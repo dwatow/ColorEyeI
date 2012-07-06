@@ -1,0 +1,48 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: OmdFile - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5CB2.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/OmdFile.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\1004066\Desktop\整理中的程式碼\ColorEyeI\OmdFile\OmdFile.cpp"
+"C:\Users\1004066\Desktop\整理中的程式碼\ColorEyeI\OmdFile\OmdFile1.cpp"
+"C:\Users\1004066\Desktop\整理中的程式碼\ColorEyeI\OmdFile\OmdFileDlg.cpp"
+"C:\Users\1004066\Desktop\整理中的程式碼\ColorEyeI\OmdFile\TxtFile.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP5CB2.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5CC3.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/OmdFile.pdb" /debug /machine:I386 /out:"Debug/OmdFile.exe" /pdbtype:sept 
+".\Debug\Bolt.obj"
+".\Debug\Bullet.obj"
+".\Debug\Cartridge.obj"
+".\Debug\OmdFile.obj"
+".\Debug\OmdFile1.obj"
+".\Debug\OmdFileDlg.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TxtFile.obj"
+".\Debug\OmdFile.res"
+]
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP5CC3.tmp"
+<h3>Output Window</h3>
+Compiling...
+OmdFile1.cpp
+Generating Code...
+Skipping... (no relevant changes detected)
+OmdFile.cpp
+OmdFileDlg.cpp
+TxtFile.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+OmdFile.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
