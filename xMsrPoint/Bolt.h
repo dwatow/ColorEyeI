@@ -21,7 +21,8 @@ class Bolt
 public:
 	Bolt();
 	~Bolt();
-	BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator&, std::vector<Cartridge>::iterator& );  //¼u§X
+//	BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator&, std::vector<Cartridge>::iterator& );  //¼u§X
+	BOOL Magazine(CString LcmSize, std::vector<Cartridge>& );  //¼u§X
 	void Partition(std::vector<Cartridge>& , Cartridge& );  //¶ñ¼u¾¹¡]§Ö³t¶q´ú¡^
 
 	UINT Trigger(std::vector<Cartridge>::iterator&);

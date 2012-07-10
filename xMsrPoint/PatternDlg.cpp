@@ -131,8 +131,8 @@ void CPatternDlg::OnPaint()
 	// 	TextOut(dc, 0, 15, KeyMessage, 40);
 
 		//iterator的訊息
-		CString isEnd(m_itor == m_BeginItor? "Begin" : m_itor == m_EndItor ? "End" : "Other");
-		temp.Format("迭代器資訊: itor.begin = %x, itor.end = %x, itor(位址/位置) = %x/%s", m_BeginItor, m_EndItor, m_itor, isEnd);
+		CString isEnd(m_itor == m_Belt.begin()? "Begin" : m_itor == m_Belt.end() ? "End" : "Other");
+		temp.Format("迭代器資訊: itor.begin = %x, itor.end = %x, itor(位址/位置) = %x/%s", m_Belt.begin(), m_Belt.end(), m_itor, isEnd);
 		TextOut(dc, 0, 32, temp, temp.GetLength());
 
 		temp.Format("PatternDlg旗標: Goal/nGoal = %d/%d, StateBar = %d;  Msr/Msring = %d/%d, 除錯顯示 = %d, 量測百分比 = %d%%, 歸零校正 = %d, 第一點 = %d, 最後一點 = %d, 自動量測模式 = %d, 連結CA-210 = %d, 5Nits中心點 = %d", \
@@ -158,9 +158,9 @@ void CPatternDlg::OnPaint()
 		TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - temp.GetLength()*6.7, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
 	}
 
-	//主要量測指示
+	//量測目標指示
 	if (c_bDrawGold)
-		m_Goal.DrawCircle(dc);//量測目標
+		m_Goal.DrawCircle(dc);//主要量測目標
 
 	if (c_bGoalPercent)
 	{
@@ -331,20 +331,21 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
 	}
 }
 
-BOOL CPatternDlg::Magazine(CString LcmSize, std::vector<Cartridge>::iterator BeginItor, std::vector<Cartridge>::iterator EndItor)
+BOOL CPatternDlg::Magazine(CString LcmSize, std::vector<Cartridge>& vCar)
 {
+	m_Belt = vCar;
 	if(!m_GunMchn.isReady())
 	{
-		m_itor = BeginItor;
-		m_BeginItor = BeginItor;
-		m_EndItor   = EndItor;
-		if (!m_GunMchn.Magazine(LcmSize, BeginItor, EndItor))	MessageBox("PtnDlg->Magazine的槍機上膛出錯");	        //上膛
+		m_itor = vCar.begin();
+		//m_Belt.begin() = BeginItor;
+		//m_Belt.end()   = EndItor;
+		if (!m_GunMchn.Magazine(LcmSize, m_Belt))	MessageBox("PtnDlg->Magazine的槍機上膛出錯");	        //上膛
 		m_BkColor = m_GunMchn.GetBkColor();                                                               //靶背景
 		if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))		MessageBox("PtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
 		if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))		MessageBox("PtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
 		
-		Trigger(m_BeginItor);//)								MessageBox("PtnDlg->Magazine的扳機出錯");
-		NextTrigger(m_BeginItor);//)							MessageBox("PtnDlg->Magazine的下一搶扳機出錯");
+		Trigger(m_itor);//)								MessageBox("PtnDlg->Magazine的扳機出錯");
+		NextTrigger(m_itor);//)							MessageBox("PtnDlg->Magazine的下一搶扳機出錯");
 		Invalidate();
 		
 		return TRUE;
@@ -369,7 +370,7 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 	m_Goal.SetPercent(0);
 	VbrGoalThread((LPVOID)&Info1);
 	
-	c_bMsrBegin = (it == m_BeginItor) ?	TRUE : FALSE;
+	c_bMsrBegin = (it == m_Belt.begin()) ?	TRUE : FALSE;
 	
 	return TRUE;
 }
@@ -377,7 +378,7 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 BOOL CPatternDlg::NextTrigger(std::vector<Cartridge>::iterator& it)
 {
 	it++;
-	if (it != m_EndItor)
+	if (it != m_Belt.end())
 	{
 		m_NextGoal.SetColor(ShiftColor(m_BkColor));          //下一個靶顏色
 		m_NextGoal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
@@ -624,8 +625,8 @@ void CPatternDlg::EventGoPrvsGoal()
 	if (!c_bMsrBegin)
 	{
 		++m_itor;
-		if (m_itor != m_BeginItor)	m_itor--;
-		if (m_itor != m_BeginItor)	m_itor--;
+		if (m_itor != m_Belt.begin())	m_itor--;
+		if (m_itor != m_Belt.begin())	m_itor--;
 		
 		Trigger(m_itor); //它會等於0，就是從最後一回返回一次		
 		NextTrigger(m_itor);
@@ -644,8 +645,8 @@ BOOL CPatternDlg::EventGoNextGoal()
 	if (!c_bMsrEnd)
 	{
 		++m_itor;
-		if (m_itor == m_EndItor) m_itor--;
-		if (m_itor == m_EndItor) m_itor--;
+		if (m_itor == m_Belt.end()) m_itor--;
+		if (m_itor == m_Belt.end()) m_itor--;
 		
 		Trigger(m_itor);
 		NextTrigger(m_itor);

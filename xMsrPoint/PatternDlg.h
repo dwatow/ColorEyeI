@@ -82,9 +82,10 @@ private:
 	UINT MsrAIValue;
 
 	Ca210* p_CA210;
-	std::vector<Cartridge>::iterator m_itor;
-	std::vector<Cartridge>::iterator m_BeginItor;
-	std::vector<Cartridge>::iterator m_EndItor;
+	std::vector<Cartridge>  m_Belt;
+ 	std::vector<Cartridge>::iterator m_itor;
+// 	std::vector<Cartridge>::iterator m_BeginItor;
+// 	std::vector<Cartridge>::iterator m_EndItor;
 
 	CBrush   m_BkBrush;
 	COLORREF m_BkColor;	//­I´º¦â
@@ -119,7 +120,8 @@ public:
 	void Fine5Nits();
 
 	void SetOrigPriority(std::vector<Cartridge>& );
-	BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator , std::vector<Cartridge>::iterator ); //¼u§X
+//	BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator , std::vector<Cartridge>::iterator ); //¼u§X
+	BOOL Magazine(CString LcmSize, std::vector<Cartridge>&); //¼u§X
 	BOOL ConnectCa210(Ca210& ca);
 	void QuackMsr(std::vector<Cartridge>& vCar) const;
 	void OrigMsr( std::vector<Cartridge>& vCar) const;

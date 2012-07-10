@@ -780,7 +780,7 @@ m_LcmSize(0), m_isReady(0), m_5nitsBkColor(RGB(127, 127, 127)){}
 
 Bolt::~Bolt(){}
 
-BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& BeginItor, std::vector<Cartridge>::iterator& EndItor)
+BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>& vCar)
 {
 /*
 	要得到以下訊息
@@ -790,14 +790,14 @@ BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& BeginItor
 	該項目共幾點
 	目前量的點是該項第幾點
 */
-	m_itEnd = EndItor;
+	m_itEnd = vCar.end();
 	m_LcmSize = (UINT)atoi(LcmSize);
 	m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);
 	m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
 
-	m_BkColor    = BeginItor->GetBackColor();
-	m_MsrFlowNum = BeginItor->GetPostition();
-	m_MsrFlowNo  = BeginItor->GetMsrFlowNo();
+	m_BkColor    = vCar.begin()->GetBackColor();
+	m_MsrFlowNum = vCar.begin()->GetPostition();
+	m_MsrFlowNo  = vCar.begin()->GetMsrFlowNo();
 
 	m_Radius = CmtoPixel(2.25);
 

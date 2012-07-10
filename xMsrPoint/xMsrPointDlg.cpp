@@ -275,7 +275,7 @@ void CXMsrPointDlg::OnButtonMsr()
 
 //	p_PtnDlg->QuackMsr(vChain1);
 //	p_PtnDlg->OrigMsr(vChain1);
-	if(!p_PtnDlg->Magazine(m_CA210.GetLcmSize(), vChain1.begin(), vChain1.end()))
+	if(!p_PtnDlg->Magazine(m_CA210.GetLcmSize(), vChain1/*.begin(), vChain1.end()*/))
 		MessageBox("OnButtonMsrªº¼u§X¥X¿ù");
 }
 
