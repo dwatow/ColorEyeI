@@ -1,0 +1,13 @@
+REGEDIT
+; This .REG file may be used by your SETUP program.
+;   If a SETUP program is not available, the entries below will be
+;   registered in your InitInstance automatically with a call to
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+
+HKEY_CLASSES_ROOT\XMsrPoint.Application = XMsrPoint Application
+HKEY_CLASSES_ROOT\XMsrPoint.Application\CLSID = {3F6C8654-68A8-4054-88B2-08A70568065B}
+
+HKEY_CLASSES_ROOT\CLSID\{3F6C8654-68A8-4054-88B2-08A70568065B} = XMsrPoint Application
+HKEY_CLASSES_ROOT\CLSID\{3F6C8654-68A8-4054-88B2-08A70568065B}\ProgId = XMsrPoint.Application
+HKEY_CLASSES_ROOT\CLSID\{3F6C8654-68A8-4054-88B2-08A70568065B}\LocalServer32 = XMSRPOINT.EXE
