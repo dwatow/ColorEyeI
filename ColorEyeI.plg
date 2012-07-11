@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <html>
 <body>
 <pre>
@@ -98,53 +97,3 @@ ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
-=======
-<html>
-<body>
-<pre>
-<h1>Build Log</h1>
-<h3>
---------------------Configuration: ColorEyeI - Win32 Release--------------------
-</h3>
-<h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD75C.tmp" with contents
-[
-/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
-]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPD75C.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD75D.tmp" with contents
-[
-/nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
-.\Release\Bolt.obj
-.\Release\Bullet.obj
-.\Release\ca200srvr.obj
-.\Release\CA210.obj
-.\Release\Cartridge.obj
-.\Release\Circle.obj
-.\Release\CircleArc.obj
-.\Release\ColorEyeI.obj
-.\Release\ColorEyeIDoc.obj
-.\Release\ColorEyeIView.obj
-.\Release\MainFrm.obj
-.\Release\OmdFile1.obj
-.\Release\PatternDlg.obj
-.\Release\StdAfx.obj
-.\Release\Table.obj
-.\Release\TxtFile.obj
-.\Release\ColorEyeI.res
-]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPD75D.tmp"
-<h3>Output Window</h3>
-Compiling...
-PatternDlg.cpp
-Linking...
-
-
-
-<h3>Results</h3>
-ColorEyeI.exe - 0 error(s), 0 warning(s)
-</pre>
-</body>
-</html>
->>>>>>> b5425c75ef070be7770a30afe5b503213bd2584b
