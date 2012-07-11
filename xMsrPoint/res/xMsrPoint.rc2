@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 // XMSRPOINT.RC2 - resources Microsoft Visual C++ does not edit directly
 //
@@ -11,3 +12,18 @@
 // Add manually edited resources here...
 
 /////////////////////////////////////////////////////////////////////////////
+=======
+//
+// XMSRPOINT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+>>>>>>> b5425c75ef070be7770a30afe5b503213bd2584b
