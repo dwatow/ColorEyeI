@@ -16,10 +16,10 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=3
-Resource1=IDR_MAINFRAME
+Resource1=IDD_PATTERN_DIALOG
 Class5=CAboutDlg
 Resource2=IDD_ABOUTBOX
-Resource3=IDD_PATTERN_DIALOG
+Resource3=IDR_MAINFRAME
 
 [CLS:CColorEyeIApp]
 Type=0
