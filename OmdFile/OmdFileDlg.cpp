@@ -178,15 +178,15 @@ HCURSOR COmdFileDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
-void COmdFileDlg::SetOrigPriority(std::vector<Cartridge>& vCar)
-{
-	std::vector<Cartridge>::size_type OrigPrty;
-	for (std::vector<Cartridge>::iterator itor = vCar.begin(); itor != vCar.end() ; ++itor)
-	{
-		OrigPrty = itor - vCar.begin();
-		itor->SetOrigSeqc(OrigPrty);
-	}
-}
+// void COmdFileDlg::SetOrigPriority(std::vector<Cartridge>& vCar)
+// {
+// 	std::vector<Cartridge>::size_type OrigPrty;
+// 	for (std::vector<Cartridge>::iterator itor = vCar.begin(); itor != vCar.end() ; ++itor)
+// 	{
+// 		OrigPrty = itor - vCar.begin();
+// 		itor->SetOrigSeqc(OrigPrty);
+// 	}
+// }
 
 void COmdFileDlg::OnButton2() 
 {

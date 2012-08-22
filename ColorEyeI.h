@@ -9,10 +9,13 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 #include "resource.h"       // main symbols
-#include "xMsrPoint/CA210.h"
+#include "SelXls/SelExcelDlg.h"
+#include "xMsrPoint/PatternDlg.h"
+
+//#include "MsrItems/MsrItemDlg.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIApp:
@@ -21,23 +24,26 @@
 
 class CColorEyeIApp : public CWinApp
 {
+    CPatternDlg *m_pdlgPattern;
 public:
-	CColorEyeIApp();
-	~CColorEyeIApp();
+    CColorEyeIApp();
+    ~CColorEyeIApp();
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CColorEyeIApp)
-	public:
-	virtual BOOL InitInstance();
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CColorEyeIApp)
+    public:
+    virtual BOOL InitInstance();
+    //}}AFX_VIRTUAL
 
 // Implementation
-	COleTemplateServer m_server;
-		// Server object for document creation
-	//{{AFX_MSG(CColorEyeIApp)
-	afx_msg void OnAppAbout();
+    COleTemplateServer m_server;
+        // Server object for document creation
+    //{{AFX_MSG(CColorEyeIApp)
+    afx_msg void OnAppAbout();
+	afx_msg void OnFileOmdtoxls();
+	afx_msg void OnMsrForItem();
 	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 };
 
 

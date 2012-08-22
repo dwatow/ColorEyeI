@@ -1,0 +1,70 @@
+// SelXls.odl : type library source for SelXls.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (SelXls.tlb).
+
+[ uuid(D658C9D8-22AC-48CE-B81C-5638A8ED6D4A), version(1.0) ]
+library SelXls
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CSelXlsDoc
+	
+	[ uuid(6486896F-A660-4656-AC76-FE69C0E55AB1) ]
+	dispinterface ISelXls
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CSelXlsDlgAutoProxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CSelXlsDlgAutoProxy)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CSelXlsDoc
+	
+	[ uuid(050F3C79-3BAE-41CF-B8D6-73329511CE66) ]
+	coclass SelXls
+	{
+		[default] dispinterface ISelXls;
+	};
+
+
+	//  Primary dispatch interface for CSelExcelDlg
+	
+	[ uuid(1898EEAC-B573-4CD6-90FA-92D98663C79E) ]
+	dispinterface ISelExcelDlg
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CSelExcelDlg)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CSelExcelDlg)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CSelExcelDlg
+
+	[ uuid(81471BDD-2929-4A84-AD62-558527E334ED) ]
+	coclass SelExcelDlg
+	{
+		[default] dispinterface ISelExcelDlg;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

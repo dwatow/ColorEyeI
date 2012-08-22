@@ -11,27 +11,26 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc
 
 IMPLEMENT_DYNCREATE(CColorEyeIDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CColorEyeIDoc, CDocument)
-	//{{AFX_MSG_MAP(CColorEyeIDoc)
-	ON_COMMAND(ID_FILE_OPEN, OnFileOpen)
-	ON_COMMAND(ID_FILE_NEW, OnFileNew)
-	ON_COMMAND(ID_FILE_SAVE_AS, OnFileSaveAs)
-	ON_COMMAND(ID_FILE_SAVE, OnFileSave)
-	ON_UPDATE_COMMAND_UI(ID_FILE_SAVE, OnUpdateFileSave)
-	ON_COMMAND(ID_MSR_ITEM, OnMsrItem)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CColorEyeIDoc)
+    ON_COMMAND(ID_FILE_OPEN, OnFileOpen)
+    ON_COMMAND(ID_FILE_NEW, OnFileNew)
+    ON_COMMAND(ID_FILE_SAVE_AS, OnFileSaveAs)
+    ON_COMMAND(ID_FILE_SAVE, OnFileSave)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CColorEyeIDoc, CDocument)
-	//{{AFX_DISPATCH_MAP(CColorEyeIDoc)
-		// NOTE - the ClassWizard will add and remove mapping macros here.
-		//      DO NOT EDIT what you see in these blocks of generated code!
-	//}}AFX_DISPATCH_MAP
+    //{{AFX_DISPATCH_MAP(CColorEyeIDoc)
+        // NOTE - the ClassWizard will add and remove mapping macros here.
+        //      DO NOT EDIT what you see in these blocks of generated code!
+    //}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
 // Note: we add support for IID_IColorEyeI to support typesafe binding
@@ -43,7 +42,7 @@ static const IID IID_IColorEyeI =
 { 0x103a7cc5, 0x72f, 0x4c0a, { 0x96, 0x81, 0xf1, 0xb5, 0xdf, 0x57, 0xc9, 0xe1 } };
 
 BEGIN_INTERFACE_MAP(CColorEyeIDoc, CDocument)
-	INTERFACE_PART(CColorEyeIDoc, IID_IColorEyeI, Dispatch)
+    INTERFACE_PART(CColorEyeIDoc, IID_IColorEyeI, Dispatch)
 END_INTERFACE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -51,73 +50,43 @@ END_INTERFACE_MAP()
 
 CColorEyeIDoc::CColorEyeIDoc():
 m_strFilter("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||")//檔案過濾條件
-
 {
-	// TODO: add one-time construction code here
-// 	vChain1.clear();
-// 	Cartridge X;
-// 	vChain1.push_back(X);
-// 	
-// 	Cartridge W1  (White, Pn1 );
-// 	Cartridge R1  (Red  , Pn1 );
-// 	Cartridge G1  (Green, Pn1 );
-// 	Cartridge B1  (Blue , Pn1 );
-// 	Cartridge W9  (White, Pn9 );
-// 	Cartridge W49 (White, Pn49);
-// 	Cartridge nits(Nits , Pn9 );
-// 	Cartridge D9  (Dark , Pn9 );
-// 	Cartridge D25 (Dark , Pn25);
-// 	
-// 	m_SimPtnDlg.Partition(vChain1, W1);
-// 	m_SimPtnDlg.Partition(vChain1, R1);
-// 	m_SimPtnDlg.Partition(vChain1, G1);
-// 	m_SimPtnDlg.Partition(vChain1, B1);
-// 	
-// 	m_SimPtnDlg.Partition(vChain1, W9);
-// 	m_SimPtnDlg.Partition(vChain1, nits);
-// 	m_SimPtnDlg.Partition(vChain1, D9);
-// 	m_SimPtnDlg.Partition(vChain1, D25);
-// 	m_SimPtnDlg.Partition(vChain1, W49);
-	NewOmdData();
-//	FileLoad = FALSE;
+    // TODO: add one-time construction code here
 
-	EnableAutomation();
-	AfxOleLockApp();
+    EnableAutomation();
+    AfxOleLockApp();
 }
 
 CColorEyeIDoc::~CColorEyeIDoc()
 {
-//	AfxMessageBox("關閉文件");
-//	aFile.Close();
-	AfxOleUnlockApp();
+    AfxOleUnlockApp();
 }
 
 BOOL CColorEyeIDoc::OnNewDocument()
 {
-	if (!CDocument::OnNewDocument())
-		return FALSE;
-	
+    if (!CDocument::OnNewDocument())
+        return FALSE;
 
-	// TODO: add reinitialization code here
-	// (SDI documents will reuse this document)
-	return TRUE;
+    // TODO: add reinitialization code here
+    // (SDI documents will reuse this document)
+    //第一次執行時會執行這個
+    NewOmdData();
+    return TRUE;
 }
-
-
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc serialization
 
 void CColorEyeIDoc::Serialize(CArchive& ar)
 {
-	if (ar.IsStoring())
-	{
-		// TODO: add storing code here
-	}
-	else
-	{
-		// TODO: add loading code here
-	}
+    if (ar.IsStoring())
+    {
+        // TODO: add storing code here
+    }
+    else
+    {
+        // TODO: add loading code here
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -126,138 +95,219 @@ void CColorEyeIDoc::Serialize(CArchive& ar)
 #ifdef _DEBUG
 void CColorEyeIDoc::AssertValid() const
 {
-	CDocument::AssertValid();
+    CDocument::AssertValid();
 }
 
 void CColorEyeIDoc::Dump(CDumpContext& dc) const
 {
-	CDocument::Dump(dc);
+    CDocument::Dump(dc);
 }
 #endif //_DEBUG
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc commands
 
 void CColorEyeIDoc::OnFileNew() 
 {
-	// TODO: Add your command handler code here
- 	CMainFrame * pWnd = static_cast<CMainFrame*>(AfxGetMainWnd());
- 	ASSERT_VALID(pWnd);
-
-	pWnd->UpdateFrameTitleForDocument("未命名原始量測資料");
-
-	delete f_Omd;  //釋放舊的記憶體空間
-	NewOmdData();  //叫新的Omd
-	m_OmdFilePath.Empty();
-
+    // TODO: Add your command handler code here
+    //開新檔案
+    SetPathName(" ");        
+    delete f_Omd;
+    NewOmdData();          //叫新的Omd
 	UpdateAllViews(NULL);  //更新畫面
 }
 
 void CColorEyeIDoc::OnFileOpen() 
 {
-	// TODO: Add your command handler code here
-	CMainFrame * pWnd = static_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pWnd);
-
-// 	CString strTemp;
-// 	strTemp.Format("%x", pWnd);
-// 	AfxMessageBox(strTemp);
-
-	CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, m_strFilter);
-	
-	int nID = aFileDialog.DoModal();
-	if (nID == IDOK)
-	{
-		if(f_Omd->Open(aFileDialog.GetPathName()))
-			m_OmdFilePath.Format("%s", aFileDialog.GetPathName());
-		if (pWnd)
-			pWnd->UpdateFrameTitleForDocument(aFileDialog.GetFileTitle());
-	}
-
-	UpdateAllViews(NULL);
+    // TODO: Add your command handler code here
+    CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, m_strFilter);
+    
+    int nID = aFileDialog.DoModal();
+    if (nID == IDOK)
+    {
+        RestructureVector();
+        if(f_Omd->Open(aFileDialog.GetPathName()))
+        {
+            SetPathName(aFileDialog.GetPathName());
+            SetTitle(aFileDialog.GetFileName());
+        }
+    }
+    UpdateAllViews(NULL);
 }
 
 void CColorEyeIDoc::OnFileSaveAs() 
 {
-	// TODO: Add your command handler code here
-	CFileDialog fSaveDlg (TRUE, "omd", "*.omd", OFN_SHAREAWARE, m_strFilter);
+    // TODO: Add your command handler code here
+    CFileDialog fSaveDlg (FALSE, "omd", "*.omd", OFN_SHAREAWARE, m_strFilter);  //存檔會自己加副檔名
 
-	int nID = fSaveDlg.DoModal();
-	if (nID == IDOK)
-		f_Omd->Save(fSaveDlg.GetPathName()); 
+    int nID = fSaveDlg.DoModal();
+    if (nID == IDOK)
+    {
+		SetModifiedFlag(FALSE);
+        RestructureVector();
+        if (f_Omd->Save(fSaveDlg.GetPathName()))
+        {
+            SetPathName(fSaveDlg.GetPathName());
+            SetTitle(fSaveDlg.GetFileName());
+        }
+    }
+    DebugByTxt();
 }
 
 void CColorEyeIDoc::OnFileSave() 
 {
-	// TODO: Add your command handler code here
-	if (!m_OmdFilePath.IsEmpty())
-		f_Omd->Save(m_OmdFilePath);
+    // TODO: Add your command handler code here
+    if (vChain1.empty())            //若還沒有存過的檔
+        OnFileSaveAs();          //就另存新檔
+    else
+	{
+		SetModifiedFlag(FALSE);
+        f_Omd->Save(GetPathName());
+	}
 }
 
-void CColorEyeIDoc::OnUpdateFileSave(CCmdUI* pCmdUI) 
+COmdFile1& CColorEyeIDoc::GetOmdFile()
 {
-	// TODO: Add your command update UI handler code here
-	//SetModifiedFlag()
-	pCmdUI->Enable(!m_OmdFilePath.IsEmpty());
+    return *f_Omd;
 }
 
-COmdFile1 CColorEyeIDoc::GetOmdFile()
+std::vector<Cartridge>& CColorEyeIDoc::GetVector()
 {
-	return *f_Omd;
+    return vChain2;
 }
+
+void CColorEyeIDoc::RestructureVector()
+{
+    if (!vChain2.empty())//裡面這些不要修改，影響再次量測的資料擺放
+    {
+        //在這時
+        //vChain1是舊的
+        //vChain2是新的
+        std::vector<Cartridge>::iterator it2, itX;
+
+        //remove & cut
+        //在新的裡面，比對舊的，代表重覆
+        //重覆量測去除掉
+        for (it2 = vChain2.begin(); it2 != vChain2.end(); ++it2)
+        {
+            itX = std::remove(vChain1.begin(), vChain1.end(), *it2);
+            vChain1.erase(itX, vChain1.end());
+        }
+
+        //將舊的掛在新的後面（讓空的放在第一個）
+        //整串變成舊的那一串
+        //放回Omd檔
+        vChain2.insert(vChain2.end(), vChain1.begin(), itX);
+        vChain1 = vChain2;
+    }
+    else if (vChain1.empty())
+    {
+        Cartridge x;
+        vChain1.push_back(x);
+    }
+    f_Omd->SetMsrData(vChain1);
+}    
 
 BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName) 
 {
-	if (!CDocument::OnOpenDocument(lpszPathName))
-		return FALSE;
-	
-	// TODO: Add your specialized creation code here
-	AfxMessageBox("OnOpenDocument(LPCTSTR lpszPathName)");
+    if (!CDocument::OnOpenDocument(lpszPathName))
+        return FALSE;
+    
+    // TODO: Add your specialized creation code here
+    AfxMessageBox("OnOpenDocument(LPCTSTR lpszPathName)");
 
-	return TRUE;
+    return TRUE;
 }
 
 void CColorEyeIDoc::NewOmdData()
 {
-	m_OmdFilePath.Empty();               //清空檔案路徑
-	SetModifiedFlag();                 //文件已被更改是否要存檔
-
-	vChain1.clear();                   //清空記憶體空間vChain1
-	Cartridge X;
-	vChain1.push_back(X);              //第一個就是什麼都沒有
-	
-
-
-	f_Omd = new COmdFile1(vChain1);    //新增Omd檔（刪掉會開不了）
+    SetTitle("新的Omd檔");
+    vChain1.clear();          //清空記憶體空間vChain1
+    f_Omd = new COmdFile1;    //新增Omd檔（刪掉會開不了）
+	SetModifiedFlag(TRUE);
 }
 
-
-
-
-
-void CColorEyeIDoc::OnMsrItem() 
+void CColorEyeIDoc::DebugByTxt()
 {
-	// TODO: Add your command handler code here
-	Cartridge W1  (White, Pn1 );
-	Cartridge R1  (Red  , Pn1 );
-	Cartridge G1  (Green, Pn1 );
-	Cartridge B1  (Blue , Pn1 );
-	Cartridge W9  (White, Pn9 );
-	Cartridge W49 (White, Pn49);
-	Cartridge W5  (White, Pn5 );
-	Cartridge nits(Nits , Pn9 );
-	Cartridge D9  (Dark , Pn9 );
-	Cartridge D25 (Dark , Pn25);
-	//Cartridge Crstlk(crosstalk, )
-	
-	m_SimPtnDlg.Partition(vChain1, W1);
-	m_SimPtnDlg.Partition(vChain1, R1);
-	m_SimPtnDlg.Partition(vChain1, G1);
-	m_SimPtnDlg.Partition(vChain1, B1);
-	
-	m_SimPtnDlg.Partition(vChain1, W9);
-	m_SimPtnDlg.Partition(vChain1, nits);
-	m_SimPtnDlg.Partition(vChain1, D9);
-	m_SimPtnDlg.Partition(vChain1, D25);
-	m_SimPtnDlg.Partition(vChain1, W49);
+    std::vector<CString> vStr;
+    CString str;
+
+    str.Empty();
+    vStr.clear();
+    str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
+    vStr.push_back(str);
+    for (std::vector<Cartridge>::iterator iter = vChain1.begin(); iter != vChain1.end(); ++iter)
+    {                  
+        str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
+            iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\
+            iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
+        vStr.push_back(str);
+    }
+
+
+    CStdioFile file;
+    CFileException fx;
+
+    CString path;
+    path.Format("%s_debug.omd", GetPathName().Left(GetPathName().GetLength()-4));
+
+    if (!file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
+    {
+        TCHAR buf[255];
+        fx.GetErrorMessage(buf, 255);
+        CString strPrompt(buf);
+        AfxMessageBox(strPrompt);
+        file.Close();
+    }
+    else
+    {
+        if (!vStr.empty())
+            for (std::vector<CString>::iterator it = vStr.begin(); it != vStr.end(); ++it)
+                file.WriteString(it->GetBuffer(0));            
+
+        file.Close();
+    }
 }
+
+void CColorEyeIDoc::DebugByTxt(CString path)
+{
+    std::vector<CString> vStr;
+    CString str;
+    
+    str.Empty();
+    vStr.clear();
+    str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
+    vStr.push_back(str);
+    for (std::vector<Cartridge>::iterator iter = vChain1.begin(); iter != vChain1.end(); ++iter)
+    {                  
+        str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
+            iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\
+            iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
+        vStr.push_back(str);
+    }
+    
+    
+    CStdioFile file;
+    CFileException fx;
+    
+    if (!file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
+    {
+        TCHAR buf[255];
+        fx.GetErrorMessage(buf, 255);
+        CString strPrompt(buf);
+        AfxMessageBox(strPrompt);
+        file.Close();
+    }
+    else
+    {
+        if (!vStr.empty())
+            for (std::vector<CString>::iterator it = vStr.begin(); it != vStr.end(); ++it)
+                file.WriteString(it->GetBuffer(0));            
+            
+            file.Close();
+    }
+}
+
+

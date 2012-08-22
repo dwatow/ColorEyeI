@@ -13,9 +13,9 @@ Class2=COmdFileDlg
 Class3=CAboutDlg
 
 ResourceCount=3
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_OMDFILE_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_OMDFILE_DIALOG
+Resource3=IDD_ABOUTBOX
 
 [CLS:COmdFileApp]
 Type=0
@@ -30,7 +30,7 @@ ImplementationFile=OmdFileDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_COMBO1
+LastObject=COmdFileDlg
 
 [CLS:CAboutDlg]
 Type=0

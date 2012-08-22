@@ -7,7 +7,6 @@
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
 
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -25,7 +24,7 @@ BEGIN_MESSAGE_MAP(CColorEyeIView, CScrollView)
     ON_WM_MOUSEWHEEL()
     ON_WM_LBUTTONUP()
     ON_WM_MOUSEMOVE()
-    //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -38,6 +37,7 @@ CColorEyeIView::CColorEyeIView()
 
 CColorEyeIView::~CColorEyeIView()
 {
+
 }
 
 BOOL CColorEyeIView::PreCreateWindow(CREATESTRUCT& cs)
@@ -53,10 +53,12 @@ BOOL CColorEyeIView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CColorEyeIView::OnDraw(CDC* pDC)
 {
+	
     CColorEyeIDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
 
     // TODO: add draw code for native data here
+
     int nDC = pDC->SaveDC();
 
     CSize szAroundSpace(2, 2);  //視窗的留白
@@ -74,59 +76,35 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 
     m_isMsr.clear();
 
+	if (0)
+	{
     //定義導覽表格是否有量測值
-    for(int i = 0; i < 10; ++i)
-    {
-//         CString strTemp2;
-//         switch(i)
-//         {
-//             case 0: strTemp2.Format("Lv"); break;
-//             case 1: strTemp2.Format("x"); break;
-//             case 2: strTemp2.Format("y"); break;
-//             case 3: strTemp2.Format("du"); break;
-//             case 4: strTemp2.Format("dv"); break;
-//             case 5: strTemp2.Format("T"); break;
-//             case 6: strTemp2.Format("duv"); break;
-//             case 7: strTemp2.Format("X"); break;
-//             case 8: strTemp2.Format("Y"); break;
-//             case 9: strTemp2.Format("Z"); break;
-//         }
-// 
-//         strTemp.Format("從Doc抓%s值出來，是不是有量測\nWRGBD = %d, %d, %d, %d, %d\nD25 = %d\nW49 = %d\nW9 = %d\nW5 = %d\nNits = %d\n",\
-//             strTemp2, \
-//             pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i), \
-//             
-//             pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(White, Pn9, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(White, Pn5, (isMsrValue)i), \
-//             pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i)
-//             );
-//         MessageBox(strTemp); 
-
-        TbBkClr_WRGBD[i] = ((pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i)) ||
-            (pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i)) ||
-            (pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i)) ||
-            (pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i)) ||
-            (pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i)))? TRUE : FALSE ;
+		for(UINT i = 0; i < 10; ++i)
+		{
+#ifdef _DEBUG
+			DebugView(pDC, pDoc, i);
+#endif
+			TbBkClr_WRGBD[i] = ((pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i)) ||
+								(pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i)) ||
+								(pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i)) ||
+								(pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i)) ||
+								(pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i)))? TRUE : FALSE ;
         
-        TbBkClr_D25[i]  = (pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i))? TRUE : FALSE ;
-        TbBkClr_W49[i]  = (pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i))? TRUE : FALSE ;
-        TbBkClr_W9[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn9 , (isMsrValue)i))? TRUE : FALSE ;
-        TbBkClr_W5[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn5 , (isMsrValue)i))? TRUE : FALSE ;
-        TbBkClr_Nits[i] = (pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i))? TRUE : FALSE ;
-    }
+			TbBkClr_D25[i]  = (pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i))? TRUE : FALSE ;
+			TbBkClr_W49[i]  = (pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i))? TRUE : FALSE ;
+			TbBkClr_W9[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn9 , (isMsrValue)i))? TRUE : FALSE ;
+			TbBkClr_W5[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn5 , (isMsrValue)i))? TRUE : FALSE ;
+			TbBkClr_Nits[i] = (pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i))? TRUE : FALSE ;
+		}
     
-    m_isMsr.push_back(TbBkClr_WRGBD);
-    m_isMsr.push_back(TbBkClr_Nits);
-    m_isMsr.push_back(TbBkClr_W49);
-    m_isMsr.push_back(TbBkClr_W9);
-    m_isMsr.push_back(TbBkClr_D25);
-    m_isMsr.push_back(TbBkClr_W5);
+
+		m_isMsr.push_back(TbBkClr_WRGBD);
+		m_isMsr.push_back(TbBkClr_Nits);
+		m_isMsr.push_back(TbBkClr_W49);
+		m_isMsr.push_back(TbBkClr_W9);
+		m_isMsr.push_back(TbBkClr_D25);
+		m_isMsr.push_back(TbBkClr_W5);
+	}
     
 //看看5Nits的T是不是如預期的出現灰背景
 //     strTemp.Format("RGB = (%d, %d, %d)", GetRValue(TbBkClr_Nits[5]), GetGValue(TbBkClr_Nits[5]), GetBValue(TbBkClr_Nits[5]));
@@ -135,7 +113,6 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 //////////////////////////////////////////////////////////////////////////
     //表格的部份
     //設計一個table class用類似HTML的語法來管理表格
-
     //視窗左半邊，導覽區
     ptFix = GetDeviceScrollPosition();
     CPoint ptTemp = ptFix;
@@ -151,21 +128,23 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 
     
 
+
     //enum MV_TABLE    {WRGBD = 0, W49, W9, D25, W5};
     //enum isMsrValue    {Lv = 0, Sx, Sy, du, dv, T, duv, X, Y, Z};
     //11×7的hittest表格
     CTable tbOmdMap(pDC, ptTemp);
     //ptTemp = ;
-    ptTemp = tbOmdMap.SetCellNum(11, 7).SetGridBoard(1).SetTableBoard(1, RGB(255, 255, 255)).SetCellSpace(7)
-        .Width(0, 42).Width( 1, 14).Width( 2, 14).Width( 3, 14).Width( 4, 14).Width( 5, 14).Width( 6, 14).Width( 7, 14).Width( 8, 14).Width( 9, 14).Width(10, 14)//.Width(11, 14)
-        .tr().td().text("").td_()      .td().text("L").td_().td().text("x").td_().td().text("y").td_().td().text("u\'").td_().td().text("v\'").td_().td().text("T").td_().td().text("uv\'").td_().td().text("X").td_().td().text("Y").td_().td().text("Z").td_().tr_()
-        .tr().td().text("中心點").td_().td(isMsrToBkColor(m_isMsr[WRGBD][Lv]), 5, 1).td_()                                                                                                                                                          .td(isMsrToBkColor(m_isMsr[WRGBD][T])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][duv])).td_()           .td(isMsrToBkColor(m_isMsr[WRGBD][X])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][Y])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][Z])).td_().tr_()
-        .tr().td().text("5Nits").td_() .td(isMsrToBkColor(m_isMsr[Nts][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][du])).td_()            .td(isMsrToBkColor(m_isMsr[Nts][dv])).td_()            .td(isMsrToBkColor(m_isMsr[Nts][T])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][duv])).td_()             .td(isMsrToBkColor(m_isMsr[Nts][X])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Y])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Z])).td_().tr_()
-        .tr().td().text("白49").td_()  .td(isMsrToBkColor(m_isMsr[W49][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[W49][du])).td_()            .td(isMsrToBkColor(m_isMsr[W49][dv])).td_()            .td(isMsrToBkColor(m_isMsr[W49][T])).td_()          .td(isMsrToBkColor(m_isMsr[W49][duv])).td_()             .td(isMsrToBkColor(m_isMsr[W49][X])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Y])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Z])).td_().tr_()
-        .tr().td().text("白9").td_()   .td(isMsrToBkColor(m_isMsr[W9][Lv])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Sx])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Sy])).td_()           .td(isMsrToBkColor(m_isMsr[W9][du])).td_()             .td(isMsrToBkColor(m_isMsr[W9][dv])).td_()             .td(isMsrToBkColor(m_isMsr[W9][T])).td_()           .td(isMsrToBkColor(m_isMsr[W9][duv])).td_()              .td(isMsrToBkColor(m_isMsr[W9][X])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Y])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Z])).td_().tr_()
-        .tr().td().text("黑25").td_()  .td(isMsrToBkColor(m_isMsr[D25][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[D25][du])).td_()            .td(isMsrToBkColor(m_isMsr[D25][dv])).td_()            .td(isMsrToBkColor(m_isMsr[D25][T])).td_()          .td(isMsrToBkColor(m_isMsr[D25][duv])).td_()             .td(isMsrToBkColor(m_isMsr[D25][X])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Y])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Z])).td_().tr_()
-        .tr().td().text("白5").td_()   .td(isMsrToBkColor(m_isMsr[W5][Lv])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Sx])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Sy])).td_()           .td(isMsrToBkColor(m_isMsr[W5][du])).td_()             .td(isMsrToBkColor(m_isMsr[W5][dv])).td_()             .td(isMsrToBkColor(m_isMsr[W5][T])).td_()           .td(isMsrToBkColor(m_isMsr[W5][duv])).td_()              .td(isMsrToBkColor(m_isMsr[W5][X])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Y])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Z])).td_().tr_()
-    .table_(m_NvgtHit);
+// 	if (!m_isMsr.empty())
+// 		ptTemp = tbOmdMap.SetCellNum(11, 7).SetGridBoard(1).SetTableBoard(1, RGB(255, 255, 255)).SetCellSpace(7)
+// 			.Width(0, 42).Width( 1, 14).Width( 2, 14).Width( 3, 14).Width( 4, 14).Width( 5, 14).Width( 6, 14).Width( 7, 14).Width( 8, 14).Width( 9, 14).Width(10, 14)//.Width(11, 14)
+// 			.tr().td().text("").td_()      .td().text("L").td_().td().text("x").td_().td().text("y").td_().td().text("u\'").td_().td().text("v\'").td_().td().text("T").td_().td().text("uv\'").td_().td().text("X").td_().td().text("Y").td_().td().text("Z").td_().tr_()
+// 			.tr().td().text("中心點").td_().td(isMsrToBkColor(m_isMsr[WRGBD][Lv]), 5, 1).td_()                                                                                                                                                          .td(isMsrToBkColor(m_isMsr[WRGBD][T])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][duv])).td_()           .td(isMsrToBkColor(m_isMsr[WRGBD][X])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][Y])).td_()        .td(isMsrToBkColor(m_isMsr[WRGBD][Z])).td_().tr_()
+// 			.tr().td().text("5Nits").td_() .td(isMsrToBkColor(m_isMsr[Nts][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][du])).td_()            .td(isMsrToBkColor(m_isMsr[Nts][dv])).td_()            .td(isMsrToBkColor(m_isMsr[Nts][T])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][duv])).td_()             .td(isMsrToBkColor(m_isMsr[Nts][X])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Y])).td_()          .td(isMsrToBkColor(m_isMsr[Nts][Z])).td_().tr_()
+// 			.tr().td().text("白49").td_()  .td(isMsrToBkColor(m_isMsr[W49][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[W49][du])).td_()            .td(isMsrToBkColor(m_isMsr[W49][dv])).td_()            .td(isMsrToBkColor(m_isMsr[W49][T])).td_()          .td(isMsrToBkColor(m_isMsr[W49][duv])).td_()             .td(isMsrToBkColor(m_isMsr[W49][X])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Y])).td_()          .td(isMsrToBkColor(m_isMsr[W49][Z])).td_().tr_()
+// 			.tr().td().text("白9").td_()   .td(isMsrToBkColor(m_isMsr[W9][Lv])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Sx])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Sy])).td_()           .td(isMsrToBkColor(m_isMsr[W9][du])).td_()             .td(isMsrToBkColor(m_isMsr[W9][dv])).td_()             .td(isMsrToBkColor(m_isMsr[W9][T])).td_()           .td(isMsrToBkColor(m_isMsr[W9][duv])).td_()              .td(isMsrToBkColor(m_isMsr[W9][X])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Y])).td_()           .td(isMsrToBkColor(m_isMsr[W9][Z])).td_().tr_()
+// 			.tr().td().text("黑25").td_()  .td(isMsrToBkColor(m_isMsr[D25][Lv])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Sx])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Sy])).td_()          .td(isMsrToBkColor(m_isMsr[D25][du])).td_()            .td(isMsrToBkColor(m_isMsr[D25][dv])).td_()            .td(isMsrToBkColor(m_isMsr[D25][T])).td_()          .td(isMsrToBkColor(m_isMsr[D25][duv])).td_()             .td(isMsrToBkColor(m_isMsr[D25][X])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Y])).td_()          .td(isMsrToBkColor(m_isMsr[D25][Z])).td_().tr_()
+// 			.tr().td().text("白5").td_()   .td(isMsrToBkColor(m_isMsr[W5][Lv])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Sx])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Sy])).td_()           .td(isMsrToBkColor(m_isMsr[W5][du])).td_()             .td(isMsrToBkColor(m_isMsr[W5][dv])).td_()             .td(isMsrToBkColor(m_isMsr[W5][T])).td_()           .td(isMsrToBkColor(m_isMsr[W5][duv])).td_()              .td(isMsrToBkColor(m_isMsr[W5][X])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Y])).td_()           .td(isMsrToBkColor(m_isMsr[W5][Z])).td_().tr_()
+// 		.table_(m_NvgtHit);
 
 
 //    KeepSc();
@@ -212,7 +191,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 //     AfxMessageBox(strTemp);
 
 //    pDC->SetPixel(ptTemp, RGB(0, 128, 128));
-    DebugView(pDC);
+
     pDC->RestoreDC( nDC );
 
     //設定高度
@@ -221,7 +200,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     sizeTotal.cx = 956;
     sizeTotal.cy = (ptTemp.y > 291) ? ptTemp.y : 291; //291是左邊的
     SetScrollSizes(MM_TEXT, sizeTotal);
-    
+  
 }
 
 CPoint CColorEyeIView::DrawTable(isMsrItem Item, isMsrValue Value, CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
@@ -1540,6 +1519,7 @@ void CColorEyeIView::OnInitialUpdate()
     sizeTotal.cx = GetDeviceScrollPosition().x;
     sizeTotal.cy = GetDeviceScrollPosition().y;
     SetScrollSizes(MM_TEXT, sizeTotal);
+
 }
 
 
@@ -1593,6 +1573,10 @@ BOOL CColorEyeIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
     return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
 
+//////////////////////////////////////////////////////////////////////////
+//debug function
+#ifdef _DEBUG
+
 void CColorEyeIView::ViewTableBkColor(isMsrItem Item)
 {
     strTemp.Format("Lv = (%d, %d, %d)\nSx = (%d, %d, %d)\nSy = (%d, %d, %d)\ndu = (%d, %d, %d)\ndv = (%d, %d, %d)\nT  = (%d, %d, %d)\nduv = (%d, %d, %d)\nX  = (%d, %d, %d)\nY  = (%d, %d, %d)\nZ  = (%d, %d, %d)",\
@@ -1609,38 +1593,50 @@ void CColorEyeIView::ViewTableBkColor(isMsrItem Item)
     MessageBox(strTemp);
 };
 
-void CColorEyeIView::OnMouseMove(UINT nFlags, CPoint point) 
+void CColorEyeIView::DebugView(CDC* pDC, CColorEyeIDoc* pDoc, UINT i)
 {
-    // TODO: Add your message handler code here and/or call default
-
-    m_MousePoint = point;
-
-
-    CScrollView::OnMouseMove(nFlags, point);
-}
-
-void CColorEyeIView::DebugView(CDC* p_DC)
-{
-    CRect* pRect = new CRect;
-    GetClientRect(pRect);
-    CPoint pt(pRect->right, pRect->top);
     UINT hText = 16;
-    UINT nlines = 1;
-
-    while(nlines > 0)
+    CString strTemp2;
+    switch(i)
     {
-        switch(nlines)
-        {
-            case 0:        strTemp.Format("%d, %d", m_MousePoint.x, m_MousePoint.y); break;
-            default: 
-                ;
-        }
-        p_DC->SetTextAlign(TA_RIGHT);
-        p_DC->TextOut(pt.x, pt.y + hText*nlines, strTemp.GetBuffer(0), strTemp.GetLength());
-
-        nlines--;
+    case 0: strTemp2.Format("Lv"); break;
+    case 1: strTemp2.Format("x"); break;
+    case 2: strTemp2.Format("y"); break;
+    case 3: strTemp2.Format("du"); break;
+    case 4: strTemp2.Format("dv"); break;
+    case 5: strTemp2.Format("T"); break;
+    case 6: strTemp2.Format("duv"); break;
+    case 7: strTemp2.Format("X"); break;
+    case 8: strTemp2.Format("Y"); break;
+    case 9: strTemp2.Format("Z"); break;
     }
+    
+    strTemp.Format("從Doc抓%3s值出來，是不是有量測\nWRGBD = %d, %d, %d, %d, %d\nD25 = %d\nW49 = %d\nW9 = %d\nW5 = %d\nNits = %d\n   ",\
+        strTemp2, \
+        pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i), \
+        
+        pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(White, Pn9, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(White, Pn5, (isMsrValue)i), \
+        pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i)
+        );
+    
+    CRect *rect = new CRect;
+    GetClientRect(rect);
+    
+    CPoint ptRightTop(rect->right, rect->top);
+    
+    pDC->SetTextAlign(TA_RIGHT);
+    pDC->TextOut(ptRightTop.x, ptRightTop.y + hText*i, strTemp.GetBuffer(0), strTemp.GetLength());
+    delete rect;
 }
+
+#endif
 
 void CColorEyeIView::OnLButtonUp(UINT nFlags, CPoint point) 
 {

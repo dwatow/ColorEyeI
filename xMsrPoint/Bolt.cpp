@@ -1,28 +1,30 @@
-#include"stdafx.h"
+#include "stdafx.h"
 #include <cmath>
 #include "Bolt.h"
 
-/********************************************
- *    GetFE9Point (UINT few, float FromEdge) *
- *    GetD9Point (UINT few, float FromEdge)	*
- *    GetW49Point(UINT few)					*
- *    GetD13Point(UINT few)					*
- *    GetD25Point(UINT few)					*
- *    GetD29Point(UINT few)					*
- ********************************************/
+/***************************************************
+ *    GetFE9Point(UINT few, float FromEdge)  const *
+ *    GetFE5Point(UINT few, float FromEdge)  const *
+ *    Get5nits9Point(UINT few)               const *
+ *    GetD13Point(UINT few)                  const *
+ *    GetD21Point(UINT few, float hDecile, float vDecile, float FromEdge) const
+ *    GetD25Point(UINT few, UINT side)       const *
+ *    GetW49Point(UINT few)                  const *
+ *    GetCrossTalk(UINT few, float FromEdge) const *
+ ***************************************************/
 
-CPoint Bolt::GetFE9Point(UINT few, float FromEdge) const
+CPoint Bolt::GetFE9Point(UINT few) const
 {
 //運算第幾個（以九點為計）
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge   = (FromEdge) ? static_cast<UINT>(m_nScrmH / FromEdge) : CmtoPixel(2.3);
-    UINT TopEdge    = (FromEdge) ? static_cast<UINT>(m_nScrmV / FromEdge) : CmtoPixel(2.3);
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT BottomEdge = m_nScrmV - TopEdge;
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
+    int LeftEdge   = (m_f9FE) ? static_cast<int>(m_nScrmH / m_f9FE) : CmtoPixel(2.3);
+    int TopEdge    = (m_f9FE) ? static_cast<int>(m_nScrmV / m_f9FE) : CmtoPixel(2.3);
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int BottomEdge = m_nScrmV - TopEdge;
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
 /*
 +------------------------------+
 |                              |
@@ -67,18 +69,18 @@ CPoint Bolt::GetFE9Point(UINT few, float FromEdge) const
     }
 }
 
-CPoint Bolt::GetFE5Point(UINT few, float FromEdge) const
+CPoint Bolt::GetFE5Point(UINT few) const
 {
 //運算第幾個（以九點為計）
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge   = (FromEdge) ? static_cast<UINT>(m_nScrmH / FromEdge) : CmtoPixel(2.3);
-    UINT TopEdge    = (FromEdge) ? static_cast<UINT>(m_nScrmV / FromEdge) : CmtoPixel(2.3);
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT BottomEdge = m_nScrmV - TopEdge;
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
+    int LeftEdge   = (m_f5FE) ? static_cast<int>(m_nScrmH / m_f5FE) : CmtoPixel(2.3);
+    int TopEdge    = (m_f5FE) ? static_cast<int>(m_nScrmV / m_f5FE) : CmtoPixel(2.3);
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int BottomEdge = m_nScrmV - TopEdge;
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
 /*
 +------------------------------+
 |                              |
@@ -119,12 +121,12 @@ CPoint Bolt::Get5nits9Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge   = CmtoPixel(10);
-    UINT TopEdge    = static_cast<UINT>(m_nScrmV / 6);//六分之一上邊緣
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT BottomEdge = m_nScrmV - TopEdge;
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
+    int LeftEdge   = CmtoPixel(10);
+    int TopEdge    = static_cast<int>(m_nScrmV / 6);//六分之一上邊緣
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int BottomEdge = m_nScrmV - TopEdge;
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
 /*5nits
 +------------------------------+
 |                              |
@@ -164,69 +166,11 @@ CPoint Bolt::Get5nits9Point(UINT few) const
 
         case 6: return Point6; break;
         case 7: return Point7; break;
-		case 8: return Point8; break;
+        case 8: return Point8; break;
 
         default: PointD; return PointD; break;
     }
 }
-
-
-// CPoint Bolt::GetD9Point(UINT few) const
-// {
-// //運算第幾個（以九點為計）
-// 
-//     //ScrmV 螢幕垂直pixel數
-//     //ScrmH 螢幕水平pixel數
-//     UINT LeftEdge   = CmtoPixel(2.3);//左邊緣
-//     UINT TopEdge    = CmtoPixel(2.3);//上邊緣
-//     UINT RightEdge  = m_nScrmH - LeftEdge;
-//     UINT BottomEdge = m_nScrmV - TopEdge;
-//     UINT CenterH    = m_nScrmH/2;
-//     UINT CenterV    = m_nScrmV/2;
-// /*
-// +------------------------------+
-// |00            01            02|
-// |                              |  
-// |                              |  
-// |                              |
-// |03            04            05|
-// |                              |
-// |                              |  
-// |                              |  
-// |06            07            08|
-// +------------------------------+
-// */
-// 
-//     CPoint 
-//         Point0(LeftEdge ,TopEdge),
-//         Point1(CenterH  ,TopEdge),
-//         Point2(RightEdge,TopEdge),
-//         Point3(LeftEdge ,CenterV),
-//         Point4(CenterH  ,CenterV),
-//         Point5(RightEdge,CenterV),
-//         Point6(LeftEdge ,BottomEdge),
-//         Point7(CenterH  ,BottomEdge),
-//         Point8(RightEdge,BottomEdge),
-//         PointD(CenterH  ,CenterV);
-// //回傳一個點
-//     switch(few)
-//     {
-//         case 0: return Point0; break;
-//         case 1: return Point1; break;
-//         case 2: return Point2; break;
-// 
-//         case 3: return Point3; break;
-//         case 4: return Point4; break;//中心
-//         case 5: return Point5; break;
-// 
-//         case 6: return Point6; break;
-//         case 7: return Point7; break;
-//         case 8: return Point8; break;
-// 
-//         default: PointD; return PointD; break;
-//     }
-// }
-
 
 CPoint Bolt::GetD13Point(UINT few) const
 {
@@ -234,20 +178,20 @@ CPoint Bolt::GetD13Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge  = CmtoPixel(2.3);//左邊緣
-    UINT TopEdge   = CmtoPixel(2.3);//上邊緣
+    int LeftEdge  = CmtoPixel(2.3);//左邊緣
+    int TopEdge   = CmtoPixel(2.3);//上邊緣
 
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT BottomEdge = m_nScrmV - TopEdge;
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int BottomEdge = m_nScrmV - TopEdge;
 
-    UINT CenterH = m_nScrmH/2;
-    UINT CenterV = m_nScrmV/2;
+    int CenterH = m_nScrmH/2;
+    int CenterV = m_nScrmV/2;
 
-    UINT LeftQuarterH = m_nScrmH/4;
-    UINT TopQuarterV  = m_nScrmV/4;
+    int LeftQuarterH = m_nScrmH/4;
+    int TopQuarterV  = m_nScrmV/4;
 
-    UINT RightQuarterH   = m_nScrmH - m_nScrmH/4;
-    UINT BottomQuarterV  = m_nScrmV - m_nScrmV/4;
+    int RightQuarterH   = m_nScrmH - m_nScrmH/4;
+    int BottomQuarterV  = m_nScrmV - m_nScrmV/4;
 /*
 +------------------------------+
 |00            01            02|
@@ -297,39 +241,135 @@ CPoint Bolt::GetD13Point(UINT few) const
         case 7: return Point07; break;
         case 8: return Point08; break;
 
-		    case 9:  return Point09; break;
-			case 10: return Point10; break;
-			case 11: return Point11; break;
-			case 12: return Point12; break;
+            case 9:  return Point09; break;
+            case 10: return Point10; break;
+            case 11: return Point11; break;
+            case 12: return Point12; break;
 
         default: PointD; return PointD; break;
     }
 }
 
+CPoint Bolt::GetD21Point(UINT few) const
+{
+//運算第幾個（以九點為計）
+
+    //ScrmV 螢幕垂直pixel數
+    //ScrmH 螢幕水平pixel數
+    int LeftEdge   = (m_f21FE) ? static_cast<int>(m_nScrmH / m_f21FE) : CmtoPixel(2.3);
+    int TopEdge    = (m_f21FE) ? static_cast<int>(m_nScrmV / m_f21FE) : CmtoPixel(2.3);
+
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int BottomEdge = m_nScrmV - TopEdge;
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
+
+    int HLevel = m_nScrmH/m_f21Havg;
+    int VLevel = m_nScrmV/m_f21Vavg;
+
+    int L1 = CenterH - HLevel;
+    int L2 = L1 - HLevel;
+
+    int R1 = CenterH + HLevel;
+    int R2 = R1 + HLevel;
+
+    int T1 = CenterV + VLevel;
+    int B1 = CenterV - VLevel;
+/*21點
+
+     L1  L2      R2  R1
++--------------------------+
+|04  05  06  07  08  09  10| 
+|                          |
+|03                      11| T1
+|                          |
+|02          20          12|
+|                          |
+|01                      13| B1
+|                          |
+|00  19  18  17  16  15  14| 
++--------------------------+
+*/
+    CPoint 
+        Point00(LeftEdge , BottomEdge),
+        Point01(LeftEdge , B1),
+        Point02(LeftEdge , CenterV),      
+        Point03(LeftEdge , T1),
+        Point04(LeftEdge , TopEdge),
+        Point05(L1       , TopEdge),
+        Point06(L2       , TopEdge),
+        Point07(CenterH  , TopEdge),
+        Point08(R2       , TopEdge),
+        Point09(R1       , TopEdge),     
+        Point10(RightEdge, TopEdge),
+        Point11(RightEdge, T1),
+        Point12(RightEdge, CenterV),
+        Point13(RightEdge, B1),
+        Point14(RightEdge, BottomEdge), 
+        Point15(R1       , BottomEdge),
+        Point16(R2       , BottomEdge), 
+        Point17(CenterH  , BottomEdge),
+        Point18(L2       , BottomEdge),
+        Point19(L1       , BottomEdge),
+
+        Point20(CenterH  ,CenterV),//中心點
+
+        PointD(CenterH  ,CenterV);
+
+//回傳一個點
+    switch(few)
+    {
+        case  0: return Point00; break;
+        case  1: return Point01; break;
+        case  2: return Point02; break;
+        case  3: return Point03; break;
+        case  4: return Point04; break;
+        case  5: return Point05; break;
+        case  6: return Point06; break;
+        case  7: return Point07; break;
+        case  8: return Point08; break;
+        case  9: return Point09; break;
+        case 10: return Point10; break;
+        case 11: return Point11; break;
+        case 12: return Point12; break;//中心
+        case 13: return Point13; break;
+        case 14: return Point14; break;
+        case 15: return Point15; break;
+        case 16: return Point16; break;
+        case 17: return Point17; break;
+        case 18: return Point18; break;
+        case 19: return Point19; break;
+        case 20: return Point20; break;
+
+        default: PointD; return PointD; break;
+    }
+}
 
 CPoint Bolt::GetD25Point(UINT few) const
 {
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
+    int LeftEdge   = (m_f25FE) ? static_cast<int>(m_nScrmH / m_f25FE) : CmtoPixel(2.3);
+    int TopEdge    = (m_f25FE) ? static_cast<int>(m_nScrmV / m_f25FE) : CmtoPixel(2.3);
 
-    UINT LeftEdge   = CmtoPixel(2.3);
-    UINT Left_10    = LeftEdge + CmtoPixel(5);
-    UINT Left_20    = Left_10  + CmtoPixel(5);
+ //   int LeftEdge   = CmtoPixel(2.3);
+    int Left_10    = LeftEdge + CmtoPixel(m_n25RectSide/2);
+    int Left_20    = Left_10  + CmtoPixel(m_n25RectSide/2);
 
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT Right_10   = RightEdge - CmtoPixel(5);
-    UINT Right_20   = Right_10  - CmtoPixel(5);
+    int RightEdge  = m_nScrmH - LeftEdge;
+    int Right_10   = RightEdge - CmtoPixel(m_n25RectSide/2);
+    int Right_20   = Right_10  - CmtoPixel(m_n25RectSide/2);
     
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
 
-    UINT TopEdge    = CmtoPixel(2.3);//上邊緣
-    UINT Top_10     = TopEdge + CmtoPixel(5);
-    UINT Top_20     = Top_10  + CmtoPixel(5);
+//    int TopEdge    = CmtoPixel(2.3);//上邊緣
+    int Top_10     = TopEdge + CmtoPixel(m_n25RectSide/2);
+    int Top_20     = Top_10  + CmtoPixel(m_n25RectSide/2);
 
-    UINT BottomEdge = m_nScrmV - TopEdge;
-    UINT Bottom_10  = BottomEdge - CmtoPixel(5);
-    UINT Bottom_20  = Bottom_10  - CmtoPixel(5);
+    int BottomEdge = m_nScrmV - TopEdge;
+    int Bottom_10  = BottomEdge - CmtoPixel(m_n25RectSide/2);
+    int Bottom_20  = Bottom_10  - CmtoPixel(m_n25RectSide/2);
 
 /* L1L2                  R2R1
 +------------------------------+
@@ -424,164 +464,30 @@ CPoint Bolt::GetD25Point(UINT few) const
     }
 }
 
-//25+13的組合
-CPoint Bolt::GetD29Point(UINT few) const
-{
-//運算第幾個（以九點為計）
-
-    //ScrmV 螢幕垂直pixel數
-    //ScrmH 螢幕水平pixel數
-
-    UINT LeftEdge   = CmtoPixel(2.3);
-    UINT Left_10    = LeftEdge + CmtoPixel(5);
-    UINT Left_20    = Left_10  + CmtoPixel(5);
-
-    UINT RightEdge  = m_nScrmH - LeftEdge;
-    UINT Right_10   = RightEdge - CmtoPixel(5);
-    UINT Right_20   = Right_10  - CmtoPixel(5);
-    
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
-
-    UINT TopEdge    = CmtoPixel(2.3);//上邊緣
-    UINT Top_10     = TopEdge + CmtoPixel(5);
-    UINT Top_20     = Top_10  + CmtoPixel(5);
-
-    UINT BottomEdge = m_nScrmV - TopEdge;
-    UINT Bottom_10  = BottomEdge - CmtoPixel(5);
-    UINT Bottom_20  = Bottom_10  - CmtoPixel(5);
-
-    UINT LeftQuarterH = m_nScrmH/4;
-    UINT TopQuarterV  = m_nScrmV/4;
-
-    UINT RightQuarterH   = m_nScrmH - m_nScrmH/4;
-    UINT BottomQuarterV  = m_nScrmV - m_nScrmV/4;
-/* L1L2                  R2R1
-+------------------------------+
-|00  01        05        07  06|
-|  04                      10  |T1
-|02  03  25          26  09  08|T2
-|                              |
-|11            12            13|
-|                              |
-|16  17  27          28  23  25|B2
-|  18                      24  |B1
-|14  15        19        21  20|
-+------------------------------+
-*/
-    CPoint 
-        Point00(LeftEdge, TopEdge),        Point01(Left_20, TopEdge),
-
-                    Point04(Left_10, Top_10),
-
-        Point02(LeftEdge, Top_20),        Point03(Left_20, Top_20),
-                        
-                            
-        Point05(CenterH, TopEdge),
-
-
-        Point07(Right_20, TopEdge),        Point06(RightEdge, TopEdge),
-        
-                    Point10(Right_10 ,Top_10),
-
-        Point09(Right_20, Top_20),        Point08(RightEdge,Top_20),
-        //--------------------
-        Point11(LeftEdge, CenterV),
-
-        Point12(CenterH, CenterV),
-
-        Point13(RightEdge, CenterV),
-        //--------------------
-        Point16(LeftEdge ,Bottom_20),    Point17(Left_20    ,Bottom_20),
-
-                    Point18(Left_10, Bottom_10),
-
-        Point14(LeftEdge,BottomEdge),    Point15(Left_20    ,BottomEdge),
-        
-        Point19(CenterH ,BottomEdge),
-
-        Point23(Right_20, Bottom_20),    Point22(RightEdge  ,Bottom_20),
-
-                    Point24(Right_10, Bottom_10),
-
-        Point21(Right_20 ,BottomEdge),    Point20(RightEdge  ,BottomEdge),
-        //--------------------        
-        Point25(LeftQuarterH ,TopQuarterV),        Point26(RightQuarterH  ,TopQuarterV),
-
-        Point27(LeftQuarterH,BottomQuarterV),        Point28(RightQuarterH ,BottomQuarterV),        
-        //--------------------  
-		PointD(CenterH  ,CenterV);
-
-//回傳一個點
-    switch(few)
-    {
-        case 0: return Point00; break;
-        case 1: return Point01; break;
-        case 2: return Point02; break;
-        case 3: return Point03; break;
-        case 4: return Point04; break;
-
-        case 5: return Point05; break;
-
-        case 6: return Point06; break;
-        case 7: return Point07; break;
-        case 8: return Point08; break;
-        case 9: return Point09; break;
-        case 10: return Point10; break;
-//----------
-        case 11: return Point11; break;
-
-        case 12: return Point12; break;//中心
-
-        case 13: return Point13; break;
-//----------
-        case 14: return Point14; break;
-        case 15: return Point15; break;
-        case 16: return Point16; break;
-        case 17: return Point17; break;
-        case 18: return Point18; break;
-
-        case 19: return Point19; break;
-        
-        case 20: return Point20; break;
-        case 21: return Point21; break;
-        case 22: return Point22; break;
-        case 23: return Point23; break;
-        case 24: return Point24; break;
-//----------
-		case 25: return Point25; break;
-        case 26: return Point26; break;
-		case 27: return Point27; break;
-        case 28: return Point28; break;
-
-        default: PointD; return PointD; break;
-    }
-}
-
 CPoint Bolt::GetW49Point(UINT few) const
 {
 //運算第幾個（以49點為計）
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge  = m_nScrmH  / 12;   //左數1直排
-    UINT DLeftEdge = LeftEdge  *  2;   //左數2直排
-    UINT FLeftEdge = DLeftEdge *  2;   //左數3直排
+    int LeftEdge  = m_nScrmH  / 12;   //左數1直排
+    int DLeftEdge = LeftEdge  *  2;   //左數2直排
+    int FLeftEdge = DLeftEdge *  2;   //左數3直排
 
-    UINT TopEdge   = m_nScrmV / 12;    //上數1橫排
-    UINT DTopEdge  = TopEdge  * 2;    //上數2橫排
-    UINT FTopEdge  = DTopEdge * 2;    //上數2橫排
+    int TopEdge   = m_nScrmV / 12;    //上數1橫排
+    int DTopEdge  = TopEdge  * 2;    //上數2橫排
+    int FTopEdge  = DTopEdge * 2;    //上數2橫排
 
-    UINT RightEdge  = m_nScrmH -  LeftEdge;   //右數1直排
-    UINT DRightEdge = m_nScrmH - DLeftEdge;   //右數2直排
-    UINT FRightEdge = m_nScrmH - FLeftEdge;   //右數3直排
+    int RightEdge  = m_nScrmH -  LeftEdge;   //右數1直排
+    int DRightEdge = m_nScrmH - DLeftEdge;   //右數2直排
+    int FRightEdge = m_nScrmH - FLeftEdge;   //右數3直排
 
-    UINT BottomEdge = m_nScrmV -  TopEdge;    //下數1橫排
-    UINT DBottomEdge= m_nScrmV - DTopEdge;    //下數2橫排
-    UINT FBottomEdge= m_nScrmV - FTopEdge;    //下數3橫排
+    int BottomEdge = m_nScrmV -  TopEdge;    //下數1橫排
+    int DBottomEdge= m_nScrmV - DTopEdge;    //下數2橫排
+    int FBottomEdge= m_nScrmV - FTopEdge;    //下數3橫排
 
-    UINT CenterH = m_nScrmH/2;  //水平中心
-    UINT CenterV = m_nScrmV/2;  //垂直中心
+    int CenterH = m_nScrmH/2;  //水平中心
+    int CenterV = m_nScrmV/2;  //垂直中心
 /* L1L2                  R2R1
 +------------------------------+
 |                              |
@@ -717,18 +623,18 @@ CPoint Bolt::GetW49Point(UINT few) const
     }
 }
 
-CPoint Bolt::GetCrossTalk(UINT few, float FromEdge) const
+CPoint Bolt::GetCrossTalk(UINT few) const
 {
 //運算第幾個（以九點為計）
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    UINT LeftEdge   = (FromEdge) ? static_cast<UINT>(m_nScrmH / FromEdge) : CmtoPixel(2.3);    //上
-    UINT TopEdge    = (FromEdge) ? static_cast<UINT>(m_nScrmV / FromEdge) : CmtoPixel(2.3);    //下
-    UINT RightEdge  = m_nScrmH - LeftEdge;  //左
-    UINT BottomEdge = m_nScrmV - TopEdge;   //右
-    UINT CenterH    = m_nScrmH/2;
-    UINT CenterV    = m_nScrmV/2;
+    int LeftEdge   = (m_fCrsTlkRectFE) ? static_cast<int>(m_nScrmH / m_fCrsTlkRectFE) : CmtoPixel(2.3);    //上
+    int TopEdge    = (m_fCrsTlkRectFE) ? static_cast<int>(m_nScrmV / m_fCrsTlkRectFE) : CmtoPixel(2.3);    //下
+    int RightEdge  = m_nScrmH - LeftEdge;  //左
+    int BottomEdge = m_nScrmV - TopEdge;   //右
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
 /*
 +------------------------------+
 |                              |
@@ -762,8 +668,8 @@ CPoint Bolt::GetCrossTalk(UINT few, float FromEdge) const
 }
 
 UINT Bolt::CmtoPixel(const double cm) const
-{	
-	return (UINT)(m_nScrmV*cm / ((double)m_LcmSize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
+{    
+    return (UINT)(m_nScrmV*cm / ((double)m_LcmSize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
 }
 
 
@@ -775,240 +681,258 @@ UINT Bolt::CmtoPixel(const double cm) const
  *******************************************************/
 
 
-Bolt::Bolt():m_nScrmH(0), m_nScrmV(0), m_Radius(0),	
+Bolt::Bolt():m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), \
+m_nScrmV(GetSystemMetrics(SM_CYSCREEN)), m_Radius(0), \
 m_LcmSize(0), m_isReady(0), m_5nitsBkColor(RGB(127, 127, 127)){}
 
 Bolt::~Bolt(){}
 
-BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& BeginItor, std::vector<Cartridge>::iterator& EndItor)
+BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& EndItor)
 {
 /*
-	要得到以下訊息
-	LcmSize
-	解析度
-	背景色
-	該項目共幾點
-	目前量的點是該項第幾點
+    要得到以下訊息    本次量測的環境如何
+    LcmSize
+    圈半徑
 */
-	m_itEnd = EndItor;
-	m_LcmSize = (UINT)atoi(LcmSize);
-	m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);
-	m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
+    m_itEnd = EndItor;
+    m_LcmSize = (int)atoi(LcmSize.GetBuffer(0));
+    m_Radius = CmtoPixel(2.25);
 
-	m_BkColor    = BeginItor->GetBackColor();
-	m_MsrFlowNum = BeginItor->GetPostition();
-	m_MsrFlowNo  = BeginItor->GetMsrFlowNo();
+    m_isReady = TRUE;
 
-	m_Radius = CmtoPixel(2.25);
-
-	m_isReady = TRUE;
-
-	return m_isReady;
+    return m_isReady;
 }
 
 UINT Bolt::Trigger(std::vector<Cartridge>::iterator& it)
 {
-	/*
-	0 沒有資料
-	1 正常
-	2 5nits
-	*/
-	if (it != m_itEnd && m_isReady)
-	{
-		m_BkColor    = it->GetBackColor();
-		m_MsrFlowNum = it->GetPostition();
-		m_MsrFlowNo  = it->GetMsrFlowNo();
-		if (m_BkColor == Nits && it->GetArea() == 1)
-			return 2;
-		else
-			return 1;
-	}
-	else 
-		return 0;
+    /*
+    0 沒有資料
+    1 正常
+    2 5nits
+    */
+    if (it != m_itEnd && m_isReady)
+    {
+        m_BkColor    = it->GetBackColor();
+        m_MsrFlowNum = it->GetMsrFlowNum();
+        m_MsrFlowNo  = it->GetMsrFlowNo();
+
+        if (m_BkColor == Nits && it->GetArea() == 1)
+            return 2;  //5nits, so run fine5Nits
+        else
+            return 1;  //不是5nits
+    }
+    else 
+        return 0; //不是後一點
 }
 
 COLORREF Bolt::GetBkColor() const
 {
-	if (m_isReady)
-	{
-		switch(m_BkColor)
-		{
-			case White:	 return RGB( 255, 255, 255);
-			case Dark:	 return RGB(   0,   0,   0);
-			case Red:	 return RGB( 255,   0,   0);
-			case Green:	 return RGB(   0, 255,   0);
-			case Blue:	 return RGB(   0,   0, 255);
-			case Nits:	 return m_5nitsBkColor;
-			case CrsTlk: 
-			case CrsTlkW:
-			case CrsTlkD:
-						 return RGB( 128, 128, 128);
-			default:     return RGB( 192, 212,  49); 
-		}
-	}
-	else
-		return RGB( 176,  133,  77);
+    if (m_isReady)
+    {
+        switch(m_BkColor)
+        {
+            case White:    return RGB( 255, 255, 255);
+            case Dark:     return RGB(   0,   0,   0);
+            case Red:      return RGB( 255,   0,   0);
+            case Green:    return RGB(   0, 255,   0);
+            case Blue:     return RGB(   0,   0, 255);
+            case Nits:     return m_5nitsBkColor;
+            case CrsTlk: 
+            case CrsTlkW:
+            case CrsTlkD:
+                         return RGB( 128, 128, 128);
+            default:     return RGB( 192, 212,  49); 
+        }
+    }
+    else
+        return RGB( 176,  133,  77);
 }
 
 void Bolt::CenterRect(CDC* pDC, float FromEdge, COLORREF CntrClr)
 {
-	CRect* pCenterArea = new CRect(m_nScrmH/FromEdge, m_nScrmV/FromEdge, m_nScrmH - m_nScrmH/FromEdge, m_nScrmV - m_nScrmV/FromEdge);
-	CBrush* pBrush = new CBrush(CntrClr);
-	pDC->FillRect(pCenterArea, pBrush);
-	delete pBrush;
-	delete pCenterArea;
+    CRect* pCenterArea = new CRect(m_nScrmH/FromEdge, m_nScrmV/FromEdge, m_nScrmH - m_nScrmH/FromEdge, m_nScrmV - m_nScrmV/FromEdge);
+    CBrush* pBrush = new CBrush(CntrClr);
+    pDC->FillRect(pCenterArea, pBrush);
+    delete pBrush;
+    delete pCenterArea;
 }
 
 BOOL Bolt::Set5NitsBkColor(COLORREF color)
 {
-	if (m_isReady)
-	{
-		m_5nitsBkColor = color;
-		return TRUE;
-	}
-	else
-	{
-		m_5nitsBkColor = RGB(127, 127, 127);
-		return FALSE;
-	}
+    if (m_isReady)
+    {
+        m_5nitsBkColor = color;
+        return TRUE;
+    }
+    else
+    {
+        m_5nitsBkColor = RGB(127, 127, 127);
+        return FALSE;
+    }
 }
 
 COLORREF Bolt::Get5NitsBkColor() const
 {
-	return m_5nitsBkColor;
+    return m_5nitsBkColor;
 }
 
 CPoint Bolt::GetPointPosition() const
 {
-	if (m_isReady)
-	{
-		switch(m_MsrFlowNum)
-		{
-			case Pn1:
-				//中心點定義不分
-				return GetFE9Point(4, 2);
-			case Pn4:
-				return GetCrossTalk(m_MsrFlowNo);
-			case Pn5:
-				return GetFE5Point(m_MsrFlowNo, 0);
-			case Pn9:
-				//九點週邊定義各有不同
-				//分白、黑、5Nits
-				if(m_BkColor == White) return GetFE9Point(m_MsrFlowNo);
-				if(m_BkColor == Dark ) return GetFE9Point(m_MsrFlowNo, 0);
-				if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
-			case Pn49:
-				return GetW49Point(m_MsrFlowNo);
-			case Pn13:
-				return GetD13Point(m_MsrFlowNo);
-			case Pn25:
-				return GetD25Point(m_MsrFlowNo);
-			case Pn29:
-				return GetD29Point(m_MsrFlowNo);
-			default:
-				return GetFE9Point(0, 0);
-		}
-	}
-	else
-		return GetFE9Point(0, 0);
+    if (m_isReady)
+    {
+        switch(m_MsrFlowNum)
+        {
+            case Pn1:
+                //中心點定義不分
+                return GetFE9Point(4);
+            case Pn4:
+                return GetCrossTalk(m_MsrFlowNo);
+            case Pn5:
+                return GetFE5Point(m_MsrFlowNo);
+            case Pn9:
+                //九點週邊定義各有不同
+                //分白、黑、5Nits
+                if(m_BkColor == White) return GetFE9Point(m_MsrFlowNo);
+                if(m_BkColor == Dark ) return GetFE9Point(m_MsrFlowNo);
+                if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
+            case Pn13:
+                return GetD13Point(m_MsrFlowNo);
+            case Pn25:
+                return GetD25Point(m_MsrFlowNo);
+            case Pn49:
+                return GetW49Point(m_MsrFlowNo);
+            default:
+                return GetFE9Point(0);
+        }
+    }
+    else
+        return GetFE9Point(0);
 }
 
 UINT Bolt::GetRadius() const
 {
-	return m_isReady ? m_Radius : 0;
+    return m_isReady ? m_Radius : 0;
 }
 
 BOOL Bolt::isReady() const
 {
-	return m_isReady;
+    return m_isReady;
 }
 
 CString Bolt::GetMsrFlowName() const
 {
-	CString clr("NotReady");
-	CString ptnum("NotReady");
+    CString clr("NotReady");
+    CString ptnum("NotReady");
 
-	if (m_isReady)
-	{
-		switch(m_MsrFlowNum)
-		{
-		case Pn1:  ptnum.Format("中心點"); break;
-		case Pn9:  ptnum.Format("9點");    break;
-		case Pn49: ptnum.Format("49點");   break;
-		case Pn13: ptnum.Format("13點");   break;
-		case Pn25: ptnum.Format("25點");   break;
-		case Pn29: ptnum.Format("29點");   break;
-		}
-		switch(m_BkColor)
-		{
-		case White:     clr.Format("白色");      break;
-		case Dark:      clr.Format("黑色");      break;
-		case Red:       clr.Format("紅色");      break;
-		case Blue:      clr.Format("藍色");      break;
-		case Green:     clr.Format("綠色");      break;
-		case Nits:      clr.Format("5Nits");     break;
-		case CrsTlk:    clr.Format("CrossTalk"); break;
-		}
-	}
+    if (m_isReady)
+    {
+        switch(m_BkColor)
+        {
+        case White:     clr.Format("白色");        break;
+        case Dark:      clr.Format("黑色");        break;
+        case Red:       clr.Format("紅色");        break;
+        case Blue:      clr.Format("藍色");        break;
+        case Green:     clr.Format("綠色");        break;
+        case Nits:      clr.Format("5Nits");       break;
+        case CrsTlk:    clr.Format("CrossTalk");   break;
+        case CrsTlkW:   clr.Format("CrossTalkW");  break;
+        case CrsTlkD:   clr.Format("CrossTalkD");  break;
+        }
 
-	CString temp;
-	temp.Format("%s%s", clr, ptnum);
-	return temp;
+        switch(m_MsrFlowNum)
+        {
+            case Pn1:  ptnum.Format("中心點"); break;
+            case Pn4:  ptnum.Format("4點");    break;
+            case Pn5:  ptnum.Format("5點");    break;
+            case Pn9:  ptnum.Format("9點");    break;
+            case Pn49: ptnum.Format("49點");   break;
+            case Pn13: ptnum.Format("13點");   break;
+            case Pn25: ptnum.Format("25點");   break;
+        }
+    }
+
+    CString temp;
+    temp.Format("%s%s", clr, ptnum);
+    return temp;
 }
 
 void Bolt::Partition(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
 {
-	m_LcmSize = 24;
-	m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);
-	m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
+    //填入預設空包彈
+//     m_LcmSize = 24;                               //模組尺寸
+//     m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);    //螢幕解析度
+//     m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
 
-	m_BkColor    = MsrFlow.GetBackColor();
-	m_MsrFlowNum = MsrFlow.GetPostition();
+    m_BkColor    = MsrFlow.GetBackColor();        //背景色標籤
+    m_MsrFlowNum = MsrFlow.GetMsrFlowNum();        //點數標籤
 
-	UINT areaCode = 0;
+    UINT areaCode = 0;
 
-	UINT centerX = m_nScrmH/2;
-	UINT centerY = m_nScrmV/2;
-	m_isReady = TRUE;
-	for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
-	{
-		MsrFlow.SetMsrFlowNo(m_MsrFlowNo);
-// 		+----------+
-// 		|02  03  07|
-// 		|04  01  08|
-// 		|05  06  09|
-// 		+----------+
-		if((((UINT)m_MsrFlowNum - 1)/2) == MsrFlow.GetMsrFlowNo())
-			areaCode = 1;
-		else
-		{
-			UINT Xp = GetPointPosition().x;
-			UINT Yp = GetPointPosition().y;
+    UINT centerX = GetSystemMetrics(SM_CXSCREEN)/2;
+    UINT centerY = GetSystemMetrics(SM_CYSCREEN)/2;
+    m_isReady = TRUE;
+    
+    for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
+    {
+        MsrFlow.SetMsrFlowNo(m_MsrFlowNo);
+//         +----------+
+//         |02  03  07|
+//         |04  01  08|
+//         |05  06  09|
+//         +----------+
+        if((((UINT)m_MsrFlowNum - 1)/2) == MsrFlow.GetMsrFlowNo())
+            areaCode = 1;
+        else
+        {
+            UINT Xp = GetPointPosition().x;
+            UINT Yp = GetPointPosition().y;
 
-			 	 if	(Xp <  centerX && Yp <  centerY)	areaCode = 2;
-			else if (Xp == centerX && Yp <  centerY)	areaCode = 3;
-			else if (Xp <  centerX && Yp == centerY)	areaCode = 4;
-			else if (Xp <  centerX && Yp >  centerY)	areaCode = 5;
-			else if (Xp == centerX && Yp >  centerY)	areaCode = 6;
-			else if (Xp >  centerX && Yp <  centerY)	areaCode = 7;
-			else if (Xp >  centerX && Yp == centerY)	areaCode = 8;
-			else if (Xp >  centerX && Yp >  centerY)	areaCode = 9;
-			else                                        areaCode = 0;
-		}
+                  if    (Xp <  centerX && Yp <  centerY)    areaCode = 2;
+            else if (Xp == centerX && Yp <  centerY)    areaCode = 3;
+            else if (Xp <  centerX && Yp == centerY)    areaCode = 4;
+            else if (Xp <  centerX && Yp >  centerY)    areaCode = 5;
+            else if (Xp == centerX && Yp >  centerY)    areaCode = 6;
+            else if (Xp >  centerX && Yp <  centerY)    areaCode = 7;
+            else if (Xp >  centerX && Yp == centerY)    areaCode = 8;
+            else if (Xp >  centerX && Yp >  centerY)    areaCode = 9;
+            else                                        areaCode = 0;
+        }
 
-		MsrFlow.SetArea(areaCode);
-		vCar.push_back(MsrFlow);
-	}
-	m_isReady = FALSE;
+        MsrFlow.SetArea(areaCode);
+//        MsrFlow.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
+        vCar.push_back(MsrFlow);
+    }
+    m_isReady = FALSE;
 }
+//////////////////////////////////////////////////////////////////////////
+//Msr Parameter
+Bolt* Bolt::SetP5FE(float P5FE)               {m_f5FE          = P5FE;                         return this;}
+Bolt* Bolt::SetP9FE(float P9FE)               {m_f9FE          = P9FE;                         return this;}
+Bolt* Bolt::SetP21FE(float P21FE)             {m_f21FE         = P21FE;                        return this;}
+Bolt* Bolt::SetP21Avg(float Havg, float Vavg) {m_f21Havg       = Havg;    m_f21Vavg = Vavg;    return this;}
+Bolt* Bolt::SetP25FE(float P25FE)             {m_f25FE         = P25FE;                        return this;}
+Bolt* Bolt::SetP25RectSide(UINT SideLong)     {m_n25RectSide   = SideLong;                     return this;}
+Bolt* Bolt::SetGammaRange(UINT GM1, UINT GM2) {m_nGM1          = GM1;     m_nGM2    = GM2;     return this;}
+Bolt* Bolt::GammaStep(float GmStep)           {m_fGammaSetp    = GmStep;                       return this;}
+Bolt* Bolt::SetNitsNum(float NitsNum)          {m_fNits         = NitsNum;                      return this;}
+Bolt* Bolt::SetCrsTlkRectFE(float RectSideFE) {m_fCrsTlkRectFE = RectSideFE;                   return this;}
+
+//////////////////////////////////////////////////////////////////////////
+//debug function
+
+#ifdef _DEBUG
 
 CString  Bolt::GetSetupValue() const
 {
-	CString str;
-
-	str.Format("Ready = %d, 解析度(%d×%d), 半徑 = %d, LCM尺寸 = %d 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d)", \
-			m_isReady, m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
-			GetRValue(m_5nitsBkColor), GetGValue(m_5nitsBkColor), GetBValue(m_5nitsBkColor));
-	
-	return str;
+    CString str;
+    
+    str.Format("Ready = %d, 解析度(%d×%d), 半徑 = %d, LCM尺寸 = %d 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
+        m_isReady, m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
+        GetRValue(m_5nitsBkColor), GetGValue(m_5nitsBkColor), GetBValue(m_5nitsBkColor), \
+        GetRValue(GetBkColor()), GetGValue(GetBkColor()), GetBValue(GetBkColor())
+        );
+    
+    return str;
 }
+
+#endif

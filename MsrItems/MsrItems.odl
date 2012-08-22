@@ -1,0 +1,70 @@
+// MsrItems.odl : type library source for MsrItems.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (MsrItems.tlb).
+
+[ uuid(57B5D665-67FA-45C1-B0E4-6CF6C8A6ADA3), version(1.0) ]
+library MsrItems
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CMsrItemsDoc
+	
+	[ uuid(01AEEDB5-825A-4132-8DC6-BE80965170FD) ]
+	dispinterface IMsrItems
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CMsrItemsDlgAutoProxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CMsrItemsDlgAutoProxy)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CMsrItemsDoc
+	
+	[ uuid(52E3D8AC-CFD7-468D-A510-A52BCC410D81) ]
+	coclass MsrItems
+	{
+		[default] dispinterface IMsrItems;
+	};
+
+
+	//  Primary dispatch interface for CMsrItemDlg
+	
+	[ uuid(7CD56503-6F6C-449E-8A5E-781F3EA45898) ]
+	dispinterface IMsrItemDlg
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CMsrItemDlg)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CMsrItemDlg)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CMsrItemDlg
+
+	[ uuid(BD9A4F5A-4BC6-4775-88A8-DD5ED4DB64F9) ]
+	coclass MsrItemDlg
+	{
+		[default] dispinterface IMsrItemDlg;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

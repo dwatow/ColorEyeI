@@ -9,7 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 #include <vector>
-#include "ColorEyeI.h"
 
 class CTable  
 {
@@ -37,7 +36,7 @@ class CTable
     CBrush m_BkArea;
     CBrush* p_OldBrush;
 
-	//定位點
+    //定位點
     CPoint m_ptOrig;
     CPoint m_ptCur;
     CPoint m_ptNextXY;
@@ -60,7 +59,7 @@ public:
 
 //protected:
     CTable& SetFont(CFont&);
-	CTable& SetBackColor(COLORREF BkClr = RGB(255, 255, 255));
+    CTable& SetBackColor(COLORREF BkClr = RGB(255, 255, 255));
     //粗體
     CTable& b();
     CTable& b_();

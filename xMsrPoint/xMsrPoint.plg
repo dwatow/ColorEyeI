@@ -6,14 +6,31 @@
 --------------------Configuration: xMsrPoint - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4CE0.tmp" with contents
+Creating command line "midl.exe /nologo /D "_DEBUG" /tlb "Debug/xMsrPoint.tlb" /mktyplib203 /win32 "D:\GitHub\ColorEyeI\xMsrPoint\xMsrPoint.odl""
+Creating command line "rc.exe /l 0x404 /fo"Debug/xMsrPoint.res" /i "Debug" /d "_DEBUG" "D:\GitHub\ColorEyeI\xMsrPoint\xMsrPoint.rc"" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP16D3.tmp" with contents
 [
-/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/xMsrPoint.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\Dropbox\SoftwareDevelop\ColorEyeI\xMsrPoint\PatternDlg.cpp"
-"D:\Dropbox\SoftwareDevelop\ColorEyeI\xMsrPoint\xMsrPointDlg.cpp"
+/nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fp"Debug/xMsrPoint.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\Bolt.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Bullet.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\ca200srvr.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Cartridge.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Circle.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\CircleArc.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\DlgProxy.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\xMsrPoint.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\xMsrPointDlg.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP4CE0.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4CE1.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP16D3.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP16D4.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fp"Debug/xMsrPoint.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP16D4.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP16D5.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/xMsrPoint.pdb" /debug /machine:I386 /out:"Debug/xMsrPoint.exe" /pdbtype:sept 
 .\Debug\Bolt.obj
@@ -30,33 +47,37 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4CE1.tmp" with c
 .\Debug\xMsrPointDlg.obj
 .\Debug\xMsrPoint.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP4CE1.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP16D5.tmp"
 <h3>Output Window</h3>
+Creating Type Library...
+Processing D:\GitHub\ColorEyeI\xMsrPoint\xMsrPoint.odl
+xMsrPoint.odl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\oaidl.idl
+oaidl.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\objidl.idl
+objidl.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\unknwn.idl
+unknwn.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\wtypes.idl
+wtypes.idl
+Compiling resources...
 Compiling...
+StdAfx.cpp
+Compiling...
+Bolt.cpp
+Bullet.cpp
+ca200srvr.cpp
+CA210.cpp
+Cartridge.cpp
+Circle.cpp
+CircleArc.cpp
+DlgProxy.cpp
 PatternDlg.cpp
+xMsrPoint.cpp
 xMsrPointDlg.cpp
-D:\Dropbox\SoftwareDevelop\ColorEyeI\xMsrPoint\xMsrPointDlg.cpp(278) : error C2664: 'Magazine' : cannot convert parameter 2 from 'class Cartridge *' to 'class Cartridge *& '
-        A reference that is not to 'const' cannot be bound to a non-lvalue
+D:\GitHub\ColorEyeI\xMsrPoint\xMsrPointDlg.cpp(244) : error C2512: 'CPatternDlg' : no appropriate default constructor available
 Generating Code...
 Error executing cl.exe.
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4E2A.tmp" with contents
-[
-/nologo /o"Debug/xMsrPoint.bsc" 
-.\Debug\StdAfx.sbr
-.\Debug\Bolt.sbr
-.\Debug\Bullet.sbr
-.\Debug\ca200srvr.sbr
-.\Debug\CA210.sbr
-.\Debug\Cartridge.sbr
-.\Debug\Circle.sbr
-.\Debug\CircleArc.sbr
-.\Debug\DlgProxy.sbr
-.\Debug\PatternDlg.sbr
-.\Debug\xMsrPoint.sbr
-.\Debug\xMsrPointDlg.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP4E2A.tmp"
-Creating browse info file...
-<h3>Output Window</h3>
 
 
 

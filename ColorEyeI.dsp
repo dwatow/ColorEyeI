@@ -42,7 +42,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FD /c
+# ADD CPP /nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR /FD /c
 # SUBTRACT CPP /YX /Yc /Yu
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr /FD /GZ /c
 # SUBTRACT CPP /YX /Yc /Yu
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
@@ -141,7 +141,19 @@ SOURCE=.\ColorEyeIView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\excel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\FileDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MsrItems\MsrItemDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -150,6 +162,14 @@ SOURCE=.\OmdFile\OmdFile1.cpp
 # Begin Source File
 
 SOURCE=.\xMsrPoint\PatternDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\SelExcelDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MsrItems\StaticText.cpp
 # End Source File
 # Begin Source File
 
@@ -163,6 +183,30 @@ SOURCE=.\Table.cpp
 # Begin Source File
 
 SOURCE=.\OmdFile\TxtFile.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\xlef.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsFile2.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsGamma.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsOQC1.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsRA1.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsSEC1.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -210,7 +254,23 @@ SOURCE=.\ColorEyeIView.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Enum.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\excel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\FileDlg.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MsrItems\MsrItemDlg.h
 # End Source File
 # Begin Source File
 
@@ -222,7 +282,15 @@ SOURCE=.\xMsrPoint\PatternDlg.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Resource.h
+SOURCE=.\resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\SelExcelDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MsrItems\StaticText.h
 # End Source File
 # Begin Source File
 
@@ -235,6 +303,34 @@ SOURCE=.\Table.h
 # Begin Source File
 
 SOURCE=.\OmdFile\TxtFile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\VersionNo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\xlef.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsFile2.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsGamma.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsOQC1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsRA1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsSEC1.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
@@ -264,6 +360,10 @@ SOURCE=.\ColorEyeI.reg
 # Begin Source File
 
 SOURCE=.\ReadMe.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\VerCtrl.dsm
 # End Source File
 # End Target
 # End Project

@@ -61,7 +61,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	void SetOrigPriority(std::vector<Cartridge>& vCar);
+//	void SetOrigPriority(std::vector<Cartridge>& vCar);
 //	CString GetLine(UINT Num);
 };
 

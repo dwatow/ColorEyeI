@@ -10,7 +10,7 @@ library ColorEyeI
 	importlib("stdole2.tlb");
 
 
-	//  Primary dispatch interface for CColorEyeIDoc
+    //  Primary dispatch interface for CColorEyeIDoc
 	
 	[ uuid(103A7CC5-072F-4C0A-9681-F1B5DF57C9E1) ]
 	dispinterface IColorEyeI

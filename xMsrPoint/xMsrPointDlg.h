@@ -11,6 +11,7 @@
 //Belt 彈鍊
 #include "Cartridge.h"
 #include "PatternDlg.h"
+#include <algorithm>
 
 //#include "Bullet.h"    // Added by ClassView
 
@@ -25,7 +26,7 @@ class CXMsrPointDlgAutoProxy;
 class CXMsrPointDlg : public CDialog
 {
     //CA-SDK用的變數
-	Ca210        m_CA210;
+	Ca210*       m_pCA210;
     CPatternDlg* p_PtnDlg;
 	std::vector<Cartridge> vChain1;
 
@@ -74,9 +75,14 @@ protected:
     afx_msg HCURSOR OnQueryDragIcon();
     afx_msg void OnButtonMsr();
 	afx_msg void OnReleasedcaptureSlider1(NMHDR* pNMHDR, LRESULT* pResult);
-//	afx_msg void OnCustomdrawSlider1(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnDestroy();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
+private:
+	static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
+	static bool OrigPriority(const Cartridge &sp1, const Cartridge &sp2);
+	void QuackMsrSort(std::vector<Cartridge>& vCar) const;
+	void OrigMsrSort(std::vector<Cartridge>& vCar) const;
 };
 
 //{{AFX_INSERT_LOCATION}}

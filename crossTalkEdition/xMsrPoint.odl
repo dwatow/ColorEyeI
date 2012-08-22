@@ -1,0 +1,42 @@
+// xMsrPoint.odl : type library source for xMsrPoint.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (xMsrPoint.tlb).
+
+[ uuid(1AC90729-90E8-496B-9CC9-0C58E96EFC98), version(1.0) ]
+library XMsrPoint
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CXMsrPointDoc
+	
+	[ uuid(9D8EAAE8-421A-43B3-AAE9-E75B39EE4CA9) ]
+	dispinterface IXMsrPoint
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CXMsrPointDlgAutoProxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CXMsrPointDlgAutoProxy)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CXMsrPointDoc
+	
+	[ uuid(3F6C8654-68A8-4054-88B2-08A70568065B) ]
+	coclass XMsrPoint
+	{
+		[default] dispinterface IXMsrPoint;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};
