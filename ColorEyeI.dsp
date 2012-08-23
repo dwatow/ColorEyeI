@@ -141,6 +141,10 @@ SOURCE=.\ColorEyeIView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DataChain.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\excel.cpp
 # End Source File
 # Begin Source File
@@ -251,6 +255,10 @@ SOURCE=.\ColorEyeIDoc.h
 # Begin Source File
 
 SOURCE=.\ColorEyeIView.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DataChain.h
 # End Source File
 # Begin Source File
 

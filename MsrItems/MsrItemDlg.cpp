@@ -193,56 +193,6 @@ void CMsrItemDlg::OnPaint()
     // Do not call CDialog::OnPaint() for painting messages
 }
 
-
- /////////////////////////////////////////////////////////////////////////////
- //sort function
- 
- bool CMsrItemDlg::AreaPriority(const Cartridge &sp1, const Cartridge &sp2)
- {
-     return (sp1.GetArea() < sp2.GetArea()) ? 1 : 0;
- }
- 
- bool CMsrItemDlg::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
- {
-     return (sp1.GetOrigSeqc() < sp2.GetOrigSeqc()) ? 1 : 0;
- }
- 
- 
- void CMsrItemDlg::QuackMsrSort(std::vector<Cartridge>& vCar) const
- {
-     std::sort(vCar.begin(), vCar.end(), AreaPriority);
- }
- 
- void CMsrItemDlg::OrigMsrSort(std::vector<Cartridge>& vCar) const
- {
-     std::sort(vCar.begin(), vCar.end(), OrigPriority);
- }
-
-// BOOL CMsrItemDlg::DestroyWindow() 
-// {
-//     // TODO: Add your specialized code here and/or call the base class
-//     //delete m_pDlgPattern;
-// //    vCrossTalk.clear();
-//     
-//     return CDialog::DestroyWindow();
-// }
-
-// void CMsrItemDlg::Ready(/*std::vector<Cartridge>& vChain1*/)
-// {
-// //    m_chkCWP9.GetState();    
-// }
-
-// BOOL CMsrItemDlg::OnInitDialog() 
-// {
-//     CDialog::OnInitDialog();
-//     
-//     // TODO: Add extra initialization here
-// 
-// 
-//     return TRUE;  // return TRUE unless you set the focus to a control
-//                   // EXCEPTION: OCX Property Pages should return FALSE
-// }
-
 void CMsrItemDlg::SetBolt(Bolt* pusher)
 {
     Pusher = pusher;
@@ -262,72 +212,33 @@ void CMsrItemDlg::OnOK()
 
 		pDoc->SetModifiedFlag(TRUE);
 
-        pDoc->GetVector().clear();
-        Cartridge x;
-        pDoc->GetVector().push_back(x);
-
+        pDoc->GetVector().Empty();
         UpdateData(TRUE);
 
         //執行連到了這
         //1. CA-210已連線
         //2. CA-210已宣告
         //////////////////////////////////////////////////////////////////////////
-        Cartridge w1(White, Pn1);
-        Cartridge r1(Red  , Pn1);
-        Cartridge g1(Green, Pn1);
-        Cartridge b1(Blue , Pn1);
-        Cartridge d1(Dark , Pn1);
-
-        Cartridge w5(White, Pn5);    
-        Cartridge r5(Red  , Pn5);    
-        Cartridge g5(Green, Pn5);    
-        Cartridge b5(Blue , Pn5);    
-        Cartridge d5(Dark , Pn5);    
-    
-        Cartridge w9(White, Pn9);    
-        Cartridge r9(Red  , Pn9);    
-        Cartridge g9(Green, Pn9);    
-        Cartridge b9(Blue , Pn9);    
-        Cartridge d9(Dark , Pn9);    
-
-        Cartridge w25(White, Pn25);    
-        Cartridge r25(Red  , Pn25);    
-        Cartridge g25(Green, Pn25);    
-        Cartridge b25(Blue , Pn25);    
-        Cartridge d25(Dark , Pn25);    
-    
-        Cartridge w49(White, Pn49);    
-        Cartridge r49(Red  , Pn49);    
-        Cartridge g49(Green, Pn49);    
-        Cartridge b49(Blue , Pn49);    
-        Cartridge d49(Dark , Pn49);    
-    
-        Cartridge nits(Nits, Pn9);
-
-        Cartridge crstlk1(CrsTlk , Pn4);
-        Cartridge crstlk2(CrsTlkW, Pn4);
-        Cartridge crstlk3(CrsTlkD, Pn4);
-
-        if (m_chkCWP1.GetState())    Pusher->Partition(pDoc->GetVector(), w1);
-        if (m_chkCRP1.GetState())    Pusher->Partition(pDoc->GetVector(), r1);
-        if (m_chkCGP1.GetState())    Pusher->Partition(pDoc->GetVector(), g1);
-        if (m_chkCBP1.GetState())    Pusher->Partition(pDoc->GetVector(), b1);
-        if (m_chkCDP1.GetState())    Pusher->Partition(pDoc->GetVector(), d1);
-
-        if (m_chkCWP5.GetState())    Pusher->Partition(pDoc->GetVector(), w5);
-        if (m_chkCRP5.GetState())    Pusher->Partition(pDoc->GetVector(), r5);
-        if (m_chkCGP5.GetState())    Pusher->Partition(pDoc->GetVector(), g5);
-        if (m_chkCBP5.GetState())    Pusher->Partition(pDoc->GetVector(), b5);
-        if (m_chkCDP5.GetState())    Pusher->Partition(pDoc->GetVector(), d5);
+        if (m_chkCWP1.GetState())    pDoc->GetVector().Partition(White, Pn1);
+        if (m_chkCRP1.GetState())    pDoc->GetVector().Partition(Red  , Pn1);
+        if (m_chkCGP1.GetState())    pDoc->GetVector().Partition(Green, Pn1);
+        if (m_chkCBP1.GetState())    pDoc->GetVector().Partition(Green, Pn1);
+        if (m_chkCDP1.GetState())    pDoc->GetVector().Partition(Blue , Pn1);
+		
+        if (m_chkCWP5.GetState())    pDoc->GetVector().Partition(White, Pn5);
+        if (m_chkCRP5.GetState())    pDoc->GetVector().Partition(Red  , Pn5);
+        if (m_chkCGP5.GetState())    pDoc->GetVector().Partition(Green, Pn5);
+        if (m_chkCBP5.GetState())    pDoc->GetVector().Partition(Blue , Pn5);
+        if (m_chkCDP5.GetState())    pDoc->GetVector().Partition(Dark , Pn5);
         
         if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
             Pusher->SetP5FE(m_f5FE);
 
-        if (m_chkCWP9.GetState())    Pusher->Partition(pDoc->GetVector(), w9);
-        if (m_chkCRP9.GetState())    Pusher->Partition(pDoc->GetVector(), r9);
-        if (m_chkCGP9.GetState())    Pusher->Partition(pDoc->GetVector(), g9);
-        if (m_chkCBP9.GetState())    Pusher->Partition(pDoc->GetVector(), b9);
-        if (m_chkCDP9.GetState())    Pusher->Partition(pDoc->GetVector(), d9);
+        if (m_chkCWP9.GetState())    pDoc->GetVector().Partition(White, Pn9);
+        if (m_chkCRP9.GetState())    pDoc->GetVector().Partition(Red  , Pn9);
+        if (m_chkCGP9.GetState())    pDoc->GetVector().Partition(Green, Pn9);
+        if (m_chkCBP9.GetState())    pDoc->GetVector().Partition(Blue , Pn9);
+        if (m_chkCDP9.GetState())    pDoc->GetVector().Partition(Dark , Pn9);
 
         if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
             Pusher->SetP9FE(m_f9FE);
@@ -335,22 +246,22 @@ void CMsrItemDlg::OnOK()
         if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
             Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
 
-        if (m_chkCWP25.GetState())    Pusher->Partition(pDoc->GetVector(), w25);
-        if (m_chkCRP25.GetState())    Pusher->Partition(pDoc->GetVector(), r25);
-        if (m_chkCGP25.GetState())    Pusher->Partition(pDoc->GetVector(), g25);
-        if (m_chkCBP25.GetState())    Pusher->Partition(pDoc->GetVector(), b25);
-        if (m_chkCDP25.GetState())    Pusher->Partition(pDoc->GetVector(), d25);
+        if (m_chkCWP25.GetState())    pDoc->GetVector().Partition(White, Pn25);
+        if (m_chkCRP25.GetState())    pDoc->GetVector().Partition(Red  , Pn25);
+        if (m_chkCGP25.GetState())    pDoc->GetVector().Partition(Green, Pn25);
+        if (m_chkCBP25.GetState())    pDoc->GetVector().Partition(Blue , Pn25);
+        if (m_chkCDP25.GetState())    pDoc->GetVector().Partition(Dark , Pn25);
 
         if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
             Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
         
-        if (m_chkCWP49.GetState())    Pusher->Partition(pDoc->GetVector(), w49);
-        if (m_chkCRP49.GetState())    Pusher->Partition(pDoc->GetVector(), r49);
-        if (m_chkCGP49.GetState())    Pusher->Partition(pDoc->GetVector(), g49);
-        if (m_chkCBP49.GetState())    Pusher->Partition(pDoc->GetVector(), b49);
-        if (m_chkCDP49.GetState())    Pusher->Partition(pDoc->GetVector(), d49);
+        if (m_chkCWP49.GetState())    pDoc->GetVector().Partition(White, Pn49);
+        if (m_chkCRP49.GetState())    pDoc->GetVector().Partition(Red  , Pn49);
+        if (m_chkCGP49.GetState())    pDoc->GetVector().Partition(Green, Pn49);
+        if (m_chkCBP49.GetState())    pDoc->GetVector().Partition(Blue , Pn49);
+        if (m_chkCDP49.GetState())    pDoc->GetVector().Partition(Dark , Pn49);
     
-        if (m_chkNits.GetState())     Pusher->Partition(pDoc->GetVector(), nits);
+        if (m_chkNits.GetState())     pDoc->GetVector().Partition(Nits, Pn9);
 
         if (m_chkNits.GetState())
             Pusher->SetNitsNum(m_fNits);
@@ -358,22 +269,12 @@ void CMsrItemDlg::OnOK()
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
 
-        if (m_chkQuickMsr.GetState())    QuackMsrSort(pDoc->GetVector());
+        if (m_chkQuickMsr.GetState())    pDoc->GetVector().QuackMsrSort();
 
         if (m_chkCrossTalk.GetState())
         {
-            vCrossTalk.clear();
-            Pusher->Partition(vCrossTalk, crstlk1);
-            Pusher->Partition(vCrossTalk, crstlk2);
-            Pusher->Partition(vCrossTalk, crstlk3);
-
-            QuackMsrSort(vCrossTalk);
-
-            pDoc->GetVector().insert(pDoc->GetVector().end(), vCrossTalk.begin(), vCrossTalk.end());
-//             for (std::vector<Cartridge>::iterator itor = vCrossTalk.begin(); itor != vCrossTalk.end(); ++itor)
-//                 pDoc->GetVector().push_back(*itor);
-
-            Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
+			pDoc->GetVector().Partition(CrsTlk, Pn4);
+			Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
         }
     }
 	

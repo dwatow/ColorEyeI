@@ -159,7 +159,7 @@ void CColorEyeIDoc::OnFileSaveAs()
 void CColorEyeIDoc::OnFileSave() 
 {
     // TODO: Add your command handler code here
-    if (vChain1.empty())            //若還沒有存過的檔
+    if (vChain1.IsEmpty())            //若還沒有存過的檔
         OnFileSaveAs();          //就另存新檔
     else
 	{
@@ -173,40 +173,14 @@ COmdFile1& CColorEyeIDoc::GetOmdFile()
     return *f_Omd;
 }
 
-std::vector<Cartridge>& CColorEyeIDoc::GetVector()
+CDataChain& CColorEyeIDoc::GetVector()
 {
     return vChain2;
 }
 
 void CColorEyeIDoc::RestructureVector()
 {
-    if (!vChain2.empty())//裡面這些不要修改，影響再次量測的資料擺放
-    {
-        //在這時
-        //vChain1是舊的
-        //vChain2是新的
-        std::vector<Cartridge>::iterator it2, itX;
-
-        //remove & cut
-        //在新的裡面，比對舊的，代表重覆
-        //重覆量測去除掉
-        for (it2 = vChain2.begin(); it2 != vChain2.end(); ++it2)
-        {
-            itX = std::remove(vChain1.begin(), vChain1.end(), *it2);
-            vChain1.erase(itX, vChain1.end());
-        }
-
-        //將舊的掛在新的後面（讓空的放在第一個）
-        //整串變成舊的那一串
-        //放回Omd檔
-        vChain2.insert(vChain2.end(), vChain1.begin(), itX);
-        vChain1 = vChain2;
-    }
-    else if (vChain1.empty())
-    {
-        Cartridge x;
-        vChain1.push_back(x);
-    }
+	vChain1.RemoveEqualCell(vChain2);
     f_Omd->SetMsrData(vChain1);
 }    
 
@@ -224,7 +198,7 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
 void CColorEyeIDoc::NewOmdData()
 {
     SetTitle("新的Omd檔");
-    vChain1.clear();          //清空記憶體空間vChain1
+    vChain1.Empty();          //清空記憶體空間vChain1
     f_Omd = new COmdFile1;    //新增Omd檔（刪掉會開不了）
 	SetModifiedFlag(TRUE);
 }
@@ -234,11 +208,11 @@ void CColorEyeIDoc::DebugByTxt()
     std::vector<CString> vStr;
     CString str;
 
-    str.Empty();
+    str.IsEmpty();
     vStr.clear();
     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
     vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = vChain1.begin(); iter != vChain1.end(); ++iter)
+    for (std::vector<Cartridge>::iterator iter = vChain1.Begin(); iter != vChain1.End(); ++iter)
     {                  
         str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
             iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\
@@ -276,11 +250,11 @@ void CColorEyeIDoc::DebugByTxt(CString path)
     std::vector<CString> vStr;
     CString str;
     
-    str.Empty();
+    str.IsEmpty();
     vStr.clear();
     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
     vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = vChain1.begin(); iter != vChain1.end(); ++iter)
+    for (std::vector<Cartridge>::iterator iter = vChain1.Begin(); iter != vChain1.End(); ++iter)
     {                  
         str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
             iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\

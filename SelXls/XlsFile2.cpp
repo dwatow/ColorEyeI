@@ -16,13 +16,3 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-std::vector<Cartridge>::size_type CXlsFile2::SubNum(ColorType clr, PointNum Large, UINT Little) const
-{
-    std::vector<Cartridge>::size_type SubNum = -1;
-    for (std::vector<Cartridge>::const_iterator itor = m_vCar.begin(); itor != m_vCar.end(); ++itor)
-    {
-        if(Large == itor->GetMsrFlowNum() && Little == itor->GetMsrFlowNo() && clr == itor->GetBackColor())
-            SubNum = itor - m_vCar.begin();
-    }
-    return (SubNum == -1) ? 0 : SubNum;
-}

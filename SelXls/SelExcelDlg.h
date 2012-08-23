@@ -11,7 +11,8 @@
 #include "../xMsrPoint/Bolt.h"
 #include "../MainFrm.h"
 #include "../ColorEyeIDoc.h"
-#include <vector>
+//#include <vector>
+#include "../DataChain.h"
 
 #if _MSC_VER > 1000
 #pragma once
@@ -30,8 +31,7 @@ class CSelExcelDlg : public CDialog
     FormType  m_ft;
     int       m_nBufferSize;
     CString   m_strXlsPath;  //XlsFilepath
-    Bolt*     m_pVectorMaker;
-    std::vector<Cartridge> m_vOmdtoXls;
+    CDataChain m_vOmdtoXls;
 	std::vector<CString>   m_vFilePathList;  //OmdFilepath
 
 	CMainFrame* pMainFrm;

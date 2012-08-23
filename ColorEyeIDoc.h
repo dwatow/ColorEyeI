@@ -18,8 +18,8 @@ class CColorEyeIDoc : public CDocument
 //    CString m_OmdFilePath;
     CString m_strFilter;
 public:
-    std::vector<Cartridge> vChain1;
-    std::vector<Cartridge> vChain2;
+    CDataChain vChain1;
+    CDataChain vChain2;
 
 protected: // create from serialization only
     CColorEyeIDoc();
@@ -42,7 +42,7 @@ public:
 // Implementation
 public:
     COmdFile1& GetOmdFile();
-    std::vector<Cartridge>& GetVector();//新的一條鍊 vChain2
+    CDataChain& GetVector();//新的一條鍊 vChain2
     void RestructureVector();
 
     virtual ~CColorEyeIDoc();

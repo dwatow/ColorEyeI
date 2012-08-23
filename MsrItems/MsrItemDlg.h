@@ -22,7 +22,6 @@ class CMsrItemDlg : public CDialog
 {
 //    CPatternDlg* m_pDlgPattern;
     Bolt *Pusher;
-    std::vector<Cartridge> vCrossTalk;
 
 // Construction
 public:
@@ -117,11 +116,6 @@ protected:
     //}}AFX_DISPATCH
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
-private:
-    static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
-    static bool OrigPriority(const Cartridge &sp1, const Cartridge &sp2);
-    void QuackMsrSort(std::vector<Cartridge>& vCar) const;
-    void OrigMsrSort(std::vector<Cartridge>& vCar) const;
 public:
     void SetBolt(Bolt* Pusher);
 };

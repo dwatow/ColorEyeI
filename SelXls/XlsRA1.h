@@ -23,8 +23,8 @@ public:
 	CXlsRA1& iProb(CString );
 	CXlsRA1& iProb(CString, std::vector<Cartridge>::size_type);
 public:
-	CXlsRA1& iData(std::vector<Cartridge>&);
-	CXlsRA1& iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type);
+	CXlsRA1& iData(CDataChain&);
+	CXlsRA1& iData(CDataChain&, std::vector<Cartridge>::size_type);
 //	std::vector<Cartridge> oData();
 };
 

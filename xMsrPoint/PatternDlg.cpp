@@ -409,10 +409,10 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-    m_itor = pDoc->GetVector().begin();
+    m_itor = pDoc->GetVector().Begin();
     ++m_itor;               //閃掉第一個空包彈
     m_BeginItor = m_itor;
-    m_EndItor   = pDoc->GetVector().end();
+    m_EndItor   = pDoc->GetVector().End();
     
     //++BeginItor;  
     if(!m_GunMchn.isReady())

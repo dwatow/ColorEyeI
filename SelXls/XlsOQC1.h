@@ -23,8 +23,8 @@ public:
  	CXlsOQC1& iBarCode(CString, std::vector<Cartridge>::size_type);
 // 	CXlsOQC1& iProb(CString );
 // 	CXlsOQC1& iProb(CString, std::vector<Cartridge>::size_type);
-	CXlsOQC1& iData(std::vector<Cartridge>& );
-	CXlsOQC1& iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type);
+	CXlsOQC1& iData(CDataChain& );
+	CXlsOQC1& iData(CDataChain&, std::vector<Cartridge>::size_type);
 //	std::vector<Cartridge> oData();
 
 };

@@ -10,7 +10,8 @@
 #endif // _MSC_VER > 1000
 
 #include "TxtFile.h"
-#include "../xMsrPoint/Cartridge.h"
+//#include "../xMsrPoint/Cartridge.h"
+#include "../DataChain.h"
 
 class COmdFile1 : public CTxtFile
 {
@@ -55,18 +56,17 @@ private:
     CString m_Prb;
     CString m_CHID;
     UINT    m_5nitsBkColor;
-
 /*
   把每一個table裡的東西用指標指出來
   再另外去編輯
 
   另外，讓資料空白的儲存格做縮減的效果
   以達到動態編輯的假像！XD
- */
+*/
     std::vector<BOOL> isMsrChain;
     std::vector< std::vector<bool> > isMsrTalbe;
 
-    std::vector<Cartridge>  m_vMsrData;    //量測資料的記憶體空間
+    CDataChain  m_vMsrData;    //量測資料的記憶體空間
     std::vector<CString>    m_vStrIndex;  //量測項目的名字
 public:    
     CString GetPnlID()  const;   void SetPnlID(CString&);
@@ -74,8 +74,8 @@ public:
     CString GetPrb()    const;   void SetPrb(CString&);
     CString GetCHID()   const;   void SetCHID(CString&);
 
-	void SetMsrData(std::vector<Cartridge>&);  //把Vector裝到Omd檔
-	std::vector<Cartridge> GetMsrData();
+	void SetMsrData(CDataChain&);  //把Vector裝到Omd檔
+    CDataChain GetMsrData();
 
     //字串目錄
 	BOOL    SetIndex();   //return 1:有量測值 0:沒有任何量測值
@@ -85,10 +85,6 @@ public:
     //找是不是有量測值
     BOOL IsMsr(ColorType , PointNum , isMsrValue );  //    可以直接對vector做動作，找是不是有值，沒有的話回傳NULL
     BOOL IsMsr(ColorType , PointNum);                // 只管項目是不是有值
-    
-private:
-    //對著彈鍊找
-    std::vector<Cartridge>::size_type SubNum(ColorType clr, PointNum Big, UINT Little) const;
 };
 
 #endif // !defined(AFX_OMDFILE1_H__5E9E8D8E_4BB9_40C8_BEE3_2756DA9A7E76__INCLUDED_)

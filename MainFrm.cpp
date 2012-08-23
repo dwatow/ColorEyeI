@@ -118,8 +118,8 @@ void CMainFrame::OnMsrConnectca210()
 
     if (!m_iConnectCa210)
     {
-//        m_pCa210 = new Ca210(TRUE);
-        m_pCa210 = new Ca210(FALSE);
+        m_pCa210 = new Ca210(TRUE);
+//        m_pCa210 = new Ca210(FALSE);
         m_iConnectCa210 = TRUE;
  		m_iOnlineCa210 = FALSE;
 	}//     else
@@ -154,10 +154,7 @@ void CMainFrame::OnUpdateMsrItem(CCmdUI* pCmdUI)
 void CMainFrame::OnDestroy() 
 {
     CFrameWnd::OnDestroy();
-
     // TODO: Add your message handler code here
-// 	if (m_pCa210 != 0) 
-// 		m_pCa210->SetOnline(FALSE);
     delete    m_pCa210;
 }
 

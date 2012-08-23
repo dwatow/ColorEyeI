@@ -87,10 +87,10 @@ CXlsRA1& CXlsRA1::iCellNO(std::vector<Cartridge>::size_type box_count)
 }
 
 //////////////////////////////////////////////////////////////////////////
-CXlsRA1& CXlsRA1::iPanelID(CString strPanelID          , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iPanelID(strPanelID);  return *this;}
-CXlsRA1& CXlsRA1::iChannel(CString strCHID             , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iChannel(strCHID);     return *this;}
-CXlsRA1& CXlsRA1::iProb   (CString strProb             , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iProb(strProb);        return *this;}
-CXlsRA1& CXlsRA1::iData   (std::vector<Cartridge>& vCar, std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iData(vCar);           return *this;}
+CXlsRA1& CXlsRA1::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iPanelID(strPanelID);  return *this;}
+CXlsRA1& CXlsRA1::iChannel(CString strCHID    , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iChannel(strCHID);     return *this;}
+CXlsRA1& CXlsRA1::iProb   (CString strProb    , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iProb(strProb);        return *this;}
+CXlsRA1& CXlsRA1::iData   (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count).iData(vCar);           return *this;}
 
     //SelectCell('B', 5+m_CellNO).SetCellBorder(1, 3).SetCell(strPanelID);    //GetPanelID
 //         SelectCell(CellHarBeg+cell_count++, CellVerBeg+box_count).SetCellBorder(1, 3).SetCell(m_vCar.at(box_count).Gettime());    //Gettime
@@ -109,7 +109,7 @@ CXlsRA1& CXlsRA1::iPanelID(CString strPanelID) {    SelectCell('B' , 5+m_CellNO)
 CXlsRA1& CXlsRA1::iChannel(CString strCHID)    {    SelectCell("AG", 5+m_CellNO).SetCellBorder(1, 3).SetCell(strCHID);      return *this;}
 CXlsRA1& CXlsRA1::iProb(CString striProb)      {    SelectCell("AH", 5+m_CellNO).SetCellBorder(1, 3).SetCell(striProb);     return *this;}
 
-CXlsRA1& CXlsRA1::iData(std::vector<Cartridge>& vCar)
+CXlsRA1& CXlsRA1::iData(CDataChain& vCar)
 {
     //Step 4.開始設定內容
     //-----------------------------------------------------------------------------------------------
@@ -119,42 +119,42 @@ CXlsRA1& CXlsRA1::iData(std::vector<Cartridge>& vCar)
     
 	SelectSheet(1);
 
-    SelectCell('F'+0,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 0)).GetSx());
-    SelectCell('F'+1,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 0)).GetSy());
-    SelectCell('F'+2,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 0)).GetLv());
+    SelectCell('F'+0,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 0).GetSx());
+    SelectCell('F'+1,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 0).GetSy());
+    SelectCell('F'+2,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 0).GetLv());
     
-    SelectCell('F'+3,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 1)).GetSx());
-    SelectCell('F'+4,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 1)).GetSy());
-    SelectCell('F'+5,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 1)).GetLv());
+    SelectCell('F'+3,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 1).GetSx());
+    SelectCell('F'+4,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 1).GetSy());
+    SelectCell('F'+5,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 1).GetLv());
     
-    SelectCell('F'+6,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 2)).GetSx());
-    SelectCell('F'+7,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 2)).GetSy());
-    SelectCell('F'+8,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 2)).GetLv());
+    SelectCell('F'+6,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 2).GetSx());
+    SelectCell('F'+7,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 2).GetSy());
+    SelectCell('F'+8,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 2).GetLv());
     
-    SelectCell('F'+9,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 3)).GetSx());
-    SelectCell('F'+10, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 3)).GetSy());
-    SelectCell('F'+11, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 3)).GetLv());
+    SelectCell('F'+9,  5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 3).GetSx());
+    SelectCell('F'+10, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 3).GetSy());
+    SelectCell('F'+11, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 3).GetLv());
     
-    SelectCell('F'+12, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 4)).GetSx());
-    SelectCell('F'+13, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 4)).GetSy());
-    SelectCell('F'+14, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 4)).GetLv());
+    SelectCell('F'+12, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 4).GetSx());
+    SelectCell('F'+13, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 4).GetSy());
+    SelectCell('F'+14, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 4).GetLv());
     
-    SelectCell('F'+15, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 5)).GetSx());
-    SelectCell('F'+16, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 5)).GetSy());
-    SelectCell('F'+17, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 5)).GetLv());
+    SelectCell('F'+15, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 5).GetSx());
+    SelectCell('F'+16, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 5).GetSy());
+    SelectCell('F'+17, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 5).GetLv());
     
-    SelectCell('F'+18, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 6)).GetSx());
-    SelectCell('F'+19, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 6)).GetSy());
-    SelectCell('F'+20, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 6)).GetLv());
+    SelectCell('F'+18, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 6).GetSx());
+    SelectCell('F'+19, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 6).GetSy());
+    SelectCell('F'+20, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 6).GetLv());
     
     // A-Z, AA的中間界線-----------------------------------------------------
-    SelectCell('A', 'A'+0, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 7)).GetSx());
-    SelectCell('A', 'A'+1, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 7)).GetSy());
-    SelectCell('A', 'A'+2, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 7)).GetLv());
+    SelectCell('A', 'A'+0, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 7).GetSx());
+    SelectCell('A', 'A'+1, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 7).GetSy());
+    SelectCell('A', 'A'+2, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 7).GetLv());
     
-    SelectCell('A', 'A'+3, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 8)).GetSx());
-    SelectCell('A', 'A'+4, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 8)).GetSy());
-    SelectCell('A', 'A'+5, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.at(SubNum(White, Pn9, 8)).GetLv());
+    SelectCell('A', 'A'+3, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 8).GetSx());
+    SelectCell('A', 'A'+4, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 8).GetSy());
+    SelectCell('A', 'A'+5, 5+m_CellNO).SetCellBorder(1, 3).SetCell(m_vCar.At(White, Pn9, 8).GetLv());
     
 	CString strTemp;
 	strTemp.Format("=SUM(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)/9",\
