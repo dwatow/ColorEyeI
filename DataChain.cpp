@@ -121,6 +121,7 @@ void CDataChain::RemoveEqualCell(CDataChain& vCar)
         Empty();
 		AddChain(End(), vCar.Begin(), vCar.End());
     }
+	ReleaseBuffer();
 }
 
 std::vector<Cartridge>::size_type CDataChain::StdInit()
@@ -209,16 +210,20 @@ Cartridge CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
     return m_CarChain1.at((SubNum == -1) ? 0 : SubNum);
 }
 
-void CDataChain::operator=(const std::vector<Cartridge>& vCar)
+std::vector<Cartridge>& CDataChain::operator=(const std::vector<Cartridge>& vCar)
 {
 	m_CarChain1 = vCar;
+	return m_CarChain1;
 }
 
 void CDataChain::ReleaseBuffer()
 {
-    for (std::vector<Cartridge>::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+    for (std::vector<Cartridge>::iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
     {
-        if(itor != m_CarChain1.begin() && itor->m_AreaCode() == 99 && itor->GetMsrFlowNo() == 99)
+        if (itor != m_CarChain1.begin() && 
+			itor->GetArea()       == 99 && 
+			itor->GetMsrFlowNo()  == 99 &&
+			itor->GetMsrFlowNum() == NoPn)
             m_CarChain1.erase(itor);
     }
 }

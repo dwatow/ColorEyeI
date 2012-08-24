@@ -222,8 +222,8 @@ void CMsrItemDlg::OnOK()
         if (m_chkCWP1.GetState())    pDoc->GetVector().Partition(White, Pn1);
         if (m_chkCRP1.GetState())    pDoc->GetVector().Partition(Red  , Pn1);
         if (m_chkCGP1.GetState())    pDoc->GetVector().Partition(Green, Pn1);
-        if (m_chkCBP1.GetState())    pDoc->GetVector().Partition(Green, Pn1);
-        if (m_chkCDP1.GetState())    pDoc->GetVector().Partition(Blue , Pn1);
+        if (m_chkCBP1.GetState())    pDoc->GetVector().Partition(Blue, Pn1);
+        if (m_chkCDP1.GetState())    pDoc->GetVector().Partition(Dark , Pn1);
 		
         if (m_chkCWP5.GetState())    pDoc->GetVector().Partition(White, Pn5);
         if (m_chkCRP5.GetState())    pDoc->GetVector().Partition(Red  , Pn5);

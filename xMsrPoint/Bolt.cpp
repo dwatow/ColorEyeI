@@ -914,7 +914,7 @@ Bolt* Bolt::SetP25FE(float P25FE)             {m_f25FE         = P25FE;         
 Bolt* Bolt::SetP25RectSide(UINT SideLong)     {m_n25RectSide   = SideLong;                     return this;}
 Bolt* Bolt::SetGammaRange(UINT GM1, UINT GM2) {m_nGM1          = GM1;     m_nGM2    = GM2;     return this;}
 Bolt* Bolt::GammaStep(float GmStep)           {m_fGammaSetp    = GmStep;                       return this;}
-Bolt* Bolt::SetNitsNum(float NitsNum)          {m_fNits         = NitsNum;                      return this;}
+Bolt* Bolt::SetNitsNum(float NitsNum)         {m_fNits         = NitsNum;                      return this;}
 Bolt* Bolt::SetCrsTlkRectFE(float RectSideFE) {m_fCrsTlkRectFE = RectSideFE;                   return this;}
 
 //////////////////////////////////////////////////////////////////////////

@@ -159,8 +159,10 @@ void CColorEyeIDoc::OnFileSaveAs()
 void CColorEyeIDoc::OnFileSave() 
 {
     // TODO: Add your command handler code here
-    if (vChain1.IsEmpty())            //若還沒有存過的檔
+    if (GetPathName().IsEmpty())            //若還沒有存過的檔
+	{
         OnFileSaveAs();          //就另存新檔
+	}
     else
 	{
 		SetModifiedFlag(FALSE);

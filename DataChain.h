@@ -12,14 +12,13 @@
 #include <vector>
 #include <iterator>
 #include "../xMsrPoint/Cartridge.h"
-#include "Enum.h"
 #include "../xMsrPoint/Bolt.h"
+#include "Enum.h"
 
 
 class CDataChain// :public std::vector<Cartridge>
 {
  	std::vector<Cartridge> m_CarChain1;
- 	std::vector<Cartridge>::iterator m_vitCar;
 	Bolt* m_pVectorMaker;
 
  public:
@@ -41,7 +40,7 @@ class CDataChain// :public std::vector<Cartridge>
 	std::vector<Cartridge>::const_iterator cBegin();
 	std::vector<Cartridge>::const_iterator cEnd();
  	Cartridge At(ColorType, PointNum, UINT ) const;
- 	void operator=(const std::vector<Cartridge>&);
+ 	std::vector<Cartridge>& operator=(const std::vector<Cartridge>&);
 	BOOL IsEmpty();
  private:
 	 static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
