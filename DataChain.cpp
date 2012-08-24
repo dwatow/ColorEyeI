@@ -14,6 +14,7 @@ static char THIS_FILE[]=__FILE__;
 
 //////////////////////////////////////////////////////////////////////////
 //sort
+
 bool CDataChain::AreaPriority(const Cartridge &sp1, const Cartridge &sp2)
 {
 	return (sp1.GetArea() < sp2.GetArea()) ? 1 : 0;
@@ -25,12 +26,12 @@ bool CDataChain::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
 }
 
 
-void CDataChain::QuackMsrSort(std::vector<Cartridge>& vCar) const
+void CDataChain::SortQuackMsr(std::vector<Cartridge>& vCar) const
 {
 	std::sort(vCar.begin(), vCar.end(), AreaPriority);
 }
 
-void CDataChain::OrigMsrSort(std::vector<Cartridge>& vCar) const
+void CDataChain::SortOrigMsr(std::vector<Cartridge>& vCar) const
 {
 	std::sort(vCar.begin(), vCar.end(), OrigPriority);
 }
@@ -57,7 +58,7 @@ void CDataChain::AddCell(const Cartridge& _X)
 
 std::vector<Cartridge>::iterator CDataChain::Begin()
 {
-	return m_CarChain1.begin();
+	return m_CarChain1.begin()+1;
 }
 
 std::vector<Cartridge>::iterator CDataChain::End()
@@ -67,7 +68,7 @@ std::vector<Cartridge>::iterator CDataChain::End()
 
 std::vector<Cartridge>::const_iterator CDataChain::cBegin()
 {
-	return m_CarChain1.begin();
+	return m_CarChain1.begin()+1;
 }
 
 std::vector<Cartridge>::const_iterator CDataChain::cEnd()
@@ -183,7 +184,7 @@ void CDataChain::Partition(ColorType ct, PointNum pn)
 		m_pVectorMaker->Partition(vCrossTalk, CrsTlk2);
 		m_pVectorMaker->Partition(vCrossTalk, CrsTlk3);
 
-		QuackMsrSort(vCrossTalk);
+		SortQuackMsr(vCrossTalk);
 		AddChain(End(), vCrossTalk.begin(), vCrossTalk.end());
 	}
 	else
@@ -194,9 +195,9 @@ void CDataChain::Partition(ColorType ct, PointNum pn)
 	delete m_pVectorMaker;
 }
 
-void CDataChain::QuackMsrSort()
+void CDataChain::SortQuackMsr()
 {
-	QuackMsrSort(m_CarChain1);
+	SortQuackMsr(m_CarChain1);
 }
 
 Cartridge CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
@@ -218,10 +219,9 @@ std::vector<Cartridge>& CDataChain::operator=(const std::vector<Cartridge>& vCar
 
 void CDataChain::ReleaseBuffer()
 {
-    for (std::vector<Cartridge>::iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+    for (std::vector<Cartridge>::iterator itor = Begin(); itor != End(); ++itor)
     {
-        if (itor != m_CarChain1.begin() && 
-			itor->GetArea()       == 99 && 
+        if (itor->GetArea()       == 99 && 
 			itor->GetMsrFlowNo()  == 99 &&
 			itor->GetMsrFlowNum() == NoPn)
             m_CarChain1.erase(itor);

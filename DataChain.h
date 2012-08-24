@@ -29,8 +29,7 @@ class CDataChain// :public std::vector<Cartridge>
 	std::vector<Cartridge>::size_type StdInit();
 	void RemoveEqualCell(CDataChain& );
 	void Partition(ColorType ct, PointNum pn);
-	void QuackMsrSort();
-	CString str;
+	void SortQuackMsr();
 	void ReleaseBuffer();
 
 //Simulator Vector member function
@@ -42,11 +41,12 @@ class CDataChain// :public std::vector<Cartridge>
  	Cartridge At(ColorType, PointNum, UINT ) const;
  	std::vector<Cartridge>& operator=(const std::vector<Cartridge>&);
 	BOOL IsEmpty();
+
  private:
 	 static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
 	 static bool OrigPriority(const Cartridge &sp1, const Cartridge &sp2);
-	 void QuackMsrSort(std::vector<Cartridge>& vCar) const;
-	 void OrigMsrSort(std::vector<Cartridge>& vCar) const;
+	 void SortQuackMsr(std::vector<Cartridge>& vCar) const;
+	 void SortOrigMsr(std::vector<Cartridge>& vCar) const;
 };
 
 #endif // !defined(AFX_DATACHAIN_H__0108A325_5755_4826_B203_49A50707E9EF__INCLUDED_)

@@ -32,11 +32,15 @@ public:
     void SetMsrFlowNo(UINT);
     
     PointNum GetMsrFlowNum() const;
+	CString  GetStrPointNum() const;
     void     SetMsrFlowNum(PointNum);
     
     UINT GetArea() const;
     void SetArea(UINT);
 
+    ColorType GetBackColor() const;
+	CString   GetStrColorType() const;
+    void      SetBackColor(ColorType clr);
 //     float GetLv() const;  CString GetStrLv() const;        BOOL SetLv(float);    BOOL SetLv(CString);
 //     float GetSx() const;  CString GetStrSx() const;        BOOL SetSx(float);    BOOL SetSx(CString);
 //     float GetSy() const;  CString GetStrSy() const;        BOOL SetSy(float);    BOOL SetSy(CString);
@@ -54,8 +58,6 @@ public:
     Bullet GetBullet() const;
     void   SetBullet(const Bullet& Pd);
 
-    ColorType GetBackColor() const;
-    void      SetBackColor(ColorType clr);
     
     BOOL operator==(const Cartridge& vCar)
     {

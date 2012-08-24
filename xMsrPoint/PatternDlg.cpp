@@ -410,7 +410,7 @@ BOOL CPatternDlg::Magazine()
     ASSERT_VALID(pDoc);
     
     m_itor = pDoc->GetVector().Begin();
-    ++m_itor;               //閃掉第一個空包彈
+  //  ++m_itor;               //閃掉第一個空包彈
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetVector().End();
     
@@ -623,17 +623,6 @@ void CPatternDlg::OnLButtonDown(UINT nFlags, CPoint point)
 
     CDialog::OnLButtonDown(nFlags, point);
 }
-
-// void CPatternDlg::SetOrigPriority(std::vector<Cartridge>& vCar)
-// {
-//     //設定原始排序
-//     std::vector<Cartridge>::size_type OrigPrty;
-//     for (std::vector<Cartridge>::iterator itor = vCar.begin(); itor != vCar.end() ; ++itor)
-//     {
-//         OrigPrty = itor - vCar.begin();
-//         itor->SetOrigSeqc(OrigPrty);
-//     }
-// }
 
 void CPatternDlg::OnTimer(UINT nIDEvent) 
 {

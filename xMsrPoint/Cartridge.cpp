@@ -92,6 +92,44 @@ void Cartridge::SetMsrFlowNum(PointNum mfNum) {    m_MsrFlowNum = mfNum;}
 UINT Cartridge::GetMsrFlowNo()  const     {    return (UINT)m_MsrFlowNo;}
 void Cartridge::SetMsrFlowNo(UINT mfNo)       {    m_MsrFlowNo = mfNo;}
 
+CString Cartridge::GetStrPointNum() const
+{
+    CString Num;
+	switch(m_MsrFlowNum)
+	{
+	case Pn1:  Num.Format("中心點"); break;
+	case Pn4:  Num.Format("04點");   break;
+	case Pn5:  Num.Format("05點");   break;
+	case Pn9:  Num.Format("09點");   break;
+	case Pn13: Num.Format("13點");   break;
+	case Pn21: Num.Format("21點");   break;
+	case Pn25: Num.Format("25點");   break;
+	case Pn49: Num.Format("49點");   break;
+	case NoPn:
+	default:   Num.Format("未定義點位");
+    }
+	return Num;
+}
+
+CString Cartridge::GetStrColorType() const
+{
+    CString Color;
+	switch(m_BkColor)
+	{
+	case White:  Color.Format("白色");   break;
+	case Red:    Color.Format("紅色");   break;
+	case Green:  Color.Format("綠色");   break;
+	case Blue:   Color.Format("藍色");   break;
+	case Dark:   Color.Format("黑色");   break;
+	case Nits:   Color.Format("幾Nits");  break;
+	case CrsTlkW:
+	case CrsTlkD:
+	case CrsTlk: Color.Format("CrossTalk"); break;
+	case NoColor:
+	default:     Color.Format("未定義色彩");
+    }
+	return Color;
+}
 //////////////////////////////////////////////////////////////////////////
 //debug function
 #ifdef _DEBUG

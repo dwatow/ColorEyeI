@@ -35,7 +35,7 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_f9FE = 6.0f;
     m_fGammaSetp = 255.0f;
     m_n25RectSide = 0;
-    m_fCrsTlkRectFE = 4.0f;
+    m_fCrsTlkRectFE = 8.0f;
     m_fNits = 5.0f;
     //}}AFX_DATA_INIT
 }
@@ -269,7 +269,7 @@ void CMsrItemDlg::OnOK()
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
 
-        if (m_chkQuickMsr.GetState())    pDoc->GetVector().QuackMsrSort();
+        if (m_chkQuickMsr.GetState())    pDoc->GetVector().SortQuackMsr();
 
         if (m_chkCrossTalk.GetState())
         {

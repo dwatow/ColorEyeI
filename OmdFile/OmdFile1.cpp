@@ -647,36 +647,12 @@ BOOL COmdFile1::SetIndex()
     UINT    No;
 
     m_vStrIndex.clear();
+
+	
     for (std::vector<Cartridge>::const_iterator itor = m_vMsrData.Begin(); itor != m_vMsrData.End() ; ++itor)
     {
-        switch(itor->GetMsrFlowNum())
-        {
-            case Pn1:  Num.Format("中心點"); break;
-            case Pn4:  Num.Format("04點");   break;
-            case Pn5:  Num.Format("05點");   break;
-            case Pn9:  Num.Format("09點");   break;
-            case Pn13: Num.Format("13點");   break;
-			case Pn21: Num.Format("21點");   break;
-            case Pn25: Num.Format("25點");   break;
-            case Pn49: Num.Format("49點");   break;
-			case NoPn:
-            default:   Num.Format("未定義點位");
-        }
-
-        switch(itor->GetBackColor())
-        {
-            case White:  Color.Format("白色");   break;
-            case Red:    Color.Format("紅色");   break;
-            case Green:  Color.Format("綠色");   break;
-            case Blue:   Color.Format("藍色");   break;
-            case Dark:   Color.Format("黑色");   break;
-            case Nits:   Color.Format("幾Nits");  break;
-			case CrsTlkW:
-			case CrsTlkD:
-			case CrsTlk: Color.Format("CrossTalk"); break;
-			case NoColor:
-            default:     Color.Format("未定義色彩");
-        }
+		Num.Format("%s", itor->GetStrPointNum());
+		Color.Format("%s", itor->GetStrColorType());
 
         No = itor->GetMsrFlowNo();
         temp.Format("%s%s的第%2d點\n", Color, Num, No);

@@ -216,8 +216,11 @@ void CColorEyeIDoc::DebugByTxt()
     vStr.push_back(str);
     for (std::vector<Cartridge>::iterator iter = vChain1.Begin(); iter != vChain1.End(); ++iter)
     {                  
-        str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
-            iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\
+        str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
+            iter, iter->GetOrigSeqc(), iter->GetArea(), 
+			iter->GetStrColorType(), //背景色碼
+			iter->GetMsrFlowNo(), //第幾點
+			iter->GetStrPointNum(),//量測點數
             iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
         vStr.push_back(str);
     }
