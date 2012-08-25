@@ -119,20 +119,41 @@ void CColorEyeIDoc::OnFileNew()
 	UpdateAllViews(NULL);  //更新畫面
 }
 
+BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName) 
+{
+    if (!CDocument::OnOpenDocument(lpszPathName))
+        return FALSE;    
+    // TODO: Add your specialized creation code here
+	//點兩下會執行這個
+	OnNewDocument();
+	CString str;
+	str.Format("%s", lpszPathName);
+	if(f_Omd->Open(str))
+	{
+		SetPathName(str);
+
+		str.Right( str.GetLength() - str.ReverseFind('\\') - 1);
+		SetTitle(str);
+	}
+	SetModifiedFlag(FALSE);
+
+    return TRUE;
+}
+
 void CColorEyeIDoc::OnFileOpen() 
 {
     // TODO: Add your command handler code here
-    CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, m_strFilter);
+    CFileDlg aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, m_strFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        RestructureVector();
-        if(f_Omd->Open(aFileDialog.GetPathName()))
-        {
-            SetPathName(aFileDialog.GetPathName());
-            SetTitle(aFileDialog.GetFileName());
-        }
+//        RestructureVector();  //開程式後，直接開啟檔案會出問題
+		if(f_Omd->Open(aFileDialog.GetPathName()))
+		{
+			SetPathName(aFileDialog.GetPathName());
+			SetTitle(aFileDialog.GetFileName());
+		}
     }
     UpdateAllViews(NULL);
 }
@@ -140,7 +161,7 @@ void CColorEyeIDoc::OnFileOpen()
 void CColorEyeIDoc::OnFileSaveAs() 
 {
     // TODO: Add your command handler code here
-    CFileDialog fSaveDlg (FALSE, "omd", "*.omd", OFN_SHAREAWARE, m_strFilter);  //存檔會自己加副檔名
+    CFileDlg fSaveDlg (FALSE, "omd", "*.omd", OFN_SHAREAWARE, m_strFilter);  //存檔會自己加副檔名
 
     int nID = fSaveDlg.DoModal();
     if (nID == IDOK)
@@ -185,17 +206,6 @@ void CColorEyeIDoc::RestructureVector()
 	vChain1.RemoveEqualCell(vChain2);
     f_Omd->SetMsrData(vChain1);
 }    
-
-BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName) 
-{
-    if (!CDocument::OnOpenDocument(lpszPathName))
-        return FALSE;
-    
-    // TODO: Add your specialized creation code here
-    AfxMessageBox("OnOpenDocument(LPCTSTR lpszPathName)");
-
-    return TRUE;
-}
 
 void CColorEyeIDoc::NewOmdData()
 {

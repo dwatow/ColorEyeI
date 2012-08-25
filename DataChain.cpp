@@ -97,6 +97,17 @@ void CDataChain::AddChain(
 	m_CarChain1.insert(_P, _F, _L);
 }
 
+void CDataChain::operator+(const Cartridge& _X)
+{
+	m_CarChain1.push_back(_X);
+}
+
+void CDataChain::operator+(CDataChain& Data)
+{	
+	m_CarChain1.insert(m_CarChain1.end(), Data.Begin(), Data.End());
+}
+
+
 void CDataChain::RemoveEqualCell(CDataChain& vCar)
 {
     if (!vCar.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
@@ -200,7 +211,7 @@ void CDataChain::SortQuackMsr()
 	SortQuackMsr(m_CarChain1);
 }
 
-Cartridge CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
+Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little)
 {
     std::vector<Cartridge>::size_type SubNum = -1;
     for (std::vector<Cartridge>::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
@@ -208,8 +219,13 @@ Cartridge CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
         if(itor->GetMsrFlowNum() == Large && itor->GetMsrFlowNo() == Little && itor->GetBackColor() == clr)
             SubNum = itor - m_CarChain1.begin();
     }
-    return m_CarChain1.at((SubNum == -1) ? 0 : SubNum);
+    return (m_CarChain1.at((SubNum == -1) ? 0 : SubNum));
 }
+
+// Cartridge& CDataChain::operator[](ColorType clr, PointNum Large, UINT Little)
+// {
+//     return At(ColorType clr, PointNum Large, UINT Little);
+// }
 
 std::vector<Cartridge>& CDataChain::operator=(const std::vector<Cartridge>& vCar)
 {

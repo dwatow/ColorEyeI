@@ -26,6 +26,12 @@ class CDataChain// :public std::vector<Cartridge>
  	virtual ~CDataChain();
  	void AddCell(const Cartridge&);
  	void AddChain(std::vector<Cartridge>::iterator _P, std::vector<Cartridge>::const_iterator _F, std::vector<Cartridge>::const_iterator _L);
+	
+	void operator+(const Cartridge&);
+	void operator+(CDataChain&);
+
+	//+
+	
 	std::vector<Cartridge>::size_type StdInit();
 	void RemoveEqualCell(CDataChain& );
 	void Partition(ColorType ct, PointNum pn);
@@ -38,9 +44,11 @@ class CDataChain// :public std::vector<Cartridge>
 	std::vector<Cartridge>::iterator End();
 	std::vector<Cartridge>::const_iterator cBegin();
 	std::vector<Cartridge>::const_iterator cEnd();
- 	Cartridge At(ColorType, PointNum, UINT ) const;
+ 	Cartridge& At(ColorType, PointNum, UINT );
  	std::vector<Cartridge>& operator=(const std::vector<Cartridge>&);
 	BOOL IsEmpty();
+
+//	Cartridge& operator[](ColorType, PointNum, UINT);
 
  private:
 	 static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
