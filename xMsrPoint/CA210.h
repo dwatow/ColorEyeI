@@ -35,6 +35,8 @@ public:
     Ca210(BOOL tr = TRUE);
     ~Ca210();
 
+	BOOL CreatCa200();
+	BOOL AttachCa();
     UINT MsrAI(float );//0.0001
     UINT Measure();
 

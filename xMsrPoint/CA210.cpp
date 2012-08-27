@@ -18,80 +18,59 @@ Ca210::Ca210(BOOL tr):ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上
 #ifdef _CA210DEBUG
         DBugModeBox("TRUE of Ca210(BOOL tr)");
 #endif
-        int flag = 0;
-        CString CloseSetp("1. 檢查USB線和量筒\n2. 按確定");
-        do 
-        {
-            try
-            {
-                m_ICa200.CreateDispatch("CA200Srvr.Ca200.1");
-            }
-            catch (CException* e)
-            {
-                MsgFrmt(e, "m_ICa200.CreateDispatch(\"CA200Srvr.Ca200.1\");出問題", CloseSetp);
-                flag++;
-                continue;
-            }
+        CString CloseSetp();
 
-            m_ICa200.m_bAutoRelease = TRUE;
-
-            try
-            {
-                m_ICa200.AutoConnect();
-            }
-            catch (CException* e)
-            {
-                MsgFrmt(e, "m_ICa200.AutoConnect();出問題", CloseSetp);
-                flag++;
-                continue;
-            }
 
             LPDISPATCH pICa;
+			CreatCa200();
 
             try
             {
-                pICa = m_ICa200.GetSingleCa();
+				AfxMessageBox("pICa = m_ICa200.GetSingleCa();");
+                pICa = m_ICa200.GetSingleCa();;
             }            
             catch (CException* e)
             {
                 MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.GetSingleCa();出問題", CloseSetp);
-                flag++;
-                continue;
             }
 
+			AfxMessageBox("m_ICa.AttachDispatch(pICa);");
             m_ICa.AttachDispatch(pICa);
             
             LPDISPATCH pIProbe;
             try
             {
+				AfxMessageBox("pIProbe = m_ICa.GetSingleProbe();");
                 pIProbe = m_ICa.GetSingleProbe();
-                flag = 0;
+//                flag = 0;
             }            
             catch (CException* e)
             {
                 MsgFrmt(e, "LPDISPATCH pIProbe = m_ICa.GetSingleProbe();出問題", CloseSetp);
-                flag++;
-                continue;
+//                flag++;
+//				break;
             }
             
+			AfxMessageBox("m_IProbe.AttachDispatch(pIProbe);");
             m_IProbe.AttachDispatch(pIProbe);
         
             //判斷是否Zero Cal
-        } while (flag);
+//        } while (flag);
 
-        try
-        {
-            m_ICa.Measure(0);
-            m_isZeroCal = TRUE;
-        }
-        catch (CException* e)
-        {
-            TCHAR buf[255];
-            e->GetErrorMessage(buf, 255);
-
-            //MsgFrmt(e, "量測出問題", "剛剛是不是不正常使用量筒（像是搖它或對著強光源...之類的）\n否則，不要移動量筒按確定重量剛剛的點");            
-            m_isZeroCal = FALSE;
-        }
+//         try
+//         {
+// 			AfxMessageBox("m_ICa.Measure(0);");
+//             m_ICa.Measure(0);
+//             m_isZeroCal = TRUE;
+//         }
+//         catch (CException* e)
+//         {
+//             TCHAR buf[255];
+//             e->GetErrorMessage(buf, 255);
+// 
+//             //MsgFrmt(e, "量測出問題", "剛剛是不是不正常使用量筒（像是搖它或對著強光源...之類的）\n否則，不要移動量筒按確定重量剛剛的點");            
+             m_isZeroCal = FALSE;
+//         }
 //        SetOnline(FALSE);
     }
     else
@@ -121,6 +100,27 @@ Ca210::~Ca210()
         m_ICa200.ReleaseDispatch();
     }
 }
+
+BOOL Ca210::CreatCa200()
+{
+	BOOL isSuccess;
+	try
+	{
+		m_ICa200.CreateDispatch("CA200Srvr.Ca200.1");
+		m_ICa200.m_bAutoRelease = TRUE;
+		m_ICa200.AutoConnect();
+	}
+	catch (CException* e)
+	{
+		MsgFrmt(e, "CreatCa200();出問題", "1. 檢查USB線和量筒\n2. 按確定");
+		m_ICa200.m_bAutoRelease = FALSE;
+		m_ICa200.ReleaseDispatch();
+		isSuccess = FALSE;
+	}
+	return isSuccess;
+}
+
+BOOL 
 
 BOOL Ca210::isTrue() const
 {

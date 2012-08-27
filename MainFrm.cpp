@@ -118,8 +118,8 @@ void CMainFrame::OnMsrConnectca210()
 
     if (!m_iConnectCa210)
     {
-//        m_pCa210 = new Ca210(TRUE);
-        m_pCa210 = new Ca210(FALSE);
+        m_pCa210 = new Ca210(TRUE);
+//        m_pCa210 = new Ca210(FALSE);
         m_iConnectCa210 = TRUE;
  		m_iOnlineCa210 = FALSE;
 	}//     else

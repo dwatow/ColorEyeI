@@ -6,11 +6,22 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP6538.tmp" with contents
+[
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP6538.tmp" 
+<h3>Output Window</h3>
+Compiling...
+CA210.cpp
+D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp(74) : error C2043: illegal break
+Error executing cl.exe.
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 0 error(s), 0 warning(s)
+CA210.obj - 1 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
