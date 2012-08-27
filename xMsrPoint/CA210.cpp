@@ -23,19 +23,7 @@ Ca210::Ca210(BOOL tr):ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上
 
             LPDISPATCH pICa;
 			CreatCa200();
-
-            try
-            {
-				AfxMessageBox("pICa = m_ICa200.GetSingleCa();");
-                pICa = m_ICa200.GetSingleCa();;
-            }            
-            catch (CException* e)
-            {
-                MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.GetSingleCa();出問題", CloseSetp);
-            }
-
-			AfxMessageBox("m_ICa.AttachDispatch(pICa);");
-            m_ICa.AttachDispatch(pICa);
+			AttachCa();
             
             LPDISPATCH pIProbe;
             try
@@ -120,7 +108,22 @@ BOOL Ca210::CreatCa200()
 	return isSuccess;
 }
 
-BOOL 
+BOOL  Ca210::AttachCa()
+{
+	BOOL isSuccess;
+	try
+	{
+		pICa = m_ICa200.GetSingleCa();;
+	}            
+	catch (CException* e)
+	{
+		MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.GetSingleCa();出問題", CloseSetp);
+	}
+	m_ICa.AttachDispatch(pICa);
+
+	return isSuccess;
+}
+
 
 BOOL Ca210::isTrue() const
 {
