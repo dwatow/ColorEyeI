@@ -203,14 +203,6 @@ void CMsrItemDlg::SetBolt(Bolt* pusher)
     Pusher = pusher;
 }
 
-
-// void CMsrItemDlg::OnOK() 
-// {
-//     // TODO: Add extra validation here
-// 	
-//     CDialog::OnOK();
-// }
-
 void CMsrItemDlg::ListBoxUpdate(CDataChain& Datas)
 {
 	CString str;
@@ -241,10 +233,9 @@ void CMsrItemDlg::OnButtonAdd()
 		
         CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
         ASSERT_VALID(pDoc);
-		
+
 		pDoc->SetModifiedFlag(TRUE);
 		
-//        pDoc->GetVector().Empty();
         UpdateData(TRUE);
 		
         //執行連到了這
@@ -338,6 +329,7 @@ void CMsrItemDlg::OnButtonDel()
 // 		str1 += str2;
 // 		++i;
 // 	}
+
 	pDoc->GetVector().RemoveEqualCell(temp);
 
 	//void CMsrItemDlg::OnButtonDel() 
@@ -353,10 +345,29 @@ void CMsrItemDlg::OnButtonDel()
 // 		str1 += str2;
 // 	}
 
-//	MessageBox(str1);
+// 	CString str;
+// 	str.Format("%d", pDoc->GetVector().Size());
+// 		MessageBox(str);
 
 	ListBoxUpdate(pDoc->GetVector());
 	delete [] buffer;
 
 }
 
+
+BOOL CMsrItemDlg::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+	
+	// TODO: Add extra initialization here
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	ASSERT_VALID(pMainFrm);
+	
+	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+	ASSERT_VALID(pDoc);
+
+	pDoc->GetVector().Empty();
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}

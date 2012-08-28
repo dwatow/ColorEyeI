@@ -6,13 +6,28 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP85B9.tmp" with contents
+Creating temporary file "C:\Users\KX\AppData\Local\Temp\RSPF65D.tmp" with contents
 [
 /nologo /MTd /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
 "D:\GitHub\ColorEyeI\DataChain.cpp"
+"D:\GitHub\ColorEyeI\MainFrm.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\OmdFile1.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\StrList.cpp"
+"D:\GitHub\ColorEyeI\Table.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsFile2.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsGamma.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsOQC1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsRA1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsSEC1.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP85B9.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP85BA.tmp" with contents
+Creating command line "cl.exe @C:\Users\KX\AppData\Local\Temp\RSPF65D.tmp" 
+Creating temporary file "C:\Users\KX\AppData\Local\Temp\RSPF65E.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\Bolt.obj
@@ -46,14 +61,29 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP85BA.tmp" with c
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP85BA.tmp"
+Creating command line "link.exe @C:\Users\KX\AppData\Local\Temp\RSPF65E.tmp"
 <h3>Output Window</h3>
 Compiling...
+MsrItemDlg.cpp
+Generating Code...
+Skipping... (no relevant changes detected)
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
 DataChain.cpp
-c:\program files\microsoft visual studio\vc98\include\winuser.rh(384) : warning C4005: 'WM_MOUSELAST' : macro redefinition
-        c:\program files\microsoft visual studio\vc98\mfc\include\afxv_w32.h(123) : see previous definition of 'WM_MOUSELAST'
+MainFrm.cpp
+OmdFile1.cpp
+PatternDlg.cpp
+SelExcelDlg.cpp
+StrList.cpp
+Table.cpp
+XlsFile2.cpp
+XlsGamma.cpp
+XlsOQC1.cpp
+XlsRA1.cpp
+XlsSEC1.cpp
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP87FC.tmp" with contents
+Creating temporary file "C:\Users\KX\AppData\Local\Temp\RSPFB80.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -85,14 +115,14 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP87FC.tmp" with c
 .\Debug\XlsOQC1.sbr
 .\Debug\XlsRA1.sbr
 .\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP87FC.tmp"
+Creating command line "bscmake.exe @C:\Users\KX\AppData\Local\Temp\RSPFB80.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 0 error(s), 1 warning(s)
+ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

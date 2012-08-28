@@ -112,6 +112,7 @@ protected:
     afx_msg void OnPaint();
 	afx_msg void OnButtonAdd();
 	afx_msg void OnButtonDel();
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
     // Generated OLE dispatch map functions

@@ -51,6 +51,10 @@ CDataChain::~CDataChain()
 	Empty();
 }
 
+std::vector<Cartridge>::size_type CDataChain::Size() const
+{
+	return m_CarChain1.size();
+}
 void CDataChain::AddCell(const Cartridge& _X)
 {
 	m_CarChain1.push_back(_X);
@@ -128,9 +132,9 @@ void CDataChain::RemoveEqualCell(CDataChain& vCar)
         //將舊的掛在新的後面（讓空的放在第一個）
         //整串變成舊的那一串
         //放回Omd檔
-        vCar.AddChain(vCar.End(), Begin(), itX);
-        Empty();
-//		AddChain(End(), vCar.Begin(), vCar.End());
+//        vCar.AddChain(vCar.End(), Begin(), itX);
+//        Empty();
+//		  AddChain(End(), vCar.Begin(), vCar.End());
     }
 //	ReleaseBuffer();
 }
