@@ -204,6 +204,8 @@ CDataChain& CColorEyeIDoc::GetVector()
 void CColorEyeIDoc::RestructureVector()
 {
 	vChain1.RemoveEqualCell(vChain2);
+	vChain1.AddChain(vChain1.End(), vChain2.Begin(), vChain2.End());
+	vChain1.ReleaseBuffer();
     f_Omd->SetMsrData(vChain1);
 }    
 

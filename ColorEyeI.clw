@@ -2,26 +2,27 @@
 
 [General Info]
 Version=1
-LastClass=CColorEyeIApp
-LastTemplate=CDialog
+LastClass=CStrList
+LastTemplate=CListBox
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=5
+ClassCount=6
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=6
-Resource1=IDD_OMDTOEXCEL
+Resource1=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource2=IDD_ABOUTBOX
-Resource3=IDR_MAINFRAME
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_PATTERN_DIALOG
+Resource3=IDD_OMDTOEXCEL
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
+Class6=CStrList
 Resource6=IDD_MSR_ITEM
 
 [CLS:CColorEyeIApp]
@@ -142,7 +143,7 @@ Control5=IDC_RADIO_NOWFILE,button,1342312201
 Control6=IDC_RADIO_HDFILE,button,1342308361
 Control7=IDC_STATIC,button,1342177287
 Control8=IDC_BUTTON_FINDFILE,button,1476460544
-Control9=IDC_LIST_SELFILELIST,listbox,1487995137
+Control9=IDC_LIST_SELFILELIST,listbox,1488011521
 Control10=IDC_STATIC_HDFILELIST,button,1342177543
 Control11=IDC_STATIC,button,1342177287
 
@@ -259,5 +260,12 @@ Control85=IDC_EDIT_P25RECTSIDE,edit,1350631552
 Control86=IDC_STATIC,static,1342308352
 Control87=IDC_BUTTON_ADD,button,1342242816
 Control88=IDC_BUTTON_DEL,button,1342242816
-Control89=IDC_LIST_MSRITEMS,listbox,1353777537
+Control89=IDC_LIST_MSRITEMS,listbox,1353777545
+
+[CLS:CStrList]
+Type=0
+HeaderFile=StrList.h
+ImplementationFile=StrList.cpp
+BaseClass=CListBox
+Filter=W
 

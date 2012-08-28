@@ -130,9 +130,9 @@ void CDataChain::RemoveEqualCell(CDataChain& vCar)
         //©Ò¶^Omd¿…
         vCar.AddChain(vCar.End(), Begin(), itX);
         Empty();
-		AddChain(End(), vCar.Begin(), vCar.End());
+//		AddChain(End(), vCar.Begin(), vCar.End());
     }
-	ReleaseBuffer();
+//	ReleaseBuffer();
 }
 
 std::vector<Cartridge>::size_type CDataChain::StdInit()
@@ -220,6 +220,15 @@ Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little)
     }
     return (m_CarChain1.at((SubNum == -1) ? 0 : SubNum));
 }
+
+Cartridge& CDataChain::At(std::vector<Cartridge>::size_type index)
+{
+    return m_CarChain1.at(index);
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+////
 
 // Cartridge& CDataChain::operator[](ColorType clr, PointNum Large, UINT Little)
 // {

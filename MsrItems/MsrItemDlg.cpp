@@ -321,10 +321,42 @@ void CMsrItemDlg::OnButtonDel()
 	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-	//DeleteString
+	int* buffer = new int[m_lstMsrItems.GetSelCount()];
+	m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);
 	
-	pDoc->GetVector().DelCell(m_lstMsrItems.GetCurSel());
+	CDataChain temp;
+	
+	for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
+		temp.AddCell(pDoc->GetVector().At(buffer[it]+1));
+
+// 	CString str1, str2;
+// 	int i = 0;
+// 	for (std::vector<Cartridge>::iterator itor = temp.Begin(); itor != temp.End(); ++itor)
+// 	{
+// 		str2.Format("buffer[%d] = %d, temp[] = %s%s %d\n", \
+// 			i, buffer[i]+1, itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
+// 		str1 += str2;
+// 		++i;
+// 	}
+	pDoc->GetVector().RemoveEqualCell(temp);
+
+	//void CMsrItemDlg::OnButtonDel() 
+	//void CDataChain::RemoveEqualCell(CDataChain& vCar)
+	//會將另一條加在這一條下面。
+
+// 	str1.Empty();
+// 	str2.Empty();
+// 	for (std::vector<Cartridge>::iterator itor = pDoc->GetVector().Begin(); itor != pDoc->GetVector().End(); ++itor)
+// 	{
+// 		str2.Format("%s%s %d\n", \
+// 			itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
+// 		str1 += str2;
+// 	}
+
+//	MessageBox(str1);
 
 	ListBoxUpdate(pDoc->GetVector());
+	delete [] buffer;
+
 }
 

@@ -44,6 +44,8 @@ class CDataChain// :public std::vector<Cartridge>
 	std::vector<Cartridge>::const_iterator cBegin();
 	std::vector<Cartridge>::const_iterator cEnd();
  	Cartridge& At(ColorType, PointNum, UINT );
+	Cartridge& At(std::vector<Cartridge>::size_type );
+
  	std::vector<Cartridge>& operator=(const std::vector<Cartridge>&);
 	BOOL IsEmpty();
 
