@@ -23,10 +23,12 @@ class Ca210
 //    CString m_strData;
 
 //    BOOL m_DebugFlag;
+	BOOL m_isSuccess;
     BOOL m_isTrue;  //無CA-210要模擬程式進行的模式
     BOOL m_Online;
     BOOL m_isZeroCal;
     CString str;
+
     void MsgFrmt(CException* e, CString, CString);
     void MsgFrmt(CString);
 public:
@@ -34,9 +36,12 @@ public:
 //    Ca210();
     Ca210(BOOL tr = TRUE);
     ~Ca210();
-
+	BOOL isReady() const;
 	BOOL CreatCa200();
+	BOOL ConnectCa210();
 	BOOL AttachCa();
+	BOOL AttchProbe();
+
     UINT MsrAI(float );//0.0001
     UINT Measure();
 

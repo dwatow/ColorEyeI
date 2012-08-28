@@ -4,7 +4,9 @@
 #include <ctime>
 
 
-Ca210::Ca210(BOOL tr):ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上，另存成圖檔\n2. Mail給此程式設計者，詳細描述使用過程並將圖檔存成附件\n這是尚未預測到出現的問題。（應該不會發生的那種。）")
+Ca210::Ca210(BOOL tr):
+ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上，另存成圖檔\n2. Mail給此程式設計者，詳細描述使用過程並將圖檔存成附件\n這是尚未預測到出現的問題。（應該不會發生的那種。）"),
+m_isSuccess(TRUE)
 {
     /*
     初始化ca-210
@@ -18,48 +20,13 @@ Ca210::Ca210(BOOL tr):ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上
 #ifdef _CA210DEBUG
         DBugModeBox("TRUE of Ca210(BOOL tr)");
 #endif
-        CString CloseSetp();
-
-
-            LPDISPATCH pICa;
-			CreatCa200();
-			AttachCa();
-            
-            LPDISPATCH pIProbe;
-            try
-            {
-				AfxMessageBox("pIProbe = m_ICa.GetSingleProbe();");
-                pIProbe = m_ICa.GetSingleProbe();
-//                flag = 0;
-            }            
-            catch (CException* e)
-            {
-                MsgFrmt(e, "LPDISPATCH pIProbe = m_ICa.GetSingleProbe();出問題", CloseSetp);
-//                flag++;
-//				break;
-            }
-            
-			AfxMessageBox("m_IProbe.AttachDispatch(pIProbe);");
-            m_IProbe.AttachDispatch(pIProbe);
-        
-            //判斷是否Zero Cal
-//        } while (flag);
-
-//         try
-//         {
-// 			AfxMessageBox("m_ICa.Measure(0);");
-//             m_ICa.Measure(0);
-//             m_isZeroCal = TRUE;
-//         }
-//         catch (CException* e)
-//         {
-//             TCHAR buf[255];
-//             e->GetErrorMessage(buf, 255);
-// 
-//             //MsgFrmt(e, "量測出問題", "剛剛是不是不正常使用量筒（像是搖它或對著強光源...之類的）\n否則，不要移動量筒按確定重量剛剛的點");            
-             m_isZeroCal = FALSE;
-//         }
-//        SetOnline(FALSE);
+		int flag = 1;
+		     if (!CreatCa200())   AfxMessageBox("CreatCa200() ERROR!!");
+		else if (!ConnectCa210()) AfxMessageBox("ConnectCa210() ERROR!!");
+		else if (!AttachCa())     AfxMessageBox("AttachCa() ERROR!!");
+		else if (!AttchProbe())   AfxMessageBox("AttchProbe() ERROR!!");            
+		else
+			m_isZeroCal = FALSE;
     }
     else
     {
@@ -79,51 +46,94 @@ Ca210::~Ca210()
 #ifdef _CA210DEBUG
         DBugModeBox("TRUE of ~Ca210()");
 #endif
-        m_IMemory.ReleaseDispatch();
-        m_IProbe.ReleaseDispatch();
-        m_ICa.ReleaseDispatch();
-        m_ICa200.ReleaseDispatch();
         if (GetOnline())
             SetOnline(FALSE);
+        m_IMemory.DetachDispatch();
+        m_IProbe.DetachDispatch();
+        m_ICa.DetachDispatch();
         m_ICa200.ReleaseDispatch();
     }
 }
 
 BOOL Ca210::CreatCa200()
 {
-	BOOL isSuccess;
+	BOOL m_isSuccess(TRUE);
 	try
 	{
 		m_ICa200.CreateDispatch("CA200Srvr.Ca200.1");
-		m_ICa200.m_bAutoRelease = TRUE;
-		m_ICa200.AutoConnect();
+		m_ICa200.m_bAutoRelease = TRUE;		
 	}
 	catch (CException* e)
 	{
 		MsgFrmt(e, "CreatCa200();出問題", "1. 檢查USB線和量筒\n2. 按確定");
-		m_ICa200.m_bAutoRelease = FALSE;
-		m_ICa200.ReleaseDispatch();
-		isSuccess = FALSE;
+		m_ICa200.ReleaseDispatch();		
+		m_isSuccess = FALSE;
 	}
-	return isSuccess;
+	return m_isSuccess;
+}
+
+BOOL Ca210::ConnectCa210()
+{
+	BOOL m_isSuccess(TRUE);
+	try
+	{
+		m_ICa200.AutoConnect();
+	}            
+	catch (CException* e)
+	{
+		MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.ConnectCa210();出問題", ImpsbStr);
+		m_ICa200.ReleaseDispatch();
+		m_isSuccess = FALSE;
+	}
+	
+	return m_isSuccess;
 }
 
 BOOL  Ca210::AttachCa()
 {
-	BOOL isSuccess;
+	LPDISPATCH pICa;
+	BOOL m_isSuccess(TRUE);
 	try
 	{
-		pICa = m_ICa200.GetSingleCa();;
+		pICa = m_ICa200.GetSingleCa();
+		m_ICa.AttachDispatch(pICa);
 	}            
 	catch (CException* e)
 	{
-		MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.GetSingleCa();出問題", CloseSetp);
+		MsgFrmt(e, "LPDISPATCH pICa = m_ICa200.GetSingleCa();出問題", ImpsbStr);
+		pICa = 0;
+		m_ICa200.ReleaseDispatch();
+		m_isSuccess = FALSE;
 	}
-	m_ICa.AttachDispatch(pICa);
 
-	return isSuccess;
+	return m_isSuccess;
 }
 
+BOOL Ca210::AttchProbe()
+{
+	LPDISPATCH pIProbe;
+	BOOL m_isSuccess;
+	try
+	{
+		pIProbe = m_ICa.GetSingleProbe();
+		m_IProbe.AttachDispatch(pIProbe);
+	}            
+	catch (CException* e)
+	{
+		MsgFrmt(e, "LPDISPATCH pIProbe = m_ICa.GetSingleProbe();出問題", ImpsbStr);
+		pIProbe = 0;
+		m_ICa.DetachDispatch();
+		m_ICa200.ReleaseDispatch();
+		m_isSuccess = FALSE;
+	}
+	
+	return m_isSuccess;
+}
+
+BOOL Ca210::isReady() const
+{
+	return m_isSuccess;
+}
 
 BOOL Ca210::isTrue() const
 {
@@ -198,22 +208,15 @@ BOOL Ca210::LinkMemory()
         DBugModeBox("TRUE of LinkMemory()");
 #endif
         LPDISPATCH pMemory;
-        try
-        {
-            pMemory = m_ICa.GetMemory();
-        }
-        catch (CException* e)
-        {
-            MsgFrmt(e, "pMemory = m_ICa.GetMemory();出問題", ImpsbStr);
-        }
 
         try
         {
+		    pMemory = m_ICa.GetMemory();
             m_IMemory.AttachDispatch(pMemory);
         }
         catch (CException* e)
         {
-            MsgFrmt(e, "m_IMemory.AttachDispatch(pMemory);出問題", ImpsbStr);
+            MsgFrmt(e, "LinkMemory(pMemory);出問題", ImpsbStr);
         }
          return TRUE;
     } 

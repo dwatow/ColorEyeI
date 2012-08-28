@@ -6,11 +6,11 @@
 #include "XlsSEC1.h"
 #include "XlsGamma.h"
 
-#include "FileDlg.h"
-#include "cderr.h"   //for   definition   of   FNERR_BUFFERTOOSMALL 
-#include "../xMsrPoint/Bolt.h"
 #include "../MainFrm.h"
 #include "../ColorEyeIDoc.h"
+#include "cderr.h"   //for   definition   of   FNERR_BUFFERTOOSMALL 
+#include "FileDlg.h"
+//#include "../xMsrPoint/Bolt.h"
 //#include <vector>
 #include "../DataChain.h"
 
@@ -28,9 +28,9 @@ enum FormType{ FORM_Nothing = 0, FORM_RA , FORM_OQC_LCM_SPEC, FORM_SEC, FORM_Gam
 class CSelExcelDlg : public CDialog
 {
 	COmdFile1* m_pOmdfile;
-    FormType  m_ft;
-    int       m_nBufferSize;
-    CString   m_strXlsPath;  //XlsFilepath
+    FormType   m_ft;
+    int        m_nBufferSize;
+    CString    m_strXlsPath;  //XlsFilepath
     CDataChain m_vOmdtoXls;
 	std::vector<CString>   m_vFilePathList;  //OmdFilepath
 

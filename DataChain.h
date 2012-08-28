@@ -11,9 +11,7 @@
 
 #include <vector>
 #include <iterator>
-#include "../xMsrPoint/Cartridge.h"
 #include "../xMsrPoint/Bolt.h"
-#include "Enum.h"
 
 
 class CDataChain// :public std::vector<Cartridge>
@@ -26,7 +24,8 @@ class CDataChain// :public std::vector<Cartridge>
  	virtual ~CDataChain();
  	void AddCell(const Cartridge&);
  	void AddChain(std::vector<Cartridge>::iterator _P, std::vector<Cartridge>::const_iterator _F, std::vector<Cartridge>::const_iterator _L);
-	
+	void DelCell(const std::vector<Cartridge>::size_type index);
+
 	void operator+(const Cartridge&);
 	void operator+(CDataChain&);
 

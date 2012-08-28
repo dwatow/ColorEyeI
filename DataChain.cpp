@@ -107,7 +107,6 @@ void CDataChain::operator+(CDataChain& Data)
 	m_CarChain1.insert(m_CarChain1.end(), Data.Begin(), Data.End());
 }
 
-
 void CDataChain::RemoveEqualCell(CDataChain& vCar)
 {
     if (!vCar.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
@@ -208,7 +207,7 @@ void CDataChain::Partition(ColorType ct, PointNum pn)
 
 void CDataChain::SortQuackMsr()
 {
-	SortQuackMsr(m_CarChain1);
+	std::sort(Begin(), End(), AreaPriority);
 }
 
 Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little)
@@ -242,4 +241,10 @@ void CDataChain::ReleaseBuffer()
 			itor->GetMsrFlowNum() == NoPn)
             m_CarChain1.erase(itor);
     }
+}
+
+void CDataChain::DelCell(const std::vector<Cartridge>::size_type index)
+{
+	std::vector<Cartridge>::iterator it = &m_CarChain1.at(index);
+	m_CarChain1.erase(it);
 }

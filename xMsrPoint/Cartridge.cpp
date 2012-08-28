@@ -98,13 +98,13 @@ CString Cartridge::GetStrPointNum() const
 	switch(m_MsrFlowNum)
 	{
 	case Pn1:  Num.Format("¤¤¤ßÂI"); break;
-	case Pn4:  Num.Format("04ÂI");   break;
-	case Pn5:  Num.Format("05ÂI");   break;
-	case Pn9:  Num.Format("09ÂI");   break;
-	case Pn13: Num.Format("13ÂI");   break;
-	case Pn21: Num.Format("21ÂI");   break;
-	case Pn25: Num.Format("25ÂI");   break;
-	case Pn49: Num.Format("49ÂI");   break;
+	case Pn4:  Num.Format("  4ÂI");   break;
+	case Pn5:  Num.Format("  5ÂI");   break;
+	case Pn9:  Num.Format("  9ÂI");   break;
+	case Pn13: Num.Format(" 13ÂI");   break;
+	case Pn21: Num.Format(" 21ÂI");   break;
+	case Pn25: Num.Format(" 25ÂI");   break;
+	case Pn49: Num.Format(" 49ÂI");   break;
 	case NoPn:
 	default:   Num.Format("¥¼©w¸qÂI¦ì");
     }
@@ -121,7 +121,7 @@ CString Cartridge::GetStrColorType() const
 	case Green:  Color.Format("ºñ¦â");   break;
 	case Blue:   Color.Format("ÂÅ¦â");   break;
 	case Dark:   Color.Format("¶Â¦â");   break;
-	case Nits:   Color.Format("´XNits");  break;
+	case Nits:   Color.Format("Nits");  break;
 	case CrsTlkW:
 	case CrsTlkD:
 	case CrsTlk: Color.Format("CrossTalk"); break;

@@ -29,7 +29,10 @@ public:
 
 // Dialog Data
     //{{AFX_DATA(CMsrItemDlg)
-    enum { IDD = IDD_MSR_ITEM };
+	enum { IDD = IDD_MSR_ITEM };
+	CButton	m_btnDelItems;
+	CButton	m_btnAddItems;
+	CListBox	m_lstMsrItems;
     CButton    m_chkCBP21;
     CButton    m_chkCDP21;
     CButton    m_chkCGP21;
@@ -90,7 +93,7 @@ public:
     UINT    m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
-    //}}AFX_DATA
+	//}}AFX_DATA
 
 
 // Overrides
@@ -107,7 +110,8 @@ protected:
     //{{AFX_MSG(CMsrItemDlg)
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     afx_msg void OnPaint();
-    virtual void OnOK();
+	afx_msg void OnButtonAdd();
+	afx_msg void OnButtonDel();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
     // Generated OLE dispatch map functions
@@ -118,6 +122,7 @@ protected:
     DECLARE_INTERFACE_MAP()
 public:
     void SetBolt(Bolt* Pusher);
+	void ListBoxUpdate(CDataChain& );
 };
 
 //{{AFX_INSERT_LOCATION}}

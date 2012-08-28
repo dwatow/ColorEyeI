@@ -99,7 +99,7 @@ HeaderFile=MsrItemDlg.h
 ImplementationFile=MsrItemDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDOK
+LastObject=CMsrItemDlg
 VirtualFilter=dWC
 
 [CLS:CStaticText]
@@ -116,8 +116,8 @@ ControlCount=0
 
 [DLG:IDD_MSR_ITEM]
 Type=1
-Class=?
-ControlCount=86
+Class=CMsrItemDlg
+ControlCount=89
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -204,4 +204,7 @@ Control83=IDC_STATIC,static,1342308352
 Control84=IDC_EDIT_P21FE,edit,1350631552
 Control85=IDC_EDIT_P25RECTSIDE,edit,1350631552
 Control86=IDC_STATIC,static,1342308352
+Control87=IDC_BUTTON_ADD,button,1342242816
+Control88=IDC_BUTTON_DEL,button,1342242816
+Control89=IDC_LIST_MSRITEMS,listbox,1353778051
 

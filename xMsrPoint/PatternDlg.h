@@ -4,6 +4,7 @@
 #include "CircleArc.h"    // Added by ClassView
 #include "CA210.h"
 #include "../MsrItems/MsrItemDlg.h"
+
 #include <cmath>
 #include <vector>
 

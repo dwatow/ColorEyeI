@@ -10,7 +10,6 @@
 #define IDR_MAINFRAME                   128
 #define IDD_PATTERN_DIALOG              130
 #define IDD_MSR_ITEM                    131
-
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_BUTTON1                     1000
 #define IDC_CHECK_CDP1                  1002
@@ -43,6 +42,7 @@
 #define IDC_CHECK_CGP9                  1017
 #define IDC_CHECK_CBP9                  1018
 #define IDC_BUTTON_P9ADV                1019
+#define IDC_BUTTON_ADD                  1019
 #define IDC_EDIT_P9FE                   1020
 #define IDC_CHECK_CWP25                 1021
 #define IDC_CHECK_CRP25                 1022
@@ -92,6 +92,8 @@
 #define IDC_CHECK_CROSSTALK             1060
 #define IDC_EDIT_CROSSTALK1             1061
 #define IDC_EDIT_P21FE                  1062
+#define IDC_BUTTON_DEL                  1063
+#define IDC_LIST_MSRITEMS               1064
 
 // Next default values for new objects
 // 
@@ -99,7 +101,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_CONTROL_VALUE         1065
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

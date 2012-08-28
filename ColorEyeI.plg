@@ -3,25 +3,128 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: ColorEyeI - Win32 Release--------------------
+--------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP6538.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPB62B.tmp" with contents
 [
-/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp"
+/nologo /MTd /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\DataChain.cpp"
+"D:\GitHub\ColorEyeI\MainFrm.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\OmdFile1.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\Table.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsFile2.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsGamma.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsOQC1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsRA1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsSEC1.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP6538.tmp" 
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPB62B.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPB62C.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
+.\Debug\Bolt.obj
+.\Debug\Bullet.obj
+.\Debug\ca200srvr.obj
+.\Debug\CA210.obj
+.\Debug\Cartridge.obj
+.\Debug\Circle.obj
+.\Debug\CircleArc.obj
+.\Debug\ColorEyeI.obj
+.\Debug\ColorEyeIDoc.obj
+.\Debug\ColorEyeIView.obj
+.\Debug\DataChain.obj
+.\Debug\excel.obj
+.\Debug\FileDlg.obj
+.\Debug\MainFrm.obj
+.\Debug\MsrItemDlg.obj
+.\Debug\OmdFile1.obj
+.\Debug\PatternDlg.obj
+.\Debug\SelExcelDlg.obj
+.\Debug\StaticText.obj
+.\Debug\StdAfx.obj
+.\Debug\Table.obj
+.\Debug\TxtFile.obj
+.\Debug\xlef.obj
+.\Debug\XlsFile2.obj
+.\Debug\XlsGamma.obj
+.\Debug\XlsOQC1.obj
+.\Debug\XlsRA1.obj
+.\Debug\XlsSEC1.obj
+.\Debug\ColorEyeI.res
+]
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPB62C.tmp"
 <h3>Output Window</h3>
 Compiling...
-CA210.cpp
-D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp(74) : error C2043: illegal break
-Error executing cl.exe.
+DataChain.cpp
+c:\program files\microsoft visual studio\vc98\include\winuser.rh(384) : warning C4005: 'WM_MOUSELAST' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afxv_w32.h(123) : see previous definition of 'WM_MOUSELAST'
+Generating Code...
+Compiling...
+MsrItemDlg.cpp
+c:\program files\microsoft visual studio\vc98\include\winuser.rh(384) : warning C4005: 'WM_MOUSELAST' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afxv_w32.h(123) : see previous definition of 'WM_MOUSELAST'
+Generating Code...
+Skipping... (no relevant changes detected)
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+MainFrm.cpp
+OmdFile1.cpp
+PatternDlg.cpp
+SelExcelDlg.cpp
+Table.cpp
+XlsFile2.cpp
+XlsGamma.cpp
+XlsOQC1.cpp
+XlsRA1.cpp
+XlsSEC1.cpp
+Linking...
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPBB99.tmp" with contents
+[
+/nologo /o"Debug/ColorEyeI.bsc" 
+.\Debug\StdAfx.sbr
+.\Debug\Bolt.sbr
+.\Debug\Bullet.sbr
+.\Debug\ca200srvr.sbr
+.\Debug\CA210.sbr
+.\Debug\Cartridge.sbr
+.\Debug\Circle.sbr
+.\Debug\CircleArc.sbr
+.\Debug\ColorEyeI.sbr
+.\Debug\ColorEyeIDoc.sbr
+.\Debug\ColorEyeIView.sbr
+.\Debug\DataChain.sbr
+.\Debug\excel.sbr
+.\Debug\FileDlg.sbr
+.\Debug\MainFrm.sbr
+.\Debug\MsrItemDlg.sbr
+.\Debug\OmdFile1.sbr
+.\Debug\PatternDlg.sbr
+.\Debug\SelExcelDlg.sbr
+.\Debug\StaticText.sbr
+.\Debug\Table.sbr
+.\Debug\TxtFile.sbr
+.\Debug\xlef.sbr
+.\Debug\XlsFile2.sbr
+.\Debug\XlsGamma.sbr
+.\Debug\XlsOQC1.sbr
+.\Debug\XlsRA1.sbr
+.\Debug\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPBB99.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-CA210.obj - 1 error(s), 0 warning(s)
+ColorEyeI.exe - 0 error(s), 2 warning(s)
 </pre>
 </body>
 </html>
