@@ -182,10 +182,6 @@ SOURCE=.\StdAfx.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\StrList.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\Table.cpp
 # End Source File
 # Begin Source File
@@ -307,10 +303,6 @@ SOURCE=.\MsrItems\StaticText.h
 # Begin Source File
 
 SOURCE=.\StdAfx.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\StrList.h
 # End Source File
 # Begin Source File
 

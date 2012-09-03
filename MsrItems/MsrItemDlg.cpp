@@ -1,6 +1,6 @@
 // MsrItemDlg.cpp : implementation file
 //
-
+//#include <afxres.h>
 #include "stdafx.h"
 #include "resource.h"
 #include "MsrItemDlg.h"
