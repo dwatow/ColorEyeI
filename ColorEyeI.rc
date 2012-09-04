@@ -399,6 +399,16 @@ BEGIN
                     WS_HSCROLL | WS_TABSTOP
 END
 
+IDD_EDIT_DIALOG DIALOG DISCARDABLE  0, 0, 174, 34
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 10, "·L³n¥¿¶ÂÅé"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,115,10,50,15
+    EDITTEXT        IDC_EDIT_VALUE,44,10,40,12,ES_AUTOHSCROLL
+    LTEXT           "LCM Size",IDC_STATIC_SOMETHING,9,11,30,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

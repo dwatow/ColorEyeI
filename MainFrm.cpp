@@ -117,10 +117,12 @@ void CMainFrame::OnMsrConnectca210()
     // TODO: Add your command handler code here
     if (!m_iConnectCa210)
     {
+		BeginWaitCursor();
         m_pCa210 = new Ca210(TRUE);
 //        m_pCa210 = new Ca210(FALSE);
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
+		EndWaitCursor();
     }
 
     m_pCa210->SetOnline(m_iOnlineCa210);

@@ -1,137 +1,97 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
 // Used by ColorEyeI.rc
-// ColorEyeI\resource.h
-//
-#define IDR_CLRETYPE                    129
-#define IDC_CHECK_CDP10                 1003
-#define IDC_CHECK_CDP11                 1004
-#define IDC_CHECK_CDP12                 1005
-#define IDC_BUTTON_P1                   1013
-#define IDC_CHECK_CWP10                 1015
-#define IDC_CHECK_CRP10                 1016
-#define IDC_CHECK_CGP10                 1017
-#define IDC_CHECK_CBP10                 1018
-#define IDC_BUTTON_P10                  1019
-#define IDC_BUTTON_ADD                  1019
-#define IDC_EDIT2                       1020
-#define IDC_CHECK_CWP11                 1021
-#define IDC_CHECK_CRP11                 1022
-#define IDC_CHECK_CGP11                 1023
-#define IDC_CHECK_CBP11                 1024
-#define IDC_BUTTON_P11                  1025
-#define IDC_EDIT3                       1026
-#define IDC_CHECK_CWP12                 1027
-#define IDC_CHECK_CRP12                 1028
-#define IDC_CHECK_CGP12                 1029
-#define IDC_CHECK_CBP12                 1030
-#define IDC_BUTTON_P12                  1031
-#define IDC_EDIT4                       1032
-#define IDC_BUTTON_DEL                  1063
-#define IDC_LIST_MSRITEMS               1064
-#define ID_MENUITEM32771                32771
-#define ID_FILE_OMDTOXLS                32771
-#define ID_MSR_CONNECTCA210             32772
-#define ID_MSR_FORM                     32773
-#define ID_MSR_ITEM                     32774
-#define ID_MSR_POINT                    32775
-#define ID_SETUP_SOFT                   32776
-#define ID_SETUP_MSR                    32777
-#define ID_SETUP_SPEC                   32778
-#define ID_SETUP_CA210                  32779
-#define ID_SETUP_CAL                    32780
-#define ID_INDICATOR_USB                59142
-#define ID_INDICATOR_RES                59143
-
-// Next default values for new objects
-// 
-#ifdef APSTUDIO_INVOKED
-#ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        130
-#define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         1020
-#define _APS_NEXT_SYMED_VALUE           101
-#endif
-#endif
-
-
-// SelXls\resource.h
 //
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDS_ABOUTBOX                    101
 #define IDD_SELXLS_DIALOG               102
-#define IDR_MAINFRAME                   128
-#define IDD_OMDTOEXCEL                  132
-
-#define IDC_BUTTON1                     1000
-#define IDC_COMBO_EXCELSELER            1001
-#define IDC_STATIC_ITEMLIST             1005
-#define IDC_RADIO_NOWFILE               1007
-#define IDC_RADIO_HDFILE                1008
-#define IDC_LIST_SELFILELIST            1009
-#define IDC_BUTTON_FINDFILE             1010
-#define IDC_STATIC_HDFILELIST           1013
-
-// MsrItems\resource.h
-//
-#define IDM_ABOUTBOX                    0x0010
-#define IDD_ABOUTBOX                    100
-#define IDP_OLE_INIT_FAILED             100
-#define IDS_ABOUTBOX                    101
 #define IDD_MSRITEMS_DIALOG             112
 #define IDR_MAINFRAME                   128
+#define IDR_CLRETYPE                    129
 #define IDD_PATTERN_DIALOG              130
 #define IDD_MSR_ITEM                    131
-#define ID_MSR_ITEM_GO                  1000
+#define IDD_OMDTOEXCEL                  132
+#define IDD_EDIT_DIALOG                 133
 #define IDC_BUTTON1                     1000
+#define ID_MSR_ITEM_GO                  1000
+#define IDC_COMBO_EXCELSELER            1001
 #define IDC_CHECK_CDP1                  1002
 #define IDC_CHECK1                      1002
+#define IDC_CHECK_CDP10                 1003
 #define IDC_CHECK_CDP9                  1003
 #define IDC_CHECK2                      1003
+#define IDC_CHECK_CDP11                 1004
 #define IDC_CHECK_CDP25                 1004
 #define IDC_CHECK3                      1004
+#define IDC_CHECK_CDP12                 1005
+#define IDC_STATIC_ITEMLIST             1005
 #define IDC_CHECK_CDP5                  1005
 #define IDC_CHECK4                      1005
 #define IDC_CHECK_CDP13                 1006
 #define IDC_CHECK5                      1006
+#define IDC_RADIO_NOWFILE               1007
 #define IDC_CHECK_CDP49                 1007
 #define IDC_CHECK6                      1007
+#define IDC_RADIO_HDFILE                1008
 #define IDC_CHECK_CDGM                  1008
 #define IDC_CHECK7                      1008
+#define IDC_LIST_SELFILELIST            1009
 #define IDC_CHECK_CWP1                  1009
 #define IDC_CHECK8                      1009
+#define IDC_BUTTON_FINDFILE             1010
 #define IDC_CHECK_CRP1                  1010
 #define IDC_CHECK9                      1010
 #define IDC_CHECK_CGP1                  1011
 #define IDC_CHECK10                     1011
 #define IDC_CHECK_CBP1                  1012
 #define IDC_CHECK11                     1012
+#define IDC_BUTTON_P1                   1013
+#define IDC_STATIC_HDFILELIST           1013
 #define IDC_BUTTON_P1ADV                1013
 #define IDC_CHECK_CDP21                 1013
 #define IDC_STATIC_W                    1014
+#define IDC_CHECK_CWP10                 1015
 #define IDC_CHECK_CWP9                  1015
+#define IDC_CHECK_CRP10                 1016
 #define IDC_CHECK_CRP9                  1016
+#define IDC_CHECK_CGP10                 1017
 #define IDC_CHECK_CGP9                  1017
+#define IDC_CHECK_CBP10                 1018
 #define IDC_CHECK_CBP9                  1018
-#define IDC_BUTTON_P9ADV                1019
+#define IDC_BUTTON_P10                  1019
 #define IDC_BUTTON_ADD                  1019
+#define IDC_BUTTON_P9ADV                1019
+#define IDC_EDIT2                       1020
 #define IDC_EDIT_P9FE                   1020
+#define IDC_EDIT_VALUE                  1020
+#define IDC_CHECK_CWP11                 1021
 #define IDC_CHECK_CWP25                 1021
+#define IDC_STATIC_SOMETHING            1021
+#define IDC_CHECK_CRP11                 1022
 #define IDC_CHECK_CRP25                 1022
+#define IDC_CHECK_CGP11                 1023
 #define IDC_CHECK_CGP25                 1023
+#define IDC_CHECK_CBP11                 1024
 #define IDC_CHECK_CBP25                 1024
+#define IDC_BUTTON_P11                  1025
 #define IDC_BUTTON_P25ADV               1025
 #define IDC_EDIT_P21HAVG                1025
+#define IDC_EDIT3                       1026
 #define IDC_EDIT_P25FE                  1026
+#define IDC_CHECK_CWP12                 1027
 #define IDC_CHECK_CWP5                  1027
+#define IDC_CHECK_CRP12                 1028
 #define IDC_CHECK_CRP5                  1028
+#define IDC_CHECK_CGP12                 1029
 #define IDC_CHECK_CGP5                  1029
+#define IDC_CHECK_CBP12                 1030
 #define IDC_CHECK_CBP5                  1030
+#define IDC_BUTTON_P12                  1031
 #define IDC_BUTTON_P5ADV                1031
 #define IDC_EDIT_P21VAVG                1031
+#define IDC_EDIT4                       1032
 #define IDC_EDIT_P5FE                   1032
 #define IDC_CHECK_CWP13                 1033
 #define IDC_CHECK_CRP13                 1034
@@ -169,3 +129,28 @@
 #define IDC_EDIT_P21FE                  1062
 #define IDC_BUTTON_DEL                  1063
 #define IDC_LIST_MSRITEMS               1064
+#define ID_MENUITEM32771                32771
+#define ID_FILE_OMDTOXLS                32771
+#define ID_MSR_CONNECTCA210             32772
+#define ID_MSR_FORM                     32773
+#define ID_MSR_ITEM                     32774
+#define ID_MSR_POINT                    32775
+#define ID_SETUP_SOFT                   32776
+#define ID_SETUP_MSR                    32777
+#define ID_SETUP_SPEC                   32778
+#define ID_SETUP_CA210                  32779
+#define ID_SETUP_CAL                    32780
+#define ID_INDICATOR_USB                59142
+#define ID_INDICATOR_RES                59143
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_3D_CONTROLS                     1
+#define _APS_NEXT_RESOURCE_VALUE        134
+#define _APS_NEXT_COMMAND_VALUE         32782
+#define _APS_NEXT_CONTROL_VALUE         1022
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif

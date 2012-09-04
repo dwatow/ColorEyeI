@@ -6,6 +6,7 @@
 #include <ctime>
 #include "xMsrPoint.h"
 #include "PatternDlg.h"
+#include "..\EnterValueDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -364,29 +365,29 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
 }
 
 //BOOL CPatternDlg::Magazine(std::vector<Cartridge>::iterator BeginItor, std::vector<Cartridge>::iterator EndItor)
-BOOL CPatternDlg::Magazine(std::vector<Cartridge>& vCar)
-{
-    m_itor = vCar.begin();
-    ++m_itor;               //閃掉第一個空包彈
-    m_BeginItor = m_itor;
-    m_EndItor   = vCar.end();
-
-    //++BeginItor;  
-    if(!m_GunMchn.isReady())
-    {
-        if (!m_GunMchn.Magazine(m_pCA210->GetLcmSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
-            Trigger(m_itor);//)                                MessageBox("PtnDlg->Magazine的扳機出錯");
-            NextTrigger(m_itor);//)                            MessageBox("PtnDlg->Magazine的下一搶扳機出錯");
-        if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-        if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
-
-        Invalidate();
-        
-        return TRUE;  //第一次量測
-    }
-    else
-        return FALSE; //單點覆測使用
-}
+// BOOL CPatternDlg::Magazine(std::vector<Cartridge>& vCar)
+// {
+//     m_itor = vCar.begin();
+//     ++m_itor;               //閃掉第一個空包彈
+//     m_BeginItor = m_itor;
+//     m_EndItor   = vCar.end();
+// 
+//     //++BeginItor;  
+//     if(!m_GunMchn.isReady())
+//     {
+//         if (!m_GunMchn.Magazine(m_pCA210->GetLcmSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+//             Trigger(m_itor);//)                                MessageBox("PtnDlg->Magazine的扳機出錯");
+//             NextTrigger(m_itor);//)                            MessageBox("PtnDlg->Magazine的下一搶扳機出錯");
+//         if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
+//         if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
+// 
+//         Invalidate();
+//         
+//         return TRUE;  //第一次量測
+//     }
+//     else
+//         return FALSE; //單點覆測使用
+// }
 
 BOOL CPatternDlg::ConnectCa210(Ca210* pCa)
 {
@@ -414,10 +415,23 @@ BOOL CPatternDlg::Magazine()
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetVector().End();
     
+
+	CString LCMSize;
     //++BeginItor;  
     if(!m_GunMchn.isReady())
     {
-        if (!m_GunMchn.Magazine(m_pCA210->GetLcmSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+
+		LCMSize = m_pCA210->GetLcmSize();
+		if (!atoi(LCMSize))
+		{
+			CEnterValueDlg dlgEnterValue;
+			dlgEnterValue.SetValueKind("LCM Size");
+			if (dlgEnterValue.DoModal() == MB_OK)
+				LCMSize = dlgEnterValue.m_strValue;
+		}
+
+
+        if (!m_GunMchn.Magazine(LCMSize, m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
         Trigger(m_itor);
         NextTrigger(m_itor);
         if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小

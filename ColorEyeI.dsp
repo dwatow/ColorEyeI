@@ -145,6 +145,10 @@ SOURCE=.\DataChain.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\EnterValueDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\excel.cpp
 # End Source File
 # Begin Source File
@@ -259,6 +263,10 @@ SOURCE=.\ColorEyeIView.h
 # Begin Source File
 
 SOURCE=.\DataChain.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\EnterValueDlg.h
 # End Source File
 # Begin Source File
 

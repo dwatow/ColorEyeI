@@ -2,8 +2,8 @@
 
 [General Info]
 Version=1
-LastClass=CStrList
-LastTemplate=CListBox
+LastClass=CEnterValueDlg
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
@@ -15,15 +15,16 @@ Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
-ResourceCount=6
-Resource1=IDR_MAINFRAME
+ResourceCount=7
+Resource1=IDD_MSR_ITEM
 Class5=CAboutDlg
 Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_OMDTOEXCEL
-Resource4=IDD_ABOUTBOX
+Resource3=IDD_ABOUTBOX
+Resource4=IDR_MAINFRAME
 Resource5="IDD_OMDTOEXCEL"
-Class6=CStrList
-Resource6=IDD_MSR_ITEM
+Class6=CEnterValueDlg
+Resource6=IDD_OMDTOEXCEL
+Resource7=IDD_EDIT_DIALOG
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -262,10 +263,20 @@ Control87=IDC_BUTTON_ADD,button,1342242816
 Control88=IDC_BUTTON_DEL,button,1342242816
 Control89=IDC_LIST_MSRITEMS,listbox,1353779585
 
-[CLS:CStrList]
+[DLG:IDD_EDIT_DIALOG]
+Type=1
+Class=CEnterValueDlg
+ControlCount=3
+Control1=IDOK,button,1342242817
+Control2=IDC_EDIT_VALUE,edit,1350631552
+Control3=IDC_STATIC_SOMETHING,static,1342308352
+
+[CLS:CEnterValueDlg]
 Type=0
-HeaderFile=StrList.h
-ImplementationFile=StrList.cpp
-BaseClass=CListBox
-Filter=W
+HeaderFile=EnterValueDlg.h
+ImplementationFile=EnterValueDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_EDIT_VALUE
+VirtualFilter=dWC
 

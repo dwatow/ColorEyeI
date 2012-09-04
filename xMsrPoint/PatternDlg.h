@@ -3,7 +3,7 @@
 
 #include "CircleArc.h"    // Added by ClassView
 #include "CA210.h"
-#include "../MsrItems/MsrItemDlg.h"
+#include "..\MsrItems\MsrItemDlg.h"
 
 #include <cmath>
 #include <vector>
@@ -122,7 +122,7 @@ private:
 public:
     void FineNits();
 
-    BOOL Magazine(std::vector<Cartridge>& ); //¼u§X
+ //   BOOL Magazine(std::vector<Cartridge>& ); //¼u§X
     BOOL Magazine(); //¼u§X
     BOOL ConnectCa210(Ca210* ca);
     BOOL ConnectCa210();
