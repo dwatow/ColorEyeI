@@ -55,6 +55,7 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     //{{AFX_DATA_MAP(CMsrItemDlg)
+	DDX_Control(pDX, IDOK, m_btnOK);
 	DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
 	DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
 	DDX_Control(pDX, IDC_LIST_MSRITEMS, m_lstMsrItems);
@@ -203,7 +204,7 @@ void CMsrItemDlg::SetBolt(Bolt* pusher)
     Pusher = pusher;
 }
 
-void CMsrItemDlg::ListBoxUpdate(CDataChain& Datas)
+unsigned int CMsrItemDlg::ListBoxUpdate(CDataChain& Datas)
 {
 	CString str;
 	m_lstMsrItems.ResetContent();
@@ -221,6 +222,7 @@ void CMsrItemDlg::ListBoxUpdate(CDataChain& Datas)
 			m_lstMsrItems.AddString(str);
 		}
 	}
+	return Datas.Size();
 }
 
 void CMsrItemDlg::OnButtonAdd() 
@@ -299,7 +301,8 @@ void CMsrItemDlg::OnButtonAdd()
 			pDoc->GetVector().Partition(CrsTlk, Pn4);
 			Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
         }
-		ListBoxUpdate(pDoc->GetVector());
+		if (ListBoxUpdate(pDoc->GetVector()))
+			m_btnOK.EnableWindow(TRUE);
     }
 }
 
@@ -349,7 +352,9 @@ void CMsrItemDlg::OnButtonDel()
 // 	str.Format("%d", pDoc->GetVector().Size());
 // 		MessageBox(str);
 
-	ListBoxUpdate(pDoc->GetVector());
+	if (!ListBoxUpdate(pDoc->GetVector()))
+		m_btnOK.EnableWindow(FALSE);
+
 	delete [] buffer;
 
 }

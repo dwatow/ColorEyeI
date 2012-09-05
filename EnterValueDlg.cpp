@@ -15,9 +15,10 @@ static char THIS_FILE[] = __FILE__;
 // CEnterValueDlg dialog
 
 
-CEnterValueDlg::CEnterValueDlg(CWnd* pParent /*=NULL*/)
+CEnterValueDlg::CEnterValueDlg(const CString dlgTitle, CWnd* pParent /*=NULL*/)
 	: CDialog(CEnterValueDlg::IDD, pParent)
 {
+	m_dlgTitle.Format("%s", dlgTitle);
 	//{{AFX_DATA_INIT(CEnterValueDlg)
 	m_strValue = _T("");
 	m_strName = _T("");
@@ -37,10 +38,19 @@ void CEnterValueDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CEnterValueDlg, CDialog)
 	//{{AFX_MSG_MAP(CEnterValueDlg)
-		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CEnterValueDlg message handlers
 
+
+BOOL CEnterValueDlg::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+	
+	// TODO: Add extra initialization here
+	SetWindowText(m_dlgTitle);
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}

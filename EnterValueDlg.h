@@ -13,9 +13,11 @@
 class CEnterValueDlg : public CDialog
 {
 // Construction
+	CString m_dlgTitle;
 public:
+//	void SetDlgTitle(CString str){ SetWindowText(str.GetBuffer(0)); };
 	void SetValueKind(const CString str){	m_strName = str;	};
-	CEnterValueDlg(CWnd* pParent = NULL);   // standard constructor
+	CEnterValueDlg(const CString dlgTitle, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CEnterValueDlg)
@@ -37,7 +39,7 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CEnterValueDlg)
-		// NOTE: the ClassWizard will add member functions here
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

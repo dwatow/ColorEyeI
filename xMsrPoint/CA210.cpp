@@ -12,7 +12,7 @@ m_isSuccess(TRUE)
     初始化ca-210
     設定是否為模擬機
     */
-    //m_CA210DEBUGFlag = TRUE;
+//    m_CA210DEBUGFlag = TRUE;
 //    m_CA210DEBUGFlag = FALSE;
     m_isTrue = tr;  //TRUE接實體儀器, FALSE模擬儀器
     if (m_isTrue)

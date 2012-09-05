@@ -401,6 +401,26 @@ BOOL CPatternDlg::ConnectCa210(Ca210* pCa)
         return FALSE;
 }
 
+CString CPatternDlg::SetLCMSize()
+{
+	CString LCMSize;
+	LCMSize = m_pCA210->GetLcmSize();
+	if (!atoi(LCMSize))
+	{
+		CEnterValueDlg dlgEnterValue("無法判別LCM Size");
+//		dlgEnterValue.SetWindowText;
+		dlgEnterValue.SetValueKind("LCM Size");
+		if (dlgEnterValue.DoModal() == IDOK)
+	//	dlgEnterValue.DoModal();
+			LCMSize = dlgEnterValue.m_strValue;
+
+// 		CString str;
+// 		str.Format("%d =?= %d\n%s", dlgEnterValue.DoModal(), IDOK, LCMSize);
+// 		MessageBox(str);
+	}
+	return LCMSize;
+}
+
 BOOL CPatternDlg::Magazine()
 {
     // TODO: Add extra validation here
@@ -410,28 +430,14 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-    m_itor = pDoc->GetVector().Begin();
-  //  ++m_itor;               //閃掉第一個空包彈
+    m_itor		= pDoc->GetVector().Begin();
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetVector().End();
-    
 
-	CString LCMSize;
     //++BeginItor;  
     if(!m_GunMchn.isReady())
     {
-
-		LCMSize = m_pCA210->GetLcmSize();
-		if (!atoi(LCMSize))
-		{
-			CEnterValueDlg dlgEnterValue;
-			dlgEnterValue.SetValueKind("LCM Size");
-			if (dlgEnterValue.DoModal() == MB_OK)
-				LCMSize = dlgEnterValue.m_strValue;
-		}
-
-
-        if (!m_GunMchn.Magazine(LCMSize, m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+        if (!m_GunMchn.Magazine(SetLCMSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
         Trigger(m_itor);
         NextTrigger(m_itor);
         if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小

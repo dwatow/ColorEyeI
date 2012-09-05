@@ -100,6 +100,8 @@ private:
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
+	CString SetLCMSize();
+
     BOOL Trigger(std::vector<Cartridge>::iterator&);
     BOOL NextTrigger(std::vector<Cartridge>::iterator&);
     COLORREF ShiftColor(COLORREF clr, UINT shift = 55) const;

@@ -30,6 +30,7 @@ public:
 // Dialog Data
     //{{AFX_DATA(CMsrItemDlg)
 	enum { IDD = IDD_MSR_ITEM };
+	CButton	m_btnOK;
 	CButton	m_btnDelItems;
 	CButton	m_btnAddItems;
 	CListBox	m_lstMsrItems;
@@ -123,7 +124,7 @@ protected:
     DECLARE_INTERFACE_MAP()
 public:
     void SetBolt(Bolt* Pusher);
-	void ListBoxUpdate(CDataChain& );
+	unsigned int ListBoxUpdate(CDataChain& );
 };
 
 //{{AFX_INSERT_LOCATION}}
