@@ -60,50 +60,50 @@ ChainData::size_type CDataChain::StdInit()
 {
     m_CarChain1.clear();
     
-    Partition(White, Pn1);
-    Partition(Red  , Pn1);
-    Partition(Green, Pn1);
-    Partition(Blue , Pn1);
-    Partition(Dark , Pn1);
+    Grow(White, Pn1);
+    Grow(Red  , Pn1);
+    Grow(Green, Pn1);
+    Grow(Blue , Pn1);
+    Grow(Dark , Pn1);
     
-    Partition(White, Pn5);    
-    Partition(Red  , Pn5);    
-    Partition(Green, Pn5);    
-    Partition(Blue , Pn5);    
-    Partition(Dark , Pn5);    
+    Grow(White, Pn5);    
+    Grow(Red  , Pn5);    
+    Grow(Green, Pn5);    
+    Grow(Blue , Pn5);    
+    Grow(Dark , Pn5);    
     
-    Partition(White, Pn9);    
-    Partition(Red  , Pn9);    
-    Partition(Green, Pn9);    
-    Partition(Blue , Pn9);    
-    Partition(Dark , Pn9);    
+    Grow(White, Pn9);    
+    Grow(Red  , Pn9);    
+    Grow(Green, Pn9);    
+    Grow(Blue , Pn9);    
+    Grow(Dark , Pn9);    
     
-    Partition(White, Pn25);    
-    Partition(Red  , Pn25);    
-    Partition(Green, Pn25);    
-    Partition(Blue , Pn25);    
-    Partition(Dark , Pn25);    
+    Grow(White, Pn25);    
+    Grow(Red  , Pn25);    
+    Grow(Green, Pn25);    
+    Grow(Blue , Pn25);    
+    Grow(Dark , Pn25);    
     
-    Partition(White, Pn49);    
-    Partition(Red  , Pn49);    
-    Partition(Green, Pn49);    
-    Partition(Blue , Pn49);    
-    Partition(Dark , Pn49);    
+    Grow(White, Pn49);    
+    Grow(Red  , Pn49);    
+    Grow(Green, Pn49);    
+    Grow(Blue , Pn49);    
+    Grow(Dark , Pn49);    
     
-    Partition(Nits, Pn9);
+    Grow(Nits, Pn9);
     
-    Partition(CrsTlk , Pn4);
-    Partition(CrsTlkW, Pn4);
-    Partition(CrsTlkD, Pn4);
+    Grow(CrsTlk , Pn4);
+    Grow(CrsTlkW, Pn4);
+    Grow(CrsTlkD, Pn4);
     
     //freeBuffer();
     return m_CarChain1.size();
 }
 
-void CDataChain::Partition(ColorType ct, PointNum pn)
+void CDataChain::Grow(ColorType ct, PointNum pn)
 {
-    Bolt* pVectorMaker;
-    pVectorMaker = new Bolt;
+    Bolt* PetriDish;
+    PetriDish = new Bolt;
     if (ct == CrsTlk)
     {
         ChainData vCrossTalk;
@@ -112,9 +112,9 @@ void CDataChain::Partition(ColorType ct, PointNum pn)
         Cartridge CrsTlk2(CrsTlkW, pn);
         Cartridge CrsTlk3(CrsTlkD, pn);
 		
-        pVectorMaker->Partition(vCrossTalk, CrsTlk1);
-        pVectorMaker->Partition(vCrossTalk, CrsTlk2);
-        pVectorMaker->Partition(vCrossTalk, CrsTlk3);
+        PetriDish->Grow(vCrossTalk, CrsTlk1);
+        PetriDish->Grow(vCrossTalk, CrsTlk2);
+        PetriDish->Grow(vCrossTalk, CrsTlk3);
 		
         SortQuackMsr(vCrossTalk);
         m_CarChain1.insert(m_CarChain1.end(), vCrossTalk.begin(), vCrossTalk.end());
@@ -122,10 +122,10 @@ void CDataChain::Partition(ColorType ct, PointNum pn)
     else
     {
         Cartridge MsrItem(ct, pn);
-        pVectorMaker->Partition(m_CarChain1, MsrItem);
+        PetriDish->Grow(m_CarChain1, MsrItem);
     }
  
-    delete pVectorMaker;
+    delete PetriDish;
 }
 
 Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) 
@@ -169,39 +169,33 @@ void CDataChain::Empty()
 	m_CarChain1.push_back(x);
 }
 
-
-/*
-
-void CDataChain::RemoveEqualCell(ChainData& vCar)
+void CDataChain::RemoveEqualCell(ChainData& compData)
 {
-    if (!vCar.empty())
+    if (!compData.empty())
     {
-        ChainData::iterator it2, itX;
-
-        for (it2 = vCar.begin(); it2 != vCar.end(); ++it2)
+        ChainData::iterator compItor, removeBeginItor;
+		
+        for (compItor = compData.begin(); compItor != compData.end(); ++compItor)
         {
-            itX = std::remove(Begin(), End(), *it2);
-            m_CarChain1.erase(itX, End());
+            removeBeginItor = std::remove(Begin(), End(), *compItor);
+            m_CarChain1.erase(removeBeginItor, End());
         }
-
     }
 }
-void CDataChain::RemoveEqualCell(CDataChain& vCar)
+
+void CDataChain::RemoveEqualCell(CDataChain& compData)
 {
-    if (!vCar.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
+    if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
     {
-        //在這時
-        //m_CarChain1是舊的
-        //vCar是新的
-        ChainData::iterator it2, itX;
+        //在這時m_CarChain1是舊的compData是新的
+        ChainData::iterator compItor, removeBeginItor;
 
         //remove & cut
-        //在新的裡面，比對舊的，代表重覆
-        //重覆量測去除掉
-        for (it2 = vCar.Begin(); it2 != vCar.End(); ++it2)
+        //在新的裡面，比對舊的，代表重覆，重覆量測去除掉
+        for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
         {
-            itX = std::remove(Begin(), End(), *it2);
-            m_CarChain1.erase(itX, End());
+            removeBeginItor = std::remove(Begin(), End(), *compItor);
+            m_CarChain1.erase(removeBeginItor, End());
         }
 
         //將舊的掛在新的後面（讓空的放在第一個）
@@ -213,20 +207,9 @@ void CDataChain::RemoveEqualCell(CDataChain& vCar)
     }
 //    ReleaseBuffer();
 }
-
-
-
-Cartridge CDataChain::At(ChainData::size_type index)
-{
-    
-}
+/*
 
 //////////////////////////////////////////////////////////////////////////
-
-// Cartridge& CDataChain::operator[](ColorType clr, PointNum Large, UINT Little)
-// {
-//     return At(ColorType clr, PointNum Large, UINT Little);
-// }
 
 ChainData& CDataChain::operator=(const ChainData& vCar)
 {

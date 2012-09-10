@@ -286,21 +286,14 @@ void CColorEyeIDoc::OnFileSave()
 	}
 }
 
-CDataChain& CColorEyeIDoc::GetMsrDataChain()
-{
-    return vChain2;
-}
-
 void CColorEyeIDoc::RestructureVector()
 {
-//**	m_OmdData.RemoveEqualCell(vChain2);
+	m_OmdData.RemoveEqualCell(m_msrData);
 
-// 	vChain2.AddCell(vChain2.End(), m_OmdData.Begin(), m_OmdData.End());
+// 	m_msrData.AddCell(m_msrData.End(), m_OmdData.Begin(), m_OmdData.End());
 // 	m_OmdData.Empty();
-	m_OmdData.AddCell(m_OmdData.End(), vChain2.Begin(), vChain2.End());
+	m_OmdData.AddCell(m_OmdData.End(), m_msrData.Begin(), m_msrData.End());
 //	m_OmdData.ReleaseBuffer();
-
-//**    f_Omd->SetMsrData(m_OmdData);
 }    
 
 void CColorEyeIDoc::DebugByTxt()

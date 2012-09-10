@@ -24,9 +24,9 @@ class Bolt
     float    m_f21Havg;
     float    m_f21Vavg;
     float    m_f25FE;
-    UINT    m_n25RectSide;
-    UINT    m_nGM1;
-    UINT    m_nGM2;
+    UINT     m_n25RectSide;
+    UINT     m_nGM1;
+    UINT     m_nGM2;
     float    m_fGammaSetp;
     float    m_fNits;
     float    m_fCrsTlkRectFE;
@@ -36,7 +36,7 @@ public:
     ~Bolt();
 
     BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator& );  //¼u§X
-    void Partition(std::vector<Cartridge>& , Cartridge& );  //¶ñ¼u¾¹
+    void Grow(std::vector<Cartridge>& , Cartridge& );  //¶ñ¼u¾¹
 
     UINT Trigger(std::vector<Cartridge>::iterator&);
 

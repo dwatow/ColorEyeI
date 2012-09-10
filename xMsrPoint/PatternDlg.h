@@ -20,7 +20,8 @@ enum initType{  MsrForItem = 0, MsrForPoint, MsrForForm  };
 // CPatternDlg dialog
 class CPatternDlg : public CDialog
 {
-    initType initVectorType;
+    initType InitDataType;
+
     struct MyThreadInfo
     {
         CPatternDlg* ptnDlg;
@@ -114,7 +115,7 @@ private:
     void EventRunMsrAi(BOOL isRun = 2);
     UINT EventCatchMsrValue();
 
-    void InitialVector();
+    void InitDataDlgType();//Call SelMsrItem
 
     static UINT VbrGoalThread(LPVOID LParam);
     static UINT VbrNextGoalThread(LPVOID LParam);
@@ -124,9 +125,9 @@ public:
 
  //   BOOL Magazine(std::vector<Cartridge>& ); //彈匣
     BOOL Magazine(); //彈匣
-    BOOL ConnectCa210(Ca210* ca);
+//    BOOL ConnectCa210(Ca210* ca);
     BOOL ConnectCa210();
-    void Partition(std::vector<Cartridge>& , Cartridge& );  //填彈器（快速量測）
+//    void Partition(std::vector<Cartridge>& , Cartridge& );  //填彈器（快速量測）
 
     COLORREF GetBkColor() const;
     BOOL     SetBkColor(COLORREF);

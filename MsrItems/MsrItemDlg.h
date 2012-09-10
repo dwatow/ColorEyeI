@@ -123,7 +123,7 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 public:
-    void SetBolt(Bolt* Pusher);
+    void SetBolt(Bolt* Pusher);  //在CPatternDlg::InitDataDlgType()有用到
 	unsigned int ListBoxUpdate(CDataChain& );
 };
 

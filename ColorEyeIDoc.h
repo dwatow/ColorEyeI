@@ -29,24 +29,31 @@ public:
     void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
     void SetPrb    (CString& _S) { m_Prb    =  _S; };
     void SetCHID   (CString& _S) { m_CHID   =  _S; };
-public:
-//    CDataChain vChain1;
-    CDataChain vChain2;
 
 //OMD File
-public:
+private:
     OmdValueData m_OmdData;
+public:
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
     OmdValueData GetOmdData(){return m_OmdData; };
 
 //TXT File
-public:
+private:
     TxtStrData m_TextData;
+public:
     void OpenTxtFile(LPCTSTR );
     void SaveTxtFile(LPCTSTR );
     TxtStrData GetTextData(){return m_TextData; };
     //TxtStrData& GetTextData(){return m_TextData; }; //也可以
+
+//MsrDataChain
+private:
+public:
+	CDataChain m_msrData;
+	CDataChain& GetMsrDataChain(){ return m_msrData; };//新的一條鍊 vChain2
+    void RestructureVector();
+
 
 protected: // create from serialization only
     CColorEyeIDoc();
@@ -68,10 +75,6 @@ public:
 
 // Implementation
 public:
-    CDataChain& GetMsrDataChain();//新的一條鍊 vChain2
-//    CDataChain& GetCoreDataChain();//新的一條鍊 vChain2
-    void RestructureVector();
-
     virtual ~CColorEyeIDoc();
 #ifdef _DEBUG
     virtual void AssertValid() const;

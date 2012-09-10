@@ -856,15 +856,15 @@ CString Bolt::GetMsrFlowName() const
     return temp;
 }
 
-void Bolt::Partition(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
+void Bolt::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrCell)
 {
     //填入預設空包彈
 //     m_LcmSize = 24;                               //模組尺寸
 //     m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);    //螢幕解析度
 //     m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
 
-    m_BkColor    = MsrFlow.GetBackColor();        //背景色標籤
-    m_MsrFlowNum = MsrFlow.GetMsrFlowNum();        //點數標籤
+    m_BkColor    = MsrCell.GetBackColor();        //背景色標籤
+    m_MsrFlowNum = MsrCell.GetMsrFlowNum();        //點數標籤
 
     UINT areaCode = 0;
 
@@ -874,13 +874,13 @@ void Bolt::Partition(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
     
     for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
     {
-        MsrFlow.SetMsrFlowNo(m_MsrFlowNo);
+        MsrCell.SetMsrFlowNo(m_MsrFlowNo);
 //         +----------+
 //         |02  03  07|
 //         |04  01  08|
 //         |05  06  09|
 //         +----------+
-        if((((UINT)m_MsrFlowNum - 1)/2) == MsrFlow.GetMsrFlowNo())
+        if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
             areaCode = 1;
         else
         {
@@ -898,9 +898,9 @@ void Bolt::Partition(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
             else                                        areaCode = 0;
         }
 
-        MsrFlow.SetArea(areaCode);
+        MsrCell.SetArea(areaCode);
 //        MsrFlow.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
-        vCar.push_back(MsrFlow);
+        vCar.push_back(MsrCell);
     }
     m_isReady = FALSE;
 }

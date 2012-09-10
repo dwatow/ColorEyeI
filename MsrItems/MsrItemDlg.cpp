@@ -40,25 +40,14 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     //}}AFX_DATA_INIT
 }
 
-
-// void CMsrItemDlg::OnFinalRelease()
-// {
-//     // When the last reference for an automation object is released
-//     // OnFinalRelease is called.  The base class will automatically
-//     // deletes the object.  Add additional cleanup required for your
-//     // object before calling the base class.
-// 
-//     CDialog::OnFinalRelease();
-// }
-
 void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     //{{AFX_DATA_MAP(CMsrItemDlg)
-	DDX_Control(pDX, IDOK, m_btnOK);
-	DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
-	DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
-	DDX_Control(pDX, IDC_LIST_MSRITEMS, m_lstMsrItems);
+    DDX_Control(pDX, IDOK, m_btnOK);
+    DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
+    DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
+    DDX_Control(pDX, IDC_LIST_MSRITEMS, m_lstMsrItems);
     DDX_Control(pDX, IDC_CHECK_CBP21, m_chkCBP21);
     DDX_Control(pDX, IDC_CHECK_CDP21, m_chkCDP21);
     DDX_Control(pDX, IDC_CHECK_CGP21, m_chkCGP21);
@@ -131,7 +120,7 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
-	//}}AFX_DATA_MAP
+    //}}AFX_DATA_MAP
 }
 
 
@@ -139,9 +128,9 @@ BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
     //{{AFX_MSG_MAP(CMsrItemDlg)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
-	ON_BN_CLICKED(IDC_BUTTON_ADD, OnButtonAdd)
-	ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
-	//}}AFX_MSG_MAP
+    ON_BN_CLICKED(IDC_BUTTON_ADD, OnButtonAdd)
+    ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CMsrItemDlg, CDialog)
@@ -206,173 +195,179 @@ void CMsrItemDlg::SetBolt(Bolt* pusher)
 
 unsigned int CMsrItemDlg::ListBoxUpdate(CDataChain& Datas)
 {
-	CString str;
-	m_lstMsrItems.ResetContent();
+    m_lstMsrItems.ResetContent();
 
-	if (Datas.IsEmpty())
-	{
-		m_btnDelItems.EnableWindow(FALSE);
-	}
-	else
-	{
-		m_btnDelItems.EnableWindow(TRUE);
-		for (std::vector<Cartridge>::iterator itor = Datas.Begin(); itor != Datas.End(); ++itor)
-		{
-			str.Format("%s%s第%2d點", itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
-			m_lstMsrItems.AddString(str);
-		}
-	}
-	return Datas.Size();
+    if (Datas.IsEmpty())
+        m_btnDelItems.EnableWindow(FALSE);
+    else
+    {
+        m_btnDelItems.EnableWindow(TRUE);
+
+		CString str;
+        //for (std::vector<Cartridge>::iterator itor = Datas.Begin(); itor != Datas.End(); ++itor)
+		for (std::vector<Cartridge>::iterator itor = Datas.m_CarChain1.begin(); itor != Datas.m_CarChain1.end(); ++itor)
+        {
+            str.Format("%s%s第%2d點", itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
+            m_lstMsrItems.AddString(str);
+        }
+    }
+    return Datas.Size();
 }
 
 void CMsrItemDlg::OnButtonAdd() 
 {
-	// TODO: Add your control notification handler code here
-	if (Pusher != 0)
+    // TODO: Add your control notification handler code here
+    if (Pusher != 0)
     {
         CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
         ASSERT_VALID(pMainFrm);
-		
+        
         CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
         ASSERT_VALID(pDoc);
 
-		pDoc->SetModifiedFlag(TRUE);
-		
+        pDoc->SetModifiedFlag(TRUE);
+        
         UpdateData(TRUE);
-		
+        
         //執行連到了這
         //1. CA-210已連線
         //2. CA-210已宣告
+		if (m_chkCWP1.GetState())    pDoc->m_msrData.Grow(White, Pn1);
+        if (m_chkCRP1.GetState())    pDoc->m_msrData.Grow(Red  , Pn1);
+        if (m_chkCGP1.GetState())    pDoc->m_msrData.Grow(Green, Pn1);
+        if (m_chkCBP1.GetState())    pDoc->m_msrData.Grow(Blue , Pn1);
+        if (m_chkCDP1.GetState())    pDoc->m_msrData.Grow(Dark , Pn1);
+
         //////////////////////////////////////////////////////////////////////////
-        if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn1);
-        if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn1);
-        if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn1);
-        if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Partition(Blue, Pn1);
-        if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn1);
-		
-        if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn5);
-        if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn5);
-        if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn5);
-        if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn5);
-        if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn5);
+//         if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
+//         if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
+//         if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn1);
+//         if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
+//         if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
         
-        if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
-            Pusher->SetP5FE(m_f5FE);
-		
-        if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn9);
-        if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn9);
-        if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn9);
-        if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn9);
-        if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn9);
-		
-        if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
-            Pusher->SetP9FE(m_f9FE);
-		
-        if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
-            Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
-		
-        if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn25);
-        if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn25);
-        if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn25);
-        if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn25);
-        if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn25);
-		
-        if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
-            Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
-        
-        if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn49);
-        if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn49);
-        if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn49);
-        if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn49);
-        if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn49);
-		
-        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Partition(Nits, Pn9);
-		
-        if (m_chkNits.GetState())
-            Pusher->SetNitsNum(m_fNits);
-		
-        if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
-            Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
-		
-        if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
-		
-        if (m_chkCrossTalk.GetState())
-        {
-			pDoc->GetMsrDataChain().Partition(CrsTlk, Pn4);
-			Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
-        }
-		if (ListBoxUpdate(pDoc->GetMsrDataChain()))
-			m_btnOK.EnableWindow(TRUE);
+//         if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
+//         if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
+//         if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
+//         if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn5);
+//         if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn5);
+//         
+//         if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
+//             Pusher->SetP5FE(m_f5FE);
+//         
+//         if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
+//         if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
+//         if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
+//         if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
+//         if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
+//         
+//         if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
+//             Pusher->SetP9FE(m_f9FE);
+//         
+//         if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
+//             Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
+//         
+//         if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
+//         if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
+//         if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
+//         if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn25);
+//         if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn25);
+//         
+//         if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
+//             Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
+//         
+//         if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
+//         if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn49);
+//         if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn49);
+//         if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn49);
+//         if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
+//         
+//         if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
+//         
+//         if (m_chkNits.GetState())
+//             Pusher->SetNitsNum(m_fNits);
+//         
+//         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
+//             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
+//         
+//         if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
+//         
+//         if (m_chkCrossTalk.GetState())
+//         {
+//             pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
+//             Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
+//         }
+            if (ListBoxUpdate(pDoc->m_msrData))
+                m_btnOK.EnableWindow(TRUE);
     }
 }
 
 void CMsrItemDlg::OnButtonDel() 
 {
-	// TODO: Add your control notification handler code here
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pMainFrm);
-	
-	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    // TODO: Add your control notification handler code here
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-	int* buffer = new int[m_lstMsrItems.GetSelCount()];
-	m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);
-	
-	CDataChain temp;
-	
-	for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
-		temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
+    int* buffer = new int[m_lstMsrItems.GetSelCount()];
+    m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);
+    
+    CDataChain temp;
+    
+    for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
+        temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
 
-// 	CString str1, str2;
-// 	int i = 0;
-// 	for (std::vector<Cartridge>::iterator itor = temp.Begin(); itor != temp.End(); ++itor)
-// 	{
-// 		str2.Format("buffer[%d] = %d, temp[] = %s%s %d\n", \
-// 			i, buffer[i]+1, itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
-// 		str1 += str2;
-// 		++i;
-// 	}
+//     CString str1, str2;
+//     int i = 0;
+//     for (std::vector<Cartridge>::iterator itor = temp.Begin(); itor != temp.End(); ++itor)
+//     {
+//         str2.Format("buffer[%d] = %d, temp[] = %s%s %d\n", \
+//             i, buffer[i]+1, itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
+//         str1 += str2;
+//         ++i;
+//     }
 
-//**	pDoc->GetMsrDataChain().RemoveEqualCell(temp);
+//**    pDoc->GetMsrDataChain().RemoveEqualCell(temp);
 
-	//void CMsrItemDlg::OnButtonDel() 
-	//void CDataChain::RemoveEqualCell(CDataChain& vCar)
-	//會將另一條加在這一條下面。
+    //void CMsrItemDlg::OnButtonDel() 
+    //void CDataChain::RemoveEqualCell(CDataChain& vCar)
+    //會將另一條加在這一條下面。
 
-// 	str1.Empty();
-// 	str2.Empty();
-// 	for (std::vector<Cartridge>::iterator itor = pDoc->GetMsrDataChain().Begin(); itor != pDoc->GetMsrDataChain().End(); ++itor)
-// 	{
-// 		str2.Format("%s%s %d\n", \
-// 			itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
-// 		str1 += str2;
-// 	}
+//     str1.Empty();
+//     str2.Empty();
+//     for (std::vector<Cartridge>::iterator itor = pDoc->GetMsrDataChain().Begin(); itor != pDoc->GetMsrDataChain().End(); ++itor)
+//     {
+//         str2.Format("%s%s %d\n", \
+//             itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
+//         str1 += str2;
+//     }
 
-// 	CString str;
-// 	str.Format("%d", pDoc->GetMsrDataChain().Size());
-// 		MessageBox(str);
+//     CString str;
+//     str.Format("%d", pDoc->GetMsrDataChain().Size());
+//         MessageBox(str);
 
-	if (!ListBoxUpdate(pDoc->GetMsrDataChain()))
-		m_btnOK.EnableWindow(FALSE);
+    if (!ListBoxUpdate(pDoc->GetMsrDataChain()))
+        m_btnOK.EnableWindow(FALSE);
 
-	delete [] buffer;
+    delete [] buffer;
 
 }
 
 
 BOOL CMsrItemDlg::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
-	
-	// TODO: Add extra initialization here
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pMainFrm);
-	
-	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-	ASSERT_VALID(pDoc);
+    CDialog::OnInitDialog();
+    
+    // TODO: Add extra initialization here
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
 
-	pDoc->GetMsrDataChain().Empty();
+    pDoc->GetMsrDataChain().Empty();
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+    return TRUE;  // return TRUE unless you set the focus to a control
+                  // EXCEPTION: OCX Property Pages should return FALSE
 }

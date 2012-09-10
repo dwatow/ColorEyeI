@@ -19,36 +19,38 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
-    : CDialog(CPatternDlg::IDD, pParent)
+    : CDialog(CPatternDlg::IDD, pParent), c_bisReady(FALSE), InitDataType(it)
 {
     //{{AFX_DATA_INIT(CPatternDlg)
         // NOTE: the ClassWizard will add member initialization here
     //}}AFX_DATA_INIT
-    c_bisReady = FALSE;
-    initVectorType = it;
-
+    
 	//ConnectCa210()
 	//pMainFrm->m_pCa210->LinkMemory();
-	//InitialVector();
+	//InitMsrData();
 	//之間的順序要固定，不要修改了！
     
 	if (!ConnectCa210())
-        MessageBox("OnButtonMsr的CA-210連線錯誤\n這個程式即將關閉!!\n\n要關囉!");    
+        MessageBox("CPatternDlg::CPatternDlg() ERROR!!\nOnButtonMsr的CA-210連線錯誤\n這個程式即將關閉!!");    
 
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     pMainFrm->m_pCa210->LinkMemory();
-    InitialVector();
-  
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
-    
-	//之後的部份要在
-    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
-    pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
-    pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
+    InitDataDlgType();  
 }
 
+void CPatternDlg::InitDataDlgType()
+{
+    switch(InitDataType)
+    {
+    case MsrForItem:
+        CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
+        dlgMsrItem.SetBolt(&m_GunMchn);
+        if (dlgMsrItem.DoModal() == IDOK)        //就是MsrItemGo的按鈕
+            c_bisReady = TRUE;
+        break;
+    }
+}
 
 void CPatternDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -387,17 +389,17 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
 //         return FALSE; //單點覆測使用
 // }
 
-BOOL CPatternDlg::ConnectCa210(Ca210* pCa)
-{
-    m_pCA210 = pCa;
-    if (m_pCA210 != 0)
-    {
-        m_pCA210->SetOnline(TRUE);
-        return TRUE ;
-    }
-    else
-        return FALSE;
-}
+// BOOL CPatternDlg::ConnectCa210(Ca210* pCa)
+// {
+//     m_pCA210 = pCa;
+//     if (m_pCA210 != 0)
+//     {
+//         m_pCA210->SetOnline(TRUE);
+//         return TRUE ;
+//     }
+//     else
+//         return FALSE;
+// }
 
 CString CPatternDlg::SetLCMSize()
 {
@@ -428,6 +430,10 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
+	pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
+    pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
+    pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
+
     m_itor		= pDoc->GetMsrDataChain().Begin();
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetMsrDataChain().End();
@@ -573,10 +579,10 @@ UINT CPatternDlg::Recoil()
     return recoil;
 }
 
-void CPatternDlg::Partition(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
-{
-    m_GunMchn.Partition(vCar, MsrFlow);
-}
+// void CPatternDlg::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
+// {
+//     m_GunMchn.Grow(vCar, MsrFlow);
+// }
 
 UINT CPatternDlg::VbrGoalThread(LPVOID LParam)
 {
@@ -851,18 +857,6 @@ void CPatternDlg::FineNits()
     c_bMsring = c_bFind5nits = !c_bMsring;//5Nits特別流程結束
 }
 
-void CPatternDlg::InitialVector()
-{
-    switch(initVectorType)
-    {
-    case MsrForItem:
-        CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
-        dlgMsrItem.SetBolt(&m_GunMchn);
-        if (dlgMsrItem.DoModal() == IDOK)        //就是MsrItemGo的按鈕
-            c_bisReady = TRUE;
-        break;
-    }
-}
 
 BOOL CPatternDlg::isReady()
 {
