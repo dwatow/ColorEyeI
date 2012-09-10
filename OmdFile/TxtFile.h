@@ -11,26 +11,26 @@
 
 #include <vector>
 
+typedef std::vector<CString> TxtStrData;
+
 class CTxtFile  
 {
-    UINT m_LineNum;
-    std::vector<CString> vStr;
-protected:
-    CString GetCell(TCHAR, UINT);    //介面程式段
-    CString GetCell(PTCHAR, UINT);    //介面程式段
+	CString m_filepath;
+public:
+	CString GetFilePathName() const{ return m_filepath; };  //for Omdfile
 public:
     CTxtFile();
     virtual ~CTxtFile();
     virtual BOOL Open(CString);
     virtual BOOL Save(CString);
-    CString GetLine(UINT Num);        //取得第幾行（從1開始）
-    std::vector<CString>::size_type SetLine(CString& );
-    void Clear();
-    UINT GetLineNum();
+
+    BOOL LoadData(TxtStrData&);
+    BOOL SaveData(TxtStrData&);
+
 private:
-    BOOL LoadData(CStdioFile &infile);
-    BOOL SaveData(CStdioFile &infile);
-    CString GetCell(UINT, UINT);    //取得第幾個字
+	void FileToMem(CStdioFile& file, TxtStrData& dTxt);
+	void MemToFile(TxtStrData& dTxt, CStdioFile& file);
+	void ErrorMsg(CFileException&);
 };
 
 #endif // !defined(AFX_TXTFILE_H__E577A7EE_A364_4A73_8E30_C42DDB851DED__INCLUDED_)

@@ -78,11 +78,14 @@ protected:
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
+private:
+	void DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt);
+	void DrawAsOmdFile(CDC* pDC, OmdValueData Data, CPoint& pt);
+
     COLORREF isMsrToBkColor(BOOL b)
-    {
-        return b ? RGB(255, 255, 255) : RGB(192, 192, 192);
-    }
+    { return b ? RGB(255, 255, 255) : RGB(192, 192, 192); };
 //    void ViewMsrItemView(std::vector<Cartridge>&, CDC, CPoint);
+	/*
     CPoint DrawW05Table_Lv (CDC*, CColorEyeIDoc*, CPoint);
     CPoint DrawW05Table_Sx (CDC*, CColorEyeIDoc*, CPoint);
     CPoint DrawW05Table_Sy (CDC*, CColorEyeIDoc*, CPoint);
@@ -149,9 +152,9 @@ private:
     CPoint DrawNitsTable_Y  (CDC*, CColorEyeIDoc*, CPoint);
     CPoint DrawNitsTable_Z  (CDC*, CColorEyeIDoc*, CPoint);
 
+  CPoint DrawTable(isMsrItem, isMsrValue, CDC*, CColorEyeIDoc*, CPoint);
+*/        //   DrawTableTitle(CDC* pDC, CPoint ptTemp, const CString strTitle)
     CPoint DrawTableTitle  (CDC*, CPoint, const CString);
-        //   DrawTableTitle(CDC* pDC, CPoint ptTemp, const CString strTitle)
-    CPoint DrawTable(isMsrItem, isMsrValue, CDC*, CColorEyeIDoc*, CPoint);
 
     void KeepSc();
 

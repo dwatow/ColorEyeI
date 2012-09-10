@@ -30,9 +30,9 @@ class CSelExcelDlg : public CDialog
 	COmdFile1* m_pOmdfile;
     FormType   m_ft;
     int        m_nBufferSize;
-    CString    m_strXlsPath;  //XlsFilepath
+    CString    m_strXlsFilePath;  //XlsFilepath
     CDataChain m_vOmdtoXls;
-	std::vector<CString>   m_vFilePathList;  //OmdFilepath
+	std::vector<CString>   m_vOmdFilePathList;
 
 	CMainFrame* pMainFrm;
 	CColorEyeIDoc* pDoc;
@@ -65,13 +65,14 @@ public:
 
 // Implementation
 protected:
+    //afx_msg void OnSelchangeComboExcelseler();OnSelectXlsForm
 
     // Generated message map functions
     //{{AFX_MSG(CSelExcelDlg)
     virtual BOOL OnInitDialog();
     virtual void OnOK();
-    afx_msg void OnSelchangeComboExcelseler();
-    afx_msg void OnButtonFindfile();
+	afx_msg void OnSelectXlsForm();
+    afx_msg void OnFindOmdFile();
     afx_msg void OnRadioNowfile();
     afx_msg void OnRadioHdfile();
     //}}AFX_MSG
@@ -83,14 +84,14 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-	void oChooseXls();
+	void formWhichOne();
     void formRA();
     void formOQC();
     void formGamma();
     void formSEC();
 
 	void NewVector();
-    void GetCurFileList(CComboBox& ComboBox, CString FileNameExt);
+    void InitXlsFileList(CComboBox& ComboBox, CString FileNameExt);
  
 	void SetFileComeFrom(enum WhereFileComeFrom WFCF);
 };

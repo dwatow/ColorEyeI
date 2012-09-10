@@ -52,10 +52,8 @@ protected:
     virtual BOOL OnInitDialog();
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     afx_msg void OnPaint();
-    afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
-    afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
     afx_msg void OnTimer(UINT nIDEvent);
-    //}}AFX_MSG
+	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
     UINT Recoil();

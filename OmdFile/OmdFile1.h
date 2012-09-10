@@ -12,79 +12,59 @@
 #include "TxtFile.h"
 //#include "../xMsrPoint/Cartridge.h"
 #include "../DataChain.h"
+#include <vector>
+#include <iterator>
+#include "../xMsrPoint/Bolt.h"
 
-class COmdFile1 : public CTxtFile
+//typedef std::vector<Cartridge> OmdValueData;
+typedef CDataChain OmdValueData;
+
+class COmdFile1// : public CTxtFile
 {
+	//CTxtFile f_Txt;  //為了要它的路徑，才放class的全域。
+	CString m_filepath;
+	TxtStrData D_Txt;
 
-//////////////////////////////////////////////////////////////////////////
-    //輸入函式
-/*      輸入有兩種方式      *
- *        1. 由vector串     *
- *        2. 讀取檔案進來   */
-public:
-    //從記憶體輸入資料
-    COmdFile1(); //開新檔案，並且丟入Data
-//    COmdFile1();
-//    virtual ~COmdFile1();
-
-    BOOL Open(CString);    //從Omd檔輸入資料
-private:
-    void iForm();
-    BOOL isOldForm();  //判斷是不是Labview輸出的檔
-//////////////////////////////////////////////////////////////////////////
-//輸出
-/*      輸出有兩種方式      *
- *        1. 輸出vector串   *
- *        2. 存成檔案進來   */
-public:
-    //輸出資料到記憶體
-    //抓取各別資料串（依定義順序）
-    //掛到某一串後面，或都生成原生串
-
-	//可能要砍掉的函數(2)
-    std::vector<Cartridge> AddMsrData(ColorType, PointNum, std::vector<Cartridge>& );
-    std::vector<Cartridge> AddMsrData(ColorType clrtye, PointNum ptN);
-
-    BOOL Save(CString);    //從Omd檔輸出資料
-private:
-    void oForm();
-//////////////////////////////////////////////////////////////////////////
-//其它資料存取函式
-private:
-    CString m_PnlID;
+	CString m_PnlID;
     CString m_MsrDvc;
     CString m_Prb;
     CString m_CHID;
-    UINT    m_5nitsBkColor;
-/*
-  把每一個table裡的東西用指標指出來
-  再另外去編輯
+	
+public:
+    CString GetPnlID () const { return m_PnlID;  };
+    CString GetMsrDvc() const { return m_MsrDvc; };
+    CString GetPrb   () const { return m_Prb;    };
+    CString GetCHID  () const { return m_CHID;   };
+	
+	void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
+	void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
+    void SetPrb    (CString& _S) { m_Prb    =  _S; };
+    void SetCHID   (CString& _S) { m_CHID   =  _S; };
 
-  另外，讓資料空白的儲存格做縮減的效果
-  以達到動態編輯的假像！XD
-*/
-    std::vector<BOOL> isMsrChain;
-    std::vector< std::vector<bool> > isMsrTalbe;
+public:
+    COmdFile1();
+    BOOL Open(CString path);
+    BOOL Save(CString path);
+    
+	BOOL LoadData(OmdValueData&);
+    BOOL SaveData(OmdValueData&);
 
-    CDataChain  m_vMsrData;    //量測資料的記憶體空間
-    std::vector<CString>    m_vStrIndex;  //量測項目的名字
-public:    
-    CString GetPnlID()  const;   void SetPnlID(CString&);
-    CString GetMsrDvc() const;   void SetMsrDvc(CString&);
-    CString GetPrb()    const;   void SetPrb(CString&);
-    CString GetCHID()   const;   void SetCHID(CString&);
+// 	void iForm(OmdValueData&);
+//     void oForm(OmdValueData&);
 
-	void SetMsrData(CDataChain&);  //把Vector裝到Omd檔
-    CDataChain GetMsrData();
+private:
+	BOOL isOldForm() { return (D_Txt.at(0).Find(':') != -1) ? TRUE : FALSE; };  //判斷是不是Labview輸出的檔
+	
+	void InitData(OmdValueData& Data){ Data.StdInit(); };  //為了debug
+	void TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd);
+	void OmdToTxt(OmdValueData& dOmd, TxtStrData& dTxt);
+	void ErrorMsg(CFileException& fx);
 
-    //字串目錄
-	BOOL    SetIndex();   //return 1:有量測值 0:沒有任何量測值
-    CString GetIndex(UINT) const;    
-    UINT    GetIdxNum()    const;
+	CString GetLine(UINT LineNum);	
+	CString GetCell(UINT Word, UINT Line);
+	CString GetCell(TCHAR c, UINT n);   // 0< c<=24
+	CString GetCell(PTCHAR c, UINT n);  //25<=c，從AA開始算
 
-    //找是不是有量測值
-    BOOL IsMsr(ColorType , PointNum , isMsrValue );  //    可以直接對vector做動作，找是不是有值，沒有的話回傳NULL
-    BOOL IsMsr(ColorType , PointNum);                // 只管項目是不是有值
 };
 
 #endif // !defined(AFX_OMDFILE1_H__5E9E8D8E_4BB9_40C8_BEE3_2756DA9A7E76__INCLUDED_)

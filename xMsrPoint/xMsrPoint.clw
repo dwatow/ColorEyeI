@@ -15,12 +15,12 @@ Class3=CAboutDlg
 Class4=CXMsrPointDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_PATTERN_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_MSR_ITEM
+Resource3=IDD_XMSRPOINT_DIALOG
 Class5=CPatternDlg
-Resource4=IDD_XMSRPOINT_DIALOG
-Resource5=IDD_ABOUTBOX
+Resource4=IDD_PATTERN_DIALOG
+Resource5=IDD_MSR_ITEM
 
 [CLS:CXMsrPointApp]
 Type=0

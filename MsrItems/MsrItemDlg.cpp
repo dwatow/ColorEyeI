@@ -244,26 +244,26 @@ void CMsrItemDlg::OnButtonAdd()
         //1. CA-210已連線
         //2. CA-210已宣告
         //////////////////////////////////////////////////////////////////////////
-        if (m_chkCWP1.GetState())    pDoc->GetVector().Partition(White, Pn1);
-        if (m_chkCRP1.GetState())    pDoc->GetVector().Partition(Red  , Pn1);
-        if (m_chkCGP1.GetState())    pDoc->GetVector().Partition(Green, Pn1);
-        if (m_chkCBP1.GetState())    pDoc->GetVector().Partition(Blue, Pn1);
-        if (m_chkCDP1.GetState())    pDoc->GetVector().Partition(Dark , Pn1);
+        if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn1);
+        if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn1);
+        if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn1);
+        if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Partition(Blue, Pn1);
+        if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn1);
 		
-        if (m_chkCWP5.GetState())    pDoc->GetVector().Partition(White, Pn5);
-        if (m_chkCRP5.GetState())    pDoc->GetVector().Partition(Red  , Pn5);
-        if (m_chkCGP5.GetState())    pDoc->GetVector().Partition(Green, Pn5);
-        if (m_chkCBP5.GetState())    pDoc->GetVector().Partition(Blue , Pn5);
-        if (m_chkCDP5.GetState())    pDoc->GetVector().Partition(Dark , Pn5);
+        if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn5);
+        if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn5);
+        if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn5);
+        if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn5);
+        if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn5);
         
         if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
             Pusher->SetP5FE(m_f5FE);
 		
-        if (m_chkCWP9.GetState())    pDoc->GetVector().Partition(White, Pn9);
-        if (m_chkCRP9.GetState())    pDoc->GetVector().Partition(Red  , Pn9);
-        if (m_chkCGP9.GetState())    pDoc->GetVector().Partition(Green, Pn9);
-        if (m_chkCBP9.GetState())    pDoc->GetVector().Partition(Blue , Pn9);
-        if (m_chkCDP9.GetState())    pDoc->GetVector().Partition(Dark , Pn9);
+        if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn9);
+        if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn9);
+        if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn9);
+        if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn9);
+        if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn9);
 		
         if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
             Pusher->SetP9FE(m_f9FE);
@@ -271,22 +271,22 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
             Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
 		
-        if (m_chkCWP25.GetState())    pDoc->GetVector().Partition(White, Pn25);
-        if (m_chkCRP25.GetState())    pDoc->GetVector().Partition(Red  , Pn25);
-        if (m_chkCGP25.GetState())    pDoc->GetVector().Partition(Green, Pn25);
-        if (m_chkCBP25.GetState())    pDoc->GetVector().Partition(Blue , Pn25);
-        if (m_chkCDP25.GetState())    pDoc->GetVector().Partition(Dark , Pn25);
+        if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn25);
+        if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn25);
+        if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn25);
+        if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn25);
+        if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn25);
 		
         if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
             Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
         
-        if (m_chkCWP49.GetState())    pDoc->GetVector().Partition(White, Pn49);
-        if (m_chkCRP49.GetState())    pDoc->GetVector().Partition(Red  , Pn49);
-        if (m_chkCGP49.GetState())    pDoc->GetVector().Partition(Green, Pn49);
-        if (m_chkCBP49.GetState())    pDoc->GetVector().Partition(Blue , Pn49);
-        if (m_chkCDP49.GetState())    pDoc->GetVector().Partition(Dark , Pn49);
+        if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Partition(White, Pn49);
+        if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Partition(Red  , Pn49);
+        if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Partition(Green, Pn49);
+        if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Partition(Blue , Pn49);
+        if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Partition(Dark , Pn49);
 		
-        if (m_chkNits.GetState())     pDoc->GetVector().Partition(Nits, Pn9);
+        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Partition(Nits, Pn9);
 		
         if (m_chkNits.GetState())
             Pusher->SetNitsNum(m_fNits);
@@ -294,14 +294,14 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
 		
-        if (m_chkQuickMsr.GetState())    pDoc->GetVector().SortQuackMsr();
+        if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
 		
         if (m_chkCrossTalk.GetState())
         {
-			pDoc->GetVector().Partition(CrsTlk, Pn4);
+			pDoc->GetMsrDataChain().Partition(CrsTlk, Pn4);
 			Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
         }
-		if (ListBoxUpdate(pDoc->GetVector()))
+		if (ListBoxUpdate(pDoc->GetMsrDataChain()))
 			m_btnOK.EnableWindow(TRUE);
     }
 }
@@ -321,7 +321,7 @@ void CMsrItemDlg::OnButtonDel()
 	CDataChain temp;
 	
 	for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
-		temp.AddCell(pDoc->GetVector().At(buffer[it]+1));
+		temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
 
 // 	CString str1, str2;
 // 	int i = 0;
@@ -333,7 +333,7 @@ void CMsrItemDlg::OnButtonDel()
 // 		++i;
 // 	}
 
-	pDoc->GetVector().RemoveEqualCell(temp);
+//**	pDoc->GetMsrDataChain().RemoveEqualCell(temp);
 
 	//void CMsrItemDlg::OnButtonDel() 
 	//void CDataChain::RemoveEqualCell(CDataChain& vCar)
@@ -341,7 +341,7 @@ void CMsrItemDlg::OnButtonDel()
 
 // 	str1.Empty();
 // 	str2.Empty();
-// 	for (std::vector<Cartridge>::iterator itor = pDoc->GetVector().Begin(); itor != pDoc->GetVector().End(); ++itor)
+// 	for (std::vector<Cartridge>::iterator itor = pDoc->GetMsrDataChain().Begin(); itor != pDoc->GetMsrDataChain().End(); ++itor)
 // 	{
 // 		str2.Format("%s%s %d\n", \
 // 			itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
@@ -349,10 +349,10 @@ void CMsrItemDlg::OnButtonDel()
 // 	}
 
 // 	CString str;
-// 	str.Format("%d", pDoc->GetVector().Size());
+// 	str.Format("%d", pDoc->GetMsrDataChain().Size());
 // 		MessageBox(str);
 
-	if (!ListBoxUpdate(pDoc->GetVector()))
+	if (!ListBoxUpdate(pDoc->GetMsrDataChain()))
 		m_btnOK.EnableWindow(FALSE);
 
 	delete [] buffer;
@@ -371,7 +371,7 @@ BOOL CMsrItemDlg::OnInitDialog()
 	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
 	ASSERT_VALID(pDoc);
 
-	pDoc->GetVector().Empty();
+	pDoc->GetMsrDataChain().Empty();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

@@ -75,7 +75,7 @@ HeaderFile=SelExcelDlg.h
 ImplementationFile=SelExcelDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CSelExcelDlg
+LastObject=IDC_COMBO_EXCELSELER
 VirtualFilter=dWC
 
 [CLS:CFileDlg]

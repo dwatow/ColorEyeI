@@ -14,12 +14,39 @@
 
 class CColorEyeIDoc : public CDocument
 {
-    COmdFile1 *f_Omd;
-//    CString m_OmdFilePath;
-    CString m_strFilter;
+    CString m_PnlID;
+    CString m_MsrDvc;
+    CString m_Prb;
+    CString m_CHID;
+
+public:    
+    CString GetPnlID () const { return m_PnlID;  };
+    CString GetMsrDvc() const { return m_MsrDvc; };
+    CString GetPrb   () const { return m_Prb;    };
+    CString GetCHID  () const { return m_CHID;   };
+
+    void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
+    void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
+    void SetPrb    (CString& _S) { m_Prb    =  _S; };
+    void SetCHID   (CString& _S) { m_CHID   =  _S; };
 public:
-    CDataChain vChain1;
+//    CDataChain vChain1;
     CDataChain vChain2;
+
+//OMD File
+public:
+    OmdValueData m_OmdData;
+    void OpenOmdFile(LPCTSTR);
+    void SaveOmdFile(LPCTSTR);
+    OmdValueData GetOmdData(){return m_OmdData; };
+
+//TXT File
+public:
+    TxtStrData m_TextData;
+    void OpenTxtFile(LPCTSTR );
+    void SaveTxtFile(LPCTSTR );
+    TxtStrData GetTextData(){return m_TextData; };
+    //TxtStrData& GetTextData(){return m_TextData; }; //也可以
 
 protected: // create from serialization only
     CColorEyeIDoc();
@@ -41,8 +68,8 @@ public:
 
 // Implementation
 public:
-    COmdFile1& GetOmdFile();
-    CDataChain& GetVector();//新的一條鍊 vChain2
+    CDataChain& GetMsrDataChain();//新的一條鍊 vChain2
+//    CDataChain& GetCoreDataChain();//新的一條鍊 vChain2
     void RestructureVector();
 
     virtual ~CColorEyeIDoc();
@@ -60,7 +87,7 @@ protected:
     afx_msg void OnFileNew();
     afx_msg void OnFileSaveAs();
     afx_msg void OnFileSave();
-	//}}AFX_MSG
+    //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 
     // Generated OLE dispatch map functions
@@ -71,9 +98,8 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-    void NewOmdData();
     void DebugByTxt();
-	void DebugByTxt(CString path);
+    void DebugByTxt(CString path);
 //    static bool isMsred(const Cartridge &sp1, const Cartridge &sp2);
 
 };

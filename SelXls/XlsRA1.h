@@ -25,7 +25,7 @@ public:
 public:
 	CXlsRA1& iData(CDataChain&);
 	CXlsRA1& iData(CDataChain&, std::vector<Cartridge>::size_type);
-//	std::vector<Cartridge> oData();
+//	CDataChain& oData();
 };
 
 #endif // !defined(AFX_XLSRA1_H__31300755_DBA3_46D7_8D23_B37B8813FCE7__INCLUDED_)

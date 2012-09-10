@@ -19,8 +19,6 @@ static char THIS_FILE[]=__FILE__;
 void CXlsSEC1::InitForm()
 {
 	int i,j;
-	New().SetSheetName(1,"Report");
-	SetVisible(TRUE);
 
 	for(i=1;i<47;i++)
 	{
@@ -193,7 +191,6 @@ void CXlsSEC1::InitForm()
 	SelectCell("H29", "I38").SetMergeCells().SetCellColor(16).SetCellBorder(1, 3, 1);
 
 	//Cosmetic Picture(F/W)
-	//Cosmetic Picture(F/W)
 	SelectCell("B21", "I22").SetCellBorder().SetCellBorder(1, 3, 1);
 	SelectCell("C23", "E28").SetCellBorder();
 	SelectCell("C39", "I46").SetMergeCells();//.SetCellBorder(1, 3, 1);
@@ -203,66 +200,75 @@ void CXlsSEC1::InitForm()
 	SelectCell("B2", "B46").SetCellBorder(1, 3, 1);
 }
 
-xlsFile& CXlsSEC1::iData(std::vector<Cartridge>& vCar, std::vector<Cartridge>::size_type i)
+CXlsSEC1& CXlsSEC1::iData(CDataChain& vCar)
 {
-/*
+
 //Step 4.開始設定內容
 //-----------------------------------------------------------------------------------------------
 //           表格字填完！下面是填入資料！請準備陣列！
 //-----------------------------------------------------------------------------------------------
+    m_vCar = vCar;
+	SelectSheet(1);
+	int i, j;
+
+	CString str;
+	str.Format("%3.2f, %1.4f, %1.4f", m_vCar.At(White, Pn1, 0).GetLv(), m_vCar.At(White, Pn1, 0).GetSx(), m_vCar.At(White, Pn1, 0).GetSy());
+	AfxMessageBox(str);
+
+	str.Format("%3.2f, %1.4f, %1.4f", vCar.At(White, Pn1, 0).GetLv(), vCar.At(White, Pn1, 0).GetSx(), vCar.At(White, Pn1, 0).GetSy());
+	AfxMessageBox(str);
+
+    SelectCell("D10").SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
+    SelectCell("E10").SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+	SelectCell("F10").SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
 	
-    SelectCell("D10").SetCell("%3.2f", MsrCenter[0][0]); //[color][L]
-    SelectCell("E10").SetCell("%1.4f", MsrCenter[0][1]); //[color][x]
-	SelectCell("F10").SetCell("%1.4f", MsrCenter[0][2]); //[color][y]
+    SelectCell("D11").SetCell("%3.2f", m_vCar.At(Red  , Pn1, 0).GetLv());
+    SelectCell("E11").SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSx());
+	SelectCell("F11").SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSy());
 	
-    SelectCell("D11").SetCell("%3.2f", MsrCenter[1][0]); //[color][L]
-    SelectCell("E11").SetCell("%1.4f", MsrCenter[1][1]); //[color][x]
-	SelectCell("F11").SetCell("%1.4f", MsrCenter[1][2]); //[color][y]
+    SelectCell("D12").SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
+    SelectCell("E12").SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
+	SelectCell("F12").SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
 	
-    SelectCell("D12").SetCell("%3.2f", MsrCenter[2][0]); //[color][L]
-    SelectCell("E12").SetCell("%1.4f", MsrCenter[2][1]); //[color][x]
-	SelectCell("F12").SetCell("%1.4f", MsrCenter[2][2]); //[color][y]
-	
-	SelectCell("D13").SetCell("%3.2f", MsrCenter[3][0]); //[color][L]
-    SelectCell("E13").SetCell("%1.4f", MsrCenter[3][1]); //[color][x]
-	SelectCell("F13").SetCell("%1.4f", MsrCenter[3][2]); //[color][y]
+	SelectCell("D13").SetCell("%3.2f", m_vCar.At(Blue , Pn1, 0).GetLv());
+    SelectCell("E13").SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSx());
+	SelectCell("F13").SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSy());
 	
 	
 	//w,49點亮度值
 	for(i=0;i<7;i++){//橫的
-		for(j=0;j<7;j++){//直的
-			SelectCell('C'+i, 14+j).SetCell("%3.2f",MsrFortyNineOValue[0][i+j*7][0]);
+	for(j=0;j<7;j++){//直的
+		SelectCell('C'+i, 14+j).SetCell("%3.2f",m_vCar.At(White, Pn49, i+j*7).GetLv());
     }}
 	//白色 9點全部值
-	for(i=0;i<5;i++){//value
-		for(j=0;j<9;j++){//n
-			//Color 012'3'4 = 'W'RGB,other		// MsrNineOValue[Color][n][value]
-			if(i == 0)	    SelectCell('C'+i, 30+j).SetCell("%3.2f", MsrNineOValue[0][j][0]); //[W][1-9][L]
-			else if(i == 1)     SelectCell('C'+i, 30+j).SetCell("%1.4f", MsrNineOValue[0][j][1]); //[W][1-9][T]
-			else if(i == 2)     SelectCell('C'+i, 30+j).SetCell("%1.4f", MsrNineOValue[0][j][2]); //[W][1-9][T]
-			else if(i == 3)     SelectCell('C'+i, 30+j).SetCell("%4.0f", MsrNineOValue[0][j][3]); //[W][1-9][T]
-			else if(i == 4)     SelectCell('C'+i, 30+j).SetCell("%1.4f", MsrNineOValue[0][j][4]); //[W][1-9][T]
+	for(i=0;i<5;i++){
+	for(j=0;j<9;j++){
+			 if(i == 0)	    SelectCell('C'+i, 30+j).SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+		else if(i == 1)     SelectCell('C'+i, 30+j).SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
+		else if(i == 2)     SelectCell('C'+i, 30+j).SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
+		else if(i == 3)     SelectCell('C'+i, 30+j).SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
+		else if(i == 4)     SelectCell('C'+i, 30+j).SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
 	}}
 	//黑色 9點全部值（四角漏光）
-	for(i=0;i<3;i++){//value
-		for(j=0;j<3;j++){//n
-			SelectCell('C'+j,26+i).SetCell("%3.2f",MsrNineOValue[4][i*3+j][0]);
+	for(i=0;i<3;i++){
+	for(j=0;j<3;j++){
+			SelectCell('C'+j,26+i).SetCell("%3.2f",m_vCar.At(Dark , Pn9, i*3+j).GetLv());
 	}}
 	
 	//5nits 
-	for(i=0;i<3;i++){//value
-		for(j=0;j<3;j++){//n
-			SelectCell('C'+j,23+i).SetCell("%3.2f", FiveNits[i*3+j][0]);
+	for(i=0;i<3;i++){
+	for(j=0;j<3;j++){
+			SelectCell('C'+j,23+i).SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
     }}
-	SetVisible(TRUE);
-*/	
+
+//	SetVisible(TRUE);
+	
 	return *this;
 }
 
 std::vector<Cartridge> CXlsSEC1::oData()
 {
 	std::vector<Cartridge> a;
-	Cartridge x;
-	a.push_back(x);
+	/*...*/
 	return a;
 }

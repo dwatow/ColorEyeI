@@ -76,35 +76,35 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 
     m_isMsr.clear();
 
-	if (0)
-	{
-    //定義導覽表格是否有量測值
-		for(UINT i = 0; i < 10; ++i)
-		{
-#ifdef _DEBUG
-			DebugView(pDC, pDoc, i);
-#endif
-			TbBkClr_WRGBD[i] = ((pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i)) ||
-								(pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i)) ||
-								(pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i)) ||
-								(pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i)) ||
-								(pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i)))? TRUE : FALSE ;
-        
-			TbBkClr_D25[i]  = (pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i))? TRUE : FALSE ;
-			TbBkClr_W49[i]  = (pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i))? TRUE : FALSE ;
-			TbBkClr_W9[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn9 , (isMsrValue)i))? TRUE : FALSE ;
-			TbBkClr_W5[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn5 , (isMsrValue)i))? TRUE : FALSE ;
-			TbBkClr_Nits[i] = (pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i))? TRUE : FALSE ;
-		}
-    
-
-		m_isMsr.push_back(TbBkClr_WRGBD);
-		m_isMsr.push_back(TbBkClr_Nits);
-		m_isMsr.push_back(TbBkClr_W49);
-		m_isMsr.push_back(TbBkClr_W9);
-		m_isMsr.push_back(TbBkClr_D25);
-		m_isMsr.push_back(TbBkClr_W5);
-	}
+// 	if (0)
+// 	{
+//     //定義導覽表格是否有量測值
+// 		for(UINT i = 0; i < 10; ++i)
+// 		{
+// #ifdef _DEBUG
+// 			DebugView(pDC, pDoc, i);
+// #endif
+// // 			TbBkClr_WRGBD[i] = ((pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i)) ||
+// // 								(pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i)) ||
+// // 								(pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i)) ||
+// // 								(pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i)) ||
+// // 								(pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i)))? TRUE : FALSE ;
+// //         
+// // 			TbBkClr_D25[i]  = (pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i))? TRUE : FALSE ;
+// // 			TbBkClr_W49[i]  = (pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i))? TRUE : FALSE ;
+// // 			TbBkClr_W9[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn9 , (isMsrValue)i))? TRUE : FALSE ;
+// // 			TbBkClr_W5[i]   = (pDoc->GetOmdFile().IsMsr(White, Pn5 , (isMsrValue)i))? TRUE : FALSE ;
+// // 			TbBkClr_Nits[i] = (pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i))? TRUE : FALSE ;
+// 		}
+//     
+// 
+// 		m_isMsr.push_back(TbBkClr_WRGBD);
+// 		m_isMsr.push_back(TbBkClr_Nits);
+// 		m_isMsr.push_back(TbBkClr_W49);
+// 		m_isMsr.push_back(TbBkClr_W9);
+// 		m_isMsr.push_back(TbBkClr_D25);
+// 		m_isMsr.push_back(TbBkClr_W5);
+// 	}
     
 //看看5Nits的T是不是如預期的出現灰背景
 //     strTemp.Format("RGB = (%d, %d, %d)", GetRValue(TbBkClr_Nits[5]), GetGValue(TbBkClr_Nits[5]), GetBValue(TbBkClr_Nits[5]));
@@ -120,19 +120,21 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     CTable tbInfo(pDC, ptTemp);
     ptTemp = tbInfo.SetCellNum(2, 4).SetTableBoard(0).SetGridBoard(0).SetFont(afont).SetCellSpace(1)
      .Width(0, TextHight*10).Width(1, TextHight*12).Hight(0, 16).Hight(1, 16).Hight(2, 16)//.Hight(3, 16)
-             .tr().td().b().text("Panel ID").b_().td_()          .td().text(pDoc->GetOmdFile().GetPnlID()).td_().tr_()
-             .tr().td().b().text("Measurement device").b_().td_().td().text(pDoc->GetOmdFile().GetMsrDvc()).td_().tr_()
-             .tr().td().b().text("Probe").b_().td_()             .td().text(pDoc->GetOmdFile().GetPrb()).td_().tr_()
-             .tr().td().b().text("Chanel").b_().td_()            .td().text(pDoc->GetOmdFile().GetCHID()).td_().tr_()
+             .tr().td().b().text("Panel ID").b_().td_()          .td().text(pDoc->GetPnlID()).td_().tr_()
+             .tr().td().b().text("Measurement device").b_().td_().td().text(pDoc->GetMsrDvc()).td_().tr_()
+             .tr().td().b().text("Probe").b_().td_()             .td().text(pDoc->GetPrb()).td_().tr_()
+             .tr().td().b().text("Chanel").b_().td_()            .td().text(pDoc->GetCHID()).td_().tr_()
         .table_();
 
-    
 
+    
+	//CTable tableTemp(pDC, ptTemp);
+	//ptTemp = tableTemp.
 
     //enum MV_TABLE    {WRGBD = 0, W49, W9, D25, W5};
     //enum isMsrValue    {Lv = 0, Sx, Sy, du, dv, T, duv, X, Y, Z};
     //11×7的hittest表格
-    CTable tbOmdMap(pDC, ptTemp);
+//    CTable tbOmdMap(pDC, ptTemp);
     //ptTemp = ;
 // 	if (!m_isMsr.empty())
 // 		ptTemp = tbOmdMap.SetCellNum(11, 7).SetGridBoard(1).SetTableBoard(1, RGB(255, 255, 255)).SetCellSpace(7)
@@ -175,14 +177,44 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     ptTemp.x = 365;
     ptTemp.y = ptOrig.y;
     
+/*
+	std::vector<CString> vStr;
+    CString str;
+	
+    str.Empty();
+    vStr.clear();
+    str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ  %d\n", pDoc->GetCoreDataChain().Size());
+    vStr.push_back(str);
+    for (std::vector<Cartridge>::iterator iter = pDoc->GetCoreDataChain().Begin(); iter != pDoc->GetCoreDataChain().End(); ++iter)
+    {                  
+        str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
+            iter, iter->GetOrigSeqc(), iter->GetArea(), 
+			iter->GetStrColorType(), //背景色碼
+			iter->GetMsrFlowNo(), //第幾點
+			iter->GetStrPointNum(),//量測點數
+            iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
+        vStr.push_back(str);
+    }
+	
+    CTable tbDebug(pDC, ptTemp);
+    tbDebug.SetCellNum(1, pDoc->GetCoreDataChain().Size()).SetTableBoard(0).SetGridBoard(0).SetFont(afont).SetCellSpace(1)
+		.Width(0, 2000);
+	
+    for (std::vector<CString>::iterator stritor = vStr.begin(); stritor != vStr.end(); ++stritor)
+		tbDebug.tr().td().text(*stritor).td_().tr_();
+	
+	ptTemp = tbDebug.table_();
+*/
+	DrawAsOmdFile(pDC, pDoc->GetOmdData(), ptTemp);
+
     //表格寬956
 //    int CellWidth = 64;
     
-    for (std::vector<ViewTable>::iterator it = m_vViewTable.begin(); it != m_vViewTable.end(); ++it)
-    {
-        ptTemp = DrawTable(it->GetMsrItem(), it->GetMsrValue(),pDC, pDoc, ptTemp);
-        ptTemp.y += 16;
-    }
+//    for (std::vector<ViewTable>::iterator it = m_vViewTable.begin(); it != m_vViewTable.end(); ++it)
+//    {
+//**        ptTemp = DrawTable(it->GetMsrItem(), it->GetMsrValue(),pDC, pDoc, ptTemp);
+//        ptTemp.y += 16;
+//    }
 
 //     for (std::vector<CPoint>::iterator ptIt = m_NvgtHit.begin(); ptIt != m_NvgtHit.end(); ++ptIt)
 //         pDC->SetPixel(*ptIt, RGB(61, 234, 36));
@@ -203,6 +235,36 @@ void CColorEyeIView::OnDraw(CDC* pDC)
   
 }
 
+void CColorEyeIView::DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt)
+{
+    for (TxtStrData::iterator itor = Data.begin(); itor != Data.end(); ++itor)
+    {
+        unsigned int i = itor - Data.begin();
+        pDC->TextOut(pt.x, pt.y, *itor);
+		pt.y = pt.y + 16;
+    }
+}
+
+void CColorEyeIView::DrawAsOmdFile(CDC* pDC, OmdValueData Data, CPoint& pt)
+{
+    std::vector<CString> str = Data.InsideData();
+    
+    pDC->TextOut(pt.x, pt.y, "測試第一行");
+	
+    if (!Data.IsEmpty())
+    {
+		for (std::vector<CString>::iterator itor = str.begin(); itor != str.end(); ++itor)
+		{
+			pDC->TextOut(pt.x, pt.y, *itor);
+			pt.y = pt.y+16;
+		}
+    }
+	// 	CString str1;
+	// 	str1.Format ("final %d, %d", pt.x, pt.y);
+	// 	MessageBox(str1);
+}
+
+/*
 CPoint CColorEyeIView::DrawTable(isMsrItem Item, isMsrValue Value, CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     //switch-case的資料來自
@@ -215,7 +277,7 @@ CPoint CColorEyeIView::DrawTable(isMsrItem Item, isMsrValue Value, CDC* pDC, CCo
             switch(Value)
             {
                 default:
-                case Lv:     return DrawWRGBDTable_Lv(pDC, pDoc, ptTemp);
+//                case Lv:     return DrawWRGBDTable_Lv(pDC, pDoc, ptTemp);
 //                 case Sx:     return DrawWRGBDTable_Sx(pDC, pDoc, ptTemp);
 //                 case Sy:     return DrawWRGBDTable_Sy(pDC, pDoc, ptTemp);
 //                 case du:     return DrawWRGBDTable_T(pDC, pDoc, ptTemp);
@@ -304,7 +366,7 @@ CPoint CColorEyeIView::DrawTable(isMsrItem Item, isMsrValue Value, CDC* pDC, CCo
         default:    return ptTemp;
     }
 }
-
+*/
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -314,6 +376,7 @@ CPoint CColorEyeIView::DrawTable(isMsrItem Item, isMsrValue Value, CDC* pDC, CCo
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+/*
 CPoint CColorEyeIView::DrawTableTitle(CDC* pDC, CPoint ptTemp, const CString strTitle)
 {
     CTable TitleTable(pDC, ptTemp);
@@ -331,7 +394,7 @@ CPoint CColorEyeIView::DrawTableTitle(CDC* pDC, CPoint ptTemp, const CString str
 CPoint CColorEyeIView::DrawD25Table_Lv(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
 
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -353,7 +416,7 @@ CPoint CColorEyeIView::DrawD25Table_Lv(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
 CPoint CColorEyeIView::DrawD25Table_Sx(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -375,7 +438,7 @@ CPoint CColorEyeIView::DrawD25Table_Sx(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
 CPoint CColorEyeIView::DrawD25Table_Sy(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -397,7 +460,7 @@ CPoint CColorEyeIView::DrawD25Table_Sy(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
 CPoint CColorEyeIView::DrawD25Table_Du(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -419,7 +482,7 @@ CPoint CColorEyeIView::DrawD25Table_Du(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
 CPoint CColorEyeIView::DrawD25Table_Dv(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -441,7 +504,7 @@ CPoint CColorEyeIView::DrawD25Table_Dv(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
 CPoint CColorEyeIView::DrawD25Table_T(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -463,7 +526,7 @@ CPoint CColorEyeIView::DrawD25Table_T(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTe
 CPoint CColorEyeIView::DrawD25Table_Duv(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptTemp)
 {
     CTable tbD25  (pDC, ptTemp);
-    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
+//**    std::vector<Cartridge> vD25 = pDoc->GetOmdFile().AddMsrData(Dark , Pn25);
     
     int CellWidth = 64;
     ptTemp = tbD25.SetCellNum(7, 9).SetGridBoard(0).SetTableBoard(1).SetCellSpace(10)
@@ -1494,6 +1557,7 @@ CPoint CColorEyeIView::DrawNitsTable_Z(CDC* pDC, CColorEyeIDoc* pDoc, CPoint ptT
         
     return ptTemp;
 }
+*/
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -1595,45 +1659,45 @@ void CColorEyeIView::ViewTableBkColor(isMsrItem Item)
 
 void CColorEyeIView::DebugView(CDC* pDC, CColorEyeIDoc* pDoc, UINT i)
 {
-    UINT hText = 16;
-    CString strTemp2;
-    switch(i)
-    {
-    case 0: strTemp2.Format("Lv"); break;
-    case 1: strTemp2.Format("x"); break;
-    case 2: strTemp2.Format("y"); break;
-    case 3: strTemp2.Format("du"); break;
-    case 4: strTemp2.Format("dv"); break;
-    case 5: strTemp2.Format("T"); break;
-    case 6: strTemp2.Format("duv"); break;
-    case 7: strTemp2.Format("X"); break;
-    case 8: strTemp2.Format("Y"); break;
-    case 9: strTemp2.Format("Z"); break;
-    }
-    
-    strTemp.Format("從Doc抓%3s值出來，是不是有量測\nWRGBD = %d, %d, %d, %d, %d\nD25 = %d\nW49 = %d\nW9 = %d\nW5 = %d\nNits = %d\n   ",\
-        strTemp2, \
-        pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i), \
-        
-        pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(White, Pn9, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(White, Pn5, (isMsrValue)i), \
-        pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i)
-        );
-    
-    CRect *rect = new CRect;
-    GetClientRect(rect);
-    
-    CPoint ptRightTop(rect->right, rect->top);
-    
-    pDC->SetTextAlign(TA_RIGHT);
-    pDC->TextOut(ptRightTop.x, ptRightTop.y + hText*i, strTemp.GetBuffer(0), strTemp.GetLength());
-    delete rect;
+//     UINT hText = 16;
+//     CString strTemp2;
+//     switch(i)
+//     {
+//     case 0: strTemp2.Format("Lv"); break;
+//     case 1: strTemp2.Format("x"); break;
+//     case 2: strTemp2.Format("y"); break;
+//     case 3: strTemp2.Format("du"); break;
+//     case 4: strTemp2.Format("dv"); break;
+//     case 5: strTemp2.Format("T"); break;
+//     case 6: strTemp2.Format("duv"); break;
+//     case 7: strTemp2.Format("X"); break;
+//     case 8: strTemp2.Format("Y"); break;
+//     case 9: strTemp2.Format("Z"); break;
+//     }
+//     
+//     strTemp.Format("從Doc抓%3s值出來，是不是有量測\nWRGBD = %d, %d, %d, %d, %d\nD25 = %d\nW49 = %d\nW9 = %d\nW5 = %d\nNits = %d\n   ",\
+//         strTemp2, \
+//         pDoc->GetOmdFile().IsMsr(White, Pn1, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(Red  , Pn1, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(Green, Pn1, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(Blue , Pn1, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(Dark , Pn1, (isMsrValue)i), \
+//         
+//         pDoc->GetOmdFile().IsMsr(Dark , Pn25, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(White, Pn49, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(White, Pn9, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(White, Pn5, (isMsrValue)i), \
+//         pDoc->GetOmdFile().IsMsr(Nits , Pn9 , (isMsrValue)i)
+//         );
+//     
+//     CRect *rect = new CRect;
+//     GetClientRect(rect);
+//     
+//     CPoint ptRightTop(rect->right, rect->top);
+//     
+//     pDC->SetTextAlign(TA_RIGHT);
+//     pDC->TextOut(ptRightTop.x, ptRightTop.y + hText*i, strTemp.GetBuffer(0), strTemp.GetLength());
+//     delete rect;
 }
 
 #endif

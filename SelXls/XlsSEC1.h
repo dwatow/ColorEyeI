@@ -15,7 +15,7 @@ class CXlsSEC1 : public CXlsFile2
 {
 public:
 	void InitForm(); //畫出表格的title
-	xlsFile& iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type = 0);
+	CXlsSEC1& iData(CDataChain&);
 	std::vector<Cartridge> oData();
 
 };

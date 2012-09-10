@@ -44,9 +44,9 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
     ASSERT_VALID(pDoc);
     
 	//之後的部份要在
-    pDoc->GetOmdFile().SetCHID(pMainFrm->m_pCa210->GetChNO());
-    pDoc->GetOmdFile().SetPrb(pMainFrm->m_pCa210->GetProb());
-    pDoc->GetOmdFile().SetMsrDvc(pMainFrm->m_pCa210->GetDeviceType());
+    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
+    pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
+    pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 }
 
 
@@ -63,10 +63,8 @@ BEGIN_MESSAGE_MAP(CPatternDlg, CDialog)
     //{{AFX_MSG_MAP(CPatternDlg)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
-    ON_WM_LBUTTONDBLCLK()
-    ON_WM_LBUTTONDOWN()
     ON_WM_TIMER()
-    //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
@@ -240,23 +238,23 @@ void CPatternDlg::OnPaint()
     // Do not call CDialog::OnPaint() for painting messages
 }
 
-void CPatternDlg::DrawMsrLabel(CDC &dc)
+void CPatternDlg::DrawMsrLabel(CDC &aDC)
 {
     CRect* rect1 = new CRect
         (m_Goal.GetCenter().x - (m_Goal.GetRadius()+10)     , m_Goal.GetCenter().y - (m_Goal.GetRadius()+20), \
          m_Goal.GetCenter().x - (m_Goal.GetRadius()+10) + 88, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) + 158); //設定文字區塊
     
-    dc.SetTextColor(InvrtColor(m_BkColor));
+    aDC.SetTextColor(InvrtColor(m_BkColor));
     CString temp;
     temp.Format(" Lv =%3.2f\nx =%1.4f \ny =%1.4f\nT =%3d \nΔuv=%1.4f\nu' =%1.4f\nv' =%1.4f\nX = %3.2f\nY = %3.2f\nZ = %3.2f", \
         m_itor->GetLv(), m_itor->GetSx(), m_itor->GetSy(), m_itor->GetT(), m_itor->GetDuv(), m_itor->GetDu(), m_itor->GetDv(), m_itor->GetX(), m_itor->GetY(), m_itor->GetZ());
 
-    dc.DrawText(temp, rect1, DT_LEFT | DT_VCENTER);
+    aDC.DrawText(temp, rect1, DT_LEFT | DT_VCENTER);
 
     delete rect1;
 }
 
-void CPatternDlg::DrawMsringLabel(CDC &dc)
+void CPatternDlg::DrawMsringLabel(CDC &aDC)
 {    
     CRect* rect2;
     
@@ -274,8 +272,8 @@ void CPatternDlg::DrawMsringLabel(CDC &dc)
              m_Goal.GetCenter().x - (m_Goal.GetRadius()+125) + 88, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) + 158); //設定文字區塊
     }
 
-    dc.SetTextColor(ShiftColor(m_BkColor));
-    dc.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
+    aDC.SetTextColor(ShiftColor(m_BkColor));
+    aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
 
     delete rect2;
 }
@@ -430,9 +428,9 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-    m_itor		= pDoc->GetVector().Begin();
+    m_itor		= pDoc->GetMsrDataChain().Begin();
     m_BeginItor = m_itor;
-    m_EndItor   = pDoc->GetVector().End();
+    m_EndItor   = pDoc->GetMsrDataChain().End();
 
     //++BeginItor;  
     if(!m_GunMchn.isReady())
@@ -628,20 +626,6 @@ UINT CPatternDlg::VbrNextGoalThread(LPVOID LParam)
         Sleep(15);
     }
     return 0;
-}
-
-void CPatternDlg::OnLButtonDblClk(UINT nFlags, CPoint point) 
-{
-    // TODO: Add your message handler code here and/or call default
-
-    CDialog::OnLButtonDblClk(nFlags, point);
-}
-
-void CPatternDlg::OnLButtonDown(UINT nFlags, CPoint point) 
-{
-    // TODO: Add your message handler code here and/or call default
-
-    CDialog::OnLButtonDown(nFlags, point);
 }
 
 void CPatternDlg::OnTimer(UINT nIDEvent) 
