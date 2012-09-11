@@ -122,6 +122,7 @@ void COmdFile1::OmdToTxt(OmdValueData& dOmd, TxtStrData& dTxt)
 
 void COmdFile1::TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd)
 {
+	dOmd.StdInit();
 //檔頭
     if (isOldForm())
     {
@@ -586,9 +587,8 @@ void COmdFile1::TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd)
     dOmd.At(White, Pn49, 46).SetDuv(GetCell("AR", 41));
     dOmd.At(White, Pn49, 47).SetDuv(GetCell("AS", 41));
     dOmd.At(White, Pn49, 48).SetDuv(GetCell("AT", 41));
-// 
-// 	dOmd.freeZeroCell();
-
+ 
+	dOmd.freeEmptyCell();
 }
 	
 //////////////////////////////////////////////////////////////////////
@@ -617,7 +617,7 @@ BOOL COmdFile1::LoadData(OmdValueData& omdData)
 	CTxtFile f_Txt;
 	f_Txt.Open(m_filepath);
 
-	f_Txt.LoadData(D_Txt);		InitData(omdData);
+	f_Txt.LoadData(D_Txt);
 	TxtToOmd(D_Txt, omdData);  //取得txt，轉成omd
 	
 	return TRUE;

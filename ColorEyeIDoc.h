@@ -49,8 +49,8 @@ public:
 
 //MsrDataChain
 private:
-public:
 	CDataChain m_msrData;
+public:
 	CDataChain& GetMsrDataChain(){ return m_msrData; };//新的一條鍊 vChain2
     void RestructureVector();
 

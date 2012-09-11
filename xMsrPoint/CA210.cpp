@@ -143,7 +143,7 @@ BOOL Ca210::isTrue() const
     return m_isTrue;
 }
 
-BOOL Ca210::CalZero()
+BOOL Ca210::CalZero(int flag)
 {
     /*
     連線 實機
@@ -159,8 +159,6 @@ BOOL Ca210::CalZero()
 #ifdef _CA210DEBUG
         DBugModeBox("TRUE of CalZero()");
 #endif
-
-        int flag = 0;
          do 
          {
             try
@@ -175,7 +173,8 @@ BOOL Ca210::CalZero()
                     MsgFrmt(e,"將套筒還沒轉至0-Cal就執行Zero Cal", "1. 將量測筒轉至0-Cal檔。\n2. 按「確定」");
                 else
                     MsgFrmt("1. 將量測筒轉至0-Cal檔。\n2. 按「確定」");
-                flag++;
+				SetOnline(TRUE);
+				flag++;
             }
          } while (flag);
         return TRUE;
@@ -246,8 +245,6 @@ UINT Ca210::Measure()
 #endif
         int flag = 0;
     
-        if (m_isZeroCal)
-        {
             do 
             {
                 try
@@ -261,20 +258,23 @@ UINT Ca210::Measure()
                 }
                 catch (CException* e)
                 {
+					SetOnline(TRUE);
+					if (!m_isZeroCal)
+					{
+						Mode = 2;
+						break;
+					}
+					else
+					{
                     TCHAR buf[255];
                     e->GetErrorMessage(buf, 255);
 
 //                     MsgFrmt(e, "量測出問題", "剛剛是不是不正常使用量筒（像是搖它或對著強光源...之類的）\n否則，不要移動量筒按確定重量剛剛的點");
 //                     flag++;
                     continue;
+					}
                 }
             } while (flag);
-        }
-        else
-        {
-            //MsgFrmt("是否Zero Cal!!!");
-            Mode = 2;
-        }
     }
     return Mode;
 }
@@ -380,6 +380,7 @@ CString Ca210::GetDeviceType()
 
 Bullet Ca210::GetMsrData()
 {
+
     if (m_Online)
     {
         if (m_isTrue)

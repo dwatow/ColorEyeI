@@ -69,9 +69,9 @@ BOOL CColorEyeIDoc::OnNewDocument()
     // TODO: add reinitialization code here
     // (SDI documents will reuse this document)
     //第一次執行時會執行這個
-	SetTitle("新的Omd檔");
+    SetTitle("新的Omd檔");
     m_OmdData.Empty();          //清空記憶體空間m_OmdData
-	SetModifiedFlag(TRUE);
+    SetModifiedFlag(TRUE);
 
     return TRUE;
 }
@@ -114,11 +114,11 @@ void CColorEyeIDoc::OnFileNew()
     // TODO: Add your command handler code here
     //開新檔案
     SetPathName(" ");        
-	SetTitle("新的Omd檔");
+    SetTitle("新的Omd檔");
     m_OmdData.Empty();          //清空記憶體空間m_OmdData
-	SetModifiedFlag(TRUE);
+    SetModifiedFlag(TRUE);
 
-	UpdateAllViews(NULL);  //更新畫面
+    UpdateAllViews(NULL);  //更新畫面
 }
 
 BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName) 
@@ -126,26 +126,26 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
     if (!CDocument::OnOpenDocument(lpszPathName))
         return FALSE;    
     // TODO: Add your specialized creation code here
-	//點兩下會執行這個
-	OnNewDocument();
-	CString str;
-	str.Format("%s", lpszPathName);
-	
-	COmdFile1 f_Omd;
-	if(!f_Omd.Open(lpszPathName))
-		AfxMessageBox("路徑有問題");
-	else 
-	{
-		SetPathName(lpszPathName);
-		SetTitle(lpszPathName);
-	}			
-	
-	if (!f_Omd.LoadData(m_OmdData))
-		AfxMessageBox("檔案開啟錯誤!!");
-	else
-		UpdateAllViews(NULL);
+    //點兩下會執行這個
+    OnNewDocument();
+    CString str;
+    str.Format("%s", lpszPathName);
+    
+    COmdFile1 f_Omd;
+    if(!f_Omd.Open(lpszPathName))
+        AfxMessageBox("路徑有問題");
+    else 
+    {
+        SetPathName(lpszPathName);
+        SetTitle(lpszPathName);
+    }            
+    
+    if (!f_Omd.LoadData(m_OmdData))
+        AfxMessageBox("檔案開啟錯誤!!");
+    else
+        UpdateAllViews(NULL);
 
-	SetModifiedFlag(FALSE);
+    SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);
 
     return TRUE;
@@ -154,147 +154,146 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
 void CColorEyeIDoc::OnFileOpen() 
 {
     // TODO: Add your command handler code here
-	//	OpenTxtFile("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-	OpenOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    //    OpenTxtFile("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    OpenOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 }
 
 void CColorEyeIDoc::OnFileSaveAs() 
 {
     // TODO: Add your command handler code here
-	//	SaveTxtFile("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-	SaveOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    //    SaveTxtFile("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    SaveOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 }
 
 void CColorEyeIDoc::OpenTxtFile(LPCTSTR FileFilter)
 {
-	CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
-	
-	CTxtFile f_txt;
-	int nID = aFileDialog.DoModal();
+    CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
+    
+    CTxtFile f_txt;
+    int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-		if(f_txt.Open(aFileDialog.GetPathName()))
-			AfxMessageBox("路徑有問題!!");
-		else
-		{
-			SetPathName(aFileDialog.GetPathName());
-			SetTitle(aFileDialog.GetFileName());
-		}
-		
-		if (!f_txt.LoadData(m_TextData))
-			AfxMessageBox("檔案開啟錯誤!!");
-		else
-			UpdateAllViews(NULL);
+        if(f_txt.Open(aFileDialog.GetPathName()))
+            AfxMessageBox("路徑有問題!!");
+        else
+        {
+            SetPathName(aFileDialog.GetPathName());
+            SetTitle(aFileDialog.GetFileName());
+        }
+        
+        if (!f_txt.LoadData(m_TextData))
+            AfxMessageBox("檔案開啟錯誤!!");
+        else
+            UpdateAllViews(NULL);
     }
 }
 
 void CColorEyeIDoc::SaveTxtFile(LPCTSTR FileFilter)
 {
-	CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
-	
-	CTxtFile f_txt;
-	int nID = aFileDialog.DoModal();
+    CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
+    
+    CTxtFile f_txt;
+    int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-		if (f_txt.Save(aFileDialog.GetPathName()))
-			AfxMessageBox("路徑有問題!!!");
-		else 
-		{
-			SetPathName(aFileDialog.GetPathName());
-			SetTitle(aFileDialog.GetFileName());
-		}
-		
-		if (!f_txt.SaveData(m_TextData))
-			AfxMessageBox("檔案存檔錯誤!!");
-		else
-			UpdateAllViews(NULL);
+        if (f_txt.Save(aFileDialog.GetPathName()))
+            AfxMessageBox("路徑有問題!!!");
+        else 
+        {
+            SetPathName(aFileDialog.GetPathName());
+            SetTitle(aFileDialog.GetFileName());
+        }
+        
+        if (!f_txt.SaveData(m_TextData))
+            AfxMessageBox("檔案存檔錯誤!!");
+        else
+            UpdateAllViews(NULL);
     }
 }
 
 void CColorEyeIDoc::OpenOmdFile(LPCTSTR FileFilter)
 {
-	CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
-	
-	int nID = aFileDialog.DoModal();
+    CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
+    
+    int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-		COmdFile1 f_Omd;
+        BeginWaitCursor();
 
-		if(f_Omd.Open(aFileDialog.GetPathName()))
-			AfxMessageBox("路徑有問題");
-		else 
-		{
-			SetPathName(aFileDialog.GetPathName());
-			SetTitle(aFileDialog.GetFileName());
-		}
+        COmdFile1 f_Omd;
 
-		if (!f_Omd.LoadData(m_OmdData))
-			AfxMessageBox("檔案開啟錯誤!!");
-		else
-		{
-			m_PnlID  = f_Omd.GetPnlID();
-			m_MsrDvc = f_Omd.GetMsrDvc();
-			m_Prb    = f_Omd.GetPrb();
-			m_CHID   = f_Omd.GetCHID();
+        if(f_Omd.Open(aFileDialog.GetPathName()))
+            AfxMessageBox("路徑有問題");
+        else 
+        {
+            SetPathName(aFileDialog.GetPathName());
+            SetTitle(aFileDialog.GetFileName());
+        }
 
-			UpdateAllViews(NULL);
-		}
-	}
+        if (!f_Omd.LoadData(m_OmdData))
+            AfxMessageBox("檔案開啟錯誤!!");
+        else
+        {
+            m_PnlID  = f_Omd.GetPnlID();
+            m_MsrDvc = f_Omd.GetMsrDvc();
+            m_Prb    = f_Omd.GetPrb();
+            m_CHID   = f_Omd.GetCHID();
+
+            UpdateAllViews(NULL);
+        }
+        EndWaitCursor();
+    }
 }
 
 void CColorEyeIDoc::SaveOmdFile(LPCTSTR FileFilter)
 {
-	CFileDialog aFileDialog (FALSE, "omd", "*.omd", OFN_SHAREAWARE, FileFilter);
-	
-	COmdFile1 f_Omd;
-	int nID = aFileDialog.DoModal();
+    CFileDialog aFileDialog (FALSE, "omd", "*.omd", OFN_SHAREAWARE, FileFilter);
+    
+    COmdFile1 f_Omd;
+    int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-		if(f_Omd.Save(aFileDialog.GetPathName()))
-			AfxMessageBox("路徑有問題!!");
-		else
-		{
-			SetPathName(aFileDialog.GetPathName());
-			SetTitle(aFileDialog.GetFileName());
-		}
-		
-		if (!f_Omd.SaveData(m_OmdData))
-			AfxMessageBox("檔案存檔錯誤!!");
-		else
-		{
-			f_Omd.SetPnlID (m_PnlID);
-			f_Omd.SetMsrDvc(m_MsrDvc);
-			f_Omd.SetPrb   (m_Prb);
-			f_Omd.SetCHID  (m_CHID);
-			
-			UpdateAllViews(NULL);
-		}    
-	}
+        if(f_Omd.Save(aFileDialog.GetPathName()))
+            AfxMessageBox("路徑有問題!!");
+        else
+        {
+            SetPathName(aFileDialog.GetPathName());
+            SetTitle(aFileDialog.GetFileName());
+        }
+        
+        if (!f_Omd.SaveData(m_OmdData))
+            AfxMessageBox("檔案存檔錯誤!!");
+        else
+        {
+            f_Omd.SetPnlID (m_PnlID);
+            f_Omd.SetMsrDvc(m_MsrDvc);
+            f_Omd.SetPrb   (m_Prb);
+            f_Omd.SetCHID  (m_CHID);
+            
+            UpdateAllViews(NULL);
+        }    
+    }
 }
 
 void CColorEyeIDoc::OnFileSave() 
 {
     // TODO: Add your command handler code here
     if (GetPathName().IsEmpty())            //若還沒有存過的檔
-	{
+    {
         OnFileSaveAs();          //就另存新檔
-	}
+    }
     else
-	{
-		SetModifiedFlag(FALSE);
-		SaveOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-	}
+    {
+        SetModifiedFlag(FALSE);
+        SaveOmdFile("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    }
 }
 
 void CColorEyeIDoc::RestructureVector()
 {
-	m_OmdData.RemoveEqualCell(m_msrData);
-
-// 	m_msrData.AddCell(m_msrData.End(), m_OmdData.Begin(), m_OmdData.End());
-// 	m_OmdData.Empty();
-	m_OmdData.AddCell(m_OmdData.End(), m_msrData.Begin(), m_msrData.End());
-//	m_OmdData.ReleaseBuffer();
-}    
+    m_OmdData.CutEqualCell(m_msrData);  //erase
+    m_OmdData.AddCell(m_OmdData.End(), m_msrData.Begin(), m_msrData.End());  //insert
+}
 
 void CColorEyeIDoc::DebugByTxt()
 {
@@ -309,9 +308,9 @@ void CColorEyeIDoc::DebugByTxt()
     {                  
         str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
             iter, iter->GetOrigSeqc(), iter->GetArea(), 
-			iter->GetStrColorType(), //背景色碼
-			iter->GetMsrFlowNo(), //第幾點
-			iter->GetStrPointNum(),//量測點數
+            iter->GetStrColorType(), //背景色碼
+            iter->GetMsrFlowNo(), //第幾點
+            iter->GetStrPointNum(),//量測點數
             iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
         vStr.push_back(str);
     }

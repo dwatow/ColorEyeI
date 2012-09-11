@@ -15,12 +15,12 @@ Class3=CAboutDlg
 Class4=CSelXlsDlgAutoProxy
 
 ResourceCount=4
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_OMDTOEXCEL
 Resource2=IDR_MAINFRAME
 Resource3=IDD_SELXLS_DIALOG
 Class5=CSelExcelDlg
 Class6=CFileDlg
-Resource4=IDD_OMDTOEXCEL
+Resource4=IDD_ABOUTBOX
 
 [CLS:CSelXlsApp]
 Type=0

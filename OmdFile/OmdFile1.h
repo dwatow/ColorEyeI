@@ -55,7 +55,6 @@ public:
 private:
 	BOOL isOldForm() { return (D_Txt.at(0).Find(':') != -1) ? TRUE : FALSE; };  //判斷是不是Labview輸出的檔
 	
-	void InitData(OmdValueData& Data){ Data.StdInit(); };  //為了debug
 	void TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd);
 	void OmdToTxt(OmdValueData& dOmd, TxtStrData& dTxt);
 	void ErrorMsg(CFileException& fx);

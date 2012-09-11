@@ -856,13 +856,8 @@ CString Bolt::GetMsrFlowName() const
     return temp;
 }
 
-void Bolt::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrCell)
+void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 {
-    //填入預設空包彈
-//     m_LcmSize = 24;                               //模組尺寸
-//     m_nScrmH  = GetSystemMetrics(SM_CXSCREEN);    //螢幕解析度
-//     m_nScrmV  = GetSystemMetrics(SM_CYSCREEN);
-
     m_BkColor    = MsrCell.GetBackColor();        //背景色標籤
     m_MsrFlowNum = MsrCell.GetMsrFlowNum();        //點數標籤
 
@@ -899,7 +894,15 @@ void Bolt::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrCell)
         }
 
         MsrCell.SetArea(areaCode);
-//        MsrFlow.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
+        MsrCell.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
+
+// 		if (m_MsrFlowNo == 0)
+// 			MsrCell.SetOrigSeqc(0);
+// 		else if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
+// 			MsrCell.SetOrigSeqc(1);
+// 		else
+// 			vCar.rbegin()->GetOrigSeqc() + 1;
+
         vCar.push_back(MsrCell);
     }
     m_isReady = FALSE;

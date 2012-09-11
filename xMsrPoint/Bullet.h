@@ -4,7 +4,7 @@
 //Bullet ºu¿Y
 class Bullet
 {
-protected:
+private:
     float m_fLv;                                     float m_fX;
     float m_fSx;    long  m_lT;      float m_fDu;    float m_fY;
     float m_fSy;    float m_fDuv;    float m_fDv;    float m_fZ;
@@ -47,7 +47,9 @@ public:
     float GetY()   const; CString GetStrY()   const;  BOOL SetY(float);
     float GetZ()   const; CString GetStrZ()   const;  BOOL SetZ(float);
 
-    virtual void    operator() ( float, float, float, long, float, float, float, float, float, float);
+    virtual void    operator() (float, float, float, long, float, float, float, float, float, float);
+	virtual void    operator() (CString, CString, CString, CString, CString, CString, CString, CString, CString, CString );
+
     virtual void    operator() (Bullet&);
     virtual void    operator= (const Bullet&);
 

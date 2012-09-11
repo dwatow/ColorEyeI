@@ -52,12 +52,13 @@ public:
 // Overrides
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CColorEyeIView)
-    public:
+	public:
     virtual void OnDraw(CDC* pDC);  // overridden to draw this view
     virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-    protected:
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	protected:
     virtual void OnInitialUpdate(); // called first time after construct
-    //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 // Implementation
 public:
@@ -77,7 +78,6 @@ protected:
     afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
-private:
 private:
 	void DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt);
 	void DrawAsOmdFile(CDC* pDC, OmdValueData Data, CPoint& pt);

@@ -5,9 +5,11 @@
 #include <iterator>
 #include "Cartridge.h"
 
+typedef std::vector<Cartridge> xChain;
+
 class Bolt 
 {
-    std::vector<Cartridge>::iterator m_itEnd;
+    xChain::iterator m_itEnd;
     BOOL      m_isReady;
     UINT      m_nScrmH;
     UINT      m_nScrmV;
@@ -35,10 +37,10 @@ public:
     Bolt();
     ~Bolt();
 
-    BOOL Magazine(CString LcmSize, std::vector<Cartridge>::iterator& );  //¼u§X
-    void Grow(std::vector<Cartridge>& , Cartridge& );  //¶ñ¼u¾¹
+    BOOL Magazine(CString LcmSize, xChain::iterator& );  //¼u§X
+    void Grow(xChain& , Cartridge& );  //¶ñ¼u¾¹
 
-    UINT Trigger(std::vector<Cartridge>::iterator&);
+    UINT Trigger(xChain::iterator&);
 
     CString  GetMsrFlowName()   const;
     COLORREF GetBkColor()       const;

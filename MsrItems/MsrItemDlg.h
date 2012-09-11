@@ -124,7 +124,7 @@ protected:
     DECLARE_INTERFACE_MAP()
 public:
     void SetBolt(Bolt* Pusher);  //在CPatternDlg::InitDataDlgType()有用到
-	unsigned int ListBoxUpdate(CDataChain& );
+	unsigned int ListBoxUpdate(const CDataChain& );
 };
 
 //{{AFX_INSERT_LOCATION}}

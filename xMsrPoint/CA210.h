@@ -46,7 +46,7 @@ public:
     UINT Measure();
 
     BOOL isTrue() const;
-    BOOL CalZero();
+    BOOL CalZero(int f = 0);
     BOOL LinkMemory();
     BOOL SetOnline(BOOL);
     BOOL GetOnline() const;

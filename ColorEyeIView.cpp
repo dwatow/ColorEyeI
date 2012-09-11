@@ -1819,3 +1819,30 @@ isMsrValue CColorEyeIView::UIntToMrVle(UINT i)
 }
 
 
+
+BOOL CColorEyeIView::PreTranslateMessage(MSG* pMsg) 
+{
+	// TODO: Add your specialized code here and/or call the base class
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+	
+	if (pMsg->message == WM_KEYDOWN)
+    {
+        switch(pMsg->wParam)
+        {
+// 		case VK_SPACE:   break;
+// 		case VK_UP:      break;
+// 		case VK_DOWN:    break;
+// 		case VK_RIGHT:   break;
+// 		case VK_LEFT:    break;
+// 		case VK_RETURN:  break;
+// 		case VK_ESCAPE:  break;
+		case VK_F5:     pDoc->UpdateAllViews(NULL); break;
+        }
+        return TRUE;
+    }
+	return CScrollView::PreTranslateMessage(pMsg);
+}

@@ -27,12 +27,12 @@ bool CDataChain::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
 }
 
 
-void CDataChain::SortQuackMsr(ChainData& vCar) const
+void CDataChain::SortQuackMsr(xChain& vCar) const
 {
     std::sort(vCar.begin(), vCar.end(), AreaPriority);
 }
 
-void CDataChain::SortOrigMsr(ChainData& vCar) const
+void CDataChain::SortOrigMsr(xChain& vCar) const
 {
     std::sort(vCar.begin(), vCar.end(), OrigPriority);
 }
@@ -56,46 +56,18 @@ CDataChain::~CDataChain()
     m_CarChain1.clear();
 }
 
-ChainData::size_type CDataChain::StdInit()
+xChain::size_type CDataChain::StdInit()
 {
     m_CarChain1.clear();
     
-    Grow(White, Pn1);
-    Grow(Red  , Pn1);
-    Grow(Green, Pn1);
-    Grow(Blue , Pn1);
-    Grow(Dark , Pn1);
-    
-    Grow(White, Pn5);    
-    Grow(Red  , Pn5);    
-    Grow(Green, Pn5);    
-    Grow(Blue , Pn5);    
-    Grow(Dark , Pn5);    
-    
-    Grow(White, Pn9);    
-    Grow(Red  , Pn9);    
-    Grow(Green, Pn9);    
-    Grow(Blue , Pn9);    
-    Grow(Dark , Pn9);    
-    
-    Grow(White, Pn25);    
-    Grow(Red  , Pn25);    
-    Grow(Green, Pn25);    
-    Grow(Blue , Pn25);    
-    Grow(Dark , Pn25);    
-    
-    Grow(White, Pn49);    
-    Grow(Red  , Pn49);    
-    Grow(Green, Pn49);    
-    Grow(Blue , Pn49);    
-    Grow(Dark , Pn49);    
-    
-    Grow(Nits, Pn9);
-    
-    Grow(CrsTlk , Pn4);
-    Grow(CrsTlkW, Pn4);
-    Grow(CrsTlkD, Pn4);
-    
+    Grow(White, Pn1);    Grow(Red  , Pn1);    Grow(Green, Pn1);    Grow(Blue , Pn1);    Grow(Dark , Pn1);
+    Grow(White, Pn5);    Grow(Red  , Pn5);    Grow(Green, Pn5);    Grow(Blue , Pn5);    Grow(Dark , Pn5);    
+    Grow(White, Pn9);    Grow(Red  , Pn9);    Grow(Green, Pn9);    Grow(Blue , Pn9);    Grow(Dark , Pn9);    
+    Grow(White, Pn25);   Grow(Red  , Pn25);   Grow(Green, Pn25);   Grow(Blue , Pn25);   Grow(Dark , Pn25);
+    Grow(White, Pn49);   Grow(Red  , Pn49);   Grow(Green, Pn49);   Grow(Blue , Pn49);   Grow(Dark , Pn49);
+	Grow(Nits, Pn9);
+    Grow(CrsTlk , Pn4);  Grow(CrsTlkW, Pn4);  Grow(CrsTlkD, Pn4);
+	
     //freeBuffer();
     return m_CarChain1.size();
 }
@@ -106,7 +78,7 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
     PetriDish = new Bolt;
     if (ct == CrsTlk)
     {
-        ChainData vCrossTalk;
+        xChain vCrossTalk;
 		
         Cartridge CrsTlk1(CrsTlk, pn);
         Cartridge CrsTlk2(CrsTlkW, pn);
@@ -136,7 +108,7 @@ Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little)
 	    return m_CarChain1.at(0);
 	}
 	else
-		for (ChainData::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+		for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
 			if (itor->GetBackColor()  == clr   && 
 				itor->GetMsrFlowNum() == Large && 
 				itor->GetMsrFlowNo()  == Little)
@@ -153,7 +125,7 @@ const Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) cons
 		return m_CarChain1.at(0);
 	}
 	else
-		for (ChainData::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+		for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
 			if (itor->GetBackColor()  == clr   && 
 				itor->GetMsrFlowNum() == Large && 
 				itor->GetMsrFlowNo()  == Little)
@@ -169,11 +141,11 @@ void CDataChain::Empty()
 	m_CarChain1.push_back(x);
 }
 
-void CDataChain::RemoveEqualCell(ChainData& compData)
+void CDataChain::CutEqualCell(xChain compData)
 {
     if (!compData.empty())
     {
-        ChainData::iterator compItor, removeBeginItor;
+        xChain::iterator compItor, removeBeginItor;
 		
         for (compItor = compData.begin(); compItor != compData.end(); ++compItor)
         {
@@ -183,78 +155,53 @@ void CDataChain::RemoveEqualCell(ChainData& compData)
     }
 }
 
-void CDataChain::RemoveEqualCell(CDataChain& compData)
+void CDataChain::CutEqualCell(CDataChain compData)
 {
     if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
     {
         //在這時m_CarChain1是舊的compData是新的
-        ChainData::iterator compItor, removeBeginItor;
-
-        //remove & cut
-        //在新的裡面，比對舊的，代表重覆，重覆量測去除掉
-        for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
-        {
-            removeBeginItor = std::remove(Begin(), End(), *compItor);
-            m_CarChain1.erase(removeBeginItor, End());
-        }
-
-        //將舊的掛在新的後面（讓空的放在第一個）
-        //整串變成舊的那一串
-        //放回Omd檔
-//        vCar.AddChain(vCar.End(), Begin(), itX);
-//        Empty();
-//          AddChain(End(), vCar.Begin(), vCar.End());
+        xChain::iterator compItor, removeBeginItor;
+        //remove & cut 在新的裡面，比對舊的，代表重覆，重覆量測去除掉
+         for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
+         {
+             removeBeginItor = std::remove(Begin(), End(), *compItor);
+             m_CarChain1.erase(removeBeginItor, End());
+         }
     }
-//    ReleaseBuffer();
 }
-/*
+
+void CDataChain::freeEmptyCell()
+{
+    //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
+    //void COmdFile1::iForm()
+    xChain x;
+    for (xChain::iterator itor = Begin(); itor != End(); ++itor)
+        if (itor->GetBullet().isEmpty())
+            x.push_back(*itor);           //要剪掉的
+// 		else
+// 			AfxMessageBox(itor->GetBullet().MsgBoxStr());
+
+    CutEqualCell(x);
+}
 
 //////////////////////////////////////////////////////////////////////////
 
-ChainData& CDataChain::operator=(const ChainData& vCar)
+xChain& CDataChain::operator=(const xChain& vCar)
 {
     m_CarChain1 = vCar;
     return m_CarChain1;
 }
 
-void CDataChain::freeBuffer()
-{
-    //適用於整理完要fee掉跟本參與量測的點。
-    //void CColorEyeIDoc::RestructureVector()
-    //CDataChain::StdInit()    
-    for (ChainData::iterator itor = Begin(); itor != End(); ++itor)
-        if (itor->GetArea() == 99 && itor->GetMsrFlowNo() == 99 && itor->GetMsrFlowNum() == NoPn)
-            m_CarChain1.erase(itor);
-}
-
-void CDataChain::freeZeroCell()
-{
-    //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
-    //void COmdFile1::iForm()
-    ChainData x;
-    for (ChainData::iterator itor = Begin(); itor != End(); ++itor)
-        if (itor->GetBullet().isAllValueZero())
-            x.push_back(*itor);
-
-    RemoveEqualCell(x);
-}
-
-void CDataChain::DelCell(const ChainData::size_type index)
-{
-    ChainData::iterator it = &m_CarChain1.at(index);
-    m_CarChain1.erase(it);
-}
-*/
 std::vector<CString> CDataChain::InsideData()
 {
     std::vector<CString> vStr;
     CString str1;
 
     vStr.clear();
-    str1.Format("記憶體位址    原始順序    區域碼    背景色碼    第幾點    量測點數    Lv    x    y    du    dv    T    Duv    X    Y    Z  Doc:%d\n", m_CarChain1.size());
+    str1.Format("記憶體位址    原始順序    區域碼    背景色碼    第幾點    量測點數    ||    Lv    x    y    du    dv    T    Duv    X    Y    Z  Doc:%d\n", m_CarChain1.size());
     vStr.push_back(str1);
 
-    for (ChainData::const_iterator iter = m_CarChain1.begin(); iter != m_CarChain1.end(); ++iter)
+    for (xChain::const_iterator iter = m_CarChain1.begin(); iter != m_CarChain1.end(); ++iter)
     {                  
         CString str;
 //         str.Format("%x    %d    %d    %s    %d    %s    %f    %f    %f    %f    %f    %d    %f    %f    %f    %f\n",\
@@ -277,7 +224,7 @@ std::vector<CString> CDataChain::InsideData()
 //             iter->GetZ()
 //             );
 
-        str.Format("%x    %d    %d    %s    %d    %s    %s    %s    %s    %s    %s    %s    %s    %s    %s    %s\n",\
+        str.Format("%x    %d    %d    %s    %d    %s   ||    %s    %s    %s    %s    %s    %s    %s    %s    %s    %s\n",\
             iter,                      //記憶體位址
             iter->GetOrigSeqc(),       //原始順序 99 
             iter->GetArea(),           //區域碼

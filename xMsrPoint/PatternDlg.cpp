@@ -25,15 +25,15 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
         // NOTE: the ClassWizard will add member initialization here
     //}}AFX_DATA_INIT
     
-	//ConnectCa210()
-	//pMainFrm->m_pCa210->LinkMemory();
-	//InitMsrData();
-	//之間的順序要固定，不要修改了！
+    //ConnectCa210()
+    //pMainFrm->m_pCa210->LinkMemory();
+    //InitMsrData();
+    //之間的順序要固定，不要修改了！
     
-	if (!ConnectCa210())
+    if (!ConnectCa210())
         MessageBox("CPatternDlg::CPatternDlg() ERROR!!\nOnButtonMsr的CA-210連線錯誤\n這個程式即將關閉!!");    
 
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     pMainFrm->m_pCa210->LinkMemory();
     InitDataDlgType();  
@@ -66,7 +66,7 @@ BEGIN_MESSAGE_MAP(CPatternDlg, CDialog)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
     ON_WM_TIMER()
-	//}}AFX_MSG_MAP
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
@@ -79,7 +79,6 @@ BOOL CPatternDlg::OnInitDialog()
     
     c_bDrawNextGold = FALSE;
     c_bDrawGold     = TRUE;
-//    c_bDebugDisplay = TRUE;  //Debug 資料顯示  //替換成 #ifdef-#endif
     c_bStateBar     = TRUE;
 
     c_bMsrBegin     = FALSE;
@@ -132,7 +131,7 @@ void CPatternDlg::OnPaint()
     CPaintDC dc(this); // device context for painting
     CString temp;
     dc.SetBkMode(OPAQUE);
-     dc.SetBkColor(m_BkColor);
+    dc.SetBkColor(m_BkColor);
 
     //Cross Talk 的背景色
     if (m_GunMchn.GetColorType() == CrsTlkW)
@@ -145,7 +144,7 @@ void CPatternDlg::OnPaint()
     if (c_bDrawNextGold) 
         m_NextGoal.DrawCircle(dc);
 
-#ifdef _DEBUG//     if (c_bDebugDisplay){
+#ifdef _DEBUG
 
         //Pattern運作參數
         //Goal訊息
@@ -175,13 +174,13 @@ void CPatternDlg::OnPaint()
 
         temp.Format("這一點的資訊: %s", m_itor->GetSetupValue());
         TextOut(dc, 0, 80, temp, temp.GetLength());
-#endif//    }
+#endif
 
     //狀態列
     if (c_bStateBar)
     {
         //操作說明（左）
-        temp.Format("Zero-Cal: ↑, 抓值量測: ↓, 上一點: ←, 下一點: →");
+        temp.Format("上一點: ←, 下一點: →, 抓值+下一點: Enter, 自動量測: ↓");
         TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %s inch", \
@@ -223,7 +222,7 @@ void CPatternDlg::OnPaint()
 
     if (c_bMsrEnd && c_bRunMsrAI)
     {
-        temp.Format("這是最後一點！量完時，按ESC離開。");    
+        temp.Format("這是最後一點！別忘量最後一點。量完時，按ESC離開。");    
         if ((m_Goal.GetCenter().x == GetSystemMetrics(SM_CXSCREEN)/2) && (m_Goal.GetCenter().y == GetSystemMetrics(SM_CYSCREEN)/2))
             TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8-m_Goal.GetRadius()*2, temp, temp.GetLength());
         else
@@ -231,10 +230,11 @@ void CPatternDlg::OnPaint()
     }
 
     if (c_bUnCntCA210)
-    {
-        if (c_bUnCntCA210)        temp.Format("未連接CA-210。");
-        TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
-    }
+        temp.Format("未連接CA-210。");
+    else
+        temp.Format("");
+    TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
+
 
     // TODO: Add your message handler code here
     // Do not call CDialog::OnPaint() for painting messages
@@ -403,22 +403,22 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
 
 CString CPatternDlg::SetLCMSize()
 {
-	CString LCMSize;
-	LCMSize = m_pCA210->GetLcmSize();
-	if (!atoi(LCMSize))
-	{
-		CEnterValueDlg dlgEnterValue("無法判別LCM Size");
-//		dlgEnterValue.SetWindowText;
-		dlgEnterValue.SetValueKind("LCM Size");
-		if (dlgEnterValue.DoModal() == IDOK)
-	//	dlgEnterValue.DoModal();
-			LCMSize = dlgEnterValue.m_strValue;
+    CString LCMSize;
+    LCMSize = m_pCA210->GetLcmSize();
+    if (!atoi(LCMSize))
+    {
+        CEnterValueDlg dlgEnterValue("無法判別LCM Size");
+//        dlgEnterValue.SetWindowText;
+        dlgEnterValue.SetValueKind("LCM Size");
+        if (dlgEnterValue.DoModal() == IDOK)
+    //    dlgEnterValue.DoModal();
+            LCMSize = dlgEnterValue.m_strValue;
 
-// 		CString str;
-// 		str.Format("%d =?= %d\n%s", dlgEnterValue.DoModal(), IDOK, LCMSize);
-// 		MessageBox(str);
-	}
-	return LCMSize;
+//         CString str;
+//         str.Format("%d =?= %d\n%s", dlgEnterValue.DoModal(), IDOK, LCMSize);
+//         MessageBox(str);
+    }
+    return LCMSize;
 }
 
 BOOL CPatternDlg::Magazine()
@@ -430,22 +430,22 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-	pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
+    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
     pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
     pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 
-    m_itor		= pDoc->GetMsrDataChain().Begin();
+    m_itor        = pDoc->GetMsrDataChain().Begin();
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetMsrDataChain().End();
 
     //++BeginItor;  
     if(!m_GunMchn.isReady())
     {
-        if (!m_GunMchn.Magazine(SetLCMSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+        if (!m_GunMchn.Magazine(SetLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
         Trigger(m_itor);
         NextTrigger(m_itor);
-        if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-        if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
+        if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
+        if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
         
         Invalidate();
         
@@ -523,7 +523,7 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
         switch(pMsg->wParam)
         {
             case VK_SPACE:  EventSwCntCa210();    break;//切換連線
-            case VK_UP:        EventRunZeroCal();    break;//Zero Cal
+//            case VK_UP:        EventRunZeroCal();    break;//Zero Cal
             case VK_DOWN:   EventRunMsrAi();      break;//自動量測模式
             case VK_RIGHT:  EventGoNextGoal();    break;//跳下一個點
             case VK_LEFT:   EventGoPrvsGoal();    break;//上一個點
@@ -543,12 +543,11 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
 
 UINT CPatternDlg::Recoil()
 {
-    UINT recoil = 0;
+    UINT camsrResult = 0;
 
     //存目前的
     BOOL OldDrawNextGold = c_bDrawNextGold;
     BOOL OldDrawGold     = c_bDrawGold;
-//    BOOL OldDebugDisplay = c_bDebugDisplay;
     BOOL OldStateBar     = c_bStateBar;
     BOOL OldMsrValues    = c_bMsrValues;
     BOOL OldMsring       = c_bMsring;
@@ -561,14 +560,13 @@ UINT CPatternDlg::Recoil()
 
     Sleep(70);
 
-    recoil = m_pCA210->Measure();//有連線、有Zero Cal
+    camsrResult = m_pCA210->Measure();
 
     m_itor->SetBullet(m_pCA210->GetMsrData());
 
     //恢復目前的
     c_bDrawNextGold = OldDrawNextGold;
     c_bDrawGold     = OldDrawGold;
-//    c_bDebugDisplay = OldDebugDisplay;
     c_bStateBar     = OldStateBar;
     c_bMsrValues    = OldMsrValues;
     c_bMsring       = OldMsring;
@@ -576,7 +574,7 @@ UINT CPatternDlg::Recoil()
     Invalidate();
     UpdateWindow();
 
-    return recoil;
+    return camsrResult;
 }
 
 // void CPatternDlg::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
@@ -746,7 +744,7 @@ UINT CPatternDlg::EventCatchMsrValue()
     Recoil() 
     0 沒連線
     1 連線
-    2 尚未Zero Cal//************************************
+    2 尚未Zero Cal
     3 檔位不在MEAS
     4 量測正常 當作1
     最後一點  5
@@ -754,7 +752,8 @@ UINT CPatternDlg::EventCatchMsrValue()
     switch(Recoil())
     {
     case 0:        MessageBox("沒連線，無法量測");        return 0;
-    case 2:        MessageBox("尚未Zero Cal");            return 2;
+    case 2:        MessageBox("尚未0-Cal!!依下列SOP排解此問題\n1. 量筒轉到0-Cal檔\n2. 按下「確定」");
+                   m_pCA210->CalZero();                   return 2;
     case 3:        MessageBox("檔位不在MEAS");            return 3;
     default:
         m_Goal.SetPercent(100);
