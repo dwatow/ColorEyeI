@@ -198,10 +198,6 @@ SOURCE=.\SelXls\xlef.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsFile2.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\SelXls\XlsGamma.cpp
 # End Source File
 # Begin Source File

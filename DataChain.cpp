@@ -58,7 +58,7 @@ CDataChain::~CDataChain()
 
 xChain::size_type CDataChain::StdInit()
 {
-    m_CarChain1.clear();
+    Empty();
     
     Grow(White, Pn1);    Grow(Red  , Pn1);    Grow(Green, Pn1);    Grow(Blue , Pn1);    Grow(Dark , Pn1);
     Grow(White, Pn5);    Grow(Red  , Pn5);    Grow(Green, Pn5);    Grow(Blue , Pn5);    Grow(Dark , Pn5);    
@@ -178,10 +178,8 @@ void CDataChain::freeEmptyCell()
     for (xChain::iterator itor = Begin(); itor != End(); ++itor)
         if (itor->GetBullet().isEmpty())
             x.push_back(*itor);           //­n°Å±¼ªº
-// 		else
-// 			AfxMessageBox(itor->GetBullet().MsgBoxStr());
 
-    CutEqualCell(x);
+	CutEqualCell(x);
 }
 
 //////////////////////////////////////////////////////////////////////////

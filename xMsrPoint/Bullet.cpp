@@ -117,8 +117,7 @@ CString Bullet::MsgBoxStr() const
         , m_fX  , m_strX   \
         , m_fY  , m_strY   \
         , m_fZ  , m_strZ   \
-        );
-    
+        );    
     return strBullet;
 }
 #endif

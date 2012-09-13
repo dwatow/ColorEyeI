@@ -141,13 +141,6 @@ void COmdFile1::TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd)
 
 //檔案資料      
     //中心點    
-//     dOmd.At(White, Pn1, 0).SetLv( GetCell('B', 3));
-//     dOmd.At(White, Pn1, 0).SetSx( GetCell('C', 3) );
-//     dOmd.At(White, Pn1, 0).SetSy( GetCell('D', 3) );
-//     dOmd.At(White, Pn1, 0).SetDu( GetCell('E', 3) );
-//     dOmd.At(White, Pn1, 0).SetDv( GetCell('F', 3) );
-
-//////////////////////////////////////////////////////////////////////////
     dOmd.At(White, Pn1, 0).SetLv(GetCell('B', 3));
     dOmd.At(White, Pn1, 0).SetSx(GetCell('C', 3));
     dOmd.At(White, Pn1, 0).SetSy(GetCell('D', 3));
@@ -173,16 +166,6 @@ void COmdFile1::TxtToOmd(TxtStrData& dTxt, OmdValueData& dOmd)
     dOmd.At(Blue, Pn1, 0).SetDv(GetCell('F', 6));
 
     //5nits
-//     dOmd.At(Nits, Pn9, 0).SetLv( GetCell('H', 3));
-//     dOmd.At(Nits, Pn9, 1).SetLv( GetCell('I', 3));
-//     dOmd.At(Nits, Pn9, 2).SetLv( GetCell('J', 3));
-//     dOmd.At(Nits, Pn9, 3).SetLv( GetCell('H', 4));
-//     dOmd.At(Nits, Pn9, 4).SetLv( GetCell('I', 4));
-//     dOmd.At(Nits, Pn9, 5).SetLv( GetCell('J', 4));
-//     dOmd.At(Nits, Pn9, 6).SetLv( GetCell('H', 5));
-//     dOmd.At(Nits, Pn9, 7).SetLv( GetCell('I', 5));
-//     dOmd.At(Nits, Pn9, 8).SetLv( GetCell('J', 5));
-
 	dOmd.At(Nits, Pn9, 0).SetLv( 123);
     dOmd.At(Nits, Pn9, 1).SetLv( 223);
     dOmd.At(Nits, Pn9, 2).SetLv( 323);

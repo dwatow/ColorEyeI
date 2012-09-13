@@ -12,21 +12,25 @@
 
 class CXlsOQC1 : public CXlsFile2
 {
-	int m_ModuleNO;
+    int m_ModuleNO;
 public:
-	void InitForm(); //畫出表格的title
- 	CXlsOQC1& iCellNO(std::vector<Cartridge>::size_type);
+    void InitForm(){ SetVisible(true); }; //畫出表格的title
+//    std::vector<Cartridge> oData();
+	
+    CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
 
- 	CXlsOQC1& iChannel(CString);
- 	CXlsOQC1& iChannel(CString, std::vector<Cartridge>::size_type);
- 	CXlsOQC1& iBarCode(CString );
- 	CXlsOQC1& iBarCode(CString, std::vector<Cartridge>::size_type);
-// 	CXlsOQC1& iProb(CString );
-// 	CXlsOQC1& iProb(CString, std::vector<Cartridge>::size_type);
-	CXlsOQC1& iData(CDataChain& );
-	CXlsOQC1& iData(CDataChain&, std::vector<Cartridge>::size_type);
-//	std::vector<Cartridge> oData();
+    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type);
+    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type){ return This(); };
+    CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type);
+    CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type);
 
+    CXlsFile2* iPanelID(CString     );
+    CXlsFile2* iProb   (CString     ){ return This(); };
+    CXlsFile2* iChannel(CString     );
+    CXlsFile2* iData   (CDataChain& );
+
+    CXlsFile2* This()       { return dynamic_cast<CXlsFile2*>(this); };
+    CXlsFile2* operator->() { return This(); };
 };
 
 #endif // !defined(AFX_XLSOQC1_H__D5913DE1_A748_4AC1_885C_6385B3C1CB17__INCLUDED_)

@@ -31,21 +31,21 @@ xlsFile::~xlsFile()
 }
 
 //Open()
-xlsFile& xlsFile::New()
+xlsFile* xlsFile::New()
 {
 	objBooks = objApp.GetWorkbooks();
     objBook = objBooks.Add(VOptional);	//開新檔案
 	objSheets = objBook.GetWorksheets();
-	return *this;
+	return this;
 }
 
-xlsFile& xlsFile::Open(const char* path)
+xlsFile* xlsFile::Open(const char* path)
 {
 	objBooks = objApp.GetWorkbooks();
     objBook.AttachDispatch(objBooks.Add(_variant_t(path))); //開啟一個已存在的檔案
 	objBook.Activate();
 	objSheets = objBook.GetWorksheets();
-	return *this;
+	return this;
 }
 
 void xlsFile::SaveAs(const char* strTableName)
@@ -116,18 +116,18 @@ CString xlsFile::GetSheetName(short SheetNumber)
 //-------------------------
 //選擇Sheet
 //由SheetName
-xlsFile& xlsFile::SelectSheet(const char* SheetName)
+xlsFile* xlsFile::SelectSheet(const char* SheetName)
 {
 	objSheet = objSheets.GetItem(_variant_t(SheetName));
 	objSheet.Activate();//edisonx
-	return *this;
+	return this;
 }
 //由SheetNumber 
-xlsFile& xlsFile::SelectSheet(short SheetNumber)
+xlsFile* xlsFile::SelectSheet(short SheetNumber)
 {
 	objSheet = objSheets.GetItem(COleVariant(SheetNumber));
 	objSheet.Activate();//edisonx
-	return *this;
+	return this;
 }
 //-------------------------
 //複製SheetName 指定插入Sheet的位置，並指定新Sheet名稱
@@ -194,64 +194,64 @@ long xlsFile::GetVrticlTotalCell()
 //-------------------------
 //選格子
 //選一格
-xlsFile& xlsFile::SelectCell(const char* x)
+xlsFile* xlsFile::SelectCell(const char* x)
 {
 	range=objSheet.GetRange(COleVariant(x),COleVariant(x));
-	return *this;
+	return this;
 }
 
-xlsFile& xlsFile::SelectCell(const char* x, int y)
+xlsFile* xlsFile::SelectCell(const char* x, int y)
 {
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%s%d",x,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	return *this;
+	return this;
 }
 //小於Z
-xlsFile& xlsFile::SelectCell(char x, int y)
+xlsFile* xlsFile::SelectCell(char x, int y)
 {
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%c%d",x,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	return *this;
+	return this;
 }
 //大於Z，開始選AA
-xlsFile& xlsFile::SelectCell(char x1,char x2,int y)
+xlsFile* xlsFile::SelectCell(char x1,char x2,int y)
 {
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%c%c%d",x1,x2,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	return *this;
+	return this;
 }
 //-------------------------
 //選格子
 //選範圍
-xlsFile& xlsFile::SelectCell(const char* x1,const char* x2)
+xlsFile* xlsFile::SelectCell(const char* x1,const char* x2)
 {
 	range=objSheet.GetRange(COleVariant(x1),COleVariant(x2));
-	return *this;
+	return this;
 }
-xlsFile& xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
+xlsFile* xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
 {
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
 	sprintf(buf1,"%s%d",x1,y1);
 	sprintf(buf2,"%s%d",x2,y2);
 	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
-	return *this;
+	return this;
 }
 //小於Z
-xlsFile& xlsFile::SelectCell(char x1, int y1, char x2, int y2)
+xlsFile* xlsFile::SelectCell(char x1, int y1, char x2, int y2)
 {
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
 	sprintf(buf1,"%c%d",x1,y1);
 	sprintf(buf2,"%c%d",x2,y2);
 	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
-	return *this;
+	return this;
 }
 //大於Z，開始選AA
-xlsFile& xlsFile::SelectCell(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
+xlsFile* xlsFile::SelectCell(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
 {
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
@@ -259,7 +259,7 @@ xlsFile& xlsFile::SelectCell(char xA1, char xB1, int y1, char xA2, char xB2, int
 	sprintf(buf2,"%c%c%d",xA2,xB2,y2);
 
 	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
@@ -270,50 +270,50 @@ void xlsFile::ClearCell()
 	range.Clear();//edisonx
 }
 //合併儲存格
-xlsFile& xlsFile::SetMergeCells(short vMerge, bool isCenterAcross)
+xlsFile* xlsFile::SetMergeCells(short vMerge, bool isCenterAcross)
 {
 	//先選取一個範圍的儲存格
     range.SetMergeCells(_variant_t(vMerge));
 	if(isCenterAcross) SetHorztlAlgmet(HA_CENTERACROSS);
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
 //對齊方式
 //水平對齊
-xlsFile& xlsFile::SetHorztlAlgmet(short position)
+xlsFile* xlsFile::SetHorztlAlgmet(short position)
 {
 	range.SetHorizontalAlignment(COleVariant(position));
-	return *this;
+	return this;
 }
 
 //垂直對齊
-xlsFile& xlsFile::SetVrticlAlgmet(short position)
+xlsFile* xlsFile::SetVrticlAlgmet(short position)
 {
 	range.SetVerticalAlignment(COleVariant(position));
-	return *this;
+	return this;
 }
 
 //對齊方式的方向幾度（+90~-90）
-xlsFile& xlsFile::SetTextAngle(short Angle)
+xlsFile* xlsFile::SetTextAngle(short Angle)
 {
 	range.SetOrientation(COleVariant(Angle)); 
-	return *this;
+	return this;
 }
 //設定文字自動換行
-xlsFile& xlsFile::AutoNewLine(bool NewLine)
+xlsFile* xlsFile::AutoNewLine(bool NewLine)
 {
 	if(NewLine)		range.SetWrapText(VTRUE);
 	else			range.SetWrapText(VFALSE);
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
 //設定框線、框線顏色
-xlsFile& xlsFile::SetCellBorder(long BoarderStyle, int BoarderWeight, long BoarderColor)
+xlsFile* xlsFile::SetCellBorder(long BoarderStyle, int BoarderWeight, long BoarderColor)
 {
 	range.BorderAround(_variant_t(BoarderStyle), BoarderWeight, BoarderColor,_variant_t((long)RGB(0,0,0)));
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
@@ -331,67 +331,67 @@ void xlsFile::AutoFitHight()
 	row.AutoFit();					//自動調整一整排的列高
 }
 //設定列高
-xlsFile& xlsFile::SetCellHeight(float height)
+xlsFile* xlsFile::SetCellHeight(float height)
 {
 	range.SetRowHeight(_variant_t(height));
-	return *this;
+	return this;
 }
 //設定欄寬
-xlsFile& xlsFile::SetCellWidth(float height)
+xlsFile* xlsFile::SetCellWidth(float height)
 {
 	range.SetColumnWidth(_variant_t(height));
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
 //設定字型
-xlsFile& xlsFile::SetFont(const char* fontType)
+xlsFile* xlsFile::SetFont(const char* fontType)
 {
 	font = range.GetFont();
     font.SetName(_variant_t(fontType));//原本是韓文字型
-	return *this;
+	return this;
 }
 //粗體
-xlsFile& xlsFile::SetFontBold(bool isBold)
+xlsFile* xlsFile::SetFontBold(bool isBold)
 {
 	font = range.GetFont();
 	if (isBold)		font.SetBold(VTRUE);
 	else			font.SetBold(VFALSE);
 	//font.SetBold(_variant_t(isBold)); //粗體
-	return *this;
+	return this;
 }
 //刪除線
-xlsFile& xlsFile::SetFontStrkthrgh(bool isStrike)
+xlsFile* xlsFile::SetFontStrkthrgh(bool isStrike)
 {
 	font = range.GetFont();
 	if (isStrike)	font.SetStrikethrough(VTRUE);	//edisonx
 	else			font.SetStrikethrough(VFALSE);	//edisonx
 	//font.SetStrikethrough(_variant_t((short)STRIKE));
-	return *this;
+	return this;
 }
 //字型大小
-xlsFile& xlsFile::SetFontSize(short fontSize)
+xlsFile* xlsFile::SetFontSize(short fontSize)
 {
 	font = range.GetFont();
     font.SetSize(_variant_t(fontSize));//字型大小pt
-	return *this;
+	return this;
 }
 //字型顏色
-xlsFile& xlsFile::SetFontColor(short colorIndex)
+xlsFile* xlsFile::SetFontColor(short colorIndex)
 {
 	font = range.GetFont();
 	font.SetColorIndex(_variant_t(colorIndex)); //字色(預設黑色)
-	return *this;
+	return this;
 }
 //-------------------------
 //-------------------------
 //設定底色
-xlsFile& xlsFile::SetCellColor(short colorIndex)
+xlsFile* xlsFile::SetCellColor(short colorIndex)
 {
 	cell = range.GetInterior();                   //取得選取範圍，設定儲存格的記憶體位址
     cell.SetColorIndex(_variant_t(colorIndex));   //設定底色（查表）
 	//cell.SetColor(_variant_t(colorIndex));
-	return *this;
+	return this;
 }
 //選擇顏色（適合字色和底色）依excel介面的座標選擇顏色
 short xlsFile::SelectColor(short x, short y)
@@ -713,17 +713,17 @@ void xlsFile::SaveChart(CString FullBmpPathName)
 	xlsChart.Export(LPCTSTR(FullBmpPathName),VOptional,VOptional);
 }
 //選擇表格資料的範圍
-xlsFile& xlsFile::SelectChartRange(const char* x1,const char* x2)
+xlsFile* xlsFile::SelectChartRange(const char* x1,const char* x2)
 {
 	NewChart();
 
 	lpDisp = objSheet.GetRange(COleVariant(x1),COleVariant(x2));
 	range.AttachDispatch(lpDisp);
 	
-	return *this;
+	return this;
 }
 
-xlsFile& xlsFile::SelectChartRange(const char* x1, int y1, const char* x2, int y2)
+xlsFile* xlsFile::SelectChartRange(const char* x1, int y1, const char* x2, int y2)
 {
 	NewChart();	
 
@@ -734,10 +734,10 @@ xlsFile& xlsFile::SelectChartRange(const char* x1, int y1, const char* x2, int y
 
 	lpDisp = objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
 	range.AttachDispatch(lpDisp);
-	return *this;
+	return this;
 }
 //小於Z
-xlsFile& xlsFile::SelectChartRange(char x1, int y1, char x2, int y2)
+xlsFile* xlsFile::SelectChartRange(char x1, int y1, char x2, int y2)
 {
 	NewChart();
 
@@ -748,10 +748,10 @@ xlsFile& xlsFile::SelectChartRange(char x1, int y1, char x2, int y2)
 
 	lpDisp = objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
 	range.AttachDispatch(lpDisp);
-	return *this;
+	return this;
 }
 //大於Z，開始選AA
-xlsFile& xlsFile::SelectChartRange(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
+xlsFile* xlsFile::SelectChartRange(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
 {
 	NewChart();
 	ZeroMemory(buf1,sizeof(buf1));
@@ -760,11 +760,11 @@ xlsFile& xlsFile::SelectChartRange(char xA1, char xB1, int y1, char xA2, char xB
 	sprintf(buf2,"%c%c%d",xA2,xB2,y2);	
 	lpDisp = objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
 	range.AttachDispatch(lpDisp);
-	return *this;
+	return this;
 }
 
 // 設定表格參數（預設會顯示立體直方圖）
-xlsFile& xlsFile::SetChart(short XaxisByToporLeft, bool isLabelVisable, CString TitleString, CString XaxisTitle, CString YaxisTitle) 
+xlsFile* xlsFile::SetChart(short XaxisByToporLeft, bool isLabelVisable, CString TitleString, CString XaxisTitle, CString YaxisTitle) 
 {	
 	var.vt = VT_DISPATCH;
 	var.pdispVal = lpDisp;
@@ -784,7 +784,7 @@ xlsFile& xlsFile::SetChart(short XaxisByToporLeft, bool isLabelVisable, CString 
 		_variant_t(COleVariant(YaxisTitle)),	// const VARIANT& ValueTitle
 		VOptional								// const VARIANT& ExtraTitle
 		);
-	return *this;
+	return this;
 }
 //插入圖表
 void xlsFile::InsertHistogramChart(int shapeType, bool is3D, 

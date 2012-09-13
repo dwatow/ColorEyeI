@@ -21,15 +21,15 @@ void CXlsGamma::InitForm()
 
 }
 
-xlsFile& CXlsGamma::iData(std::vector<Cartridge>& vCar, std::vector<Cartridge>::size_type)
+CXlsFile2* CXlsGamma::iData(std::vector<Cartridge>& vCar, std::vector<Cartridge>::size_type)
 {
-	return *this;
+	return This();
 }
 
-std::vector<Cartridge> CXlsGamma::oData()
-{
-	std::vector<Cartridge> a;
-	Cartridge x;
-	a.push_back(x);
-	return a;
-}
+// std::vector<Cartridge> CXlsGamma::oData()
+// {
+// 	std::vector<Cartridge> a;
+// 	Cartridge x;
+// 	a.push_back(x);
+// 	return a;
+// }

@@ -12,20 +12,25 @@
 
 class CXlsRA1 : public CXlsFile2
 {
-	int m_CellNO;
+  int m_CellNO;
 public:
-	void InitForm();
-	CXlsRA1& iCellNO(std::vector<Cartridge>::size_type);
-	CXlsRA1& iChannel(CString);
-	CXlsRA1& iChannel(CString, std::vector<Cartridge>::size_type);
-	CXlsRA1& iPanelID(CString );
-	CXlsRA1& iPanelID(CString, std::vector<Cartridge>::size_type);
-	CXlsRA1& iProb(CString );
-	CXlsRA1& iProb(CString, std::vector<Cartridge>::size_type);
-public:
-	CXlsRA1& iData(CDataChain&);
-	CXlsRA1& iData(CDataChain&, std::vector<Cartridge>::size_type);
-//	CDataChain& oData();
+  void InitForm();
+  //    std::vector<Cartridge> oData();
+
+  CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
+
+  CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type );
+  CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type );
+  CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type );
+  CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type );
+
+  CXlsFile2* iChannel(CString     );
+  CXlsFile2* iPanelID(CString     );
+  CXlsFile2* iProb   (CString     );
+  CXlsFile2* iData   (CDataChain& );
+
+  CXlsFile2* This()       { return dynamic_cast<CXlsFile2*>(this); };
+  CXlsFile2* operator->() { return This(); };
 };
 
 #endif // !defined(AFX_XLSRA1_H__31300755_DBA3_46D7_8D23_B37B8813FCE7__INCLUDED_)

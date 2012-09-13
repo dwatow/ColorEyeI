@@ -16,59 +16,60 @@ static char THIS_FILE[] = __FILE__;
 
 
 CSelExcelDlg::CSelExcelDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CSelExcelDlg::IDD, pParent),
-	pMainFrm(dynamic_cast<CMainFrame*>(AfxGetMainWnd())), pDoc(dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument()))
+    : CDialog(CSelExcelDlg::IDD, pParent),
+    m_pMainFrm(dynamic_cast<CMainFrame*>(AfxGetMainWnd())), 
+	m_pDoc(dynamic_cast<CColorEyeIDoc*>(m_pMainFrm->GetActiveDocument()))
 
 {
-	EnableAutomation();
-	ASSERT_VALID(pMainFrm);
-	ASSERT_VALID(pDoc);
-	
-	//{{AFX_DATA_INIT(CSelExcelDlg)
-	m_strItemOfExcel = _T("");
-	//}}AFX_DATA_INIT
+    EnableAutomation();
+    ASSERT_VALID(m_pMainFrm);
+    ASSERT_VALID(m_pDoc);
+    
+    //{{AFX_DATA_INIT(CSelExcelDlg)
+    m_strItemOfExcel = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CSelExcelDlg::OnFinalRelease()
 {
-	// When the last reference for an automation object is released
-	// OnFinalRelease is called.  The base class will automatically
-	// deletes the object.  Add additional cleanup required for your
-	// object before calling the base class.
+    // When the last reference for an automation object is released
+    // OnFinalRelease is called.  The base class will automatically
+    // deletes the object.  Add additional cleanup required for your
+    // object before calling the base class.
 
-	CDialog::OnFinalRelease();
+    CDialog::OnFinalRelease();
 }
 
 void CSelExcelDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CSelExcelDlg)
-	DDX_Control(pDX, IDOK, m_btnOK);
-	DDX_Control(pDX, IDC_STATIC_HDFILELIST, m_stcHDFileList);
-	DDX_Control(pDX, IDC_RADIO_HDFILE, m_rdoChooseHDFile);
-	DDX_Control(pDX, IDC_COMBO_EXCELSELER, m_cbxExcelSelor);
-	DDX_Control(pDX, IDC_RADIO_NOWFILE, m_rdoChooseNowFile);
-	DDX_Control(pDX, IDC_LIST_SELFILELIST, m_lstSelFileList);
-	DDX_Control(pDX, IDC_BUTTON_FINDFILE, m_btnFindFile);
-	DDX_Text(pDX, IDC_STATIC_ITEMLIST, m_strItemOfExcel);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CSelExcelDlg)
+    DDX_Control(pDX, IDC_LIST_SELFILELIST, m_lstSelOmdFileList);
+    DDX_Control(pDX, IDOK, m_btnOK);
+    DDX_Control(pDX, IDC_STATIC_HDFILELIST, m_stcHDFileList);
+    DDX_Control(pDX, IDC_RADIO_HDFILE, m_rdoChooseHDFile);
+    DDX_Control(pDX, IDC_COMBO_EXCELSELER, m_cbxExcelSelor);
+    DDX_Control(pDX, IDC_RADIO_NOWFILE, m_rdoChooseNowFile);
+    DDX_Control(pDX, IDC_BUTTON_FINDFILE, m_btnFindFile);
+    DDX_Text(pDX, IDC_STATIC_ITEMLIST, m_strItemOfExcel);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CSelExcelDlg, CDialog)
-	//{{AFX_MSG_MAP(CSelExcelDlg)
-	ON_CBN_SELCHANGE(IDC_COMBO_EXCELSELER, OnSelectXlsForm)
-	ON_BN_CLICKED(IDC_BUTTON_FINDFILE, OnFindOmdFile)
-	ON_BN_CLICKED(IDC_RADIO_NOWFILE, OnRadioNowfile)
-	ON_BN_CLICKED(IDC_RADIO_HDFILE, OnRadioHdfile)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CSelExcelDlg)
+    ON_CBN_SELCHANGE(IDC_COMBO_EXCELSELER, OnSelectXlsForm)
+    ON_BN_CLICKED(IDC_BUTTON_FINDFILE, OnFindOmdFile)
+    ON_BN_CLICKED(IDC_RADIO_NOWFILE, OnRadioNowfile)
+    ON_BN_CLICKED(IDC_RADIO_HDFILE, OnRadioHdfile)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CSelExcelDlg, CDialog)
-	//{{AFX_DISPATCH_MAP(CSelExcelDlg)
-		// NOTE - the ClassWizard will add and remove mapping macros here.
-	//}}AFX_DISPATCH_MAP
+    //{{AFX_DISPATCH_MAP(CSelExcelDlg)
+        // NOTE - the ClassWizard will add and remove mapping macros here.
+    //}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
 // Note: we add support for IID_ISelExcelDlg to support typesafe binding
@@ -80,7 +81,7 @@ static const IID IID_ISelExcelDlg =
 { 0x1898eeac, 0xb573, 0x4cd6, { 0x90, 0xfa, 0x92, 0xd9, 0x86, 0x63, 0xc7, 0x9e } };
 
 BEGIN_INTERFACE_MAP(CSelExcelDlg, CDialog)
-	INTERFACE_PART(CSelExcelDlg, IID_ISelExcelDlg, Dispatch)
+    INTERFACE_PART(CSelExcelDlg, IID_ISelExcelDlg, Dispatch)
 END_INTERFACE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -88,288 +89,237 @@ END_INTERFACE_MAP()
 
 BOOL CSelExcelDlg::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
-	
-	// TODO: Add extra initialization here
-	SetFileComeFrom(FromNowFile);
-//	HDFileCouont = 0;
+    CDialog::OnInitDialog();
+    
+    // TODO: Add extra initialization here
+    SetFileComeFrom(FromNowFile);
+    InitXlsFileList(m_cbxExcelSelor, "xls");
 
-	InitXlsFileList(m_cbxExcelSelor, "xls");
-
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+    return TRUE;  // return TRUE unless you set the focus to a control
+                  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void CSelExcelDlg::InitXlsFileList(CComboBox& ComboBox, CString FileNameExt)
 {
-	//抓取程式目錄下的.xls表格
-	WIN32_FIND_DATA FindFileData;  //一個結構，找到的檔案
-	HANDLE hListFile;
-	
-	m_strXlsFilePath.Empty(); 
-	CString strFilePathType;  //要找的檔案類型+路徑
-	
-	///設定所在目錄
-	GetModuleFileName(NULL, m_strXlsFilePath.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
-	m_strXlsFilePath.ReleaseBuffer();
-	m_strXlsFilePath = m_strXlsFilePath.Left(m_strXlsFilePath.ReverseFind('\\'));
-	strFilePathType.Format("%s\\*.%s", m_strXlsFilePath, FileNameExt);         //目前執行檔所在路徑\*.xls
-	
-	//找第一個檔案
-	hListFile = FindFirstFile(strFilePathType.GetBuffer(0), &FindFileData);
-	
-	//找xls檔案的動作
-	//設定下拉式選單的可選表格
-	//內建表格
-	ComboBox.ResetContent();
-	ComboBox.AddString("RA Form");  //0
-	ComboBox.AddString("SEC Form"); //1
+    //抓取程式目錄下的.xls表格
+    WIN32_FIND_DATA FindFileData;  //一個結構，找到的檔案
+    HANDLE hListFile;
+    
+    m_strXlsFilePath.Empty(); 
+    CString strFilePathType;  //要找的檔案類型+路徑
+    
+    ///設定所在目錄
+    GetModuleFileName(NULL, m_strXlsFilePath.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
+    m_strXlsFilePath.ReleaseBuffer();
+    m_strXlsFilePath = m_strXlsFilePath.Left(m_strXlsFilePath.ReverseFind('\\'));
+    strFilePathType.Format("%s\\*.%s", m_strXlsFilePath, FileNameExt);         //目前執行檔所在路徑\*.xls
+    
+    //找第一個檔案
+    hListFile = FindFirstFile(strFilePathType.GetBuffer(0), &FindFileData);
+    
+    //找xls檔案的動作
+    //設定下拉式選單的可選表格
+    //內建表格
+    ComboBox.ResetContent();
+    ComboBox.AddString("RA Form");  //0
+    ComboBox.AddString("SEC Form"); //1
 
-	//外加表格
-	if(hListFile == INVALID_HANDLE_VALUE)
-	{
-		//找不到檔案
-		//strFilePathType也用不到了！拿來顯示錯誤訊息吧！
-		strFilePathType.Format("錯誤: %d\n%s\n找不到.xls檔案, 無法輸出Excel!!", GetLastError(), m_strXlsFilePath);
-		MessageBox(strFilePathType, NULL, MB_ICONWARNING | MB_OK);
-		strFilePathType.Format("");
-	}
-	else
-	{
-		//填上選擇Excel下拉式選單的資料
-		
-		do ComboBox.AddString(FindFileData.cFileName);
-		while(FindNextFile(hListFile, &FindFileData));
-		//總數
-		//         strFilePathType.Format("錯誤%d", m_cbxExcelSelor.GetCount());
-		//         MessageBox(strFilePathType);
-	}
-	ComboBox.SetCurSel(0);
-	OnSelectXlsForm() ;
+    //外加表格
+    if(hListFile == INVALID_HANDLE_VALUE)
+    {
+        //找不到檔案
+        //strFilePathType也用不到了！拿來顯示錯誤訊息吧！
+        strFilePathType.Format("錯誤: %d\n%s\n找不到.xls檔案, 無法輸出Excel!!", GetLastError(), m_strXlsFilePath);
+        MessageBox(strFilePathType, NULL, MB_ICONWARNING | MB_OK);
+        strFilePathType.Format("");
+    }
+    else
+    {
+        //填上選擇Excel下拉式選單的資料
+        
+        do ComboBox.AddString(FindFileData.cFileName);
+        while(FindNextFile(hListFile, &FindFileData));
+        //總數
+        //         strFilePathType.Format("錯誤%d", m_cbxExcelSelor.GetCount());
+        //         MessageBox(strFilePathType);
+    }
+    ComboBox.SetCurSel(0);
+    OnSelectXlsForm() ;
     //程式到此結束，下面都是註解
 }
 
 void CSelExcelDlg::OnRadioNowfile() 
 {
-	// TODO: Add your control notification handler code here
-	SetFileComeFrom(FromNowFile);
+    // TODO: Add your control notification handler code here
+    SetFileComeFrom(FromNowFile);
 }
 
 void CSelExcelDlg::OnRadioHdfile() 
 {
-	// TODO: Add your control notification handler code here
-	SetFileComeFrom(FromHDFile);
+    // TODO: Add your control notification handler code here
+    SetFileComeFrom(FromHDFile);
 }
 
 void CSelExcelDlg::SetFileComeFrom(enum WhereFileComeFrom WFCF)
 {
-	//用Radio選擇誰要enable，誰不要
-	m_rdoChooseNowFile.SetCheck(!WFCF);
-	m_rdoChooseHDFile.SetCheck(WFCF);
+    //用Radio選擇誰要enable，誰不要
+    m_rdoChooseNowFile.SetCheck(!WFCF);
+    m_rdoChooseHDFile.SetCheck(WFCF);
 
-	m_lstSelFileList.EnableWindow(WFCF);
-	m_btnFindFile.EnableWindow(WFCF);
-	m_stcHDFileList.EnableWindow(WFCF);
+    m_lstSelOmdFileList.EnableWindow(WFCF);
+    m_btnFindFile.EnableWindow(WFCF);
+    m_stcHDFileList.EnableWindow(WFCF);
 }
 
 void CSelExcelDlg::OnSelectXlsForm() 
 {
-	// TODO: Add your control notification handler code here
-	//下拉式選單選擇時的動作
-	CString str;
-	m_lstSelFileList.ResetContent();
-	m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), str);
+    // TODO: Add your control notification handler code here
+    //下拉式選單選擇時的動作
+    CString str;
+    m_lstSelOmdFileList.ResetContent();
+    m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), str);
 
-	if (str.Find("RA") != -1)
-	{
-		m_strItemOfExcel.Format("9點亮度\n9點色度\n\nCA210-CH\nCA210-Probe\n"); 
-		m_nBufferSize = 100;
-		m_ft = FORM_RA;
-		m_btnOK.EnableWindow(TRUE);
-	}
-	else if (str.Find("F1") != -1 || str.Find("H1") != -1 || str.Find("F6") != -1 || str.Find("H6") != -1)
-	{
-		m_strItemOfExcel.Format("9點亮度\n9點色度\n25點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER");
-		m_nBufferSize = 10;
-		m_ft = FORM_OQC_LCM_SPEC;
-		m_btnOK.EnableWindow(TRUE);
-	}
-	else if (str.Find("Gamma") != -1)
-	{
-		m_strItemOfExcel.Format("Gamma curve");
-		m_nBufferSize = 1;
-		m_ft = FORM_Gamma;
-		m_btnOK.EnableWindow(TRUE);
-	}
-	else if (str.Find("SEC") != -1)
-	{
-		m_strItemOfExcel.Format("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER");
-		m_nBufferSize = 1;
-		m_ft = FORM_SEC;
-		m_btnOK.EnableWindow(TRUE);
-	}
-	else
-	{
-		m_strItemOfExcel.Format("(無法識別)");
-		m_nBufferSize = 1;
-		m_ft = FORM_Nothing;
-		m_btnOK.EnableWindow(FALSE);
-	}
+    if (str.Find("RA") != -1)
+    {
+        m_strItemOfExcel.Format("9點亮度\n9點色度\n\nCA210-CH\nCA210-Probe\n"); 
+        m_fileNumLimit = 100;
+        m_ft = FORM_RA;
+        m_btnOK.EnableWindow(TRUE);
+    }
+    else if (str.Find("F1") != -1 || str.Find("H1") != -1 || str.Find("F6") != -1 || str.Find("H6") != -1)
+    {
+        m_strItemOfExcel.Format("9點亮度\n9點色度\n25點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER");
+        m_fileNumLimit = 10;
+        m_ft = FORM_OQC_LCM_SPEC;
+        m_btnOK.EnableWindow(TRUE);
+    }
+    else if (str.Find("Gamma") != -1)
+    {
+        m_strItemOfExcel.Format("Gamma curve");
+        m_fileNumLimit = 1;
+        m_ft = FORM_Gamma;
+        m_btnOK.EnableWindow(TRUE);
+    }
+    else if (str.Find("SEC") != -1)
+    {
+        m_strItemOfExcel.Format("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER");
+        m_fileNumLimit = 1;
+        m_ft = FORM_SEC;
+        m_btnOK.EnableWindow(TRUE);
+    }
+    else
+    {
+        m_strItemOfExcel.Format("(無法識別)");
+        m_fileNumLimit = 1;
+        m_ft = FORM_Nothing;
+        m_btnOK.EnableWindow(FALSE);
+    }
 
-	UpdateData(FALSE);
+    UpdateData(FALSE);
 }
 
 void CSelExcelDlg::OnFindOmdFile() 
 {
-	// TODO: Add your control notification handler code here
-	//找omd檔案的動作
-	CString m_strFilter("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");//檔案過濾條件
-	CFileDlg aFileDialog (TRUE, NULL, NULL, (m_nBufferSize > 1) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT : OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, m_strFilter);
-	
-	aFileDialog.SetMultiFileNameBuffer(m_nBufferSize);
-	
+    // TODO: Add your control notification handler code here
+    //找omd檔案的動作
+    CString fOmdFilter("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");//檔案過濾條件
+    CFileDlg aFileDialog (TRUE, NULL, NULL, (m_fileNumLimit > 1) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT : OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, fOmdFilter);
+    
+    aFileDialog.SetMultiFileNameBuffer(m_fileNumLimit);
+    
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
-		aFileDialog.GetSelFileList(m_vOmdFilePathList);	
+        aFileDialog.GetSelFileList(m_vOmdFilePathList);    
 
-	if(CommDlgExtendedError() == FNERR_BUFFERTOOSMALL) 
+    if(CommDlgExtendedError() == FNERR_BUFFERTOOSMALL) 
         AfxMessageBox("Sel Excel Dialog緩衝區不夠大\n剪下畫面，並且找程式設計師解決這問題。", MB_OK | MB_ICONERROR); 
-	else
-		m_lstSelFileList.ResetContent();
+    else
+        m_lstSelOmdFileList.ResetContent();
 
-	//檔案列表裝在控制項上
-	for (std::vector<CString>::iterator itStr = m_vOmdFilePathList.begin(); itStr != m_vOmdFilePathList.end(); ++itStr)
-	{
-		//顯示時會依表格適用幾筆Omd檔的數量，做限制。
-		if (itStr - m_vOmdFilePathList.begin() < m_nBufferSize)
-			m_lstSelFileList.AddString(itStr->Right(itStr->GetLength() - itStr->ReverseFind('\\') - 1));
-		else
-		{
-			//超過表格可以裝載數量，就刪掉。
-			m_vOmdFilePathList.erase(itStr, m_vOmdFilePathList.end());
-			break;
-		}
-	}
+    //檔案列表裝在控制項上
+    for (std::vector<CString>::iterator itStr = m_vOmdFilePathList.begin(); itStr != m_vOmdFilePathList.end(); ++itStr)
+    {
+        //顯示時會依表格適用幾筆Omd檔的數量，做限制。
+        if (itStr - m_vOmdFilePathList.begin() < m_fileNumLimit)
+            m_lstSelOmdFileList.AddString(itStr->Right(itStr->GetLength() - itStr->ReverseFind('\\') - 1));
+        else
+        {
+            //超過表格可以裝載數量，就刪掉。
+            m_vOmdFilePathList.erase(itStr, m_vOmdFilePathList.end());
+            break;
+        }
+    }
 }
 
 void CSelExcelDlg::NewVector()
 {
-	m_vOmdtoXls.StdInit();
+    m_vOmdtoXls.StdInit();
 }
 
 void CSelExcelDlg::OnOK() 
 {
-	NewVector();
-	formWhichOne();
-	CDialog::OnOK();
+    BeginWaitCursor();
+	    CXlsFile2* pfXls = 0;
+	    NewVector();
+        switch(m_ft)
+        {
+        case FORM_SEC:          pfXls = new CXlsSEC1;  pfXls->New()->SetSheetName(1,"SEC Report");                break;
+        case FORM_RA:           pfXls = new CXlsRA1;   pfXls->New()->SetSheetName(1,"RA Report");                 break;    
+        case FORM_OQC_LCM_SPEC: pfXls = new CXlsOQC1;  pfXls->Open(GetXlsFilePath())->SetSheetName(1,"OQC SPEC"); break;    
+        case FORM_Gamma:        /*pfXls = new CXlsGamma;  */                                                      break;     
+        case FORM_Nothing:
+        default:                AfxMessageBox("怎麼會選這一個輸出？");
+        }
+        OutToExcel(pfXls);
+        if (pfXls != 0)
+        	delete pfXls;
+    EndWaitCursor();
+    CDialog::OnOK();
 }
 
-void CSelExcelDlg::formWhichOne()
-{
-	switch(m_ft)
-	{
-	case FORM_SEC:				formSEC();    break;
- 	case FORM_RA:				formRA();     break;    
- 	case FORM_OQC_LCM_SPEC:		formOQC();    break;    
- 	case FORM_Gamma:			formGamma();  break;	 
-	case FORM_Nothing:
-	default:
-		AfxMessageBox("怎麼會選這一個輸出？");
-	}
-}
-
-void CSelExcelDlg::formGamma()
-{
-
-}
-
-void CSelExcelDlg::formOQC()
+CString CSelExcelDlg::GetXlsFilePath()
 {
 	CString strXlsFilePath;
 	CString strFileName;
 	m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), strFileName);
 	strXlsFilePath.Format("%s\\%s", m_strXlsFilePath, strFileName);
+	return strXlsFilePath;
+}
 
-	CXlsOQC1 xlsOQC;
-	xlsOQC.Open(strXlsFilePath).SetSheetName(1,"RAReport");
-	xlsOQC.SetVisible(true);
-
-	if (m_rdoChooseHDFile.GetCheck() == FromHDFile)
-	{
-		m_pOmdfile = new COmdFile1;
-   
-		for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
-		{
-			//·C3Atemp
-//**			m_pOmdfile->SetMsrData(m_vOmdtoXls);
-			m_pOmdfile->Open(*itfPaths);
-			m_vOmdtoXls = pDoc->GetOmdData();
-
-			xlsOQC.iCellNO(itfPaths - m_vOmdFilePathList.begin()).iBarCode(m_pOmdfile->GetPnlID()).iChannel(m_pOmdfile->GetCHID()).iData(m_vOmdtoXls);
-		}
-	}
+void CSelExcelDlg::OutToExcel(CXlsFile2* pTofXls)
+{
+    if (m_rdoChooseHDFile.GetCheck() == FromHDFile)
+        HDfileToExcel(pTofXls);
     else
-	{
-//**        m_pOmdfile = pDoc->GetOmdData();	//strXlsFilePath = AER×﹐oR|+AE|W
-		m_vOmdtoXls = pDoc->GetOmdData();
-		xlsOQC.iCellNO(0).iBarCode(m_pOmdfile->GetPnlID()).iChannel(m_pOmdfile->GetCHID()).iData(m_vOmdtoXls);
-	}
+        DocfileToExcel(pTofXls);
 }
-void CSelExcelDlg::formSEC()
+
+void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 {
-	CXlsSEC1 xlsSEC;
-	xlsSEC.New().SetSheetName(1,"Report");
-	xlsSEC.SetVisible(TRUE);
-	xlsSEC.InitForm();
-	//xlsSEC.oData();
-// 	if (m_rdoChooseHDFile.GetCheck() == FromHDFile)
-// 	{
-// 		m_pOmdfile = new COmdFile1;
-		//for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
-		//{
-// 			m_pOmdfile->SetMsrData(m_vOmdtoXls);
-// 			m_pOmdfile->Open(m_vOmdFilePathList.at(0));
-// 			m_vOmdtoXls = m_pOmdfile->GetMsrData();
-// 			
-// 			xlsSEC.iData(m_vOmdtoXls);
-		//}
-// 	}
-// 	else
-// 	{
-//**        m_pOmdfile = &(pDoc->GetOmdData());
-//**		m_vOmdtoXls = pDoc->GetOmdData();
-		
-		xlsSEC.iData(m_vOmdtoXls);
-//	}
+    m_pOmdfile = new COmdFile1;
+    for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
+    {
+        //在此，等同於Doc的開啟舊檔As omd
+        if(m_pOmdfile->Open(*itfPaths))
+            AfxMessageBox("路徑有問題");
+        
+        if (!m_pOmdfile->LoadData(m_vOmdtoXls))
+            AfxMessageBox("檔案開啟錯誤!!");
+        else
+        {
+        	pHDfXls->InitForm();
+            pHDfXls->iCellNO (abs(itfPaths - m_vOmdFilePathList.begin()))\
+                 ->iChannel(m_pOmdfile->GetCHID())\
+                 ->iPanelID(m_pOmdfile->GetPnlID())\
+                 ->iProb   (m_pOmdfile->GetPrb())\
+                 ->iData   (m_vOmdtoXls);
+        }
+    }
+    delete m_pOmdfile;
 }
 
-void CSelExcelDlg::formRA()
+void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 {
-	CXlsRA1 xlsRA;
-	xlsRA.New().SetSheetName(1,"RAReport");
-	xlsRA.SetVisible(true);
-	xlsRA.InitForm();
-	if (m_rdoChooseHDFile.GetCheck() == FromHDFile)
-	{
-		m_pOmdfile = new COmdFile1;
-		for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
-		{
-//**			m_pOmdfile->SetMsrData(m_vOmdtoXls);
-			m_pOmdfile->Open(*itfPaths);
-			m_vOmdtoXls =pDoc->GetOmdData();
-
-			xlsRA.iCellNO(itfPaths - m_vOmdFilePathList.begin()).iChannel(m_pOmdfile->GetCHID()).iPanelID(m_pOmdfile->GetPnlID()).iProb(m_pOmdfile->GetPrb())\
-				.iData(m_vOmdtoXls);
-		}
-	}
-	else
-	{
-//**        m_pOmdfile = &(pDoc->GetOmdData());
-//**		m_vOmdtoXls = pDoc->GetOmdData();
-		
-		xlsRA.iCellNO(0).iChannel(m_pOmdfile->GetCHID()).iPanelID(m_pOmdfile->GetPnlID()).iProb(m_pOmdfile->GetPrb()).iData(m_vOmdtoXls);
-	}
+	pDocfXls->InitForm();
+    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iData(m_pDoc->GetOmdData());
 }
-
-
-

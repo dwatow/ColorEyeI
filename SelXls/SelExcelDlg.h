@@ -27,15 +27,16 @@ enum FormType{ FORM_Nothing = 0, FORM_RA , FORM_OQC_LCM_SPEC, FORM_SEC, FORM_Gam
 
 class CSelExcelDlg : public CDialog
 {
-	COmdFile1* m_pOmdfile;
+    COmdFile1* m_pOmdfile;
     FormType   m_ft;
-    int        m_nBufferSize;
+    int        m_fileNumLimit;
     CString    m_strXlsFilePath;  //XlsFilepath
-    CDataChain m_vOmdtoXls;
-	std::vector<CString>   m_vOmdFilePathList;
 
-	CMainFrame* pMainFrm;
-	CColorEyeIDoc* pDoc;
+    CDataChain m_vOmdtoXls;
+    std::vector<CString>   m_vOmdFilePathList;
+
+    CMainFrame*    m_pMainFrm;
+    CColorEyeIDoc* m_pDoc;
 // Construction
 public:
     CSelExcelDlg(CWnd* pParent = NULL);   // standard constructor
@@ -43,6 +44,7 @@ public:
 // Dialog Data
     //{{AFX_DATA(CSelExcelDlg)
     enum { IDD = IDD_OMDTOEXCEL };
+    CListBox   m_lstSelOmdFileList;
     CButton    m_btnOK;
     CButton    m_stcHDFileList;
     CButton    m_rdoChooseHDFile;
@@ -71,7 +73,7 @@ protected:
     //{{AFX_MSG(CSelExcelDlg)
     virtual BOOL OnInitDialog();
     virtual void OnOK();
-	afx_msg void OnSelectXlsForm();
+    afx_msg void OnSelectXlsForm();
     afx_msg void OnFindOmdFile();
     afx_msg void OnRadioNowfile();
     afx_msg void OnRadioHdfile();
@@ -84,16 +86,14 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-	void formWhichOne();
-    void formRA();
-    void formOQC();
-    void formGamma();
-    void formSEC();
-
-	void NewVector();
+	CString GetXlsFilePath();
+	void OutToExcel(CXlsFile2* );
+    void NewVector();
     void InitXlsFileList(CComboBox& ComboBox, CString FileNameExt);
- 
-	void SetFileComeFrom(enum WhereFileComeFrom WFCF);
+	void HDfileToExcel(CXlsFile2* pfXls);
+	void DocfileToExcel(CXlsFile2* fXls);
+
+    void SetFileComeFrom(enum WhereFileComeFrom WFCF);
 };
 
 //{{AFX_INSERT_LOCATION}}
