@@ -205,8 +205,9 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 	
 	ptTemp = tbDebug.table_();
 */
+#ifdef _DEBUG
 	DrawAsOmdFile(pDC, pDoc->GetOmdData(), ptTemp);
-
+#endif
     //ªí®æ¼e956
 //    int CellWidth = 64;
     
