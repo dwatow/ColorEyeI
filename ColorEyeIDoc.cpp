@@ -127,9 +127,8 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
         return FALSE;    
     // TODO: Add your specialized creation code here
     //點兩下會執行這個
+	BeginWaitCursor();
     OnNewDocument();
-    CString str;
-    str.Format("%s", lpszPathName);
     
     COmdFile1 f_Omd;
     if(!f_Omd.Open(lpszPathName))
@@ -143,11 +142,17 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
     if (!f_Omd.LoadData(m_OmdData))
         AfxMessageBox("檔案開啟錯誤!!");
     else
-        UpdateAllViews(NULL);
+	{
+		m_PnlID  = f_Omd.GetPnlID();
+		m_MsrDvc = f_Omd.GetMsrDvc();
+		m_Prb    = f_Omd.GetPrb();
+		m_CHID   = f_Omd.GetCHID();
+		
+		UpdateAllViews(NULL);
+		SetModifiedFlag(FALSE);
+	}
 
-    SetModifiedFlag(FALSE);
-    UpdateAllViews(NULL);
-
+	EndWaitCursor();
     return TRUE;
 }
 
@@ -173,7 +178,7 @@ void CColorEyeIDoc::OpenTxtFile(LPCTSTR FileFilter)
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        if(f_txt.Open(aFileDialog.GetPathName()))
+        if(!f_txt.Open(aFileDialog.GetPathName()))
             AfxMessageBox("路徑有問題!!");
         else
         {
@@ -196,7 +201,7 @@ void CColorEyeIDoc::SaveTxtFile(LPCTSTR FileFilter)
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        if (f_txt.Save(aFileDialog.GetPathName()))
+        if (!f_txt.Save(aFileDialog.GetPathName()))
             AfxMessageBox("路徑有問題!!!");
         else 
         {
@@ -222,7 +227,7 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FileFilter)
 
         COmdFile1 f_Omd;
 
-        if(f_Omd.Open(aFileDialog.GetPathName()))
+        if(!f_Omd.Open(aFileDialog.GetPathName()))
             AfxMessageBox("路徑有問題");
         else 
         {
@@ -253,7 +258,7 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FileFilter)
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        if(f_Omd.Save(aFileDialog.GetPathName()))
+        if(!f_Omd.Save(aFileDialog.GetPathName()))
             AfxMessageBox("路徑有問題!!");
         else
         {

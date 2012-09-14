@@ -21,13 +21,13 @@ CTxtFile::~CTxtFile(){}
 BOOL CTxtFile::Open(CString path)
 {
 	m_filepath = path;
-	return m_filepath.IsEmpty();
+	return !m_filepath.IsEmpty();
 }
 
 BOOL CTxtFile::Save(CString path)
 {
 	m_filepath = path;
-	return m_filepath.IsEmpty();
+	return !m_filepath.IsEmpty();
 }
 
 BOOL CTxtFile::LoadData(TxtStrData& txtData)

@@ -66,7 +66,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ColorEyeI.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ColorEye.ico"
 IDR_CLRETYPE            ICON    DISCARDABLE     "res\\ColorEyeIDoc.ico"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -221,7 +221,7 @@ FONT 9, "微軟正黑體"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,144,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "ColorEye Version bata1",IDC_STATIC,40,10,85,8,
+    LTEXT           "ColorEye Version bata2",IDC_STATIC,40,10,85,8,
                     SS_NOPREFIX
     LTEXT           "Copyright (C) 2012\n 奇菱光電\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,105,25
@@ -254,7 +254,7 @@ END
 
 IDD_PATTERN_DIALOG DIALOG DISCARDABLE  0, 0, 265, 185
 STYLE DS_MODALFRAME | WS_POPUP
-FONT 10, "System"
+FONT 10, "SansSerif"
 BEGIN
 END
 
@@ -409,6 +409,15 @@ BEGIN
     LTEXT           "LCM Size",IDC_STATIC_SOMETHING,9,11,30,8
 END
 
+IDD_SETUP_DIALOG DIALOG DISCARDABLE  0, 0, 187, 96
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Setup CA-210"
+FONT 9, "微軟正黑體"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,24,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -446,6 +455,14 @@ BEGIN
         RIGHTMARGIN, 372
         TOPMARGIN, 7
         BOTTOMMARGIN, 222
+    END
+
+    IDD_SETUP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 89
     END
 END
 #endif    // APSTUDIO_INVOKED

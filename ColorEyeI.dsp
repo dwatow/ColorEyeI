@@ -350,6 +350,10 @@ SOURCE=.\SelXls\XlsSEC1.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\ColorEye.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\ColorEyeI.ico
 # End Source File
 # Begin Source File

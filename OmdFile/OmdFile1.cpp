@@ -586,13 +586,13 @@ m_PnlID(""), m_MsrDvc(""), m_Prb(""), m_CHID("")
 BOOL COmdFile1::Open(CString path)
 {
 	m_filepath = path;
-	return m_filepath.IsEmpty();
+	return !m_filepath.IsEmpty();
 }
 
 BOOL COmdFile1::Save(CString path)
 {
 	m_filepath = path;
-	return m_filepath.IsEmpty();
+	return !m_filepath.IsEmpty();
 }
 
 BOOL COmdFile1::LoadData(OmdValueData& omdData)

@@ -15,16 +15,17 @@ Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
-ResourceCount=7
+ResourceCount=8
 Resource1=IDD_OMDTOEXCEL
 Class5=CAboutDlg
-Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_ABOUTBOX
-Resource4=IDR_MAINFRAME
+Resource2=IDD_ABOUTBOX
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDD_MSR_ITEM
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_MSR_ITEM
-Resource7=IDD_EDIT_DIALOG
+Resource6=IDD_PATTERN_DIALOG
+Resource7=IDR_MAINFRAME
+Resource8=IDD_SETUP_DIALOG
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -279,4 +280,11 @@ BaseClass=CDialog
 Filter=D
 LastObject=CEnterValueDlg
 VirtualFilter=dWC
+
+[DLG:IDD_SETUP_DIALOG]
+Type=1
+Class=?
+ControlCount=2
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
 

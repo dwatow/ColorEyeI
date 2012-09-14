@@ -1,0 +1,460 @@
+# Microsoft Developer Studio Generated Dependency File, included by ColorEyeI.mak
+
+.\xMsrPoint\Bolt.cpp : \
+	".\Enum.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\Bullet.cpp : \
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\ca200srvr.cpp : \
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\CA210.cpp : \
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\Cartridge.cpp : \
+	".\Enum.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\Circle.cpp : \
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\CircleArc.cpp : \
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\ColorEyeI.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\ColorEyeIView.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\Table.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\ColorEyeI.rc : \
+	".\res\ColorEyeI.ico"\
+	".\res\ColorEyeI.rc2"\
+	".\res\ColorEyeIDoc.ico"\
+	".\res\Toolbar.bmp"\
+	
+
+.\ColorEyeIDoc.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\ColorEyeIView.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\ColorEyeIView.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\Table.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\DataChain.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\EnterValueDlg.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\EnterValueDlg.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\excel.cpp : \
+	".\excel.h"\
+	".\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\FileDlg.cpp : \
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\MainFrm.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\MsrItems\MsrItemDlg.cpp : \
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\MsrItems\StdAfx.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\OmdFile\OmdFile1.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\omdfile\stdafx.h"\
+	".\OmdFile\TxtFile.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\xMsrPoint\PatternDlg.cpp : \
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\EnterValueDlg.h"\
+	".\Enum.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	".\xMsrPoint\StdAfx.h"\
+	".\xMsrPoint\xMsrPoint.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\SelExcelDlg.cpp : \
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\MsrItems\StaticText.cpp : \
+	".\MsrItems\MsrItems.h"\
+	".\MsrItems\StaticText.h"\
+	".\MsrItems\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\Table.cpp : \
+	".\ColorEyeI.h"\
+	".\ColorEyeIDoc.h"\
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\MainFrm.h"\
+	".\MsrItems\MsrItemDlg.h"\
+	".\MsrItems\StaticText.h"\
+	".\OmdFile\OmdFile1.h"\
+	".\OmdFile\TxtFile.h"\
+	".\SelXls\FileDlg.h"\
+	".\SelXls\SelExcelDlg.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\SelXls\XlsRA1.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\Table.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\ca200srvr.h"\
+	".\xMsrPoint\CA210.h"\
+	".\xMsrPoint\Cartridge.h"\
+	".\xMsrPoint\Circle.h"\
+	".\xMsrPoint\CircleArc.h"\
+	".\xMsrPoint\PatternDlg.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\OmdFile\TxtFile.cpp : \
+	".\omdfile\stdafx.h"\
+	".\OmdFile\TxtFile.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\xlef.cpp : \
+	".\Enum.h"\
+	".\excel.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\XlsGamma.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsGamma.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\XlsOQC1.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsOQC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\XlsRA1.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsRA1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\SelXls\XlsSEC1.cpp : \
+	".\DataChain.h"\
+	".\Enum.h"\
+	".\excel.h"\
+	".\SelXls\SelXls.h"\
+	".\SelXls\StdAfx.h"\
+	".\SelXls\xlef.h"\
+	".\SelXls\XlsFile2.h"\
+	".\SelXls\XlsSEC1.h"\
+	".\StdAfx.h"\
+	".\xMsrPoint\Bolt.h"\
+	".\xMsrPoint\Bullet.h"\
+	".\xMsrPoint\Cartridge.h"\
+	"c:\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	

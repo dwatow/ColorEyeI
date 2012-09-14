@@ -14,6 +14,8 @@
 #define IDD_MSR_ITEM                    131
 #define IDD_OMDTOEXCEL                  132
 #define IDD_EDIT_DIALOG                 133
+#define IDD_SETUP_DIALOG                134
+#define IDI_COLOREYE_MAINICON           136
 #define IDC_BUTTON1                     1000
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_COMBO_EXCELSELER            1001
@@ -148,7 +150,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        134
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32782
 #define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           101
