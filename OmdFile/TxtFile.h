@@ -27,6 +27,7 @@ public:
     BOOL LoadData(TxtStrData&);
     BOOL SaveData(TxtStrData&);
 
+	void Close(){};
 private:
 	void FileToMem(CStdioFile& file, TxtStrData& dTxt);
 	void MemToFile(TxtStrData& dTxt, CStdioFile& file);

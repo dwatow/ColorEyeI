@@ -127,7 +127,7 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
         return FALSE;    
     // TODO: Add your specialized creation code here
     //點兩下會執行這個
-	BeginWaitCursor();
+    BeginWaitCursor();
     OnNewDocument();
     
     COmdFile1 f_Omd;
@@ -142,17 +142,17 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
     if (!f_Omd.LoadData(m_OmdData))
         AfxMessageBox("檔案開啟錯誤!!");
     else
-	{
-		m_PnlID  = f_Omd.GetPnlID();
-		m_MsrDvc = f_Omd.GetMsrDvc();
-		m_Prb    = f_Omd.GetPrb();
-		m_CHID   = f_Omd.GetCHID();
-		
-		UpdateAllViews(NULL);
-		SetModifiedFlag(FALSE);
-	}
+    {
+        m_PnlID  = f_Omd.GetPnlID();
+        m_MsrDvc = f_Omd.GetMsrDvc();
+        m_Prb    = f_Omd.GetPrb();
+        m_CHID   = f_Omd.GetCHID();
+        
+        UpdateAllViews(NULL);
+        SetModifiedFlag(FALSE);
+    }
 
-	EndWaitCursor();
+    EndWaitCursor();
     return TRUE;
 }
 
@@ -184,12 +184,11 @@ void CColorEyeIDoc::OpenTxtFile(LPCTSTR FileFilter)
         {
             SetPathName(aFileDialog.GetPathName());
             SetTitle(aFileDialog.GetFileName());
+            if (!f_txt.LoadData(m_TextData))
+                AfxMessageBox("檔案開啟錯誤!!");
         }
-        
-        if (!f_txt.LoadData(m_TextData))
-            AfxMessageBox("檔案開啟錯誤!!");
-        else
-            UpdateAllViews(NULL);
+        f_txt.Close();
+        UpdateAllViews(NULL);
     }
 }
 
@@ -207,12 +206,11 @@ void CColorEyeIDoc::SaveTxtFile(LPCTSTR FileFilter)
         {
             SetPathName(aFileDialog.GetPathName());
             SetTitle(aFileDialog.GetFileName());
+            if (!f_txt.SaveData(m_TextData))
+                AfxMessageBox("檔案存檔錯誤!!");
         }
-        
-        if (!f_txt.SaveData(m_TextData))
-            AfxMessageBox("檔案存檔錯誤!!");
-        else
-            UpdateAllViews(NULL);
+        f_txt.Close();
+        UpdateAllViews(NULL);
     }
 }
 
@@ -233,17 +231,17 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FileFilter)
         {
             SetPathName(aFileDialog.GetPathName());
             SetTitle(aFileDialog.GetFileName());
-        }
-
-        if (!f_Omd.LoadData(m_OmdData))
-            AfxMessageBox("檔案開啟錯誤!!");
-        else
-        {
-            m_PnlID  = f_Omd.GetPnlID();
-            m_MsrDvc = f_Omd.GetMsrDvc();
-            m_Prb    = f_Omd.GetPrb();
-            m_CHID   = f_Omd.GetCHID();
-
+            if (!f_Omd.LoadData(m_OmdData))
+                AfxMessageBox("檔案開啟錯誤!!");
+            else
+            {
+                m_PnlID  = f_Omd.GetPnlID();
+                m_MsrDvc = f_Omd.GetMsrDvc();
+                m_Prb    = f_Omd.GetPrb();
+                m_CHID   = f_Omd.GetCHID();
+                
+            }
+            f_Omd.Close();
             UpdateAllViews(NULL);
         }
         EndWaitCursor();
@@ -264,19 +262,19 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FileFilter)
         {
             SetPathName(aFileDialog.GetPathName());
             SetTitle(aFileDialog.GetFileName());
-        }
-        
-        if (!f_Omd.SaveData(m_OmdData))
-            AfxMessageBox("檔案存檔錯誤!!");
-        else
-        {
-            f_Omd.SetPnlID (m_PnlID);
-            f_Omd.SetMsrDvc(m_MsrDvc);
-            f_Omd.SetPrb   (m_Prb);
-            f_Omd.SetCHID  (m_CHID);
-            
+            if (!f_Omd.SaveData(m_OmdData))
+                AfxMessageBox("檔案存檔錯誤!!");
+            else
+            {
+                f_Omd.SetPnlID (m_PnlID);
+                f_Omd.SetMsrDvc(m_MsrDvc);
+                f_Omd.SetPrb   (m_Prb);
+                f_Omd.SetCHID  (m_CHID);
+                
+            }    
+            f_Omd.Close();
             UpdateAllViews(NULL);
-        }    
+        }        
     }
 }
 

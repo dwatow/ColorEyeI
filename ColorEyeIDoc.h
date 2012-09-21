@@ -20,10 +20,10 @@ class CColorEyeIDoc : public CDocument
     CString m_CHID;
 
 public:    
-    CString GetPnlID () const { return m_PnlID;  };
-    CString GetMsrDvc() const { return m_MsrDvc; };
-    CString GetPrb   () const { return m_Prb;    };
-    CString GetCHID  () const { return m_CHID;   };
+    CString& GetPnlID () { return m_PnlID;  };
+    CString& GetMsrDvc() { return m_MsrDvc; };
+    CString& GetPrb   () { return m_Prb;    };
+    CString& GetCHID  () { return m_CHID;   };
 
     void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
     void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
@@ -36,7 +36,7 @@ private:
 public:
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
-    OmdValueData GetOmdData(){return m_OmdData; };
+    OmdValueData& GetOmdData(){return m_OmdData; };
 
 //TXT File
 private:
@@ -44,7 +44,7 @@ private:
 public:
     void OpenTxtFile(LPCTSTR );
     void SaveTxtFile(LPCTSTR );
-    TxtStrData GetTextData(){return m_TextData; };
+    TxtStrData& GetTextData(){return m_TextData; };
     //TxtStrData& GetTextData(){return m_TextData; }; //¤]¥i¥H
 
 //MsrDataChain

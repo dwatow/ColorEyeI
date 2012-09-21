@@ -199,12 +199,81 @@ void CXlsSEC1::InitForm()
     SelectCell("B29", "G29")->SetCellBorder(1, 3, 1);
     SelectCell("B2", "B46")->SetCellBorder(1, 3, 1);
 
+	SelectSheet(2)->SetSheetName(2, "CrossTalk");
+
+	SelectCell("B1")->SetCell("Lv");
+	SelectCell("A3")->SetCell("Ya");
+	SelectCell("A6")->SetCell("Yb");
+	SelectCell("A10")->SetCell("Ya");
+
+	SelectCell("B2", "D4")->SetCellColor(15)->SetCellBorder();
+	SelectCell("B6", "D8")->SetCellColor(15)->SetCellBorder();
+	SelectCell("B10", "D12")->SetCellColor(15);
+
+	SelectCell("C7")->SetCellColor(SelectColor(8, 4));
+	SelectCell("C11")->SetCellColor(SelectColor(1, 1));
+
+
+	SelectCell("H2")->SetCellColor(SelectColor(2, 4))->SetCellBorder()->SetCell("Gray 0");
+	SelectCell("I2")->SetCellBorder()->SetCell("YB");
+	SelectCell("J2")->SetCellBorder()->SetCell("YA");
+	SelectCell("K2")->SetCellBorder()->SetCell("CT");
+
+	SelectCell("H3")->SetCellBorder()->SetCell("YU");//
+	SelectCell("I3")->SetCellBorder()->SetCell("=C10");
+	SelectCell("J3")->SetCellBorder()->SetCell("=C2");
+	SelectCell("K3")->SetCellBorder()->SetCell("=(I3-J3)/J3");
+
+	SelectCell("H4")->SetCellBorder()->SetCell("YD");//
+	SelectCell("I4")->SetCellBorder()->SetCell("=C12");
+	SelectCell("J4")->SetCellBorder()->SetCell("=C4");
+	SelectCell("K4")->SetCellBorder()->SetCell("=(I4-J4)/J4");
+
+	SelectCell("H5")->SetCellBorder()->SetCell("YL");//
+	SelectCell("I5")->SetCellBorder()->SetCell("=B11");
+	SelectCell("J5")->SetCellBorder()->SetCell("=B3");
+	SelectCell("K5")->SetCellBorder()->SetCell("=(I5-J5)/J5");
+
+	SelectCell("H6")->SetCellBorder()->SetCell("YR");//
+	SelectCell("I6")->SetCellBorder()->SetCell("=D11");
+	SelectCell("J6")->SetCellBorder()->SetCell("=D3");
+	SelectCell("K6")->SetCellBorder()->SetCell("=(I6-J6)/J6");
+
+	SelectCell("H2", "K6")->SetCellBorder(1, 4, 1);
+
+	
+	SelectCell("H8")->SetCellColor(SelectColor(2, 4))->SetCellBorder()->SetCell("Gray 255");
+	SelectCell("I8")->SetCellBorder()->SetCell("YB");
+	SelectCell("J8")->SetCellBorder()->SetCell("YA");
+	SelectCell("K8")->SetCellBorder()->SetCell("CT");
+
+	SelectCell("H9")->SetCellBorder()->SetCell("YB");//
+	SelectCell("I9")->SetCellBorder()->SetCell("=C6");
+	SelectCell("J9")->SetCellBorder()->SetCell("=C2");
+	SelectCell("K9")->SetCellBorder()->SetCell("=(I9-J9)/J9");
+
+	SelectCell("H10")->SetCellBorder()->SetCell("YD");//
+	SelectCell("I10")->SetCellBorder()->SetCell("=C8");
+	SelectCell("J10")->SetCellBorder()->SetCell("=C4");
+	SelectCell("K10")->SetCellBorder()->SetCell("=(I10-J10)/J10");
+
+	SelectCell("H11")->SetCellBorder()->SetCell("YL");
+	SelectCell("I11")->SetCellBorder()->SetCell("=B7");
+	SelectCell("J11")->SetCellBorder()->SetCell("=B3");
+	SelectCell("K11")->SetCellBorder()->SetCell("=(I11-J11)/J11");
+
+	SelectCell("H12")->SetCellBorder()->SetCell("YR");
+	SelectCell("I12")->SetCellBorder()->SetCell("=D7");
+	SelectCell("J12")->SetCellBorder()->SetCell("=D3");
+	SelectCell("K12")->SetCellBorder()->SetCell("=(I12-J12)/J12");
+
+	SelectCell("H8", "K12")->SetCellBorder(1, 4, 1);
+
     SetVisible(true);
 }
 
 CXlsFile2* CXlsSEC1::iData (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count)
 {
-
     iCellNO(1)->iData(vCar);
     return This();
 }
@@ -252,7 +321,7 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     //白色 9點全部值
     for(i=0;i<5;i++){
     for(j=0;j<9;j++){
-             if(i == 0)        SelectCell('C'+i, 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+             if(i == 0)     SelectCell('C'+i, 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
         else if(i == 1)     SelectCell('C'+i, 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
         else if(i == 2)     SelectCell('C'+i, 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
         else if(i == 3)     SelectCell('C'+i, 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]

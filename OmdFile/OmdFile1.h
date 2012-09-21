@@ -52,6 +52,7 @@ public:
 // 	void iForm(OmdValueData&);
 //     void oForm(OmdValueData&);
 
+	void Close(){};
 private:
 	BOOL isOldForm() { return (D_Txt.at(0).Find(':') != -1) ? TRUE : FALSE; };  //判斷是不是Labview輸出的檔
 	

@@ -30,6 +30,8 @@ BOOL CTxtFile::Save(CString path)
 	return !m_filepath.IsEmpty();
 }
 
+//CFileException::m_lOsError
+
 BOOL CTxtFile::LoadData(TxtStrData& txtData)
 {
 	CStdioFile file;

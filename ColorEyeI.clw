@@ -16,15 +16,15 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=8
-Resource1=IDD_OMDTOEXCEL
+Resource1=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource2=IDD_ABOUTBOX
-Resource3=IDD_EDIT_DIALOG
-Resource4=IDD_MSR_ITEM
+Resource2=IDD_MSR_ITEM
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_OMDTOEXCEL
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_PATTERN_DIALOG
-Resource7=IDR_MAINFRAME
+Resource6=IDD_ABOUTBOX
+Resource7=IDD_EDIT_DIALOG
 Resource8=IDD_SETUP_DIALOG
 
 [CLS:CColorEyeIApp]
