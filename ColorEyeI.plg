@@ -3,97 +3,169 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: ColorEyeI - Win32 Debug--------------------
+--------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4CF6.tmp" with contents
+Creating command line "midl.exe /nologo /D "NDEBUG" /tlb "Release/ColorEyeI.tlb" /mktyplib203 /win32 "D:\GitHub\ColorEyeI\ColorEyeI.odl""
+Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /i "Release" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP645A.tmp" with contents
 [
-/nologo /MTd /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\Bolt.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Bullet.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\ca200srvr.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\CA210.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Cartridge.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\Circle.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\CircleArc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\DataChain.cpp"
+"D:\GitHub\ColorEyeI\EnterValueDlg.cpp"
+"D:\GitHub\ColorEyeI\excel.cpp"
+"D:\GitHub\ColorEyeI\SelXls\FileDlg.cpp"
+"D:\GitHub\ColorEyeI\MainFrm.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\OmdFile1.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\StaticText.cpp"
+"D:\GitHub\ColorEyeI\Table.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\TxtFile.cpp"
 "D:\GitHub\ColorEyeI\SelXls\xlef.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsGamma.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsOQC1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsRA1.cpp"
 "D:\GitHub\ColorEyeI\SelXls\XlsSEC1.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP4CF6.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP4CF7.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP645A.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP645B.tmp" with contents
 [
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
-.\Debug\Bolt.obj
-.\Debug\Bullet.obj
-.\Debug\ca200srvr.obj
-.\Debug\CA210.obj
-.\Debug\Cartridge.obj
-.\Debug\Circle.obj
-.\Debug\CircleArc.obj
-.\Debug\ColorEyeI.obj
-.\Debug\ColorEyeIDoc.obj
-.\Debug\ColorEyeIView.obj
-.\Debug\DataChain.obj
-.\Debug\EnterValueDlg.obj
-.\Debug\excel.obj
-.\Debug\FileDlg.obj
-.\Debug\MainFrm.obj
-.\Debug\MsrItemDlg.obj
-.\Debug\OmdFile1.obj
-.\Debug\PatternDlg.obj
-.\Debug\SelExcelDlg.obj
-.\Debug\StaticText.obj
-.\Debug\StdAfx.obj
-.\Debug\Table.obj
-.\Debug\TxtFile.obj
-.\Debug\xlef.obj
-.\Debug\XlsGamma.obj
-.\Debug\XlsOQC1.obj
-.\Debug\XlsRA1.obj
-.\Debug\XlsSEC1.obj
-.\Debug\ColorEyeI.res
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fp"Release/ColorEyeI.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\StdAfx.cpp"
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP4CF7.tmp"
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP645B.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP646B.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
+.\Release\Bolt.obj
+.\Release\Bullet.obj
+.\Release\ca200srvr.obj
+.\Release\CA210.obj
+.\Release\Cartridge.obj
+.\Release\Circle.obj
+.\Release\CircleArc.obj
+.\Release\ColorEyeI.obj
+.\Release\ColorEyeIDoc.obj
+.\Release\ColorEyeIView.obj
+.\Release\DataChain.obj
+.\Release\EnterValueDlg.obj
+.\Release\excel.obj
+.\Release\FileDlg.obj
+.\Release\MainFrm.obj
+.\Release\MsrItemDlg.obj
+.\Release\OmdFile1.obj
+.\Release\PatternDlg.obj
+.\Release\SelExcelDlg.obj
+.\Release\StaticText.obj
+.\Release\StdAfx.obj
+.\Release\Table.obj
+.\Release\TxtFile.obj
+.\Release\xlef.obj
+.\Release\XlsGamma.obj
+.\Release\XlsOQC1.obj
+.\Release\XlsRA1.obj
+.\Release\XlsSEC1.obj
+.\Release\ColorEyeI.res
+]
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP646B.tmp"
 <h3>Output Window</h3>
+Creating Type Library...
+Processing D:\GitHub\ColorEyeI\ColorEyeI.odl
+ColorEyeI.odl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\oaidl.idl
+oaidl.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\objidl.idl
+objidl.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\unknwn.idl
+unknwn.idl
+Processing C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\wtypes.idl
+wtypes.idl
+Compiling resources...
 Compiling...
+StdAfx.cpp
+Compiling...
+Bolt.cpp
+Bullet.cpp
+ca200srvr.cpp
+CA210.cpp
+Cartridge.cpp
+Circle.cpp
+CircleArc.cpp
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+DataChain.cpp
+EnterValueDlg.cpp
+excel.cpp
+FileDlg.cpp
+MainFrm.cpp
+MsrItemDlg.cpp
+OmdFile1.cpp
+PatternDlg.cpp
+SelExcelDlg.cpp
+StaticText.cpp
+Generating Code...
+Compiling...
+Table.cpp
+TxtFile.cpp
 xlef.cpp
+XlsGamma.cpp
+XlsOQC1.cpp
+XlsRA1.cpp
 XlsSEC1.cpp
 Generating Code...
 Linking...
-LINK : fatal error LNK1168: cannot open Debug/ColorEyeI.exe for writing
-Error executing link.exe.
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5503.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPB46F.tmp" with contents
 [
-/nologo /o"Debug/ColorEyeI.bsc" 
-.\Debug\StdAfx.sbr
-.\Debug\Bolt.sbr
-.\Debug\Bullet.sbr
-.\Debug\ca200srvr.sbr
-.\Debug\CA210.sbr
-.\Debug\Cartridge.sbr
-.\Debug\Circle.sbr
-.\Debug\CircleArc.sbr
-.\Debug\ColorEyeI.sbr
-.\Debug\ColorEyeIDoc.sbr
-.\Debug\ColorEyeIView.sbr
-.\Debug\DataChain.sbr
-.\Debug\EnterValueDlg.sbr
-.\Debug\excel.sbr
-.\Debug\FileDlg.sbr
-.\Debug\MainFrm.sbr
-.\Debug\MsrItemDlg.sbr
-.\Debug\OmdFile1.sbr
-.\Debug\PatternDlg.sbr
-.\Debug\SelExcelDlg.sbr
-.\Debug\StaticText.sbr
-.\Debug\Table.sbr
-.\Debug\TxtFile.sbr
-.\Debug\xlef.sbr
-.\Debug\XlsGamma.sbr
-.\Debug\XlsOQC1.sbr
-.\Debug\XlsRA1.sbr
-.\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP5503.tmp"
+/nologo /o"Release/ColorEyeI.bsc" 
+.\Release\StdAfx.sbr
+.\Release\Bolt.sbr
+.\Release\Bullet.sbr
+.\Release\ca200srvr.sbr
+.\Release\CA210.sbr
+.\Release\Cartridge.sbr
+.\Release\Circle.sbr
+.\Release\CircleArc.sbr
+.\Release\ColorEyeI.sbr
+.\Release\ColorEyeIDoc.sbr
+.\Release\ColorEyeIView.sbr
+.\Release\DataChain.sbr
+.\Release\EnterValueDlg.sbr
+.\Release\excel.sbr
+.\Release\FileDlg.sbr
+.\Release\MainFrm.sbr
+.\Release\MsrItemDlg.sbr
+.\Release\OmdFile1.sbr
+.\Release\PatternDlg.sbr
+.\Release\SelExcelDlg.sbr
+.\Release\StaticText.sbr
+.\Release\Table.sbr
+.\Release\TxtFile.sbr
+.\Release\xlef.sbr
+.\Release\XlsGamma.sbr
+.\Release\XlsOQC1.sbr
+.\Release\XlsRA1.sbr
+.\Release\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPB46F.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 1 error(s), 0 warning(s)
+ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

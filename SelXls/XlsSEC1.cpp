@@ -208,7 +208,7 @@ void CXlsSEC1::InitForm()
 
 	SelectCell("B2", "D4")->SetCellColor(15)->SetCellBorder();
 	SelectCell("B6", "D8")->SetCellColor(15)->SetCellBorder();
-	SelectCell("B10", "D12")->SetCellColor(15);
+	SelectCell("B10", "D12")->SetCellColor(15)->SetCellBorder();
 
 	SelectCell("C7")->SetCellColor(SelectColor(8, 4));
 	SelectCell("C11")->SetCellColor(SelectColor(1, 1));
@@ -338,6 +338,23 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     for(j=0;j<3;j++){
             SelectCell('C'+j,23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
     }}
+
+	SelectSheet(2);
+
+	SelectCell("C2")->SetCell(vCar.At(CrsTlk, Pn4, 0).GetLv());
+	SelectCell("B3")->SetCell(vCar.At(CrsTlk, Pn4, 1).GetLv());
+	SelectCell("D3")->SetCell(vCar.At(CrsTlk, Pn4, 2).GetLv());
+	SelectCell("C4")->SetCell(vCar.At(CrsTlk, Pn4, 3).GetLv());
+
+	SelectCell("C6")->SetCell(vCar.At(CrsTlkW, Pn4, 0).GetLv());
+	SelectCell("B7")->SetCell(vCar.At(CrsTlkW, Pn4, 1).GetLv());
+	SelectCell("D7")->SetCell(vCar.At(CrsTlkW, Pn4, 2).GetLv());
+	SelectCell("C8")->SetCell(vCar.At(CrsTlkW, Pn4, 3).GetLv());
+
+	SelectCell("C10")->SetCell(vCar.At(CrsTlkD, Pn4, 0).GetLv());
+	SelectCell("B11")->SetCell(vCar.At(CrsTlkD, Pn4, 1).GetLv());
+	SelectCell("D11")->SetCell(vCar.At(CrsTlkD, Pn4, 2).GetLv());
+	SelectCell("C12")->SetCell(vCar.At(CrsTlkD, Pn4, 3).GetLv());
 
 //    SetVisible(TRUE);
     

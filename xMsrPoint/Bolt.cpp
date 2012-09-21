@@ -58,7 +58,7 @@ CPoint Bolt::GetFE9Point(UINT few) const
         case 2: return Point2; break;
 
         case 3: return Point3; break;
-        case 4: return Point4; break;//中心
+        case 4: return Point4; break;
         case 5: return Point5; break;
 
         case 6: return Point6; break;
@@ -623,6 +623,7 @@ CPoint Bolt::GetW49Point(UINT few) const
     }
 }
 
+
 CPoint Bolt::GetCrossTalk(UINT few) const
 {
 //運算第幾個（以九點為計）
@@ -648,20 +649,20 @@ CPoint Bolt::GetCrossTalk(UINT few) const
 |                              |
 +------------------------------+
 */
-
     CPoint 
-        Point0(CenterH  , TopEdge),
-        Point1(LeftEdge , CenterV),
-        Point2(RightEdge, CenterV),
-        Point3(CenterH  , BottomEdge),
-        PointD(CenterH  , CenterV);
+        PtTop    (CenterH  , TopEdge),
+        PtLefp   (LeftEdge , CenterV),
+        PtRight  (RightEdge, CenterV),
+        PtButtom (CenterH  , BottomEdge),
+        PointD   (CenterH  , CenterV);
+
 //回傳一個點
     switch(few)
     {
-        case 0: return Point0; break;
-        case 1: return Point1; break;
-        case 2: return Point2; break;
-        case 3: return Point3; break;
+        case 0: return PtTop;    break;
+        case 1: return PtLefp;   break;
+        case 2: return PtRight;  break;
+        case 3: return PtButtom; break;
 
         default: PointD; return PointD; break;
     }

@@ -6,6 +6,7 @@
 #include "Cartridge.h"
 
 typedef std::vector<Cartridge> xChain;
+//enum PtXt {PtXtT = 0, PtXtL, PtXtR, PtXtB};
 
 class Bolt 
 {
