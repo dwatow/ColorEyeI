@@ -297,23 +297,21 @@ void CSelExcelDlg::OutToExcel(CXlsFile2* pTofXls)
 void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 {
     m_pOmdfile = new COmdFile1;
+	CFileException fx;
     for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
     {
         //在此，等同於Doc的開啟舊檔As omd
-        if(m_pOmdfile->Open(*itfPaths))
+        if(m_pOmdfile->Open(*itfPaths, fx))
             AfxMessageBox("路徑有問題");
         
-        if (!m_pOmdfile->LoadData(m_vOmdtoXls))
-            AfxMessageBox("檔案開啟錯誤!!");
-        else
-        {
-        	pHDfXls->InitForm();
-            pHDfXls->iCellNO (abs(itfPaths - m_vOmdFilePathList.begin()))\
-                 ->iChannel(m_pOmdfile->GetCHID())\
-                 ->iPanelID(m_pOmdfile->GetPnlID())\
-                 ->iProb   (m_pOmdfile->GetPrb())\
-                 ->iData   (m_vOmdtoXls);
-        }
+        m_pOmdfile->iOmdData(m_vOmdtoXls);
+
+        pHDfXls->InitForm();
+        pHDfXls->iCellNO (abs(itfPaths - m_vOmdFilePathList.begin()))\
+             ->iChannel(m_pOmdfile->GetCHID())\
+             ->iPanelID(m_pOmdfile->GetPnlID())\
+             ->iProb   (m_pOmdfile->GetPrb())\
+             ->iData   (m_vOmdtoXls);
     }
     delete m_pOmdfile;
 }
@@ -323,3 +321,4 @@ void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 	pDocfXls->InitForm();
     pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iData(m_pDoc->GetOmdData());
 }
+

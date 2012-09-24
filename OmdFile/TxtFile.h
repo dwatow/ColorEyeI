@@ -15,22 +15,22 @@ typedef std::vector<CString> TxtStrData;
 
 class CTxtFile  
 {
-	CString m_filepath;
-public:
-	CString GetFilePathName() const{ return m_filepath; };  //for Omdfile
+	CStdioFile f_Std;
+	TxtStrData D_Txt;
 public:
     CTxtFile();
     virtual ~CTxtFile();
-    virtual BOOL Open(CString);
-    virtual BOOL Save(CString);
+    virtual BOOL Open(CString, CFileException&);
+    virtual BOOL Save(CString, CFileException&);
 
-    BOOL LoadData(TxtStrData&);
-    BOOL SaveData(TxtStrData&);
+	void Close(){ f_Std.Close(); };
 
-	void Close(){};
+	void iTxtData(TxtStrData& data){ D_Txt = data; };
+	void oTxtData(TxtStrData& data){ data = D_Txt; };
+	TxtStrData oTxtData(){ return D_Txt; };
 private:
-	void FileToMem(CStdioFile& file, TxtStrData& dTxt);
-	void MemToFile(TxtStrData& dTxt, CStdioFile& file);
+	void FileToMem();
+	void MemToFile();
 	void ErrorMsg(CFileException&);
 };
 

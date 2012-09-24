@@ -1,9 +1,9 @@
-// Txtfile.cpp: implementation of the CTxtFile class.
+// TxtFile.cpp: implementation of the CTxtFile class.
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "stdAfx.h"
-#include "Txtfile.h"
+#include "TxtFile.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -18,83 +18,64 @@ static char THIS_FILE[]=__FILE__;
 CTxtFile::CTxtFile(){}
 CTxtFile::~CTxtFile(){}
 
-BOOL CTxtFile::Open(CString path)
+BOOL CTxtFile::Open(CString path, CFileException& fx)
 {
-	m_filepath = path;
-	return !m_filepath.IsEmpty();
-}
-
-BOOL CTxtFile::Save(CString path)
-{
-	m_filepath = path;
-	return !m_filepath.IsEmpty();
-}
-
-//CFileException::m_lOsError
-
-BOOL CTxtFile::LoadData(TxtStrData& txtData)
-{
-	CStdioFile file;
-    CFileException fx;
-    if (file.Open(m_filepath, CFile::modeRead | CFile::typeText, &fx))
-	{
-		FileToMem(file, txtData);
-		file.Close();
+    if (f_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
+    {
+        FileToMem();
         return TRUE;  //成功入侵取得資料
-	}
-	else
+    }
+    else
     { 
-		ErrorMsg(fx);
-        file.Close();
+        ErrorMsg(fx);
+        f_Std.Close();
         return FALSE;  //失敗
     }
 }
 
-BOOL CTxtFile::SaveData(TxtStrData& txtData)
+void CTxtFile::FileToMem()
 {
-	CStdioFile file;
-    CFileException fx;
-    if (file.Open(m_filepath, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
-	{
-		MemToFile(txtData, file);			
-		file.Close();
+    D_Txt.clear();
+    CString strTemp;
+    while (f_Std.ReadString(strTemp))
+    {
+        strTemp.Format(_T("%s\n"), strTemp);
+        D_Txt.push_back(strTemp);
+    }
+}
+
+BOOL CTxtFile::Save(CString path, CFileException& fx)
+{
+    if (f_Std.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
+    {
+        MemToFile();
         return TRUE;
-	}
+    }
     else
     {
-		ErrorMsg(fx);
-		file.Close();
+        ErrorMsg(fx);
+		f_Std.Close();
         return FALSE;
+    }
+}
+
+void CTxtFile::MemToFile()
+{
+    if (!D_Txt.empty())
+    {
+        for (TxtStrData::iterator it = D_Txt.begin(); it != D_Txt.end(); ++it)
+            f_Std.WriteString(*it);
     }
 }
 
 void CTxtFile::ErrorMsg(CFileException& fx)
 {
-	//例外處理
-	TCHAR buf[255];
-	fx.GetErrorMessage(buf, 255);
-	CString strPrompt;
-	strPrompt.Format("CTxtFile\n%s", buf);
-	AfxMessageBox(strPrompt);
+    //例外處理
+    TCHAR buf[255];
+    fx.GetErrorMessage(buf, 255);
+    CString strPrompt;
+    strPrompt.Format("CTxtFile\n%s", buf);
+    AfxMessageBox(strPrompt);
 }
 
-void CTxtFile::FileToMem(CStdioFile& file, TxtStrData& txtData)
-{
-	txtData.clear();
-	CString strTemp;
-	while (file.ReadString(strTemp))
-	{
-		strTemp.Format(_T("%s\n"), strTemp);
-		txtData.push_back(strTemp);
-	}
-}
 
-void CTxtFile::MemToFile(TxtStrData& txtData, CStdioFile& file)
-{
-	if (!txtData.empty())
-	{
-		CString strTemp;
-		for (TxtStrData::iterator it = txtData.begin(); it != txtData.end(); ++it)
-			file.WriteString(*it);
-	}
-}

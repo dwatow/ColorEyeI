@@ -21,6 +21,7 @@
 class CMsrItemDlg : public CDialog
 {
 //    CPatternDlg* m_pDlgPattern;
+	CString m_filePathName;
     Bolt *Pusher;
 
 // Construction
@@ -76,12 +77,12 @@ public:
     CButton    m_chkCRP1;
     CButton    m_chkCGP1;
     CButton    m_chkCDP1;
+    CButton    m_chkCBP1;
     CStaticText    m_stcWhite;
     CStaticText    m_stcBlue;
     CStaticText    m_stcDark;
     CStaticText    m_stcGreen;
     CStaticText    m_stcRed;
-    CButton    m_chkCBP1;
     UINT    m_nGM1;
     UINT    m_nGM2;
     float    m_f21FE;
@@ -91,7 +92,7 @@ public:
     float    m_f5FE;
     float    m_f9FE;
     float    m_fGammaSetp;
-    UINT    m_n25RectSide;
+    UINT     m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
 	//}}AFX_DATA
@@ -100,6 +101,8 @@ public:
 // Overrides
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CMsrItemDlg)
+	public:
+	virtual void Serialize(CArchive& ar);
 	protected:
     virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
@@ -114,6 +117,7 @@ protected:
 	afx_msg void OnButtonAdd();
 	afx_msg void OnButtonDel();
 	virtual BOOL OnInitDialog();
+	virtual void OnOK();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
     // Generated OLE dispatch map functions

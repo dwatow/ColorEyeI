@@ -80,7 +80,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 private:
 	void DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt);
-	void DrawAsOmdFile(CDC* pDC, OmdValueData Data, CPoint& pt);
+	void DrawAsOmdFile(CDC* pDC, OmdCarData Data, CPoint& pt);
 
     COLORREF isMsrToBkColor(BOOL b)
     { return b ? RGB(255, 255, 255) : RGB(192, 192, 192); };

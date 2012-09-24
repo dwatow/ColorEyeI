@@ -207,6 +207,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 */
 #ifdef _DEBUG
 	DrawAsOmdFile(pDC, pDoc->GetOmdData(), ptTemp);
+	DrawAsTxtFile(pDC, pDoc->GetTextData(), ptTemp);
 #endif
     //ªí®æ¼e956
 //    int CellWidth = 64;
@@ -246,7 +247,7 @@ void CColorEyeIView::DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt)
     }
 }
 
-void CColorEyeIView::DrawAsOmdFile(CDC* pDC, OmdValueData Data, CPoint& pt)
+void CColorEyeIView::DrawAsOmdFile(CDC* pDC, OmdCarData Data, CPoint& pt)
 {
     std::vector<CString> str = Data.InsideData();
     

@@ -29,14 +29,15 @@ public:
     void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
     void SetPrb    (CString& _S) { m_Prb    =  _S; };
     void SetCHID   (CString& _S) { m_CHID   =  _S; };
-
+//File Error
+	CFileException m_ErrorFx;
 //OMD File
 private:
-    OmdValueData m_OmdData;
+    OmdCarData m_OmdData;
 public:
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
-    OmdValueData& GetOmdData(){return m_OmdData; };
+    OmdCarData& GetOmdData(){return m_OmdData; };
 
 //TXT File
 private:
