@@ -24,8 +24,12 @@
 
 class CColorEyeIApp : public CWinApp
 {
+	CString m_strPathName;
     CPatternDlg *m_pdlgPattern;
 public:
+	void DelMsrItemDlgSetupFile();
+	CString GetPath();
+	CString GetPathName();
     CColorEyeIApp();
     ~CColorEyeIApp();
 // Overrides

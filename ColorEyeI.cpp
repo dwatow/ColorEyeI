@@ -39,6 +39,7 @@ CColorEyeIApp::CColorEyeIApp():m_pdlgPattern(0)
 
 CColorEyeIApp::~CColorEyeIApp()
 {
+	DelMsrItemDlgSetupFile();
     delete m_pdlgPattern;
 }
 
@@ -141,6 +142,15 @@ BOOL CColorEyeIApp::InitInstance()
     // Enable drag/drop open
     m_pMainWnd->DragAcceptFiles();
 
+	// Get App PathName
+	GetModuleFileName(NULL, m_strPathName.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
+	m_strPathName.ReleaseBuffer();   //要加這一行，才可以處理該字串
+
+	// Get Desktop Path
+// 	CString szPath;
+// 	SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
+//    BCFandODFPath.Format("%s",szPath);
+
     return TRUE;
 }
 
@@ -226,4 +236,21 @@ void CColorEyeIApp::OnMsrForItem()
         if (!m_pdlgPattern->Magazine())                   AfxMessageBox("OnButtonMsr的彈匣出錯");
         m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
     }
+}
+
+CString CColorEyeIApp::GetPathName()
+{
+	return m_strPathName;
+}
+
+CString CColorEyeIApp::GetPath()
+{
+	return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
+}
+
+void CColorEyeIApp::DelMsrItemDlgSetupFile()
+{
+	CString delFileNamePath;
+	delFileNamePath.Format("%s\\~MsrItemDlg.temp", GetPath());
+	DeleteFile(delFileNamePath);
 }

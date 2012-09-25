@@ -21,7 +21,7 @@
 class CMsrItemDlg : public CDialog
 {
 //    CPatternDlg* m_pDlgPattern;
-	CString m_filePathName;
+	CString m_RememberChkPathName;
     Bolt *Pusher;
 
 // Construction

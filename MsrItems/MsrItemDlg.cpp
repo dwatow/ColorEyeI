@@ -5,6 +5,7 @@
 #include "resource.h"
 #include "MsrItemDlg.h"
 #include "../xMsrPoint/PatternDlg.h"
+#include "../ColorEyeI.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -17,20 +18,18 @@ static char THIS_FILE[] = __FILE__;
 
 
 CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
-    : CDialog(CMsrItemDlg::IDD, pParent)
+    : CDialog(CMsrItemDlg::IDD, pParent), Pusher(0)
 {
     EnableAutomation();
 
-//	CString strTemp;
-	GetModuleFileName(NULL, m_filePathName.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
- 	m_filePathName.ReleaseBuffer();   //要加這一行，才可以處理該字串
- 	m_filePathName = m_filePathName.Left(m_filePathName.ReverseFind('\\'));
-// 	AfxMessageBox(m_filePathName);
-//	AfxMessageBox(strTemp);
+	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+	ASSERT_VALID(pApp);
 
-    Pusher = 0;
-    //m_pDlgPattern = 0;
-//    m_pCA210 = 0;
+	m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
+	
+// 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+//     ASSERT_VALID(pMainFrm);
+
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
     m_nGM2 = 255;
@@ -340,12 +339,9 @@ BOOL CMsrItemDlg::OnInitDialog()
     pDoc->GetMsrDataChain().Empty();
 
 	//記憶 選項 file >> Dialog
-	CString strFilePath;
-	strFilePath.Format("%s\\~MsrItemDlg.temp", m_filePathName);
-
 	CFile LoadSet;
 	CFileException fx;
-	if (LoadSet.Open(strFilePath, CFile::modeRead, &fx))
+	if (LoadSet.Open(m_RememberChkPathName, CFile::modeRead, &fx))
 	{
 		CArchive arch(&LoadSet, CArchive::load);
 		Serialize(arch);
@@ -370,12 +366,9 @@ void CMsrItemDlg::OnOK()
 	// TODO: Add extra validation here
 	
 	//記憶 選項 file >> Dialog
-	CString strFilePath;
-	strFilePath.Format("%s\\~MsrItemDlg.temp", m_filePathName);
-
 	CFile SaveSet;
 	CFileException fx;
-	if (SaveSet.Open(strFilePath, CFile::modeCreate | CFile::modeWrite, &fx))
+	if (SaveSet.Open(m_RememberChkPathName, CFile::modeCreate | CFile::modeWrite, &fx))
 	{
 		CArchive arch(&SaveSet, CArchive::store);
 		Serialize(arch);

@@ -46,7 +46,7 @@ public:
     void OpenTxtFile(LPCTSTR );
     void SaveTxtFile(LPCTSTR );
     TxtStrData& GetTextData(){return m_TextData; };
-    //TxtStrData& GetTextData(){return m_TextData; }; //也可以
+    //TxtStrData GetTextData(){return m_TextData; }; //也可以
 
 //MsrDataChain
 private:
@@ -54,7 +54,6 @@ private:
 public:
 	CDataChain& GetMsrDataChain(){ return m_msrData; };//新的一條鍊 vChain2
     void RestructureVector();
-
 
 protected: // create from serialization only
     CColorEyeIDoc();
