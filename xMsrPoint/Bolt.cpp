@@ -798,6 +798,8 @@ CPoint Bolt::GetPointPosition() const
                 if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
             case Pn13:
                 return GetD13Point(m_MsrFlowNo);
+            case Pn21:
+				return GetD21Point(m_MsrFlowNo);
             case Pn25:
                 return GetD25Point(m_MsrFlowNo);
             case Pn49:

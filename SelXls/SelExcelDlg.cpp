@@ -202,7 +202,7 @@ void CSelExcelDlg::OnSelectXlsForm()
     }
     else if (str.Find("SEC") != -1)
     {
-        m_strItemOfExcel.Format("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER");
+        m_strItemOfExcel.Format("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER\nCross Talk");
         m_fileNumLimit = 1;
         m_ft = FORM_SEC;
         m_btnOK.EnableWindow(TRUE);

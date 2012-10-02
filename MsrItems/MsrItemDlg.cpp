@@ -237,12 +237,14 @@ void CMsrItemDlg::OnButtonAdd()
         //1. CA-210쨢퀂퐑
         //2. CA-210쨢ヅ쬲
         //////////////////////////////////////////////////////////////////////////
-        if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
+        //ㄴㅯ헕
+		if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
         if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
         if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn1);
         if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
         if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
         
+		//5헕
         if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
         if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
         if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
@@ -252,6 +254,7 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
             Pusher->SetP5FE(m_f5FE);
         
+		//9헕
         if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
         if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
         if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
@@ -261,9 +264,17 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
             Pusher->SetP9FE(m_f9FE);
         
+		//21헕
+        if (m_chkCWP21.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn21);
+        if (m_chkCRP21.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn21);
+        if (m_chkCGP21.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn21);
+        if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
+        if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
+
         if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
             Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
-        
+       
+		//25헕
         if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
         if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
         if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
@@ -273,22 +284,26 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
             Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
         
+		//49헕
         if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
         if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn49);
         if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn49);
         if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn49);
         if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
         
+		//Nits
         if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
         
         if (m_chkNits.GetState())
             Pusher->SetNitsNum(m_fNits);
         
+		//Gamma
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
         
         if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
         
+		//Cross Talk
         if (m_chkCrossTalk.GetState())
         {
             pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);

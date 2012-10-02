@@ -6,8 +6,13 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /i "Release" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP93D5.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPF740.tmp" with contents
+[
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPF740.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPF741.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
 .\Release\Bolt.obj
@@ -41,10 +46,46 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP93D5.tmp" with c
 .\Release\XlsSEC1.obj
 .\Release\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP93D5.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPF741.tmp"
 <h3>Output Window</h3>
-Compiling resources...
+Compiling...
+MsrItemDlg.cpp
 Linking...
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPFA7D.tmp" with contents
+[
+/nologo /o"Release/ColorEyeI.bsc" 
+.\Release\StdAfx.sbr
+.\Release\Bolt.sbr
+.\Release\Bullet.sbr
+.\Release\ca200srvr.sbr
+.\Release\CA210.sbr
+.\Release\Cartridge.sbr
+.\Release\CaSetupDlg.sbr
+.\Release\Circle.sbr
+.\Release\CircleArc.sbr
+.\Release\ColorEyeI.sbr
+.\Release\ColorEyeIDoc.sbr
+.\Release\ColorEyeIView.sbr
+.\Release\DataChain.sbr
+.\Release\EnterValueDlg.sbr
+.\Release\excel.sbr
+.\Release\FileDlg.sbr
+.\Release\MainFrm.sbr
+.\Release\MsrItemDlg.sbr
+.\Release\OmdFile1.sbr
+.\Release\PatternDlg.sbr
+.\Release\SelExcelDlg.sbr
+.\Release\StaticText.sbr
+.\Release\Table.sbr
+.\Release\TxtFile.sbr
+.\Release\xlef.sbr
+.\Release\XlsGamma.sbr
+.\Release\XlsOQC1.sbr
+.\Release\XlsRA1.sbr
+.\Release\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPFA7D.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
