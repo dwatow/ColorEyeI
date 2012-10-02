@@ -15,9 +15,9 @@ Class3=CAboutDlg
 Class4=CSelXlsDlgAutoProxy
 
 ResourceCount=4
-Resource1=IDD_SELXLS_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_SELXLS_DIALOG
 Class5=CSelExcelDlg
 Class6=CFileDlg
 Resource4=IDD_OMDTOEXCEL

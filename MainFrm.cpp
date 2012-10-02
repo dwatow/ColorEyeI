@@ -26,7 +26,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
     ON_UPDATE_COMMAND_UI(ID_MSR_CONNECTCA210, OnUpdateMsrConnectca210)
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_USB, OnCntUSBUI)
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_RES, OnResolutionUI)
-    //}}AFX_MSG_MAP
+	ON_UPDATE_COMMAND_UI(ID_SETUP_CA210, OnUpdateSetupCa210)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -118,8 +119,8 @@ void CMainFrame::OnMsrConnectca210()
     if (!m_iConnectCa210)
     {
 		BeginWaitCursor();
-//        m_pCa210 = new Ca210(TRUE);
-        m_pCa210 = new Ca210(FALSE);
+        m_pCa210 = new Ca210(TRUE);
+//        m_pCa210 = new Ca210(FALSE);
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
 		EndWaitCursor();
@@ -151,11 +152,16 @@ void CMainFrame::OnUpdateMsrItem(CCmdUI* pCmdUI)
     // TODO: Add your command update UI handler code here
     pCmdUI->Enable(m_iConnectCa210);
 }
+
+void CMainFrame::OnUpdateSetupCa210(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+    pCmdUI->Enable(m_iConnectCa210);	
+}
+
 void CMainFrame::OnDestroy() 
 {
     CFrameWnd::OnDestroy();
     // TODO: Add your message handler code here
     delete    m_pCa210;
 }
-
-

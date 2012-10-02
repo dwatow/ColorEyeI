@@ -57,7 +57,8 @@ protected:
     afx_msg void OnAppExit();
 	afx_msg void OnCntUSBUI(CCmdUI  *pCmdUI);
 	afx_msg void OnResolutionUI(CCmdUI  *pCmdUI);
-    //}}AFX_MSG
+	afx_msg void OnUpdateSetupCa210(CCmdUI* pCmdUI);
+	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 };
 

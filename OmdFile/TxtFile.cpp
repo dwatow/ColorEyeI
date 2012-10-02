@@ -21,10 +21,7 @@ CTxtFile::~CTxtFile(){}
 BOOL CTxtFile::Open(CString path, CFileException& fx)
 {
     if (f_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
-    {
-        FileToMem();
         return TRUE;  //成功入侵取得資料
-    }
     else
     { 
         ErrorMsg(fx);
@@ -47,10 +44,7 @@ void CTxtFile::FileToMem()
 BOOL CTxtFile::Save(CString path, CFileException& fx)
 {
     if (f_Std.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
-    {
-        MemToFile();
         return TRUE;
-    }
     else
     {
         ErrorMsg(fx);
@@ -64,7 +58,8 @@ void CTxtFile::MemToFile()
     if (!D_Txt.empty())
     {
         for (TxtStrData::iterator it = D_Txt.begin(); it != D_Txt.end(); ++it)
-            f_Std.WriteString(*it);
+			//AfxMessageBox(*it);
+				f_Std.WriteString(*it);
     }
 }
 

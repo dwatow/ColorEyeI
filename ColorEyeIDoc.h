@@ -35,6 +35,8 @@ public:
 private:
     OmdCarData m_OmdData;
 public:
+	void OpenOmdDlg(LPCTSTR);
+	void SaveOmdDlg(LPCTSTR);
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
     OmdCarData& GetOmdData(){return m_OmdData; };
@@ -43,11 +45,15 @@ public:
 private:
     TxtStrData m_TextData;
 public:
-    void OpenTxtFile(LPCTSTR );
-    void SaveTxtFile(LPCTSTR );
+	void OpenTxtDlg(LPCTSTR);
+	void SaveTxtDlg(LPCTSTR);
+    void OpenTxtFile(LPCTSTR);
+    void SaveTxtFile(LPCTSTR);
     TxtStrData& GetTextData(){return m_TextData; };
     //TxtStrData GetTextData(){return m_TextData; }; //¤]¥i¥H
 
+public:
+	void AutoSave(int); //0: Txt, 1: Omd
 //MsrDataChain
 private:
 	CDataChain m_msrData;

@@ -12,8 +12,6 @@
     #error include 'stdafx.h' before including this file for PCH
 #endif
 #include "resource.h"       // main symbols
-#include "SelXls/SelExcelDlg.h"
-#include "xMsrPoint/PatternDlg.h"
 
 //#include "MsrItems/MsrItemDlg.h"
 
@@ -22,10 +20,14 @@
 // See ColorEyeI.cpp for the implementation of this class
 //
 
+class CPatternDlg;
+class CCaSetupDlg;
+
 class CColorEyeIApp : public CWinApp
 {
 	CString m_strPathName;
     CPatternDlg *m_pdlgPattern;
+	CCaSetupDlg *m_pdlgCaSetup;
 public:
 	void DelMsrItemDlgSetupFile();
 	CString GetPath();
@@ -46,6 +48,7 @@ public:
     afx_msg void OnAppAbout();
 	afx_msg void OnFileOmdtoxls();
 	afx_msg void OnMsrForItem();
+	afx_msg void OnSetupCa210();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 };

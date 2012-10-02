@@ -634,3 +634,22 @@ void IMemory::CopyFromFile(long ProbeNOVal, LPCTSTR FileNameVal)
          ProbeNOVal, FileNameVal);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+// IProbeInfo properties
+
+/////////////////////////////////////////////////////////////////////////////
+// IProbeInfo operations
+
+CString IProbeInfo::GetTypeName()
+{
+	CString result;
+	InvokeHelper(0x1, DISPATCH_PROPERTYGET, VT_BSTR, (void*)&result, NULL);
+	return result;
+}
+
+long IProbeInfo::GetTypeNO()
+{
+	long result;
+	InvokeHelper(0x2, DISPATCH_PROPERTYGET, VT_I4, (void*)&result, NULL);
+	return result;
+}

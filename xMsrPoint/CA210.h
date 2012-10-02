@@ -7,14 +7,21 @@
 //單獨控制CA-210模組是不是要進入 DEBUG模式
 //#define _CA210DEBUG _DEBUG
 
+enum SynMode   { SM_NTSC = 0, SM_PAL, SM_EXT, SM_UNIV, SM_INT};
+enum DisPlay   { DP_Lvxy = 0, DP_duvT, DP_Analyzer_NoDisplay, DP_Analyzer_Gstand, DP_Analyzer_Rstand, DP_dudv, DP_FMA, DP_XYZ, DP_JEITA};
+enum DisDigits { DD_3DisDigits = 0, DD_4DisDigits};
+enum AvgMode   { AM_SLOW = 0, AM_FAST, AM_AUTO};
+enum BrigUnit  { BU_fL =0, BU_cdm2 };
+enum CalStand  { CS_6500K = 1, CS_9300K };
+
 class Ca210
 {
-    ICa200          m_ICa200;
-    ICa             m_ICa;
-    IProbe          m_IProbe;
-    IMemory         m_IMemory;
+    ICa200          *m_pICa200;
+    ICa             *m_pICa;
+    IProbe          *m_pIProbe;
+    IMemory         *m_pIMemory;
 //    IProbes         m_IProbes;
-//    IProbeInfo      m_IProbeInfo;
+    IProbeInfo      *m_pIProbeInfo;
 //    ICas            m_ICas;
 //    IOutputProbes   m_IOutputProbes;
 //    _ICaEvents      m__ICaEvents;
@@ -36,7 +43,7 @@ public:
 //    Ca210();
     Ca210(BOOL tr = TRUE);
     ~Ca210();
-	BOOL isReady() const;
+	BOOL isReady() const { return m_isSuccess; };
 	BOOL CreatCa200();
 	BOOL ConnectCa210();
 	BOOL AttachCa();
@@ -45,26 +52,79 @@ public:
     UINT MsrAI(float );//0.0001
     UINT Measure();
 
-    BOOL isTrue() const;
-    BOOL CalZero(int f = 0);
-    BOOL LinkMemory();
-    BOOL SetOnline(BOOL);
+    BOOL isTrue() const { return m_isTrue; };
+    BOOL CalZero(int i = 0);
+    void LinkMemory();
+    BOOL SetOnline(BOOL b = TRUE);
     BOOL GetOnline() const;
     CString GetLcmSize();
     Bullet  GetMsrData();
     CString OutData();
     CString GetChData();
 
-    //for Omd File Head
-    CString GetChNO();
-    CString GetProb();
-    CString GetDeviceType();
+	//for setup
+	float   GetRangeColor1();
+	float   GetRangeColor2();
+	float   GetRangeFAM();
+
+	void    SetChId(LPCTSTR &Id) { m_pIMemory->SetChannelID(Id); };
+	CString GetChId()            {                               return m_pIMemory->GetChannelID(); };
+	CString GetChId(long &No)    { m_pIMemory->SetChannelNO(No); return m_pIMemory->GetChannelID(); };
+
+ 	void    SetChNo(long &No)    { m_pIMemory->SetChannelNO(No); };
+    CString GetChStrNo()         { str.Format("%ld", m_pIMemory->GetChannelNO()); return str; };
+	long    GetChNo()            { return m_pIMemory->GetChannelNO(); };
+
+  
+	CString GetProb()       { return m_pIProbe->GetSerialNO(); };
+    CString GetDeviceType() { return m_pICa->GetCAType();      };
+	CString GetCaVersion()  { return m_pICa->GetCAVersion();   };
+
+	CString GetRefProbe();
+	CString GetCalProbe();
+	CString GetCalMode();
+	
+	CString GetRefLv();
+	CString GetRefSx();
+	CString GetRefSy();
+
+	void    SetSynMode(SynMode);
+	CString GetSynMode(SynMode);
+	float   GetSynMode();
+
+	void    SetDisplayMode(DisPlay);
+	CString GetDisplayMode(DisPlay);
+	long    GetDisplayMode();
+
+	void    SetDisplayDigits(DisDigits);
+	CString GetDisplayDigits(DisDigits);
+	long    GetDisplayDigits();
+
+	void    SetAvgingMode(AvgMode);
+	CString GetAvgingMode(AvgMode);
+	long    GetAvgingMode();
+
+	void    SetBrigUnit(BrigUnit);
+	CString GetBrigUnit(BrigUnit);
+	long    GetBrigUnit();
+
+	void    SetCalStandard(CalStand);
+	CString GetCalStandard(CalStand);
+	long    GetCalStandard();
 
 
 #ifdef _CA210DEBUG
     CString GetSetupValue() const;
     void DBugModeBox(CString) const;
 #endif
+
+private:
+	float   ChooseSynMode(SynMode);
+	int     ChooseDisplayMode(DisPlay);
+	int     ChooseDisplayDigits(DisDigits);
+	int     ChooseAvgingMode(AvgMode);
+	int     ChooseBrigUnit(BrigUnit);
+	int     ChooseCalStandard(CalStand);
 };
 
 #endif

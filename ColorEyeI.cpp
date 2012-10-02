@@ -7,6 +7,9 @@
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
+#include "SelXls/SelExcelDlg.h"
+#include "CaSetupDlg.h"
+#include "xMsrPoint/PatternDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +25,7 @@ BEGIN_MESSAGE_MAP(CColorEyeIApp, CWinApp)
     ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	ON_COMMAND(ID_FILE_OMDTOXLS, OnFileOmdtoxls)
 	ON_COMMAND(ID_MSR_ITEM, OnMsrForItem)
+	ON_COMMAND(ID_SETUP_CA210, OnSetupCa210)
 	//}}AFX_MSG_MAP
     // Standard file based document commands
     ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -31,7 +35,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIApp construction
 
-CColorEyeIApp::CColorEyeIApp():m_pdlgPattern(0)
+CColorEyeIApp::CColorEyeIApp():m_pdlgPattern(0), m_pdlgCaSetup(0)
 {
     // TODO: add construction code here,
     // Place all significant initialization in InitInstance
@@ -41,6 +45,7 @@ CColorEyeIApp::~CColorEyeIApp()
 {
 	DelMsrItemDlgSetupFile();
     delete m_pdlgPattern;
+	delete m_pdlgCaSetup;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -253,4 +258,15 @@ void CColorEyeIApp::DelMsrItemDlgSetupFile()
 	CString delFileNamePath;
 	delFileNamePath.Format("%s\\~MsrItemDlg.temp", GetPath());
 	DeleteFile(delFileNamePath);
+}
+
+void CColorEyeIApp::OnSetupCa210() 
+{
+	// TODO: Add your command handler code here
+	if (m_pdlgCaSetup == 0)
+	{
+		m_pdlgCaSetup = new CCaSetupDlg();
+		m_pdlgCaSetup->Create(IDD_CASETUP_DIALOG);
+	}
+	m_pdlgCaSetup->ShowWindow(SW_NORMAL);
 }

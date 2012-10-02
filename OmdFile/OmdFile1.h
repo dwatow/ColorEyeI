@@ -53,15 +53,15 @@ private:
 	TxtStrData D_Txt;
 public:
     COmdFile1();
-	virtual ~COmdFile1(){D_Txt.clear();};
+	virtual ~COmdFile1(){  D_Omd.Empty(); D_Txt.clear(); D_Txt.clear(); };
     BOOL Open(CString, CFileException&);
     BOOL Save(CString, CFileException&);
     
 	void Close(){ f_Txt.Close(); };
 
-	void iOmdData(OmdCarData& data){ D_Omd = data; };
-	void oOmdData(OmdCarData& data){ data = D_Omd; };
-	OmdCarData oOmdData(){ return D_Omd; };
+	void iOmdData(OmdCarData& data){ D_Omd = data; OmdToTxt(); };
+	void oOmdData(OmdCarData& data){ TxtToOmd(); data = D_Omd; };
+	OmdCarData oOmdData(){ TxtToOmd(); return D_Omd; };
 private:
 	void TxtToOmd();
 	void OmdToTxt();

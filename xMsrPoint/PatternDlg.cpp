@@ -66,7 +66,8 @@ BEGIN_MESSAGE_MAP(CPatternDlg, CDialog)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
     ON_WM_TIMER()
-    //}}AFX_MSG_MAP
+	ON_WM_SHOWWINDOW()
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
@@ -364,43 +365,6 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
     }
 }
 
-//BOOL CPatternDlg::Magazine(std::vector<Cartridge>::iterator BeginItor, std::vector<Cartridge>::iterator EndItor)
-// BOOL CPatternDlg::Magazine(std::vector<Cartridge>& vCar)
-// {
-//     m_itor = vCar.begin();
-//     ++m_itor;               //閃掉第一個空包彈
-//     m_BeginItor = m_itor;
-//     m_EndItor   = vCar.end();
-// 
-//     //++BeginItor;  
-//     if(!m_GunMchn.isReady())
-//     {
-//         if (!m_GunMchn.Magazine(m_pCA210->GetLcmSize(), m_EndItor))    MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
-//             Trigger(m_itor);//)                                MessageBox("PtnDlg->Magazine的扳機出錯");
-//             NextTrigger(m_itor);//)                            MessageBox("PtnDlg->Magazine的下一搶扳機出錯");
-//         if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-//         if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))        MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
-// 
-//         Invalidate();
-//         
-//         return TRUE;  //第一次量測
-//     }
-//     else
-//         return FALSE; //單點覆測使用
-// }
-
-// BOOL CPatternDlg::ConnectCa210(Ca210* pCa)
-// {
-//     m_pCA210 = pCa;
-//     if (m_pCA210 != 0)
-//     {
-//         m_pCA210->SetOnline(TRUE);
-//         return TRUE ;
-//     }
-//     else
-//         return FALSE;
-// }
-
 CString CPatternDlg::SetLCMSize()
 {
     CString LCMSize;
@@ -430,7 +394,7 @@ BOOL CPatternDlg::Magazine()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChNO()       );
+    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChStrNo()    );
     pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
     pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 
@@ -531,9 +495,10 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
             case VK_ESCAPE://跳離Patten Dialog
                 if(c_bRunMsrAI)
                     KillTimer(1);
-                m_pCA210->SetOnline(FALSE);
+                //m_pCA210->SetOnline(FALSE);
                 ShowWindow(SW_HIDE);
-                pDoc->RestructureVector();  //有問題~
+                pDoc->RestructureVector();
+				pDoc->UpdateAllViews(NULL);
                 break;
         }
         return TRUE;
@@ -753,8 +718,8 @@ UINT CPatternDlg::EventCatchMsrValue()
     {
     case 0:        MessageBox("沒連線，無法量測");        return 0;
     case 2:        MessageBox("尚未0-Cal!!依下列SOP排解此問題\n1. 量筒轉到0-Cal檔\n2. 按下「確定」");
-                   m_pCA210->CalZero();                   return 2;
-    case 3:        MessageBox("檔位不在MEAS");            return 3;
+                   m_pCA210->CalZero();                 return 2;
+    case 3:        MessageBox("檔位不在MEAS");           return 3;
     default:
         m_Goal.SetPercent(100);
         if (!EventGoNextGoal())
@@ -860,4 +825,12 @@ void CPatternDlg::FineNits()
 BOOL CPatternDlg::isReady()
 {
     return c_bisReady;
+}
+
+void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
+{
+	CDialog::OnShowWindow(bShow, nStatus);
+	
+	// TODO: Add your message handler code here
+	m_pCA210->SetOnline(bShow);	
 }

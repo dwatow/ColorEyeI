@@ -25,9 +25,9 @@ public:
 
 	void Close(){ f_Std.Close(); };
 
-	void iTxtData(TxtStrData& data){ D_Txt = data; };
-	void oTxtData(TxtStrData& data){ data = D_Txt; };
-	TxtStrData oTxtData(){ return D_Txt; };
+	void iTxtData(TxtStrData& data){ D_Txt = data; MemToFile(); };
+	void oTxtData(TxtStrData& data){ FileToMem(); data = D_Txt; };
+	TxtStrData oTxtData(){ FileToMem(); return D_Txt; };
 private:
 	void FileToMem();
 	void MemToFile();

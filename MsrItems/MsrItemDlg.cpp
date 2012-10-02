@@ -27,8 +27,6 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
 
 	m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
 	
-// 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-//     ASSERT_VALID(pMainFrm);
 
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;

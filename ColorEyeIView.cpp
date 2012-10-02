@@ -6,6 +6,7 @@
 
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
+#include "MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -53,7 +54,6 @@ BOOL CColorEyeIView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CColorEyeIView::OnDraw(CDC* pDC)
 {
-	
     CColorEyeIDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
 

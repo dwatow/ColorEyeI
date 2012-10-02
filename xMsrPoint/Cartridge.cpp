@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Cartridge.h"
+
 /*******************************************
  *    Define PointSet Class member function  *
  *******************************************/

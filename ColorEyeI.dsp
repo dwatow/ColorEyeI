@@ -113,6 +113,10 @@ SOURCE=.\xMsrPoint\Cartridge.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CaSetupDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\Circle.cpp
 # End Source File
 # Begin Source File
@@ -235,6 +239,10 @@ SOURCE=.\xMsrPoint\CA210.h
 # Begin Source File
 
 SOURCE=.\xMsrPoint\Cartridge.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CaSetupDlg.h
 # End Source File
 # Begin Source File
 

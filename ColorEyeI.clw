@@ -2,30 +2,31 @@
 
 [General Info]
 Version=1
-LastClass=CColorEyeIView
+LastClass=CCaSetupDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=6
+ClassCount=7
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=8
-Resource1=IDD_EDIT_DIALOG
+Resource1=IDD_MSR_ITEM
 Class5=CAboutDlg
 Resource2=IDD_ABOUTBOX
-Resource3=IDD_MSR_ITEM
-Resource4=IDD_PATTERN_DIALOG
+Resource3=IDD_OMDTOEXCEL
+Resource4=IDR_MAINFRAME
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_OMDTOEXCEL
-Resource7=IDR_MAINFRAME
-Resource8=IDD_SETUP_DIALOG
+Resource6=IDD_EDIT_DIALOG
+Resource7=IDD_PATTERN_DIALOG
+Class7=CCaSetupDlg
+Resource8=IDD_CASETUP_DIALOG
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -60,7 +61,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=CMainFrame
+LastObject=ID_SETUP_CA210
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -281,10 +282,60 @@ Filter=D
 LastObject=CEnterValueDlg
 VirtualFilter=dWC
 
-[DLG:IDD_SETUP_DIALOG]
+[DLG:IDD_CASETUP_DIALOG]
 Type=1
-Class=?
-ControlCount=2
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
+Class=CCaSetupDlg
+ControlCount=43
+Control1=IDOK,button,1073807361
+Control2=IDCANCEL,button,1073807360
+Control3=IDC_STATIC,button,1342177287
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STATIC,static,1342308352
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_COMBO_DISPLAY_MODE,combobox,1344339971
+Control10=IDC_COMBO_SYNC_MODE,combobox,1478557699
+Control11=IDC_COMBO_AVERAGING_MODE,combobox,1478557699
+Control12=IDC_COMBO_DISPLAY_DIGITS_MODE,combobox,1478557699
+Control13=IDC_STATIC_CA_TYPE,static,1342312962
+Control14=IDC_STATIC,button,1342177287
+Control15=IDC_COMBO_DISPLAY_DEFAULT_STD,combobox,1478557699
+Control16=IDC_STATIC_CA_VERSION,static,1342312962
+Control17=IDC_STATIC_PROB_SNO,static,1342312962
+Control18=IDC_STATIC,static,1342308352
+Control19=IDC_STATIC,static,1342308352
+Control20=IDC_STATIC,static,1342308352
+Control21=IDC_STATIC,static,1342308352
+Control22=IDC_STATIC,button,1342177287
+Control23=IDC_EDIT_DISPLAY_RANGE_COLOR1,edit,1484849280
+Control24=IDC_STATIC,button,1342177287
+Control25=IDC_STATIC,button,1342177287
+Control26=IDC_EDIT_DISPLAY_RANGE_COLOR2,edit,1484849280
+Control27=IDC_EDIT_DISPLAY_RANGE_FLICKER,edit,1484849280
+Control28=IDC_STATIC,button,1342177287
+Control29=IDC_STATIC,static,1342308352
+Control30=IDC_STATIC,static,1342308352
+Control31=IDC_STATIC,static,1342308352
+Control32=IDC_STATIC,static,1342308352
+Control33=IDC_STATIC_REF_PROB,static,1342312962
+Control34=IDC_STATIC_CAL_PROB,static,1342312962
+Control35=IDC_STATIC_REF_LV,static,1342312962
+Control36=IDC_STATIC,static,1342308352
+Control37=IDC_STATIC,static,1342308352
+Control38=IDC_COMBO_CHANNEL_ID,combobox,1344339971
+Control39=IDC_COMBO_CHANNEL_NUMBER,combobox,1344339971
+Control40=IDC_STATIC_CAL_MODE,static,1342312962
+Control41=IDC_STATIC_REF_X,static,1342312962
+Control42=IDC_STATIC_REF_Y,static,1342312962
+Control43=IDC_COMBO_BRIG_UNIT,combobox,1478557699
+
+[CLS:CCaSetupDlg]
+Type=0
+HeaderFile=CaSetupDlg.h
+ImplementationFile=CaSetupDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CCaSetupDlg
+VirtualFilter=dWC
 

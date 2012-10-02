@@ -135,7 +135,7 @@ BEGIN
         MENUITEM "環境設定\t(未定義)",          ID_SETUP_SOFT
         MENUITEM "量測操作\t(未定義)",          ID_SETUP_MSR
         MENUITEM "量測值規範",                  ID_SETUP_SPEC
-        MENUITEM "設定CA-210",                  ID_SETUP_CA210
+        MENUITEM "CA-210控制選項",              ID_SETUP_CA210
         MENUITEM "校正CA-210\t(未定義)",        ID_SETUP_CAL
     END
     POPUP "說明(&H)"
@@ -170,8 +170,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,0,1
- PRODUCTVERSION 2,2,0,2
+ FILEVERSION 1,3,3,1
+ PRODUCTVERSION 2,2,1,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -189,14 +189,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 MFC應用程式\0"
-            VALUE "FileVersion", "1, 3, 0, 1\0"
+            VALUE "FileVersion", "1, 3, 3, 1\0"
             VALUE "InternalName", "ColorEye 測試版2.2\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Color Eye App\0"
-            VALUE "ProductVersion", "2, 2, 0, 2\0"
+            VALUE "ProductVersion", "2, 2, 1, 2\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -217,20 +217,20 @@ END
 IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 201, 58
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "關於 ColorEye"
-FONT 9, "微軟正黑體"
+FONT 9, "Verdana"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,144,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "ColorEye Version bata2",IDC_STATIC,40,10,85,8,
+    LTEXT           "ColorEye Version Beta 2.2.1",IDC_STATIC,40,10,90,8,
                     SS_NOPREFIX
-    LTEXT           "Copyright (C) 2012\n 奇菱光電\n光電技術研發處 電子開發一課",
+    LTEXT           "Copyright (C) 2012\n奇菱光電\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,105,25
 END
 
 IDD_OMDTOEXCEL DIALOG DISCARDABLE  0, 0, 339, 173
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Omd轉Excel"
-FONT 9, "微軟正黑體"
+FONT 9, "Verdana"
 BEGIN
     COMBOBOX        IDC_COMBO_EXCELSELER,17,17,105,74,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
@@ -254,14 +254,14 @@ END
 
 IDD_PATTERN_DIALOG DIALOG DISCARDABLE  0, 0, 265, 185
 STYLE DS_MODALFRAME | WS_POPUP
-FONT 10, "SansSerif"
+FONT 10, "Verdana"
 BEGIN
 END
 
 IDD_MSR_ITEM DIALOG DISCARDABLE  0, 0, 379, 229
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "MsrItems"
-FONT 9, "微軟正黑體"
+FONT 9, "Verdana"
 BEGIN
     CONTROL         "",IDC_CHECK_CWP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     45,27,8,8
@@ -402,20 +402,81 @@ END
 IDD_EDIT_DIALOG DIALOG DISCARDABLE  0, 0, 159, 34
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
-FONT 10, "SansSerif"
+FONT 10, "Verdana"
 BEGIN
     EDITTEXT        IDC_EDIT_VALUE,44,10,40,12,ES_AUTOHSCROLL
     DEFPUSHBUTTON   "OK",IDOK,95,8,50,15
     LTEXT           "LCM Size",IDC_STATIC_SOMETHING,9,11,30,8
 END
 
-IDD_SETUP_DIALOG DIALOG DISCARDABLE  0, 0, 187, 96
+IDD_CASETUP_DIALOG DIALOG DISCARDABLE  0, 0, 279, 189
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Setup CA-210"
-FONT 9, "微軟正黑體"
+CAPTION "CA-210控制選項"
+FONT 8, "Verdana"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,130,7,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,130,24,50,14
+    DEFPUSHBUTTON   "關閉設定",IDOK,160,175,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,215,175,50,14,NOT WS_VISIBLE
+    GROUPBOX        "基本設定",IDC_STATIC,5,5,130,90
+    LTEXT           "Display Mode",IDC_STATIC,10,15,70,8
+    LTEXT           "Sync. Mode",IDC_STATIC,10,30,70,8
+    LTEXT           "Averaging Mode",IDC_STATIC,10,45,70,8
+    LTEXT           "Brightness Unit Mode",IDC_STATIC,10,60,70,8
+    LTEXT           "Display Digits Mode",IDC_STATIC,10,75,70,8
+    COMBOBOX        IDC_COMBO_DISPLAY_MODE,85,15,40,90,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SYNC_MODE,85,30,40,90,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_AVERAGING_MODE,85,45,40,90,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_DISPLAY_DIGITS_MODE,85,75,40,90,
+                    CBS_DROPDOWNLIST | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "CA-210",IDC_STATIC_CA_TYPE,70,105,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    GROUPBOX        "CA Info.",IDC_STATIC,5,95,130,75
+    COMBOBOX        IDC_COMBO_DISPLAY_DEFAULT_STD,70,135,50,60,
+                    CBS_DROPDOWNLIST | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Ver.3.20.0000",IDC_STATIC_CA_VERSION,70,120,50,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    RTEXT           "08113142",IDC_STATIC_PROB_SNO,70,150,50,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    LTEXT           "CA Type",IDC_STATIC,10,105,55,8
+    LTEXT           "Prob SNO",IDC_STATIC,10,150,55,8
+    LTEXT           "Default Std",IDC_STATIC,10,135,55,8
+    LTEXT           "CA Version",IDC_STATIC,10,120,55,8
+    GROUPBOX        "Display Range",IDC_STATIC,140,5,130,45
+    EDITTEXT        IDC_EDIT_DISPLAY_RANGE_COLOR1,150,25,30,12,
+                    ES_AUTOHSCROLL | WS_DISABLED
+    GROUPBOX        "Color",IDC_STATIC,145,15,75,30
+    GROUPBOX        "Flicker",IDC_STATIC,225,15,40,30
+    EDITTEXT        IDC_EDIT_DISPLAY_RANGE_COLOR2,185,25,30,12,
+                    ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDIT_DISPLAY_RANGE_FLICKER,229,25,31,12,
+                    ES_AUTOHSCROLL | WS_DISABLED
+    GROUPBOX        "Memory Info.",IDC_STATIC,140,55,130,115
+    LTEXT           "Channel Number",IDC_STATIC,145,65,55,8
+    LTEXT           "Cal. Probe",IDC_STATIC,145,110,55,8
+    LTEXT           "Ref. Probe",IDC_STATIC,145,95,55,8
+    LTEXT           "Channel ID",IDC_STATIC,145,80,55,8
+    RTEXT           "0",IDC_STATIC_REF_PROB,205,95,58,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    RTEXT           "0",IDC_STATIC_CAL_PROB,205,110,58,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    RTEXT           "160",IDC_STATIC_REF_LV,225,150,35,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LTEXT           "Ref. xyLv",IDC_STATIC,145,140,55,8
+    LTEXT           "Cal. Mode",IDC_STATIC,145,125,55,8
+    COMBOBOX        IDC_COMBO_CHANNEL_ID,205,80,58,85,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CHANNEL_NUMBER,205,65,58,85,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "6500K",IDC_STATIC_CAL_MODE,205,125,58,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    RTEXT           "0.3127",IDC_STATIC_REF_X,145,150,35,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    RTEXT           "0.3293",IDC_STATIC_REF_Y,185,150,35,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_COMBO_BRIG_UNIT,85,60,40,90,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
 END
 
 
@@ -457,12 +518,12 @@ BEGIN
         BOTTOMMARGIN, 222
     END
 
-    IDD_SETUP_DIALOG, DIALOG
+    IDD_CASETUP_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 180
+        RIGHTMARGIN, 272
         TOPMARGIN, 7
-        BOTTOMMARGIN, 89
+        BOTTOMMARGIN, 182
     END
 END
 #endif    // APSTUDIO_INVOKED

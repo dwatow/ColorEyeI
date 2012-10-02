@@ -54,6 +54,7 @@ protected:
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     afx_msg void OnPaint();
     afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:

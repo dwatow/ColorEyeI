@@ -149,4 +149,24 @@ public:
     void CopyFromFile(long ProbeNOVal, LPCTSTR FileNameVal);
 };
 
+// Machine generated IDispatch wrapper class(es) created with ClassWizard
+/////////////////////////////////////////////////////////////////////////////
+// IProbeInfo wrapper class
+
+class IProbeInfo : public COleDispatchDriver
+{
+public:
+	IProbeInfo() {}		// Calls COleDispatchDriver default constructor
+	IProbeInfo(LPDISPATCH pDispatch) : COleDispatchDriver(pDispatch) {}
+	IProbeInfo(const IProbeInfo& dispatchSrc) : COleDispatchDriver(dispatchSrc) {}
+	
+	// Attributes
+public:
+	
+	// Operations
+public:
+	CString GetTypeName();
+	long GetTypeNO();
+};
+
 #endif
