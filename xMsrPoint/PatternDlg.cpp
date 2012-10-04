@@ -185,7 +185,7 @@ void CPatternDlg::OnPaint()
         TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %s inch", \
-            m_pCA210->GetOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize().Left(2));
+            m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize().Left(2));
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - temp.GetLength()*6.7, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
     }
 
@@ -214,9 +214,9 @@ void CPatternDlg::OnPaint()
 
     if (c_bZeroCal)
     {
-        if (!m_pCA210->isTrue())
-            temp.Format("沒接 CA-210，模擬Zero Cal");
-        else
+//         if (!m_pCA210->isTrue())
+//             temp.Format("沒接 CA-210，模擬Zero Cal");
+//         else
             temp.Format("       正在Zero Cal...   ");
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
     }
@@ -487,7 +487,6 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
         switch(pMsg->wParam)
         {
             case VK_SPACE:  EventSwCntCa210();    break;//切換連線
-//            case VK_UP:        EventRunZeroCal();    break;//Zero Cal
             case VK_DOWN:   EventRunMsrAi();      break;//自動量測模式
             case VK_RIGHT:  EventGoNextGoal();    break;//跳下一個點
             case VK_LEFT:   EventGoPrvsGoal();    break;//上一個點
@@ -495,7 +494,6 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
             case VK_ESCAPE://跳離Patten Dialog
                 if(c_bRunMsrAI)
                     KillTimer(1);
-                //m_pCA210->SetOnline(FALSE);
                 ShowWindow(SW_HIDE);
                 pDoc->RestructureVector();
 				pDoc->UpdateAllViews(NULL);
@@ -506,10 +504,8 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
     return CDialog::PreTranslateMessage(pMsg);
 }
 
-UINT CPatternDlg::Recoil()
+CaState CPatternDlg::Recoil()
 {
-    UINT camsrResult = 0;
-
     //存目前的
     BOOL OldDrawNextGold = c_bDrawNextGold;
     BOOL OldDrawGold     = c_bDrawGold;
@@ -523,9 +519,9 @@ UINT CPatternDlg::Recoil()
     Invalidate();
     UpdateWindow();
 
-    Sleep(70);
+    Sleep(100);
 
-    camsrResult = m_pCA210->Measure();
+    CaState camsrResult(m_pCA210->Measure());
 
     m_itor->SetBullet(m_pCA210->GetMsrData());
 
@@ -541,11 +537,6 @@ UINT CPatternDlg::Recoil()
 
     return camsrResult;
 }
-
-// void CPatternDlg::Grow(std::vector<Cartridge>& vCar, Cartridge& MsrFlow)
-// {
-//     m_GunMchn.Grow(vCar, MsrFlow);
-// }
 
 UINT CPatternDlg::VbrGoalThread(LPVOID LParam)
 {
@@ -614,46 +605,50 @@ void CPatternDlg::OnTimer(UINT nIDEvent)
            1 標準範圍 →2.
            2 大於100
     */
-    srand(time(NULL));
-    MsrAIValue = m_pCA210->MsrAI((float)0.005);
-    switch(MsrAIValue)
-    {
-        case 0://亮度0，目前0-Cal
-            EventRunMsrAi(FALSE);
-            AfxMessageBox("量測目前在0-Cal唷！\n請轉至Measure。");
-            break;
-        case 1://標準門檻值內：繼續量測+百分比
-            SetPercentValue = m_Goal.SetPercent(m_Percent);
-            switch (SetPercentValue)
-            {
-                case 0://空杯啦
-                    //m_Percent = rand()%20+10;
-                    m_Goal.SetPercent(rand()%20+10);
-                    m_Percent = m_Goal.GetPercent();
-                    break;
-                case 1://進行中
-                    m_Percent += rand()%50+rand()%50+1;
-                    break;
-                case 2://滿出來啦
-                    c_bMsrValues = /*TRUE;*/c_bMsring = FALSE;
-                    if (m_Percent > 83)
-                    {
-                        EventRunMsrAi(FALSE);
-                        if (EventCatchMsrValue() == 1) //最複雜的步驟
-                            EventRunMsrAi(TRUE);
-                    }
-                    break;
-            }
-            break;
-        case 2://標準門檻值外：繼續量測-百分比
-            m_Percent -= rand()%25+rand()%25+1;
-            break;
-        case 3://未連線
-            c_bUnCntCA210 = TRUE;
-            break;
-    }
-    Invalidate();
-    UpdateWindow();
+	if (m_pCA210->isOnline())
+	{
+		srand(time(NULL));
+		MsrAIValue = m_pCA210->MsrAI((float)0.005);
+		switch(MsrAIValue)
+		{
+			case MA_InDeviation://標準門檻值內：繼續量測+百分比
+				SetPercentValue = m_Goal.SetPercent(m_Percent);
+				switch (SetPercentValue)
+				{
+					case 0://空杯啦
+						//m_Percent = rand()%20+10;
+						m_Goal.SetPercent(rand()%20+10);
+						m_Percent = m_Goal.GetPercent();
+						break;
+					case 1://進行中
+						m_Percent += rand()%50+rand()%50+1;
+						break;
+					case 2://滿出來啦
+						c_bMsrValues = /*TRUE;*/c_bMsring = FALSE;
+						if (m_Percent > 83)
+						{
+							EventRunMsrAi(FALSE);
+							if (EventCatchMsrValue() == 1) //最複雜的步驟
+								EventRunMsrAi(TRUE);
+						}
+						break;
+				}
+				break;
+			case MA_OutDeviation://標準門檻值外：繼續量測-百分比
+				m_Percent -= rand()%25+rand()%25+1;
+				break;
+			case MA_nonMsr:
+				EventRunMsrAi(FALSE);
+				AfxMessageBox("檢查探頭：要轉到MEAS\n檢查主機：REMOTE燈要亮\n可以順利自動量測！");
+				break;
+		}
+		Invalidate();
+		UpdateWindow();
+	}
+	else
+	{
+		c_bUnCntCA210 = TRUE;
+	}
 
     CDialog::OnTimer(nIDEvent);
 }
@@ -713,22 +708,28 @@ UINT CPatternDlg::EventCatchMsrValue()
     3 檔位不在MEAS
     4 量測正常 當作1
     最後一點  5
-    */    
+    */
+// 	CaState n = Recoil();//m_pCA210->Measure();  //測試量測
+// 	CString str;
+// 	str.Format("%d", n);
+// 	MessageBox(str);
+// 	switch(n)
     switch(Recoil())
     {
-    case 0:        MessageBox("沒連線，無法量測");        return 0;
-    case 2:        MessageBox("尚未0-Cal!!依下列SOP排解此問題\n1. 量筒轉到0-Cal檔\n2. 按下「確定」");
-                   m_pCA210->CalZero();                 return 2;
-    case 3:        MessageBox("檔位不在MEAS");           return 3;
-    default:
+    case CA_Offline:        MessageBox("沒連線，無法量測");  return 0;
+    case CA_ZeroCalMode:    MessageBox("檔位不在MEAS");     return 3;
+	case CA_MsrMode:
+	default:
         m_Goal.SetPercent(100);
         if (!EventGoNextGoal())
-            return 5;//是否為最後一點
+			                                               return 5;//是否為最後一點
+		else
+		{
+			m_Goal.SetPercent(0);
+			m_Percent = m_Goal.GetPercent();
+			Invalidate();                                  return 1;
+		}
     }
-    m_Goal.SetPercent(0);
-    m_Percent = m_Goal.GetPercent();
-    Invalidate();
-    return 1;
 }
 
 void CPatternDlg::EventRunMsrAi(int isRun)
@@ -768,7 +769,7 @@ void CPatternDlg::EventRunMsrAi(int isRun)
 void CPatternDlg::EventSwCntCa210()
 {
     //切換連線
-    m_pCA210->SetOnline(m_pCA210->GetOnline() ? FALSE : TRUE);
+    m_pCA210->SetOnline(m_pCA210->isOnline() ? FALSE : TRUE);
     Invalidate();
 }
 
@@ -777,7 +778,7 @@ void CPatternDlg::EventRunZeroCal()
     c_bZeroCal = TRUE;
     Invalidate();
     UpdateWindow();
-    if (!m_pCA210->CalZero())
+    if (m_pCA210->CalZero() == CA_Offline)
         MessageBox("未連線");
     c_bZeroCal = FALSE;
     Invalidate();
@@ -790,7 +791,7 @@ void CPatternDlg::FineNits()
      int j;
      float fLv = 0;
 
-    if (m_pCA210->isTrue())  //虛擬機時，就不執行
+//    if (m_pCA210->isTrue())  //虛擬機時，就不執行
         for(j=0;j<2;++j)
         {
             while(fLv < m_GunMchn.GetNitsSpec())//若亮度還在5以下，就...變亮

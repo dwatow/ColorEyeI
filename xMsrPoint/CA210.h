@@ -14,6 +14,9 @@ enum AvgMode   { AM_SLOW = 0, AM_FAST, AM_AUTO};
 enum BrigUnit  { BU_fL =0, BU_cdm2 };
 enum CalStand  { CS_6500K = 1, CS_9300K };
 
+enum CaState    { CA_Offline, CA_BeforeZeroCal, CA_ZeroCalMode, CA_MsrMode};
+enum MsrAiState { MA_nonMsr, MA_InDeviation, MA_OutDeviation };
+
 class Ca210
 {
     ICa200          *m_pICa200;
@@ -27,40 +30,41 @@ class Ca210
 //    _ICaEvents      m__ICaEvents;
 
     Bullet m_blt;
-//    CString m_strData;
 
-//    BOOL m_DebugFlag;
-	BOOL m_isSuccess;
-    BOOL m_isTrue;  //無CA-210要模擬程式進行的模式
-    BOOL m_Online;
-    BOOL m_isZeroCal;
+    CaState m_caState;
+	CaState m_caStateTemp;
+//    BOOL m_isZeroCal;
     CString str;
 
+protected:
     void MsgFrmt(CException* e, CString, CString);
     void MsgFrmt(CString);
+
 public:
     CString ImpsbStr;
-//    Ca210();
-    Ca210(BOOL tr = TRUE);
-    ~Ca210();
-	BOOL isReady() const { return m_isSuccess; };
-	BOOL CreatCa200();
-	BOOL ConnectCa210();
-	BOOL AttachCa();
-	BOOL AttchProbe();
 
-    UINT MsrAI(float );//0.0001
-    UINT Measure();
+    //初始化函數
+	Ca210();
+    virtual ~Ca210();
+//	virtual BOOL isReady() const { return m_isSuccess; };
+		BOOL initCreatCa200();
+		BOOL initConnectCa210();
+		BOOL initAttachCa();
+		BOOL initAttchProbe();
 
-    BOOL isTrue() const { return m_isTrue; };
-    BOOL CalZero(int i = 0);
-    void LinkMemory();
-    BOOL SetOnline(BOOL b = TRUE);
-    BOOL GetOnline() const;
-    CString GetLcmSize();
-    Bullet  GetMsrData();
+	virtual CaState CalZero();
+    virtual CaState Measure();
+
+    virtual void LinkMemory();
+
+    virtual MsrAiState MsrAI(float MsrDeviation = 0.0001);//0.0001
+
+    void SetOnline(BOOL b = TRUE);
+    virtual BOOL isOnline() const { return m_caState == CA_Offline ? FALSE : TRUE; };
+    virtual CString GetLcmSize();
+    virtual CString GetChData();
+    virtual Bullet  GetMsrData();
     CString OutData();
-    CString GetChData();
 
 	//for setup
 	float   GetRangeColor1();
@@ -114,11 +118,11 @@ public:
 
 
 #ifdef _CA210DEBUG
-    CString GetSetupValue() const;
-    void DBugModeBox(CString) const;
+    virtual CString GetSetupValue() const;
+    virtual void DBugModeBox(CString) const;
 #endif
 
-private:
+protected:
 	float   ChooseSynMode(SynMode);
 	int     ChooseDisplayMode(DisPlay);
 	int     ChooseDisplayDigits(DisDigits);

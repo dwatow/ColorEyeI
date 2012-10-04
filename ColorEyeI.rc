@@ -261,98 +261,98 @@ END
 IDD_MSR_ITEM DIALOG DISCARDABLE  0, 0, 379, 229
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "MsrItems"
-FONT 9, "Verdana"
+FONT 8, "Verdana"
 BEGIN
     CONTROL         "",IDC_CHECK_CWP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     45,27,8,8
     CONTROL         "",IDC_CHECK_CRP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    57,27,8,8
+                    55,27,8,8
     CONTROL         "",IDC_CHECK_CGP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    69,27,8,8
+                    65,27,8,8
     CONTROL         "",IDC_CHECK_CBP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    81,27,8,8
+                    75,27,8,8
     CONTROL         "",IDC_CHECK_CDP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,27,8,8
+                    85,27,8,8
     CONTROL         "",IDC_CHECK_CWP5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     45,40,8,8
     CONTROL         "",IDC_CHECK_CRP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,57,40,8,8
+                    WS_TABSTOP,55,40,8,8
     CONTROL         "",IDC_CHECK_CGP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,69,40,8,8
+                    WS_TABSTOP,65,40,8,8
     CONTROL         "",IDC_CHECK_CBP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,81,40,8,8
+                    WS_TABSTOP,75,40,8,8
     CONTROL         "",IDC_CHECK_CDP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,93,40,8,8
-    EDITTEXT        IDC_EDIT_P5FE,138,39,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,85,40,8,8
+    EDITTEXT        IDC_EDIT_P5FE,128,38,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     45,53,8,8
     CONTROL         "",IDC_CHECK_CRP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,57,53,8,8
+                    WS_TABSTOP,55,53,8,8
     CONTROL         "",IDC_CHECK_CGP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,69,53,8,8
+                    WS_TABSTOP,65,53,8,8
     CONTROL         "",IDC_CHECK_CBP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,81,53,8,8
+                    WS_TABSTOP,75,53,8,8
     CONTROL         "",IDC_CHECK_CDP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,93,53,8,8
-    EDITTEXT        IDC_EDIT_P9FE,138,52,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,85,53,8,8
+    EDITTEXT        IDC_EDIT_P9FE,128,51,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP13,"Button",BS_AUTOCHECKBOX | 
                     WS_DISABLED | WS_TABSTOP,45,66,8,8
     CONTROL         "",IDC_CHECK_CRP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,57,66,8,8
+                    WS_DISABLED | WS_TABSTOP,55,66,8,8
     CONTROL         "",IDC_CHECK_CGP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,69,66,8,8
+                    WS_DISABLED | WS_TABSTOP,65,66,8,8
     CONTROL         "",IDC_CHECK_CBP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,81,66,8,8
+                    WS_DISABLED | WS_TABSTOP,75,66,8,8
     CONTROL         "",IDC_CHECK_CDP13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,66,8,8
+                    85,66,8,8
     CONTROL         "",IDC_CHECK_CWP21,"Button",BS_AUTOCHECKBOX | 
                     WS_DISABLED | WS_TABSTOP,45,79,8,8
     CONTROL         "",IDC_CHECK_CRP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,57,79,8,8
+                    WS_DISABLED | WS_TABSTOP,55,79,8,8
     CONTROL         "",IDC_CHECK_CGP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,69,79,8,8
+                    WS_DISABLED | WS_TABSTOP,65,79,8,8
     CONTROL         "",IDC_CHECK_CBP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,81,79,8,8
+                    WS_DISABLED | WS_TABSTOP,75,79,8,8
     CONTROL         "",IDC_CHECK_CDP21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,79,8,8
-    EDITTEXT        IDC_EDIT_P21HAVG,139,76,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_P21VAVG,200,76,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_P21FE,139,90,20,12,ES_AUTOHSCROLL
+                    85,79,8,8
+    EDITTEXT        IDC_EDIT_P21HAVG,129,75,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_P21VAVG,190,75,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_P21FE,129,89,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP25,"Button",BS_AUTOCHECKBOX | 
                     WS_DISABLED | WS_TABSTOP,45,105,8,8
     CONTROL         "",IDC_CHECK_CRP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,57,105,8,8
+                    WS_DISABLED | WS_TABSTOP,55,105,8,8
     CONTROL         "",IDC_CHECK_CGP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,69,105,8,8
+                    WS_DISABLED | WS_TABSTOP,65,105,8,8
     CONTROL         "",IDC_CHECK_CBP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,81,105,8,8
+                    WS_DISABLED | WS_TABSTOP,75,105,8,8
     CONTROL         "",IDC_CHECK_CDP25,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,105,8,8
-    EDITTEXT        IDC_EDIT_P25RECTSIDE,154,103,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_P25FE,139,116,20,12,ES_AUTOHSCROLL
+                    85,105,8,8
+    EDITTEXT        IDC_EDIT_P25RECTSIDE,144,102,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_P25FE,129,115,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP49,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     45,131,8,8
     CONTROL         "",IDC_CHECK_CRP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,57,131,8,8
+                    WS_DISABLED | WS_TABSTOP,55,131,8,8
     CONTROL         "",IDC_CHECK_CGP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,69,131,8,8
+                    WS_DISABLED | WS_TABSTOP,65,131,8,8
     CONTROL         "",IDC_CHECK_CBP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,81,131,8,8
+                    WS_DISABLED | WS_TABSTOP,75,131,8,8
     CONTROL         "",IDC_CHECK_CDP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,93,131,8,8
-    CONTROL         "",IDC_CHECK_CWGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    45,144,8,8
-    CONTROL         "",IDC_CHECK_CRGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    57,144,8,8
-    CONTROL         "",IDC_CHECK_CGGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    69,144,8,8
-    CONTROL         "",IDC_CHECK_CBGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    81,144,8,8
+                    WS_DISABLED | WS_TABSTOP,85,131,8,8
+    CONTROL         "",IDC_CHECK_CWGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
+                    WS_TABSTOP,45,144,8,8
+    CONTROL         "",IDC_CHECK_CRGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
+                    WS_TABSTOP,55,144,8,8
+    CONTROL         "",IDC_CHECK_CGGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
+                    WS_TABSTOP,65,144,8,8
+    CONTROL         "",IDC_CHECK_CBGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
+                    WS_TABSTOP,75,144,8,8
     CONTROL         "",IDC_CHECK_CDGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,93,144,8,8
-    EDITTEXT        IDC_EDIT_GM1,107,143,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_GM2,140,143,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_GM3,195,143,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,85,144,8,8
+    EDITTEXT        IDC_EDIT_GM1,97,142,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_GM2,130,142,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_GM3,185,142,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_NITS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     18,175,8,8
     EDITTEXT        IDC_EDIT_NITS,30,173,15,12,ES_AUTOHSCROLL
@@ -373,30 +373,30 @@ BEGIN
     LTEXT           "9點",IDC_STATIC,28,53,11,8
     LTEXT           "5點",IDC_STATIC,28,40,11,8
     LTEXT           "中心點",IDC_STATIC,17,27,21,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,108,53,28,8
-    LTEXT           "四週矩形邊長:",IDC_STATIC,109,105,44,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,108,40,28,8
-    LTEXT           "cm",IDC_STATIC,175,105,11,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,97,52,31,8
+    LTEXT           "四週矩形邊長:",IDC_STATIC,97,104,44,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,97,39,30,8
+    LTEXT           "cm",IDC_STATIC,165,104,11,8
     LTEXT           "49點",IDC_STATIC,25,131,15,8
     LTEXT           "Gamma",IDC_STATIC,13,144,25,8
-    LTEXT           "~",IDC_STATIC,130,144,8,8
-    LTEXT           "平均分配",IDC_STATIC,167,144,28,8
-    LTEXT           "等分",IDC_STATIC,219,144,15,8
+    LTEXT           "~",IDC_STATIC,120,143,8,8
+    LTEXT           "平均分配",IDC_STATIC,157,144,28,8
+    LTEXT           "等分",IDC_STATIC,206,144,15,8
     LTEXT           "Nits",IDC_STATIC,50,174,14,8
-    LTEXT           "█",IDC_STATIC_W,45,17,8,8
-    LTEXT           "█",IDC_STATIC_R,57,17,8,8
-    LTEXT           "█",IDC_STATIC_G,69,17,8,8
-    LTEXT           "█",IDC_STATIC_B,81,17,8,8
-    LTEXT           "█",IDC_STATIC_D,93,17,8,8
+    LTEXT           "█",IDC_STATIC_W,45,15,8,8
+    LTEXT           "█",IDC_STATIC_R,55,15,8,8
+    LTEXT           "█",IDC_STATIC_G,65,15,8,8
+    LTEXT           "█",IDC_STATIC_B,75,15,8,8
+    LTEXT           "█",IDC_STATIC_D,85,15,8,8
     GROUPBOX        "",IDC_STATIC,7,7,231,153
     GROUPBOX        "",IDC_STATIC,7,163,231,40
     LTEXT           "中心方塊離邊 : 1/",IDC_STATIC,68,188,54,8
     LTEXT           "21點",IDC_STATIC,24,79,15,8
-    LTEXT           "水平均分",IDC_STATIC,108,78,28,8
-    LTEXT           "點, 垂直均分",IDC_STATIC,160,78,39,8
-    LTEXT           "點",IDC_STATIC,223,78,8,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,108,91,28,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,108,118,28,8
+    LTEXT           "水平均分",IDC_STATIC,97,77,28,8
+    LTEXT           "點, 垂直均分",IDC_STATIC,150,77,39,8
+    LTEXT           "點",IDC_STATIC,213,77,8,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,97,90,30,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,97,117,30,8
 END
 
 IDD_EDIT_DIALOG DIALOG DISCARDABLE  0, 0, 159, 34

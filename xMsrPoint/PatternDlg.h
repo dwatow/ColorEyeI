@@ -58,7 +58,7 @@ protected:
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
-    UINT Recoil();
+    CaState Recoil();
     
     //手動可調
     BOOL c_bDrawGold;
@@ -79,7 +79,7 @@ private:
     BOOL c_bisReady;
 
     UINT SetPercentValue;
-    UINT MsrAIValue;
+    MsrAiState MsrAIValue;
 
     Ca210* m_pCA210;
 

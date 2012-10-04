@@ -119,14 +119,13 @@ void CMainFrame::OnMsrConnectca210()
     if (!m_iConnectCa210)
     {
 		BeginWaitCursor();
-        m_pCa210 = new Ca210(TRUE);
-//        m_pCa210 = new Ca210(FALSE);
+        m_pCa210 = new Ca210();
+//        m_pCa210 = new Ca210sim();
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
 		EndWaitCursor();
     }
-
-    m_pCa210->SetOnline(m_iOnlineCa210);
+	m_pCa210->SetOnline(m_iOnlineCa210);
 }
 
 void CMainFrame::OnCntUSBUI(CCmdUI  *pCmdUI)
