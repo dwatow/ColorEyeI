@@ -203,7 +203,7 @@ void CPatternDlg::OnPaint()
         TextOut(dc, m_Goal.GetCenter().x + (m_Goal.GetRadius()+2) ,  m_Goal.GetCenter().y -7 , (LPCSTR)temp, temp.GetLength());  //右
     }
 
-    //量測目標指示
+    //量測數據指示
     if (c_bMsring)
         DrawMsringLabel(dc);
 
@@ -512,14 +512,16 @@ CaState CPatternDlg::Recoil()
     BOOL OldStateBar     = c_bStateBar;
     BOOL OldMsrValues    = c_bMsrValues;
     BOOL OldMsring       = c_bMsring;
+	BOOL OldGoalPercent  = c_bGoalPercent;
+
 
     //固定全關掉
-    c_bDrawNextGold = c_bDrawGold = c_bStateBar = c_bMsrValues = c_bMsring = FALSE;
+    c_bDrawNextGold = c_bDrawGold = c_bStateBar = c_bMsrValues = c_bMsring = c_bGoalPercent = FALSE;
 
     Invalidate();
     UpdateWindow();
 
-    Sleep(100);
+    Sleep(70);
 
     CaState camsrResult(m_pCA210->Measure());
 
@@ -531,6 +533,7 @@ CaState CPatternDlg::Recoil()
     c_bStateBar     = OldStateBar;
     c_bMsrValues    = OldMsrValues;
     c_bMsring       = OldMsring;
+	c_bGoalPercent  = OldGoalPercent;
 
     Invalidate();
     UpdateWindow();
@@ -727,7 +730,7 @@ UINT CPatternDlg::EventCatchMsrValue()
 		{
 			m_Goal.SetPercent(0);
 			m_Percent = m_Goal.GetPercent();
-			Invalidate();                                  return 1;
+			Invalidate();									return 1;
 		}
     }
 }

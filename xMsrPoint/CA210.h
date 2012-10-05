@@ -46,7 +46,6 @@ public:
     //ªì©l¤Æ¨ç¼Æ
 	Ca210();
     virtual ~Ca210();
-//	virtual BOOL isReady() const { return m_isSuccess; };
 		BOOL initCreatCa200();
 		BOOL initConnectCa210();
 		BOOL initAttachCa();
