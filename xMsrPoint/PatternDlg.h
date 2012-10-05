@@ -71,6 +71,7 @@ private:
     BOOL c_bZeroCal;
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
+	BOOL c_bMsrEndnMsred;
     BOOL c_bMsring;
     BOOL c_bGoalPercent;
     BOOL c_bRunMsrAI;

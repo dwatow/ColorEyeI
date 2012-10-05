@@ -57,7 +57,7 @@ public:
     {
         return m_BkColor;
     }
-    void CenterRect(CDC* pDC, float FromEdge, COLORREF CntrClr);
+    void CenterRect(CDC* pDC, COLORREF CntrClr);
 
     Bolt* SetP5FE(float);
     Bolt* SetP9FE(float);

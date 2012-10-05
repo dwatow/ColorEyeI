@@ -84,6 +84,7 @@ BOOL CPatternDlg::OnInitDialog()
 
     c_bMsrBegin     = FALSE;
     c_bMsrEnd       = FALSE;
+	c_bMsrEndnMsred = FALSE;
     c_bMsrValues    = FALSE;
     c_bMsring       = FALSE;
     c_bGoalPercent  = FALSE;
@@ -136,9 +137,9 @@ void CPatternDlg::OnPaint()
 
     //Cross Talk 的背景色
     if (m_GunMchn.GetColorType() == CrsTlkW)
-        m_GunMchn.CenterRect(&dc, 4.0, RGB(255, 255, 255));
+        m_GunMchn.CenterRect(&dc, RGB(255, 255, 255));
     if (m_GunMchn.GetColorType() == CrsTlkD)
-        m_GunMchn.CenterRect(&dc, 4.0, RGB(0, 0, 0));
+        m_GunMchn.CenterRect(&dc, RGB(0, 0, 0));
 
 //    dc.SetBkMode(TRANSPARENT);
     dc.SetTextColor(ShiftColor(m_BkColor));
@@ -221,9 +222,9 @@ void CPatternDlg::OnPaint()
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
     }
 
-    if (c_bMsrEnd && c_bRunMsrAI)
+    if (c_bMsrEnd && c_bRunMsrAI && c_bMsrEndnMsred)
     {
-        temp.Format("這是最後一點！別忘量最後一點。量完時，按ESC離開。");    
+        temp.Format("按ESC離開。");    
         if ((m_Goal.GetCenter().x == GetSystemMetrics(SM_CXSCREEN)/2) && (m_Goal.GetCenter().y == GetSystemMetrics(SM_CYSCREEN)/2))
             TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8-m_Goal.GetRadius()*2, temp, temp.GetLength());
         else
@@ -436,15 +437,18 @@ BOOL CPatternDlg::ConnectCa210()
 
 BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 {
-    //目前這一點是不是5nits的中心點？2=是
-    c_bFind5nits = (m_GunMchn.Trigger(it) == 2)? TRUE:FALSE;
+	if (!c_bMsrEndnMsred)
+	{
+		//目前這一點是不是5nits的中心點？2=是
+		c_bFind5nits = (m_GunMchn.Trigger(it) == 2)? TRUE:FALSE;
 
-    m_BkColor = m_GunMchn.GetBkColor();              //靶背景
-    m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
-    m_Goal.SetPercent(0);
-    VbrGoalThread((LPVOID)&Info1);
+		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
+		m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
+		m_Goal.SetPercent(0);
+		VbrGoalThread((LPVOID)&Info1);
+	}
 
-    c_bMsrBegin = (it == m_BeginItor) ?    TRUE : FALSE;
+	c_bMsrBegin = (it == m_BeginItor) ? TRUE : FALSE;
 
     return TRUE;
 }
@@ -466,11 +470,12 @@ BOOL CPatternDlg::NextTrigger(std::vector<Cartridge>::iterator& it)
     }
     else
     {
-        c_bMsrEnd = TRUE;
         it--;
+        c_bMsrEnd = TRUE;
+		c_bMsrEndnMsred = (it->GetBullet().isEmpty()) ? FALSE : TRUE;
         //結束自動量測的訊號
     }
-    return !c_bMsrEnd;  //還可以繼續
+    return !c_bMsrEnd;
 }
 
 BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg) 
@@ -506,7 +511,7 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
 
 CaState CPatternDlg::Recoil()
 {
-    //存目前的
+    //暫存目前的螢幕顯示/隱藏狀態
     BOOL OldDrawNextGold = c_bDrawNextGold;
     BOOL OldDrawGold     = c_bDrawGold;
     BOOL OldStateBar     = c_bStateBar;
@@ -514,8 +519,7 @@ CaState CPatternDlg::Recoil()
     BOOL OldMsring       = c_bMsring;
 	BOOL OldGoalPercent  = c_bGoalPercent;
 
-
-    //固定全關掉
+    //固定關掉所有螢幕顯示/隱藏狀態
     c_bDrawNextGold = c_bDrawGold = c_bStateBar = c_bMsrValues = c_bMsring = c_bGoalPercent = FALSE;
 
     Invalidate();
@@ -527,7 +531,7 @@ CaState CPatternDlg::Recoil()
 
     m_itor->SetBullet(m_pCA210->GetMsrData());
 
-    //恢復目前的
+    //恢復目前的螢幕顯示/隱藏狀態
     c_bDrawNextGold = OldDrawNextGold;
     c_bDrawGold     = OldDrawGold;
     c_bStateBar     = OldStateBar;
@@ -570,6 +574,7 @@ UINT CPatternDlg::VbrGoalThread(LPVOID LParam)
 
 UINT CPatternDlg::VbrNextGoalThread(LPVOID LParam)
 {
+    //圈圈跳出動畫
     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
     CPatternDlg *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
     Circle *pNextGoal = (Circle*)&(PtnDlg->m_NextGoal);//(pInfo1->crl);
@@ -631,7 +636,8 @@ void CPatternDlg::OnTimer(UINT nIDEvent)
 						if (m_Percent > 83)
 						{
 							EventRunMsrAi(FALSE);
-							if (EventCatchMsrValue() == 1) //最複雜的步驟
+							if ((EventCatchMsrValue() == 1) //最複雜的步驟
+								|| (c_bMsrEndnMsred == FALSE))
 								EventRunMsrAi(TRUE);
 						}
 						break;
@@ -668,32 +674,33 @@ void CPatternDlg::EventGoPrvsGoal()
         Trigger(m_itor); //它會等於0，就是從最後一回返回一次        
         NextTrigger(m_itor);
         Invalidate();
-        c_bMsrValues = /*TRUE;*/c_bMsring = FALSE;
+        c_bMsrValues = TRUE;
+		c_bMsring = FALSE;
     }
 }
 
 BOOL CPatternDlg::EventGoNextGoal()
 {
     //下一個點
-    //m_Percent = 0;
     m_Goal.SetPercent(0);
     m_Percent = m_Goal.GetPercent();
 
     if (!c_bMsrEnd)
     {
+		//計算下一顆
         ++m_itor;
         if (m_itor == m_EndItor) m_itor--;
         if (m_itor == m_EndItor) m_itor--;
-        
+    }
+
+		//重新畫圈圈+動畫
         Trigger(m_itor);
         NextTrigger(m_itor);
-        c_bMsring = FALSE;
+		c_bMsring = FALSE;
         c_bMsrValues = FALSE;
         Invalidate();
-        return TRUE;
-    }
-    else
-        return FALSE;
+
+        return !c_bMsrEnd;
 }
 
 UINT CPatternDlg::EventCatchMsrValue()
@@ -719,25 +726,29 @@ UINT CPatternDlg::EventCatchMsrValue()
 // 	switch(n)
     switch(Recoil())
     {
-    case CA_Offline:        MessageBox("沒連線，無法量測");  return 0;
-    case CA_ZeroCalMode:    MessageBox("檔位不在MEAS");     return 3;
+    case CA_Offline:        
+		MessageBox("沒連線，無法量測");  
+		return 0;
+    case CA_ZeroCalMode:    
+		MessageBox("檔位不在MEAS");     
+		return 3;
 	case CA_MsrMode:
 	default:
-        m_Goal.SetPercent(100);
         if (!EventGoNextGoal())
-			                                               return 5;//是否為最後一點
+			return 5;//是否為最後一點
 		else
-		{
-			m_Goal.SetPercent(0);
-			m_Percent = m_Goal.GetPercent();
-			Invalidate();									return 1;
-		}
+			return 1;
     }
 }
 
 void CPatternDlg::EventRunMsrAi(int isRun)
 {
 //不要隨意更動！= =+
+	//關就給它開，開就給它關
+	//指定控制 TRUE FALSE
+	// 2 : Switch Mode
+	// 1 : Assign Run Mode
+	// 0 : Assign Off Mode
     c_bRunMsrAI = (isRun == 2) ? c_bRunMsrAI ? FALSE : TRUE : !isRun;
 
     switch(isRun)

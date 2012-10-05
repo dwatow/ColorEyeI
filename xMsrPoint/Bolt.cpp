@@ -627,11 +627,14 @@ CPoint Bolt::GetW49Point(UINT few) const
 CPoint Bolt::GetCrossTalk(UINT few) const
 {
 //運算第幾個（以九點為計）
+	//不可以貼邊
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    int LeftEdge   = (m_fCrsTlkRectFE) ? static_cast<int>(m_nScrmH / m_fCrsTlkRectFE) : CmtoPixel(2.3);    //上
-    int TopEdge    = (m_fCrsTlkRectFE) ? static_cast<int>(m_nScrmV / m_fCrsTlkRectFE) : CmtoPixel(2.3);    //下
+	float FromEdge = m_fCrsTlkRectFE * 2.0 ;
+
+    int LeftEdge   = static_cast<int>(m_nScrmH / FromEdge);    //上
+    int TopEdge    = static_cast<int>(m_nScrmV / FromEdge);    //下
     int RightEdge  = m_nScrmH - LeftEdge;  //左
     int BottomEdge = m_nScrmV - TopEdge;   //右
     int CenterH    = m_nScrmH/2;
@@ -749,9 +752,13 @@ COLORREF Bolt::GetBkColor() const
         return RGB( 176,  133,  77);
 }
 
-void Bolt::CenterRect(CDC* pDC, float FromEdge, COLORREF CntrClr)
+void Bolt::CenterRect(CDC* pDC, COLORREF CntrClr)
 {
-    CRect* pCenterArea = new CRect(m_nScrmH/FromEdge, m_nScrmV/FromEdge, m_nScrmH - m_nScrmH/FromEdge, m_nScrmV - m_nScrmV/FromEdge);
+    CRect* pCenterArea = new CRect( (long)( m_nScrmH / m_fCrsTlkRectFE ), 
+		                            (long)( m_nScrmV / m_fCrsTlkRectFE ), 
+									(long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
+									(long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
+
     CBrush* pBrush = new CBrush(CntrClr);
     pDC->FillRect(pCenterArea, pBrush);
     delete pBrush;

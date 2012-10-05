@@ -39,7 +39,7 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_f9FE = 6.0f;
     m_fGammaSetp = 255.0f;
     m_n25RectSide = 0;
-    m_fCrsTlkRectFE = 8.0f;
+    m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
     //}}AFX_DATA_INIT
 }
@@ -94,12 +94,12 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_CHECK_CRP1, m_chkCRP1);
     DDX_Control(pDX, IDC_CHECK_CGP1, m_chkCGP1);
     DDX_Control(pDX, IDC_CHECK_CDP1, m_chkCDP1);
+    DDX_Control(pDX, IDC_CHECK_CBP1, m_chkCBP1);
     DDX_Control(pDX, IDC_STATIC_W, m_stcWhite);
     DDX_Control(pDX, IDC_STATIC_B, m_stcBlue);
     DDX_Control(pDX, IDC_STATIC_D, m_stcDark);
     DDX_Control(pDX, IDC_STATIC_G, m_stcGreen);
     DDX_Control(pDX, IDC_STATIC_R, m_stcRed);
-    DDX_Control(pDX, IDC_CHECK_CBP1, m_chkCBP1);
     DDX_Text(pDX, IDC_EDIT_GM1, m_nGM1);
     DDV_MinMaxUInt(pDX, m_nGM1, 0, 255);
     DDX_Text(pDX, IDC_EDIT_GM2, m_nGM2);
@@ -121,10 +121,10 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT_P25RECTSIDE, m_n25RectSide);
     DDV_MinMaxUInt(pDX, m_n25RectSide, 0, 100);
     DDX_Text(pDX, IDC_EDIT_CROSSTALK1, m_fCrsTlkRectFE);
-    DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
-    //}}AFX_DATA_MAP
+	//}}AFX_DATA_MAP
 }
 
 
@@ -245,44 +245,44 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
         
 		//5헕
+        if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
+            Pusher->SetP5FE(m_f5FE);
         if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
         if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
         if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
         if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn5);
         if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn5);
         
-        if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
-            Pusher->SetP5FE(m_f5FE);
         
 		//9헕
+        if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
+            Pusher->SetP9FE(m_f9FE);
         if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
         if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
         if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
         if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
         if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
         
-        if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
-            Pusher->SetP9FE(m_f9FE);
         
 		//21헕
+        if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
+            Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
         if (m_chkCWP21.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn21);
         if (m_chkCRP21.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn21);
         if (m_chkCGP21.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn21);
         if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
         if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
 
-        if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
-            Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
        
 		//25헕
+        if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
+            Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
         if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
         if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
         if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
         if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn25);
         if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn25);
         
-        if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
-            Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
         
 		//49헕
         if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
@@ -292,22 +292,23 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
         
 		//Nits
-        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
-        
         if (m_chkNits.GetState())
             Pusher->SetNitsNum(m_fNits);
+        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
         
+        
+        if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
+
 		//Gamma
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
         
-        if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
         
 		//Cross Talk
         if (m_chkCrossTalk.GetState())
         {
-            pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
             Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
+            pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
         }
             if (ListBoxUpdate(pDoc->GetMsrDataChain()))
                 m_btnOK.EnableWindow(TRUE);
