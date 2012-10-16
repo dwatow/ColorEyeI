@@ -60,14 +60,16 @@ xChain::size_type CDataChain::StdInit()
 {
     Empty();
     
-    Grow(White, Pn1);    Grow(Red  , Pn1);    Grow(Green, Pn1);    Grow(Blue , Pn1);    Grow(Dark , Pn1);
-    Grow(White, Pn5);    Grow(Red  , Pn5);    Grow(Green, Pn5);    Grow(Blue , Pn5);    Grow(Dark , Pn5);    
-    Grow(White, Pn9);    Grow(Red  , Pn9);    Grow(Green, Pn9);    Grow(Blue , Pn9);    Grow(Dark , Pn9);    
-    Grow(White, Pn25);   Grow(Red  , Pn25);   Grow(Green, Pn25);   Grow(Blue , Pn25);   Grow(Dark , Pn25);
-    Grow(White, Pn49);   Grow(Red  , Pn49);   Grow(Green, Pn49);   Grow(Blue , Pn49);   Grow(Dark , Pn49);
-	Grow(Nits, Pn9);
+    Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
+    Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
+    Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
+    Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
+    Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
+    Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
+    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
+    Grow(Nits, Pn9);
     Grow(CrsTlk , Pn4);  Grow(CrsTlkW, Pn4);  Grow(CrsTlkD, Pn4);
-	
+    
     //freeBuffer();
     return m_CarChain1.size();
 }
@@ -79,15 +81,15 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
     if (ct == CrsTlk)
     {
         xChain vCrossTalk;
-		
+        
         Cartridge CrsTlk1(CrsTlk, pn);
         Cartridge CrsTlk2(CrsTlkW, pn);
         Cartridge CrsTlk3(CrsTlkD, pn);
-		
+        
         PetriDish->Grow(vCrossTalk, CrsTlk1);
         PetriDish->Grow(vCrossTalk, CrsTlk2);
         PetriDish->Grow(vCrossTalk, CrsTlk3);
-		
+        
         SortQuackMsr(vCrossTalk);
         m_CarChain1.insert(m_CarChain1.end(), vCrossTalk.begin(), vCrossTalk.end());
     }
@@ -102,43 +104,43 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
 
 Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) 
 {
-	if(Little > Large)
-	{
-		AfxMessageBox("CDataChain::At() ERROR!!!");
-	    return m_CarChain1.at(0);
-	}
-	else
-		for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
-			if (itor->GetBackColor()  == clr   && 
-				itor->GetMsrFlowNum() == Large && 
-				itor->GetMsrFlowNo()  == Little)
-				return m_CarChain1.at(abs(itor - m_CarChain1.begin()));
-		
-	return m_CarChain1.at(0);
+    if(Little > Large)
+    {
+        AfxMessageBox("CDataChain::At() ERROR!!!");
+        return m_CarChain1.at(0);
+    }
+    else
+        for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+            if (itor->GetBackColor()  == clr   && 
+                itor->GetMsrFlowNum() == Large && 
+                itor->GetMsrFlowNo()  == Little)
+                return m_CarChain1.at(abs(itor - m_CarChain1.begin()));
+        
+    return m_CarChain1.at(0);
 }
 
 const Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
 {
-	if(Little > Large)
-	{
-		AfxMessageBox("CDataChain::At() ERROR!!!");
-		return m_CarChain1.at(0);
-	}
-	else
-		for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
-			if (itor->GetBackColor()  == clr   && 
-				itor->GetMsrFlowNum() == Large && 
-				itor->GetMsrFlowNo()  == Little)
-				return m_CarChain1.at(abs(itor - m_CarChain1.begin()));
-			
-			return m_CarChain1.at(0);
+    if(Little > Large)
+    {
+        AfxMessageBox("CDataChain::At() ERROR!!!");
+        return m_CarChain1.at(0);
+    }
+    else
+        for (xChain::const_iterator itor = m_CarChain1.begin(); itor != m_CarChain1.end(); ++itor)
+            if (itor->GetBackColor()  == clr   && 
+                itor->GetMsrFlowNum() == Large && 
+                itor->GetMsrFlowNo()  == Little)
+                return m_CarChain1.at(abs(itor - m_CarChain1.begin()));
+            
+            return m_CarChain1.at(0);
 }
 
 void CDataChain::Empty()
 {
     m_CarChain1.clear();
-	Cartridge x;
-	m_CarChain1.push_back(x);
+    Cartridge x;
+    m_CarChain1.push_back(x);
 }
 
 void CDataChain::CutEqualCell(xChain compData)
@@ -146,7 +148,7 @@ void CDataChain::CutEqualCell(xChain compData)
     if (!compData.empty())
     {
         xChain::iterator compItor, removeBeginItor;
-		
+        
         for (compItor = compData.begin(); compItor != compData.end(); ++compItor)
         {
             removeBeginItor = std::remove(Begin(), End(), *compItor);
@@ -179,7 +181,7 @@ void CDataChain::freeEmptyCell()
         if (itor->GetBullet().isEmpty())
             x.push_back(*itor);           //­n°Å±¼ªº
 
-	CutEqualCell(x);
+    CutEqualCell(x);
 }
 
 //////////////////////////////////////////////////////////////////////////

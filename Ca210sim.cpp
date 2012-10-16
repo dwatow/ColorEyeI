@@ -27,7 +27,8 @@ ImpsbStr("1. «ö¡uPrt ScmÁä¡v§ì¤U¥Ø«eªº¿Ã¹õ¡A¨Ã¶}¤pµe®a¶K¤W¡A¥t¦s¦¨¹ÏÀÉ\n2. Mailµ
 {
     int flag = 1;
     m_pIProbe = new Bullet();
-    m_caState = CA_BeforeZeroCal;
+    //m_caState = CA_BeforeZeroCal;
+	m_caState = CA_MsrMode;  //¼ÒÀÀ¤£¥ÎZero Cal
 }
 
 Ca210sim::~Ca210sim()

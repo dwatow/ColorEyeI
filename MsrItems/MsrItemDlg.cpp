@@ -300,9 +300,14 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
 
 		//Gamma
-        if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())        
+        if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
         
+		if (m_chkCWGM.GetState())	pDoc->GetMsrDataChain().Grow(White, PnGamma);
+		if (m_chkCRGM.GetState())	pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
+		if (m_chkCGGM.GetState())	pDoc->GetMsrDataChain().Grow(Green, PnGamma);
+		if (m_chkCBGM.GetState())	pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
+		if (m_chkCDGM.GetState())	pDoc->GetMsrDataChain().Grow(Dark , PnGamma);
         
 		//Cross Talk
         if (m_chkCrossTalk.GetState())

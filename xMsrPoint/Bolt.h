@@ -81,6 +81,7 @@ private:
     CPoint GetD29Point(UINT few)     const;
     CPoint GetD21Point(UINT few)     const;
     CPoint GetD13Point(UINT few)     const;
+	CPoint GetGammaPoint()           const;
 
     UINT CmtoPixel(const double cm) const;
 

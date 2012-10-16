@@ -445,7 +445,8 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
 		m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
 		m_Goal.SetPercent(0);
-		VbrGoalThread((LPVOID)&Info1);
+		if (it->GetMsrFlowNum() != PnGamma && it != m_BeginItor)
+			VbrGoalThread((LPVOID)&Info1);
 	}
 
 	c_bMsrBegin = (it == m_BeginItor) ? TRUE : FALSE;
@@ -460,7 +461,8 @@ BOOL CPatternDlg::NextTrigger(std::vector<Cartridge>::iterator& it)
     {
         m_NextGoal.SetColor(ShiftColor(m_BkColor));          //下一個靶顏色
         m_NextGoal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
-        VbrNextGoalThread((LPVOID)&Info1);
+		if (it->GetMsrFlowNum() != PnGamma && it != m_BeginItor)
+	        VbrNextGoalThread((LPVOID)&Info1);
 
         it--;
         m_GunMchn.Trigger(it);

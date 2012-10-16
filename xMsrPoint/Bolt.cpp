@@ -267,16 +267,14 @@ CPoint Bolt::GetD21Point(UINT few) const
     int HLevel = m_nScrmH/m_f21Havg;
     int VLevel = m_nScrmV/m_f21Vavg;
 
-    int L1 = CenterH - HLevel;
-    int L2 = L1 - HLevel;
+    int L2 = CenterH - HLevel;
+    int L1 = L2 - HLevel;
+    int R2 = CenterH + HLevel;
+    int R1 = R2 + HLevel;
 
-    int R1 = CenterH + HLevel;
-    int R2 = R1 + HLevel;
-
-    int T1 = CenterV + VLevel;
-    int B1 = CenterV - VLevel;
+    int T1 = CenterV - VLevel;
+    int B1 = CenterV + VLevel;
 /*21點
-
      L1  L2      R2  R1
 +--------------------------+
 |04  05  06  07  08  09  10| 
@@ -671,6 +669,33 @@ CPoint Bolt::GetCrossTalk(UINT few) const
     }
 }
 
+CPoint Bolt::GetGammaPoint() const
+{
+//運算第幾個
+    //ScrmV 螢幕垂直pixel數
+    //ScrmH 螢幕水平pixel數
+
+    int CenterH    = m_nScrmH/2;
+    int CenterV    = m_nScrmV/2;
+/*
++------------------------------+
+|                              |
+|                              |  
+|                              |  
+|                              |
+|              00              |
+|                              |
+|                              |  
+|                              |  
+|                              |
++------------------------------+
+*/
+    CPoint PointD (CenterH, CenterV);
+
+//回傳一個點
+	return PointD;
+}
+
 UINT Bolt::CmtoPixel(const double cm) const
 {    
     return (UINT)(m_nScrmV*cm / ((double)m_LcmSize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
@@ -713,7 +738,7 @@ UINT Bolt::Trigger(std::vector<Cartridge>::iterator& it)
     0 沒有資料
     1 正常
     2 5nits
-    */
+	*/
     if (it != m_itEnd && m_isReady)
     {
         m_BkColor    = it->GetBackColor();
@@ -733,20 +758,32 @@ COLORREF Bolt::GetBkColor() const
 {
     if (m_isReady)
     {
-        switch(m_BkColor)
-        {
-            case White:    return RGB( 255, 255, 255);
-            case Dark:     return RGB(   0,   0,   0);
-            case Red:      return RGB( 255,   0,   0);
-            case Green:    return RGB(   0, 255,   0);
-            case Blue:     return RGB(   0,   0, 255);
-            case Nits:     return m_5nitsBkColor;
-            case CrsTlk: 
-            case CrsTlkW:
-            case CrsTlkD:
-                         return RGB( 128, 128, 128);
-            default:     return RGB( 192, 212,  49); 
-        }
+		if (m_MsrFlowNum != PnGamma)
+			switch(m_BkColor)
+			{
+				case White:    return RGB( 255, 255, 255);
+				case Dark:     return RGB(   0,   0,   0);
+				case Red:      return RGB( 255,   0,   0);
+				case Green:    return RGB(   0, 255,   0);
+				case Blue:     return RGB(   0,   0, 255);
+				case Nits:     return m_5nitsBkColor;
+				case CrsTlk: 
+				case CrsTlkW:
+				case CrsTlkD:
+							 return RGB( 128, 128, 128);
+				default:     return RGB( 192, 212,  49); 
+			}
+		else
+			switch(m_BkColor)
+			{
+				case Red:      return RGB( m_MsrFlowNo,           0,           0);
+				case Green:    return RGB(           0, m_MsrFlowNo,           0);
+				case Blue:     return RGB(           0,           0, m_MsrFlowNo);
+				case White:    
+				case Dark:     
+				default:       
+								return RGB( m_MsrFlowNo, m_MsrFlowNo, m_MsrFlowNo);
+			}
     }
     else
         return RGB( 176,  133,  77);
@@ -811,6 +848,8 @@ CPoint Bolt::GetPointPosition() const
                 return GetD25Point(m_MsrFlowNo);
             case Pn49:
                 return GetW49Point(m_MsrFlowNo);
+			case PnGamma:
+				return GetGammaPoint();
             default:
                 return GetFE9Point(0);
         }
@@ -838,26 +877,27 @@ CString Bolt::GetMsrFlowName() const
     {
         switch(m_BkColor)
         {
-        case White:     clr.Format("白色");        break;
-        case Dark:      clr.Format("黑色");        break;
-        case Red:       clr.Format("紅色");        break;
-        case Blue:      clr.Format("藍色");        break;
-        case Green:     clr.Format("綠色");        break;
-        case Nits:      clr.Format("5Nits");       break;
-        case CrsTlk:    clr.Format("CrossTalk");   break;
-        case CrsTlkW:   clr.Format("CrossTalkW");  break;
-        case CrsTlkD:   clr.Format("CrossTalkD");  break;
+			case White:     clr.Format("白色");        break;
+			case Dark:      clr.Format("黑色");        break;
+			case Red:       clr.Format("紅色");        break;
+			case Blue:      clr.Format("藍色");        break;
+			case Green:     clr.Format("綠色");        break;
+			case Nits:      clr.Format("5Nits");       break;
+			case CrsTlk:    clr.Format("CrossTalk");   break;
+			case CrsTlkW:   clr.Format("CrossTalkW");  break;
+			case CrsTlkD:   clr.Format("CrossTalkD");  break;
         }
 
         switch(m_MsrFlowNum)
         {
-            case Pn1:  ptnum.Format("中心點"); break;
-            case Pn4:  ptnum.Format("4點");    break;
-            case Pn5:  ptnum.Format("5點");    break;
-            case Pn9:  ptnum.Format("9點");    break;
-            case Pn49: ptnum.Format("49點");   break;
-            case Pn13: ptnum.Format("13點");   break;
-            case Pn25: ptnum.Format("25點");   break;
+            case Pn1:     ptnum.Format("中心點");  break;
+            case Pn4:     ptnum.Format("4點");    break;
+            case Pn5:     ptnum.Format("5點");    break;
+            case Pn9:     ptnum.Format("9點");    break;
+            case Pn49:    ptnum.Format("49點");   break;
+            case Pn13:    ptnum.Format("13點");   break;
+            case Pn25:    ptnum.Format("25點");   break;
+			case PnGamma: ptnum.Format("Gamma");  break;
         }
     }
 
@@ -868,8 +908,8 @@ CString Bolt::GetMsrFlowName() const
 
 void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 {
-    m_BkColor    = MsrCell.GetBackColor();        //背景色標籤
-    m_MsrFlowNum = MsrCell.GetMsrFlowNum();        //點數標籤
+	m_BkColor    = MsrCell.GetBackColor();        //背景色標籤
+    m_MsrFlowNum = MsrCell.GetMsrFlowNum();       //點數標籤
 
     UINT areaCode = 0;
 
@@ -880,6 +920,7 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
     for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
     {
         MsrCell.SetMsrFlowNo(m_MsrFlowNo);
+		//Set Area Code
 //         +----------+
 //         |02  03  07|
 //         |04  01  08|
@@ -892,7 +933,7 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
             UINT Xp = GetPointPosition().x;
             UINT Yp = GetPointPosition().y;
 
-                  if    (Xp <  centerX && Yp <  centerY)    areaCode = 2;
+                 if (Xp <  centerX && Yp <  centerY)    areaCode = 2;
             else if (Xp == centerX && Yp <  centerY)    areaCode = 3;
             else if (Xp <  centerX && Yp == centerY)    areaCode = 4;
             else if (Xp <  centerX && Yp >  centerY)    areaCode = 5;
