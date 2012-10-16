@@ -1,74 +1,73 @@
-// a210sim.h: interface for the Ca210sim class.
-//
-//////////////////////////////////////////////////////////////////////
+#ifndef CA210REAL_H
+#define CA210REAL_H
 
-#ifndef CA210SIM_H
-#define CA210SIM_H
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
 
 #include "xMsrPoint/CA210.h"
+#include "xMsrPoint/ca200srvr.h"
+#include "xMsrPoint/Bullet.h"
 
-class Ca210sim : public Ca210
-{	
+//單獨控制CA-210模組是不是要進入 DEBUG模式
+//#define _CA210DEBUG _DEBUG
+
+class Ca210real : public Ca210
+{
+    ICa200          *m_pICa200;
+    ICa             *m_pICa;
+    IProbe          *m_pIProbe;
+    IMemory         *m_pIMemory;
+//    IProbes         m_IProbes;
+    IProbeInfo      *m_pIProbeInfo;
+//    ICas            m_ICas;
+//    IOutputProbes   m_IOutputProbes;
+//    _ICaEvents      m__ICaEvents;
+
     Bullet m_blt;
-	Bullet* m_pIProbe;
-
-//simulation setup dialog item
-	SynMode m_syncMode;
-	DisPlay m_displayMode;
-	DisDigits m_displayDigits;
-	AvgMode m_averageMide;
-	BrigUnit m_brightnessUnit;
-	CalStand m_calStandard;
 
     CaState m_caState;
 	CaState m_caStateTemp;
     CString str;
-	
+
     CString ImpsbStr;
 protected:
-    void MsgFrmt(CException* e, CString, CString){};
-    void MsgFrmt(CString){};
-	
+    void MsgFrmt(CException* e, CString, CString);
+    void MsgFrmt(CString);
+
 public:
-	Ca210sim();
-    virtual ~Ca210sim();
-	
+	Ca210real();
+    virtual ~Ca210real();
+
 public:
 	CaState CalZero();
     CaState Measure();
-	
+
     void LinkMemory();
-	
+
     MsrAiState MsrAI(float MsrDeviation = 0.0001);//0.0001
-	
+
     void SetOnline(BOOL b = TRUE);
     BOOL isOnline() const { return m_caState == CA_Offline ? FALSE : TRUE; };
     CString GetLcmSize();
     CString GetChData();
     Bullet  GetMsrData();
     CString OutData();
-	
-	//for setup Dialog Value
+
+//for setup Dialog Value
 	float   GetRangeColor1();
 	float   GetRangeColor2();
 	float   GetRangeFAM();
-	
-	void    SetChId(LPCTSTR &Id) {  };
-	CString GetChId()            {  return "0"; };
-	CString GetChId(long &No)    {  return "0"; };
-	
-	void    SetChNo(long &No)    {  };
-    CString GetChStrNo()         { return "0"; };
-	long    GetChNo()            { return 0; };
-	
-	CString GetProb()       { return "0"; };
-    CString GetDeviceType() { return "0";      };
-	CString GetCaVersion()  { return "0";   };
-	
+
+	void    SetChId(LPCTSTR &Id) { m_pIMemory->SetChannelID(Id); };
+	CString GetChId()            {                               return m_pIMemory->GetChannelID(); };
+	CString GetChId(long &No)    { m_pIMemory->SetChannelNO(No); return m_pIMemory->GetChannelID(); };
+
+ 	void    SetChNo(long &No)    { m_pIMemory->SetChannelNO(No); };
+    CString GetChStrNo()         { str.Format("%ld", m_pIMemory->GetChannelNO()); return str; };
+	long    GetChNo()            { return m_pIMemory->GetChannelNO(); };
+
+	CString GetProb()       { return m_pIProbe->GetSerialNO(); };
+    CString GetDeviceType() { return m_pICa->GetCAType();      };
+	CString GetCaVersion()  { return m_pICa->GetCAVersion();   };
+
 	CString GetRefProbe();
 	CString GetCalProbe();
 	CString GetCalMode();
@@ -76,28 +75,28 @@ public:
 	CString GetRefLv();
 	CString GetRefSx();
 	CString GetRefSy();
-	
-	//for setup dialog combo box ItemString
+
+//for setup dialog combo box ItemString
 	CString GetSynMode(SynMode);
 	CString GetDisplayMode(DisPlay);
 	CString GetDisplayDigits(DisDigits);
 	CString GetAvgingMode(AvgMode);
 	CString GetBrigUnit(BrigUnit);
 	CString GetCalStandard(CalStand);
-	
-	//Get and Set of CA-SDK 
+
+//Get and Set of CA-SDK 
 	void    SetSynMode(SynMode);			float   GetSynMode();
 	void    SetDisplayMode(DisPlay);		long    GetDisplayMode();
 	void    SetDisplayDigits(DisDigits);	long    GetDisplayDigits();
 	void    SetAvgingMode(AvgMode);			long    GetAvgingMode();
 	void    SetBrigUnit(BrigUnit);			long    GetBrigUnit();
 	void    SetCalStandard(CalStand);		long    GetCalStandard();
-	
+
 #ifdef _CA210DEBUG
     CString GetSetupValue() const;
     void DBugModeBox(CString) const;
 #endif
-	
+
 private:  //for setup CA-SDK parameter
 	float   ChooseSynMode(SynMode);
 	int     ChooseDisplayMode(DisPlay);
@@ -105,8 +104,12 @@ private:  //for setup CA-SDK parameter
 	int     ChooseAvgingMode(AvgMode);
 	int     ChooseBrigUnit(BrigUnit);
 	int     ChooseCalStandard(CalStand);
+
+private:  //for real CA-210 USB connect initial
+	BOOL initCreatCa200();
+	BOOL initConnectCa210();
+	BOOL initAttachCa();
+	BOOL initAttchProbe();
 };
 
-
-
-#endif // !defined(AFX_A210SIM_H__BEC68607_FF0F_4C06_97AF_665A09334DFE__INCLUDED_)
+#endif

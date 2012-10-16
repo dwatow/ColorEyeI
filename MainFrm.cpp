@@ -43,10 +43,10 @@ static UINT indicators[] =
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame construction/destruction
 
-CMainFrame::CMainFrame()
+CMainFrame::CMainFrame(): m_pCa210(0)
 {
     // TODO: add member initialization code here
-    m_pCa210 = 0;
+    //m_pCa210 = 0;
 }
 
 CMainFrame::~CMainFrame()
@@ -119,8 +119,8 @@ void CMainFrame::OnMsrConnectca210()
     if (!m_iConnectCa210)
     {
 		BeginWaitCursor();
-        m_pCa210 = new Ca210();
-//        m_pCa210 = new Ca210sim();
+//        m_pCa210 = new Ca210real();
+        m_pCa210 = new Ca210sim();
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
 		EndWaitCursor();

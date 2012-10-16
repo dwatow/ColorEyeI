@@ -109,6 +109,10 @@ SOURCE=.\xMsrPoint\CA210.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CA210real.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Ca210sim.cpp
 # End Source File
 # Begin Source File
@@ -239,6 +243,10 @@ SOURCE=.\xMsrPoint\ca200srvr.h
 # Begin Source File
 
 SOURCE=.\xMsrPoint\CA210.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CA210real.h
 # End Source File
 # Begin Source File
 
