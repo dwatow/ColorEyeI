@@ -231,7 +231,7 @@ void CColorEyeIDoc::SaveOmdDlg(LPCTSTR FileFilter)
     if (nID == IDOK)
     {
         SaveOmdFile(aFileDialog.GetPathName());
-		DebugByTxt();
+		DebugByTxt(aFileDialog.GetPathName());
 
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
@@ -297,7 +297,7 @@ void CColorEyeIDoc::RestructureVector()
     m_dOmd.AddCell(m_dOmd.End(), m_MsrData.Begin(), m_MsrData.End());  //insert
 }
 
-void CColorEyeIDoc::DebugByTxt()
+void CColorEyeIDoc::DebugByTxt(CString pathName)
 {
     std::vector<CString> vStr;
     CString str;
@@ -317,20 +317,17 @@ void CColorEyeIDoc::DebugByTxt()
         vStr.push_back(str);
     }
 
-
     CStdioFile file;
     CFileException fx;
 
-    CString path;
-    path.Format("%s_debug.omd", GetPathName().Left(GetPathName().GetLength()-4));
+    pathName.Format("%s_debug.omd", pathName.Left(pathName.GetLength()-4));
 
-    if (!file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
+    if (!file.Open(pathName, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
     {
         TCHAR buf[255];
         fx.GetErrorMessage(buf, 255);
         CString strPrompt(buf);
         AfxMessageBox(strPrompt);
-        file.Close();
     }
     else
     {
@@ -338,44 +335,6 @@ void CColorEyeIDoc::DebugByTxt()
             for (std::vector<CString>::iterator it = vStr.begin(); it != vStr.end(); ++it)
                 file.WriteString(it->GetBuffer(0));            
 
-        file.Close();
-    }
-}
-
-void CColorEyeIDoc::DebugByTxt(CString path)
-{
-    std::vector<CString> vStr;
-    CString str;
-    
-    str.IsEmpty();
-    vStr.clear();
-    str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
-    vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
-    {                  
-        str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
-            iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\
-            iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
-        vStr.push_back(str);
-    }
-
-    CStdioFile file;
-    CFileException fx;
-    
-    if (!file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
-    {
-        TCHAR buf[255];
-        fx.GetErrorMessage(buf, 255);
-        CString strPrompt(buf);
-        AfxMessageBox(strPrompt);
-        file.Close();
-    }
-    else
-    {
-        if (!vStr.empty())
-            for (std::vector<CString>::iterator it = vStr.begin(); it != vStr.end(); ++it)
-                file.WriteString(it->GetBuffer(0));            
-            
         file.Close();
     }
 }

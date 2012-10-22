@@ -107,8 +107,8 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-    void DebugByTxt();
-    void DebugByTxt(CString path);
+//    void DebugByTxt();
+    void DebugByTxt(CString pathName);
 //    static bool isMsred(const Cartridge &sp1, const Cartridge &sp2);
 
 };
