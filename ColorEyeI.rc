@@ -170,8 +170,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,4,0
- PRODUCTVERSION 2,3,0,0
+ FILEVERSION 1,3,4,2
+ PRODUCTVERSION 2,3,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -189,14 +189,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 MFC應用程式\0"
-            VALUE "FileVersion", "1, 3, 4, 0\0"
+            VALUE "FileVersion", "1, 3, 4, 2\0"
             VALUE "InternalName", "ColorEye 測試版 v2.3\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Color Eye App\0"
-            VALUE "ProductVersion", "2, 3, 0, 0\0"
+            VALUE "ProductVersion", "2, 3, 1, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -221,7 +221,7 @@ FONT 9, "Verdana"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,144,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "ColorEye Version Beta 2.2.1",IDC_STATIC,40,10,90,8,
+    LTEXT           "ColorEye Version Beta 2.3.1",IDC_STATIC,40,10,90,8,
                     SS_NOPREFIX
     LTEXT           "Copyright (C) 2012\n奇菱光電\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,105,25
@@ -340,8 +340,8 @@ BEGIN
                     WS_DISABLED | WS_TABSTOP,75,131,8,8
     CONTROL         "",IDC_CHECK_CDP49,"Button",BS_AUTOCHECKBOX | 
                     WS_DISABLED | WS_TABSTOP,85,131,8,8
-    CONTROL         "",IDC_CHECK_CWGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,45,144,8,8
+    CONTROL         "",IDC_CHECK_CWGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    45,144,8,8
     CONTROL         "",IDC_CHECK_CRGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     55,144,8,8
     CONTROL         "",IDC_CHECK_CGGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -461,7 +461,7 @@ BEGIN
                     SS_SUNKEN
     RTEXT           "0",IDC_STATIC_CAL_PROB,205,110,58,12,SS_CENTERIMAGE | 
                     SS_SUNKEN
-    RTEXT           "160",IDC_STATIC_REF_LV,225,150,35,12,SS_CENTERIMAGE | 
+    RTEXT           "160",IDC_STATIC_REF_LV,215,150,45,12,SS_CENTERIMAGE | 
                     SS_SUNKEN
     LTEXT           "Ref. xyLv",IDC_STATIC,145,140,55,8
     LTEXT           "Cal. Mode",IDC_STATIC,145,125,55,8
@@ -471,9 +471,9 @@ BEGIN
                     WS_VSCROLL | WS_TABSTOP
     RTEXT           "6500K",IDC_STATIC_CAL_MODE,205,125,58,12,SS_CENTERIMAGE | 
                     SS_SUNKEN
-    RTEXT           "0.3127",IDC_STATIC_REF_X,145,150,35,12,SS_CENTERIMAGE | 
+    RTEXT           "0.3127",IDC_STATIC_REF_X,145,150,30,12,SS_CENTERIMAGE | 
                     SS_SUNKEN
-    RTEXT           "0.3293",IDC_STATIC_REF_Y,185,150,35,12,SS_CENTERIMAGE | 
+    RTEXT           "0.3293",IDC_STATIC_REF_Y,180,150,30,12,SS_CENTERIMAGE | 
                     SS_SUNKEN
     COMBOBOX        IDC_COMBO_BRIG_UNIT,85,60,40,90,CBS_DROPDOWNLIST | 
                     WS_DISABLED | WS_VSCROLL | WS_TABSTOP

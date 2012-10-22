@@ -8,9 +8,9 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#include "Omdfile/OmdFile1.h"
 #include <vector>
 #include <algorithm>
+#include "Omdfile/COmdFile0.h"
 
 class CColorEyeIDoc : public CDocument
 {
@@ -33,13 +33,13 @@ public:
 	CFileException m_ErrorFx;
 //OMD File
 private:
-    OmdCarData m_OmdData;
+    OmdCarData m_dOmd;
 public:
 	void OpenOmdDlg(LPCTSTR);
 	void SaveOmdDlg(LPCTSTR);
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
-    OmdCarData& GetOmdData(){return m_OmdData; };
+    OmdCarData& GetOmdData(){return m_dOmd; };
 
 //TXT File
 private:
@@ -56,9 +56,9 @@ public:
 	void AutoSave(int); //0: Txt, 1: Omd
 //MsrDataChain
 private:
-	CDataChain m_msrData;
+	CDataChain m_MsrData;
 public:
-	CDataChain& GetMsrDataChain(){ return m_msrData; };//新的一條鍊 vChain2
+	CDataChain& GetMsrDataChain(){ return m_MsrData; };//新的一條鍊 vChain2
     void RestructureVector();
 
 protected: // create from serialization only

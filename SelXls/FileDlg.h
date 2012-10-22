@@ -16,11 +16,11 @@ class CFileDlg : public CFileDialog
 	DECLARE_DYNAMIC(CFileDlg)
 public:
 	CFileDlg(BOOL bOpenFileDialog, // TRUE for FileOpen, FALSE for FileSaveAs
-		LPCTSTR lpszDefExt = NULL,
-		LPCTSTR lpszFileName = NULL,
-		DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-		LPCTSTR lpszFilter = NULL,
-		CWnd* pParentWnd = NULL);
+	LPCTSTR lpszDefExt = NULL,
+	LPCTSTR lpszFileName = NULL,
+	DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+	LPCTSTR lpszFilter = NULL,
+	CWnd* pParentWnd = NULL);
 
 protected:
 	//{{AFX_MSG(CFileDlg)

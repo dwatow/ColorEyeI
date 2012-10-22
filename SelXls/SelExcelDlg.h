@@ -10,8 +10,6 @@
 #include "../ColorEyeIDoc.h"
 #include "cderr.h"   //for   definition   of   FNERR_BUFFERTOOSMALL 
 #include "FileDlg.h"
-//#include "../xMsrPoint/Bolt.h"
-//#include <vector>
 #include "../DataChain.h"
 
 #if _MSC_VER > 1000
@@ -27,7 +25,7 @@ enum FormType{ FORM_Nothing = 0, FORM_RA , FORM_OQC_LCM_SPEC, FORM_SEC, FORM_Gam
 
 class CSelExcelDlg : public CDialog
 {
-    COmdFile1* m_pOmdfile;
+//    COmdFile0* m_pOmdfile;
     FormType   m_ft;
     int        m_fileNumLimit;
     CString    m_strXlsFilePath;  //XlsFilepath
@@ -60,7 +58,7 @@ public:
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CSelExcelDlg)
 	public:
-    virtual void OnFinalRelease();
+//    virtual void OnFinalRelease();
 	protected:
     virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL

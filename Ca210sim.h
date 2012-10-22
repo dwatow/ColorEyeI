@@ -30,7 +30,7 @@ class Ca210sim : public Ca210
 	
     CString ImpsbStr;
 protected:
-    void MsgFrmt(CException* e, CString, CString){};
+    void MsgFrmt(CException* , CString, CString){};
     void MsgFrmt(CString){};
 	
 public:
@@ -57,17 +57,17 @@ public:
 	float   GetRangeColor2();
 	float   GetRangeFAM();
 	
-	void    SetChId(LPCTSTR &Id) {  };
-	CString GetChId()            {  return "0"; };
-	CString GetChId(long &No)    {  return "0"; };
+	void    SetChId(LPCTSTR &) {  };
+	CString GetChId()            {  return "SimCh"; };
+	CString GetChId(long &)    {  return "SimCh"; };
 	
-	void    SetChNo(long &No)    {  };
+	void    SetChNo(long &)    {  };
     CString GetChStrNo()         { return "0"; };
 	long    GetChNo()            { return 0; };
 	
-	CString GetProb()       { return "0"; };
-    CString GetDeviceType() { return "0";      };
-	CString GetCaVersion()  { return "0";   };
+	CString GetProb()       { return "8115678"; };
+    CString GetDeviceType() { return "SimCA-210"; };
+	CString GetCaVersion()  { return "Simulator";   };
 	
 	CString GetRefProbe();
 	CString GetCalProbe();

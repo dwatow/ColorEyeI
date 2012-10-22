@@ -29,8 +29,7 @@ public:
   CXlsFile2* iProb   (CString     );
   CXlsFile2* iData   (CDataChain& );
 
-  CXlsFile2* This()       { return dynamic_cast<CXlsFile2*>(this); };
-  CXlsFile2* operator->() { return This(); };
+  CXlsFile2* operator->() { return this; };
 };
 
 #endif // !defined(AFX_XLSRA1_H__31300755_DBA3_46D7_8D23_B37B8813FCE7__INCLUDED_)

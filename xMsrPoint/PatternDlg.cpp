@@ -101,7 +101,7 @@ BOOL CPatternDlg::OnInitDialog()
                   // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-HBRUSH CPatternDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+HBRUSH CPatternDlg::OnCtlColor(CDC* , CWnd* , UINT ) 
 {
     m_BkBrush.DeleteObject();
     m_BkBrush.CreateSolidBrush(m_BkColor);
@@ -187,7 +187,7 @@ void CPatternDlg::OnPaint()
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %s inch", \
             m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize().Left(2));
-        TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - temp.GetLength()*6.7, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
+        TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
     }
 
     //主要量測指示
@@ -262,7 +262,7 @@ void CPatternDlg::DrawMsringLabel(CDC &aDC)
 {    
     CRect* rect2;
     
-    if (m_Goal.GetCenter().x < (m_Goal.GetRadius()+125) + 88)
+    if (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))
     {
         rect2= new CRect
             (m_Goal.GetCenter().x + (m_Goal.GetRadius()+40)     , m_Goal.GetCenter().y - (m_Goal.GetRadius()+20), \
@@ -330,7 +330,7 @@ BOOL     CPatternDlg::SetGoalBkColor(COLORREF clr)
         return FALSE;
 }
 
-COLORREF CPatternDlg::ShiftColor(COLORREF clr, UINT shift) const
+COLORREF CPatternDlg::ShiftColor(COLORREF clr, int shift) const
 {
     int O = 0x000000FF & (clr >>24);
     int B = GetBValue(clr);
@@ -399,7 +399,7 @@ BOOL CPatternDlg::Magazine()
     pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
     pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 
-    m_itor        = pDoc->GetMsrDataChain().Begin();
+    m_itor      = pDoc->GetMsrDataChain().Begin();
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetMsrDataChain().End();
 
@@ -582,7 +582,7 @@ UINT CPatternDlg::VbrNextGoalThread(LPVOID LParam)
     Circle *pNextGoal = (Circle*)&(PtnDlg->m_NextGoal);//(pInfo1->crl);
     
     UINT oriR = pNextGoal->GetRadius(), 
-        varR = 0;
+         varR = 0;
     
     CPoint p1(pNextGoal->GetCenter());
     

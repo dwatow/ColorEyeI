@@ -17,20 +17,19 @@ public:
     void InitForm(); //畫出表格的title
 //    std::vector<Cartridge> oData();
 
-    CXlsFile2* iCellNO(std::vector<Cartridge>::size_type){ return This(); };
+    CXlsFile2* iCellNO(std::vector<Cartridge>::size_type){ return this;};
     
-    CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type ){ return This(); };
-    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type ){ return This(); };
-    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type ){ return This(); };
+    CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type ){ return this;};
+    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type ){ return this;};
+    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type ){ return this;};
 	CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type );
     
-    CXlsFile2* iChannel(CString     ){ return This(); };
-    CXlsFile2* iPanelID(CString     ){ return This(); };
-    CXlsFile2* iProb   (CString     ){ return This(); };
-    CXlsFile2* iData(CDataChain&);
+    CXlsFile2* iChannel(CString     ){ return this;};
+    CXlsFile2* iPanelID(CString     ){ return this;};
+    CXlsFile2* iProb   (CString     ){ return this;};
+    CXlsFile2* iData   (CDataChain&);
     
-    CXlsFile2* This()       { return dynamic_cast<CXlsFile2*>(this); };
-    CXlsFile2* operator->() { return This(); };
+    CXlsFile2* operator->() { return this;};
 
 };
 

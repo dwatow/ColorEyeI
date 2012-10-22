@@ -5,6 +5,8 @@
 #include "ColorEyeI.h"
 #include "ColorEyeIDoc.h"
 
+#include "SelXls\FileDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -69,7 +71,7 @@ BOOL CColorEyeIDoc::OnNewDocument()
     // (SDI documents will reuse this document)
     //第一次執行時會執行這個
     SetTitle("新的Omd檔");
-    m_OmdData.Empty();          //清空記憶體空間m_OmdData
+    m_dOmd.Empty();          //清空記憶體空間m_OmdData
     SetModifiedFlag(TRUE);
     UpdateAllViews(NULL);
     return TRUE;
@@ -114,7 +116,7 @@ void CColorEyeIDoc::OnFileNew()
     //開新檔案
     SetPathName(" ");        
     SetTitle("新的Omd檔");
-    m_OmdData.Empty();          //清空記憶體空間m_OmdData
+    m_dOmd.Empty();          //清空記憶體空間m_OmdData
     m_PnlID.Empty();
     m_MsrDvc.Empty();
     m_Prb.Empty();
@@ -160,7 +162,7 @@ void CColorEyeIDoc::OnFileSaveAs()
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::OpenTxtDlg(LPCTSTR FileFilter)
 {
-    CFileDialog aFileDialog (TRUE, "txt", "*.txt", OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
+    CFileDlg aFileDialog (TRUE, "txt", "*.txt", OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
@@ -173,7 +175,7 @@ void CColorEyeIDoc::OpenTxtDlg(LPCTSTR FileFilter)
 
 void CColorEyeIDoc::SaveTxtDlg(LPCTSTR FileFilter)
 {
-    CFileDialog aFileDialog (FALSE, "txt", "*.txt", OFN_SHAREAWARE, FileFilter);
+    CFileDlg aFileDialog (FALSE, "txt", "*.txt", OFN_SHAREAWARE, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
@@ -229,6 +231,8 @@ void CColorEyeIDoc::SaveOmdDlg(LPCTSTR FileFilter)
     if (nID == IDOK)
     {
         SaveOmdFile(aFileDialog.GetPathName());
+		DebugByTxt();
+
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
     }
@@ -238,28 +242,29 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
 {
     BeginWaitCursor();
 
-    COmdFile1 f_Omd;
+    COmdFile0 ft_Omd;
 
-    if(!f_Omd.Open(FilePathName, m_ErrorFx))
+    if(!ft_Omd.Open(FilePathName, m_ErrorFx))
         AfxMessageBox("路徑有問題");
     else 
     {
-        f_Omd.oOmdData(m_OmdData);
-        m_PnlID  = f_Omd.GetPnlID();
-        m_MsrDvc = f_Omd.GetMsrDvc();
-        m_Prb    = f_Omd.GetPrb();
-        m_CHID   = f_Omd.GetCHID();
+        m_dOmd = ft_Omd.oOmdData();
 
-        f_Omd.Close();
+        m_PnlID   = ft_Omd.GetPnlID();
+        m_MsrDvc  = ft_Omd.GetMsrDvc();
+        m_Prb     = ft_Omd.GetPrb();
+        m_CHID    = ft_Omd.GetCHID();
+
+        ft_Omd.Close();
     }
     EndWaitCursor();
 }
 
 void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 {
-    COmdFile1 f_Omd;
+    COmdFile0 f_Omd;
 
-    if(!f_Omd.Save(FilePathName, m_ErrorFx))
+    if(!f_Omd.Save(FilePathName, m_ErrorFx, m_dOmd))
         AfxMessageBox("路徑有問題!!");
     else
 	{
@@ -267,7 +272,8 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 		f_Omd.SetMsrDvc(m_MsrDvc);
 		f_Omd.SetPrb   (m_Prb);
 		f_Omd.SetCHID  (m_CHID);
-		f_Omd.iOmdData (m_OmdData);
+		f_Omd.iOmdData (m_dOmd);
+
         f_Omd.Close();
 	}
 }
@@ -287,8 +293,8 @@ void CColorEyeIDoc::OnFileSave()
 
 void CColorEyeIDoc::RestructureVector()
 {
-    m_OmdData.CutEqualCell(m_msrData);  //erase
-    m_OmdData.AddCell(m_OmdData.End(), m_msrData.Begin(), m_msrData.End());  //insert
+    m_dOmd.CutEqualCell(m_MsrData);  //erase
+    m_dOmd.AddCell(m_dOmd.End(), m_MsrData.Begin(), m_MsrData.End());  //insert
 }
 
 void CColorEyeIDoc::DebugByTxt()
@@ -300,7 +306,7 @@ void CColorEyeIDoc::DebugByTxt()
     vStr.clear();
     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
     vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = m_OmdData.Begin(); iter != m_OmdData.End(); ++iter)
+    for (std::vector<Cartridge>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
     {                  
         str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
             iter, iter->GetOrigSeqc(), iter->GetArea(), 
@@ -345,7 +351,7 @@ void CColorEyeIDoc::DebugByTxt(CString path)
     vStr.clear();
     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
     vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = m_OmdData.Begin(); iter != m_OmdData.End(); ++iter)
+    for (std::vector<Cartridge>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
     {                  
         str.Format("%x\t%d\t%d\t%d\t%d\t%d\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
             iter, iter->GetOrigSeqc(), iter->GetArea(), iter->GetBackColor(), iter->GetMsrFlowNo(), iter->GetMsrFlowNum(),\

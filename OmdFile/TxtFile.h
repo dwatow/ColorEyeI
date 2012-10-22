@@ -15,19 +15,19 @@ typedef std::vector<CString> TxtStrData;
 
 class CTxtFile  
 {
-	CStdioFile f_Std;
-	TxtStrData D_Txt;
+	CStdioFile ftxt_Std;
+	TxtStrData dtxt_Txt;
 public:
-    CTxtFile();
-    virtual ~CTxtFile();
-    virtual BOOL Open(CString, CFileException&);
-    virtual BOOL Save(CString, CFileException&);
+    CTxtFile(){};
+    virtual ~CTxtFile(){};
+    BOOL Open(CString, CFileException&);
+    BOOL Save(CString, CFileException&);
 
-	void Close(){ f_Std.Close(); };
+	void Close(){ ftxt_Std.Close(); };
 
-	void iTxtData(TxtStrData& data){ D_Txt = data; MemToFile(); };
-	void oTxtData(TxtStrData& data){ FileToMem(); data = D_Txt; };
-	TxtStrData oTxtData(){ FileToMem(); return D_Txt; };
+	void iTxtData(TxtStrData& data){ dtxt_Txt = data; MemToFile(); };
+	void oTxtData(TxtStrData& data){ FileToMem(); data = dtxt_Txt; };
+	TxtStrData oTxtData(){ FileToMem(); return dtxt_Txt; };
 private:
 	void FileToMem();
 	void MemToFile();

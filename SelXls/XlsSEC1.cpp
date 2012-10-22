@@ -42,9 +42,9 @@ void CXlsSEC1::InitForm()
     for(j=0;j<10;j++)
     {
         if(j==1)//B
-            SelectCell('A'+j, 1)->SetCellWidth((float)24.63);
+            SelectCell((char)('A'+j), 1)->SetCellWidth((float)24.63);
         else 
-            SelectCell('A'+j, 1)->SetCellWidth((float)8.38);
+            SelectCell((char)('A'+j), 1)->SetCellWidth((float)8.38);
     }
     
     
@@ -122,9 +122,9 @@ void CXlsSEC1::InitForm()
             switch(i)
             {
                 //case 0:  strcpy(buf,"");  break;
-            case 1:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("L"); break;
-            case 2:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("x"); break;
-            case 3:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("y"); break;
+            case 1:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("L"); break;
+            case 2:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("x"); break;
+            case 3:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("y"); break;
             }
         }
         if(i==0)
@@ -132,13 +132,13 @@ void CXlsSEC1::InitForm()
             switch(j)
             {
                 //case 0:  SelectCell('C'+i, 9+i)->SetCell("");      break;
-            case 1:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("White"); break;
-            case 2:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("Red");   break;
-            case 3:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("Green"); break;
-            case 4:  SelectCell('C'+i, 9+j)->SetCellBorder()->SetCell("Blue");  break;
+            case 1:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("White"); break;
+            case 2:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("Red");   break;
+            case 3:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("Green"); break;
+            case 4:  SelectCell((char)('C'+i), 9+j)->SetCellBorder()->SetCell("Blue");  break;
             }
         }
-        SelectCell('C'+i, 9+j)->SetCellBorder();
+        SelectCell((char)('C'+i), 9+j)->SetCellBorder();
     }}
     SelectCell("G9", "I13")->SetMergeCells()->SetCellBorder(1,3,1);
     SelectCell("B9", "I13")->SetCellBorder(1, 3, 1);
@@ -146,9 +146,9 @@ void CXlsSEC1::InitForm()
     //49 Point Brightness
     for(i=0;i<7;i++){
     for(j=0;j<7;j++){
-        SelectCell('C'+i, 14+j)->SetCellBorder();
+        SelectCell((char)('C'+i), 14+j)->SetCellBorder();
         if((i%2==1)&&(j%2==1))
-            SelectCell('C'+i, 14+j)->SetCellColor(6);
+            SelectCell((char)('C'+i), 14+j)->SetCellColor(6);
     }}
     SelectCell("B14", "I20")->SetCellBorder(1, 3, 1);
 
@@ -164,7 +164,7 @@ void CXlsSEC1::InitForm()
     //Low Frequency Uniformity (5 nits)
     for(i=0;i<7;i++){
     for(j=0;j<16;j++){
-        SelectCell('C'+i, 23+j)->SetCellBorder();
+        SelectCell((char)('C'+i), 23+j)->SetCellBorder();
     }}
 
     SelectCell("F23")->SetCell("=ABS(C23-D23)/D23");
@@ -274,8 +274,9 @@ void CXlsSEC1::InitForm()
 
 CXlsFile2* CXlsSEC1::iData (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count)
 {
-    iCellNO(1)->iData(vCar);
-    return This();
+	box_count = 1;
+    iCellNO(box_count)->iData(vCar);
+    return this;
 }
 
 CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
@@ -316,27 +317,27 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     //w,49點亮度值
     for(i=0;i<7;i++){//橫的
     for(j=0;j<7;j++){//直的
-        SelectCell('C'+i, 14+j)->SetCell("%3.2f",m_vCar.At(White, Pn49, i+j*7).GetLv());
+        SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
     }}
     //白色 9點全部值
     for(i=0;i<5;i++){
     for(j=0;j<9;j++){
-             if(i == 0)     SelectCell('C'+i, 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
-        else if(i == 1)     SelectCell('C'+i, 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
-        else if(i == 2)     SelectCell('C'+i, 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
-        else if(i == 3)     SelectCell('C'+i, 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
-        else if(i == 4)     SelectCell('C'+i, 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
+             if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+        else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
+        else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
+        else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
+        else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
     }}
     //黑色 9點全部值（四角漏光）
     for(i=0;i<3;i++){
     for(j=0;j<3;j++){
-            SelectCell('C'+j,26+i)->SetCell("%3.2f",m_vCar.At(Dark , Pn9, i*3+j).GetLv());
+            SelectCell((char)('C'+j), 26+i)->SetCell("%3.2f", m_vCar.At(Dark , Pn9, i*3+j).GetLv());
     }}
     
     //5nits 
     for(i=0;i<3;i++){
     for(j=0;j<3;j++){
-            SelectCell('C'+j,23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
+            SelectCell((char)('C'+j), 23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
     }}
 
 	SelectSheet(2);
@@ -358,7 +359,7 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 
 //    SetVisible(TRUE);
     
-    return This();
+    return this;
 }
 
 // std::vector<Cartridge> CXlsSEC1::oData()

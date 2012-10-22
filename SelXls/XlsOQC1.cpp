@@ -20,17 +20,17 @@ CXlsFile2* CXlsOQC1::iCellNO(std::vector<Cartridge>::size_type ModuleNO)
 {
     m_ModuleNO = ModuleNO;
     SelectCell('A', 5+m_ModuleNO)->SetCell(m_ModuleNO+1);
-    return This();
+    return this;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CXlsFile2* CXlsOQC1::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iPanelID(strPanelID);     return This();}
-CXlsFile2* CXlsOQC1::iChannel(CString striChannel, std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iChannel(striChannel);    return This();}
-CXlsFile2* CXlsOQC1::iData(CDataChain& vCar      , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iData(m_vCar);              return This();}
+CXlsFile2* CXlsOQC1::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iPanelID(strPanelID);     return this;}
+CXlsFile2* CXlsOQC1::iChannel(CString striChannel, std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iChannel(striChannel);    return this;}
+CXlsFile2* CXlsOQC1::iData(CDataChain&           , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iData(m_vCar);              return this;}
 
 //////////////////////////////////////////////////////////////////////////
-CXlsFile2* CXlsOQC1::iPanelID(CString strPanelID)  { SelectSheet(1)->SelectCell('B' , 5+m_ModuleNO)->SetCell(strPanelID);     return This();}
-CXlsFile2* CXlsOQC1::iChannel(CString striChannel) { SelectSheet(1)->SelectCell("AP", 5+m_ModuleNO)->SetCell(striChannel);    return This();}
+CXlsFile2* CXlsOQC1::iPanelID(CString strPanelID)  { SelectSheet(1)->SelectCell('B' , 5+m_ModuleNO)->SetCell(strPanelID);     return this;}
+CXlsFile2* CXlsOQC1::iChannel(CString striChannel) { SelectSheet(1)->SelectCell("AP", 5+m_ModuleNO)->SetCell(striChannel);    return this;}
 CXlsFile2* CXlsOQC1::iData(CDataChain& vCar)
 {
 //Step 4.開始設定內容
@@ -44,7 +44,7 @@ CXlsFile2* CXlsOQC1::iData(CDataChain& vCar)
     //W9(Lv)
 	SelectSheet(1);
     for(i = 0; i < 9; ++i)
-        SelectCell('C'+i, 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, i).GetLv());
+        SelectCell((char)('C'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, i).GetLv());
     //W1(x,y)
     SelectCell('L', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
     SelectCell('M', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
@@ -68,7 +68,7 @@ CXlsFile2* CXlsOQC1::iData(CDataChain& vCar)
     SelectCell('Z', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, 0).GetLv());
 
     for(i=0;i<8;++i)
-        SelectCell('A','A'+i, 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i+1).GetLv());
+        SelectCell('A',(char)('A'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i+1).GetLv());
 
     //5nits(x,y)
     SelectCell('A','J', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Nits, Pn9, 4).GetSx());
@@ -95,13 +95,13 @@ CXlsFile2* CXlsOQC1::iData(CDataChain& vCar)
     SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn1, 0).GetSy());
     //D25(Lv)
     for(i=0;i<21;++i)
-        SelectCell('F'+i, 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i).GetLv());
+        SelectCell((char)('F'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i).GetLv());
 
     for(i=0;i<4;++i)
     //    CString temp;
     //    temp.Format("OQC_Date[%d].d25[%d].GetLv() = %f\nOQC_Date[%d].d25[%d].GetLv() = %f", Tai, i+21,m_vCar.At(d25[i+21].GetLv(), Tai, i+21,m_vCar.At(d25[i].GetLv());
     //    MessageBox(temp);
-        SelectCell('A','A'+i, 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i+21).GetLv());
+        SelectCell('A',(char)('A'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i+21).GetLv());
 
 	//////////////////////////////////////////////////////////////////////////
     //Step 4.設定Sheet3
@@ -130,7 +130,7 @@ CXlsFile2* CXlsOQC1::iData(CDataChain& vCar)
 
 //    SetVisible(TRUE);    
 
-    return This();
+    return this;
 }
 
 // std::vector<Cartridge> CXlsOQC1::oData()

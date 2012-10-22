@@ -15,51 +15,48 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CTxtFile::CTxtFile(){}
-CTxtFile::~CTxtFile(){}
-
 BOOL CTxtFile::Open(CString path, CFileException& fx)
 {
-    if (f_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
+    if (ftxt_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
         return TRUE;  //成功入侵取得資料
     else
     { 
         ErrorMsg(fx);
-        f_Std.Close();
+        ftxt_Std.Close();
         return FALSE;  //失敗
     }
 }
 
 void CTxtFile::FileToMem()
 {
-    D_Txt.clear();
+    dtxt_Txt.clear();
     CString strTemp;
-    while (f_Std.ReadString(strTemp))
+    while (ftxt_Std.ReadString(strTemp))
     {
         strTemp.Format(_T("%s\n"), strTemp);
-        D_Txt.push_back(strTemp);
+        dtxt_Txt.push_back(strTemp);
     }
 }
 
 BOOL CTxtFile::Save(CString path, CFileException& fx)
 {
-    if (f_Std.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
+    if (ftxt_Std.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
         return TRUE;
     else
     {
         ErrorMsg(fx);
-		f_Std.Close();
+		ftxt_Std.Close();
         return FALSE;
     }
 }
 
 void CTxtFile::MemToFile()
 {
-    if (!D_Txt.empty())
+    if (!dtxt_Txt.empty())
     {
-        for (TxtStrData::iterator it = D_Txt.begin(); it != D_Txt.end(); ++it)
+        for (TxtStrData::iterator it = dtxt_Txt.begin(); it != dtxt_Txt.end(); ++it)
 			//AfxMessageBox(*it);
-				f_Std.WriteString(*it);
+				ftxt_Std.WriteString(*it);
     }
 }
 

@@ -20,17 +20,16 @@ public:
     CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
 
     CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type);
-    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type){ return This(); };
+    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type){ return this; };
     CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type);
     CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type);
 
     CXlsFile2* iPanelID(CString     );
-    CXlsFile2* iProb   (CString     ){ return This(); };
+    CXlsFile2* iProb   (CString     ){ return this; };
     CXlsFile2* iChannel(CString     );
     CXlsFile2* iData   (CDataChain& );
 
-    CXlsFile2* This()       { return dynamic_cast<CXlsFile2*>(this); };
-    CXlsFile2* operator->() { return This(); };
+    CXlsFile2* operator->() { return this; };
 };
 
 #endif // !defined(AFX_XLSOQC1_H__D5913DE1_A748_4AC1_885C_6385B3C1CB17__INCLUDED_)

@@ -105,7 +105,7 @@ private:
 
     BOOL Trigger(std::vector<Cartridge>::iterator&);
     BOOL NextTrigger(std::vector<Cartridge>::iterator&);
-    COLORREF ShiftColor(COLORREF clr, UINT shift = 55) const;
+    COLORREF ShiftColor(COLORREF clr, int shift = 55) const;
     COLORREF InvrtColor(COLORREF clr) const;
     void DrawMsrLabel(CDC &pDC);
     void DrawMsringLabel(CDC &pDC);

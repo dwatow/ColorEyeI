@@ -69,8 +69,8 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr /FD /GZ /c
-# SUBTRACT CPP /YX /Yc /Yu
+# ADD CPP /nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr /FD /GZ /c
+# SUBTRACT CPP /WX /YX /Yc /Yu
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x404 /d "_DEBUG"
@@ -153,6 +153,22 @@ SOURCE=.\ColorEyeIView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\OmdFile\COmdFile0.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFile1.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFileGm.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFilePtr.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DataChain.cpp
 # End Source File
 # Begin Source File
@@ -174,10 +190,6 @@ SOURCE=.\MainFrm.cpp
 # Begin Source File
 
 SOURCE=.\MsrItems\MsrItemDlg.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\OmdFile\OmdFile1.cpp
 # End Source File
 # Begin Source File
 
@@ -282,6 +294,22 @@ SOURCE=.\ColorEyeIView.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\OmdFile\COmdFile0.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFile1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFileGm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFilePtr.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\DataChain.h
 # End Source File
 # Begin Source File
@@ -307,10 +335,6 @@ SOURCE=.\MainFrm.h
 # Begin Source File
 
 SOURCE=.\MsrItems\MsrItemDlg.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\OmdFile\OmdFile1.h
 # End Source File
 # Begin Source File
 

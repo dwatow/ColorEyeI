@@ -264,8 +264,8 @@ CPoint Bolt::GetD21Point(UINT few) const
     int CenterH    = m_nScrmH/2;
     int CenterV    = m_nScrmV/2;
 
-    int HLevel = m_nScrmH/m_f21Havg;
-    int VLevel = m_nScrmV/m_f21Vavg;
+    int HLevel = (int)(m_nScrmH/m_f21Havg);
+    int VLevel = (int)(m_nScrmV/m_f21Vavg);
 
     int L2 = CenterH - HLevel;
     int L1 = L2 - HLevel;
@@ -629,7 +629,7 @@ CPoint Bolt::GetCrossTalk(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	float FromEdge = m_fCrsTlkRectFE * 2.0 ;
+	float FromEdge = m_fCrsTlkRectFE * (float)2.0 ;
 
     int LeftEdge   = static_cast<int>(m_nScrmH / FromEdge);    //上
     int TopEdge    = static_cast<int>(m_nScrmV / FromEdge);    //下
@@ -758,7 +758,17 @@ COLORREF Bolt::GetBkColor() const
 {
     if (m_isReady)
     {
-		if (m_MsrFlowNum != PnGamma)
+		if (m_MsrFlowNum == PnGamma)
+			switch(m_BkColor)
+			{
+				case Red:      return RGB( m_MsrFlowNo,           0,           0);
+				case Green:    return RGB(           0, m_MsrFlowNo,           0);
+				case Blue:     return RGB(           0,           0, m_MsrFlowNo);
+				case White:    
+				case Dark:     
+				default:       return RGB( m_MsrFlowNo, m_MsrFlowNo, m_MsrFlowNo);
+			}
+		else
 			switch(m_BkColor)
 			{
 				case White:    return RGB( 255, 255, 255);
@@ -769,20 +779,8 @@ COLORREF Bolt::GetBkColor() const
 				case Nits:     return m_5nitsBkColor;
 				case CrsTlk: 
 				case CrsTlkW:
-				case CrsTlkD:
-							 return RGB( 128, 128, 128);
-				default:     return RGB( 192, 212,  49); 
-			}
-		else
-			switch(m_BkColor)
-			{
-				case Red:      return RGB( m_MsrFlowNo,           0,           0);
-				case Green:    return RGB(           0, m_MsrFlowNo,           0);
-				case Blue:     return RGB(           0,           0, m_MsrFlowNo);
-				case White:    
-				case Dark:     
-				default:       
-								return RGB( m_MsrFlowNo, m_MsrFlowNo, m_MsrFlowNo);
+				case CrsTlkD:  return RGB( 128, 128, 128);
+				default:       return RGB( 192, 212,  49); 
 			}
     }
     else

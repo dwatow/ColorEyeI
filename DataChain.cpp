@@ -66,7 +66,7 @@ xChain::size_type CDataChain::StdInit()
     Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
     Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
     Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
-    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
+//    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
     Grow(Nits, Pn9);
     Grow(CrsTlk , Pn4);  Grow(CrsTlkW, Pn4);  Grow(CrsTlkD, Pn4);
     
@@ -104,7 +104,7 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
 
 Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) 
 {
-    if(Little > Large)
+    if(Little > (UINT)Large)
     {
         AfxMessageBox("CDataChain::At() ERROR!!!");
         return m_CarChain1.at(0);
@@ -121,7 +121,7 @@ Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little)
 
 const Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) const
 {
-    if(Little > Large)
+    if(Little > (UINT)Large)
     {
         AfxMessageBox("CDataChain::At() ERROR!!!");
         return m_CarChain1.at(0);

@@ -2,8 +2,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#if !defined(AFX_OMDFILE1_H__5E9E8D8E_4BB9_40C8_BEE3_2756DA9A7E76__INCLUDED_)
-#define AFX_OMDFILE1_H__5E9E8D8E_4BB9_40C8_BEE3_2756DA9A7E76__INCLUDED_
+#ifndef OMDFILEPTR_H
+#define OMDFILEPTR_H
 
 #if _MSC_VER > 1000
 #pragma once
@@ -19,14 +19,14 @@
 //typedef std::vector<Cartridge> OmdCarData;
 typedef CDataChain OmdCarData;
 
-class COmdFile1// : public CTxtFile
+class COmdFilePtr
 {
 //Diff of Txt file
+protected:
 	CString m_PnlID;
     CString m_MsrDvc;
     CString m_Prb;
     CString m_CHID;
-	
 public:
     CString GetPnlID () const { return m_PnlID;  };
     CString GetMsrDvc() const { return m_MsrDvc; };
@@ -37,35 +37,34 @@ public:
 	void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
     void SetPrb    (CString& _S) { m_Prb    =  _S; };
     void SetCHID   (CString& _S) { m_CHID   =  _S; };
-private:
-	BOOL isOldForm(TxtStrData&);
-	
-	CString GetLine(UINT LineNum);	
-	CString GetCell(UINT Word, UINT Line);
-	CString GetCell(TCHAR c, UINT n);   // 0< c<=24
-	CString GetCell(PTCHAR c, UINT n);  //25<=c，從AA開始算
+protected:
+//	virtual BOOL isOldForm(TxtStrData&) = 0;
+	CString GetLine(UINT );	
+	CString GetCell(UINT , UINT );
+	CString GetCell(TCHAR , UINT );   // 0< c<=24
+	CString GetCell(PTCHAR , UINT );  //25<=c，從AA開始算
 
+protected:
+	TxtStrData m_dTxt;
 //the same of Txt file;
-private:
-	CTxtFile f_Txt;
-	OmdCarData D_Omd;
-
-	TxtStrData D_Txt;
+	CTxtFile   m_fTxt;
+	OmdCarData m_dOmd;
 public:
-    COmdFile1();
-	virtual ~COmdFile1(){  D_Omd.Empty(); D_Txt.clear(); D_Txt.clear(); };
+    COmdFilePtr();
+	virtual ~COmdFilePtr();
     BOOL Open(CString, CFileException&);
     BOOL Save(CString, CFileException&);
-    
-	void Close(){ f_Txt.Close(); };
 
-	void iOmdData(OmdCarData& data){ D_Omd = data; OmdToTxt(); };
-	void oOmdData(OmdCarData& data){ TxtToOmd(); data = D_Omd; };
-	OmdCarData oOmdData(){ TxtToOmd(); return D_Omd; };
+	void Close(){ m_fTxt.Close(); };
+
+	OmdCarData oOmdData(){ TxtToOmd(); return m_dOmd; };
+	void oOmdData(OmdCarData& data){ TxtToOmd(); data = m_dOmd; };
+	void iOmdData(OmdCarData& data){ m_dOmd = data; OmdToTxt(); };
+
 private:
-	void TxtToOmd();
-	void OmdToTxt();
-	void ErrorMsg(CFileException& fx);
+ 	virtual void TxtToOmd() = 0;
+ 	virtual void OmdToTxt() = 0;
+ 	void ErrorMsg(CFileException& );
 };
 
-#endif // !defined(AFX_OMDFILE1_H__5E9E8D8E_4BB9_40C8_BEE3_2756DA9A7E76__INCLUDED_)
+#endif // OMDFILE0_H

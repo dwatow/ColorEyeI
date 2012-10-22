@@ -12,7 +12,6 @@ m_pICa200(0), m_pICa(0), m_pIProbe(0), m_pIProbeInfo(0), m_pIMemory(0)
 #ifdef _CA210DEBUG
         DBugModeBox("TRUE of Ca210real()");
 #endif
-    int flag = 1;
     if (initCreatCa200())
     if (initConnectCa210())
     if (initAttachCa())
@@ -457,7 +456,7 @@ CString Ca210real::GetRefSx()
     float Lv, Sx, Sy;
     m_pIMemory->GetReferenceColor(m_pIProbe->GetId(), &Sx, &Sy, &Lv);
     CString strSx;
-    strSx.Format("%f", Sx);
+    strSx.Format("%1.4f", Sx);
     return strSx;
 }
 
@@ -466,7 +465,7 @@ CString Ca210real::GetRefSy()
     float Lv, Sx, Sy;
     m_pIMemory->GetReferenceColor(m_pIProbe->GetId(), &Sx, &Sy, &Lv);
     CString strSy;
-    strSy.Format("%f", Sy);
+    strSy.Format("%1.4f", Sy);
     return strSy;
 }
 

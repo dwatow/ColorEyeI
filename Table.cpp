@@ -246,8 +246,8 @@ CTable& CTable::td(UINT Hspan, UINT Vspan)//往右一格
     if (Hspan != 1 || Vspan != 1)//預設就是1, 1
     {
 //        strTemp.Format("");
-        for (int ii = m_xCnt; ii < Hspan + m_xCnt; ++ii)
-        for (int ij = m_yCnt; ij < Vspan + m_yCnt; ++ij)
+        for (int ii = m_xCnt; ii < (int)(Hspan + m_xCnt); ++ii)
+        for (int ij = m_yCnt; ij < (int)(Vspan + m_yCnt); ++ij)
         {
 //             若SpanTble格子裡為1，就是打算合併儲存格的儲存格
 //             所以，之後不畫框線
@@ -276,7 +276,7 @@ CTable& CTable::td(UINT Hspan, UINT Vspan)//往右一格
 CTable& CTable::td(COLORREF BkClr, UINT Hspan, UINT Vspan)
 {
     td(Hspan, Vspan);
-    int GrayClr = 223;
+//    int GrayClr = 223; 未使用的區域變數
     DrawRect(BkClr);
     return *this;
  }
@@ -328,7 +328,7 @@ UINT CTable::nextX(UINT SpanNum)
 {
     UINT nX = m_ptCur.x;
     UINT tXCnt = m_xCnt;
-    for (int i = 0; i < SpanNum; ++i)
+    for (int i = 0; i < (int)SpanNum; ++i)
     {
         if (m_xCnt != 0 && m_yCnt != 0)
             nX = nX + m_SpanTable[(tXCnt%m_xCnt_Max)] + m_CellSpace.cx*2; //取寬度，設定座標
@@ -352,7 +352,7 @@ UINT CTable::nextY(UINT SpanNum)
     m_SpanTable[(m_yCnt%m_yCnt_Max)*m_xCnt_Max] = TextHight;
 
     
-    for (int i = 0; i < SpanNum; ++i)
+    for (int i = 0; i < (int)SpanNum; ++i)
     {
         if (m_xCnt != 0 && m_yCnt != 0)
             nY = nY + TextHight + m_CellSpace.cy*2; //取寬度，設定座標
@@ -532,7 +532,14 @@ void CTable::ViewSpanTableValue(const CString title)
     //all of table value
     CString strTemp, temp;
 
-    strTemp.Format((title.IsEmpty()) ? (_T("SetCellNum(%d/%d, %d/%d)"), m_xCnt, m_xCnt_Max, m_yCnt, m_yCnt_Max) : (_T("%s"), title));
+	LPCTSTR lpctstr;
+	if (title.IsEmpty())
+		lpctstr = _T("SetCellNum(%d/%d, %d/%d)"), m_xCnt, m_xCnt_Max, m_yCnt, m_yCnt_Max;
+	else
+		lpctstr = _T("%s"), title;
+
+		strTemp.Format(lpctstr);
+
     strTemp += _T("\n");
 
     for (std::vector<UINT>::iterator it = m_SpanTable.begin(); it != m_SpanTable.end(); ++it)
@@ -552,7 +559,12 @@ void CTable::ViewTableTableValue(const CString title)
     //all of table value
     CString strTemp, temp;
     
-    strTemp.Format((title.IsEmpty()) ? (_T("SetCellNum(%d/%d, %d/%d)"), m_xCnt -1, m_xCnt_Max -1, m_yCnt -1, m_yCnt_Max -1) : (_T("%s"), title));
+	LPCTSTR lpctstr;
+	if (title.IsEmpty())
+		lpctstr = _T("SetCellNum(%d/%d, %d/%d)"), m_xCnt -1, m_xCnt_Max -1, m_yCnt -1, m_yCnt_Max -1;
+	else
+		lpctstr = _T("%s"), title;
+    strTemp.Format(lpctstr);
     strTemp += _T("\n");
     
     for (std::vector<CPoint>::iterator it = m_PointTable.begin(); it != m_PointTable.end(); ++it)

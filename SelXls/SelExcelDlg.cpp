@@ -15,10 +15,10 @@ static char THIS_FILE[] = __FILE__;
 // CSelExcelDlg dialog
 
 
-CSelExcelDlg::CSelExcelDlg(CWnd* pParent /*=NULL*/)
-    : CDialog(CSelExcelDlg::IDD, pParent),
+CSelExcelDlg::CSelExcelDlg(CWnd* pParent /*=NULL*/): 
+    CDialog(CSelExcelDlg::IDD, pParent),
     m_pMainFrm(dynamic_cast<CMainFrame*>(AfxGetMainWnd())), 
-	m_pDoc(dynamic_cast<CColorEyeIDoc*>(m_pMainFrm->GetActiveDocument()))
+    m_pDoc(dynamic_cast<CColorEyeIDoc*>(m_pMainFrm->GetActiveDocument()))
 
 {
     EnableAutomation();
@@ -31,15 +31,6 @@ CSelExcelDlg::CSelExcelDlg(CWnd* pParent /*=NULL*/)
 }
 
 
-void CSelExcelDlg::OnFinalRelease()
-{
-    // When the last reference for an automation object is released
-    // OnFinalRelease is called.  The base class will automatically
-    // deletes the object.  Add additional cleanup required for your
-    // object before calling the base class.
-
-    CDialog::OnFinalRelease();
-}
 
 void CSelExcelDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -223,7 +214,9 @@ void CSelExcelDlg::OnFindOmdFile()
     // TODO: Add your control notification handler code here
     //找omd檔案的動作
     CString fOmdFilter("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");//檔案過濾條件
-    CFileDlg aFileDialog (TRUE, NULL, NULL, (m_fileNumLimit > 1) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT : OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, fOmdFilter);
+    CFileDlg aFileDialog (TRUE, NULL, NULL, \
+                          (m_fileNumLimit > 1) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT \
+                                               : OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, fOmdFilter);
     
     aFileDialog.SetMultiFileNameBuffer(m_fileNumLimit);
     
@@ -259,31 +252,31 @@ void CSelExcelDlg::NewVector()
 void CSelExcelDlg::OnOK() 
 {
     BeginWaitCursor();
-	    CXlsFile2* pfXls = 0;
-	    NewVector();
+        CXlsFile2* pfXls = 0;
+        NewVector();
         switch(m_ft)
         {
-        case FORM_SEC:          pfXls = new CXlsSEC1;  pfXls->New()->SetSheetName(1,"SEC Report");                break;
-        case FORM_RA:           pfXls = new CXlsRA1;   pfXls->New()->SetSheetName(1,"RA Report");                 break;    
-        case FORM_OQC_LCM_SPEC: pfXls = new CXlsOQC1;  pfXls->Open(GetXlsFilePath())->SetSheetName(1,"OQC SPEC"); break;    
+        case FORM_SEC:          pfXls = new CXlsSEC1();  pfXls->New()->SetSheetName(1,"SEC Report");                break;
+        case FORM_RA:           pfXls = new CXlsRA1();   pfXls->New()->SetSheetName(1,"RA Report");                 break;    
+        case FORM_OQC_LCM_SPEC: pfXls = new CXlsOQC1();  pfXls->Open(GetXlsFilePath())->SetSheetName(1,"OQC SPEC"); break;    
         case FORM_Gamma:        /*pfXls = new CXlsGamma;  */                                                      break;     
         case FORM_Nothing:
         default:                AfxMessageBox("怎麼會選這一個輸出？");
         }
         OutToExcel(pfXls);
         if (pfXls != 0)
-        	delete pfXls;
+            delete pfXls;
     EndWaitCursor();
     CDialog::OnOK();
 }
 
 CString CSelExcelDlg::GetXlsFilePath()
 {
-	CString strXlsFilePath;
-	CString strFileName;
-	m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), strFileName);
-	strXlsFilePath.Format("%s\\%s", m_strXlsFilePath, strFileName);
-	return strXlsFilePath;
+    CString strXlsFilePath;
+    CString strFileName;
+    m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), strFileName);
+    strXlsFilePath.Format("%s\\%s", m_strXlsFilePath, strFileName);
+    return strXlsFilePath;
 }
 
 void CSelExcelDlg::OutToExcel(CXlsFile2* pTofXls)
@@ -296,29 +289,37 @@ void CSelExcelDlg::OutToExcel(CXlsFile2* pTofXls)
 
 void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 {
-    m_pOmdfile = new COmdFile1;
-	CFileException fx;
+    pHDfXls->InitForm();
+
+    COmdFile0 fOmd;
+    CFileException fx;
+    BeginWaitCursor();
     for (std::vector<CString>::iterator itfPaths = m_vOmdFilePathList.begin(); itfPaths != m_vOmdFilePathList.end(); ++itfPaths)
     {
         //在此，等同於Doc的開啟舊檔As omd
-        if(m_pOmdfile->Open(*itfPaths, fx))
+        if(!fOmd.Open(*itfPaths, fx))
             AfxMessageBox("路徑有問題");
-        
-        m_pOmdfile->iOmdData(m_vOmdtoXls);
+        else
+        {
+            fOmd.oOmdData(m_vOmdtoXls);
 
-        pHDfXls->InitForm();
-        pHDfXls->iCellNO (abs(itfPaths - m_vOmdFilePathList.begin()))\
-             ->iChannel(m_pOmdfile->GetCHID())\
-             ->iPanelID(m_pOmdfile->GetPnlID())\
-             ->iProb   (m_pOmdfile->GetPrb())\
-             ->iData   (m_vOmdtoXls);
+            pHDfXls->iCellNO (abs(itfPaths - m_vOmdFilePathList.begin()));
+            pHDfXls->iChannel(fOmd.GetCHID());
+            pHDfXls->iPanelID(fOmd.GetPnlID());
+            pHDfXls->iProb   (fOmd.GetPrb());
+            pHDfXls->iData   (m_vOmdtoXls);
+
+            fOmd.Close();
+
+
+        }
     }
-    delete m_pOmdfile;
+    EndWaitCursor();
 }
 
 void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 {
-	pDocfXls->InitForm();
+    pDocfXls->InitForm();
     pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iData(m_pDoc->GetOmdData());
 }
 

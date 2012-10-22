@@ -241,7 +241,8 @@ void CColorEyeIView::DrawAsTxtFile(CDC* pDC, TxtStrData Data, CPoint& pt)
 {
     for (TxtStrData::iterator itor = Data.begin(); itor != Data.end(); ++itor)
     {
-        unsigned int i = itor - Data.begin();
+		unsigned int i = 0;
+        i = itor - Data.begin();
         pDC->TextOut(pt.x, pt.y, *itor);
 		pt.y = pt.y + 16;
     }
@@ -1659,8 +1660,8 @@ void CColorEyeIView::ViewTableBkColor(isMsrItem Item)
     MessageBox(strTemp);
 };
 
-void CColorEyeIView::DebugView(CDC* pDC, CColorEyeIDoc* pDoc, UINT i)
-{
+//void CColorEyeIView::DebugView(CDC* pDC, CColorEyeIDoc* pDoc, UINT i)
+//{
 //     UINT hText = 16;
 //     CString strTemp2;
 //     switch(i)
@@ -1700,7 +1701,7 @@ void CColorEyeIView::DebugView(CDC* pDC, CColorEyeIDoc* pDoc, UINT i)
 //     pDC->SetTextAlign(TA_RIGHT);
 //     pDC->TextOut(ptRightTop.x, ptRightTop.y + hText*i, strTemp.GetBuffer(0), strTemp.GetLength());
 //     delete rect;
-}
+//}
 
 #endif
 

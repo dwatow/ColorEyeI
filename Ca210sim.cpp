@@ -25,7 +25,7 @@
 Ca210sim::Ca210sim():
 ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上，另存成圖檔\n2. Mail給此程式設計者，詳細描述使用過程並將圖檔存成附件\n這是尚未預測到出現的問題。（應該不會發生的那種。）")
 {
-    int flag = 1;
+//    int flag = 1;
     m_pIProbe = new Bullet();
     //m_caState = CA_BeforeZeroCal;
 	m_caState = CA_MsrMode;  //模擬不用Zero Cal
@@ -252,32 +252,32 @@ float Ca210sim::GetRangeFAM()
 
 CString Ca210sim::GetRefSx()
 {
-    return "160";
+    return "0.3127";
 }
 
 CString Ca210sim::GetRefSy()
 {
-    return "0.3127";
+    return "0.3293";
 }
 
 CString Ca210sim::GetRefLv()
 {
-    return "0.3293";
+    return "160";
 }
 
 CString Ca210sim::GetRefProbe()
 {
-    return "0";
+    return "8115678";
 }
 
 CString Ca210sim::GetCalProbe()
 {
-    return "0";
+    return "8115678";
 }
 
 CString Ca210sim::GetCalMode()
 {
-    return "1";
+    return "11";
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -314,7 +314,7 @@ CString Ca210sim::GetSynMode(SynMode SmType)
 
 float Ca210sim::GetSynMode()
 {
-	return ChooseSynMode(m_syncMode);
+	return 3.0; //SM_UNIV
 }
 //////////////////////////////////////////////////////////////////////////
 void Ca210sim::SetDisplayMode(DisPlay DpType)
@@ -346,7 +346,7 @@ CString Ca210sim::GetDisplayMode(DisPlay DpType)
 
 long Ca210sim::GetDisplayMode()
 {
-	return ChooseDisplayMode(m_displayMode);
+	return 0;  //xyLv
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -377,7 +377,7 @@ CString Ca210sim::GetDisplayDigits(DisDigits DdType)
 
 long Ca210sim::GetDisplayDigits()
 {
-	return ChooseDisplayDigits(m_displayDigits);
+	return 1; //DD_4DisDigits
 }
 //////////////////////////////////////////////////////////////////////////
 void Ca210sim::SetAvgingMode(AvgMode AmType)
@@ -409,7 +409,7 @@ CString Ca210sim::GetAvgingMode(AvgMode AmType)
 
 long Ca210sim::GetAvgingMode()
 {
-	return ChooseAvgingMode(m_averageMide);
+	return 1; //AM_FAST
 }
 //////////////////////////////////////////////////////////////////////////
 void Ca210sim::SetBrigUnit(BrigUnit BuType)
@@ -439,7 +439,7 @@ CString Ca210sim::GetBrigUnit(BrigUnit BuType)
 
 long Ca210sim::GetBrigUnit()
 {
-	return ChooseBrigUnit(m_brightnessUnit);
+	return 1; //BU_cdm2
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -470,7 +470,7 @@ CString Ca210sim::GetCalStandard(CalStand CsType)
 
 long Ca210sim::GetCalStandard()
 {
-	return ChooseCalStandard(m_calStandard);
+	return 1; //CS_6500K
 }
 //////////////////////////////////////////////////////////////////////////
 

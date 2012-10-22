@@ -743,6 +743,8 @@ xlsFile* xlsFile::SelectChartRange(char x1, int y1, char x2, int y2)
 
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
+	//發現了這個問題，但是忘記了是不是故意這樣寫的！
+	//是x1, y1; x2, y2?
 	sprintf(buf1,"%c%d",x1,y2);
 	sprintf(buf2,"%c%d",x1,y2);
 
@@ -769,7 +771,8 @@ xlsFile* xlsFile::SetChart(short XaxisByToporLeft, bool isLabelVisable, CString 
 	var.vt = VT_DISPATCH;
 	var.pdispVal = lpDisp;
 
-	short LabelVisable = (isLabelVisable) ? TRUE : FALSE ;
+	short LabelVisable(FALSE);
+	LabelVisable = (isLabelVisable) ? (short)TRUE : (short)FALSE ;
 		
 	xlsChart.ChartWizard(var,					// const VARIANT& Source.
 		COleVariant((short)11),					// const VARIANT& fix please, Gallery: 3d Column. 1 or 11 是否轉動3D（3D類適用, 1轉，11不轉）
