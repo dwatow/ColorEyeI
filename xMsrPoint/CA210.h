@@ -56,7 +56,7 @@ public:
  	virtual CString GetChId(long&) = 0;
  
   	virtual void    SetChNo(long&) = 0;
-     virtual CString GetChStrNo() = 0;
+    virtual CString GetChStrNo() = 0;
  	virtual long    GetChNo() = 0;
 
 	virtual CString GetProb() = 0;

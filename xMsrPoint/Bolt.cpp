@@ -698,7 +698,7 @@ CPoint Bolt::GetGammaPoint() const
 
 UINT Bolt::CmtoPixel(const double cm) const
 {    
-    return (UINT)(m_nScrmV*cm / ((double)m_LcmSize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
+    return (UINT)(m_nScrmV*cm / (m_LcmSize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
 }
 
 
@@ -712,7 +712,7 @@ UINT Bolt::CmtoPixel(const double cm) const
 
 Bolt::Bolt():m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), \
 m_nScrmV(GetSystemMetrics(SM_CYSCREEN)), m_Radius(0), \
-m_LcmSize(0), m_isReady(0), m_5nitsBkColor(RGB(127, 127, 127)){}
+m_LcmSize(0.0), m_isReady(0), m_5nitsBkColor(RGB(127, 127, 127)){}
 
 Bolt::~Bolt(){}
 
@@ -724,7 +724,7 @@ BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& EndItor)
     圈半徑
 */
     m_itEnd = EndItor;
-    m_LcmSize = (int)atoi(LcmSize.GetBuffer(0));
+    m_LcmSize = atof(LcmSize);
     m_Radius = CmtoPixel(2.25);
 
     m_isReady = TRUE;
@@ -978,7 +978,7 @@ CString  Bolt::GetSetupValue() const
 {
     CString str;
     
-    str.Format("Ready = %d, 解析度(%d×%d), 半徑 = %d, LCM尺寸 = %d 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
+    str.Format("Ready = %d, 解析度(%d×%d), 半徑 = %d, LCM尺寸 = %f 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
         m_isReady, m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
         GetRValue(m_5nitsBkColor), GetGValue(m_5nitsBkColor), GetBValue(m_5nitsBkColor), \
         GetRValue(GetBkColor()), GetGValue(GetBkColor()), GetBValue(GetBkColor())

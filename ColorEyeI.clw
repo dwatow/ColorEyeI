@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CCaSetupDlg
+LastClass=CEnterValueDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -16,15 +16,15 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=8
-Resource1=IDD_MSR_ITEM
+Resource1=IDD_OMDTOEXCEL
 Class5=CAboutDlg
-Resource2=IDD_OMDTOEXCEL
-Resource3=IDD_EDIT_DIALOG
-Resource4=IDD_ABOUTBOX
+Resource2=IDD_EDIT_DIALOG
+Resource3=IDD_ABOUTBOX
+Resource4=IDD_PATTERN_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
 Resource6=IDR_MAINFRAME
-Resource7=IDD_PATTERN_DIALOG
+Resource7=IDD_MSR_ITEM
 Class7=CCaSetupDlg
 Resource8=IDD_CASETUP_DIALOG
 
@@ -279,7 +279,7 @@ HeaderFile=EnterValueDlg.h
 ImplementationFile=EnterValueDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CEnterValueDlg
+LastObject=IDC_EDIT_VALUE
 VirtualFilter=dWC
 
 [DLG:IDD_CASETUP_DIALOG]

@@ -18,12 +18,13 @@ public:
 //	void SetDlgTitle(CString str){ SetWindowText(str.GetBuffer(0)); };
 	void SetValueKind(const CString str){	m_strName = str;	};
 	CEnterValueDlg(const CString dlgTitle, CWnd* pParent = NULL);   // standard constructor
+//	float GetLcmSize(){ return (float)(atof(m_strValue)); };
 
 // Dialog Data
 	//{{AFX_DATA(CEnterValueDlg)
 	enum { IDD = IDD_EDIT_DIALOG };
-	CString	m_strValue;
 	CString	m_strName;
+	CString	m_strValue;
 	//}}AFX_DATA
 
 

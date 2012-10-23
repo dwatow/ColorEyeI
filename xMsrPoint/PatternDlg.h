@@ -101,7 +101,7 @@ private:
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
-	CString SetLCMSize();
+	CString SetupLCMSize();
 
     BOOL Trigger(std::vector<Cartridge>::iterator&);
     BOOL NextTrigger(std::vector<Cartridge>::iterator&);

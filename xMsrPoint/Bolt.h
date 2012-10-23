@@ -15,7 +15,7 @@ class Bolt
     UINT      m_nScrmH;
     UINT      m_nScrmV;
     UINT      m_Radius;
-    UINT      m_LcmSize;
+    float     m_LcmSize;
     ColorType m_BkColor;
     PointNum  m_MsrFlowNum;       //該項目共幾點
     UINT      m_MsrFlowNo;        //該項目的第幾點
@@ -69,6 +69,8 @@ public:
     Bolt* GammaStep(float);
     Bolt* SetNitsNum(float);
     Bolt* SetCrsTlkRectFE(float);
+
+	float GetLcmSize() const{ return m_LcmSize; };
     
 private:
     CPoint Get5nits9Point(UINT few) const;

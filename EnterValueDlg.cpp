@@ -20,8 +20,8 @@ CEnterValueDlg::CEnterValueDlg(const CString dlgTitle, CWnd* pParent /*=NULL*/)
 {
 	m_dlgTitle.Format("%s", dlgTitle);
 	//{{AFX_DATA_INIT(CEnterValueDlg)
-	m_strValue = _T("");
 	m_strName = _T("");
+	m_strValue = _T("");
 	//}}AFX_DATA_INIT
 }
 
@@ -30,8 +30,8 @@ void CEnterValueDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEnterValueDlg)
-	DDX_Text(pDX, IDC_EDIT_VALUE, m_strValue);
 	DDX_Text(pDX, IDC_STATIC_SOMETHING, m_strName);
+	DDX_Text(pDX, IDC_EDIT_VALUE, m_strValue);
 	//}}AFX_DATA_MAP
 }
 
