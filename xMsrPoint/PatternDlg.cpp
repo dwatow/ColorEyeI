@@ -434,6 +434,7 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 	if (!c_bMsrEndnMsred)
 	{
 		//目前這一點是不是5nits的中心點？2=是
+		c_bGoalPercent = FALSE;
 		c_bFind5nits = (m_GunMchn.Trigger(it) == 2)? TRUE:FALSE;
 
 		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
@@ -553,7 +554,6 @@ UINT CPatternDlg::VbrGoalThread(LPVOID LParam)
     
     CPoint p1(pGoal->GetCenter());
 
-    PtnDlg->c_bGoalPercent = FALSE;
     if (PtnDlg->c_bMsrValues) PtnDlg->c_bMsrValues = FALSE; //動畫的時候，關掉
     PtnDlg->Invalidate();
     PtnDlg->UpdateWindow();
@@ -564,7 +564,7 @@ UINT CPatternDlg::VbrGoalThread(LPVOID LParam)
         PtnDlg->UpdateWindow();
         Sleep(15); //調節動畫重畫時是否看得到
     }
-    PtnDlg->c_bGoalPercent = TRUE;
+    //PtnDlg->c_bGoalPercent = TRUE;
     return 0;
 }
 
@@ -609,6 +609,7 @@ void CPatternDlg::OnTimer(UINT nIDEvent)
            1 標準範圍 →2.
            2 大於100
     */
+	c_bGoalPercent = TRUE;
 	if (m_pCA210->isOnline())
 	{
 		srand(time(NULL));

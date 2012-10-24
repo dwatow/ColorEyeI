@@ -199,21 +199,25 @@ void CXlsSEC1::InitForm()
     SelectCell("B29", "G29")->SetCellBorder(1, 3, 1);
     SelectCell("B2", "B46")->SetCellBorder(1, 3, 1);
 
+	//Sheet2
 	SelectSheet(2)->SetSheetName(2, "CrossTalk");
 
+	//左邊表格填文字
 	SelectCell("B1")->SetCell("Lv");
 	SelectCell("A3")->SetCell("Ya");
 	SelectCell("A6")->SetCell("Yb");
-	SelectCell("A10")->SetCell("Ya");
+	SelectCell("A10")->SetCell("Yb");
 
-	SelectCell("B2", "D4")->SetCellColor(15)->SetCellBorder();
-	SelectCell("B6", "D8")->SetCellColor(15)->SetCellBorder();
-	SelectCell("B10", "D12")->SetCellColor(15)->SetCellBorder();
+	//灰方塊
+	SelectCell("B2", "D4")->SetCellColor(SelectColor(8, 4))->SetCellBorder();
+	SelectCell("B6", "D8")->SetCellColor(SelectColor(8, 4))->SetCellBorder();
+	SelectCell("B10", "D12")->SetCellColor(SelectColor(8, 4))->SetCellBorder();
 
-	SelectCell("C7")->SetCellColor(SelectColor(8, 4));
+	//中心顏色
+	SelectCell("C7")->SetCellColor(SelectColor(8, 5));
 	SelectCell("C11")->SetCellColor(SelectColor(1, 1));
 
-
+	//右邊表格
 	SelectCell("H2")->SetCellColor(SelectColor(2, 4))->SetCellBorder()->SetCell("Gray 0");
 	SelectCell("I2")->SetCellBorder()->SetCell("YB");
 	SelectCell("J2")->SetCellBorder()->SetCell("YA");
@@ -342,6 +346,7 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 
 	SelectSheet(2);
 
+	//灰色方塊
 	SelectCell("C2")->SetCell(vCar.At(CrsTlk, Pn4, 0).GetLv());
 	SelectCell("B3")->SetCell(vCar.At(CrsTlk, Pn4, 1).GetLv());
 	SelectCell("D3")->SetCell(vCar.At(CrsTlk, Pn4, 2).GetLv());
