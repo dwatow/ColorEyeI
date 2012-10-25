@@ -21,7 +21,7 @@ class Ca210real : public Ca210
 //    IOutputProbes   m_IOutputProbes;
 //    _ICaEvents      m__ICaEvents;
 
-    Bullet m_blt;
+//    Bullet m_blt;
 
     CaState m_caState;
 	CaState m_caStateTemp;
@@ -49,7 +49,7 @@ public:
     CString GetLcmSize();
     CString GetChData();
     Bullet  GetMsrData();
-    CString OutData();
+    //CString OutData();
 
 //for setup Dialog Value
 	float   GetRangeColor1();

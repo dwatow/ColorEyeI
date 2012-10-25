@@ -337,14 +337,17 @@ void CMsrItemDlg::OnButtonDel()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-    int* buffer = new int[m_lstMsrItems.GetSelCount()];
-    m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);
+    int* buffer = new int[m_lstMsrItems.GetSelCount()];  //弄一個buffer，準備存放選擇好的東西
+    m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);  //將選擇的選項，放進buffer
     
+	//將buffer弄成CDataChain
     CDataChain temp;
-    
     for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
         temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
 
+	pDoc->GetMsrDataChain().CutEqualCell(temp);
+
+	//只是更新
     if (!ListBoxUpdate(pDoc->GetMsrDataChain()))
         m_btnOK.EnableWindow(FALSE);
 

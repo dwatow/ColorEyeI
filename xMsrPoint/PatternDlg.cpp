@@ -36,7 +36,7 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     pMainFrm->m_pCa210->LinkMemory();
-    InitDataDlgType();  
+    InitDataDlgType();
 }
 
 void CPatternDlg::InitDataDlgType()
@@ -46,7 +46,7 @@ void CPatternDlg::InitDataDlgType()
     case MsrForItem:
         CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
         dlgMsrItem.SetBolt(&m_GunMchn);
-        dlgMsrItem.DoModal();        //就是MsrItemGo的按鈕
+        dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
 
         break;
     }
@@ -97,6 +97,7 @@ BOOL CPatternDlg::OnInitDialog()
 
     m_Goal.SetColor(ShiftColor(RGB(255, 0, 127), 5));
 	
+
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -397,16 +398,22 @@ BOOL CPatternDlg::Magazine()
     m_BeginItor = m_itor;
     m_EndItor   = pDoc->GetMsrDataChain().End();
 
-    //++BeginItor;  
-    if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
-    Trigger(m_itor);
-    NextTrigger(m_itor);
-    if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-    if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
+	//MsrItem按下「確定」還是「取消」
+	if (pDoc->GetMsrDataChain().IsEmpty())
+		return FALSE;  //無填彈，不用量
+	else
+	{
+		//++BeginItor;  
+		if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+		Trigger(m_itor);
+		NextTrigger(m_itor);
+		if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
+		if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
     
-    Invalidate();
+		Invalidate();
     
-    return TRUE;  //第一次量測
+	   return TRUE;  //有子彈可以量測
+	}
 }
 
 BOOL CPatternDlg::ConnectCa210()
@@ -426,8 +433,6 @@ BOOL CPatternDlg::ConnectCa210()
 
 BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 {
-	if (!c_bMsrEndnMsred)
-	{
 		c_bGoalPercent = FALSE;
 		//目前這一點是不是5nits的中心點？2=是
 		TrigStatus ts;
@@ -445,9 +450,10 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
 		m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
 		m_Goal.SetPercent(0);
-		if (it->GetMsrFlowNum() != PnGamma && it != m_BeginItor)
+
+		if ( !c_bMsrEndnMsred || it->GetMsrFlowNum() != PnGamma && it != m_BeginItor)
 			VbrGoalThread((LPVOID)&Info1);
-	}
+	//}
 
 	c_bMsrBegin = (it == m_BeginItor) ? TRUE : FALSE;
 

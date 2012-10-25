@@ -184,56 +184,6 @@ Bullet Ca210sim::GetMsrData()
     return m_blt;
 }
 
-CString Ca210sim::OutData()
-{
-    CString Lv, SX, SY;
-    CString T, Duv;
-    CString Du, Dv;
-    CString X, Y, Z;
-
-    if(isOnline())
-    {
-        Lv.Format("%3.2f", m_blt.GetLv());//Lv
-        SX.Format("%1.4f", m_blt.GetSx());//Small x
-        SY.Format("%1.4f", m_blt.GetSy());//Small y
-
-        T.Format("%3d줖X", m_blt.GetT());//T
-        Duv.Format("%1.4f", m_blt.GetDuv());//duv
-
-        Du.Format("%1.4f", m_blt.GetDu());//du
-        Dv.Format("%1.4f", m_blt.GetDv());//dv
-
-        X.Format("%3.2f", m_blt.GetX());//X
-        Y.Format("%3.2f", m_blt.GetY());//Y
-        Z.Format("%3.2f", m_blt.GetZ());//Z
-    }    
-    else
-    {
-        Lv.Format("차퐑짦");//Lv
-        SX.Format("차퐑짦");//Small x
-        SY.Format("차퐑짦");//Small y
-        
-        T.Format("차퐑짦");//T
-        Duv.Format("차퐑짦");//duv
-        
-        Du.Format("차퐑짦");//du
-        Dv.Format("차퐑짦");//dv
-        
-        X.Format("차퐑짦");//X
-        Y.Format("차퐑짦");//Y
-        Z.Format("차퐑짦");//Z
-    } 
-    return " Lv =" + Lv + "     \n" 
-         + "  x =" + SX + "     \n" 
-         + "  y =" + SY + "     \n" 
-         + "  T =" +  T + "     \n" 
-         + "줗Guv=" + Duv + "     \n" 
-         + " u' =" + Du + "     \n"
-         + " v' =" + Dv + "     \n"
-         + "  X =" +  X + "     \n"
-         + "  Y =" +  Y + "     \n"
-         + "  Z =" +  Z;
-}
 //////////////////////////////////////////////////////////////////////////
 float Ca210sim::GetRangeColor1()
 {

@@ -23,6 +23,7 @@ class Ca210
     CaState m_caState;
 	CaState m_caStateTemp;
 protected:
+    Bullet m_blt;
     virtual void MsgFrmt(CException* e, CString, CString) = 0;
     virtual void MsgFrmt(CString) = 0;
 
@@ -44,7 +45,7 @@ public:
     virtual CString GetLcmSize() = 0;
     virtual CString GetChData() = 0;
     virtual Bullet  GetMsrData() = 0;
-    virtual CString OutData() = 0;
+    CString OutData();
 
  //for setup Dialog Value
  	virtual float   GetRangeColor1() = 0;

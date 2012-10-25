@@ -13,7 +13,7 @@
 
 class Ca210sim : public Ca210
 {	
-    Bullet m_blt;
+//    Bullet m_blt;
 	Bullet* m_pIProbe;
 
 //simulation setup dialog item
@@ -50,7 +50,7 @@ public:
     CString GetLcmSize();
     CString GetChData();
     Bullet  GetMsrData();
-    CString OutData();
+    //CString OutData();
 	
 	//for setup Dialog Value
 	float   GetRangeColor1();
