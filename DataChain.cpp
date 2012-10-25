@@ -58,19 +58,25 @@ CDataChain::~CDataChain()
 
 xChain::size_type CDataChain::StdInit()
 {
-    Empty();
+//    Empty();
     
+	Grow(JND, Pn1);
     Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
     Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
     Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
     Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
     Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
     Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
-//    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
     Grow(Nits, Pn9);
-    Grow(CrsTlk , Pn4);  Grow(CrsTlkW, Pn4);  Grow(CrsTlkD, Pn4);
+    Grow(CrsTlk , Pn4);
     
     //freeBuffer();
+    return m_CarChain1.size();
+}
+
+xChain::size_type CDataChain::GammaInit()
+{
+    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
     return m_CarChain1.size();
 }
 
@@ -93,7 +99,20 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
         SortQuackMsr(vCrossTalk);
         m_CarChain1.insert(m_CarChain1.end(), vCrossTalk.begin(), vCrossTalk.end());
     }
-    else
+    else if (ct == JND)
+	{
+		xChain vJND;
+        
+        Cartridge JndX(JNDX, pn);
+        Cartridge Jnd(JND, pn);
+        
+        PetriDish->Grow(vJND, JndX);
+        PetriDish->Grow(vJND, Jnd);
+        
+        SortQuackMsr(vJND);
+        m_CarChain1.insert(m_CarChain1.end(), vJND.begin(), vJND.end());
+	}
+	else
     {
         Cartridge MsrItem(ct, pn);
         PetriDish->Grow(m_CarChain1, MsrItem);

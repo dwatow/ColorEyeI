@@ -152,6 +152,8 @@
 #define IDC_EDIT_P21FE                  1062
 #define IDC_BUTTON_DEL                  1063
 #define IDC_LIST_MSRITEMS               1064
+#define IDC_CHECK_JND                   1065
+#define IDC_EDIT_JND_GRAYVALUE          1066
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771
 #define ID_MSR_CONNECTCA210             32772
@@ -173,7 +175,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         1028
+#define _APS_NEXT_CONTROL_VALUE         1066
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

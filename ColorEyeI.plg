@@ -6,13 +6,13 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE249.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD71E.tmp" with contents
 [
 /nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\GitHub\ColorEyeI\SelXls\XlsSEC1.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPE249.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE24A.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPD71E.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD72F.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\Bolt.obj
@@ -51,12 +51,12 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE24A.tmp" with c
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPE24A.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPD72F.tmp"
 <h3>Output Window</h3>
 Compiling...
-XlsSEC1.cpp
+PatternDlg.cpp
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE5B5.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPDAE7.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -93,7 +93,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE5B5.tmp" with c
 .\Debug\XlsOQC1.sbr
 .\Debug\XlsRA1.sbr
 .\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPE5B5.tmp"
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPDAE7.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

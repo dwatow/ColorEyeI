@@ -15,13 +15,13 @@ Class3=CAboutDlg
 Class4=CMsrItemsDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_MSRITEMS_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_MSRITEMS_DIALOG
 Class5=CMsrItemDlg
 Class6=CStaticText
-Resource4=IDD_MSR_ITEM
-Resource5=IDD_PATTERN_DIALOG
+Resource4=IDD_PATTERN_DIALOG
+Resource5=IDD_MSR_ITEM
 
 [CLS:CMsrItemsApp]
 Type=0
@@ -99,7 +99,7 @@ HeaderFile=MsrItemDlg.h
 ImplementationFile=MsrItemDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_EDIT_CROSSTALK1
+LastObject=IDC_EDIT_JSD_GRAYVALUE
 VirtualFilter=dWC
 
 [CLS:CStaticText]
@@ -109,10 +109,15 @@ ImplementationFile=StaticText.cpp
 BaseClass=CStatic
 Filter=W
 
+[DLG:IDD_PATTERN_DIALOG]
+Type=1
+Class=?
+ControlCount=0
+
 [DLG:IDD_MSR_ITEM]
 Type=1
 Class=?
-ControlCount=89
+ControlCount=94
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -155,10 +160,10 @@ Control39=IDC_CHECK_CRP49,button,1476460547
 Control40=IDC_CHECK_CGP49,button,1476460547
 Control41=IDC_CHECK_CBP49,button,1476460547
 Control42=IDC_CHECK_CDP49,button,1476460547
-Control43=IDC_CHECK_CWGM,button,1476460547
-Control44=IDC_CHECK_CRGM,button,1476460547
-Control45=IDC_CHECK_CGGM,button,1476460547
-Control46=IDC_CHECK_CBGM,button,1476460547
+Control43=IDC_CHECK_CWGM,button,1342242819
+Control44=IDC_CHECK_CRGM,button,1342242819
+Control45=IDC_CHECK_CGGM,button,1342242819
+Control46=IDC_CHECK_CBGM,button,1342242819
 Control47=IDC_CHECK_CDGM,button,1476460547
 Control48=IDC_EDIT_GM1,edit,1350631552
 Control49=IDC_EDIT_GM2,edit,1350631552
@@ -202,8 +207,9 @@ Control86=IDC_STATIC,static,1342308352
 Control87=IDC_STATIC,static,1342308352
 Control88=IDC_STATIC,static,1342308352
 Control89=IDC_STATIC,static,1342308352
-
-[DLG:IDD_PATTERN_DIALOG]
-Type=1
-ControlCount=0
+Control90=IDC_CHECK_JND,button,1342242819
+Control91=IDC_EDIT_JND_GRAYVALUE,edit,1350631552
+Control92=IDC_STATIC,static,1342308352
+Control93=IDC_STATIC,button,1342177287
+Control94=IDC_STATIC,button,1342177287
 

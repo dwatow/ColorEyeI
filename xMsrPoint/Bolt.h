@@ -7,11 +7,11 @@
 
 typedef std::vector<Cartridge> xChain;
 //enum PtXt {PtXtT = 0, PtXtL, PtXtR, PtXtB};
+enum TrigStatus{ TS_FinalPoint = 0, TS_Normal, TS_Find_Nits, TS_JND, TS_JNDX};
 
 class Bolt 
 {
     xChain::iterator m_itEnd;
-    BOOL      m_isReady;
     UINT      m_nScrmH;
     UINT      m_nScrmV;
     UINT      m_Radius;
@@ -20,6 +20,7 @@ class Bolt
     PointNum  m_MsrFlowNum;       //該項目共幾點
     UINT      m_MsrFlowNo;        //該項目的第幾點
     COLORREF  m_5nitsBkColor;
+	COLORREF  m_JNDBkColor;
 
     float    m_f5FE;
     float    m_f9FE;
@@ -41,23 +42,27 @@ public:
     BOOL Magazine(CString LcmSize, xChain::iterator& );  //彈匣
     void Grow(xChain& , Cartridge& );  //填彈器
 
-    UINT Trigger(xChain::iterator&);
+    TrigStatus Trigger(xChain::iterator&);
 
     CString  GetMsrFlowName()   const;
     COLORREF GetBkColor()       const;
     CPoint   GetPointPosition() const;
     UINT     GetRadius()        const;
-    BOOL     isReady()          const;
 
     float    GetNitsSpec(){ return m_fNits; }
+
     BOOL     Set5NitsBkColor(COLORREF);
     COLORREF Get5NitsBkColor()  const;
+
+	void     SetJNDBkColor(COLORREF);
+	COLORREF GetJDNBkColor() const;
 
     ColorType GetColorType() const
     {
         return m_BkColor;
     }
     void CenterRect(CDC* pDC, COLORREF CntrClr);
+    void CenterCross(CDC* pDC, COLORREF CntrClr);
 
     Bolt* SetP5FE(float);
     Bolt* SetP9FE(float);
@@ -84,6 +89,7 @@ private:
     CPoint GetD21Point(UINT few)     const;
     CPoint GetD13Point(UINT few)     const;
 	CPoint GetGammaPoint()           const;
+	CPoint GetJND()                  const;
 
     UINT CmtoPixel(const double cm) const;
 

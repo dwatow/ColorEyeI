@@ -27,6 +27,7 @@ public:
 	//完全不像vector的操作
 public:
     xChain::size_type StdInit();
+	xChain::size_type GammaInit();
     void DelCell(xChain::size_type index){ m_CarChain1.erase(&m_CarChain1.at(index)); };
    	void CutEqualCell(CDataChain );
     void CutEqualCell(xChain );

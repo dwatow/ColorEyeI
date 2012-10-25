@@ -712,7 +712,7 @@ UINT Bolt::CmtoPixel(const double cm) const
 
 Bolt::Bolt():m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), \
 m_nScrmV(GetSystemMetrics(SM_CYSCREEN)), m_Radius(0), \
-m_LcmSize(0.0), m_isReady(0), m_5nitsBkColor(RGB(127, 127, 127)){}
+m_LcmSize(0.0), m_5nitsBkColor(RGB(127, 127, 127)){}
 
 Bolt::~Bolt(){}
 
@@ -727,37 +727,37 @@ BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& EndItor)
     m_LcmSize = atof(LcmSize);
     m_Radius = CmtoPixel(2.25);
 
-    m_isReady = TRUE;
-
-    return m_isReady;
+    return TRUE;
 }
 
-UINT Bolt::Trigger(std::vector<Cartridge>::iterator& it)
+TrigStatus Bolt::Trigger(std::vector<Cartridge>::iterator& it)
 {
     /*
     0 沒有資料
     1 正常
     2 5nits
 	*/
-    if (it != m_itEnd && m_isReady)
+    if (it != m_itEnd)
     {
         m_BkColor    = it->GetBackColor();
         m_MsrFlowNum = it->GetMsrFlowNum();
         m_MsrFlowNo  = it->GetMsrFlowNo();
 
-        if (m_BkColor == Nits && it->GetArea() == 1)
-            return 2;  //5nits, so run fine5Nits
+		if (m_BkColor == JND)
+			return TS_JND;
+		else if (m_BkColor == JNDX)
+			return TS_JNDX;
+        else if (m_BkColor == Nits && it->GetArea() == 1)
+            return TS_Find_Nits;
         else
-            return 1;  //不是5nits
+            return TS_Normal;
     }
     else 
-        return 0; //不是後一點
+        return TS_FinalPoint;
 }
 
 COLORREF Bolt::GetBkColor() const
 {
-    if (m_isReady)
-    {
 		if (m_MsrFlowNum == PnGamma)
 			switch(m_BkColor)
 			{
@@ -777,14 +777,13 @@ COLORREF Bolt::GetBkColor() const
 				case Green:    return RGB(   0, 255,   0);
 				case Blue:     return RGB(   0,   0, 255);
 				case Nits:     return m_5nitsBkColor;
+				case JNDX:
+				case JND:      return m_JNDBkColor;
 				case CrsTlk: 
 				case CrsTlkW:
 				case CrsTlkD:  return RGB( 128, 128, 128);
 				default:       return RGB( 192, 212,  49); 
 			}
-    }
-    else
-        return RGB( 176,  133,  77);
 }
 
 void Bolt::CenterRect(CDC* pDC, COLORREF CntrClr)
@@ -800,18 +799,39 @@ void Bolt::CenterRect(CDC* pDC, COLORREF CntrClr)
     delete pCenterArea;
 }
 
+void Bolt::CenterCross(CDC* pDC, COLORREF CrosColor)
+{
+	CPoint hStart(0, m_nScrmV/2), hEnd(m_nScrmH, m_nScrmV/2);
+	CPoint vStart(m_nScrmH/2, 0), vEnd(m_nScrmH/2, m_nScrmV);
+	
+ 	CPen pen;
+ 	pen.CreatePen(PS_SOLID, 1, CrosColor); 
+ 	CPen* oldPen = pDC->SelectObject(&pen); 
+
+	//H line
+	pDC->MoveTo(hStart);
+	pDC->LineTo(hEnd);
+	//V line
+	pDC->MoveTo(vStart);
+	pDC->LineTo(vEnd);
+
+ 	pDC-> SelectObject(oldPen);
+	pen.DeleteObject();
+}
+
+void Bolt::SetJNDBkColor(COLORREF color)
+{
+    m_JNDBkColor = color;
+}
+
+COLORREF Bolt::GetJDNBkColor() const
+{
+	return m_JNDBkColor;
+}
 BOOL Bolt::Set5NitsBkColor(COLORREF color)
 {
-    if (m_isReady)
-    {
-        m_5nitsBkColor = color;
-        return TRUE;
-    }
-    else
-    {
-        m_5nitsBkColor = RGB(127, 127, 127);
-        return FALSE;
-    }
+    m_5nitsBkColor = color;
+    return TRUE;
 }
 
 COLORREF Bolt::Get5NitsBkColor() const
@@ -821,49 +841,40 @@ COLORREF Bolt::Get5NitsBkColor() const
 
 CPoint Bolt::GetPointPosition() const
 {
-    if (m_isReady)
+
+    switch(m_MsrFlowNum)
     {
-        switch(m_MsrFlowNum)
-        {
-            case Pn1:
-                //中心點定義不分
-                return GetFE9Point(4);
-            case Pn4:
-                return GetCrossTalk(m_MsrFlowNo);
-            case Pn5:
-                return GetFE5Point(m_MsrFlowNo);
-            case Pn9:
-                //九點週邊定義各有不同
-                //分白、黑、5Nits
-                if(m_BkColor == White) return GetFE9Point(m_MsrFlowNo);
-                if(m_BkColor == Dark ) return GetFE9Point(m_MsrFlowNo);
-                if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
-            case Pn13:
-                return GetD13Point(m_MsrFlowNo);
-            case Pn21:
-				return GetD21Point(m_MsrFlowNo);
-            case Pn25:
-                return GetD25Point(m_MsrFlowNo);
-            case Pn49:
-                return GetW49Point(m_MsrFlowNo);
-			case PnGamma:
-				return GetGammaPoint();
-            default:
-                return GetFE9Point(0);
-        }
+        case Pn1:
+            //中心點定義不分
+            return GetFE9Point(4);
+        case Pn4:
+            return GetCrossTalk(m_MsrFlowNo);
+        case Pn5:
+            return GetFE5Point(m_MsrFlowNo);
+        case Pn9:
+            //九點週邊定義各有不同
+            //分白、黑、5Nits
+            if(m_BkColor == White) return GetFE9Point(m_MsrFlowNo);
+            if(m_BkColor == Dark ) return GetFE9Point(m_MsrFlowNo);
+            if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
+        case Pn13:
+            return GetD13Point(m_MsrFlowNo);
+        case Pn21:
+			return GetD21Point(m_MsrFlowNo);
+        case Pn25:
+            return GetD25Point(m_MsrFlowNo);
+        case Pn49:
+            return GetW49Point(m_MsrFlowNo);
+		case PnGamma:
+			return GetGammaPoint();
+        default:
+            return GetFE9Point(0);
     }
-    else
-        return GetFE9Point(0);
 }
 
 UINT Bolt::GetRadius() const
 {
-    return m_isReady ? m_Radius : 0;
-}
-
-BOOL Bolt::isReady() const
-{
-    return m_isReady;
+    return m_Radius;
 }
 
 CString Bolt::GetMsrFlowName() const
@@ -871,33 +882,31 @@ CString Bolt::GetMsrFlowName() const
     CString clr("NotReady");
     CString ptnum("NotReady");
 
-    if (m_isReady)
+    switch(m_BkColor)
     {
-        switch(m_BkColor)
-        {
-			case White:     clr.Format("白色");        break;
-			case Dark:      clr.Format("黑色");        break;
-			case Red:       clr.Format("紅色");        break;
-			case Blue:      clr.Format("藍色");        break;
-			case Green:     clr.Format("綠色");        break;
-			case Nits:      clr.Format("5Nits");       break;
-			case CrsTlk:    clr.Format("CrossTalk");   break;
-			case CrsTlkW:   clr.Format("CrossTalkW");  break;
-			case CrsTlkD:   clr.Format("CrossTalkD");  break;
-        }
-
-        switch(m_MsrFlowNum)
-        {
-            case Pn1:     ptnum.Format("中心點");  break;
-            case Pn4:     ptnum.Format("4點");    break;
-            case Pn5:     ptnum.Format("5點");    break;
-            case Pn9:     ptnum.Format("9點");    break;
-            case Pn49:    ptnum.Format("49點");   break;
-            case Pn13:    ptnum.Format("13點");   break;
-            case Pn25:    ptnum.Format("25點");   break;
-			case PnGamma: ptnum.Format("Gamma");  break;
-        }
+		case White:     clr.Format("白色");        break;
+		case Dark:      clr.Format("黑色");        break;
+		case Red:       clr.Format("紅色");        break;
+		case Blue:      clr.Format("藍色");        break;
+		case Green:     clr.Format("綠色");        break;
+		case Nits:      clr.Format("5Nits");       break;
+		case CrsTlk:    clr.Format("CrossTalk");   break;
+		case CrsTlkW:   clr.Format("CrossTalkW");  break;
+		case CrsTlkD:   clr.Format("CrossTalkD");  break;
     }
+
+    switch(m_MsrFlowNum)
+    {
+        case Pn1:     ptnum.Format("中心點");  break;
+        case Pn4:     ptnum.Format("4點");    break;
+        case Pn5:     ptnum.Format("5點");    break;
+        case Pn9:     ptnum.Format("9點");    break;
+        case Pn49:    ptnum.Format("49點");   break;
+        case Pn13:    ptnum.Format("13點");   break;
+        case Pn25:    ptnum.Format("25點");   break;
+		case PnGamma: ptnum.Format("Gamma");  break;
+    }
+ 
 
     CString temp;
     temp.Format("%s%s", clr, ptnum);
@@ -913,7 +922,6 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 
     UINT centerX = GetSystemMetrics(SM_CXSCREEN)/2;
     UINT centerY = GetSystemMetrics(SM_CYSCREEN)/2;
-    m_isReady = TRUE;
     
     for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
     {
@@ -954,7 +962,6 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 
         vCar.push_back(MsrCell);
     }
-    m_isReady = FALSE;
 }
 //////////////////////////////////////////////////////////////////////////
 //Msr Parameter
@@ -978,8 +985,8 @@ CString  Bolt::GetSetupValue() const
 {
     CString str;
     
-    str.Format("Ready = %d, 解析度(%d×%d), 半徑 = %d, LCM尺寸 = %f 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
-        m_isReady, m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
+    str.Format("解析度(%d×%d), 半徑 = %d, LCM尺寸 = %f 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
+        m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
         GetRValue(m_5nitsBkColor), GetGValue(m_5nitsBkColor), GetBValue(m_5nitsBkColor), \
         GetRValue(GetBkColor()), GetGValue(GetBkColor()), GetBValue(GetBkColor())
         );

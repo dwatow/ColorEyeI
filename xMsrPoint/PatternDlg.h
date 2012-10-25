@@ -77,7 +77,6 @@ private:
     BOOL c_bRunMsrAI;
     BOOL c_bUnCntCA210;
     BOOL c_bFind5nits;
-    BOOL c_bisReady;
 
     UINT SetPercentValue;
     MsrAiState MsrAIValue;
@@ -145,8 +144,6 @@ public:
 
         COLORREF GetGoalColor() const;
         BOOL     SetGoalColor(COLORREF);
-
-    BOOL isReady();
 };
 
 //{{AFX_INSERT_LOCATION}}

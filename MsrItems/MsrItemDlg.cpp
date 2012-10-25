@@ -41,13 +41,15 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_n25RectSide = 0;
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
-    //}}AFX_DATA_INIT
+	m_jsdGray = 0;
+	//}}AFX_DATA_INIT
 }
 
 void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     //{{AFX_DATA_MAP(CMsrItemDlg)
+	DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
     DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
     DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
@@ -124,6 +126,8 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
+	DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_jsdGray);
+	DDV_MinMaxUInt(pDX, m_jsdGray, 0, 255);
 	//}}AFX_DATA_MAP
 }
 
@@ -237,6 +241,11 @@ void CMsrItemDlg::OnButtonAdd()
         //1. CA-210已連線
         //2. CA-210已宣告
         //////////////////////////////////////////////////////////////////////////
+		if (m_chkJND.GetState())
+		{
+			Pusher->SetJNDBkColor(RGB(m_jsdGray, m_jsdGray, m_jsdGray));
+			pDoc->GetMsrDataChain().Grow(JND , Pn1);
+		}
         //中心點
 		if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
         if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
@@ -262,7 +271,6 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
         if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
         if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
-        
         
 		//21點
         if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
@@ -413,6 +421,7 @@ void CMsrItemDlg::Serialize(CArchive& ar)
 
     BOOL chkCrossTalk;
     BOOL chkNits;
+	BOOL chkJND;
 
     BOOL chkCWP1 , chkCRP1 , chkCGP1 , chkCBP1 , chkCDP1 ;
     BOOL chkCWP5 , chkCRP5 , chkCGP5 , chkCBP5 , chkCDP5 ;
@@ -427,8 +436,9 @@ void CMsrItemDlg::Serialize(CArchive& ar)
     {    // storing code
         chkQuickMsr = m_chkQuickMsr.GetCheck();    ar << chkQuickMsr;
 
-        chkCrossTalk = m_chkCrossTalk.GetCheck();    ar << chkCrossTalk;
-        chkNits = m_chkNits.GetCheck();    ar << chkNits;
+        chkCrossTalk = m_chkCrossTalk.GetCheck();  ar << chkCrossTalk;
+        chkNits = m_chkNits.GetCheck();            ar << chkNits;
+		chkJND  = m_chkJND.GetCheck();             ar << chkJND;
         
         chkCWP21 = m_chkCWP21.GetCheck();    ar << chkCWP21;
         chkCRP21 = m_chkCRP21.GetCheck();    ar << chkCRP21;
@@ -494,8 +504,9 @@ void CMsrItemDlg::Serialize(CArchive& ar)
     {    // loading code
         ar >> chkQuickMsr;   m_chkQuickMsr.SetCheck(chkQuickMsr);
         
-        ar >> chkCrossTalk;   m_chkCrossTalk.SetCheck(chkCrossTalk);
-        ar >> chkNits;   m_chkNits.SetCheck(chkNits);
+        ar >> chkCrossTalk;  m_chkCrossTalk.SetCheck(chkCrossTalk);
+        ar >> chkNits;       m_chkNits.SetCheck(chkNits);
+		ar >> chkJND;        m_chkJND.SetCheck(chkJND);
         
         ar >> chkCWP21;   m_chkCWP21.SetCheck(chkCWP21);
         ar >> chkCRP21;   m_chkCRP21.SetCheck(chkCRP21);

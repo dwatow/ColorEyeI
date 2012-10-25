@@ -15,8 +15,8 @@ public:
     BOOL SetColor(COLORREF clr);
     COLORREF GetColor() const;
 
-    BOOL SetBkColor(COLORREF clr);
-    COLORREF GetBkColor() const;
+//     BOOL SetBkColor(COLORREF clr);
+//     COLORREF GetBkColor() const;
 
     BOOL SetRadius(UINT r);
     UINT GetRadius() const;
@@ -28,7 +28,7 @@ public:
     UINT SetPercent(UINT pct);
     UINT GetPercent() const;
 
-    void DrawCircle(CPaintDC&);
+    virtual void DrawCircle(CPaintDC&);
     virtual CRect VbrFun(UINT, UINT);
 
 #ifdef _DEBUG

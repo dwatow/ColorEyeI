@@ -152,15 +152,17 @@ CString Cartridge::GetSetupValue() const
 
     switch(m_BkColor)
     {
-    case 1: color.Format("White"); break;
-    case 2: color.Format("Red");   break;
-    case 3: color.Format("Green"); break;
-    case 4: color.Format("Blue");  break;
-    case 5: color.Format("Dark");  break;
-    case 6: color.Format("Nits");  break;
-    case 7: color.Format("CrsTlk"); break;
-    case 8: color.Format("CrsTlkW"); break;
-    case 9: color.Format("CrsTlkD"); break;
+    case White: color.Format("White"); break;
+    case Red: color.Format("Red");   break;
+    case Green: color.Format("Green"); break;
+    case Blue: color.Format("Blue");  break;
+    case Dark: color.Format("Dark");  break;
+    case Nits: color.Format("Nits");  break;
+    case CrsTlk: color.Format("CrsTlk"); break;
+    case CrsTlkW: color.Format("CrsTlkW"); break;
+    case CrsTlkD: color.Format("CrsTlkD"); break;
+	case JND:     color.Format("JND"); break;
+	case JNDX:     color.Format("JNDX"); break;
     default: color.Format("UnDefine"); break;
     }
 

@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
-    : CDialog(CPatternDlg::IDD, pParent), c_bisReady(FALSE), InitDataType(it)
+    : CDialog(CPatternDlg::IDD, pParent), InitDataType(it)
 {
     //{{AFX_DATA_INIT(CPatternDlg)
         // NOTE: the ClassWizard will add member initialization here
@@ -46,8 +46,8 @@ void CPatternDlg::InitDataDlgType()
     case MsrForItem:
         CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
         dlgMsrItem.SetBolt(&m_GunMchn);
-        if (dlgMsrItem.DoModal() == IDOK)        //就是MsrItemGo的按鈕
-            c_bisReady = TRUE;
+        dlgMsrItem.DoModal();        //就是MsrItemGo的按鈕
+
         break;
     }
 }
@@ -136,12 +136,15 @@ void CPatternDlg::OnPaint()
     dc.SetBkColor(m_BkColor);
 
     //Cross Talk 的背景色
-    if (m_GunMchn.GetColorType() == CrsTlkW)
-        m_GunMchn.CenterRect(&dc, RGB(255, 255, 255));
-    if (m_GunMchn.GetColorType() == CrsTlkD)
-        m_GunMchn.CenterRect(&dc, RGB(0, 0, 0));
+	ColorType SpecelPattern(m_GunMchn.GetColorType());
+	switch(SpecelPattern)
+	{
+	case CrsTlkW: m_GunMchn.CenterRect(&dc, RGB(255, 255, 255));  break;
+	case CrsTlkD: m_GunMchn.CenterRect(&dc, RGB(0, 0, 0));        break;
+	case JNDX:    m_GunMchn.CenterCross(&dc, RGB(255, 255, 255)); break;
+	}
 
-//    dc.SetBkMode(TRANSPARENT);
+
     dc.SetTextColor(ShiftColor(m_BkColor));
     if (c_bDrawNextGold) 
         m_NextGoal.DrawCircle(dc);
@@ -215,10 +218,7 @@ void CPatternDlg::OnPaint()
 
     if (c_bZeroCal)
     {
-//         if (!m_pCA210->isTrue())
-//             temp.Format("沒接 CA-210，模擬Zero Cal");
-//         else
-            temp.Format("       正在Zero Cal...   ");
+        temp.Format("       正在Zero Cal...   ");
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
     }
 
@@ -311,24 +311,24 @@ BOOL   CPatternDlg::SetGoalPosi(CPoint posi){    return m_Goal.SetCenter(posi); 
 COLORREF CPatternDlg::GetGoalColor() const      {    return m_Goal.GetColor(   ); }
 BOOL     CPatternDlg::SetGoalColor(COLORREF clr){    return m_Goal.SetColor(clr); }
 
-COLORREF CPatternDlg::GetGoalBkColor() const {    return m_NextGoal.GetBkColor(); }
-BOOL     CPatternDlg::SetGoalBkColor(COLORREF clr)
-{
-    int O = 0x000000FF & (clr >>24);
-    int B = GetBValue(clr);
-    int G = GetGValue(clr);
-    int R = GetRValue(clr);
-    
-    if(O == 0 && R >= 0 && R <256
-              && G >= 0 && G <256 
-              && B >= 0 && B <256 )
-    {
-        m_Goal.SetBkColor(clr);
-        return TRUE;
-    }
-    else
-        return FALSE;
-}
+// COLORREF CPatternDlg::GetGoalBkColor() const {    return m_NextGoal.GetBkColor(); }
+// BOOL     CPatternDlg::SetGoalBkColor(COLORREF clr)
+// {
+//     int O = 0x000000FF & (clr >> 24);
+//     int B = GetBValue(clr);
+//     int G = GetGValue(clr);
+//     int R = GetRValue(clr);
+//     
+//     if(O == 0 && R >= 0 && R <256
+//               && G >= 0 && G <256 
+//               && B >= 0 && B <256 )
+//     {
+//         m_Goal.SetBkColor(clr);
+//         return TRUE;
+//     }
+//     else
+//         return FALSE;
+// }
 
 COLORREF CPatternDlg::ShiftColor(COLORREF clr, int shift) const
 {
@@ -398,20 +398,15 @@ BOOL CPatternDlg::Magazine()
     m_EndItor   = pDoc->GetMsrDataChain().End();
 
     //++BeginItor;  
-    if(!m_GunMchn.isReady())
-    {
-        if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
-        Trigger(m_itor);
-        NextTrigger(m_itor);
-        if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-        if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
-        
-        Invalidate();
-        
-        return TRUE;  //第一次量測
-    }
-    else
-        return FALSE; //單點覆測使用
+    if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+    Trigger(m_itor);
+    NextTrigger(m_itor);
+    if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
+    if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
+    
+    Invalidate();
+    
+    return TRUE;  //第一次量測
 }
 
 BOOL CPatternDlg::ConnectCa210()
@@ -433,9 +428,19 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 {
 	if (!c_bMsrEndnMsred)
 	{
-		//目前這一點是不是5nits的中心點？2=是
 		c_bGoalPercent = FALSE;
-		c_bFind5nits = (m_GunMchn.Trigger(it) == 2)? TRUE:FALSE;
+		//目前這一點是不是5nits的中心點？2=是
+		TrigStatus ts;
+		ts = m_GunMchn.Trigger(it);
+		switch(ts)
+		{
+		case TS_Find_Nits: c_bDrawGold = TRUE;  c_bFind5nits = TRUE;  c_bStateBar = TRUE; break;
+		case TS_JND:       c_bDrawGold = FALSE; c_bFind5nits = FALSE; c_bStateBar = FALSE; break;
+		case TS_JNDX:      c_bDrawGold = FALSE; c_bFind5nits = FALSE; c_bStateBar = TRUE; break;
+		case TS_Normal:
+		default:           c_bDrawGold = TRUE;  c_bFind5nits = FALSE; c_bStateBar = TRUE; 
+		}
+		//c_bFind5nits = (m_GunMchn.Trigger(it) == TS_Find_Nits)? TRUE : FALSE;
 
 		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
 		m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
@@ -831,12 +836,6 @@ void CPatternDlg::FineNits()
          }
     m_GunMchn.Set5NitsBkColor(m_BkColor);
     c_bMsring = c_bFind5nits = !c_bMsring;//5Nits特別流程結束
-}
-
-
-BOOL CPatternDlg::isReady()
-{
-    return c_bisReady;
 }
 
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 

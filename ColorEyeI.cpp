@@ -235,12 +235,11 @@ void CColorEyeIApp::OnMsrForItem()
     //把vChain放進去
 	
     m_pdlgPattern = new CPatternDlg(MsrForItem);  //初始化Pattern Dialog，可以呼叫MsrForItem等對話框出來初始化vChain
-    if (m_pdlgPattern->isReady())
-    {
-        if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
-        if (!m_pdlgPattern->Magazine())                   AfxMessageBox("OnButtonMsr的彈匣出錯");
-        m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
-    }
+
+    if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
+    if (!m_pdlgPattern->Magazine())                   AfxMessageBox("OnButtonMsr的彈匣出錯");
+    m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
+
 }
 
 CString CColorEyeIApp::GetPathName()

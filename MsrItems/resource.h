@@ -94,6 +94,8 @@
 #define IDC_EDIT_P21FE                  1062
 #define IDC_BUTTON_DEL                  1063
 #define IDC_LIST_MSRITEMS               1064
+#define IDC_CHECK_JND                   1065
+#define IDC_EDIT_JND_GRAYVALUE          1066
 
 // Next default values for new objects
 // 

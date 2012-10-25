@@ -121,29 +121,6 @@ COLORREF Circle::GetColor() const
     return m_Color;
 }
 
-BOOL Circle::SetBkColor(COLORREF clr)
-{
-    int O = 0x000000FF & (clr >>24);
-    int B = GetBValue(clr);
-    int G = GetGValue(clr);
-    int R = GetRValue(clr);
-    
-    if(O == 0 && R >= 0 && R <256
-              && G >= 0 && G <256 
-              && B >= 0 && B <256 )
-    {
-        m_BkColor = clr;
-        return TRUE;
-    }    
-    else 
-        return FALSE;
-}
-
-COLORREF Circle::GetBkColor() const
-{
-    return m_BkColor;
-}
-
 CRect Circle::VbrFun(UINT k, UINT x0)
 {
     //max = 375

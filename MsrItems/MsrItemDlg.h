@@ -31,6 +31,7 @@ public:
 // Dialog Data
     //{{AFX_DATA(CMsrItemDlg)
 	enum { IDD = IDD_MSR_ITEM };
+	CButton	m_chkJND;
 	CButton	m_btnOK;
 	CButton	m_btnDelItems;
 	CButton	m_btnAddItems;
@@ -95,6 +96,7 @@ public:
     UINT     m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
+	UINT	m_jsdGray;
 	//}}AFX_DATA
 
 

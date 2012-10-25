@@ -16,15 +16,15 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=8
-Resource1=IDD_EDIT_DIALOG
+Resource1=IDD_PATTERN_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_OMDTOEXCEL
-Resource3=IDD_MSR_ITEM
-Resource4=IDR_MAINFRAME
+Resource2=IDR_MAINFRAME
+Resource3=IDD_OMDTOEXCEL
+Resource4=IDD_MSR_ITEM
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_PATTERN_DIALOG
-Resource7=IDD_ABOUTBOX
+Resource6=IDD_ABOUTBOX
+Resource7=IDD_EDIT_DIALOG
 Class7=CCaSetupDlg
 Resource8=IDD_CASETUP_DIALOG
 
@@ -174,7 +174,7 @@ Control11=IDC_STATIC,button,1342177287
 [DLG:IDD_MSR_ITEM]
 Type=1
 Class=?
-ControlCount=89
+ControlCount=94
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -264,6 +264,11 @@ Control86=IDC_STATIC,static,1342308352
 Control87=IDC_STATIC,static,1342308352
 Control88=IDC_STATIC,static,1342308352
 Control89=IDC_STATIC,static,1342308352
+Control90=IDC_CHECK_JND,button,1342242819
+Control91=IDC_EDIT_JND_GRAYVALUE,edit,1350631552
+Control92=IDC_STATIC,static,1342308352
+Control93=IDC_STATIC,button,1342177287
+Control94=IDC_STATIC,button,1342177287
 
 [DLG:IDD_EDIT_DIALOG]
 Type=1
@@ -279,7 +284,7 @@ HeaderFile=EnterValueDlg.h
 ImplementationFile=EnterValueDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_EDIT_VALUE
+LastObject=CEnterValueDlg
 VirtualFilter=dWC
 
 [DLG:IDD_CASETUP_DIALOG]
