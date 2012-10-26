@@ -230,6 +230,10 @@ SOURCE=.\SelXls\XlsOQC1.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SelXls\XlsOQC2.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SelXls\XlsRA1.cpp
 # End Source File
 # Begin Source File
@@ -383,6 +387,10 @@ SOURCE=.\SelXls\XlsGamma.h
 # Begin Source File
 
 SOURCE=.\SelXls\XlsOQC1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SelXls\XlsOQC2.h
 # End Source File
 # Begin Source File
 

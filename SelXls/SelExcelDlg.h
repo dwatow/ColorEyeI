@@ -3,6 +3,7 @@
 
 #include "XlsRA1.h"
 #include "XlsOQC1.h"
+#include "XlsOQC2.h"
 #include "XlsSEC1.h"
 #include "XlsGamma.h"
 

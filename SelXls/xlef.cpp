@@ -216,7 +216,7 @@ xlsFile* xlsFile::SelectCell(char x, int y)
 	return this;
 }
 //大於Z，開始選AA
-xlsFile* xlsFile::SelectCell(char x1,char x2,int y)
+xlsFile* xlsFile::SelectCell(char x1, char x2, int y)
 {
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%c%c%d",x1,x2,y);
@@ -226,7 +226,7 @@ xlsFile* xlsFile::SelectCell(char x1,char x2,int y)
 //-------------------------
 //選格子
 //選範圍
-xlsFile* xlsFile::SelectCell(const char* x1,const char* x2)
+xlsFile* xlsFile::SelectCell(const char* x1, const char* x2)
 {
 	range=objSheet.GetRange(COleVariant(x1),COleVariant(x2));
 	return this;
