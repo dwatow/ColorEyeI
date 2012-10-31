@@ -174,7 +174,6 @@ void CPatternDlg::OnPaint()
                      c_bDrawGold, c_bDrawNextGold, c_bStateBar, c_bMsrValues, c_bMsring, m_Goal.GetPercent(), c_bZeroCal, c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
         TextOut(dc, 0, 48, temp, temp.GetLength());
 
-
         temp.Format("翻譯器資訊: %s", m_GunMchn.GetSetupValue());
         TextOut(dc, 0, 64, temp, temp.GetLength());
 
@@ -189,7 +188,7 @@ void CPatternDlg::OnPaint()
         temp.Format("上一點: ←, 下一點: →, 抓值+下一點: Enter, 自動量測: ↓");
         TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
         //狀態（右）
-        temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %s inch", \
+        temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %2.1f inch", \
             m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), _T(m_GunMchn.GetLcmSize()));//LCM Size這樣抓會有問題
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
     }
@@ -298,9 +297,9 @@ BOOL CPatternDlg::SetBkColor(COLORREF clr)
         return TRUE;
     }
     else
-        return FALSE;
-    
+        return FALSE;    
 }
+
 COLORREF CPatternDlg::GetBkColor() const {    return m_BkColor;}
 
 UINT CPatternDlg::GetGoalRadius() const{    return m_Goal.GetRadius( ); }
@@ -311,25 +310,6 @@ BOOL   CPatternDlg::SetGoalPosi(CPoint posi){    return m_Goal.SetCenter(posi); 
 
 COLORREF CPatternDlg::GetGoalColor() const      {    return m_Goal.GetColor(   ); }
 BOOL     CPatternDlg::SetGoalColor(COLORREF clr){    return m_Goal.SetColor(clr); }
-
-// COLORREF CPatternDlg::GetGoalBkColor() const {    return m_NextGoal.GetBkColor(); }
-// BOOL     CPatternDlg::SetGoalBkColor(COLORREF clr)
-// {
-//     int O = 0x000000FF & (clr >> 24);
-//     int B = GetBValue(clr);
-//     int G = GetGValue(clr);
-//     int R = GetRValue(clr);
-//     
-//     if(O == 0 && R >= 0 && R <256
-//               && G >= 0 && G <256 
-//               && B >= 0 && B <256 )
-//     {
-//         m_Goal.SetBkColor(clr);
-//         return TRUE;
-//     }
-//     else
-//         return FALSE;
-// }
 
 COLORREF CPatternDlg::ShiftColor(COLORREF clr, int shift) const
 {
@@ -809,39 +789,41 @@ void CPatternDlg::EventRunZeroCal()
 void CPatternDlg::FineNits()
 {
     c_bMsring = TRUE;
-     int i=60;
-     int j;
-     float fLv = 0;
+	int Graylevel = 60;
+	int j;
+	float fLv = 0;
 
-//    if (m_pCA210->isTrue())  //虛擬機時，就不執行
-        for(j=0;j<2;++j)
+    for(j = 0; j < 2; ++j)
+    {
+        while(fLv >  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
         {
-            while(fLv < m_GunMchn.GetNitsSpec())//若亮度還在5以下，就...變亮
-            {
-                //變動背景顏色
-                m_BkColor = RGB(i,i,i);
-                Invalidate();
-                UpdateWindow();
-                //量測抓值
-                m_pCA210->Measure();
-                fLv = m_pCA210->GetMsrData().GetLv();//m_IProbe.GetLv();
-                i+=2;
-            }
-            while(fLv >  m_GunMchn.GetNitsSpec())//若亮度還沒有到5以下，就減少
-            {
-                //變動背景顏色
-                m_BkColor = RGB(i,i,i);
-                Invalidate();
-                UpdateWindow();
-                Sleep(60);
-                //量測抓值
-                m_pCA210->Measure();
-                fLv = m_pCA210->GetMsrData().GetLv();//m_IProbe.GetLv();
-                --i;
-            }
-         }
+            //變動背景顏色
+            m_BkColor = RGB(Graylevel, Graylevel, Graylevel);
+            Invalidate();
+            UpdateWindow();
+            //量測抓值
+            m_pCA210->Measure();
+            fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+            //--Graylevel;
+			Graylevel-=2;
+        }
+
+        while(fLv < m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
+        {
+            //變動背景顏色
+            m_BkColor = RGB(Graylevel, Graylevel, Graylevel);
+            Invalidate();
+            UpdateWindow();
+            Sleep(60);
+            //量測抓值
+            m_pCA210->Measure();
+            fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+            //i+=2;
+			++Graylevel;
+        }
+	}
     m_GunMchn.Set5NitsBkColor(m_BkColor);
-    c_bMsring = c_bFind5nits = !c_bMsring;//5Nits特別流程結束
+    c_bMsring = c_bFind5nits = !c_bMsring;  //5Nits特別流程結束
 }
 
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 

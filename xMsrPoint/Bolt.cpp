@@ -903,11 +903,11 @@ CString Bolt::GetMsrFlowName() const
         case Pn9:     ptnum.Format("9點");    break;
         case Pn49:    ptnum.Format("49點");   break;
         case Pn13:    ptnum.Format("13點");   break;
+		case Pn21:    ptnum.Format("21點");   break;
         case Pn25:    ptnum.Format("25點");   break;
 		case PnGamma: ptnum.Format("Gamma");  break;
     }
  
-
     CString temp;
     temp.Format("%s%s", clr, ptnum);
     return temp;
@@ -919,6 +919,7 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
     m_MsrFlowNum = MsrCell.GetMsrFlowNum();       //點數標籤
 
     UINT areaCode = 0;
+	UINT origCode = 0;
 
     UINT centerX = GetSystemMetrics(SM_CXSCREEN)/2;
     UINT centerY = GetSystemMetrics(SM_CYSCREEN)/2;
@@ -932,8 +933,12 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 //         |04  01  08|
 //         |05  06  09|
 //         +----------+
-        if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
+//      area code:0 nothing
+        if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())//找中心（整個量測的一半）點
+		{
             areaCode = 1;
+            //origCode = 1;
+		}
         else
         {
             UINT Xp = GetPointPosition().x;
@@ -948,17 +953,28 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
             else if (Xp >  centerX && Yp == centerY)    areaCode = 8;
             else if (Xp >  centerX && Yp >  centerY)    areaCode = 9;
             else                                        areaCode = 0;
+
+// 			if (MsrCell.GetBackColor() != CrsTlk || CrsTlkD || CrsTlkW)
+// 			origCode = vCar.size() + 1;
         }
 
-        MsrCell.SetArea(areaCode);
-        MsrCell.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
+		switch (MsrCell.GetMsrFlowNum())
+		{
+		case Pn21: if (m_MsrFlowNo+1 == (UINT)m_MsrFlowNum)//21點定義中，最後一點
+					   origCode = 1;
+					else
+						origCode = vCar.size() + 1;
+					break;
+		default:	
+			if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
+				origCode = 1;
+			else
+				origCode = vCar.size() + 1;
+		}
 
-// 		if (m_MsrFlowNo == 0)
-// 			MsrCell.SetOrigSeqc(0);
-// 		else if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
-// 			MsrCell.SetOrigSeqc(1);
-// 		else
-// 			vCar.rbegin()->GetOrigSeqc() + 1;
+        MsrCell.SetArea(areaCode);
+		MsrCell.SetOrigSeqc(origCode);
+        //MsrCell.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
 
         vCar.push_back(MsrCell);
     }
@@ -985,7 +1001,7 @@ CString  Bolt::GetSetupValue() const
 {
     CString str;
     
-    str.Format("解析度(%d×%d), 半徑 = %d, LCM尺寸 = %f 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
+    str.Format("解析度(%d×%d), 半徑 = %d, LCM尺寸 = %2.1f 寸, 顏色項目點: %s/%d/%d, 5Nits背景色(%d,%d,%d), 背景色(%d,%d,%d)", \
         m_nScrmH, m_nScrmV, m_Radius, m_LcmSize, GetMsrFlowName(), m_MsrFlowNo, m_MsrFlowNum, \
         GetRValue(m_5nitsBkColor), GetGValue(m_5nitsBkColor), GetBValue(m_5nitsBkColor), \
         GetRValue(GetBkColor()), GetGValue(GetBkColor()), GetBValue(GetBkColor())

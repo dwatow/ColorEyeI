@@ -12,6 +12,8 @@
 #define IDD_MSR_ITEM                    131
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_BUTTON1                     1000
+#define IDC_BUTTON_SELALL               1000
+#define IDC_BUTTON_SELNO                1001
 #define IDC_CHECK_CDP1                  1002
 #define IDC_CHECK1                      1002
 #define IDC_CHECK_CDP9                  1003

@@ -115,6 +115,7 @@ CString Cartridge::GetStrPointNum() const
 	case Pn21: Num.Format(" 21ÂI");   break;
 	case Pn25: Num.Format(" 25ÂI");   break;
 	case Pn49: Num.Format(" 49ÂI");   break;
+	case PnGamma: Num.Format("Gamma");   break;
 	case NoPn:
 	default:   Num.Format("¥¼©w¸qÂI¦ì");
     }
@@ -135,6 +136,8 @@ CString Cartridge::GetStrColorType() const
 	case CrsTlkW:
 	case CrsTlkD:
 	case CrsTlk: Color.Format("CrossTalk"); break;
+	case JNDX:
+	case JND:    Color.Format("JND"); break;
 	case NoColor:
 	default:     Color.Format("¥¼©w¸q¦â±m");
     }

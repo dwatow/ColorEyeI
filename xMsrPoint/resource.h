@@ -11,7 +11,9 @@
 #define IDD_PATTERN_DIALOG              130
 #define IDD_MSR_ITEM                    131
 #define IDC_BUTTON_MSR                  1000
+#define IDC_BUTTON_SELALL               1000
 #define IDC_STATIC_L                    1001
+#define IDC_BUTTON_SELNO                1001
 #define IDC_STATIC_SX                   1002
 #define IDC_CHECK_CDP1                  1002
 #define IDC_STATIC_SY                   1003

@@ -33,6 +33,7 @@ public:
     void CutEqualCell(xChain );
     void Grow(ColorType ct, PointNum pn);
     void SortQuackMsr();
+	void SortOrigMsr();
     void freeEmptyCell();
 	//像vector的函數，卻不是直接回傳
 public:

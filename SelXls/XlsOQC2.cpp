@@ -76,7 +76,7 @@ CXlsFile2* CXlsOQC2::iData(CDataChain& vCar)
     //5nits(Lv)
 //     SelectCell('Z', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, 0).GetLv());
     for(i=0;i<9;++i)
-        SelectCell('A',(char)('R'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i+1).GetLv());
+        SelectCell('A',(char)('R'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i).GetLv());
 
     //5nits(x,y)
     SelectCell("BB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Nits, Pn9, 4).GetSx());

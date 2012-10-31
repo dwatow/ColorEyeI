@@ -10,3 +10,10 @@ enum ColorType   {NoColor = 0, White, Red, Green, Blue, Dark, Nits, CrsTlk, CrsT
 enum PointNum    {Pn1 = 1, Pn4 = 4, Pn5 = 5, Pn9=9, Pn13=13, Pn21=21, Pn25=25, Pn49=49, PnGamma = 256, NoPn = 999};
 
 #endif
+
+/*
+±ý­×§ï
+CString Cartridge::GetStrColorType() const
+CString Cartridge::GetStrPointNum() const
+
+*/

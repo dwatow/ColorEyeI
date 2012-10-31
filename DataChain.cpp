@@ -29,18 +29,24 @@ bool CDataChain::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
 
 void CDataChain::SortQuackMsr(xChain& vCar) const
 {
-    std::sort(vCar.begin(), vCar.end(), AreaPriority);
+    std::stable_sort(vCar.begin(), vCar.end(), AreaPriority);
 }
 
 void CDataChain::SortOrigMsr(xChain& vCar) const
 {
-    std::sort(vCar.begin(), vCar.end(), OrigPriority);
+    std::stable_sort(vCar.begin(), vCar.end(), OrigPriority);
 }
 
 void CDataChain::SortQuackMsr()
 {
-    std::sort(Begin(), End(), AreaPriority);
+    std::stable_sort(Begin(), End(), AreaPriority);
 }
+
+void CDataChain::SortOrigMsr()
+{
+    std::stable_sort(Begin(), End(), OrigPriority);
+}
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -61,13 +67,13 @@ xChain::size_type CDataChain::StdInit()
 //    Empty();
     
 	Grow(JND, Pn1);
+    Grow(Nits, Pn9);
     Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
     Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
     Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
     Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
     Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
     Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
-    Grow(Nits, Pn9);
     Grow(CrsTlk , Pn4);
     
     //freeBuffer();
