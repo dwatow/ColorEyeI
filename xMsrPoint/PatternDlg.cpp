@@ -89,7 +89,7 @@ BOOL CPatternDlg::OnInitDialog()
     c_bMsring       = FALSE;
     c_bGoalPercent  = FALSE;
     c_bRunMsrAI     = TRUE;
-    c_bZeroCal      = FALSE;
+//    c_bZeroCal      = FALSE;
     c_bUnCntCA210   = FALSE;
     c_bFind5nits    = FALSE;
 
@@ -170,8 +170,8 @@ void CPatternDlg::OnPaint()
         temp.Format("迭代器資訊: itor.begin = 0x%x, itor.end = 0x%x, itor(位址 / 位置) = 0x%x / %s", m_BeginItor, m_EndItor, m_itor, isEnd);
         TextOut(dc, 0, 32, temp, temp.GetLength());
 
-        temp.Format("PatternDlg旗標: Goal/nGoal = %d/%d, StateBar = %d;  Msr/Msring = %d/%d, 量測百分比 = %d%%, 歸零校正 = %d, 第一點 = %d, 最後一點 = %d, 自動量測模式 = %d, 連結CA-210 = %d, 5Nits中心點 = %d", \
-                     c_bDrawGold, c_bDrawNextGold, c_bStateBar, c_bMsrValues, c_bMsring, m_Goal.GetPercent(), c_bZeroCal, c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
+        temp.Format("PatternDlg旗標: Goal/nGoal = %d/%d, StateBar = %d;  Msr/Msring = %d/%d, 量測百分比 = %d%%, 第一點 = %d, 最後一點 = %d, 自動量測模式 = %d, 連結CA-210 = %d, 5Nits中心點 = %d", \
+                     c_bDrawGold, c_bDrawNextGold, c_bStateBar, c_bMsrValues, c_bMsring, m_Goal.GetPercent(), c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
         TextOut(dc, 0, 48, temp, temp.GetLength());
 
         temp.Format("翻譯器資訊: %s", m_GunMchn.GetSetupValue());
@@ -216,11 +216,11 @@ void CPatternDlg::OnPaint()
 
     dc.SetTextColor(InvrtColor(m_BkColor));
 
-    if (c_bZeroCal)
-    {
-        temp.Format("       正在Zero Cal...   ");
-        TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
-    }
+//     if (c_bZeroCal)
+//     {
+//         temp.Format("       正在Zero Cal...   ");
+//         TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
+//     }
 
     if (c_bMsrEnd && c_bRunMsrAI && c_bMsrEndnMsred)
     {
@@ -427,7 +427,7 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 		}
 		//c_bFind5nits = (m_GunMchn.Trigger(it) == TS_Find_Nits)? TRUE : FALSE;
 
-		m_BkColor = m_GunMchn.GetBkColor();              //靶背景
+		SetBkColor(m_GunMchn.GetBkColor());              //靶背景
 		m_Goal.SetCenter(m_GunMchn.GetPointPosition());  //靶位置
 		m_Goal.SetPercent(0);
 
@@ -777,50 +777,102 @@ void CPatternDlg::EventSwCntCa210()
 
 void CPatternDlg::EventRunZeroCal()
 {
-    c_bZeroCal = TRUE;
+//    c_bZeroCal = TRUE;
     Invalidate();
     UpdateWindow();
     if (m_pCA210->CalZero() == CA_Offline)
         MessageBox("未連線");
-    c_bZeroCal = FALSE;
+//    c_bZeroCal = FALSE;
     Invalidate();
+}
+
+void CPatternDlg::ChangeBkColor(COLORREF color)
+{
+	SetBkColor(RGB(color, color, color));
+	Invalidate();
+    UpdateWindow();
+}
+
+void CPatternDlg::FineNitsPos()
+{
+	float fLv = 0;
+	int Graylevel = 60;
+	while(fLv >  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
+	{
+		Graylevel -= 2;
+		ChangeBkColor(Graylevel);
+		//量測抓值
+		m_pCA210->Measure();
+		fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+	}
+	
+	while(fLv < m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
+	{
+		++Graylevel;
+		ChangeBkColor(Graylevel);
+		Sleep(60);
+		//量測抓值
+		m_pCA210->Measure();
+		fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+    }
+}
+
+void CPatternDlg::FineNitsNeg()
+{
+	float fLv = 0;
+	int Graylevel = 60;
+
+	while(fLv <  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
+	{
+		Graylevel += 2;
+		ChangeBkColor(Graylevel);
+		//量測抓值
+		m_pCA210->Measure();
+		fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+	}
+	
+	while(fLv > m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
+	{
+		--Graylevel;
+		ChangeBkColor(Graylevel);
+		Sleep(60);
+		//量測抓值
+		m_pCA210->Measure();
+		fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+    }
 }
 
 void CPatternDlg::FineNits()
 {
     c_bMsring = TRUE;
-	int Graylevel = 60;
-	int j;
-	float fLv = 0;
+	int i;
 
-    for(j = 0; j < 2; ++j)
+	//夾擊演算法
+//	int glvMax = 255, glvMin = 0;
+
+// 	while ((glvMax - glvMin) > 2)
+// 	{
+// 		Graylevel = (glvMax + glvMin)/2;
+// 		ChangeBkColor(Graylevel);
+// 		m_pCA210->Measure();
+// 		fLv = m_pCA210->GetMsrData().GetLv();
+// 		
+// 		if( fLv > m_GunMchn.GetNitsSpec() )
+// 			glvMax = Graylevel;
+// 		else// if (fLv > m_GunMchn.GetNitsSpec() )
+// 			glvMin = Graylevel;
+// 	}
+// 
+// 	CString str;
+// 	str.Format("max:%d\nmin%d\ngraylv:%d", glvMax, glvMin, Graylevel);
+// 	AfxMessageBox(str);
+
+    for(i = 0; i < 2; ++i)
     {
-        while(fLv >  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
-        {
-            //變動背景顏色
-            m_BkColor = RGB(Graylevel, Graylevel, Graylevel);
-            Invalidate();
-            UpdateWindow();
-            //量測抓值
-            m_pCA210->Measure();
-            fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
-            //--Graylevel;
-			Graylevel-=2;
-        }
-
-        while(fLv < m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
-        {
-            //變動背景顏色
-            m_BkColor = RGB(Graylevel, Graylevel, Graylevel);
-            Invalidate();
-            UpdateWindow();
-            Sleep(60);
-            //量測抓值
-            m_pCA210->Measure();
-            fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
-            //i+=2;
-			++Graylevel;
-        }
+ 		     if (m_GunMchn.GetNitsKind() == NK_POS) FineNitsPos();
+ 		else if (m_GunMchn.GetNitsKind() == NK_NEG) FineNitsNeg();
+		else MessageBox("找Nits出問題。");
+	
 	}
     m_GunMchn.Set5NitsBkColor(m_BkColor);
     c_bMsring = c_bFind5nits = !c_bMsring;  //5Nits特別流程結束

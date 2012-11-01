@@ -63,12 +63,10 @@ private:
     //手動可調
     BOOL c_bDrawGold;
     BOOL c_bDrawNextGold;
-//    BOOL c_bDebugDisplay;
     BOOL c_bStateBar;
 
     //自動使用的參數
     BOOL c_bMsrValues;
-    BOOL c_bZeroCal;
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
 	BOOL c_bMsrEndnMsred;
@@ -83,7 +81,6 @@ private:
 
     Ca210* m_pCA210;
 
-//    std::vector<Cartridge> vDataChain;
     std::vector<Cartridge>::iterator m_itor;
     std::vector<Cartridge>::iterator m_BeginItor;
     std::vector<Cartridge>::iterator m_EndItor;
@@ -121,14 +118,14 @@ private:
     static UINT VbrGoalThread(LPVOID LParam);
     static UINT VbrNextGoalThread(LPVOID LParam);
 
+	void ChangeBkColor(COLORREF);
+	void FineNitsPos();
+	void FineNitsNeg();
 public:
     void FineNits();
 
- //   BOOL Magazine(std::vector<Cartridge>& ); //彈匣
     BOOL Magazine(); //彈匣
-//    BOOL ConnectCa210(Ca210* ca);
     BOOL ConnectCa210();
-//    void Partition(std::vector<Cartridge>& , Cartridge& );  //填彈器（快速量測）
 
     COLORREF GetBkColor() const;
     BOOL     SetBkColor(COLORREF);

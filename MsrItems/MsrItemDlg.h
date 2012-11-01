@@ -31,6 +31,7 @@ public:
 // Dialog Data
     //{{AFX_DATA(CMsrItemDlg)
 	enum { IDD = IDD_MSR_ITEM };
+	CComboBox	m_cbxSelNitsKind;
 	CButton	m_chkJND;
 	CButton	m_btnOK;
 	CButton	m_btnDelItems;

@@ -98,6 +98,7 @@
 #define IDC_LIST_MSRITEMS               1064
 #define IDC_CHECK_JND                   1065
 #define IDC_EDIT_JND_GRAYVALUE          1066
+#define IDC_COMBO_SEL_NITS_KIND         1067
 
 // Next default values for new objects
 // 

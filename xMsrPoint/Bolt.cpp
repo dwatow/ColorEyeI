@@ -979,6 +979,8 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
         vCar.push_back(MsrCell);
     }
 }
+
+NitsKind Bolt::GetNitsKind(){ return m_nNitsKind;}
 //////////////////////////////////////////////////////////////////////////
 //Msr Parameter
 Bolt* Bolt::SetP5FE(float P5FE)               {m_f5FE          = P5FE;                         return this;}
@@ -990,6 +992,8 @@ Bolt* Bolt::SetP25RectSide(UINT SideLong)     {m_n25RectSide   = SideLong;      
 Bolt* Bolt::SetGammaRange(UINT GM1, UINT GM2) {m_nGM1          = GM1;     m_nGM2    = GM2;     return this;}
 Bolt* Bolt::GammaStep(float GmStep)           {m_fGammaSetp    = GmStep;                       return this;}
 Bolt* Bolt::SetNitsNum(float NitsNum)         {m_fNits         = NitsNum;                      return this;}
+Bolt* Bolt::SetNitsKind(NitsKind nk)          {m_nNitsKind     = nk;                     return this;}
+
 Bolt* Bolt::SetCrsTlkRectFE(float RectSideFE) {m_fCrsTlkRectFE = RectSideFE;                   return this;}
 
 //////////////////////////////////////////////////////////////////////////

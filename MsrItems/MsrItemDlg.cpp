@@ -49,6 +49,7 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     //{{AFX_DATA_MAP(CMsrItemDlg)
+	DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
 	DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
     DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
@@ -253,7 +254,16 @@ void CMsrItemDlg::OnButtonAdd()
 
 		//Nits
         if (m_chkNits.GetState())
+		{
             Pusher->SetNitsNum(m_fNits);
+
+			switch (m_cbxSelNitsKind.GetCurSel())
+			{
+			case 0: Pusher->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
+			default:
+			case 1: Pusher->SetNitsKind(NK_NEG); break;
+			}
+		}
         if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
         
         //中心點
@@ -370,6 +380,10 @@ BOOL CMsrItemDlg::OnInitDialog()
 
     pDoc->GetMsrDataChain().Empty();
 
+	m_cbxSelNitsKind.AddString("+");
+	m_cbxSelNitsKind.AddString("--");
+	m_cbxSelNitsKind.SetCurSel(0);
+
 	//記憶 選項 file >> Dialog
 	CFile LoadSet;
 	CFileException fx;
@@ -385,9 +399,6 @@ BOOL CMsrItemDlg::OnInitDialog()
 		//例外處理
 		TCHAR buf[255];
 		fx.GetErrorMessage(buf, 255);
-		//CString strPrompt;
-		//strPrompt.Format("CMsrItemDlg\n%s", buf);
-		//AfxMessageBox(strPrompt);
 	}
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE

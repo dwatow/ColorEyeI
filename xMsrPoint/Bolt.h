@@ -8,6 +8,7 @@
 typedef std::vector<Cartridge> xChain;
 //enum PtXt {PtXtT = 0, PtXtL, PtXtR, PtXtB};
 enum TrigStatus{ TS_FinalPoint = 0, TS_Normal, TS_Find_Nits, TS_JND, TS_JNDX};
+enum NitsKind{ NK_POS, NK_NEG};
 
 class Bolt 
 {
@@ -34,6 +35,7 @@ class Bolt
     float    m_fGammaSetp;
     float    m_fNits;
     float    m_fCrsTlkRectFE;
+	NitsKind m_nNitsKind;
 
 public:
     Bolt();
@@ -73,8 +75,10 @@ public:
     Bolt* SetGammaRange(UINT, UINT);
     Bolt* GammaStep(float);
     Bolt* SetNitsNum(float);
+	Bolt* SetNitsKind(NitsKind);
     Bolt* SetCrsTlkRectFE(float);
 
+	NitsKind GetNitsKind();
 	float GetLcmSize() const{ return m_LcmSize; };
     
 private:

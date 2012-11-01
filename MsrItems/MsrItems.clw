@@ -15,12 +15,12 @@ Class3=CAboutDlg
 Class4=CMsrItemsDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_PATTERN_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_MSRITEMS_DIALOG
+Resource3=IDD_ABOUTBOX
 Class5=CMsrItemDlg
 Class6=CStaticText
-Resource4=IDD_PATTERN_DIALOG
+Resource4=IDD_MSRITEMS_DIALOG
 Resource5=IDD_MSR_ITEM
 
 [CLS:CMsrItemsApp]
@@ -99,7 +99,7 @@ HeaderFile=MsrItemDlg.h
 ImplementationFile=MsrItemDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_EDIT_JSD_GRAYVALUE
+LastObject=CMsrItemDlg
 VirtualFilter=dWC
 
 [CLS:CStaticText]
@@ -116,8 +116,7 @@ ControlCount=0
 
 [DLG:IDD_MSR_ITEM]
 Type=1
-Class=?
-ControlCount=96
+ControlCount=97
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -214,4 +213,5 @@ Control93=IDC_STATIC,button,1342177287
 Control94=IDC_STATIC,button,1342177287
 Control95=IDC_BUTTON_SELALL,button,1342242816
 Control96=IDC_BUTTON_SELNO,button,1342242816
+Control97=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
 
