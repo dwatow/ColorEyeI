@@ -114,7 +114,7 @@ void CColorEyeIDoc::OnFileNew()
 {
     // TODO: Add your command handler code here
     //開新檔案
-    SetPathName(" ");        
+    SetPathName("");    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
     m_dOmd.Empty();          //清空記憶體空間m_OmdData
     m_PnlID.Empty();
@@ -281,6 +281,7 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 void CColorEyeIDoc::OnFileSave() 
 {
     // TODO: Add your command handler code here
+//	SetPathName()
     if (GetPathName().IsEmpty())            //若還沒有存過的檔
         OnFileSaveAs();                     //就另存新檔
     else
