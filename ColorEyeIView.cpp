@@ -123,7 +123,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
              .tr().td().b().text("Panel ID").b_().td_()          .td().text(pDoc->GetPnlID()).td_().tr_()
              .tr().td().b().text("Measurement device").b_().td_().td().text(pDoc->GetMsrDvc()).td_().tr_()
              .tr().td().b().text("Probe").b_().td_()             .td().text(pDoc->GetPrb()).td_().tr_()
-             .tr().td().b().text("Chanel").b_().td_()            .td().text(pDoc->GetCHID()).td_().tr_()
+             .tr().td().b().text("Channel").b_().td_()            .td().text(pDoc->GetCHID()).td_().tr_()
         .table_();
 
 
