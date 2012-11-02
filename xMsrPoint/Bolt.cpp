@@ -65,7 +65,7 @@ CPoint Bolt::GetFE9Point(UINT few) const
         case 7: return Point7; break;
         case 8: return Point8; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -111,7 +111,7 @@ CPoint Bolt::GetFE5Point(UINT few) const
         case 3: return Point3; break;
         case 4: return Point4; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -168,7 +168,7 @@ CPoint Bolt::Get5nits9Point(UINT few) const
         case 7: return Point7; break;
         case 8: return Point8; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -246,7 +246,7 @@ CPoint Bolt::GetD13Point(UINT few) const
             case 11: return Point11; break;
             case 12: return Point12; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -339,7 +339,7 @@ CPoint Bolt::GetD21Point(UINT few) const
         case 19: return Point19; break;
         case 20: return Point20; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -458,7 +458,7 @@ CPoint Bolt::GetD25Point(UINT few) const
         case 23: return Point23; break;
         case 24: return Point24; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -617,7 +617,7 @@ CPoint Bolt::GetW49Point(UINT few) const
         case 47:  return Point65;  break;
         case 48:  return Point66;  break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -665,7 +665,7 @@ CPoint Bolt::GetCrossTalk(UINT few) const
         case 2: return PtRight;  break;
         case 3: return PtButtom; break;
 
-        default: PointD; return PointD; break;
+        default: return PointD;
     }
 }
 
@@ -841,7 +841,6 @@ COLORREF Bolt::Get5NitsBkColor() const
 
 CPoint Bolt::GetPointPosition() const
 {
-
     switch(m_MsrFlowNum)
     {
         case Pn1:
@@ -854,9 +853,8 @@ CPoint Bolt::GetPointPosition() const
         case Pn9:
             //九點週邊定義各有不同
             //分白、黑、5Nits
-            if(m_BkColor == White) return GetFE9Point(m_MsrFlowNo);
-            if(m_BkColor == Dark ) return GetFE9Point(m_MsrFlowNo);
             if(m_BkColor == Nits)  return Get5nits9Point(m_MsrFlowNo);
+			else                   return GetFE9Point(m_MsrFlowNo);
         case Pn13:
             return GetD13Point(m_MsrFlowNo);
         case Pn21:
@@ -872,7 +870,7 @@ CPoint Bolt::GetPointPosition() const
     }
 }
 
-UINT Bolt::GetRadius() const
+int Bolt::GetRadius() const
 {
     return m_Radius;
 }
@@ -913,6 +911,42 @@ CString Bolt::GetMsrFlowName() const
     return temp;
 }
 
+AreaKind Bolt::PointToArea(CPoint p) const
+{
+//         Set Area Code
+//         +--+--+--+
+//         |02|03|07|
+//         +--a--+--+
+//         |04|01|08|
+//         +--+--d--+
+//         |05|06|09|
+//         +--+--+--+
+	
+	CPoint ctrP(m_nScrmH/2, m_nScrmV/2);
+	const UINT shift = 5;
+	CPoint aP(ctrP.x - shift, ctrP.y - shift), 
+		   dP(ctrP.x + shift, ctrP.y + shift);
+	
+	    if (p.y < aP.y)
+		{
+			     if (p.x < aP.x) return AA_02; 
+			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_03;
+			else                                                     return AA_04;
+		}
+		else if ((p.y >= aP.y) && (p.y < dP.y))
+		{
+			if (p.x < aP.x) return AA_05; 
+			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_01;
+			else                                                     return AA_06;
+		}
+		else
+		{
+			if (p.x < aP.x) return AA_07; 
+			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_08;
+			else                                                     return AA_09;
+		}
+}
+
 void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
 {
 	m_BkColor    = MsrCell.GetBackColor();        //背景色標籤
@@ -921,60 +955,29 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
     UINT areaCode = 0;
 	UINT origCode = 0;
 
-    UINT centerX = GetSystemMetrics(SM_CXSCREEN)/2;
-    UINT centerY = GetSystemMetrics(SM_CYSCREEN)/2;
-    
     for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
     {
         MsrCell.SetMsrFlowNo(m_MsrFlowNo);
-		//Set Area Code
-//         +----------+
-//         |02  03  07|
-//         |04  01  08|
-//         |05  06  09|
-//         +----------+
-//      area code:0 nothing
-        if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())//找中心（整個量測的一半）點
+
+		switch( PointToArea (GetPointPosition()) )
 		{
-            areaCode = 1;
-            //origCode = 1;
+		case AA_01: 
+			areaCode = 1;
+			origCode = ( MsrCell.GetMsrFlowNum() == PnGamma )? ( vCar.size() + 1 ) : 1 ; 
+			break;
+
+		case AA_02: areaCode = 2; origCode = vCar.size() + 1; break;
+		case AA_03: areaCode = 3; origCode = vCar.size() + 1; break;
+		case AA_04: areaCode = 4; origCode = vCar.size() + 1; break;
+		case AA_05: areaCode = 5; origCode = vCar.size() + 1; break;
+		case AA_06: areaCode = 6; origCode = vCar.size() + 1; break;
+		case AA_07: areaCode = 7; origCode = vCar.size() + 1; break;
+		case AA_08: areaCode = 8; origCode = vCar.size() + 1; break;
+		case AA_09: areaCode = 9; origCode = vCar.size() + 1; break;
+		default:    areaCode = 0; origCode = vCar.size() + 1;
 		}
-        else
-        {
-            UINT Xp = GetPointPosition().x;
-            UINT Yp = GetPointPosition().y;
-
-                 if (Xp <  centerX && Yp <  centerY)    areaCode = 2;
-            else if (Xp == centerX && Yp <  centerY)    areaCode = 3;
-            else if (Xp <  centerX && Yp == centerY)    areaCode = 4;
-            else if (Xp <  centerX && Yp >  centerY)    areaCode = 5;
-            else if (Xp == centerX && Yp >  centerY)    areaCode = 6;
-            else if (Xp >  centerX && Yp <  centerY)    areaCode = 7;
-            else if (Xp >  centerX && Yp == centerY)    areaCode = 8;
-            else if (Xp >  centerX && Yp >  centerY)    areaCode = 9;
-            else                                        areaCode = 0;
-
-// 			if (MsrCell.GetBackColor() != CrsTlk || CrsTlkD || CrsTlkW)
-// 			origCode = vCar.size() + 1;
-        }
-
-		switch (MsrCell.GetMsrFlowNum())
-		{
-		case Pn21: if (m_MsrFlowNo+1 == (UINT)m_MsrFlowNum)//21點定義中，最後一點
-					   origCode = 1;
-					else
-						origCode = vCar.size() + 1;
-					break;
-		default:	
-			if((((UINT)m_MsrFlowNum - 1)/2) == MsrCell.GetMsrFlowNo())
-				origCode = 1;
-			else
-				origCode = vCar.size() + 1;
-		}
-
         MsrCell.SetArea(areaCode);
 		MsrCell.SetOrigSeqc(origCode);
-        //MsrCell.SetOrigSeqc((m_MsrFlowNo == 0)? 0 : (vCar.rbegin()->GetOrigSeqc() + 1));
 
         vCar.push_back(MsrCell);
     }

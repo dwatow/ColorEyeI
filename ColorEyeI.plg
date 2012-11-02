@@ -6,13 +6,29 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC25B.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC919.tmp" with contents
 [
 /nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\Bolt.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFile0.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFile1.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFileGm.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFilePtr.cpp"
+"D:\GitHub\ColorEyeI\DataChain.cpp"
 "D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsGamma.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsOQC1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsOQC2.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsRA1.cpp"
+"D:\GitHub\ColorEyeI\SelXls\XlsSEC1.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPC25B.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC25C.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPC919.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC91A.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
 .\Release\Bolt.obj
@@ -52,12 +68,29 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC25C.tmp" with c
 .\Release\XlsSEC1.obj
 .\Release\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPC25C.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPC91A.tmp"
 <h3>Output Window</h3>
 Compiling...
+Bolt.cpp
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+COmdFile0.cpp
+COmdFile1.cpp
+COmdFileGm.cpp
+COmdFilePtr.cpp
+DataChain.cpp
 MsrItemDlg.cpp
+PatternDlg.cpp
+SelExcelDlg.cpp
+XlsGamma.cpp
+XlsOQC1.cpp
+XlsOQC2.cpp
+XlsRA1.cpp
+XlsSEC1.cpp
+Generating Code...
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPCEFB.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC312.tmp" with contents
 [
 /nologo /o"Release/ColorEyeI.bsc" 
 .\Release\StdAfx.sbr
@@ -95,7 +128,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPCEFB.tmp" with c
 .\Release\XlsOQC2.sbr
 .\Release\XlsRA1.sbr
 .\Release\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPCEFB.tmp"
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPC312.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

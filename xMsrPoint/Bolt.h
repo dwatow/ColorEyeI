@@ -9,17 +9,18 @@ typedef std::vector<Cartridge> xChain;
 //enum PtXt {PtXtT = 0, PtXtL, PtXtR, PtXtB};
 enum TrigStatus{ TS_FinalPoint = 0, TS_Normal, TS_Find_Nits, TS_JND, TS_JNDX};
 enum NitsKind{ NK_POS, NK_NEG};
+enum AreaKind { AA_00, AA_01, AA_02, AA_03, AA_04, AA_05, AA_06, AA_07, AA_08, AA_09};
 
 class Bolt 
 {
     xChain::iterator m_itEnd;
-    UINT      m_nScrmH;
-    UINT      m_nScrmV;
-    UINT      m_Radius;
+    int      m_nScrmH;
+    int      m_nScrmV;
+    int      m_Radius;
     float     m_LcmSize;
     ColorType m_BkColor;
     PointNum  m_MsrFlowNum;       //該項目共幾點
-    UINT      m_MsrFlowNo;        //該項目的第幾點
+    int      m_MsrFlowNo;        //該項目的第幾點
     COLORREF  m_5nitsBkColor;
 	COLORREF  m_JNDBkColor;
 
@@ -29,9 +30,9 @@ class Bolt
     float    m_f21Havg;
     float    m_f21Vavg;
     float    m_f25FE;
-    UINT     m_n25RectSide;
-    UINT     m_nGM1;
-    UINT     m_nGM2;
+    int     m_n25RectSide;
+    int     m_nGM1;
+    int     m_nGM2;
     float    m_fGammaSetp;
     float    m_fNits;
     float    m_fCrsTlkRectFE;
@@ -46,10 +47,10 @@ public:
 
     TrigStatus Trigger(xChain::iterator&);
 
-    CString  GetMsrFlowName()   const;
-    COLORREF GetBkColor()       const;
-    CPoint   GetPointPosition() const;
-    UINT     GetRadius()        const;
+    CString  GetMsrFlowName()     const;
+    COLORREF GetBkColor()         const;
+    CPoint   GetPointPosition()   const;
+    int     GetRadius()          const;
 
     float    GetNitsSpec(){ return m_fNits; }
 
@@ -82,6 +83,7 @@ public:
 	float GetLcmSize() const{ return m_LcmSize; };
     
 private:
+	AreaKind PointToArea(CPoint p) const;
     CPoint Get5nits9Point(UINT few) const;
     CPoint GetCrossTalk(UINT few) const;// 6/26新增
 

@@ -64,11 +64,10 @@ CDataChain::~CDataChain()
 
 xChain::size_type CDataChain::StdInit()
 {
-//    Empty();
-    
+//    Empty();    
 	Grow(JND, Pn1);
-    Grow(Nits, Pn9);
     Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
+    Grow(Nits, Pn9);
     Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
     Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
     Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);

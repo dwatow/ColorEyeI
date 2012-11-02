@@ -251,20 +251,6 @@ void CMsrItemDlg::OnButtonAdd()
 			Pusher->SetJNDBkColor(RGB(m_jsdGray, m_jsdGray, m_jsdGray));
 			pDoc->GetMsrDataChain().Grow(JND , Pn1);
 		}
-
-		//Nits
-        if (m_chkNits.GetState())
-		{
-            Pusher->SetNitsNum(m_fNits);
-
-			switch (m_cbxSelNitsKind.GetCurSel())
-			{
-			case 0: Pusher->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
-			default:
-			case 1: Pusher->SetNitsKind(NK_NEG); break;
-			}
-		}
-        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
         
         //中心點
 		if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
@@ -273,6 +259,20 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
         if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
         
+		//Nits
+        if (m_chkNits.GetState())
+		{
+            Pusher->SetNitsNum(m_fNits);
+			
+			switch (m_cbxSelNitsKind.GetCurSel())
+			{
+			case 0: Pusher->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
+			default:
+			case 1: Pusher->SetNitsKind(NK_NEG); break;
+			}
+		}
+        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
+
 		//5點
         if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
             Pusher->SetP5FE(m_f5FE);
@@ -320,14 +320,15 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
 		else                             pDoc->GetMsrDataChain().SortOrigMsr();
         
-		//Cross Talk
+		//Cross Talk srot by AreaCode
         if (m_chkCrossTalk.GetState())
         {
             Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
             pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
         }
-            if (ListBoxUpdate(pDoc->GetMsrDataChain()))
-                m_btnOK.EnableWindow(TRUE);
+        if (ListBoxUpdate(pDoc->GetMsrDataChain()))
+            m_btnOK.EnableWindow(TRUE);
+
 		//Gamma
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
             Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
