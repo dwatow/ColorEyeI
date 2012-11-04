@@ -42,21 +42,66 @@ void COmdFile1::OmdToTxt()
     m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrT() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrDuv() + "\n");
     m_dTxt.push_back("\n");
     
-    m_dTxt.push_back("\t\t\t\t\t\t15點均齊度\tL\t\t\t\t\t15點均齊度\tx\t\t\t\t\t15點均齊度\ty\t\t\t\t\t15點均齊度\tT\t\t\t\t\t15點均齊度\tduv\n");
+    m_dTxt.push_back("\t\t\t\t\t\tCross Talk\tYa\t\t\t\t\tCross Talk\tYb\t\t\t\t\tCross Talk\tYb\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 0).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 0).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 0).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 1).GetStrLv() + "\t灰\t" + m_dOmd.At(Dark , Pn9, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 1).GetStrLv() + "\t白\t" + m_dOmd.At(CrsTlkW , Pn4, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 1).GetStrLv() + "\t黑\t" + m_dOmd.At(CrsTlkD , Pn4, 2).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 3).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 3).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 3).GetStrLv() + "\n");
+    m_dTxt.push_back("\n\n\n\n");
 
-    for (n = 0; n < 4 ; ++n)
-        m_dTxt.push_back(" \n");
-
-    //m_dTxt.push_back("\n\n\n\n");
-    m_dTxt.push_back("\t\t\t\t\t\t2010 SEC 15點均齊度-W\tL\t\t\t\t\t2010 SEC 15點均齊度-W\tx\t\t\t\t\t2010 SEC 15點均齊度-W\ty\t\t\t\t\t2010 SEC 15點均齊度-W\tT\t\t\t\t\t2010 SEC 15點均齊度-W\tduv\n");
+	//////////////////////////////////////////////////////////////////////////
+    m_dTxt.push_back("\t\t\t\t\t\t25點暗態\tL\t\t\t\t\t\t\t25點暗態\tx\t\t\t\t\t\t\t25點暗態\ty\t\t\t\t\t\t\t25點暗態\tT\t\t\t\t\t\t\t25點暗態\tduv\n");
     
-    for (n = 0; n < 4 ; ++n)
-        m_dTxt.push_back(" \n");
-
-    m_dTxt.push_back("\t\t\t\t\t\t2010 SEC 15點均齊度-D\tL\t\t\t\t\t2010 SEC 15點均齊度-D\tx\t\t\t\t\t2010 SEC 15點均齊度-D\ty\t\t\t\t\t2010 SEC 15點均齊度-D\tT\t\t\t\t\t2010 SEC 15點均齊度-D\tduv\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + 
+		m_dOmd.At(Dark, Pn25, 0).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrLv()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 0).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrSx()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 0).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrSy()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 0).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrT()   + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 0).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrDuv() + "\n");
     
-    for (n = 0; n < 6 ; ++n)
-        m_dTxt.push_back(" \n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25,  4).GetStrLv()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrLv()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25,  4).GetStrSx()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrSx()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25,  4).GetStrSy()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrSy()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25,  4).GetStrT()   + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrT()   + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25,  4).GetStrDuv() + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrDuv() + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + 
+		m_dOmd.At(Dark, Pn25, 2).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrLv()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 2).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrSx()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 2).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrSy()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 2).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrT()   + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 2).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrDuv() + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + 
+		m_dOmd.At(Dark, Pn25, 11).GetStrLv()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrLv()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrLv()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 11).GetStrSx()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrSx()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrSx()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 11).GetStrSy()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrSy()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrSy()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 11).GetStrT()   + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrT()   + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrT()   + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 11).GetStrDuv() + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrDuv() + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrDuv() + "\n");
+	
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + 
+		m_dOmd.At(Dark, Pn25, 16).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrLv()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 16).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrSx()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 16).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrSy()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 16).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrT()   + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 16).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrDuv() + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25, 18).GetStrLv()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrLv()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25, 18).GetStrSx()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrSx()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25, 18).GetStrSy()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrSy()  + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25, 18).GetStrT()   + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrT()   + "\t\t\t\t" +
+        m_dOmd.At(Dark, Pn25, 18).GetStrDuv() + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrDuv() + "\n");
+	
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + 
+		m_dOmd.At(Dark, Pn25, 14).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrLv()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 14).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrSx()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 14).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrSy()  + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 14).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrT()   + "\t\t" +
+		m_dOmd.At(Dark, Pn25, 14).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrDuv() + "\n");
+    
+
+	//////////////////////////////////////////////////////////////////////////
 
     m_dTxt.push_back("\t\t\t\t\t\t49點均齊度\tL\t\t\t\t\t\t\t49點均齊度\tx\t\t\t\t\t\t\t49點均齊度\ty\t\t\t\t\t\t\t49點均齊度\tT\t\t\t\t\t\t\t49點均齊度\tduv\n");
     
@@ -238,8 +283,6 @@ void COmdFile1::TxtToOmd()
     m_dOmd.At(White, Pn9, 7).SetLv( GetCell('I', 10) );
     m_dOmd.At(White, Pn9, 8).SetLv( GetCell('J', 10) );
 
-	//m_dOmd.At(Red  , Pn9, 0).SetSx( 0.666);
-
     m_dOmd.At(White, Pn9, 0).SetSx( GetCell('N', 8) );
     m_dOmd.At(White, Pn9, 1).SetSx( GetCell('O', 8) );
     m_dOmd.At(White, Pn9, 2).SetSx( GetCell('P', 8) );
@@ -331,7 +374,154 @@ void COmdFile1::TxtToOmd()
     m_dOmd.At(Dark, Pn9, 7).SetDuv( GetCell("AG", 15) );
     m_dOmd.At(Dark, Pn9, 8).SetDuv( GetCell("AH", 15) );
 
-    //49點
+	//Cross Talk
+    m_dOmd.At(CrsTlk, Pn4, 0).SetDuv( GetCell("I", 18) );
+    m_dOmd.At(CrsTlk, Pn4, 1).SetDuv( GetCell("H", 19) );
+    m_dOmd.At(CrsTlk, Pn4, 2).SetDuv( GetCell("J", 19) );
+    m_dOmd.At(CrsTlk, Pn4, 3).SetDuv( GetCell("I", 20) );
+	
+    m_dOmd.At(CrsTlkW, Pn4, 0).SetDuv( GetCell("O", 18) );
+    m_dOmd.At(CrsTlkW, Pn4, 1).SetDuv( GetCell("N", 19) );
+    m_dOmd.At(CrsTlkW, Pn4, 2).SetDuv( GetCell("P", 19) );
+    m_dOmd.At(CrsTlkW, Pn4, 3).SetDuv( GetCell("O", 20) );
+	
+    m_dOmd.At(CrsTlkD, Pn4, 0).SetDuv( GetCell("U", 18) );
+    m_dOmd.At(CrsTlkD, Pn4, 1).SetDuv( GetCell("T", 19) );
+    m_dOmd.At(CrsTlkD, Pn4, 2).SetDuv( GetCell("V", 19) );
+    m_dOmd.At(CrsTlkD, Pn4, 3).SetDuv( GetCell("U", 20) );
+	
+	//25點
+    m_dOmd.At(Dark, Pn25,  0).SetLv( GetCell('H', 26) );
+    m_dOmd.At(Dark, Pn25,  1).SetLv( GetCell('J', 26) );
+    m_dOmd.At(Dark, Pn25,  2).SetLv( GetCell('H', 28) );
+    m_dOmd.At(Dark, Pn25,  3).SetLv( GetCell('J', 28) );
+    m_dOmd.At(Dark, Pn25,  4).SetLv( GetCell('I', 27) );
+    m_dOmd.At(Dark, Pn25,  5).SetLv( GetCell('K', 26) );
+    m_dOmd.At(Dark, Pn25,  6).SetLv( GetCell('N', 26) );
+    m_dOmd.At(Dark, Pn25,  7).SetLv( GetCell('L', 26) );
+    m_dOmd.At(Dark, Pn25,  8).SetLv( GetCell('N', 28) );
+    m_dOmd.At(Dark, Pn25,  9).SetLv( GetCell('L', 28) );
+    m_dOmd.At(Dark, Pn25, 10).SetLv( GetCell('M', 27) );
+    m_dOmd.At(Dark, Pn25, 11).SetLv( GetCell('H', 29) );
+    m_dOmd.At(Dark, Pn25, 12).SetLv( GetCell('K', 29) );
+    m_dOmd.At(Dark, Pn25, 13).SetLv( GetCell('N', 29) );
+    m_dOmd.At(Dark, Pn25, 14).SetLv( GetCell('H', 32) );
+    m_dOmd.At(Dark, Pn25, 15).SetLv( GetCell('J', 32) );
+    m_dOmd.At(Dark, Pn25, 16).SetLv( GetCell('H', 30) );
+    m_dOmd.At(Dark, Pn25, 17).SetLv( GetCell('J', 30) );
+    m_dOmd.At(Dark, Pn25, 18).SetLv( GetCell('I', 31) );
+    m_dOmd.At(Dark, Pn25, 19).SetLv( GetCell('K', 32) );
+    m_dOmd.At(Dark, Pn25, 20).SetLv( GetCell('N', 32) );
+    m_dOmd.At(Dark, Pn25, 21).SetLv( GetCell('L', 32) );
+    m_dOmd.At(Dark, Pn25, 22).SetLv( GetCell('N', 30) );
+    m_dOmd.At(Dark, Pn25, 23).SetLv( GetCell('L', 30) );
+    m_dOmd.At(Dark, Pn25, 24).SetLv( GetCell('M', 31) );
+
+    m_dOmd.At(Dark, Pn25,  0).SetSx( GetCell('P', 26) );
+    m_dOmd.At(Dark, Pn25,  1).SetSx( GetCell('R', 26) );
+    m_dOmd.At(Dark, Pn25,  2).SetSx( GetCell('P', 28) );
+    m_dOmd.At(Dark, Pn25,  3).SetSx( GetCell('R', 28) );
+    m_dOmd.At(Dark, Pn25,  4).SetSx( GetCell('Q', 27) );
+    m_dOmd.At(Dark, Pn25,  5).SetSx( GetCell('S', 26) );
+    m_dOmd.At(Dark, Pn25,  6).SetSx( GetCell('V', 26) );
+    m_dOmd.At(Dark, Pn25,  7).SetSx( GetCell('T', 26) );
+    m_dOmd.At(Dark, Pn25,  8).SetSx( GetCell('V', 28) );
+    m_dOmd.At(Dark, Pn25,  9).SetSx( GetCell('T', 28) );
+    m_dOmd.At(Dark, Pn25, 10).SetSx( GetCell('U', 27) );
+    m_dOmd.At(Dark, Pn25, 11).SetSx( GetCell('P', 29) );
+    m_dOmd.At(Dark, Pn25, 12).SetSx( GetCell('S', 29) );
+    m_dOmd.At(Dark, Pn25, 13).SetSx( GetCell('V', 29) );
+    m_dOmd.At(Dark, Pn25, 14).SetSx( GetCell('P', 32) );
+    m_dOmd.At(Dark, Pn25, 15).SetSx( GetCell('R', 32) );
+    m_dOmd.At(Dark, Pn25, 16).SetSx( GetCell('P', 30) );
+    m_dOmd.At(Dark, Pn25, 17).SetSx( GetCell('R', 30) );
+    m_dOmd.At(Dark, Pn25, 18).SetSx( GetCell('Q', 31) );
+    m_dOmd.At(Dark, Pn25, 19).SetSx( GetCell('S', 32) );
+    m_dOmd.At(Dark, Pn25, 20).SetSx( GetCell('V', 32) );
+    m_dOmd.At(Dark, Pn25, 21).SetSx( GetCell('T', 32) );
+    m_dOmd.At(Dark, Pn25, 22).SetSx( GetCell('V', 30) );
+    m_dOmd.At(Dark, Pn25, 23).SetSx( GetCell('T', 30) );
+    m_dOmd.At(Dark, Pn25, 24).SetSx( GetCell('U', 31) );
+
+    m_dOmd.At(Dark, Pn25,  0).SetSy( GetCell('X' , 26) );
+    m_dOmd.At(Dark, Pn25,  1).SetSy( GetCell('Z' , 26) );
+    m_dOmd.At(Dark, Pn25,  2).SetSy( GetCell('X' , 28) );
+    m_dOmd.At(Dark, Pn25,  3).SetSy( GetCell('Z' , 28) );
+    m_dOmd.At(Dark, Pn25,  4).SetSy( GetCell('Y' , 27) );
+    m_dOmd.At(Dark, Pn25,  5).SetSy( GetCell("AA", 26) );
+    m_dOmd.At(Dark, Pn25,  6).SetSy( GetCell("AD", 26) );
+    m_dOmd.At(Dark, Pn25,  7).SetSy( GetCell("AB", 26) );
+    m_dOmd.At(Dark, Pn25,  8).SetSy( GetCell("AD", 28) );
+    m_dOmd.At(Dark, Pn25,  9).SetSy( GetCell("AB", 28) );
+    m_dOmd.At(Dark, Pn25, 10).SetSy( GetCell("AC", 27) );
+    m_dOmd.At(Dark, Pn25, 11).SetSy( GetCell('X' , 29) );
+    m_dOmd.At(Dark, Pn25, 12).SetSy( GetCell("AA", 29) );
+    m_dOmd.At(Dark, Pn25, 13).SetSy( GetCell("AD", 29) );
+    m_dOmd.At(Dark, Pn25, 14).SetSy( GetCell('X' , 32) );
+    m_dOmd.At(Dark, Pn25, 15).SetSy( GetCell('Z' , 32) );
+    m_dOmd.At(Dark, Pn25, 16).SetSy( GetCell('X' , 30) );
+    m_dOmd.At(Dark, Pn25, 17).SetSy( GetCell('Z' , 30) );
+    m_dOmd.At(Dark, Pn25, 18).SetSy( GetCell('Y' , 31) );
+    m_dOmd.At(Dark, Pn25, 19).SetSy( GetCell("AA", 32) );
+    m_dOmd.At(Dark, Pn25, 20).SetSy( GetCell("AD", 32) );
+    m_dOmd.At(Dark, Pn25, 21).SetSy( GetCell("AB", 32) );
+    m_dOmd.At(Dark, Pn25, 22).SetSy( GetCell("AD", 30) );
+    m_dOmd.At(Dark, Pn25, 23).SetSy( GetCell("AB", 30) );
+    m_dOmd.At(Dark, Pn25, 24).SetSy( GetCell("AC", 31) );
+    
+	m_dOmd.At(Dark, Pn25,  0).SetT( GetCell("AF", 26) );
+    m_dOmd.At(Dark, Pn25,  1).SetT( GetCell("AH", 26) );
+    m_dOmd.At(Dark, Pn25,  2).SetT( GetCell("AF", 28) );
+    m_dOmd.At(Dark, Pn25,  3).SetT( GetCell("AH", 28) );
+    m_dOmd.At(Dark, Pn25,  4).SetT( GetCell("AG", 27) );
+    m_dOmd.At(Dark, Pn25,  5).SetT( GetCell("AI", 26) );
+    m_dOmd.At(Dark, Pn25,  6).SetT( GetCell("AL", 26) );
+    m_dOmd.At(Dark, Pn25,  7).SetT( GetCell("AJ", 26) );
+    m_dOmd.At(Dark, Pn25,  8).SetT( GetCell("AL", 28) );
+    m_dOmd.At(Dark, Pn25,  9).SetT( GetCell("AJ", 28) );
+    m_dOmd.At(Dark, Pn25, 10).SetT( GetCell("AK", 27) );
+    m_dOmd.At(Dark, Pn25, 11).SetT( GetCell("AF", 29) );
+    m_dOmd.At(Dark, Pn25, 12).SetT( GetCell("AI", 29) );
+    m_dOmd.At(Dark, Pn25, 13).SetT( GetCell("AL", 29) );
+    m_dOmd.At(Dark, Pn25, 14).SetT( GetCell("AF", 32) );
+    m_dOmd.At(Dark, Pn25, 15).SetT( GetCell("AH", 32) );
+    m_dOmd.At(Dark, Pn25, 16).SetT( GetCell("AF", 30) );
+    m_dOmd.At(Dark, Pn25, 17).SetT( GetCell("AH", 30) );
+    m_dOmd.At(Dark, Pn25, 18).SetT( GetCell("AG", 31) );
+    m_dOmd.At(Dark, Pn25, 19).SetT( GetCell("AI", 32) );
+    m_dOmd.At(Dark, Pn25, 20).SetT( GetCell("AL", 32) );
+    m_dOmd.At(Dark, Pn25, 21).SetT( GetCell("AJ", 32) );
+    m_dOmd.At(Dark, Pn25, 22).SetT( GetCell("AL", 30) );
+    m_dOmd.At(Dark, Pn25, 23).SetT( GetCell("AJ", 30) );
+    m_dOmd.At(Dark, Pn25, 24).SetT( GetCell("AK", 31) );
+
+    m_dOmd.At(Dark, Pn25,  0).SetDuv( GetCell("AN", 26) );
+    m_dOmd.At(Dark, Pn25,  1).SetDuv( GetCell("AP", 26) );
+    m_dOmd.At(Dark, Pn25,  2).SetDuv( GetCell("AN", 28) );
+    m_dOmd.At(Dark, Pn25,  3).SetDuv( GetCell("AP", 28) );
+    m_dOmd.At(Dark, Pn25,  4).SetDuv( GetCell("AO", 27) );
+    m_dOmd.At(Dark, Pn25,  5).SetDuv( GetCell("AQ", 26) );
+    m_dOmd.At(Dark, Pn25,  6).SetDuv( GetCell("AT", 26) );
+    m_dOmd.At(Dark, Pn25,  7).SetDuv( GetCell("AR", 26) );
+    m_dOmd.At(Dark, Pn25,  8).SetDuv( GetCell("AT", 28) );
+    m_dOmd.At(Dark, Pn25,  9).SetDuv( GetCell("AR", 28) );
+    m_dOmd.At(Dark, Pn25, 10).SetDuv( GetCell("AS", 27) );
+    m_dOmd.At(Dark, Pn25, 11).SetDuv( GetCell("AN", 29) );
+    m_dOmd.At(Dark, Pn25, 12).SetDuv( GetCell("AQ", 29) );
+    m_dOmd.At(Dark, Pn25, 13).SetDuv( GetCell("AT", 29) );
+    m_dOmd.At(Dark, Pn25, 14).SetDuv( GetCell("AN", 32) );
+    m_dOmd.At(Dark, Pn25, 15).SetDuv( GetCell("AP", 32) );
+    m_dOmd.At(Dark, Pn25, 16).SetDuv( GetCell("AN", 30) );
+    m_dOmd.At(Dark, Pn25, 17).SetDuv( GetCell("AP", 30) );
+    m_dOmd.At(Dark, Pn25, 18).SetDuv( GetCell("AO", 31) );
+    m_dOmd.At(Dark, Pn25, 19).SetDuv( GetCell("AQ", 32) );
+    m_dOmd.At(Dark, Pn25, 20).SetDuv( GetCell("AT", 32) );
+    m_dOmd.At(Dark, Pn25, 21).SetDuv( GetCell("AR", 32) );
+    m_dOmd.At(Dark, Pn25, 22).SetDuv( GetCell("AT", 30) );
+    m_dOmd.At(Dark, Pn25, 23).SetDuv( GetCell("AR", 30) );
+    m_dOmd.At(Dark, Pn25, 24).SetDuv( GetCell("AS", 31) );
+    
+	//49點
     m_dOmd.At(White, Pn49,  0).SetLv( GetCell('H', 35) );
     m_dOmd.At(White, Pn49,  1).SetLv( GetCell('I', 35) );
     m_dOmd.At(White, Pn49,  2).SetLv( GetCell('J', 35) );
