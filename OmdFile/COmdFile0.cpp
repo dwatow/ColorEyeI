@@ -51,7 +51,7 @@ void COmdFile0::openWhichKindOmefile()
 	switch(omdKind)
 	{
 		case OMD_AtYPE: m_Omd = new COmdFile1(OMD_AtYPE); break;
-		case OMD_GAMMA: m_Omd = new COmdFileGm();         break;
+		case OMD_GAMMA: //m_Omd = new COmdFileGm();         break;
 		case OMD_OLD:
 		default:        m_Omd = new COmdFile1(OMD_OLD);
 	}
@@ -61,18 +61,21 @@ void COmdFile0::saveWhichKindOmefile(OmdCarData _D)
 {
 	KindOfOmd omdKind = OMD_AtYPE;
 
-	for (int i = 0; omdKind == OMD_AtYPE && i < 256; ++i)
-	{
-		if ((_D.At(White, PnGamma, i).GetMsrFlowNo() != 99) ||  //有量測 = .GetMsrFlowNo() != 99
-			(_D.At(Red  , PnGamma, i).GetMsrFlowNo() != 99) ||
-			(_D.At(Green, PnGamma, i).GetMsrFlowNo() != 99) ||
-			(_D.At(Blue , PnGamma, i).GetMsrFlowNo() != 99))
-			omdKind = OMD_GAMMA;
-	}
+// 	for (int i = 0; omdKind == OMD_AtYPE && i < 256; ++i)
+// 	{
+// 		if ((_D.At(White, PnGamma, i).GetMsrFlowNo() != 99) ||  //有量測 = .GetMsrFlowNo() != 99
+// 			(_D.At(Red  , PnGamma, i).GetMsrFlowNo() != 99) ||
+// 			(_D.At(Green, PnGamma, i).GetMsrFlowNo() != 99) ||
+// 			(_D.At(Blue , PnGamma, i).GetMsrFlowNo() != 99))
+// 		{
+// 			omdKind = OMD_GAMMA;
+// 			break;
+// 		}
+// 	}
 
 	switch(omdKind)
 	{
-	case OMD_GAMMA: m_Omd = new COmdFileGm();
+	case OMD_GAMMA: //m_Omd = new COmdFileGm();
 	default:		m_Omd = new COmdFile1(OMD_AtYPE);
 	}
 	

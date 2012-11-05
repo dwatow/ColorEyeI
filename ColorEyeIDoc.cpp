@@ -70,10 +70,7 @@ BOOL CColorEyeIDoc::OnNewDocument()
     // TODO: add reinitialization code here
     // (SDI documents will reuse this document)
     //第一次執行時會執行這個
-    SetTitle("新的Omd檔");
-    m_dOmd.Empty();          //清空記憶體空間m_OmdData
-    SetModifiedFlag(TRUE);
-    UpdateAllViews(NULL);
+	CColorEyeIDoc::OnFileNew();
     return TRUE;
 }
 
@@ -114,15 +111,17 @@ void CColorEyeIDoc::OnFileNew()
 {
     // TODO: Add your command handler code here
     //開新檔案
-    SetPathName("");    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
+	if (!GetPathName().IsEmpty())
+		SetPathName("");    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
     m_dOmd.Empty();          //清空記憶體空間m_OmdData
+
     m_PnlID.Empty();
     m_MsrDvc.Empty();
     m_Prb.Empty();
     m_CHID.Empty();
-    SetModifiedFlag(TRUE);
-
+    
+	SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);  //更新畫面
 }
 
@@ -150,6 +149,7 @@ void CColorEyeIDoc::OnFileOpen()
     // TODO: Add your command handler code here
 //    OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
     OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+	SetModifiedFlag(FALSE);
 	UpdateAllViews(NULL);
 }
 
@@ -158,6 +158,7 @@ void CColorEyeIDoc::OnFileSaveAs()
     // TODO: Add your command handler code here
 //    SaveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
     SaveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+	SetModifiedFlag(FALSE);
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::OpenTxtDlg(LPCTSTR FileFilter)
@@ -290,12 +291,14 @@ void CColorEyeIDoc::OnFileSave()
 //		SaveTxtFile(GetPathName());
 		SaveOmdFile(GetPathName());
     }
+	SetModifiedFlag(FALSE);
 }
 
 void CColorEyeIDoc::RestructureVector()
 {
     m_dOmd.CutEqualCell(m_MsrData);  //erase
     m_dOmd.AddCell(m_dOmd.End(), m_MsrData.Begin(), m_MsrData.End());  //insert
+	SetModifiedFlag(TRUE);
 }
 
 void CColorEyeIDoc::DebugByTxt(CString pathName)
