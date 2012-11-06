@@ -19,8 +19,8 @@ Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CPatternDlg
 Resource3=IDD_XMSRPOINT_DIALOG
-Resource4=IDD_MSR_ITEM
-Resource5=IDD_PATTERN_DIALOG
+Resource4=IDD_PATTERN_DIALOG
+Resource5=IDD_MSR_ITEM
 
 [CLS:CXMsrPointApp]
 Type=0
@@ -89,6 +89,10 @@ BaseClass=CDialog
 Filter=D
 LastObject=CPatternDlg
 VirtualFilter=dWC
+
+[DLG:IDD_PATTERN_DIALOG]
+Type=1
+ControlCount=0
 
 [DLG:IDD_MSR_ITEM]
 Type=1
@@ -190,8 +194,4 @@ Control94=IDC_STATIC,button,1342177287
 Control95=IDC_BUTTON_SELALL,button,1342242816
 Control96=IDC_BUTTON_SELNO,button,1342242816
 Control97=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
-
-[DLG:IDD_PATTERN_DIALOG]
-Type=1
-ControlCount=0
 

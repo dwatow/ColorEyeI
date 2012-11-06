@@ -7,6 +7,7 @@
 #include "xMsrPoint.h"
 #include "PatternDlg.h"
 #include "..\EnterValueDlg.h"
+#include "..\ReadBarCodeDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,14 +33,16 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
 
 void CPatternDlg::InitDataDlgType()
 {
+    CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
     switch(InitDataType)
     {
     case MsrForItem:
-        CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
         dlgMsrItem.SetBolt(&m_GunMchn);
         dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
+		break;
 
-        break;
+// 	default:
+// 		return FALSE;
     }
 }
 
@@ -374,6 +377,10 @@ BOOL CPatternDlg::Magazine()
 		return FALSE;  //無填彈，不用量
 	else
 	{
+		//SetPanel
+		CReadBarCodeDialog dlgReadBarCode;
+		dlgReadBarCode.DoModal();
+
 		//++BeginItor;  
 		if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
 		Trigger(m_itor);

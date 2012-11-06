@@ -22,7 +22,6 @@
 
 class CPatternDlg;
 class CCaSetupDlg;
-class CReadBarCodeDialog;
 
 class CColorEyeIApp : public CWinApp
 {

@@ -10,7 +10,6 @@
 #include "SelXls/SelExcelDlg.h"
 #include "CaSetupDlg.h"
 #include "xMsrPoint/PatternDlg.h"
-#include "ReadBarCodeDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -157,8 +156,7 @@ BOOL CColorEyeIApp::InitInstance()
 // 	SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
 //    BCFandODFPath.Format("%s",szPath);
 
-	CReadBarCodeDialog dlgbarcode;
-	dlgbarcode.DoModal();
+
 
     return TRUE;
 }
@@ -245,6 +243,8 @@ void CColorEyeIApp::OnMsrForItem()
     
 	if (m_pdlgPattern->Magazine())  //按下OK就顯示
 		m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
+	else
+		m_pdlgPattern->ShowWindow(SW_HIDE);
 }
 
 CString CColorEyeIApp::GetPathName()
