@@ -15,13 +15,13 @@ Class3=CAboutDlg
 Class4=CMsrItemsDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_PATTERN_DIALOG
+Resource1=IDD_MSRITEMS_DIALOG
 Resource2=IDR_MAINFRAME
 Resource3=IDD_ABOUTBOX
 Class5=CMsrItemDlg
 Class6=CStaticText
-Resource4=IDD_MSRITEMS_DIALOG
-Resource5=IDD_MSR_ITEM
+Resource4=IDD_MSR_ITEM
+Resource5=IDD_PATTERN_DIALOG
 
 [CLS:CMsrItemsApp]
 Type=0
@@ -108,11 +108,6 @@ HeaderFile=StaticText.h
 ImplementationFile=StaticText.cpp
 BaseClass=CStatic
 Filter=W
-
-[DLG:IDD_PATTERN_DIALOG]
-Type=1
-Class=?
-ControlCount=0
 
 [DLG:IDD_MSR_ITEM]
 Type=1
@@ -214,4 +209,8 @@ Control94=IDC_STATIC,button,1342177287
 Control95=IDC_BUTTON_SELALL,button,1342242816
 Control96=IDC_BUTTON_SELNO,button,1342242816
 Control97=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
+
+[DLG:IDD_PATTERN_DIALOG]
+Type=1
+ControlCount=0
 

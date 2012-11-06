@@ -2,31 +2,33 @@
 
 [General Info]
 Version=1
-LastClass=CEnterValueDlg
+LastClass=CReadBarCodeDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=7
+ClassCount=8
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
-ResourceCount=8
-Resource1=IDR_MAINFRAME
+ResourceCount=9
+Resource1=IDD_PATTERN_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_EDIT_DIALOG
-Resource4=IDD_OMDTOEXCEL
+Resource2=IDD_ABOUTBOX
+Resource3=IDD_OMDTOEXCEL
+Resource4=IDR_MAINFRAME
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_ABOUTBOX
-Resource7=IDD_MSR_ITEM
+Resource6=IDD_MSR_ITEM
+Resource7=IDD_EDIT_DIALOG
 Class7=CCaSetupDlg
 Resource8=IDD_CASETUP_DIALOG
+Class8=CReadBarCodeDialog
+Resource9=IDD_DIALOG_BARCODE
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -276,10 +278,11 @@ Control97=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
 [DLG:IDD_EDIT_DIALOG]
 Type=1
 Class=CEnterValueDlg
-ControlCount=3
+ControlCount=4
 Control1=IDC_EDIT_VALUE,edit,1350631552
 Control2=IDOK,button,1342242817
 Control3=IDC_STATIC_SOMETHING,static,1342308352
+Control4=IDC_STATIC,static,1342308352
 
 [CLS:CEnterValueDlg]
 Type=0
@@ -345,5 +348,22 @@ ImplementationFile=CaSetupDlg.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CCaSetupDlg
+VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_BARCODE]
+Type=1
+Class=CReadBarCodeDialog
+ControlCount=3
+Control1=IDOK,button,1342242817
+Control2=IDC_COMBO_SELNO,combobox,1344339971
+Control3=IDC_STATIC_BARCODE,static,1342308352
+
+[CLS:CReadBarCodeDialog]
+Type=0
+HeaderFile=ReadBarCodeDialog.h
+ImplementationFile=ReadBarCodeDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_COMBO_SELNO
 VirtualFilter=dWC
 

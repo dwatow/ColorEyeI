@@ -109,7 +109,7 @@ private:
     void EventGoPrvsGoal();
     BOOL EventGoNextGoal();
     void EventSwCntCa210();
-    void EventRunZeroCal();
+    //void EventRunZeroCal();
     void EventRunMsrAi(BOOL isRun = 2);
     UINT EventCatchMsrValue();
 
@@ -121,11 +121,12 @@ private:
 	void ChangeBkColor(COLORREF);
 	void FineNitsPos();
 	void FineNitsNeg();
+
+    void ConnectCa210();
 public:
     void FineNits();
 
     BOOL Magazine(); //¼u§X
-    BOOL ConnectCa210();
 
     COLORREF GetBkColor() const;
     BOOL     SetBkColor(COLORREF);

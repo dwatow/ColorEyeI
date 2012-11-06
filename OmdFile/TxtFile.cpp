@@ -4,6 +4,7 @@
 
 #include "stdAfx.h"
 #include "TxtFile.h"
+#include <shlwapi.h>
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -17,14 +18,19 @@ static char THIS_FILE[]=__FILE__;
 
 BOOL CTxtFile::Open(CString path, CFileException& fx)
 {
-    if (ftxt_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
-        return TRUE;  //成功入侵取得資料
-    else
-    { 
-        ErrorMsg(fx);
-        ftxt_Std.Close();
-        return FALSE;  //失敗
-    }
+	if (PathFileExists(path))
+	{
+		if (ftxt_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
+			return TRUE;  //成功入侵取得資料
+		else
+		{ 
+			ErrorMsg(fx);
+			ftxt_Std.Close();
+			return FALSE;  //失敗
+		}
+	}
+	else
+		return FALSE;
 }
 
 void CTxtFile::FileToMem()
@@ -66,7 +72,7 @@ void CTxtFile::ErrorMsg(CFileException& fx)
     TCHAR buf[255];
     fx.GetErrorMessage(buf, 255);
     CString strPrompt;
-    strPrompt.Format("CTxtFile\n%s", buf);
+    strPrompt.Format("CTxtFile說：「%s」", buf);
     AfxMessageBox(strPrompt);
 }
 

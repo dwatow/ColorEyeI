@@ -10,6 +10,7 @@
 #include "SelXls/SelExcelDlg.h"
 #include "CaSetupDlg.h"
 #include "xMsrPoint/PatternDlg.h"
+#include "ReadBarCodeDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -155,6 +156,9 @@ BOOL CColorEyeIApp::InitInstance()
 // 	CString szPath;
 // 	SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
 //    BCFandODFPath.Format("%s",szPath);
+
+	CReadBarCodeDialog dlgbarcode;
+	dlgbarcode.DoModal();
 
     return TRUE;
 }

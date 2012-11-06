@@ -25,17 +25,8 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
         // NOTE: the ClassWizard will add member initialization here
     //}}AFX_DATA_INIT
     
-    //ConnectCa210()
-    //pMainFrm->m_pCa210->LinkMemory();
-    //InitMsrData();
     //之間的順序要固定，不要修改了！
-    
-    if (!ConnectCa210())
-        MessageBox("CPatternDlg::CPatternDlg() ERROR!!\nOnButtonMsr的CA-210連線錯誤\n這個程式即將關閉!!");    
-
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    pMainFrm->m_pCa210->LinkMemory();
+    ConnectCa210();
     InitDataDlgType();
 }
 
@@ -396,19 +387,14 @@ BOOL CPatternDlg::Magazine()
 	}
 }
 
-BOOL CPatternDlg::ConnectCa210()
+void CPatternDlg::ConnectCa210()
 {
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     
     m_pCA210 = pMainFrm->m_pCa210;
-    if (m_pCA210 != 0)
-    {
-        m_pCA210->SetOnline(TRUE);
-        return TRUE ;
-    }
-    else
-        return FALSE;
+    m_pCA210->SetOnline(TRUE);
+	m_pCA210->LinkMemory();
 }
 
 BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
@@ -479,12 +465,12 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
     {
         switch(pMsg->wParam)
         {
-            case VK_SPACE:  EventSwCntCa210();    break;//切換連線
-            case VK_DOWN:   EventRunMsrAi();      break;//自動量測模式
-            case VK_RIGHT:  EventGoNextGoal();    break;//跳下一個點
-            case VK_LEFT:   EventGoPrvsGoal();    break;//上一個點
-            case VK_RETURN: EventCatchMsrValue(); break;//抓值抓抓抓!!!!
-            case VK_ESCAPE://跳離Patten Dialog
+            case VK_SPACE:  EventSwCntCa210();    break;//空白鍵：切換連線
+            case VK_DOWN:   EventRunMsrAi();      break;//下   ：自動量測模式
+            case VK_RIGHT:  EventGoNextGoal();    break;//右   ：跳下一個點
+            case VK_LEFT:   EventGoPrvsGoal();    break;//左   ：上一個點
+            case VK_RETURN: EventCatchMsrValue(); break;//Enter：抓值抓抓抓!!!!
+            case VK_ESCAPE:                             //ESC  ：跳離Patten Dialog
                 if(c_bRunMsrAI)
                     KillTimer(1);
                 ShowWindow(SW_HIDE);
@@ -775,16 +761,19 @@ void CPatternDlg::EventSwCntCa210()
     Invalidate();
 }
 
-void CPatternDlg::EventRunZeroCal()
-{
-//    c_bZeroCal = TRUE;
-    Invalidate();
-    UpdateWindow();
-    if (m_pCA210->CalZero() == CA_Offline)
-        MessageBox("未連線");
-//    c_bZeroCal = FALSE;
-    Invalidate();
-}
+// void CPatternDlg::EventRunZeroCal()
+// {
+// //    c_bZeroCal = TRUE;
+//     Invalidate();
+//     UpdateWindow();
+//     if (m_pCA210->CalZero() == CA_Offline)
+//         MessageBox("未連線");
+// //    c_bZeroCal = FALSE;
+//     Invalidate();
+// }
+
+//////////////////////////////////////////////////////////////////////////
+//find 5 nits
 
 void CPatternDlg::ChangeBkColor(COLORREF color)
 {

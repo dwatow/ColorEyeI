@@ -17,6 +17,7 @@
 #define IDD_SETUP_DIALOG                134
 #define IDD_CASETUP_DIALOG              134
 #define IDI_COLOREYE_MAINICON           136
+#define IDD_DIALOG_BARCODE              138
 #define IDC_BUTTON1                     1000
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_BUTTON_SELALL               1000
@@ -156,8 +157,9 @@
 #define IDC_LIST_MSRITEMS               1064
 #define IDC_CHECK_JND                   1065
 #define IDC_EDIT_JND_GRAYVALUE          1066
-#define IDC_COMBO_SEL_KIND_NITS         1067
 #define IDC_COMBO_SEL_NITS_KIND         1067
+#define IDC_COMBO_SELNO                 1068
+#define IDC_STATIC_BARCODE              1069
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771
 #define ID_MSR_CONNECTCA210             32772
@@ -177,9 +179,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        138
+#define _APS_NEXT_RESOURCE_VALUE        139
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         1068
+#define _APS_NEXT_CONTROL_VALUE         1070
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

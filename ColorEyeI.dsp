@@ -193,6 +193,10 @@ SOURCE=.\xMsrPoint\PatternDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ReadBarCodeDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SelXls\SelExcelDlg.cpp
 # End Source File
 # Begin Source File
@@ -335,6 +339,10 @@ SOURCE=.\MsrItems\MsrItemDlg.h
 # Begin Source File
 
 SOURCE=.\xMsrPoint\PatternDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ReadBarCodeDialog.h
 # End Source File
 # Begin Source File
 

@@ -17,6 +17,7 @@ class CTxtFile
 {
 	CStdioFile ftxt_Std;
 	TxtStrData dtxt_Txt;
+
 public:
     CTxtFile(){};
     virtual ~CTxtFile(){};
@@ -28,6 +29,7 @@ public:
 	void iTxtData(TxtStrData& data){ dtxt_Txt = data; MemToFile(); };
 	void oTxtData(TxtStrData& data){ FileToMem(); data = dtxt_Txt; };
 	TxtStrData oTxtData(){ FileToMem(); return dtxt_Txt; };
+
 private:
 	void FileToMem();
 	void MemToFile();
