@@ -249,7 +249,7 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
         AfxMessageBox("路徑有問題");
     else 
     {
-        m_dOmd = ft_Omd.oOmdData();
+        ft_Omd.oOmdData(m_dOmd);
 
         m_PnlID   = ft_Omd.GetPnlID();
         m_MsrDvc  = ft_Omd.GetMsrDvc();

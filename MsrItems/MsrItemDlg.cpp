@@ -238,7 +238,7 @@ void CMsrItemDlg::OnButtonAdd()
 
         pDoc->SetModifiedFlag(TRUE);
         
-        UpdateData(TRUE);
+        UpdateData(TRUE);//***
         
         //執行連到了這
         //1. CA-210已連線
@@ -271,6 +271,7 @@ void CMsrItemDlg::OnButtonAdd()
 			case 1: Pusher->SetNitsKind(NK_NEG); break;
 			}
 		}
+
         if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
 
 		//5點
@@ -326,8 +327,6 @@ void CMsrItemDlg::OnButtonAdd()
             Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
             pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
         }
-        if (ListBoxUpdate(pDoc->GetMsrDataChain()))
-            m_btnOK.EnableWindow(TRUE);
 
 		//Gamma
         if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
@@ -338,6 +337,9 @@ void CMsrItemDlg::OnButtonAdd()
 		if (m_chkCRGM.GetState())	pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
 		if (m_chkCGGM.GetState())	pDoc->GetMsrDataChain().Grow(Green, PnGamma);
 		if (m_chkCBGM.GetState())	pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
+
+		if (ListBoxUpdate(pDoc->GetMsrDataChain()))
+			m_btnOK.EnableWindow(TRUE);
     }
 }
 
@@ -698,4 +700,18 @@ void CMsrItemDlg::OnButtonSelno()
 	if (m_chkCGP1.IsWindowEnabled())        m_chkCGP1.SetCheck(FALSE);
 	if (m_chkCBP1.IsWindowEnabled())        m_chkCBP1.SetCheck(FALSE);
 	if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(FALSE);
+}
+
+void CMsrItemDlg::OnCancel() 
+{
+	// TODO: Add extra cleanup here
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	ASSERT_VALID(pMainFrm);
+	
+	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+
+	pDoc->GetMsrDataChain().Empty();
+	
+	CDialog::OnCancel();
 }

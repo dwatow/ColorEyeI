@@ -88,7 +88,7 @@ xChain::size_type CDataChain::GammaInit()
 void CDataChain::Grow(ColorType ct, PointNum pn)
 {
     Bolt* PetriDish;
-    PetriDish = new Bolt;
+    PetriDish = new Bolt();
     if (ct == CrsTlk)
     {
         xChain vCrossTalk;

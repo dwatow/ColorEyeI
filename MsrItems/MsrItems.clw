@@ -111,10 +111,12 @@ Filter=W
 
 [DLG:IDD_PATTERN_DIALOG]
 Type=1
+Class=?
 ControlCount=0
 
 [DLG:IDD_MSR_ITEM]
 Type=1
+Class=?
 ControlCount=97
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819

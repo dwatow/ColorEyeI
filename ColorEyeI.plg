@@ -6,16 +6,25 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPA1E0.tmp" with contents
+Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /i "Release" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7900.tmp" with contents
 [
 /nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
 "D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFile0.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFileGm.cpp"
+"D:\GitHub\ColorEyeI\OmdFile\COmdFilePtr.cpp"
+"D:\GitHub\ColorEyeI\DataChain.cpp"
 "D:\GitHub\ColorEyeI\MainFrm.cpp"
 "D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
 "D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\ReadBarCodeDialog.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPA1E0.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPA1E1.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP7900.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7901.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
 .\Release\Bolt.obj
@@ -33,6 +42,7 @@ shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.p
 .\Release\ColorEyeIView.obj
 .\Release\COmdFile0.obj
 .\Release\COmdFile1.obj
+.\Release\COmdFileGm.obj
 .\Release\COmdFilePtr.obj
 .\Release\DataChain.obj
 .\Release\EnterValueDlg.obj
@@ -55,16 +65,27 @@ shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.p
 .\Release\XlsSEC1.obj
 .\Release\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPA1E1.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP7901.tmp"
 <h3>Output Window</h3>
+Compiling resources...
 Compiling...
 ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+COmdFile0.cpp
+COmdFileGm.cpp
+COmdFilePtr.cpp
+DataChain.cpp
+Generating Code...
+Compiling...
 MainFrm.cpp
 MsrItemDlg.cpp
 PatternDlg.cpp
+ReadBarCodeDialog.cpp
+SelExcelDlg.cpp
 Generating Code...
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAB15.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP996D.tmp" with contents
 [
 /nologo /o"Release/ColorEyeI.bsc" 
 .\Release\StdAfx.sbr
@@ -83,6 +104,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAB15.tmp" with c
 .\Release\ColorEyeIView.sbr
 .\Release\COmdFile0.sbr
 .\Release\COmdFile1.sbr
+.\Release\COmdFileGm.sbr
 .\Release\COmdFilePtr.sbr
 .\Release\DataChain.sbr
 .\Release\EnterValueDlg.sbr
@@ -102,7 +124,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAB15.tmp" with c
 .\Release\XlsOQC2.sbr
 .\Release\XlsRA1.sbr
 .\Release\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPAB15.tmp"
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP996D.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

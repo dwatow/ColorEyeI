@@ -162,6 +162,10 @@ SOURCE=.\OmdFile\COmdFile1.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\OmdFile\COmdFileGm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\OmdFile\COmdFilePtr.cpp
 # End Source File
 # Begin Source File
@@ -304,6 +308,10 @@ SOURCE=.\OmdFile\COmdFile0.h
 # Begin Source File
 
 SOURCE=.\OmdFile\COmdFile1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OmdFile\COmdFileGm.h
 # End Source File
 # Begin Source File
 

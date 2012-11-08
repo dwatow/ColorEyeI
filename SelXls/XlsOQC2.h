@@ -12,7 +12,7 @@
 
 class CXlsOQC2 : public CXlsFile2
 {
-    int m_ModuleNO;
+	int m_ModuleNO;
 public:
     void InitForm(){ SetVisible(true); }; //畫出表格的title
 	

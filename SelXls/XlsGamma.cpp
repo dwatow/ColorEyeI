@@ -16,20 +16,50 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-void CXlsGamma::InitForm()
+CXlsFile2* CXlsGamma::iCellNO(std::vector<Cartridge>::size_type ModuleNO)
 {
-
+    m_ModuleNO = ModuleNO;
+    return this;
 }
 
-CXlsFile2* CXlsGamma::iData(std::vector<Cartridge>& , std::vector<Cartridge>::size_type)
+//////////////////////////////////////////////////////////////////////////
+CXlsFile2* CXlsGamma::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type ModuleNO)
 {
+	iCellNO(ModuleNO)->iPanelID(strPanelID);
 	return this;
 }
 
-// std::vector<Cartridge> CXlsGamma::oData()
-// {
-// 	std::vector<Cartridge> a;
-// 	Cartridge x;
-// 	a.push_back(x);
-// 	return a;
-// }
+CXlsFile2* CXlsGamma::iData(CDataChain&, std::vector<Cartridge>::size_type ModuleNO)
+{
+	iCellNO(ModuleNO)->iData(m_vCar);
+	return this;
+}
+
+//////////////////////////////////////////////////////////////////////////
+CXlsFile2* CXlsGamma::iPanelID(CString strPanelID)
+{
+	SelectSheet(1)->SelectCell('E'+13*m_ModuleNO, '2', 'F'+13*m_ModuleNO, '2')->SetCell(strPanelID);
+	return this;
+}
+
+CXlsFile2* CXlsGamma::iData(CDataChain& vCar)
+{
+//Step 4.開始設定內容
+//-----------------------------------------------------------------------------------------------
+//       表格字填完！下面是填入資料！請準備陣列！
+//-----------------------------------------------------------------------------------------------
+//填入資料
+	m_vCar = vCar;
+    int i = 0;
+
+    //Gamma
+	SelectSheet(1);
+    for(i = 0; i < PnGamma; ++i)
+	{
+		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.At(White, PnGamma, i).GetLv());
+		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSx());
+        SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSy());
+	}
+	
+    return this;
+}

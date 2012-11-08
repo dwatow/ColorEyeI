@@ -123,6 +123,7 @@ protected:
 	virtual void OnOK();
 	afx_msg void OnButtonSelall();
 	afx_msg void OnButtonSelno();
+	virtual void OnCancel();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
     // Generated OLE dispatch map functions

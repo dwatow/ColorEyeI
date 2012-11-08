@@ -105,6 +105,7 @@ void CReadBarCodeDialog::OnOK()
 	
 	CString pnlId;
 	m_stcBarCode.GetWindowText(pnlId);
+	pnlId.TrimRight();
 	pDoc->SetPnlID(pnlId);
 
 	CDialog::OnOK();

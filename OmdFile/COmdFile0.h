@@ -19,6 +19,7 @@ class COmdFile0
 {
 //Diff of Txt file
 	COmdFilePtr *m_Omd;
+	COmdFilePtr *m_GmOmd;
 	TxtStrData m_dTxt;
 
 public:
@@ -27,21 +28,21 @@ public:
     CString GetPrb   () const { return m_Omd->GetPrb   (); };
     CString GetCHID  () const { return m_Omd->GetCHID  (); };
 	
-	void SetPnlID  (CString& _S) { m_Omd->SetPnlID  (_S); };
-	void SetMsrDvc (CString& _S) { m_Omd->SetMsrDvc (_S); };
-    void SetPrb    (CString& _S) { m_Omd->SetPrb    (_S); };
-    void SetCHID   (CString& _S) { m_Omd->SetCHID   (_S); };
+	void SetPnlID  (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPnlID(_S);  m_Omd->SetPnlID  (_S); };
+	void SetMsrDvc (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetMsrDvc(_S); m_Omd->SetMsrDvc (_S); };
+    void SetPrb    (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPrb(_S);    m_Omd->SetPrb    (_S); };
+    void SetCHID   (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetCHID(_S);   m_Omd->SetCHID   (_S); };
 public:
-	COmdFile0():m_Omd(0){};
-	virtual ~COmdFile0(){ delete m_Omd; };
+	COmdFile0():m_Omd(0), m_GmOmd(0){};
+	virtual ~COmdFile0() { delete m_Omd; };
     BOOL Open(CString _S, CFileException& _Fx);
     BOOL Save(CString _S, CFileException& _Fx, OmdCarData _D);
     
-	void Close(){ m_Omd->Close(); };
+	void Close(){ if (m_GmOmd != 0) m_GmOmd->Close();   m_Omd->Close(); };
 
-	void iOmdData(OmdCarData& data){ m_Omd->iOmdData(data); };
+	void iOmdData(OmdCarData& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
 	void oOmdData(OmdCarData& data){ m_Omd->oOmdData(data); };
-	OmdCarData oOmdData(){ return m_Omd->oOmdData(); };
+//	OmdCarData oOmdData(){ return m_Omd->oOmdData(); };
 
 private:
 	void openWhichKindOmefile();

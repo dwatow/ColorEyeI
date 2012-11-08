@@ -12,10 +12,21 @@
 
 class CXlsGamma : public CXlsFile2
 {
+	int m_ModuleNO;
 public:
-	void InitForm(); //畫出表格的title
-	CXlsFile2* iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type = 0);
-//	std::vector<Cartridge> oData();
+	void InitForm(){ SetVisible(true); }; //畫出表格的title
+	CXlsFile2* iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type = 0){ return this; };
+    CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
+	
+    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type);
+    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type){ return this; };
+    CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type){ return this; };
+    CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type);
+	
+    CXlsFile2* iPanelID(CString     );
+    CXlsFile2* iProb   (CString     ){ return this; };
+    CXlsFile2* iChannel(CString     ){ return this; };
+    CXlsFile2* iData   (CDataChain& );
 
     CXlsFile2* operator->() { return this; };
 };

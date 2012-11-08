@@ -50,7 +50,7 @@ public:
     CString  GetMsrFlowName()     const;
     COLORREF GetBkColor()         const;
     CPoint   GetPointPosition()   const;
-    int     GetRadius()          const;
+    int      GetRadius()          const;
 
     float    GetNitsSpec(){ return m_fNits; }
 

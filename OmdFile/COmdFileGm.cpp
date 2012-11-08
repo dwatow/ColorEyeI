@@ -22,25 +22,23 @@ void COmdFileGm::OmdToTxt()
 //	int n(0);
 	CString nlv;
 
-    m_dTxt.push_back("Panel ID\t"           + m_PnlID  + "Gamma curve\tL\t\t\tx\t\t\ty\t\t\tT\tduv\n");
-	m_dTxt.push_back("Measurement device\t" + m_MsrDvc + "Level\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tWhite\n");
-	m_dTxt.push_back("Probe\t"              + m_Prb    + "0" + m_dOmd.At(White, PnGamma, 0).GetStrLv() + m_dOmd.At(Red  , PnGamma, 0).GetStrLv() + m_dOmd.At(Blue , PnGamma, 0).GetStrLv() + m_dOmd.At(Green, PnGamma, 0).GetStrLv() + m_dOmd.At(White, PnGamma, 0).GetStrSx() + m_dOmd.At(Red  , PnGamma, 0).GetStrSx() + m_dOmd.At(Blue , PnGamma, 0).GetStrSx() + m_dOmd.At(Green, PnGamma, 0).GetStrSx() + m_dOmd.At(White, PnGamma, 0).GetStrSy() + m_dOmd.At(Red  , PnGamma, 0).GetStrSy() + m_dOmd.At(Blue , PnGamma, 0).GetStrSy() + m_dOmd.At(Green, PnGamma, 0).GetStrSy() + m_dOmd.At(White, PnGamma, 0).GetStrT() + m_dOmd.At(White, PnGamma, 0).GetStrDuv() + "\n");
-	m_dTxt.push_back("CH\t"                 + m_CHID   + "1" + m_dOmd.At(White, PnGamma, 1).GetStrLv() + m_dOmd.At(Red  , PnGamma, 1).GetStrLv() + m_dOmd.At(Blue , PnGamma, 1).GetStrLv() + m_dOmd.At(Green, PnGamma, 1).GetStrLv() + m_dOmd.At(White, PnGamma, 1).GetStrSx() + m_dOmd.At(Red  , PnGamma, 1).GetStrSx() + m_dOmd.At(Blue , PnGamma, 1).GetStrSx() + m_dOmd.At(Green, PnGamma, 1).GetStrSx() + m_dOmd.At(White, PnGamma, 1).GetStrSy() + m_dOmd.At(Red  , PnGamma, 1).GetStrSy() + m_dOmd.At(Blue , PnGamma, 1).GetStrSy() + m_dOmd.At(Green, PnGamma, 1).GetStrSy() + m_dOmd.At(White, PnGamma, 1).GetStrT() + m_dOmd.At(White, PnGamma, 1).GetStrDuv() + "\n");
+    m_dTxt.push_back("Panel ID\t"           + m_PnlID  + "\tGamma curve\tL\t\t\t\tx\t\t\t\ty\t\t\t\tT\tduv\n");
+	m_dTxt.push_back("Measurement device\t" + m_MsrDvc + "\tLevel\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tWhite\n");
+	m_dTxt.push_back("Probe\t"              + m_Prb    + "\t0\t" + m_dOmd.At(White, PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrDuv() + "\n");
+	m_dTxt.push_back("CH\t"                 + m_CHID   + "\t1\t" + m_dOmd.At(White, PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrDuv() + "\n");
 	for (int n = 2; n < PnGamma; ++n)
 	{
 		nlv.Format("%d", n);
-		m_dTxt.push_back("\t\t"                        + nlv + m_dOmd.At(White, PnGamma, n).GetStrLv() + m_dOmd.At(Red  , PnGamma, n).GetStrLv() + m_dOmd.At(Blue , PnGamma, n).GetStrLv() + m_dOmd.At(Green, PnGamma, n).GetStrLv() + m_dOmd.At(White, PnGamma, n).GetStrSx() + m_dOmd.At(Red  , PnGamma, n).GetStrSx() + m_dOmd.At(Blue , PnGamma, n).GetStrSx() + m_dOmd.At(Green, PnGamma, n).GetStrSx() + m_dOmd.At(White, PnGamma, n).GetStrSy() + m_dOmd.At(Red  , PnGamma, n).GetStrSy() + m_dOmd.At(Blue , PnGamma, n).GetStrSy() + m_dOmd.At(Green, PnGamma, n).GetStrSy() + m_dOmd.At(White, PnGamma, n).GetStrT() + m_dOmd.At(White, PnGamma, n).GetStrDuv() + "\n");
-
+		m_dTxt.push_back("\t\t"                        + nlv + "\t" + m_dOmd.At(White, PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrDuv() + "\n");
 	}
 
     m_fTxt.iTxtData(m_dTxt);
 
-//	m_dTxt.clear();
 }
 
 void COmdFileGm::TxtToOmd()
 {
-	m_dOmd.StdInit();
+	m_dOmd.GammaInit();
 	m_fTxt.oTxtData(m_dTxt);
 
 //ÀÉÀY
