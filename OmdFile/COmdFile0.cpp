@@ -55,7 +55,7 @@ void COmdFile0::openWhichKindOmefile()
 	KindOfOmd omdKind;
 	if (m_dTxt.at(0).Find(':') != -1)
 		omdKind = OMD_OLD;
-	if (m_dTxt.at(0).Find("Gamma") != -1)
+	else if (m_dTxt.at(0).Find("Gamma") != -1)
 		omdKind = OMD_GAMMA;
 	else
 		omdKind = OMD_AtYPE;

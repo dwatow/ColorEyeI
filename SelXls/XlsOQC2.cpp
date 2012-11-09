@@ -46,15 +46,19 @@ CXlsFile2* CXlsOQC2::iData(CDataChain& vCar)
 {
 	m_vCar = vCar;
 
-	idW9();
-//	idW1();
-	idR1();
-	idG1();
-    idB1();
-    idD1();
-	idNits();
-   	idD25();
-//	idW5();
+	//礚舼
+	if (Msred(Red  , Pn1))  idR1();
+	if (Msred(Green, Pn1))  idG1();
+    if (Msred(Blue , Pn1))  idB1();
+	if (Msred(Nits , Pn9))  idNits();
+
+	//舼
+   	if (Msred(Dark , Pn25)) idD25();
+    if (Msred(Dark , Pn1))  idD1();
+
+	if (Msred(White, Pn9))  idW9();
+	if (Msred(White, Pn5))  idW5();
+	if (Msred(White, Pn1))  idW1();
 	SetVisible(true);
     return this;
 }
@@ -62,7 +66,7 @@ CXlsFile2* CXlsOQC2::iData(CDataChain& vCar)
 void CXlsOQC2::idW9()
 {
 	SelectSheet(1);
-    int i = 0;
+    int i(0);
     //W9(Lv)(1~8)
     for(i = 0; i < 8; ++i)
 	{
@@ -73,13 +77,34 @@ void CXlsOQC2::idW9()
 	SelectCell("AA", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn9, 8).GetSx());
 	SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn9, 8).GetSx());
 	SelectCell("AC", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, 8).GetLv());
+	
+	//单フ︹いみ
+	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
+	SelectCell("AD", 5+m_ModuleNO)->SetCell("=P5");
+
+	//单禟娩フ︹翴
+	CString str;
+	str.Format("=\'%s\'!O%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('O', 5)->SetCell(str);
+	str.Format("=\'%s\'!P%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('P', 5)->SetCell(str);
+	str.Format("=\'%s\'!Q%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('Q', 5)->SetCell(str);
 }
 
 void CXlsOQC2::idW1()
 {
-	SelectSheet(1);
-//     SelectCell('L', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
-//     SelectCell('M', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+    SelectSheet(1);
+	SelectCell('O', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+	SelectCell('P', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+	SelectCell('Q', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
+
+	//单フ︹いみ
+	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
+	SelectCell("AD", 5+m_ModuleNO)->SetCell("=P5");
+
+	//单禟娩フ︹翴
+	CString str;
+	str.Format("=\'%s\'!O%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('O', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!P%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('P', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!Q%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('Q', 5+m_ModuleNO)->SetCell(str);
 }
 
 void CXlsOQC2::idR1()
@@ -104,6 +129,7 @@ void CXlsOQC2::idB1()
     SelectCell("AL", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Blue, Pn1, 0).GetLv());
     SelectCell("AM", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Blue, Pn1, 0).GetSx());
     SelectCell("AN", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Blue, Pn1, 0).GetSy());
+
 }
 
 void CXlsOQC2::idD1()
@@ -113,10 +139,12 @@ void CXlsOQC2::idD1()
     SelectCell("AP", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn1, 0).GetSx());
     SelectCell("AQ", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn1, 0).GetSy());
 	
-	SelectSheet(2);
-
-    SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn1, 0).GetSx());
-    SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn1, 0).GetSy());
+	//单D25
+	CString str;
+	str.Format("=\'%s\'!AO%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(2)->SelectCell('R', 5+m_ModuleNO)->SetCell(str);
+	                                                            SelectSheet(2)->SelectCell('C', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!AP%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(2)->SelectCell('D', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!AQ%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(2)->SelectCell('E', 5+m_ModuleNO)->SetCell(str);
 }
 
 void CXlsOQC2::idNits()
@@ -139,29 +167,40 @@ void CXlsOQC2::idD25()
 	
     for(i=0;i<4;++i)
         SelectCell('A',(char)('A'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i+21).GetLv());
+
+	SelectCell('C', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, 12).GetLv());
+	SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn25, 12).GetSx());
+	SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn25, 12).GetSy());
+
+	//单D1
+	CString str;
+	str.Format("=\'%s\'!C%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AO", 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!D%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AP", 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!E%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AQ", 5+m_ModuleNO)->SetCell(str);
 }
 
 void CXlsOQC2::idW5()
 {
     SelectSheet(3);
     //W5(Lv,x,y)
-    SelectCell('C', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 0).GetLv());
-    SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSx());
-    SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSy());
+    SelectCell('C',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 0).GetLv());
+    SelectCell('D',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSx());
+    SelectCell('E',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSy());
     //W5(Lv)
-    SelectCell('F', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 1).GetLv());
-    SelectCell('G', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSx());
-    SelectCell('H', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSy());
+    SelectCell('I',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 1).GetLv());
+    SelectCell('J',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSx());
+    SelectCell('K',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSy());
     
-    SelectCell('I', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 2).GetLv());
-    SelectCell('J', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSx());
-    SelectCell('K', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSy());
+    SelectCell('O',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 2).GetLv());
+    SelectCell('P',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSx());
+    SelectCell('Q',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSy());
     
-    SelectCell('L', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 3).GetLv());
-    SelectCell('M', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSx());
-    SelectCell('N', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSy());
+    SelectCell('U',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 3).GetLv());
+    SelectCell('V',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSx());
+    SelectCell('W',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSy());
 
-    SelectCell('O', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 4).GetLv());
-    SelectCell('P', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSx());
-    SelectCell('Q', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSy());
+    SelectCell("AA", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 4).GetLv());
+    SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSx());
+    SelectCell("AC", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSy());
 }
+

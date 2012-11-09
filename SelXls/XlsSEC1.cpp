@@ -281,6 +281,19 @@ CXlsFile2* CXlsSEC1::iData (CDataChain& vCar   , std::vector<Cartridge>::size_ty
     return this;
 }
 
+CXlsFile2* CXlsSEC1::iPanelID   (CString strProb    , std::vector<Cartridge>::size_type box_count)
+{    
+	iCellNO(box_count)->iPanelID(strProb);
+	return this;
+}
+
+CXlsFile2* CXlsSEC1::iPanelID(CString strPanelID)
+{
+	SelectSheet(1);
+	SelectCell("C2", "I2")->SetCell(strPanelID);
+	return this;
+}
+
 CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 {
 
@@ -290,15 +303,24 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 //-----------------------------------------------------------------------------------------------
     m_vCar = vCar;
 
-    idW1();
-    idR1();
-    idG1();
-    idB1();    
-    idW49();
-    idD9();
-    idNits();
+	//ぃ舼
+	if (Msred(Red  , Pn1 )) idR1();
+	if (Msred(Green, Pn1 )) idG1();
+    if (Msred(Blue , Pn1 )) idB1();
+	if (Msred(Nits , Pn9))  idNits();
 
-    idCrosTalk();
+	//舼
+	if (Msred(White, Pn1 )) idW1();
+	if (Msred(White, Pn9))  idW9();
+    if (Msred(White, Pn49)) idW49();
+
+    if (Msred(Dark , Pn9))  idD9();
+	if (Msred(Dark , Pn1))  idD1();
+
+    if ((Msred(CrsTlk , Pn4)) ||
+		(Msred(CrsTlkW, Pn4)) ||
+		(Msred(CrsTlkD, Pn4)) )  idCrosTalk();
+
 	SetVisible(true);
 
     return this;
@@ -317,6 +339,16 @@ void CXlsSEC1::idW1()
     SelectCell("D10")->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
     SelectCell("E10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
     SelectCell("F10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+
+	//单W49
+	SelectSheet(1)->SelectCell("F17")->SetCell("=D10");
+
+	//单W9
+	SelectCell("C34")->SetCell("=D10");
+	SelectCell("D34")->SetCell("=E10");
+	SelectCell("E34")->SetCell("=F10");
+	SelectCell("F34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetT()  );
+	SelectCell("G34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetDuv());
 }
 
 void CXlsSEC1::idR1()
@@ -351,6 +383,68 @@ void CXlsSEC1::idW49()
 	for(j=0;j<7;j++){//
 		SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
     }}
+
+	//单W9
+	//Lv
+	SelectCell("C30")->SetCell("=D15");
+	SelectCell("C31")->SetCell("=F15");
+	SelectCell("C32")->SetCell("=H15");
+	SelectCell("C33")->SetCell("=D15");
+	SelectCell("C34")->SetCell("=D15");
+	SelectCell("C35")->SetCell("=D15");
+	SelectCell("C36")->SetCell("=D15");
+	SelectCell("C37")->SetCell("=D15");
+	SelectCell("C38")->SetCell("=D15");
+
+	//Sx
+	SelectCell("D30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSx());
+	SelectCell("D31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSx());
+	SelectCell("D32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSx());
+	SelectCell("D33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSx());
+	SelectCell("D34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSx());
+	SelectCell("D35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSx());
+	SelectCell("D36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSx());
+	SelectCell("D37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSx());
+	SelectCell("D38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSx());
+
+	//Sy
+	SelectCell("E30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSy());
+	SelectCell("E31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSy());
+	SelectCell("E32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSy());
+	SelectCell("E33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSy());
+	SelectCell("E34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSy());
+	SelectCell("E35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSy());
+	SelectCell("E36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSy());
+	SelectCell("E37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSy());
+	SelectCell("E38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSy());
+
+	//T
+	SelectCell("F30")->SetCell("%3d", m_vCar.At(White, Pn49,  8).GetT());
+	SelectCell("F31")->SetCell("%3d", m_vCar.At(White, Pn49, 10).GetT());
+	SelectCell("F32")->SetCell("%3d", m_vCar.At(White, Pn49, 12).GetT());
+	SelectCell("F33")->SetCell("%3d", m_vCar.At(White, Pn49, 22).GetT());
+	SelectCell("F34")->SetCell("%3d", m_vCar.At(White, Pn49, 24).GetT());
+	SelectCell("F35")->SetCell("%3d", m_vCar.At(White, Pn49, 26).GetT());
+	SelectCell("F36")->SetCell("%3d", m_vCar.At(White, Pn49, 36).GetT());
+	SelectCell("F37")->SetCell("%3d", m_vCar.At(White, Pn49, 38).GetT());
+	SelectCell("F38")->SetCell("%3d", m_vCar.At(White, Pn49, 40).GetT());
+	
+	//Duv
+	SelectCell("G30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetDuv());
+	SelectCell("G31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetDuv());
+	SelectCell("G32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetDuv());
+	SelectCell("G33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetDuv());
+	SelectCell("G34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetDuv());
+	SelectCell("G35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetDuv());
+	SelectCell("G36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetDuv());
+	SelectCell("G37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetDuv());
+	SelectCell("G38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetDuv());
+	
+	//单W1
+	SelectCell("D10")->SetCell("=C34");
+	SelectCell("F10")->SetCell("=D34");
+	SelectCell("H10")->SetCell("=E34");
+
 }
 
 void CXlsSEC1::idW9()
@@ -359,12 +453,29 @@ void CXlsSEC1::idW9()
 	int i, j;
 	for(i=0;i<5;i++){
 	for(j=0;j<9;j++){
-		if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
-			else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
-			else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
-			else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
-			else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
+			 if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+		else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
+		else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
+		else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
+		else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
     }}
+
+	//单W1
+	SelectCell("D10")->SetCell("=C34");
+	SelectCell("F10")->SetCell("=D34");
+	SelectCell("H10")->SetCell("=E34");
+
+	//单W49
+	SelectCell("D15")->SetCell("=C30");
+	SelectCell("F15")->SetCell("=C31");
+	SelectCell("H15")->SetCell("=C32");
+	SelectCell("D17")->SetCell("=C33");
+	SelectCell("F17")->SetCell("=C34");
+	SelectCell("H17")->SetCell("=C35");
+	SelectCell("D19")->SetCell("=C36");
+	SelectCell("F19")->SetCell("=C37");
+	SelectCell("H19")->SetCell("=C38");
+
 }
 void CXlsSEC1::idD9()
 {
@@ -405,4 +516,10 @@ void CXlsSEC1::idCrosTalk()
 	SelectCell("B11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
 	SelectCell("D11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
 	SelectCell("C12")->SetCell(m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
+}
+
+void CXlsSEC1::idD1()
+{
+	SelectSheet(1);
+	SelectCell("D27")->SetCell("%3.2f", m_vCar.At(Dark, Pn1, 0).GetLv());
 }

@@ -137,9 +137,6 @@ public:
         UINT     GetGoalRadius() const;
         BOOL     SetGoalRadius(UINT );
 
-        COLORREF GetGoalBkColor() const;
-        BOOL     SetGoalBkColor(COLORREF);
-
         COLORREF GetGoalColor() const;
         BOOL     SetGoalColor(COLORREF);
 };

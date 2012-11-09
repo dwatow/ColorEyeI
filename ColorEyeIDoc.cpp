@@ -62,18 +62,6 @@ CColorEyeIDoc::~CColorEyeIDoc()
     AfxOleUnlockApp();
 }
 
-BOOL CColorEyeIDoc::OnNewDocument()
-{
-    if (!CDocument::OnNewDocument())
-        return FALSE;
-
-    // TODO: add reinitialization code here
-    // (SDI documents will reuse this document)
-    //第一次執行時會執行這個
-	CColorEyeIDoc::OnFileNew();
-    return TRUE;
-}
-
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc serialization
 
@@ -111,8 +99,8 @@ void CColorEyeIDoc::OnFileNew()
 {
     // TODO: Add your command handler code here
     //開新檔案
-	if (!GetPathName().IsEmpty())
-		SetPathName("");    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
+//	if (!GetPathName().IsEmpty())
+	CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
     m_dOmd.Empty();          //清空記憶體空間m_OmdData
 
@@ -123,6 +111,18 @@ void CColorEyeIDoc::OnFileNew()
     
 	SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);  //更新畫面
+}
+
+BOOL CColorEyeIDoc::OnNewDocument()
+{
+    if (!CDocument::OnNewDocument())
+        return FALSE;
+	
+    // TODO: add reinitialization code here
+    // (SDI documents will reuse this document)
+    //第一次執行時會執行這個
+	CColorEyeIDoc::OnFileNew();
+    return TRUE;
 }
 
 BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName) 

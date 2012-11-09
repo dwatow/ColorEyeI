@@ -15,6 +15,13 @@
 class CXlsFile2 : public xlsFile
 {
 protected:
+	BOOL Msred(ColorType clr, PointNum pn)
+	{
+		BOOL _notmsr(FALSE);
+		for (int i =0; i < pn; ++i)
+			_notmsr = m_vCar.At(clr, pn, i).GetBullet().isEmpty(); //量過就是非空的
+		return !_notmsr;
+	}
 	CDataChain m_vCar;
 public:
 	virtual void       InitForm() = 0;

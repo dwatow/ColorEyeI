@@ -17,7 +17,7 @@ class CXlsSEC1 : public CXlsFile2
 	void idR1();
 	void idG1();
 	void idB1();
-//	void idD1();
+	void idD1();
 	void idW9();
 	void idW49();
 	void idD9();
@@ -31,12 +31,12 @@ public:
     CXlsFile2* iCellNO(std::vector<Cartridge>::size_type){ return this;};
     
     CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type ){ return this;};
-    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type ){ return this;};
+    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type );
     CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type ){ return this;};
 	CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type );
     
     CXlsFile2* iChannel(CString     ){ return this;};
-    CXlsFile2* iPanelID(CString     ){ return this;};
+    CXlsFile2* iPanelID(CString     );
     CXlsFile2* iProb   (CString     ){ return this;};
     CXlsFile2* iData   (CDataChain&);
     
