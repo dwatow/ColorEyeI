@@ -24,7 +24,7 @@ class CXlsOQC2 : public CXlsFile2
 	void idW5();
 
 public:
-    void InitForm(){ SetVisible(true); }; //畫出表格的title
+    void InitForm(){  }; //畫出表格的title
 	
     CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
 

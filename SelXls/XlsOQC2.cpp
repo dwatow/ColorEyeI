@@ -55,6 +55,7 @@ CXlsFile2* CXlsOQC2::iData(CDataChain& vCar)
 	idNits();
    	idD25();
 //	idW5();
+	SetVisible(true);
     return this;
 }
 

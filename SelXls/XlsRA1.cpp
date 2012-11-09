@@ -76,15 +76,13 @@ void CXlsRA1::InitForm()
     SelectCell('A', (char)('A'+cell_count), 3, 'A', (char)('A'+cell_count), 4)->SetMergeCells()->SetCellColor(40)->SetCellBorder(1, 3)->SetCell("Max");cell_count++;
     SelectCell('A', (char)('A'+cell_count), 3, 'A', (char)('A'+cell_count), 4)->SetMergeCells()->SetCellColor(40)->SetCellBorder(1, 3)->SetCell("Min");cell_count++;
     SelectCell('A', (char)('A'+cell_count), 3, 'A', (char)('A'+cell_count), 4)->SetMergeCells()->SetCellColor(40)->SetCellBorder(1, 3)->SetCell("Spec");cell_count++;
-
-    SetVisible(true);
 }
 
 CXlsFile2* CXlsRA1::iCellNO(std::vector<Cartridge>::size_type box_count)
 {    
-	m_CellNO = box_count;    
-	SelectCell('A', 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_CellNO+1);    
-	return this;
+    m_CellNO = box_count;    
+    SelectCell('A', 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_CellNO+1);    
+    return this;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -93,18 +91,6 @@ CXlsFile2* CXlsRA1::iChannel(CString strCHID    , std::vector<Cartridge>::size_t
 CXlsFile2* CXlsRA1::iProb   (CString strProb    , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count)->iProb(strProb);        return this;}
 CXlsFile2* CXlsRA1::iData   (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count){    iCellNO(box_count)->iData(vCar);           return this;}
 
-    //SelectCell('B', 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strPanelID);    //GetPanelID
-//         SelectCell(CellHarBeg+cell_count++, CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->Gettime());    //Gettime
-//         SelectCell(CellHarBeg+cell_count++, CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count).GetSampleName());    //GetSampleName
-//         SelectCell(CellHarBeg+cell_count++, CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetMsrItemProg());    //GetMsrItemProg
-
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetCA210Probe());    //GetCA210Probe
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetAvgLv());    //GetAvgLv
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetMedianLv());    //GetMedianLv
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetMaxLv());    //GetMaxLv
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count)->GetMinLv());    //GetMinLv
-//         SelectCell('A', (char)('A'+cell_count++), CellVerBeg+box_count)->SetCellBorder(1, 3)->SetCell(m_vCar.At(box_count).GetSpec());    //GetSpec
-
 //////////////////////////////////////////////////////////////////////////
 CXlsFile2* CXlsRA1::iPanelID(CString strPanelID) { SelectCell('B' , 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strPanelID);   return this;}
 CXlsFile2* CXlsRA1::iChannel(CString strCHID)    { SelectCell("AG", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strCHID);      return this;}
@@ -112,13 +98,35 @@ CXlsFile2* CXlsRA1::iProb(CString striProb)      { SelectCell("AH", 5+m_CellNO)-
 
 CXlsFile2* CXlsRA1::iData(CDataChain& vCar)
 {
-    //Step 4->開始設定內容
-    //-----------------------------------------------------------------------------------------------
-    //              表格字填完！下面是填入資料！請準備陣列！
-    //-----------------------------------------------------------------------------------------------
     m_vCar = vCar;
     
+    idW9();
+    idAvg();
+    idMedian();
+    idMax();
+    idMin();
+
 	SelectSheet(1);
+    SelectCell("A", 5, "AM", 5+m_CellNO)->SetCellBorder(1, 3)->SetHorztlAlgmet(HA_CENTER);    //設定對齊方式
+    SelectCell("A1","AM1")->AutoFitWidth();    //最適欄寬
+	SetVisible(true);
+
+//    SelectCell("A", 5, "AM", 5+m_CellNO)->Sort("B5",1,"C5",1);    //排序
+//    SelectCell("A1","E3")->InsertImage(CurrentPath, 141, 40);    //貼Logo
+    return this;
+}
+
+// std::vector<Cartridge> CXlsRA1::oData()
+// {
+//     std::vector<Cartridge> a;
+//     Cartridge x;
+//     a->push_back(x);
+//     return a;
+// }
+
+void CXlsRA1::idW9()
+{
+    SelectSheet(1);
 
     SelectCell('F'+0,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 0).GetSx());
     SelectCell('F'+1,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 0).GetSy());
@@ -156,35 +164,40 @@ CXlsFile2* CXlsRA1::iData(CDataChain& vCar)
     SelectCell('A', 'A'+3, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetSx());
     SelectCell('A', 'A'+4, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetSy());
     SelectCell('A', 'A'+5, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetLv());
-    
-	CString strTemp;
-	strTemp.Format("=SUM(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)/9",\
-		5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
-    SelectCell("AI", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp);  //Avg
-
-	strTemp.Format("=T%d", 5+m_CellNO);
-    SelectCell("AJ", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Median
-
-	strTemp.Format("=MAX(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)",\
-		5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
-	SelectCell("AK", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Max
-
-	strTemp.Format("=MIN(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)",\
-		5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
-    SelectCell("AL", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Min
-
-
-    SelectCell("A", 5, "AM", 5+m_CellNO)->SetCellBorder(1, 3)->SetHorztlAlgmet(HA_CENTER);    //設定對齊方式
-    SelectCell("A1","AM1")->AutoFitWidth();    //最適欄寬
-//    SelectCell("A", 5, "AM", 5+m_CellNO)->Sort("B5",1,"C5",1);    //排序
-//    SelectCell("A1","E3")->InsertImage(CurrentPath, 141, 40);    //貼Logo
-    return this;
 }
 
-// std::vector<Cartridge> CXlsRA1::oData()
-// {
-//     std::vector<Cartridge> a;
-//     Cartridge x;
-//     a->push_back(x);
-//     return a;
-// }
+void CXlsRA1::idAvg()
+{
+    SelectSheet(1);
+    CString strTemp;
+    strTemp.Format("=SUM(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)/9",\
+        5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
+    SelectCell("AI", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp);  //Avg
+}
+
+void CXlsRA1::idMedian()
+{
+    SelectSheet(1);
+    CString strTemp;
+    strTemp.Format("=T%d", 5+m_CellNO);
+    SelectCell("AJ", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Median
+}
+
+void CXlsRA1::idMax()
+{
+    SelectSheet(1);
+    CString strTemp;
+    strTemp.Format("=MAX(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)",\
+        5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
+    SelectCell("AK", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Max
+}
+
+void CXlsRA1::idMin()
+{
+    SelectSheet(1);
+    CString strTemp;
+    strTemp.Format("=MIN(AF%d,AC%d,Z%d,W%d,T%d,Q%d,N%d,K%d,H%d)",\
+        5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO, 5+m_CellNO);
+    SelectCell("AL", 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(strTemp); //Min
+}
+

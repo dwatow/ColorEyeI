@@ -272,7 +272,6 @@ void CXlsSEC1::InitForm()
 
 	SelectCell("H8", "K12")->SetCellBorder(1, 4, 1);
 
-    SetVisible(true);
 }
 
 CXlsFile2* CXlsSEC1::iData (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count)
@@ -291,13 +290,6 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 //-----------------------------------------------------------------------------------------------
     m_vCar = vCar;
 
-//     CString str;
-//     str.Format("%3.2f, %1.4f, %1.4f", m_vCar.At(White, Pn1, 0).GetLv(), m_vCar.At(White, Pn1, 0).GetSx(), m_vCar.At(White, Pn1, 0).GetSy());
-//     AfxMessageBox(str);
-// 
-//     str.Format("%3.2f, %1.4f, %1.4f", vCar.At(White, Pn1, 0).GetLv(), vCar.At(White, Pn1, 0).GetSx(), vCar.At(White, Pn1, 0).GetSy());
-//     AfxMessageBox(str);
-
     idW1();
     idR1();
     idG1();
@@ -307,6 +299,8 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     idNits();
 
     idCrosTalk();
+	SetVisible(true);
+
     return this;
 }
 

@@ -46,6 +46,7 @@ CXlsFile2* CXlsGamma::iData(CDataChain& vCar)
 {
 	m_vCar = vCar;
     idGamma();	
+	SetVisible(true);
     return this;
 }
 

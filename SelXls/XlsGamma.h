@@ -16,7 +16,7 @@ class CXlsGamma : public CXlsFile2
 
 	void idGamma();
 public:
-	void InitForm(){ SetVisible(true); }; //畫出表格的title
+	void InitForm(){ }; //畫出表格的title
 	CXlsFile2* iData(std::vector<Cartridge>&, std::vector<Cartridge>::size_type = 0){ return this; };
     CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
 	

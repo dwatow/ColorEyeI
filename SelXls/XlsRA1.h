@@ -13,6 +13,12 @@
 class CXlsRA1 : public CXlsFile2
 {
   int m_CellNO;
+  void idW9();
+  void idAvg();
+  void idMedian();
+  void idMax();
+  void idMin();
+
 public:
   void InitForm();
   //    std::vector<Cartridge> oData();
