@@ -44,22 +44,19 @@ CXlsFile2* CXlsGamma::iPanelID(CString strPanelID)
 
 CXlsFile2* CXlsGamma::iData(CDataChain& vCar)
 {
-//Step 4.開始設定內容
-//-----------------------------------------------------------------------------------------------
-//       表格字填完！下面是填入資料！請準備陣列！
-//-----------------------------------------------------------------------------------------------
-//填入資料
 	m_vCar = vCar;
-    int i = 0;
+    idGamma();	
+    return this;
+}
 
-    //Gamma
+void CXlsGamma::idGamma()
+{
 	SelectSheet(1);
+	int i(0);
     for(i = 0; i < PnGamma; ++i)
 	{
 		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.At(White, PnGamma, i).GetLv());
 		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSx());
         SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSy());
 	}
-	
-    return this;
 }

@@ -13,6 +13,16 @@
 class CXlsOQC2 : public CXlsFile2
 {
 	int m_ModuleNO;
+	void idW9();
+	void idW1();
+	void idR1();
+	void idG1();
+	void idB1();
+	void idD1();
+	void idNits();
+	void idD25();
+	void idW5();
+
 public:
     void InitForm(){ SetVisible(true); }; //畫出表格的title
 	

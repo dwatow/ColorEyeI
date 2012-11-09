@@ -22,7 +22,7 @@ void CXlsSEC1::InitForm()
 
     for(i=1;i<47;i++)
     {
-        if(    (i>= 5)&&(i < 8) || 
+        if( (i>= 5)&&(i < 8) || 
             (i>= 9)&&(i <13) || 
             (i>=15)&&(i <18) || 
             (i==19)||(i==21) ||
@@ -45,8 +45,7 @@ void CXlsSEC1::InitForm()
             SelectCell((char)('A'+j), 1)->SetCellWidth((float)24.63);
         else 
             SelectCell((char)('A'+j), 1)->SetCellWidth((float)8.38);
-    }
-    
+    }    
     
     for(i=2;i<47;i++)
     {
@@ -291,8 +290,6 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 //           表格字填完！下面是填入資料！請準備陣列！
 //-----------------------------------------------------------------------------------------------
     m_vCar = vCar;
-    SelectSheet(1);
-    int i, j;
 
 //     CString str;
 //     str.Format("%3.2f, %1.4f, %1.4f", m_vCar.At(White, Pn1, 0).GetLv(), m_vCar.At(White, Pn1, 0).GetSx(), m_vCar.At(White, Pn1, 0).GetSy());
@@ -301,69 +298,15 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 //     str.Format("%3.2f, %1.4f, %1.4f", vCar.At(White, Pn1, 0).GetLv(), vCar.At(White, Pn1, 0).GetSx(), vCar.At(White, Pn1, 0).GetSy());
 //     AfxMessageBox(str);
 
-    SelectCell("D10")->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
-    SelectCell("E10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
-    SelectCell("F10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
-    
-    SelectCell("D11")->SetCell("%3.2f", m_vCar.At(Red  , Pn1, 0).GetLv());
-    SelectCell("E11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSx());
-    SelectCell("F11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSy());
-    
-    SelectCell("D12")->SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
-    SelectCell("E12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
-    SelectCell("F12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
-    
-    SelectCell("D13")->SetCell("%3.2f", m_vCar.At(Blue , Pn1, 0).GetLv());
-    SelectCell("E13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSx());
-    SelectCell("F13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSy());
-    
-    
-    //w,49點亮度值
-    for(i=0;i<7;i++){//橫的
-    for(j=0;j<7;j++){//直的
-        SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
-    }}
-    //白色 9點全部值
-    for(i=0;i<5;i++){
-    for(j=0;j<9;j++){
-             if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
-        else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
-        else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
-        else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
-        else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
-    }}
-    //黑色 9點全部值（四角漏光）
-    for(i=0;i<3;i++){
-    for(j=0;j<3;j++){
-            SelectCell((char)('C'+j), 26+i)->SetCell("%3.2f", m_vCar.At(Dark , Pn9, i*3+j).GetLv());
-    }}
-    
-    //5nits 
-    for(i=0;i<3;i++){
-    for(j=0;j<3;j++){
-            SelectCell((char)('C'+j), 23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
-    }}
+    idW1();
+    idR1();
+    idG1();
+    idB1();    
+    idW49();
+    idD9();
+    idNits();
 
-	SelectSheet(2);
-
-	//灰色方塊
-	SelectCell("C2")->SetCell(vCar.At(CrsTlk, Pn4, 0).GetLv());
-	SelectCell("B3")->SetCell(vCar.At(CrsTlk, Pn4, 1).GetLv());
-	SelectCell("D3")->SetCell(vCar.At(CrsTlk, Pn4, 2).GetLv());
-	SelectCell("C4")->SetCell(vCar.At(CrsTlk, Pn4, 3).GetLv());
-
-	SelectCell("C6")->SetCell(vCar.At(CrsTlkW, Pn4, 0).GetLv());
-	SelectCell("B7")->SetCell(vCar.At(CrsTlkW, Pn4, 1).GetLv());
-	SelectCell("D7")->SetCell(vCar.At(CrsTlkW, Pn4, 2).GetLv());
-	SelectCell("C8")->SetCell(vCar.At(CrsTlkW, Pn4, 3).GetLv());
-
-	SelectCell("C10")->SetCell(vCar.At(CrsTlkD, Pn4, 0).GetLv());
-	SelectCell("B11")->SetCell(vCar.At(CrsTlkD, Pn4, 1).GetLv());
-	SelectCell("D11")->SetCell(vCar.At(CrsTlkD, Pn4, 2).GetLv());
-	SelectCell("C12")->SetCell(vCar.At(CrsTlkD, Pn4, 3).GetLv());
-
-//    SetVisible(TRUE);
-    
+    idCrosTalk();
     return this;
 }
 
@@ -373,3 +316,99 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
 //     //...
 //     return a;
 // }
+
+void CXlsSEC1::idW1()
+{
+	SelectSheet(1);
+    SelectCell("D10")->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
+    SelectCell("E10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+    SelectCell("F10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+}
+
+void CXlsSEC1::idR1()
+{
+	SelectSheet(1);
+    SelectCell("D11")->SetCell("%3.2f", m_vCar.At(Red  , Pn1, 0).GetLv());
+    SelectCell("E11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSx());
+    SelectCell("F11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSy());
+}
+
+void CXlsSEC1::idG1()
+{
+	SelectSheet(1);
+    SelectCell("D12")->SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
+    SelectCell("E12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
+    SelectCell("F12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
+}
+
+void CXlsSEC1::idB1()
+{
+	SelectSheet(1);
+    SelectCell("D13")->SetCell("%3.2f", m_vCar.At(Blue , Pn1, 0).GetLv());
+    SelectCell("E13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSx());
+    SelectCell("F13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSy());
+}
+
+void CXlsSEC1::idW49()
+{
+	SelectSheet(1);
+	int i, j;
+    for(i=0;i<7;i++){//橫的
+	for(j=0;j<7;j++){//直的
+		SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
+    }}
+}
+
+void CXlsSEC1::idW9()
+{
+	SelectSheet(1);
+	int i, j;
+	for(i=0;i<5;i++){
+	for(j=0;j<9;j++){
+		if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+			else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
+			else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
+			else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
+			else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
+    }}
+}
+void CXlsSEC1::idD9()
+{
+	SelectSheet(1);
+	int i, j;
+    for(i=0;i<3;i++){
+	for(j=0;j<3;j++){
+        SelectCell((char)('C'+j), 26+i)->SetCell("%3.2f", m_vCar.At(Dark , Pn9, i*3+j).GetLv());
+    }}
+}
+
+void CXlsSEC1::idNits()
+{
+	SelectSheet(1);
+	int i, j;
+    for(i=0;i<3;i++){
+	for(j=0;j<3;j++){
+        SelectCell((char)('C'+j), 23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
+    }}
+}
+
+void CXlsSEC1::idCrosTalk()
+{
+	SelectSheet(2);
+	
+	//灰色方塊
+	SelectCell("C2")->SetCell(m_vCar.At(CrsTlk, Pn4, 0).GetLv());
+	SelectCell("B3")->SetCell(m_vCar.At(CrsTlk, Pn4, 1).GetLv());
+	SelectCell("D3")->SetCell(m_vCar.At(CrsTlk, Pn4, 2).GetLv());
+	SelectCell("C4")->SetCell(m_vCar.At(CrsTlk, Pn4, 3).GetLv());
+	
+	SelectCell("C6")->SetCell(m_vCar.At(CrsTlkW, Pn4, 0).GetLv());
+	SelectCell("B7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 1).GetLv());
+	SelectCell("D7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 2).GetLv());
+	SelectCell("C8")->SetCell(m_vCar.At(CrsTlkW, Pn4, 3).GetLv());
+	
+	SelectCell("C10")->SetCell(m_vCar.At(CrsTlkD, Pn4, 0).GetLv());
+	SelectCell("B11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
+	SelectCell("D11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
+	SelectCell("C12")->SetCell(m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
+}

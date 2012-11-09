@@ -13,6 +13,17 @@
 
 class CXlsSEC1 : public CXlsFile2
 {
+	void idW1();
+	void idR1();
+	void idG1();
+	void idB1();
+//	void idD1();
+	void idW9();
+	void idW49();
+	void idD9();
+	void idNits();
+
+	void idCrosTalk();
 public:
     void InitForm(); //畫出表格的title
 //    std::vector<Cartridge> oData();
