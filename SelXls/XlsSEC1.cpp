@@ -389,12 +389,12 @@ void CXlsSEC1::idW49()
 	SelectCell("C30")->SetCell("=D15");
 	SelectCell("C31")->SetCell("=F15");
 	SelectCell("C32")->SetCell("=H15");
-	SelectCell("C33")->SetCell("=D15");
-	SelectCell("C34")->SetCell("=D15");
-	SelectCell("C35")->SetCell("=D15");
-	SelectCell("C36")->SetCell("=D15");
-	SelectCell("C37")->SetCell("=D15");
-	SelectCell("C38")->SetCell("=D15");
+	SelectCell("C33")->SetCell("=D17");
+	SelectCell("C34")->SetCell("=F17");
+	SelectCell("C35")->SetCell("=H17");
+	SelectCell("C36")->SetCell("=D19");
+	SelectCell("C37")->SetCell("=F19");
+	SelectCell("C38")->SetCell("=H19");
 
 	//Sx
 	SelectCell("D30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSx());

@@ -38,9 +38,12 @@ float Bullet::GetX()   const { return m_fX;}    CString Bullet::GetStrX()   cons
 float Bullet::GetY()   const { return m_fY;}    CString Bullet::GetStrY()   const { return m_strY;  }
 float Bullet::GetZ()   const { return m_fZ;}    CString Bullet::GetStrZ()   const { return m_strZ;  }
 ////////////////////////////////////////
-BOOL Bullet::SetSx  (float  x ){ if (x>0 && x<0.8) { m_fSx  =   x; m_strSx .Format(_T("%f"), m_fSx ); return TRUE; } else return FALSE; }
-BOOL Bullet::SetSy  (float  y ){ if (y>0 && y<0.9) { m_fSy  =   y; m_strSy .Format(_T("%f"), m_fSy ); return TRUE; } else return FALSE; }
-BOOL Bullet::SetLv  (float  L ){ if (L>=0)         { m_fLv  =   L; m_strLv .Format(_T("%f"), m_fLv ); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetSx  (float  x ){ if (x>0 && x<0.8) { m_fSx  =   x; m_strSx .Format(_T("%f"), m_fSx ); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetSy  (float  y ){ if (y>0 && y<0.9) { m_fSy  =   y; m_strSy .Format(_T("%f"), m_fSy ); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetLv  (float  L ){ if (L>=0)         { m_fLv  =   L; m_strLv .Format(_T("%f"), m_fLv ); return TRUE; } else return FALSE; }
+BOOL Bullet::SetSx  (float  x ){                     m_fSx  =   x; m_strSx .Format(_T("%f"), m_fSx ); return TRUE;                      }
+BOOL Bullet::SetSy  (float  y ){                     m_fSy  =   y; m_strSy .Format(_T("%f"), m_fSy ); return TRUE;                      }
+BOOL Bullet::SetLv  (float  L ){                     m_fLv  =   L; m_strLv .Format(_T("%f"), m_fLv ); return TRUE;                      }
 BOOL Bullet::SetT   (long   T ){                     m_lT   =   T; m_strT  .Format(_T("%d"), m_lT  ); return TRUE;                      }
 BOOL Bullet::SetDuv (float Duv){                     m_fDuv = Duv; m_strDuv.Format(_T("%f"), m_fDuv); return TRUE;                      }
 BOOL Bullet::SetDu  (float Du ){                     m_fDu  = Du ; m_strDu .Format(_T("%f"), m_fDu ); return TRUE;                      }
@@ -49,9 +52,12 @@ BOOL Bullet::SetX   (float X  ){                     m_fX   = X  ; m_strX  .Form
 BOOL Bullet::SetY   (float Y  ){                     m_fY   = Y  ; m_strY  .Format(_T("%f"), m_fY)  ; return TRUE;                      }
 BOOL Bullet::SetZ   (float Z  ){                     m_fZ   = Z  ; m_strZ  .Format(_T("%f"), m_fZ)  ; return TRUE;                      }
 ////////////////////////////////////////
-BOOL Bullet::SetSx  (CString   x){ if (atof(x) > 0 && atof(x) < 0.8) { m_strSx  =   x; m_fSx  = (float)atof(  x); return TRUE; } else return FALSE; }
-BOOL Bullet::SetSy  (CString   y){ if (atof(y) > 0 && atof(y) < 0.9) { m_strSy  =   y; m_fSy  = (float)atof(  y); return TRUE; } else return FALSE; }
-BOOL Bullet::SetLv  (CString   L){ if (atof(L) >=0)                  { m_strLv  =   L; m_fLv  = (float)atof(  L); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetSx  (CString   x){ if (atof(x) > 0 && atof(x) < 0.8) { m_strSx  =   x; m_fSx  = (float)atof(  x); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetSy  (CString   y){ if (atof(y) > 0 && atof(y) < 0.9) { m_strSy  =   y; m_fSy  = (float)atof(  y); return TRUE; } else return FALSE; }
+// BOOL Bullet::SetLv  (CString   L){ if (atof(L) >=0)                  { m_strLv  =   L; m_fLv  = (float)atof(  L); return TRUE; } else return FALSE; }
+BOOL Bullet::SetSx  (CString   x){                                     m_strSx  =   x; m_fSx  = (float)atof(  x); return TRUE;                      }
+BOOL Bullet::SetSy  (CString   y){                                     m_strSy  =   y; m_fSy  = (float)atof(  y); return TRUE;                      }
+BOOL Bullet::SetLv  (CString   L){                                     m_strLv  =   L; m_fLv  = (float)atof(  L); return TRUE;                      }
 BOOL Bullet::SetT   (CString   T){                                     m_strT   =   T; m_lT   = (long )atol(  T); return TRUE;                      }
 BOOL Bullet::SetDuv (CString Duv){                                     m_strDuv = Duv; m_fDuv = (float)atof(Duv); return TRUE;                      }
 BOOL Bullet::SetDu  (CString  Du){                                     m_strDu  =  Du; m_fDu  = (float)atof( Du); return TRUE;                      }

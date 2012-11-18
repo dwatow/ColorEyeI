@@ -75,12 +75,12 @@ void CXlsOQC2::idW9()
         SelectCell((char)('C'+i*3+2), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, i).GetLv());
 	}
 	SelectCell("AA", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn9, 8).GetSx());
-	SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn9, 8).GetSx());
+	SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn9, 8).GetSy());
 	SelectCell("AC", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, 8).GetLv());
 	
 	//单フ︹いみ
 	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
-	SelectCell("AD", 5+m_ModuleNO)->SetCell("=P5");
+	SelectCell("AE", 5+m_ModuleNO)->SetCell("=P5");
 
 	//单禟娩フ︹翴
 	CString str;
@@ -98,7 +98,7 @@ void CXlsOQC2::idW1()
 
 	//单フ︹いみ
 	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
-	SelectCell("AD", 5+m_ModuleNO)->SetCell("=P5");
+	SelectCell("AE", 5+m_ModuleNO)->SetCell("=P5");
 
 	//单禟娩フ︹翴
 	CString str;
