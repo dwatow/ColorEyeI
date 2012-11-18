@@ -242,7 +242,10 @@ void CColorEyeIApp::OnMsrForItem()
 		AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
     
 	if (m_pdlgPattern->Magazine())  //按下OK就顯示
+	{
 		m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
+		m_pdlgPattern->SetFocus();
+	}
 	else
 		m_pdlgPattern->ShowWindow(SW_HIDE);
 }

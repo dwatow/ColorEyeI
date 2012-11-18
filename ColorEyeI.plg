@@ -3,101 +3,101 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: ColorEyeI - Win32 Release--------------------
+--------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP3C00.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5C5C.tmp" with contents
 [
-/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+/nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "D:\GitHub\ColorEyeI\MainFrm.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP3C00.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP3C01.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP5C5C.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5C5D.tmp" with contents
 [
-shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
-.\Release\Bolt.obj
-.\Release\Bullet.obj
-.\Release\ca200srvr.obj
-.\Release\CA210.obj
-.\Release\CA210real.obj
-.\Release\Ca210sim.obj
-.\Release\Cartridge.obj
-.\Release\CaSetupDlg.obj
-.\Release\Circle.obj
-.\Release\CircleArc.obj
-.\Release\ColorEyeI.obj
-.\Release\ColorEyeIDoc.obj
-.\Release\ColorEyeIView.obj
-.\Release\COmdFile0.obj
-.\Release\COmdFile1.obj
-.\Release\COmdFileGm.obj
-.\Release\COmdFilePtr.obj
-.\Release\DataChain.obj
-.\Release\EnterValueDlg.obj
-.\Release\excel.obj
-.\Release\FileDlg.obj
-.\Release\MainFrm.obj
-.\Release\MsrItemDlg.obj
-.\Release\PatternDlg.obj
-.\Release\ReadBarCodeDialog.obj
-.\Release\SelExcelDlg.obj
-.\Release\StaticText.obj
-.\Release\StdAfx.obj
-.\Release\Table.obj
-.\Release\TxtFile.obj
-.\Release\xlef.obj
-.\Release\XlsGamma.obj
-.\Release\XlsOQC1.obj
-.\Release\XlsOQC2.obj
-.\Release\XlsRA1.obj
-.\Release\XlsSEC1.obj
-.\Release\ColorEyeI.res
+shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
+.\Debug\Bolt.obj
+.\Debug\Bullet.obj
+.\Debug\ca200srvr.obj
+.\Debug\CA210.obj
+.\Debug\CA210real.obj
+.\Debug\Ca210sim.obj
+.\Debug\Cartridge.obj
+.\Debug\CaSetupDlg.obj
+.\Debug\Circle.obj
+.\Debug\CircleArc.obj
+.\Debug\ColorEyeI.obj
+.\Debug\ColorEyeIDoc.obj
+.\Debug\ColorEyeIView.obj
+.\Debug\COmdFile0.obj
+.\Debug\COmdFile1.obj
+.\Debug\COmdFileGm.obj
+.\Debug\COmdFilePtr.obj
+.\Debug\DataChain.obj
+.\Debug\EnterValueDlg.obj
+.\Debug\excel.obj
+.\Debug\FileDlg.obj
+.\Debug\MainFrm.obj
+.\Debug\MsrItemDlg.obj
+.\Debug\PatternDlg.obj
+.\Debug\ReadBarCodeDialog.obj
+.\Debug\SelExcelDlg.obj
+.\Debug\StaticText.obj
+.\Debug\StdAfx.obj
+.\Debug\Table.obj
+.\Debug\TxtFile.obj
+.\Debug\xlef.obj
+.\Debug\XlsGamma.obj
+.\Debug\XlsOQC1.obj
+.\Debug\XlsOQC2.obj
+.\Debug\XlsRA1.obj
+.\Debug\XlsSEC1.obj
+.\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP3C01.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP5C5D.tmp"
 <h3>Output Window</h3>
 Compiling...
 MainFrm.cpp
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP465E.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP6544.tmp" with contents
 [
-/nologo /o"Release/ColorEyeI.bsc" 
-.\Release\StdAfx.sbr
-.\Release\Bolt.sbr
-.\Release\Bullet.sbr
-.\Release\ca200srvr.sbr
-.\Release\CA210.sbr
-.\Release\CA210real.sbr
-.\Release\Ca210sim.sbr
-.\Release\Cartridge.sbr
-.\Release\CaSetupDlg.sbr
-.\Release\Circle.sbr
-.\Release\CircleArc.sbr
-.\Release\ColorEyeI.sbr
-.\Release\ColorEyeIDoc.sbr
-.\Release\ColorEyeIView.sbr
-.\Release\COmdFile0.sbr
-.\Release\COmdFile1.sbr
-.\Release\COmdFileGm.sbr
-.\Release\COmdFilePtr.sbr
-.\Release\DataChain.sbr
-.\Release\EnterValueDlg.sbr
-.\Release\excel.sbr
-.\Release\FileDlg.sbr
-.\Release\MainFrm.sbr
-.\Release\MsrItemDlg.sbr
-.\Release\PatternDlg.sbr
-.\Release\ReadBarCodeDialog.sbr
-.\Release\SelExcelDlg.sbr
-.\Release\StaticText.sbr
-.\Release\Table.sbr
-.\Release\TxtFile.sbr
-.\Release\xlef.sbr
-.\Release\XlsGamma.sbr
-.\Release\XlsOQC1.sbr
-.\Release\XlsOQC2.sbr
-.\Release\XlsRA1.sbr
-.\Release\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP465E.tmp"
+/nologo /o"Debug/ColorEyeI.bsc" 
+.\Debug\StdAfx.sbr
+.\Debug\Bolt.sbr
+.\Debug\Bullet.sbr
+.\Debug\ca200srvr.sbr
+.\Debug\CA210.sbr
+.\Debug\CA210real.sbr
+.\Debug\Ca210sim.sbr
+.\Debug\Cartridge.sbr
+.\Debug\CaSetupDlg.sbr
+.\Debug\Circle.sbr
+.\Debug\CircleArc.sbr
+.\Debug\ColorEyeI.sbr
+.\Debug\ColorEyeIDoc.sbr
+.\Debug\ColorEyeIView.sbr
+.\Debug\COmdFile0.sbr
+.\Debug\COmdFile1.sbr
+.\Debug\COmdFileGm.sbr
+.\Debug\COmdFilePtr.sbr
+.\Debug\DataChain.sbr
+.\Debug\EnterValueDlg.sbr
+.\Debug\excel.sbr
+.\Debug\FileDlg.sbr
+.\Debug\MainFrm.sbr
+.\Debug\MsrItemDlg.sbr
+.\Debug\PatternDlg.sbr
+.\Debug\ReadBarCodeDialog.sbr
+.\Debug\SelExcelDlg.sbr
+.\Debug\StaticText.sbr
+.\Debug\Table.sbr
+.\Debug\TxtFile.sbr
+.\Debug\xlef.sbr
+.\Debug\XlsGamma.sbr
+.\Debug\XlsOQC1.sbr
+.\Debug\XlsOQC2.sbr
+.\Debug\XlsRA1.sbr
+.\Debug\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP6544.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

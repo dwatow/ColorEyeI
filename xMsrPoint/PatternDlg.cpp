@@ -655,7 +655,11 @@ void CPatternDlg::EventGoPrvsGoal()
         Trigger(m_itor); //它會等於0，就是從最後一回返回一次        
         NextTrigger(m_itor);
         Invalidate();
-        c_bMsrValues = TRUE;
+        if (m_itor->GetBackColor() == JND || JNDX) 
+			c_bMsrValues = FALSE;
+		else
+			c_bMsrValues = TRUE;
+
 		c_bMsring = FALSE;
     }
 }
