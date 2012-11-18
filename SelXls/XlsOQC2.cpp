@@ -19,7 +19,7 @@ static char THIS_FILE[]=__FILE__;
 CXlsFile2* CXlsOQC2::iCellNO(std::vector<Cartridge>::size_type ModuleNO)
 {
     m_ModuleNO = ModuleNO;
-    SelectCell('A', 5+m_ModuleNO)->SetCell(m_ModuleNO+1);
+    //SelectCell('A', 5+m_ModuleNO)->SetCell(m_ModuleNO+1);
     return this;
 }
 
@@ -79,14 +79,14 @@ void CXlsOQC2::idW9()
 	SelectCell("AC", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn9, 8).GetLv());
 	
 	//单フ︹いみ
-	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
-	SelectCell("AE", 5+m_ModuleNO)->SetCell("=P5");
+	CString str;
+	str.Format("=O%d", 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AD", 5+m_ModuleNO)->SetCell(str);
+	str.Format("=P%d", 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AE", 5+m_ModuleNO)->SetCell(str);
 
 	//单禟娩フ︹翴
-	CString str;
-	str.Format("=\'%s\'!O%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('O', 5)->SetCell(str);
-	str.Format("=\'%s\'!P%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('P', 5)->SetCell(str);
-	str.Format("=\'%s\'!Q%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('Q', 5)->SetCell(str);
+	str.Format("=\'%s\'!O%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('O', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!P%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('P', 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!Q%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('Q', 5+m_ModuleNO)->SetCell(str);
 }
 
 void CXlsOQC2::idW1()
@@ -97,14 +97,13 @@ void CXlsOQC2::idW1()
 	SelectCell('Q', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
 
 	//单フ︹いみ
-	SelectCell("AD", 5+m_ModuleNO)->SetCell("=O5");
-	SelectCell("AE", 5+m_ModuleNO)->SetCell("=P5");
+	SelectCell("AD", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+	SelectCell("AE", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
 
 	//单禟娩フ︹翴
-	CString str;
-	str.Format("=\'%s\'!O%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('O', 5+m_ModuleNO)->SetCell(str);
-	str.Format("=\'%s\'!P%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('P', 5+m_ModuleNO)->SetCell(str);
-	str.Format("=\'%s\'!Q%d", GetSheetName(1), 5+m_ModuleNO);	SelectSheet(3)->SelectCell('Q', 5+m_ModuleNO)->SetCell(str);
+	SelectSheet(3)->SelectCell('O', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+	SelectSheet(3)->SelectCell('P', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+	SelectSheet(3)->SelectCell('Q', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
 }
 
 void CXlsOQC2::idR1()
