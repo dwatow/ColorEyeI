@@ -102,7 +102,7 @@ void COmdFile1::OmdToTxt()
 		m_dOmd.At(Dark, Pn25, 14).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrT()   + "\t\t" +
 		m_dOmd.At(Dark, Pn25, 14).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrDuv() + "\n");
     
-
+    m_dTxt.push_back("\n");
 	//////////////////////////////////////////////////////////////////////////
 
     m_dTxt.push_back("\t\t\t\t\t\t49點均齊度\tL\t\t\t\t\t\t\t49點均齊度\tx\t\t\t\t\t\t\t49點均齊度\ty\t\t\t\t\t\t\t49點均齊度\tT\t\t\t\t\t\t\t49點均齊度\tduv\n");

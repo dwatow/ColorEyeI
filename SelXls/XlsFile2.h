@@ -19,8 +19,10 @@ protected:
 	{
 		BOOL _notmsr(FALSE);
 		for (int i =0; i < pn; ++i)
-			_notmsr = m_vCar.At(clr, pn, i).GetBullet().isEmpty(); //量過就是非空的
-		return !_notmsr;
+//			_notmsr = m_vCar.At(clr, pn, i).GetBullet().isEmpty(); //量過就是非空的
+			if (!m_vCar.At(clr, pn, i).GetBullet().isEmpty())
+				return TRUE;
+		return _notmsr ? FALSE : TRUE;
 	}
 	CDataChain m_vCar;
 public:
