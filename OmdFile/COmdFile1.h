@@ -19,6 +19,7 @@ public:
     COmdFile1(BOOL old = FALSE);
 	virtual ~COmdFile1();
 
+	
 private:
 	void TxtToOmd();
 	void OmdToTxt();

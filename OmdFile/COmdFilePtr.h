@@ -27,16 +27,22 @@ protected:
     CString m_MsrDvc;
     CString m_Prb;
     CString m_CHID;
+ 	CString m_nitsLv;
+
 public:
     CString GetPnlID () const { return m_PnlID;  };
     CString GetMsrDvc() const { return m_MsrDvc; };
     CString GetPrb   () const { return m_Prb;    };
     CString GetCHID  () const { return m_CHID;   };
+ 	CString GetNitsLv() const { return m_nitsLv; };
 	
 	void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
 	void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
     void SetPrb    (CString& _S) { m_Prb    =  _S; };
     void SetCHID   (CString& _S) { m_CHID   =  _S; };
+
+ 	void SetNitsLv (CString& _S) { m_nitsLv =  _S; };
+
 protected:
 //	virtual BOOL isOldForm(TxtStrData&) = 0;
 	CString GetLine(UINT );	

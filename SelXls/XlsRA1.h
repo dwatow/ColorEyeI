@@ -29,11 +29,13 @@ public:
   CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type );
   CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type );
   CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type );
+  CXlsFile2* iNitsLv (CString    , std::vector<Cartridge>::size_type ){ return this;};
 
   CXlsFile2* iChannel(CString     );
   CXlsFile2* iPanelID(CString     );
   CXlsFile2* iProb   (CString     );
   CXlsFile2* iData   (CDataChain& );
+  CXlsFile2* iNitsLv (CString     ){ return this;};
 
   CXlsFile2* operator->() { return this; };
 };

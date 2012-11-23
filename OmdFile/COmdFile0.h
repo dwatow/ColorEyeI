@@ -27,11 +27,13 @@ public:
     CString GetMsrDvc() const { return m_Omd->GetMsrDvc(); };
     CString GetPrb   () const { return m_Omd->GetPrb   (); };
     CString GetCHID  () const { return m_Omd->GetCHID  (); };
+	CString GetNitsLv() const { return m_Omd->GetNitsLv(); };
 	
 	void SetPnlID  (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPnlID(_S);  m_Omd->SetPnlID  (_S); };
 	void SetMsrDvc (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetMsrDvc(_S); m_Omd->SetMsrDvc (_S); };
     void SetPrb    (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPrb(_S);    m_Omd->SetPrb    (_S); };
     void SetCHID   (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetCHID(_S);   m_Omd->SetCHID   (_S); };
+	void SetNitsLv (CString& _S) {                                           m_Omd->SetNitsLv (_S); };
 public:
 	COmdFile0():m_Omd(0), m_GmOmd(0){};
 	virtual ~COmdFile0() { delete m_Omd; };

@@ -190,7 +190,7 @@ BEGIN
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 MFC應用程式\0"
             VALUE "FileVersion", "1, 3, 8, 17\0"
-            VALUE "InternalName", "ColorEye 測試版 v2.3\0"
+            VALUE "InternalName", "ColorEye 測試版 v2.5\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"

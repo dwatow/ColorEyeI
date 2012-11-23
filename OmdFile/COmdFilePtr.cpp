@@ -18,7 +18,7 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////////
 
 COmdFilePtr::COmdFilePtr():
-m_PnlID(""), m_MsrDvc(""), m_Prb(""), m_CHID("")
+m_PnlID(""), m_MsrDvc(""), m_Prb(""), m_CHID(""), m_nitsLv("")
 {};
 
 COmdFilePtr::~COmdFilePtr()

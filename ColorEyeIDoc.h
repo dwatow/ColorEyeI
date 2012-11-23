@@ -18,17 +18,20 @@ class CColorEyeIDoc : public CDocument
     CString m_MsrDvc;
     CString m_Prb;
     CString m_CHID;
+	CString m_nitsBkClr;
 
 public:    
     CString& GetPnlID () { return m_PnlID;  };
     CString& GetMsrDvc() { return m_MsrDvc; };
     CString& GetPrb   () { return m_Prb;    };
     CString& GetCHID  () { return m_CHID;   };
+	CString& GetNitsLv() { return m_nitsBkClr; };
 
     void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
     void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
     void SetPrb    (CString& _S) { m_Prb    =  _S; };
     void SetCHID   (CString& _S) { m_CHID   =  _S; };
+	void SetNitsLv (int& _I)     { m_nitsBkClr.Format("%d", _I); };
 //File Error
 	CFileException m_ErrorFx;
 //OMD File

@@ -830,7 +830,7 @@ COLORREF Bolt::GetJDNBkColor() const
 }
 BOOL Bolt::Set5NitsBkColor(COLORREF color)
 {
-    m_5nitsBkColor = color;
+    m_5nitsBkColor = color;	
     return TRUE;
 }
 

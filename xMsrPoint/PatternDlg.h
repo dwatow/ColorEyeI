@@ -119,8 +119,8 @@ private:
     static UINT VbrNextGoalThread(LPVOID LParam);
 
 	void ChangeBkColor(COLORREF);
-	void FineNitsPos();
-	void FineNitsNeg();
+	void FineNitsPos(int& GrayLevel);
+	void FineNitsNeg(int& GrayLevel);
 
     void ConnectCa210();
 public:

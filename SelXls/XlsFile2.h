@@ -32,11 +32,13 @@ public:
 	virtual CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type ) = 0;
 	virtual CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type ) = 0;
 	virtual CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type ) = 0;
+	virtual CXlsFile2* iNitsLv (CString    , std::vector<Cartridge>::size_type ) = 0;
 	virtual CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type ) = 0;
 
 	virtual CXlsFile2* iPanelID(CString     ) = 0;
 	virtual CXlsFile2* iProb   (CString     ) = 0;
 	virtual CXlsFile2* iChannel(CString     ) = 0;
+	virtual CXlsFile2* iNitsLv (CString     ) = 0;
 	virtual CXlsFile2* iData   (CDataChain& ) = 0;
 };
 

@@ -108,6 +108,7 @@ void CColorEyeIDoc::OnFileNew()
     m_MsrDvc.Empty();
     m_Prb.Empty();
     m_CHID.Empty();
+	m_nitsBkClr.Empty();
     
 	SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);  //更新畫面
@@ -251,10 +252,11 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
     {
         ft_Omd.oOmdData(m_dOmd);
 
-        m_PnlID   = ft_Omd.GetPnlID();
-        m_MsrDvc  = ft_Omd.GetMsrDvc();
-        m_Prb     = ft_Omd.GetPrb();
-        m_CHID    = ft_Omd.GetCHID();
+        m_PnlID     = ft_Omd.GetPnlID();
+        m_MsrDvc    = ft_Omd.GetMsrDvc();
+        m_Prb       = ft_Omd.GetPrb();
+        m_CHID      = ft_Omd.GetCHID();
+		m_nitsBkClr = ft_Omd.GetNitsLv();
 
         ft_Omd.Close();
     }
@@ -273,6 +275,7 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 		f_Omd.SetMsrDvc(m_MsrDvc);
 		f_Omd.SetPrb   (m_Prb);
 		f_Omd.SetCHID  (m_CHID);
+		f_Omd.SetNitsLv(m_nitsBkClr);
 		f_Omd.iOmdData (m_dOmd);
 
         f_Omd.Close();

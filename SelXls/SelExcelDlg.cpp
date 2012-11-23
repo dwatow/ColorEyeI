@@ -307,6 +307,7 @@ void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
             pHDfXls->iChannel(fOmd.GetCHID());
             pHDfXls->iPanelID(fOmd.GetPnlID());
             pHDfXls->iProb   (fOmd.GetPrb());
+			pHDfXls->iNitsLv (fOmd.GetNitsLv());
             pHDfXls->iData   (m_vOmdtoXls);
 
             fOmd.Close();
@@ -318,6 +319,6 @@ void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 {
     pDocfXls->InitForm();
-    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iData(m_pDoc->GetOmdData());
+    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iNitsLv(m_pDoc->GetNitsLv())->iData(m_pDoc->GetOmdData());
 }
 

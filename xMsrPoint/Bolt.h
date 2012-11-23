@@ -14,13 +14,13 @@ enum AreaKind { AA_00, AA_01, AA_02, AA_03, AA_04, AA_05, AA_06, AA_07, AA_08, A
 class Bolt 
 {
     xChain::iterator m_itEnd;
-    int      m_nScrmH;
-    int      m_nScrmV;
-    int      m_Radius;
+    int       m_nScrmH;
+    int       m_nScrmV;
+    int       m_Radius;
     float     m_LcmSize;
     ColorType m_BkColor;
     PointNum  m_MsrFlowNum;       //該項目共幾點
-    int      m_MsrFlowNo;        //該項目的第幾點
+    int       m_MsrFlowNo;        //該項目的第幾點
     COLORREF  m_5nitsBkColor;
 	COLORREF  m_JNDBkColor;
 
@@ -30,9 +30,9 @@ class Bolt
     float    m_f21Havg;
     float    m_f21Vavg;
     float    m_f25FE;
-    int     m_n25RectSide;
-    int     m_nGM1;
-    int     m_nGM2;
+    int      m_n25RectSide;
+    int      m_nGM1;
+    int      m_nGM2;
     float    m_fGammaSetp;
     float    m_fNits;
     float    m_fCrsTlkRectFE;

@@ -26,9 +26,11 @@ CXlsFile2* CXlsOQC2::iCellNO(std::vector<Cartridge>::size_type ModuleNO)
 //////////////////////////////////////////////////////////////////////////
 CXlsFile2* CXlsOQC2::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iPanelID(strPanelID);     return this;}
 CXlsFile2* CXlsOQC2::iChannel(CString striChannel, std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iChannel(striChannel);    return this;}
+CXlsFile2* CXlsOQC2::iNitsLv(CString strNitsLv   , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iNitsLv(strNitsLv);       return this;}
 CXlsFile2* CXlsOQC2::iData(CDataChain&           , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iData(m_vCar);            return this;}
 
 //////////////////////////////////////////////////////////////////////////
+CXlsFile2* CXlsOQC2::iNitsLv(CString strNitsLv   ) { SelectSheet(1)->SelectCell("BE", 5+m_ModuleNO)->SetCell(strNitsLv); AfxMessageBox(strNitsLv);    return this;}
 CXlsFile2* CXlsOQC2::iPanelID(CString strPanelID)
 {
 	SelectSheet(1)->SelectCell('B' , 5+m_ModuleNO)->SetCell(strPanelID);
