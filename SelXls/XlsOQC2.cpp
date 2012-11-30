@@ -40,6 +40,7 @@ CXlsFile2* CXlsOQC2::iPanelID(CString strPanelID)
 
 	SelectSheet(2)->SelectCell('B', 5+m_ModuleNO)->SetCell(BarCode);
 	SelectSheet(3)->SelectCell('B', 5+m_ModuleNO)->SetCell(BarCode);
+	SelectSheet(4)->SelectCell('B', 5+m_ModuleNO)->SetCell(BarCode);
 
 	return this;
 }
@@ -49,18 +50,20 @@ CXlsFile2* CXlsOQC2::iData(CDataChain& vCar)
 	m_vCar = vCar;
 
 	//無重疊
-	if (Msred(Red  , Pn1))  idR1();
-	if (Msred(Green, Pn1))  idG1();
-    if (Msred(Blue , Pn1))  idB1();
-	if (Msred(Nits , Pn9))  idNits();
+	if (nMsred(Red  , Pn1))  idR1();
+	if (nMsred(Green, Pn1))  idG1();
+    if (nMsred(Blue , Pn1))  idB1();
+	if (nMsred(Nits , Pn9))  idNits();
 
 	//重疊
-   	if (Msred(Dark , Pn25)) idD25();
-    if (Msred(Dark , Pn1))  idD1();
+   	if (nMsred(Dark , Pn25)) idD25();
+	if (nMsred(Dark , Pn21)) idD21();
+    if (nMsred(Dark , Pn1))  idD1();
 
-	if (Msred(White, Pn9))  idW9();
-	if (Msred(White, Pn5))  idW5();
-	if (Msred(White, Pn1))  idW1();
+	if (nMsred(White, Pn9))  idW9();
+	if (nMsred(White, Pn5))  idW5();
+	if (nMsred(White, Pn1))  idW1();
+
 	SetVisible(true);
     return this;
 }
@@ -205,3 +208,23 @@ void CXlsOQC2::idW5()
     SelectCell("AC", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSy());
 }
 
+void CXlsOQC2::idD21()
+{
+	SelectSheet(3);
+	int i;
+    for(i=0;i<21;++i)
+        SelectCell((char)('F'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn21, i).GetLv());
+
+//     for(i=0;i<4;++i)
+//         SelectCell('A',(char)('A'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn25, i+21).GetLv());
+
+	SelectCell('C', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Dark, Pn21, 20).GetLv());
+	SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn21, 20).GetSx());
+	SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Dark, Pn21, 20).GetSy());
+
+	//等效D1
+	CString str;
+	str.Format("=\'%s\'!C%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AO", 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!D%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AP", 5+m_ModuleNO)->SetCell(str);
+	str.Format("=\'%s\'!E%d", GetSheetName(2), 5+m_ModuleNO);	SelectSheet(1)->SelectCell("AQ", 5+m_ModuleNO)->SetCell(str);
+}

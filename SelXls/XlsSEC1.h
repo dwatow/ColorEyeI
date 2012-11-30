@@ -10,7 +10,6 @@
 #endif // _MSC_VER > 1000
 #include "XlsFile2.h"
 
-
 class CXlsSEC1 : public CXlsFile2
 {
 	void idW1();

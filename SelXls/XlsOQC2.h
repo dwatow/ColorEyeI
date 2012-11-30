@@ -20,6 +20,7 @@ class CXlsOQC2 : public CXlsFile2
 	void idB1();
 	void idD1();
 	void idNits();
+	void idD21();
 	void idD25();
 	void idW5();
 

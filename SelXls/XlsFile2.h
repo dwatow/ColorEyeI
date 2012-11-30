@@ -15,14 +15,13 @@
 class CXlsFile2 : public xlsFile
 {
 protected:
-	BOOL Msred(ColorType clr, PointNum pn)
+	BOOL nMsred(ColorType clr, PointNum pn)
 	{
-		BOOL _notmsr(FALSE);
+		BOOL _notmsr(TRUE);
 		for (int i =0; i < pn; ++i)
 //			_notmsr = m_vCar.At(clr, pn, i).GetBullet().isEmpty(); //量過就是非空的
-			if (!m_vCar.At(clr, pn, i).GetBullet().isEmpty())
-				return TRUE;
-		return _notmsr ? FALSE : TRUE;
+				_notmsr &= m_vCar.At(clr, pn, i).GetBullet().isEmpty();
+		return !_notmsr;
 	}
 	CDataChain m_vCar;
 public:

@@ -304,22 +304,22 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     m_vCar = vCar;
 
 	//¤£­«Å|
-	if (Msred(Red  , Pn1 )) idR1();
-	if (Msred(Green, Pn1 )) idG1();
-    if (Msred(Blue , Pn1 )) idB1();
-	if (Msred(Nits , Pn9))  idNits();
+	if (nMsred(Red  , Pn1 )) idR1();
+	if (nMsred(Green, Pn1 )) idG1();
+    if (nMsred(Blue , Pn1 )) idB1();
+	if (nMsred(Nits , Pn9 )) idNits();
 
 	//­«Å|
-	if (Msred(White, Pn1 )) idW1();
-	if (Msred(White, Pn9))  idW9();
-    if (Msred(White, Pn49)) idW49();
+    if (nMsred(White, Pn49)) idW49();
+	if (nMsred(White, Pn9))  idW9();
+	if (nMsred(White, Pn1 )) idW1();
 
-    if (Msred(Dark , Pn9))  idD9();
-	if (Msred(Dark , Pn1))  idD1();
+    if (nMsred(Dark , Pn9))  idD9();
+	if (nMsred(Dark , Pn1))  idD1();
 
-    if ((Msred(CrsTlk , Pn4)) ||
-		(Msred(CrsTlkW, Pn4)) ||
-		(Msred(CrsTlkD, Pn4)) )  idCrosTalk();
+    if ((nMsred(CrsTlk , Pn4)) ||
+		(nMsred(CrsTlkW, Pn4)) ||
+		(nMsred(CrsTlkD, Pn4)) )  idCrosTalk();
 
 	SetVisible(true);
 
@@ -523,3 +523,4 @@ void CXlsSEC1::idD1()
 	SelectSheet(1);
 	SelectCell("D27")->SetCell("%3.2f", m_vCar.At(Dark, Pn1, 0).GetLv());
 }
+
