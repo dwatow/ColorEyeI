@@ -16,19 +16,19 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_DIALOG_BARCODE
+Resource1=IDD_PATTERN_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_EDIT_DIALOG
-Resource3=IDD_CASETUP_DIALOG
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_MSR_ITEM
+Resource3=IDR_MAINFRAME
+Resource4=IDD_CASETUP_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_MSR_ITEM
-Resource7=IDR_MAINFRAME
+Resource6=IDD_EDIT_DIALOG
+Resource7=IDD_ABOUTBOX
 Class7=CCaSetupDlg
 Resource8=IDD_OMDTOEXCEL
 Class8=CReadBarCodeDialog
-Resource9=IDD_ABOUTBOX
+Resource9=IDD_DIALOG_BARCODE
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -192,7 +192,7 @@ Control12=IDC_CHECK_CWP9,button,1342242819
 Control13=IDC_CHECK_CRP9,button,1476460547
 Control14=IDC_CHECK_CGP9,button,1476460547
 Control15=IDC_CHECK_CBP9,button,1476460547
-Control16=IDC_CHECK_CDP9,button,1476460547
+Control16=IDC_CHECK_CDP9,button,1342242819
 Control17=IDC_EDIT_P9FE,edit,1350631552
 Control18=IDC_CHECK_CWP13,button,1476460547
 Control19=IDC_CHECK_CRP13,button,1476460547
@@ -364,6 +364,6 @@ HeaderFile=ReadBarCodeDialog.h
 ImplementationFile=ReadBarCodeDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_COMBO_SELNO
+LastObject=CReadBarCodeDialog
 VirtualFilter=dWC
 

@@ -197,6 +197,7 @@ long xlsFile::GetVrticlTotalCell()
 xlsFile* xlsFile::SelectCell(const char* x)
 {
 	range=objSheet.GetRange(COleVariant(x),COleVariant(x));
+	ASSERT(range);
 	return this;
 }
 
@@ -205,22 +206,28 @@ xlsFile* xlsFile::SelectCell(const char* x, int y)
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%s%d",x,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+	ASSERT(range);
 	return this;
 }
 //小於Z
 xlsFile* xlsFile::SelectCell(char x, int y)
 {
+	ASSERT(x >= 'A' && x <= 'Z');
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%c%d",x,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+	ASSERT(range);
 	return this;
 }
 //大於Z，開始選AA
 xlsFile* xlsFile::SelectCell(char x1, char x2, int y)
 {
+	ASSERT(x1 >= 'A' && x1 <= 'Z');
+	ASSERT(x2 >= 'A' && x2 <= 'Z');
 	ZeroMemory(buf,sizeof(buf));
 	sprintf(buf,"%c%c%d",x1,x2,y);
 	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+	ASSERT(range);
 	return this;
 }
 //-------------------------
@@ -229,6 +236,7 @@ xlsFile* xlsFile::SelectCell(char x1, char x2, int y)
 xlsFile* xlsFile::SelectCell(const char* x1, const char* x2)
 {
 	range=objSheet.GetRange(COleVariant(x1),COleVariant(x2));
+	ASSERT(range);
 	return this;
 }
 xlsFile* xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
@@ -238,11 +246,13 @@ xlsFile* xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
 	sprintf(buf1,"%s%d",x1,y1);
 	sprintf(buf2,"%s%d",x2,y2);
 	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+	ASSERT(range);
 	return this;
 }
 //小於Z
 xlsFile* xlsFile::SelectCell(char x1, int y1, char x2, int y2)
 {
+	ASSERT(x1 >= 'A' && x1 <= 'Z');
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
 	sprintf(buf1,"%c%d",x1,y1);
@@ -253,12 +263,15 @@ xlsFile* xlsFile::SelectCell(char x1, int y1, char x2, int y2)
 //大於Z，開始選AA
 xlsFile* xlsFile::SelectCell(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
 {
+	ASSERT(xA1 >= 'A' && xA2 <= 'Z');
+	ASSERT(xB1 >= 'A' && xB2 <= 'Z');
 	ZeroMemory(buf1,sizeof(buf1));
 	ZeroMemory(buf2,sizeof(buf2));
 	sprintf(buf1,"%c%c%d",xA1,xB1,y1);
 	sprintf(buf2,"%c%c%d",xA2,xB2,y2);
 
 	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+	ASSERT(range);
 	return this;
 }
 //-------------------------

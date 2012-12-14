@@ -45,9 +45,9 @@ void COmdFile1::OmdToTxt()
     m_dTxt.push_back("\n");
     
     m_dTxt.push_back("\t\t\t\t\t\tCross Talk\tYa\t\t\t\t\tCross Talk\tYb\t\t\t\t\tCross Talk\tYb\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 0).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 0).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 0).GetStrLv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 1).GetStrLv() + "\t灰\t" + m_dOmd.At(Dark , Pn9, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 1).GetStrLv() + "\t白\t" + m_dOmd.At(CrsTlkW , Pn4, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 1).GetStrLv() + "\t黑\t" + m_dOmd.At(CrsTlkD , Pn4, 2).GetStrLv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 3).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkW , Pn4, 3).GetStrLv() + "\t\t\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 3).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlk , Pn4, 0).GetStrLv() +                                         "\t\t\t\t\t\t"                                          + m_dOmd.At(CrsTlkW , Pn4, 0).GetStrLv() +                                          "\t\t\t\t\t\t"                                      + m_dOmd.At(CrsTlkD , Pn4, 0).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 1).GetStrLv() +                "\t灰\t"               + m_dOmd.At(CrsTlk , Pn4, 2).GetStrLv() +   "\t\t\t\t"   + m_dOmd.At(CrsTlkW , Pn4, 1).GetStrLv() +                   "\t白\t"              + m_dOmd.At(CrsTlkW , Pn4, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 1).GetStrLv() +                  "\t黑\t"              + m_dOmd.At(CrsTlkD , Pn4, 2).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlk , Pn4, 3).GetStrLv() +                                         "\t\t\t\t\t\t"                                          + m_dOmd.At(CrsTlkW , Pn4, 3).GetStrLv() +                                         "\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlkD , Pn4, 3).GetStrLv() + "\n");
     m_dTxt.push_back("\n\n\n\n");
 
 	//////////////////////////////////////////////////////////////////////////
@@ -189,6 +189,8 @@ void COmdFile1::OmdToTxt()
     m_dTxt.push_back(" \n");
 
     m_dTxt.push_back("\t\t\t\t\t\t黑色13點均齊度\tL\t\t\t\t\t黑色13點均齊度\tx\t\t\t\t\t黑色13點均齊度\ty\n");
+    for (n = 0; n<5; ++n)
+        m_dTxt.push_back(" \n");
     
     for (n = 0; n<10; ++n)
         m_dTxt.push_back(" \n");
@@ -415,20 +417,20 @@ void COmdFile1::TxtToOmd()
     m_dOmd.At(Dark, Pn9, 8).SetDuv( GetCell("AH", 15) );
 
 	//Cross Talk
-    m_dOmd.At(CrsTlk, Pn4, 0).SetDuv( GetCell('I', 18) );
-    m_dOmd.At(CrsTlk, Pn4, 1).SetDuv( GetCell('H', 19) );
-    m_dOmd.At(CrsTlk, Pn4, 2).SetDuv( GetCell('J', 19) );
-    m_dOmd.At(CrsTlk, Pn4, 3).SetDuv( GetCell('I', 20) );
+    m_dOmd.At(CrsTlk, Pn4, 0).SetLv( GetCell('I', 18) );
+    m_dOmd.At(CrsTlk, Pn4, 1).SetLv( GetCell('H', 19) );
+    m_dOmd.At(CrsTlk, Pn4, 2).SetLv( GetCell('J', 19) );
+    m_dOmd.At(CrsTlk, Pn4, 3).SetLv( GetCell('I', 20) );
 	
-    m_dOmd.At(CrsTlkW, Pn4, 0).SetDuv( GetCell("O", 18) );
-    m_dOmd.At(CrsTlkW, Pn4, 1).SetDuv( GetCell('N', 19) );
-    m_dOmd.At(CrsTlkW, Pn4, 2).SetDuv( GetCell('P', 19) );
-    m_dOmd.At(CrsTlkW, Pn4, 3).SetDuv( GetCell("O", 20) );
+    m_dOmd.At(CrsTlkW, Pn4, 0).SetLv( GetCell('O', 18) );
+    m_dOmd.At(CrsTlkW, Pn4, 1).SetLv( GetCell('N', 19) );
+    m_dOmd.At(CrsTlkW, Pn4, 2).SetLv( GetCell('P', 19) );
+    m_dOmd.At(CrsTlkW, Pn4, 3).SetLv( GetCell('O', 20) );
 	
-    m_dOmd.At(CrsTlkD, Pn4, 0).SetDuv( GetCell('U', 18) );
-    m_dOmd.At(CrsTlkD, Pn4, 1).SetDuv( GetCell('T', 19) );
-    m_dOmd.At(CrsTlkD, Pn4, 2).SetDuv( GetCell('V', 19) );
-    m_dOmd.At(CrsTlkD, Pn4, 3).SetDuv( GetCell('U', 20) );
+    m_dOmd.At(CrsTlkD, Pn4, 0).SetLv( GetCell('U', 18) );
+    m_dOmd.At(CrsTlkD, Pn4, 1).SetLv( GetCell('T', 19) );
+    m_dOmd.At(CrsTlkD, Pn4, 2).SetLv( GetCell('V', 19) );
+    m_dOmd.At(CrsTlkD, Pn4, 3).SetLv( GetCell('U', 20) );
 	
 	//25點
     m_dOmd.At(Dark, Pn25,  0).SetLv( GetCell('H', 26) );

@@ -23,6 +23,7 @@ class CXlsOQC2 : public CXlsFile2
 	void idD21();
 	void idD25();
 	void idW5();
+	void idCrsTlk();
 
 public:
     void InitForm(){  }; //畫出表格的title
