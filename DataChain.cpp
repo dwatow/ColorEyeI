@@ -87,20 +87,16 @@ xChain::size_type CDataChain::GammaInit()
 
 void CDataChain::Grow(ColorType ct, PointNum pn)
 {
-    Bolt* PetriDish;
-    PetriDish = new Bolt();
+    Bolt* PetriDish= new Bolt();
+
     if (ct == CrsTlk)
     {
         xChain vCrossTalk;
         
-        Cartridge CrsTlk1(CrsTlk, pn);
-        Cartridge CrsTlk2(CrsTlkW, pn);
-        Cartridge CrsTlk3(CrsTlkD, pn);
-        
-        PetriDish->Grow(vCrossTalk, CrsTlk1);
-        PetriDish->Grow(vCrossTalk, CrsTlk2);
-        PetriDish->Grow(vCrossTalk, CrsTlk3);
-        
+        Cartridge CrsTlk1(CrsTlk , pn);    PetriDish->Grow(vCrossTalk, CrsTlk1);
+        Cartridge CrsTlk2(CrsTlkW, pn);    PetriDish->Grow(vCrossTalk, CrsTlk2);
+        Cartridge CrsTlk3(CrsTlkD, pn);    PetriDish->Grow(vCrossTalk, CrsTlk3);
+
         SortQuackMsr(vCrossTalk);
         m_CarChain1.insert(m_CarChain1.end(), vCrossTalk.begin(), vCrossTalk.end());
     }

@@ -24,6 +24,8 @@ class CXlsOQC2 : public CXlsFile2
 	void idD25();
 	void idW5();
 	void idCrsTlk();
+	void iColorTemperature();
+	void iColorGamu();
 
 public:
     void InitForm(){  }; //畫出表格的title
