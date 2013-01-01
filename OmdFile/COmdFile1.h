@@ -14,13 +14,14 @@
 class COmdFile1 : public COmdFilePtr
 {
 	BOOL m_isOld;
-
 public:
     COmdFile1(BOOL old = FALSE);
 	virtual ~COmdFile1();
 
 	
 private:
+	void tempFunctionForW49();
+    void tempFunctionForDark13();
 	void TxtToOmd();
 	void OmdToTxt();
 };

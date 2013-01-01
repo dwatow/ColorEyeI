@@ -15,12 +15,12 @@ Class3=CAboutDlg
 Class4=CMsrItemsDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_MSRITEMS_DIALOG
+Resource1=IDD_PATTERN_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_MSRITEMS_DIALOG
 Class5=CMsrItemDlg
 Class6=CStaticText
-Resource4=IDD_PATTERN_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5=IDD_MSR_ITEM
 
 [CLS:CMsrItemsApp]

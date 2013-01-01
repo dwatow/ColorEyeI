@@ -301,6 +301,13 @@ void CMsrItemDlg::OnButtonAdd()
         if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
         if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
        
+		//13ÂI
+        if (m_chkCWP13.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn13);
+        if (m_chkCRP13.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn13);
+        if (m_chkCGP13.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn13);
+        if (m_chkCBP13.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn13);
+        if (m_chkCDP13.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn13);
+
 		//25ÂI
         if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
             Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);

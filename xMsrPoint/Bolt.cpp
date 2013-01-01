@@ -258,11 +258,15 @@ CPoint Bolt::GetD21Point(UINT few) const
     //ScrmH 螢幕水平pixel數
     int LeftEdge   = (m_f21FE) ? static_cast<int>(m_nScrmH / m_f21FE) : CmtoPixel(2.3);
     int TopEdge    = (m_f21FE) ? static_cast<int>(m_nScrmV / m_f21FE) : CmtoPixel(2.3);
-
     int RightEdge  = m_nScrmH - LeftEdge;
     int BottomEdge = m_nScrmV - TopEdge;
+
     int CenterH    = m_nScrmH/2;
     int CenterV    = m_nScrmV/2;
+
+// 	CString str;
+// 	str.Format("%f", m_f21FE);
+// 	AfxMessageBox(str);
 
     int HLevel = (int)(m_nScrmH/m_f21Havg);
     int VLevel = (int)(m_nScrmV/m_f21Vavg);
@@ -314,6 +318,10 @@ CPoint Bolt::GetD21Point(UINT few) const
 
         PointD(CenterH  ,CenterV);
 
+//	CString str;
+// 	str.Format("few:%d/ %d", m_MsrFlowNo, m_MsrFlowNum);
+// 	AfxMessageBox(str);
+
 //回傳一個點
     switch(few)
     {
@@ -329,7 +337,7 @@ CPoint Bolt::GetD21Point(UINT few) const
         case  9: return Point09; break;
         case 10: return Point10; break;
         case 11: return Point11; break;
-        case 12: return Point12; break;//中心
+        case 12: return Point12; break;
         case 13: return Point13; break;
         case 14: return Point14; break;
         case 15: return Point15; break;
@@ -337,7 +345,7 @@ CPoint Bolt::GetD21Point(UINT few) const
         case 17: return Point17; break;
         case 18: return Point18; break;
         case 19: return Point19; break;
-        case 20: return Point20; break;
+        case 20: return Point20; break;//中心
 
         default: return PointD;
     }
@@ -841,6 +849,10 @@ COLORREF Bolt::Get5NitsBkColor() const
 
 CPoint Bolt::GetPointPosition() const
 {
+// 	CString str;
+// 	str.Format("%d, %d", m_MsrFlowNo, m_MsrFlowNum);
+// 	AfxMessageBox(str);
+
     switch(m_MsrFlowNum)
     {
         case Pn1:
@@ -922,27 +934,32 @@ AreaKind Bolt::PointToArea(CPoint p) const
 //         |05|06|09|
 //         +--+--+--+
 	
-	CPoint ctrP(m_nScrmH/2, m_nScrmV/2);
-	const UINT shift = 5;
-	CPoint aP(ctrP.x - shift, ctrP.y - shift), 
-		   dP(ctrP.x + shift, ctrP.y + shift);
+	CPoint centerPoint(m_nScrmH/2, m_nScrmV/2);
+	const int shift = 0;
+	CPoint aP(centerPoint.x - shift, centerPoint.y - shift), 
+		   dP(centerPoint.x + shift, centerPoint.y + shift);
 	
+// 	CString str;
+// 	//str.Format("point: %d, %d\naPoint: %d, %d\ndPoint: %d, %d", p.x, p.y, aP.x, aP.y, dP.x, dP.y);
+// 	str.Format("X:%d, Y:%d", m_nScrmH/2, m_nScrmV/2);
+// 	AfxMessageBox(str);
+
 	    if (p.y < aP.y)
 		{
-			     if (p.x < aP.x) return AA_02; 
-			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_03;
-			else                                                     return AA_04;
+			if ( (p.x >= 0) && (p.x < aP.x)) return AA_02; 
+			else if ( (p.x >= aP.x) && (p.x <= dP.x) ) return AA_03;
+			else                                                     return AA_07;
 		}
-		else if ((p.y >= aP.y) && (p.y < dP.y))
+		else if ((p.y >= aP.y) && (p.y <= dP.y))
 		{
-			if (p.x < aP.x) return AA_05; 
-			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_01;
-			else                                                     return AA_06;
+			if ( (p.x >= 0) && (p.x < aP.x)) return AA_04; 
+			else if ( (p.x >= aP.x) && (p.x <= dP.x) ) return AA_01;
+			else                                                     return AA_08;
 		}
 		else
 		{
-			if (p.x < aP.x) return AA_07; 
-			else if ( (p.x >= aP.x) && (p.x < dP.x) ) return AA_08;
+			if ( (p.x >= 0) && (p.x < aP.x)) return AA_05; 
+			else if ( (p.x >= aP.x) && (p.x <= dP.x) ) return AA_06;
 			else                                                     return AA_09;
 		}
 }
@@ -958,8 +975,13 @@ void Bolt::Grow(xChain& vCar, Cartridge& MsrCell)
     for (m_MsrFlowNo = 0; m_MsrFlowNo < (UINT)m_MsrFlowNum; ++m_MsrFlowNo)
     {
         MsrCell.SetMsrFlowNo(m_MsrFlowNo);
+		CPoint hitPoint(GetPointPosition());
 
-		switch( PointToArea (GetPointPosition()) )
+// 		CString str;
+// 		str.Format("%d, %d", hitPoint.x, hitPoint.y);
+// 		AfxMessageBox(str);
+
+		switch( PointToArea (hitPoint) )
 		{
 		case AA_01: 
 			areaCode = 1;
@@ -995,7 +1017,7 @@ Bolt* Bolt::SetP25RectSide(UINT SideLong)     {m_n25RectSide   = SideLong;      
 Bolt* Bolt::SetGammaRange(UINT GM1, UINT GM2) {m_nGM1          = GM1;     m_nGM2    = GM2;     return this;}
 Bolt* Bolt::GammaStep(float GmStep)           {m_fGammaSetp    = GmStep;                       return this;}
 Bolt* Bolt::SetNitsNum(float NitsNum)         {m_fNits         = NitsNum;                      return this;}
-Bolt* Bolt::SetNitsKind(NitsKind nk)          {m_nNitsKind     = nk;                     return this;}
+Bolt* Bolt::SetNitsKind(NitsKind nk)          {m_nNitsKind     = nk;				           return this;}
 
 Bolt* Bolt::SetCrsTlkRectFE(float RectSideFE) {m_fCrsTlkRectFE = RectSideFE;                   return this;}
 
