@@ -22,7 +22,7 @@ class CMsrItemDlg : public CDialog
 {
 //    CPatternDlg* m_pDlgPattern;
 	CString m_RememberChkPathName;
-    Bolt *Pusher;
+//    Bolt *p_Pusher;
 
 // Construction
 public:
@@ -133,7 +133,7 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 public:
-    void SetBolt(Bolt* Pusher);  //在CPatternDlg::InitDataDlgType()有用到
+    void SetBolt(Bolt* _p);  //在CPatternDlg::InitDataDlgType()有用到
 	unsigned int ListBoxUpdate(const CDataChain& );
 };
 

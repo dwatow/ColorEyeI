@@ -27,7 +27,7 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
     //}}AFX_DATA_INIT
     
     //之間的順序要固定，不要修改了！
-    ConnectCa210();
+    InitCa210();
     InitDataDlgType();
 }
 
@@ -349,6 +349,7 @@ CString CPatternDlg::SetupLCMSize()
     {
         CEnterValueDlg dlgEnterValue("無法判別LCM Size");
         dlgEnterValue.SetValueKind("LCM Size");
+
         if (dlgEnterValue.DoModal() == IDOK)
             LCMSize = dlgEnterValue.m_strValue;
     }
@@ -390,11 +391,11 @@ BOOL CPatternDlg::Magazine()
     
 		Invalidate();
     
-	   return TRUE;  //有子彈可以量測
+	    return TRUE;  //有子彈可以量測
 	}
 }
 
-void CPatternDlg::ConnectCa210()
+void CPatternDlg::InitCa210()
 {
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);

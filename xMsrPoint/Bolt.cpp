@@ -241,10 +241,10 @@ CPoint Bolt::GetD13Point(UINT few) const
         case 7: return Point07; break;
         case 8: return Point08; break;
 
-            case 9:  return Point09; break;
-            case 10: return Point10; break;
-            case 11: return Point11; break;
-            case 12: return Point12; break;
+        case 9:  return Point09; break;
+        case 10: return Point10; break;
+        case 11: return Point11; break;
+        case 12: return Point12; break;
 
         default: return PointD;
     }

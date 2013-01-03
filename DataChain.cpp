@@ -51,7 +51,7 @@ void CDataChain::SortOrigMsr()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CDataChain::CDataChain()
+CDataChain::CDataChain(): p_Pusher(0)
 {
     Cartridge x;
     m_CarChain1.push_back(x);
@@ -80,24 +80,16 @@ xChain::size_type CDataChain::StdInit()
     return m_CarChain1.size();
 }
 
-xChain::size_type CDataChain::GammaInit()
-{
-    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
-    return m_CarChain1.size();
-}
-
 void CDataChain::Grow(ColorType ct, PointNum pn)
-{
-	Bolt* PetriDish = new Bolt();
-
+{	
     if (ct == CrsTlk)
     {
         xChain vCrossTalk;
         
-        Cartridge CrsTlk1(CrsTlk , pn);    PetriDish->Grow(vCrossTalk, CrsTlk1);
-        Cartridge CrsTlk2(CrsTlkW, pn);    PetriDish->Grow(vCrossTalk, CrsTlk2);
-        Cartridge CrsTlk3(CrsTlkD, pn);    PetriDish->Grow(vCrossTalk, CrsTlk3);
-
+        Cartridge CrsTlk1(CrsTlk , pn);    p_Pusher->Grow(vCrossTalk, CrsTlk1);
+        Cartridge CrsTlk2(CrsTlkW, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk2);
+        Cartridge CrsTlk3(CrsTlkD, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk3);
+		
         SortQuackMsr(vCrossTalk);
         m_CarChain1.insert(m_CarChain1.end(), vCrossTalk.begin(), vCrossTalk.end());
     }
@@ -108,8 +100,8 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
         Cartridge JndX(JNDX, pn);
         Cartridge Jnd(JND, pn);
         
-        PetriDish->Grow(vJND, JndX);
-        PetriDish->Grow(vJND, Jnd);
+        p_Pusher->Grow(vJND, JndX);
+        p_Pusher->Grow(vJND, Jnd);
         
         SortQuackMsr(vJND);
         m_CarChain1.insert(m_CarChain1.end(), vJND.begin(), vJND.end());
@@ -117,11 +109,16 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
 	else
     {
         Cartridge MsrItem(ct, pn);
-        PetriDish->Grow(m_CarChain1, MsrItem);
+        p_Pusher->Grow(m_CarChain1, MsrItem);
     }
- 
-    delete PetriDish;
 }
+
+xChain::size_type CDataChain::GammaInit()
+{
+    Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
+    return m_CarChain1.size();
+}
+
 
 Cartridge& CDataChain::At(ColorType clr, PointNum Large, UINT Little) 
 {

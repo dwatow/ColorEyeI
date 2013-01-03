@@ -23,10 +23,10 @@ static char THIS_FILE[] = __FILE__;
 BEGIN_MESSAGE_MAP(CColorEyeIApp, CWinApp)
     //{{AFX_MSG_MAP(CColorEyeIApp)
     ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
-	ON_COMMAND(ID_FILE_OMDTOXLS, OnFileOmdtoxls)
-	ON_COMMAND(ID_MSR_ITEM, OnMsrForItem)
-	ON_COMMAND(ID_SETUP_CA210, OnSetupCa210)
-	//}}AFX_MSG_MAP
+    ON_COMMAND(ID_FILE_OMDTOXLS, OnFileOmdtoxls)
+    ON_COMMAND(ID_MSR_ITEM, OnMsrForItem)
+    ON_COMMAND(ID_SETUP_CA210, OnSetupCa210)
+    //}}AFX_MSG_MAP
     // Standard file based document commands
     ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
     ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
@@ -43,9 +43,9 @@ CColorEyeIApp::CColorEyeIApp():m_pdlgPattern(0), m_pdlgCaSetup(0)
 
 CColorEyeIApp::~CColorEyeIApp()
 {
-	DelMsrItemDlgSetupFile();
+    DelMsrItemDlgSetupFile();
     delete m_pdlgPattern;
-	delete m_pdlgCaSetup;
+    delete m_pdlgCaSetup;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -147,13 +147,13 @@ BOOL CColorEyeIApp::InitInstance()
     // Enable drag/drop open
     m_pMainWnd->DragAcceptFiles();
 
-	// Get App PathName
-	GetModuleFileName(NULL, m_strPathName.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
-	m_strPathName.ReleaseBuffer();   //要加這一行，才可以處理該字串
+    // Get App PathName
+    GetModuleFileName(NULL, m_strPathName.GetBuffer(MAX_PATH+1), MAX_PATH);  //抓應用程式所在的目錄+檔名+副檔名
+    m_strPathName.ReleaseBuffer();   //要加這一行，才可以處理該字串
 
-	// Get Desktop Path
-// 	CString szPath;
-// 	SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
+    // Get Desktop Path
+//     CString szPath;
+//     SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
 //    BCFandODFPath.Format("%s",szPath);
 
 
@@ -220,60 +220,66 @@ void CColorEyeIApp::OnAppAbout()
 
 void CColorEyeIApp::OnFileOmdtoxls() 
 {
-	// TODO: Add your command handler code here
-	CSelExcelDlg dlgSelExcel;
-	dlgSelExcel.DoModal();
+    // TODO: Add your command handler code here
+    CSelExcelDlg dlgSelExcel;
+    dlgSelExcel.DoModal();
 }
 
 void CColorEyeIApp::OnMsrForItem() 
 {
-	// TODO: Add your command handler code here
+    // TODO: Add your command handler code here
     //為Pattern Dialog初始化，做準備
     if (m_pdlgPattern != 0)
         delete m_pdlgPattern;
-	
+    
+    //連接CA-210
+    //MsrItemDlg()
+
+
     //若執行m_pMsrItemDlg.XXX的時候，傳輸控制項的東西，就會崩潰（程式執行失敗）
     //執行開啟PattenDialog的Code
     //把vChain放進去
-	
+    
     m_pdlgPattern = new CPatternDlg(MsrForItem);  //初始化Pattern Dialog，可以呼叫MsrForItem等對話框出來初始化vChain
 
     if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   
-		AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
+        AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
     
-	if (m_pdlgPattern->Magazine())  //按下OK就顯示
-	{
-		m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
-		m_pdlgPattern->SetFocus();
-	}
-	else
-		m_pdlgPattern->ShowWindow(SW_HIDE);
+    if (m_pdlgPattern->Magazine())  //按下OK就顯示
+    {
+        m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
+        m_pdlgPattern->SetFocus();
+    }
+    else
+        m_pdlgPattern->ShowWindow(SW_HIDE);
 }
 
 CString CColorEyeIApp::GetPathName()
 {
-	return m_strPathName;
+    return m_strPathName;
 }
 
 CString CColorEyeIApp::GetPath()
 {
-	return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
+    return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
 }
 
 void CColorEyeIApp::DelMsrItemDlgSetupFile()
 {
-	CString delFileNamePath;
-	delFileNamePath.Format("%s\\~MsrItemDlg.temp", GetPath());
-	DeleteFile(delFileNamePath);
+    CString delFileNamePath;
+    delFileNamePath.Format("%s\\~MsrItemDlg.temp", GetPath());
+    DeleteFile(delFileNamePath);
 }
 
 void CColorEyeIApp::OnSetupCa210() 
 {
-	// TODO: Add your command handler code here
-	if (m_pdlgCaSetup == 0)
-	{
-		m_pdlgCaSetup = new CCaSetupDlg();
-		m_pdlgCaSetup->Create(IDD_CASETUP_DIALOG);
-	}
-	m_pdlgCaSetup->ShowWindow(SW_NORMAL);
+    // TODO: Add your command handler code here
+    if (m_pdlgCaSetup == 0)
+    {
+        m_pdlgCaSetup = new CCaSetupDlg();
+        m_pdlgCaSetup->Create(IDD_CASETUP_DIALOG);
+    }
+    m_pdlgCaSetup->ShowWindow(SW_NORMAL);
 }
+
+

@@ -98,6 +98,8 @@ private:
     Bolt m_NextGunMchn;
 
 	CString SetupLCMSize();
+    void InitCa210();
+    void InitDataDlgType();//Call SelMsrItem
 
     BOOL Trigger(std::vector<Cartridge>::iterator&);
     BOOL NextTrigger(std::vector<Cartridge>::iterator&);
@@ -109,11 +111,8 @@ private:
     void EventGoPrvsGoal();
     BOOL EventGoNextGoal();
     void EventSwCntCa210();
-    //void EventRunZeroCal();
     void EventRunMsrAi(BOOL isRun = 2);
     UINT EventCatchMsrValue();
-
-    void InitDataDlgType();//Call SelMsrItem
 
     static UINT VbrGoalThread(LPVOID LParam);
     static UINT VbrNextGoalThread(LPVOID LParam);
@@ -121,8 +120,6 @@ private:
 	void ChangeBkColor(COLORREF);
 	void FineNitsPos(int& GrayLevel);
 	void FineNitsNeg(int& GrayLevel);
-
-    void ConnectCa210();
 public:
     void FineNits();
 

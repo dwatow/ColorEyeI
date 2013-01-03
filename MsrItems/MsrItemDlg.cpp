@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
-    : CDialog(CMsrItemDlg::IDD, pParent), Pusher(0)
+    : CDialog(CMsrItemDlg::IDD, pParent)
 {
     EnableAutomation();
 
@@ -199,9 +199,15 @@ void CMsrItemDlg::OnPaint()
     // Do not call CDialog::OnPaint() for painting messages
 }
 
-void CMsrItemDlg::SetBolt(Bolt* pusher)
+void CMsrItemDlg::SetBolt(Bolt* _p)
 {
-    Pusher = pusher;
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	ASSERT_VALID(pMainFrm);
+	
+	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+
+	pDoc->GetMsrDataChain().SetBolt(_p);
 }
 
 unsigned int CMsrItemDlg::ListBoxUpdate(const CDataChain& Datas)
@@ -228,126 +234,125 @@ unsigned int CMsrItemDlg::ListBoxUpdate(const CDataChain& Datas)
 void CMsrItemDlg::OnButtonAdd() 
 {
     // TODO: Add your control notification handler code here
-    if (Pusher != 0)
-    {
-        CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-        ASSERT_VALID(pMainFrm);
-        
-        CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-        ASSERT_VALID(pDoc);
 
-        pDoc->SetModifiedFlag(TRUE);
-        
-        UpdateData(TRUE);//***
-        
-        //執行連到了這
-        //1. CA-210已連線
-        //2. CA-210已宣告
-        //////////////////////////////////////////////////////////////////////////
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+
+    pDoc->SetModifiedFlag(TRUE);
+    
+    UpdateData(TRUE);
+    
+    //執行連到了這
+    //1. CA-210已連線
+    //2. CA-210已宣告
+    //////////////////////////////////////////////////////////////////////////
+	
+	//JND
+	if (m_chkJND.GetState())
+	{
+		pDoc->GetMsrDataChain().GetBolt()->SetJNDBkColor(RGB(m_jsdGray, m_jsdGray, m_jsdGray));
+		pDoc->GetMsrDataChain().Grow(JND , Pn1);
+	}
+    
+    //中心點
+	if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
+    if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
+    if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn1);
+    if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
+    if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
+    
+	//Nits
+    if (m_chkNits.GetState())
+	{
+        pDoc->GetMsrDataChain().GetBolt()->SetNitsNum(m_fNits);
 		
-		//JND
-		if (m_chkJND.GetState())
+		switch (m_cbxSelNitsKind.GetCurSel())
 		{
-			Pusher->SetJNDBkColor(RGB(m_jsdGray, m_jsdGray, m_jsdGray));
-			pDoc->GetMsrDataChain().Grow(JND , Pn1);
+		case 0: pDoc->GetMsrDataChain().GetBolt()->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
+		default:
+		case 1: pDoc->GetMsrDataChain().GetBolt()->SetNitsKind(NK_NEG); break;
 		}
-        
-        //中心點
-		if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
-        if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
-        if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn1);
-        if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
-        if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
-        
-		//Nits
-        if (m_chkNits.GetState())
-		{
-            Pusher->SetNitsNum(m_fNits);
-			
-			switch (m_cbxSelNitsKind.GetCurSel())
-			{
-			case 0: Pusher->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
-			default:
-			case 1: Pusher->SetNitsKind(NK_NEG); break;
-			}
-		}
+	}
 
-        if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
+    if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
 
-		//5點
-        if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
-            Pusher->SetP5FE(m_f5FE);
-        if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
-        if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
-        if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
-        if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn5);
-        if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn5);
-        
-        //9點
-        if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
-            Pusher->SetP9FE(m_f9FE);
-        if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
-        if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
-        if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
-        if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
-        if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
-        
-		//21點
-        if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
-            Pusher->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
-        if (m_chkCWP21.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn21);
-        if (m_chkCRP21.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn21);
-        if (m_chkCGP21.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn21);
-        if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
-        if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
-       
-		//13點
-        if (m_chkCWP13.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn13);
-        if (m_chkCRP13.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn13);
-        if (m_chkCGP13.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn13);
-        if (m_chkCBP13.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn13);
-        if (m_chkCDP13.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn13);
+	//5點
+    if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
+        pDoc->GetMsrDataChain().GetBolt()->SetP5FE(m_f5FE);
+    if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
+    if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
+    if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
+    if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn5);
+    if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn5);
+    
+    //9點
+    if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
+        pDoc->GetMsrDataChain().GetBolt()->SetP9FE(m_f9FE);
+    if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
+    if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
+    if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
+    if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
+    if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
+    
+	//21點
+    if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
+        pDoc->GetMsrDataChain().GetBolt()->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
+    if (m_chkCWP21.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn21);
+    if (m_chkCRP21.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn21);
+    if (m_chkCGP21.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn21);
+    if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
+    if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
+   
+	//13點
+    if (m_chkCWP13.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn13);
+    if (m_chkCRP13.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn13);
+    if (m_chkCGP13.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn13);
+    if (m_chkCBP13.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn13);
+    if (m_chkCDP13.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn13);
 
-		//25點
-        if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
-            Pusher->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
-        if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
-        if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
-        if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
-        if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn25);
-        if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn25);
-        
-		//49點
-        if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
-        if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn49);
-        if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn49);
-        if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn49);
-        if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
-        
-        //排序
-        if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
-		else                             pDoc->GetMsrDataChain().SortOrigMsr();
-        
-		//Cross Talk srot by AreaCode
-        if (m_chkCrossTalk.GetState())
-        {
-            Pusher->SetCrsTlkRectFE(m_fCrsTlkRectFE);
-            pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
-        }
-
-		//Gamma
-        if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
-            Pusher->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
-        
-		if (m_chkCWGM.GetState() || m_chkCDGM.GetState())	
-			                        pDoc->GetMsrDataChain().Grow(White, PnGamma);
-		if (m_chkCRGM.GetState())	pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
-		if (m_chkCGGM.GetState())	pDoc->GetMsrDataChain().Grow(Green, PnGamma);
-		if (m_chkCBGM.GetState())	pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
-
-		if (ListBoxUpdate(pDoc->GetMsrDataChain()))
-			m_btnOK.EnableWindow(TRUE);
+	//25點
+    if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
+        pDoc->GetMsrDataChain().GetBolt()->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
+    if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
+    if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
+    if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
+    if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn25);
+    if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn25);
+    
+	//49點
+    if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
+    if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn49);
+    if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn49);
+    if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn49);
+    if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
+    
+    //排序
+    if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
+	else                             pDoc->GetMsrDataChain().SortOrigMsr();
+    
+	//Cross Talk srot by AreaCode
+    if (m_chkCrossTalk.GetState())
+    {
+        pDoc->GetMsrDataChain().GetBolt()->SetCrsTlkRectFE(m_fCrsTlkRectFE);
+        pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
     }
+
+	//Gamma
+    if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
+        pDoc->GetMsrDataChain().GetBolt()->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
+    
+	if (m_chkCWGM.GetState() || m_chkCDGM.GetState())	
+			                    pDoc->GetMsrDataChain().Grow(White, PnGamma);
+	if (m_chkCRGM.GetState())	pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
+	if (m_chkCGGM.GetState())	pDoc->GetMsrDataChain().Grow(Green, PnGamma);
+	if (m_chkCBGM.GetState())	pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
+
+	if (ListBoxUpdate(pDoc->GetMsrDataChain()))
+		m_btnOK.EnableWindow(TRUE);
+ 
 }
 
 void CMsrItemDlg::OnButtonDel() 

@@ -19,6 +19,8 @@ class CDataChain
 {
 	//public:
 	xChain m_CarChain1;
+	Bolt *p_Pusher;
+
 	
 public:
 	CDataChain();
@@ -35,6 +37,8 @@ public:
     void SortQuackMsr();
 	void SortOrigMsr();
     void freeEmptyCell();
+	void SetBolt(Bolt *_P){ p_Pusher = _P; };
+	Bolt* GetBolt(){ return p_Pusher; };
 	//像vector的函數，卻不是直接回傳
 public:
 	Cartridge& At (ColorType, PointNum, UINT );
