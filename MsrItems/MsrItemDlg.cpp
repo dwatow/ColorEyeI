@@ -27,7 +27,6 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
 
 	m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
 	
-
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
     m_nGM2 = 255;
@@ -352,7 +351,6 @@ void CMsrItemDlg::OnButtonAdd()
 
 	if (ListBoxUpdate(pDoc->GetMsrDataChain()))
 		m_btnOK.EnableWindow(TRUE);
- 
 }
 
 void CMsrItemDlg::OnButtonDel() 
@@ -379,7 +377,6 @@ void CMsrItemDlg::OnButtonDel()
         m_btnOK.EnableWindow(FALSE);
 
     delete [] buffer;
-
 }
 
 BOOL CMsrItemDlg::OnInitDialog() 

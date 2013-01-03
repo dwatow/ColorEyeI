@@ -140,15 +140,16 @@ void Ca210sim::SetOnline(BOOL isOnline)
 
 CString Ca210sim::GetLcmSize()
 {
-    CString str;
-    if(isOnline())
-    {
-        str.Format("%d", 14);
-        return str;
-    }
-    else 
-        str.Format("-1");
-    return str;
+//     CString str;
+//     if(isOnline())
+//     {
+//         str.Format("%d", 14);
+//         return str;
+//     }
+//     else 
+//         str.Format("-1");
+//    return str;
+	return "";
 }
 
 CString Ca210sim::GetChData()

@@ -722,7 +722,6 @@ Bolt::Bolt():m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), \
 m_nScrmV(GetSystemMetrics(SM_CYSCREEN)), m_Radius(0), \
 m_LcmSize(0.0), m_5nitsBkColor(RGB(127, 127, 127)){}
 
-Bolt::~Bolt(){}
 
 BOOL Bolt::Magazine(CString LcmSize, std::vector<Cartridge>::iterator& EndItor)
 {

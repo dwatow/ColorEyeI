@@ -455,11 +455,11 @@ float Ca210real::ChooseSynMode(SynMode SmType)
 {
     switch(SmType)
     {
-    case SM_NTSC:  return 0.0;
-    case SM_PAL:   return 1.0;
-    case SM_EXT:   return 2.0;
-    case SM_UNIV:  return 3.0;
-    case SM_INT:   return 4.0;
+    case SM_NTSC:  return  0.0;
+    case SM_PAL:   return  1.0;
+    case SM_EXT:   return  2.0;
+    case SM_UNIV:  return  3.0;
+    case SM_INT:   return  4.0;
     default:       return -1.0;
     }
 }
@@ -468,10 +468,10 @@ CString Ca210real::GetSynMode(SynMode SmType)
 {
     switch(SmType)
     {
-    case SM_NTSC:    return "NTSC";
+    case SM_NTSC:   return "NTSC";
     case SM_PAL:    return "PAL";
     case SM_EXT:    return "EXT";
-    case SM_UNIV:    return "UNIV";
+    case SM_UNIV:   return "UNIV";
     case SM_INT:    return "INT";
     default:        return "No this Mode";
     }

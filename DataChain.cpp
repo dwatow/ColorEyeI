@@ -81,7 +81,14 @@ xChain::size_type CDataChain::StdInit()
 }
 
 void CDataChain::Grow(ColorType ct, PointNum pn)
-{	
+{
+	BOOL delBolt = FALSE;
+	if (p_Pusher == 0)
+	{
+		p_Pusher = new Bolt();
+		delBolt = TRUE;
+	}
+//////////////////////////////////////////////////////////////////////////
     if (ct == CrsTlk)
     {
         xChain vCrossTalk;
@@ -111,6 +118,12 @@ void CDataChain::Grow(ColorType ct, PointNum pn)
         Cartridge MsrItem(ct, pn);
         p_Pusher->Grow(m_CarChain1, MsrItem);
     }
+//////////////////////////////////////////////////////////////////////////
+	if (delBolt == TRUE)
+	{
+		delete p_Pusher;
+		p_Pusher = 0;
+	}
 }
 
 xChain::size_type CDataChain::GammaInit()

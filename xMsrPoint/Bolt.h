@@ -109,4 +109,7 @@ CString  GetSetupValue()    const;
 #endif
 
 };
+
+inline Bolt::~Bolt(){}
+
 #endif
