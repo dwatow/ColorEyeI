@@ -6,52 +6,6 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x404 /fo"Debug/ColorEyeI.res" /i "Debug" /d "_DEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP91BB.tmp" with contents
-[
-shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
-.\Debug\Bolt.obj
-.\Debug\Bullet.obj
-.\Debug\ca200srvr.obj
-.\Debug\CA210.obj
-.\Debug\CA210real.obj
-.\Debug\Ca210sim.obj
-.\Debug\Cartridge.obj
-.\Debug\CaSetupDlg.obj
-.\Debug\Circle.obj
-.\Debug\CircleArc.obj
-.\Debug\ColorEyeI.obj
-.\Debug\ColorEyeIDoc.obj
-.\Debug\ColorEyeIView.obj
-.\Debug\COmdFile0.obj
-.\Debug\COmdFile1.obj
-.\Debug\COmdFileGm.obj
-.\Debug\COmdFilePtr.obj
-.\Debug\DataChain.obj
-.\Debug\EnterValueDlg.obj
-.\Debug\excel.obj
-.\Debug\FileDlg.obj
-.\Debug\MainFrm.obj
-.\Debug\MsrItemDlg.obj
-.\Debug\PatternDlg.obj
-.\Debug\ReadBarCodeDialog.obj
-.\Debug\SelExcelDlg.obj
-.\Debug\StaticText.obj
-.\Debug\StdAfx.obj
-.\Debug\Table.obj
-.\Debug\TxtFile.obj
-.\Debug\xlef.obj
-.\Debug\XlsGamma.obj
-.\Debug\XlsOQC1.obj
-.\Debug\XlsOQC2.obj
-.\Debug\XlsRA1.obj
-.\Debug\XlsSEC1.obj
-.\Debug\ColorEyeI.res
-]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP91BB.tmp"
-<h3>Output Window</h3>
-Compiling resources...
-Linking...
 
 
 
