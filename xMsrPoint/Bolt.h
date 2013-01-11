@@ -17,7 +17,7 @@ class Bolt
     int       m_nScrmH;
     int       m_nScrmV;
     int       m_Radius;
-    float     m_LcmSize;
+//    float     m_LcmSize;
     ColorType m_BkColor;
     PointNum  m_MsrFlowNum;       //該項目共幾點
     int       m_MsrFlowNo;        //該項目的第幾點
@@ -26,6 +26,7 @@ class Bolt
 
     float    m_f5FE;
     float    m_f9FE;
+	float    m_f13FE;
     float    m_f21FE;
     float    m_f21Havg;
     float    m_f21Vavg;
@@ -42,7 +43,7 @@ public:
     Bolt();
     ~Bolt();
 
-    BOOL Magazine(CString LcmSize, xChain::iterator& );  //彈匣
+    BOOL Magazine(xChain::iterator& );  //彈匣
     void Grow(xChain& , Cartridge& );  //填彈器
 
     TrigStatus Trigger(xChain::iterator&);
@@ -69,6 +70,7 @@ public:
 
     Bolt* SetP5FE(float);
     Bolt* SetP9FE(float);
+	Bolt* SetP13FE(float);
     Bolt* SetP21FE(float);
     Bolt* SetP21Avg(float, float);
     Bolt* SetP25FE(float);
@@ -80,7 +82,7 @@ public:
     Bolt* SetCrsTlkRectFE(float);
 
 	NitsKind GetNitsKind();
-	float GetLcmSize() const{ return m_LcmSize; };
+//	float GetLcmSize() const{ return m_LcmSize; };
     
 private:
 	AreaKind PointToArea(CPoint p) const;

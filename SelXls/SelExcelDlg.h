@@ -22,7 +22,7 @@
 // CSelExcelDlg dialog
 
 enum WhereFileComeFrom { FromNowFile = 0, FromHDFile};
-enum FormType{ FORM_Nothing = 0, FORM_RA , FORM_OQC_LCM_SPEC, FORM_SEC, FORM_Gamma};
+enum FormType{ FORM_Nothing = 0, FORM_RA, FORM_OQC_TRIAL_PRODUCTION, FORM_SEC, FORM_Gamma, FORM_OQCY2013_MASS_PRODUCTION};
 
 class CSelExcelDlg : public CDialog
 {

@@ -35,8 +35,8 @@ CXlsFile2* CXlsOQC2::iPanelID(CString strPanelID)
 {
     SelectSheet(1)->SelectCell('B' , 5+m_ModuleNO)->SetCell(strPanelID);
 
-    CString BarCode;
-    BarCode.Format("=\'%s\'!B%d", GetSheetName(1), 5+m_ModuleNO);
+//     CString BarCode;
+//     BarCode.Format("=\'%s\'!B%d", GetSheetName(1), 5+m_ModuleNO);
 
 //     SelectSheet(2)->SelectCell('B', 5+m_ModuleNO)->SetCell(BarCode);  //黑色25點
 //     SelectSheet(3)->SelectCell('B', 5+m_ModuleNO)->SetCell(BarCode);  //黑色21點
@@ -167,7 +167,8 @@ void CXlsOQC2::idG1()
     SelectCell("AI", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
     SelectCell("AJ", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
     SelectCell("AK", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
-    SelectSheet(7);
+ 
+	SelectSheet(7);
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F4")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());

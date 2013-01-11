@@ -41,6 +41,7 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
 	m_jsdGray = 0;
+	m_f13FE = 0.0f;
 	//}}AFX_DATA_INIT
 }
 
@@ -128,6 +129,8 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
 	DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_jsdGray);
 	DDV_MinMaxUInt(pDX, m_jsdGray, 0, 255);
+	DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
+	DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
 	//}}AFX_DATA_MAP
 }
 
@@ -306,6 +309,8 @@ void CMsrItemDlg::OnButtonAdd()
     if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
    
 	//13ÂI
+    if (m_chkCWP13.GetState() || m_chkCRP13.GetState() || m_chkCGP13.GetState() || m_chkCBP13.GetState() || m_chkCDP13.GetState())
+        pDoc->GetMsrDataChain().GetBolt()->SetP13FE(m_f13FE);
     if (m_chkCWP13.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn13);
     if (m_chkCRP13.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn13);
     if (m_chkCGP13.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn13);

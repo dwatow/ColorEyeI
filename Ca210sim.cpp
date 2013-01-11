@@ -140,6 +140,7 @@ void Ca210sim::SetOnline(BOOL isOnline)
 
 CString Ca210sim::GetLcmSize()
 {
+
 //     CString str;
 //     if(isOnline())
 //     {
@@ -149,7 +150,11 @@ CString Ca210sim::GetLcmSize()
 //     else 
 //         str.Format("-1");
 //    return str;
-	return "";
+//////////////////////////////////////////////////////////////////////////
+	if (m_LCMsize.IsEmpty())
+		return "";
+	else
+		return m_LCMsize;
 }
 
 CString Ca210sim::GetChData()

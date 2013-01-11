@@ -19,6 +19,7 @@ public:
 	virtual ~COmdFile1();
 	
 private:
+	void o2tW5();
 	void o2tW49();
     void o2tD13();
 	void o2tD21();
@@ -29,6 +30,7 @@ private:
 	void o2tWRGB1nNits();
 
 	void t2oInfo();
+	void t2oW5();
 	void t2oWRGBD();
 	void t2oW9();
 	void t2oD9();

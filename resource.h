@@ -159,6 +159,7 @@
 #define IDC_EDIT_JND_GRAYVALUE          1066
 #define IDC_COMBO_SEL_NITS_KIND         1067
 #define IDC_COMBO_SELNO                 1068
+#define IDC_EDIT_P13FE                  1068
 #define IDC_STATIC_BARCODE              1069
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771

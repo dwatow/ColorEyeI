@@ -23,12 +23,13 @@ class Ca210
     CaState m_caState;
 	CaState m_caStateTemp;
 protected:
+	CString m_LCMsize;
     Bullet m_blt;
     virtual void MsgFrmt(CException* e, CString, CString) = 0;
     virtual void MsgFrmt(CString) = 0;
 
 public:
-	Ca210(){};
+	Ca210(): m_LCMsize(""){};
     virtual ~Ca210(){};
 //////////////////////////////////////////////////////////////////////////
 
@@ -42,6 +43,7 @@ public:
  
     virtual void SetOnline(BOOL) = 0;
 	virtual BOOL isOnline() const = 0;
+	void    SetLcmSize(CString _S){ m_LCMsize = _S; };
     virtual CString GetLcmSize() = 0;
     virtual CString GetChData() = 0;
     virtual Bullet  GetMsrData() = 0;

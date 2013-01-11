@@ -93,11 +93,12 @@ public:
     float    m_f25FE;
     float    m_f5FE;
     float    m_f9FE;
+	float    m_f13FE;
     float    m_fGammaSetp;
     UINT     m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
-	UINT	m_jsdGray;
+	UINT     m_jsdGray;
 	//}}AFX_DATA
 
 

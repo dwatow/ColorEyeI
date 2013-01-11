@@ -28,6 +28,7 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
     
     //之間的順序要固定，不要修改了！
     InitCa210();
+	SetupLCMSize();
     InitDataDlgType();
 }
 
@@ -183,7 +184,7 @@ void CPatternDlg::OnPaint()
         TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %2.1f inch", \
-            m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), _T(m_GunMchn.GetLcmSize()));//LCM Size這樣抓會有問題
+            m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize());//LCM Size這樣抓會有問題
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
     }
 
@@ -351,7 +352,10 @@ CString CPatternDlg::SetupLCMSize()
         dlgEnterValue.SetValueKind("LCM Size");
 
         if (dlgEnterValue.DoModal() == IDOK)
+		{
             LCMSize = dlgEnterValue.m_strValue;
+			m_pCA210->SetLcmSize(LCMSize);
+		}
     }
 	return LCMSize;
 }
@@ -383,7 +387,7 @@ BOOL CPatternDlg::Magazine()
 		dlgReadBarCode.DoModal();
 
 		//++BeginItor;  
-		if (!m_GunMchn.Magazine(SetupLCMSize(), m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+		if (!m_GunMchn.Magazine(m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
 		Trigger(m_itor);
 		NextTrigger(m_itor);
 		if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小

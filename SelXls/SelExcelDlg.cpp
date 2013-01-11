@@ -179,9 +179,16 @@ void CSelExcelDlg::OnSelectXlsForm()
     }
     else if (str.Find("OQC") != -1)// str.Find("F1") != -1 || str.Find("H1") != -1 || str.Find("F6") != -1 || str.Find("H6") != -1 || 
     {
-        m_strItemOfExcel.Format("9點亮度\n9點色度\n25點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFlicker");
+        m_strItemOfExcel.Format("2013年試產表格\n9點亮色度、中心點亮色度、5Nits\n25點暗態\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker");
         m_fileNumLimit = 10;
-        m_ft = FORM_OQC_LCM_SPEC;
+        m_ft = FORM_OQC_TRIAL_PRODUCTION;  //試產
+        m_btnOK.EnableWindow(TRUE);
+    }
+    else if (str.Find("Y2013") != -1)// str.Find("F1") != -1 || str.Find("H1") != -1 || str.Find("F6") != -1 || str.Find("H6") != -1 || 
+    {
+        m_strItemOfExcel.Format("2013年量產表格\n9點亮度\n25點暗態\n中心點亮色度\n5Nits\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker");
+        m_fileNumLimit = 10;
+        m_ft = FORM_OQCY2013_MASS_PRODUCTION;  //量產
         m_btnOK.EnableWindow(TRUE);
     }
     else if (str.Find("Gamma") != -1)
@@ -249,17 +256,18 @@ void CSelExcelDlg::NewVector()
     m_vOmdtoXls.StdInit();
 }
 
-void CSelExcelDlg::OnOK() 
+void CSelExcelDlg::OnOK()
 {
     BeginWaitCursor();
         CXlsFile2* pfXls = 0;
         NewVector();
         switch(m_ft)
         {
-        case FORM_SEC:          pfXls = new CXlsSEC1();  pfXls->New()->SetSheetName(1,"SEC Report");                break;
-        case FORM_RA:           pfXls = new CXlsRA1();   pfXls->New()->SetSheetName(1,"RA Report");                 break;    
-        case FORM_OQC_LCM_SPEC: pfXls = new CXlsOQC2();  pfXls->Open(GetXlsFilePath())->SetSheetName(1,"OQC SPEC"); break;    
-        case FORM_Gamma:        pfXls = new CXlsGamma(); pfXls->Open(GetXlsFilePath())->SetSheetName(1, "Color Data"); break;
+        case FORM_SEC:                      pfXls = new CXlsSEC1();  pfXls->New()->SetSheetName(1,"SEC Report");                   break;
+        case FORM_RA:                       pfXls = new CXlsRA1();   pfXls->New()->SetSheetName(1,"RA Report");                    break;    
+        case FORM_OQC_TRIAL_PRODUCTION:     pfXls = new CXlsOQC2();  pfXls->Open(GetXlsFilePath())->SetSheetName(1, "OQC SPEC");   break;
+		case FORM_OQCY2013_MASS_PRODUCTION: pfXls = new CXlsOQC1();  pfXls->Open(GetXlsFilePath())->SetSheetName(1, "光學");        break;
+        case FORM_Gamma:                    pfXls = new CXlsGamma(); pfXls->Open(GetXlsFilePath())->SetSheetName(1, "Color Data"); break;
         case FORM_Nothing:
         default:                AfxMessageBox("怎麼會選這一個輸出？");
         }

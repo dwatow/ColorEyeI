@@ -20,13 +20,13 @@ Resource1=IDD_OMDTOEXCEL
 Class5=CAboutDlg
 Resource2=IDD_MSR_ITEM
 Resource3=IDR_MAINFRAME
-Resource4=IDD_CASETUP_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
 Resource6=IDD_PATTERN_DIALOG
 Resource7=IDD_EDIT_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_ABOUTBOX
+Resource8=IDD_CASETUP_DIALOG
 Class8=CReadBarCodeDialog
 Resource9=IDD_DIALOG_BARCODE
 
@@ -35,7 +35,7 @@ Type=0
 HeaderFile=ColorEyeI.h
 ImplementationFile=ColorEyeI.cpp
 Filter=N
-LastObject=ID_FILE_OMDTOXLS
+LastObject=CColorEyeIApp
 BaseClass=CWinApp
 VirtualFilter=AC
 
@@ -176,7 +176,7 @@ Control11=IDC_STATIC,button,1342177287
 [DLG:IDD_MSR_ITEM]
 Type=1
 Class=?
-ControlCount=97
+ControlCount=99
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -274,6 +274,8 @@ Control94=IDC_STATIC,button,1342177287
 Control95=IDC_BUTTON_SELALL,button,1342242816
 Control96=IDC_BUTTON_SELNO,button,1342242816
 Control97=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
+Control98=IDC_EDIT_P13FE,edit,1350631552
+Control99=IDC_STATIC,static,1342308352
 
 [DLG:IDD_EDIT_DIALOG]
 Type=1

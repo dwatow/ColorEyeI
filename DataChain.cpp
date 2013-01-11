@@ -65,16 +65,16 @@ CDataChain::~CDataChain()
 xChain::size_type CDataChain::StdInit()
 {
 //    Empty();    
-	Grow(JND, Pn1);
-    Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
-    Grow(Nits, Pn9);
-    Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
-    Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
-    Grow(White, Pn13);      Grow(Red  , Pn13);      Grow(Green, Pn13);      Grow(Blue , Pn13);      Grow(Dark , Pn13);
-	Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
-    Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
-    Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
-    Grow(CrsTlk , Pn4);
+	 Grow(JND, Pn1);
+     Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
+     Grow(Nits, Pn9);
+     Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
+     Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
+     Grow(White, Pn13);      Grow(Red  , Pn13);      Grow(Green, Pn13);      Grow(Blue , Pn13);      Grow(Dark , Pn13);
+     Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
+     Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
+     Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
+     Grow(CrsTlk , Pn4);
     
     //freeBuffer();
     return m_CarChain1.size();

@@ -289,27 +289,26 @@ void Ca210real::SetOnline(BOOL isOnline)
 
 CString Ca210real::GetLcmSize()
 {
-    CString str;
     if(isOnline())
     {
 #ifdef _CA210DEBUG
             DBugModeBox("TRUE of GetLcmSize()");
 #endif
-            try
-            {
-                str.Format("%s", m_pIMemory->GetChannelID().Left(2));
-            }
-            catch (CException* e)
-            {
-                MsgFrmt(e, "模組尺寸大小設定出問題", ImpsbStr);
-                return "-1";
-            }
-            return str;
-
+        try
+        {
+			if (m_LCMsize.IsEmpty())
+                m_LCMsize.Format("%s", m_pIMemory->GetChannelID().Left(2));
+        }
+        catch (CException* e)
+		{
+			MsgFrmt(e, "模組尺寸大小設定出問題", ImpsbStr);
+			m_LCMsize.Format("-1");
+		}
     }
     else 
-        str.Format("-1");
-    return str;
+        m_LCMsize.Format("-1");
+
+    return m_LCMsize;
 }
 
 CString Ca210real::GetChData()

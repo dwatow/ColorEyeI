@@ -181,6 +181,7 @@ void CCaSetupDlg::OnSelchangeComboChannelId()
 	// TODO: Add your control notification handler code here
 	long Ch = (long)m_cbxChId.GetCurSel();
 	m_pCA210->SetChNo(Ch);
+	m_pCA210->SetLcmSize("");
 	UpdateAllSetup();
 }
 
@@ -189,6 +190,7 @@ void CCaSetupDlg::OnSelchangeComboChannelNumber()
 	// TODO: Add your control notification handler code here
 	long Ch = (long)m_cbxChNo.GetCurSel();
 	m_pCA210->SetChNo(Ch);
+	m_pCA210->SetLcmSize("");
 	UpdateAllSetup();
 }
 
