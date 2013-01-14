@@ -30,7 +30,7 @@ CXlsFile2* CXlsOQC1::iNitsLv(CString strNitsLv   , std::vector<Cartridge>::size_
 CXlsFile2* CXlsOQC1::iData(CDataChain&           , std::vector<Cartridge>::size_type ModuleNO){ iCellNO(ModuleNO)->iData(m_vCar);            return this;}
 
 //////////////////////////////////////////////////////////////////////////
-CXlsFile2* CXlsOQC1::iNitsLv(CString strNitsLv   ) { SelectSheet(1)->SelectCell("BE", 5+m_ModuleNO)->SetCell(strNitsLv); /*AfxMessageBox(strNitsLv);*/    return this;}
+CXlsFile2* CXlsOQC1::iNitsLv(CString strNitsLv   ) { SelectSheet(1)->SelectCell("AM", 5+m_ModuleNO)->SetCell(strNitsLv); /*AfxMessageBox(strNitsLv);*/    return this;}
 CXlsFile2* CXlsOQC1::iPanelID(CString strPanelID)
 {
     SelectSheet(1)->SelectCell('B' , 5+m_ModuleNO)->SetCell(strPanelID);
@@ -100,26 +100,26 @@ void CXlsOQC1::idW5()
 {
     //W5(Lv,x,y)
     SelectSheet(3);
-    SelectCell('C', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 0).GetLv());
-    SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSx());
-    SelectCell('E', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSy());
+    SelectCell('C', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSx());
+    SelectCell('D', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 0).GetSy());
+    SelectCell('E', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 0).GetLv());
 	
-    SelectCell('F', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 1).GetLv());
-    SelectCell('G', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSx());
-    SelectCell('H', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSy());
+    SelectCell('F', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSx());
+    SelectCell('G', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 1).GetSy());
+    SelectCell('H', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 1).GetLv());
     
-    SelectCell('I', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 2).GetLv());
-    SelectCell('J', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSx());
-    SelectCell('K', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSy());
+    SelectCell('I', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSx());
+    SelectCell('J', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 2).GetSy());
+    SelectCell('K', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 2).GetLv());
     
-    SelectCell('L', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 3).GetLv());
-    SelectCell('M', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSx());
-    SelectCell('N', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSy());
+    SelectCell('L', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSx());
+    SelectCell('M', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 3).GetSy());
+    SelectCell('N', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 3).GetLv());
     
-    SelectCell('O', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 4).GetLv());
-    SelectCell('P', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSx());
-    SelectCell('Q', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSy());
-	
+    SelectCell('O', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSx());
+    SelectCell('P', 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.At(White, Pn5, 4).GetSy());
+    SelectCell('Q', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.At(White, Pn5, 4).GetLv());
+
 	CString Lv, Sx, Sy;
 	Lv.Format("%3.2f", m_vCar.At(White, Pn5, 2).GetLv());
 	Sx.Format("%1.4f", m_vCar.At(White, Pn5, 2).GetSx());
@@ -354,9 +354,9 @@ void CXlsOQC1::idD21()
 
     //单D1
     SelectSheet(1);
-    SelectCell("AO", 5+m_ModuleNO)->SetCell(Lv);
-    SelectCell("AP", 5+m_ModuleNO)->SetCell(Sx);
-    SelectCell("AQ", 5+m_ModuleNO)->SetCell(Sy);
+    SelectCell("W", 5+m_ModuleNO)->SetCell(Lv);
+    SelectCell("X", 5+m_ModuleNO)->SetCell(Sx);
+    SelectCell("Y", 5+m_ModuleNO)->SetCell(Sy);
     
     //单D25
     SelectSheet(2);
@@ -386,9 +386,9 @@ void CXlsOQC1::idD25()
 
     //单D1
     SelectSheet(1);
-    SelectCell("AO", 5+m_ModuleNO)->SetCell(Lv);
-    SelectCell("AP", 5+m_ModuleNO)->SetCell(Sx);
-    SelectCell("AQ", 5+m_ModuleNO)->SetCell(Sy);
+    SelectCell("W", 5+m_ModuleNO)->SetCell(Lv);
+    SelectCell("X", 5+m_ModuleNO)->SetCell(Sx);
+    SelectCell("Y", 5+m_ModuleNO)->SetCell(Sy);
 
 	//单D21
     SelectSheet(5);

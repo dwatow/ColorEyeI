@@ -807,7 +807,8 @@ void CPatternDlg::FineNitsPos(int& _gl)
 	while(fLv >  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
 	{
 		_gl -= 2;
-		ChangeBkColor(_gl);
+		ChangeBkColor(_gl);  //變成m_BkColor
+//		Sleep(0);
 		//量測抓值
 		if (m_pCA210->Measure() == CA_ZeroCalMode)
 		    MessageBox("檔位不在MEAS");
@@ -833,6 +834,7 @@ void CPatternDlg::FineNitsNeg(int& _gl)
 	{
 		_gl += 2;
 		ChangeBkColor(_gl);
+//		Sleep(0);
 		//量測抓值
 		if (m_pCA210->Measure() == CA_ZeroCalMode)
 		    MessageBox("檔位不在MEAS");
@@ -876,7 +878,7 @@ void CPatternDlg::FineNits()
 // 	str.Format("max:%d\nmin%d\ngraylv:%d", glvMax, glvMin, Graylevel);
 // 	AfxMessageBox(str);
 
-	int Graylevel;
+	int Graylevel(60);
 
 	     if (m_GunMchn.GetNitsKind() == NK_POS) Graylevel = 55;
 	else if (m_GunMchn.GetNitsKind() == NK_NEG) Graylevel = 60;
