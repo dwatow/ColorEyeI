@@ -41,9 +41,6 @@ void CPatternDlg::InitDataDlgType()
         dlgMsrItem.SetBolt(&m_GunMchn);
         dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
 		break;
-
-// 	default:
-// 		return FALSE;
     }
 }
 
@@ -360,7 +357,8 @@ CString CPatternDlg::SetupLCMSize()
 	return LCMSize;
 }
 
-BOOL CPatternDlg::Magazine()
+//BOOL CPatternDlg::Magazine()
+void CPatternDlg::Magazine()
 {
     // TODO: Add extra validation here
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
@@ -379,7 +377,8 @@ BOOL CPatternDlg::Magazine()
 
 	//MsrItem按下「確定」還是「取消」
 	if (pDoc->GetMsrDataChain().IsEmpty())
-		return FALSE;  //無填彈，不用量
+		//return FALSE;  //無填彈，不用量
+		ShowWindow(SW_HIDE);
 	else
 	{
 		//SetPanel
@@ -395,7 +394,9 @@ BOOL CPatternDlg::Magazine()
     
 		Invalidate();
     
-	    return TRUE;  //有子彈可以量測
+	    //return TRUE;  //有子彈可以量測
+		ShowWindow(SW_MAXIMIZE);
+        SetFocus();
 	}
 }
 
@@ -431,7 +432,7 @@ BOOL CPatternDlg::Trigger(std::vector<Cartridge>::iterator& it)
 
 		if ( !c_bMsrEndnMsred || it->GetMsrFlowNum() != PnGamma && it != m_BeginItor)
 			VbrGoalThread((LPVOID)&Info1);
-	//}
+
 
 	c_bMsrBegin = (it == m_BeginItor) ? TRUE : FALSE;
 
@@ -467,12 +468,6 @@ BOOL CPatternDlg::NextTrigger(std::vector<Cartridge>::iterator& it)
 BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg) 
 {
     // TODO: Add your specialized code here and/or call the base class
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
-
     if (pMsg->message == WM_KEYDOWN)
     {
         switch(pMsg->wParam)
@@ -482,15 +477,8 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
             case VK_RIGHT:  EventGoNextGoal();    break;//右   ：跳下一個點
             case VK_LEFT:   EventGoPrvsGoal();    break;//左   ：上一個點
             case VK_RETURN: EventCatchMsrValue(); break;//Enter：抓值抓抓抓!!!!
-            case VK_ESCAPE:                             //ESC  ：跳離Patten Dialog
-                if(c_bRunMsrAI)
-                    KillTimer(1);
-                ShowWindow(SW_HIDE);
-                pDoc->RestructureVector();
-				pDoc->UpdateAllViews(NULL);
-				int a = (int)(GetRValue(m_GunMchn.Get5NitsBkColor()));
- 				pDoc->SetNitsLv(a);
-                break;
+            case VK_ESCAPE: EventExitDialog();    break;//ESC  ：跳離Patten Dialog
+				
         }
         return TRUE;
     }
@@ -685,14 +673,14 @@ BOOL CPatternDlg::EventGoNextGoal()
         if (m_itor == m_EndItor) m_itor--;
     }
 
-		//重新畫圈圈+動畫
-        Trigger(m_itor);
-        NextTrigger(m_itor);
-		c_bMsring = FALSE;
-        c_bMsrValues = FALSE;
-        Invalidate();
+	//重新畫圈圈+動畫
+	Trigger(m_itor);
+	NextTrigger(m_itor);
+	c_bMsring = FALSE;
+	c_bMsrValues = FALSE;
+	Invalidate();
 
-        return !c_bMsrEnd;
+	return !c_bMsrEnd;
 }
 
 UINT CPatternDlg::EventCatchMsrValue()
@@ -777,6 +765,24 @@ void CPatternDlg::EventSwCntCa210()
     //切換連線
     m_pCA210->SetOnline(m_pCA210->isOnline() ? FALSE : TRUE);
     Invalidate();
+}
+
+void CPatternDlg::EventExitDialog()
+{
+	if(c_bRunMsrAI)
+		KillTimer(1);
+	ShowWindow(SW_HIDE);
+	
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+	ASSERT_VALID(pMainFrm);
+	
+	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+	ASSERT_VALID(pDoc);
+	
+    pDoc->RestructureVector();
+	pDoc->UpdateAllViews(NULL);
+	int a = (int)(GetRValue(m_GunMchn.Get5NitsBkColor()));
+	pDoc->SetNitsLv(a);
 }
 
 // void CPatternDlg::EventRunZeroCal()

@@ -113,6 +113,7 @@ private:
     void EventSwCntCa210();
     void EventRunMsrAi(BOOL isRun = 2);
     UINT EventCatchMsrValue();
+	void EventExitDialog();
 
     static UINT VbrGoalThread(LPVOID LParam);
     static UINT VbrNextGoalThread(LPVOID LParam);
@@ -123,7 +124,8 @@ private:
 public:
     void FineNits();
 
-    BOOL Magazine(); //¼u§X
+//    BOOL Magazine(); //¼u§X
+	void Magazine(); //¼u§X
 
     COLORREF GetBkColor() const;
     BOOL     SetBkColor(COLORREF);
