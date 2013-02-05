@@ -401,45 +401,45 @@ void CXlsOQC1::idD25()
 void CXlsOQC1::idCrsTlk()
 {
     SelectSheet(6);
+    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 0).GetLv());  //up
+    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 3).GetLv());  //down
+    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 1).GetLv());  //left
+    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 2).GetLv());  //right
+    
+    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 0).GetLv());
+    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
+    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
+    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
+    
     SelectCell('M', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 0).GetLv());
-    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 1).GetLv());
-    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 2).GetLv());
-    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 3).GetLv());
+    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 3).GetLv());
+    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 1).GetLv());
+    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkW, Pn4, 2).GetLv());
     
-    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 0).GetLv());
-    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
-    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
-    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
+    SelectCell('Q', 9+m_ModuleNO)->SetCell("%f", (SelectCell('I', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", (SelectCell('J', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", (SelectCell('K', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", (SelectCell('L', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double());
     
-    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 0).GetLv());
-    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 1).GetLv());
-    SelectCell('Y', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 2).GetLv());
-    SelectCell('Z', 9+m_ModuleNO)->SetCell("%f", m_vCar.At(CrsTlk , Pn4, 3).GetLv());
+    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('V', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double());
+    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double());
     
-    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", (SelectCell('R', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", (SelectCell('S', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", (SelectCell('T', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", (SelectCell('U', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double());
-    
-    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double());
-    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double());
-    
-    SelectCell('M', 9+m_ModuleNO)->ClearCell();
-    SelectCell('N', 9+m_ModuleNO)->ClearCell();
-    SelectCell('O', 9+m_ModuleNO)->ClearCell();
-    SelectCell('P', 9+m_ModuleNO)->ClearCell();
-    
-    SelectCell('R', 9+m_ModuleNO)->ClearCell();
-    SelectCell('S', 9+m_ModuleNO)->ClearCell();
-    SelectCell('T', 9+m_ModuleNO)->ClearCell();
-    SelectCell('U', 9+m_ModuleNO)->ClearCell();
-    
-    SelectCell('W', 9+m_ModuleNO)->ClearCell();
-    SelectCell('X', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Y', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Z', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('M', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('N', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('O', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('P', 9+m_ModuleNO)->ClearCell();
+//     
+//     SelectCell('R', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('S', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('T', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('U', 9+m_ModuleNO)->ClearCell();
+//     
+//     SelectCell('W', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('X', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('Y', 9+m_ModuleNO)->ClearCell();
+//     SelectCell('Z', 9+m_ModuleNO)->ClearCell();
 }
 
 void CXlsOQC1::iColorTemperature()
