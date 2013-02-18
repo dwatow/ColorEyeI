@@ -4,7 +4,6 @@
 //Bullet ºu¿Y
 class Bullet
 {
-private:
     float m_fLv;                                     float m_fX;
     float m_fSx;    long  m_lT;      float m_fDu;    float m_fY;
     float m_fSy;    float m_fDuv;    float m_fDv;    float m_fZ;
@@ -13,6 +12,7 @@ private:
     CString m_strSx;    CString m_strT;     CString m_strDu;    CString m_strY;
     CString m_strSy;    CString m_strDuv;   CString m_strDv;    CString m_strZ;
 
+	CTime 	m_LastModifyTime;
 public:
     Bullet();
     Bullet(const Bullet&);
@@ -54,6 +54,7 @@ public:
     virtual void    operator= (const Bullet&);
 
     BOOL isEmpty() const;
+	CString GetLastTime() const;
 
     //////////////////////////////////////////////////////////////////////////
     //debug function

@@ -57,28 +57,11 @@ public:
     float GetY()   const;   CString GetStrY()   const;    BOOL SetY(float);    BOOL SetY(CString);
     float GetZ()   const;   CString GetStrZ()   const;    BOOL SetZ(float);    BOOL SetZ(CString);
 
-//    Bullet& GetBullet();
-	Bullet GetBullet() const;
+	Bullet  GetBullet() const;
     void   SetBullet(const Bullet& Pd);
 
-    BOOL operator==(const Cartridge& vCar)
-    {
-        return ((GetMsrFlowNo()  == vCar.GetMsrFlowNo() ) && 
-                (GetMsrFlowNum() == vCar.GetMsrFlowNum()) && 
-                (GetBackColor()  == vCar.GetBackColor() )) ? TRUE : FALSE;
-    };
-
-	void operator= (const Cartridge& vCar)
-	{
-		SetMsrFlowNo(vCar.GetMsrFlowNo());
-		SetMsrFlowNum(vCar.GetMsrFlowNum());
-		SetBackColor(vCar.GetBackColor());
-		SetArea(vCar.GetArea());
-		SetOrigSeqc(vCar.GetOrigSeqc());
-
-		SetBullet(vCar.GetBullet());
-	}
-
+    BOOL operator==(const Cartridge& vCar);
+	void operator= (const Cartridge& vCar);
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -91,5 +74,24 @@ public:
 //////////////////////////////////////////////////////////////////////////
   
 };
+
+
+inline BOOL Cartridge::operator==(const Cartridge& vCar)
+{
+	return ((GetMsrFlowNo()  == vCar.GetMsrFlowNo() ) && 
+		(GetMsrFlowNum() == vCar.GetMsrFlowNum()) && 
+		(GetBackColor()  == vCar.GetBackColor() )) ? TRUE : FALSE;
+};
+
+inline void Cartridge::operator= (const Cartridge& vCar)
+{
+	SetMsrFlowNo(vCar.GetMsrFlowNo());
+	SetMsrFlowNum(vCar.GetMsrFlowNum());
+	SetBackColor(vCar.GetBackColor());
+	SetArea(vCar.GetArea());
+	SetOrigSeqc(vCar.GetOrigSeqc());
+	
+	SetBullet(vCar.GetBullet());
+}
 
 #endif

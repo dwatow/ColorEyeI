@@ -122,6 +122,10 @@ SOURCE=.\xMsrPoint\Cartridge.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\Cartridge2.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CaSetupDlg.cpp
 # End Source File
 # Begin Source File
@@ -174,6 +178,10 @@ SOURCE=.\DataChain.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\DNA.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\EnterValueDlg.cpp
 # End Source File
 # Begin Source File
@@ -194,11 +202,19 @@ SOURCE=.\MsrItems\MsrItemDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\Nucleotide.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\PatternDlg.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\ReadBarCodeDialog.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNA.cpp
 # End Source File
 # Begin Source File
 
@@ -216,6 +232,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\Table.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TranScripter.cpp
 # End Source File
 # Begin Source File
 
@@ -279,6 +299,10 @@ SOURCE=.\xMsrPoint\Cartridge.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\Cartridge2.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\CaSetupDlg.h
 # End Source File
 # Begin Source File
@@ -323,6 +347,10 @@ SOURCE=.\DataChain.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\DNA.H
+# End Source File
+# Begin Source File
+
 SOURCE=.\EnterValueDlg.h
 # End Source File
 # Begin Source File
@@ -347,6 +375,10 @@ SOURCE=.\MsrItems\MsrItemDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\xMsrPoint\Nucleotide.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\PatternDlg.h
 # End Source File
 # Begin Source File
@@ -356,6 +388,10 @@ SOURCE=.\ReadBarCodeDialog.h
 # Begin Source File
 
 SOURCE=.\resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNA.h
 # End Source File
 # Begin Source File
 
@@ -372,6 +408,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\Table.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TranScripter.h
 # End Source File
 # Begin Source File
 

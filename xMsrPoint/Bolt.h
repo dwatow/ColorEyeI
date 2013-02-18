@@ -6,6 +6,7 @@
 #include "Cartridge.h"
 
 typedef std::vector<Cartridge> xChain;
+
 //enum PtXt {PtXtT = 0, PtXtL, PtXtR, PtXtB};
 enum TrigStatus{ TS_FinalPoint = 0, TS_Normal, TS_Find_Nits, TS_JND, TS_JNDX};
 enum NitsKind{ NK_POS, NK_NEG};

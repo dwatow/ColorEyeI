@@ -60,9 +60,9 @@ float Cartridge::GetZ() const { return m_Data.GetZ();}    CString Cartridge::Get
 
 Bullet Cartridge::GetBullet() const
 {    
-//     Pd.SetLv(m_fLv);                                            Pd.SetX(m_fX);
-//     Pd.SetSx(m_fSx);    Pd.SetT(m_lT);        Pd.SetDu(m_fDu);    Pd.SetY(m_fY);
-//     Pd.SetSy(m_fSy);    Pd.SetDuv(m_fDuv);    Pd.SetDv(m_fDv);    Pd.SetZ(m_fZ);
+	//     Pd.SetLv(m_fLv);                                            Pd.SetX(m_fX);
+	//     Pd.SetSx(m_fSx);    Pd.SetT(m_lT);        Pd.SetDu(m_fDu);    Pd.SetY(m_fY);
+	//     Pd.SetSy(m_fSy);    Pd.SetDuv(m_fDuv);    Pd.SetDv(m_fDv);    Pd.SetZ(m_fZ);
     return m_Data;    
 }
 

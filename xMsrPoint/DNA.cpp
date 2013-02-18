@@ -1,0 +1,17 @@
+#include "DNA.h"
+
+void DNA::AddCell(const Nucleotide& _N) 
+{
+    nChain.push_back(_N);
+};
+
+void DNA::AddCell(ColorType _C, PointNum _P, int _N1, int _N2, int _N3)
+{
+	Nucleotide _N(_C, _P, _N1, _N2, _N3);
+	nChain.push_back(_N);
+}
+
+void DNA::DelCell(std::vector<Nucleotide>::size_type index)
+{
+	nChain.erase(&nChain.at(index));
+}

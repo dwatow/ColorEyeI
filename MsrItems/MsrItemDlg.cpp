@@ -6,12 +6,15 @@
 #include "MsrItemDlg.h"
 #include "../xMsrPoint/PatternDlg.h"
 #include "../ColorEyeI.h"
+#include "../TranScripter.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CMsrItemDlg dialog
@@ -22,11 +25,11 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
 {
     EnableAutomation();
 
-	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
-	ASSERT_VALID(pApp);
+    CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+    ASSERT_VALID(pApp);
 
-	m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
-	
+    m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
+    
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
     m_nGM2 = 255;
@@ -40,17 +43,17 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_n25RectSide = 10;
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
-	m_jsdGray = 0;
-	m_f13FE = 0.0f;
-	//}}AFX_DATA_INIT
+    m_jsdGray = 0;
+    m_f13FE = 0.0f;
+    //}}AFX_DATA_INIT
 }
 
 void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     //{{AFX_DATA_MAP(CMsrItemDlg)
-	DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
-	DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
+    DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
+    DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
     DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
     DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
@@ -124,14 +127,14 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT_P25RECTSIDE, m_n25RectSide);
     DDV_MinMaxUInt(pDX, m_n25RectSide, 0, 100);
     DDX_Text(pDX, IDC_EDIT_CROSSTALK1, m_fCrsTlkRectFE);
-	DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
-	DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_jsdGray);
-	DDV_MinMaxUInt(pDX, m_jsdGray, 0, 255);
-	DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
-	DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
-	//}}AFX_DATA_MAP
+    DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_jsdGray);
+    DDV_MinMaxUInt(pDX, m_jsdGray, 0, 255);
+    DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
+    DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
+    //}}AFX_DATA_MAP
 }
 
 
@@ -141,9 +144,9 @@ BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
     ON_WM_PAINT()
     ON_BN_CLICKED(IDC_BUTTON_ADD, OnButtonAdd)
     ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
-	ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
-	ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
-	//}}AFX_MSG_MAP
+    ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
+    ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CMsrItemDlg, CDialog)
@@ -201,161 +204,134 @@ void CMsrItemDlg::OnPaint()
     // Do not call CDialog::OnPaint() for painting messages
 }
 
-void CMsrItemDlg::SetBolt(Bolt* _p)
-{
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pMainFrm);
-	
-	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
+// void CMsrItemDlg::SetBolt(Bolt* _p)
+// {
+//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+//     ASSERT_VALID(pMainFrm);
+//     
+//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+//     ASSERT_VALID(pDoc);
+// 
+//     pDoc->GetMsrDataChain().SetBolt(_p);
+// }
 
-	pDoc->GetMsrDataChain().SetBolt(_p);
-}
-
-unsigned int CMsrItemDlg::ListBoxUpdate(const CDataChain& Datas)
+void CMsrItemDlg::ListBoxUpdate(RNA& Datas)
 {
     m_lstMsrItems.ResetContent();
-
+    
     if (Datas.IsEmpty())
         m_btnDelItems.EnableWindow(FALSE);
     else
     {
         m_btnDelItems.EnableWindow(TRUE);
-
-        CString str;
-        for (xChain::const_iterator itor = Datas.Begin(); itor != Datas.End(); ++itor)
-        {
-            str.Format("%s%s第%2d點", itor->GetStrColorType(), itor->GetStrPointNum(), itor->GetMsrFlowNo());
-            m_lstMsrItems.AddString(str);
-
-        }
+        
+        for (std::vector<Cartridge2>::const_iterator itor = Datas.Begin(); itor != Datas.End(); ++itor)
+            m_lstMsrItems.AddString(itor->GetDescrip());
     }
-    return Datas.Size();
+    m_btnOK.EnableWindow(Datas.Size());
+
+#ifdef _DEBUG
+    CTxtFile fTxt;
+    CFileException fx;
+    fTxt.Save("C://Users//1004066//Desktop//DNA.log", fx);
+    fTxt.iTxtData(m_dTxt);
+    fTxt.Close();
+#endif
 }
 
-void CMsrItemDlg::OnButtonAdd() 
+DNA CMsrItemDlg::GetSelMsrItem()
 {
-    // TODO: Add your control notification handler code here
+	DNA ballistic;  //彈道
 
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
+    //準備DNA
+    //填入參數
+    //JND
+    if (m_chkJND.GetState())  ballistic.AddCell(JND , Pn1);
+	
+    //中心點
+    if (m_chkCWP1.GetState())  ballistic.AddCell(White, Pn1);
+    if (m_chkCRP1.GetState())  ballistic.AddCell(Red  , Pn1);
+    if (m_chkCGP1.GetState())  ballistic.AddCell(Green, Pn1);
+    if (m_chkCBP1.GetState())  ballistic.AddCell(Blue , Pn1);
+    if (m_chkCDP1.GetState())  ballistic.AddCell(Dark , Pn1);
     
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
+    //Nits
+    if (m_chkNits.GetState())  ballistic.AddCell(Nits, Pn9, m_fNits, m_cbxSelNitsKind.GetCurSel());
+	
+    //5點
+    if (m_chkCWP5.GetState())    ballistic.AddCell(White, Pn5, m_f5FE);
+    if (m_chkCRP5.GetState())    ballistic.AddCell(Red  , Pn5, m_f5FE);
+    if (m_chkCGP5.GetState())    ballistic.AddCell(Green, Pn5, m_f5FE);
+    if (m_chkCBP5.GetState())    ballistic.AddCell(Blue , Pn5, m_f5FE);
+    if (m_chkCDP5.GetState())    ballistic.AddCell(Dark , Pn5, m_f5FE);
+    
+    //9點
+    if (m_chkCWP9.GetState())    ballistic.AddCell(White, Pn9, m_f9FE);
+    if (m_chkCRP9.GetState())    ballistic.AddCell(Red  , Pn9, m_f9FE);
+    if (m_chkCGP9.GetState())    ballistic.AddCell(Green, Pn9, m_f9FE);
+    if (m_chkCBP9.GetState())    ballistic.AddCell(Blue , Pn9, m_f9FE);
+    if (m_chkCDP9.GetState())    ballistic.AddCell(Dark , Pn9, m_f9FE);
+    
+    //21點
+    if (m_chkCWP21.GetState())    ballistic.AddCell(White, Pn21, m_f21FE);
+    if (m_chkCRP21.GetState())    ballistic.AddCell(Red  , Pn21, m_f21FE);
+    if (m_chkCGP21.GetState())    ballistic.AddCell(Green, Pn21, m_f21FE);
+    if (m_chkCBP21.GetState())    ballistic.AddCell(Blue , Pn21, m_f21FE);
+    if (m_chkCDP21.GetState())    ballistic.AddCell(Dark , Pn21, m_f21FE);
+	
+    //13點
+    if (m_chkCWP13.GetState())    ballistic.AddCell(White, Pn13, m_f13FE);
+    if (m_chkCRP13.GetState())    ballistic.AddCell(Red  , Pn13, m_f13FE);
+    if (m_chkCGP13.GetState())    ballistic.AddCell(Green, Pn13, m_f13FE);
+    if (m_chkCBP13.GetState())    ballistic.AddCell(Blue , Pn13, m_f13FE);
+    if (m_chkCDP13.GetState())    ballistic.AddCell(Dark , Pn13, m_f13FE);
+	
+    //25點
+    if (m_chkCWP25.GetState())    ballistic.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCRP25.GetState())    ballistic.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCGP25.GetState())    ballistic.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCBP25.GetState())    ballistic.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCDP25.GetState())    ballistic.AddCell(Dark , Pn25, m_f25FE, m_n25RectSide);
+    
+    //49點
+    if (m_chkCWP49.GetState())    ballistic.AddCell(White, Pn49);
+    if (m_chkCRP49.GetState())    ballistic.AddCell(Red  , Pn49);
+    if (m_chkCGP49.GetState())    ballistic.AddCell(Green, Pn49);
+    if (m_chkCBP49.GetState())    ballistic.AddCell(Blue , Pn49);
+    if (m_chkCDP49.GetState())    ballistic.AddCell(Dark , Pn49);
+    //排序
+	//     if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
+	//     else                             pDoc->GetMsrDataChain().SortOrigMsr();
+    
+    //Cross Talk srot by AreaCode
+    if (m_chkCrossTalk.GetState())        ballistic.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+    
+    if (m_chkCWGM.GetState() || m_chkCDGM.GetState())		
+		                         ballistic.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
+    if (m_chkCRGM.GetState())    ballistic.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
+    if (m_chkCGGM.GetState())    ballistic.AddCell(Green, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Green, PnGamma);
+    if (m_chkCBGM.GetState())    ballistic.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
 
-    pDoc->SetModifiedFlag(TRUE);
-    
-    UpdateData(TRUE);
-    
+#ifdef _DEBUG
+    for (std::vector<Nucleotide>::iterator Nit = ballistic.Begin(); Nit != ballistic.End(); ++Nit)
+		m_dTxt.push_back(Nit->showMe());
+#endif // _DEBUG
+
+	return ballistic;
+}
+
+void CMsrItemDlg::OnButtonAdd()
+{
     //執行連到了這
     //1. CA-210已連線
     //2. CA-210已宣告
-    //////////////////////////////////////////////////////////////////////////
-	
-	//JND
-	if (m_chkJND.GetState())
-	{
-		pDoc->GetMsrDataChain().GetBolt()->SetJNDBkColor(RGB(m_jsdGray, m_jsdGray, m_jsdGray));
-		pDoc->GetMsrDataChain().Grow(JND , Pn1);
-	}
-    
-    //中心點
-	if (m_chkCWP1.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn1);
-    if (m_chkCRP1.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn1);
-    if (m_chkCGP1.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn1);
-    if (m_chkCBP1.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn1);
-    if (m_chkCDP1.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn1);
-    
-	//Nits
-    if (m_chkNits.GetState())
-	{
-        pDoc->GetMsrDataChain().GetBolt()->SetNitsNum(m_fNits);
-		
-		switch (m_cbxSelNitsKind.GetCurSel())
-		{
-		case 0: pDoc->GetMsrDataChain().GetBolt()->SetNitsKind(NK_POS); break;  //S at Y2012 add this for boss
-		default:
-		case 1: pDoc->GetMsrDataChain().GetBolt()->SetNitsKind(NK_NEG); break;
-		}
-	}
+	DNA _D = GetSelMsrItem();
+	RNA _R;
 
-    if (m_chkNits.GetState())     pDoc->GetMsrDataChain().Grow(Nits, Pn9);
+	TranScripter Ts;
+	Ts.Trans(_D, _R);
 
-	//5點
-    if (m_chkCWP5.GetState() || m_chkCRP5.GetState() || m_chkCGP5.GetState() || m_chkCBP5.GetState() || m_chkCDP5.GetState())
-        pDoc->GetMsrDataChain().GetBolt()->SetP5FE(m_f5FE);
-    if (m_chkCWP5.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn5);
-    if (m_chkCRP5.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn5);
-    if (m_chkCGP5.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn5);
-    if (m_chkCBP5.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn5);
-    if (m_chkCDP5.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn5);
-    
-    //9點
-    if (m_chkCWP9.GetState() || m_chkCRP9.GetState() || m_chkCGP9.GetState() || m_chkCBP9.GetState() || m_chkCDP9.GetState())
-        pDoc->GetMsrDataChain().GetBolt()->SetP9FE(m_f9FE);
-    if (m_chkCWP9.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn9);
-    if (m_chkCRP9.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn9);
-    if (m_chkCGP9.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn9);
-    if (m_chkCBP9.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn9);
-    if (m_chkCDP9.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn9);
-    
-	//21點
-    if (m_chkCWP21.GetState() || m_chkCRP21.GetState() || m_chkCGP21.GetState() || m_chkCBP21.GetState() || m_chkCDP21.GetState())
-        pDoc->GetMsrDataChain().GetBolt()->SetP21Avg(m_f21Havg, m_f21Vavg)->SetP21FE(m_f21FE);
-    if (m_chkCWP21.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn21);
-    if (m_chkCRP21.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn21);
-    if (m_chkCGP21.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn21);
-    if (m_chkCBP21.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn21);
-    if (m_chkCDP21.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn21);
-   
-	//13點
-    if (m_chkCWP13.GetState() || m_chkCRP13.GetState() || m_chkCGP13.GetState() || m_chkCBP13.GetState() || m_chkCDP13.GetState())
-        pDoc->GetMsrDataChain().GetBolt()->SetP13FE(m_f13FE);
-    if (m_chkCWP13.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn13);
-    if (m_chkCRP13.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn13);
-    if (m_chkCGP13.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn13);
-    if (m_chkCBP13.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn13);
-    if (m_chkCDP13.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn13);
-
-	//25點
-    if (m_chkCWP25.GetState() || m_chkCRP25.GetState() || m_chkCGP25.GetState() || m_chkCBP25.GetState() || m_chkCDP25.GetState())        
-        pDoc->GetMsrDataChain().GetBolt()->SetP25RectSide(m_n25RectSide)->SetP25FE(m_f25FE);
-    if (m_chkCWP25.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn25);
-    if (m_chkCRP25.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn25);
-    if (m_chkCGP25.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn25);
-    if (m_chkCBP25.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn25);
-    if (m_chkCDP25.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn25);
-    
-	//49點
-    if (m_chkCWP49.GetState())    pDoc->GetMsrDataChain().Grow(White, Pn49);
-    if (m_chkCRP49.GetState())    pDoc->GetMsrDataChain().Grow(Red  , Pn49);
-    if (m_chkCGP49.GetState())    pDoc->GetMsrDataChain().Grow(Green, Pn49);
-    if (m_chkCBP49.GetState())    pDoc->GetMsrDataChain().Grow(Blue , Pn49);
-    if (m_chkCDP49.GetState())    pDoc->GetMsrDataChain().Grow(Dark , Pn49);
-    
-    //排序
-    if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
-	else                             pDoc->GetMsrDataChain().SortOrigMsr();
-    
-	//Cross Talk srot by AreaCode
-    if (m_chkCrossTalk.GetState())
-    {
-        pDoc->GetMsrDataChain().GetBolt()->SetCrsTlkRectFE(m_fCrsTlkRectFE);
-        pDoc->GetMsrDataChain().Grow(CrsTlk, Pn4);
-    }
-
-	//Gamma
-    if (m_chkCWGM.GetState() || m_chkCRGM.GetState() || m_chkCGGM.GetState() || m_chkCBGM.GetState() || m_chkCDGM.GetState())
-        pDoc->GetMsrDataChain().GetBolt()->SetGammaRange(m_nGM1, m_nGM2)->GammaStep(m_fGammaSetp);
-    
-	if (m_chkCWGM.GetState() || m_chkCDGM.GetState())	
-			                    pDoc->GetMsrDataChain().Grow(White, PnGamma);
-	if (m_chkCRGM.GetState())	pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
-	if (m_chkCGGM.GetState())	pDoc->GetMsrDataChain().Grow(Green, PnGamma);
-	if (m_chkCBGM.GetState())	pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
-
-	if (ListBoxUpdate(pDoc->GetMsrDataChain()))
-		m_btnOK.EnableWindow(TRUE);
+    ListBoxUpdate(_R);
 }
 
 void CMsrItemDlg::OnButtonDel() 
@@ -370,16 +346,15 @@ void CMsrItemDlg::OnButtonDel()
     int* buffer = new int[m_lstMsrItems.GetSelCount()];  //弄一個buffer，準備存放選擇好的東西
     m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);  //將選擇的選項，放進buffer
     
-	//將buffer弄成CDataChain
+    //將buffer弄成CDataChain
     CDataChain temp;
     for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
         temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
 
-	pDoc->GetMsrDataChain().CutEqualCell(temp);
+    pDoc->GetMsrDataChain().CutEqualCell(temp);
 
-	//只是更新
-    if (!ListBoxUpdate(pDoc->GetMsrDataChain()))
-        m_btnOK.EnableWindow(FALSE);
+    //只是更新
+//    ListBoxUpdate();
 
     delete [] buffer;
 }
@@ -397,55 +372,55 @@ BOOL CMsrItemDlg::OnInitDialog()
 
     pDoc->GetMsrDataChain().Empty();
 
-	m_cbxSelNitsKind.AddString("+");
-	m_cbxSelNitsKind.AddString("--");
-	m_cbxSelNitsKind.SetCurSel(0);
+    m_cbxSelNitsKind.AddString("+");
+    m_cbxSelNitsKind.AddString("--");
+    m_cbxSelNitsKind.SetCurSel(0);
 
-	//記憶 選項 file >> Dialog
-	CFile LoadSet;
-	CFileException fx;
-	if (LoadSet.Open(m_RememberChkPathName, CFile::modeRead, &fx))
-	{
-		CArchive arch(&LoadSet, CArchive::load);
-		Serialize(arch);
-		arch.Close();
-		LoadSet.Close();
-	}
-	else
-	{
-		//例外處理
-		TCHAR buf[255];
-		fx.GetErrorMessage(buf, 255);
-	}
+    //記憶 選項 file >> Dialog
+    CFile LoadSet;
+    CFileException fx;
+    if (LoadSet.Open(m_RememberChkPathName, CFile::modeRead, &fx))
+    {
+        CArchive arch(&LoadSet, CArchive::load);
+        Serialize(arch);
+        arch.Close();
+        LoadSet.Close();
+    }
+    else
+    {
+        //例外處理
+        TCHAR buf[255];
+        fx.GetErrorMessage(buf, 255);
+    }
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void CMsrItemDlg::OnOK() 
 {
-	// TODO: Add extra validation here
-	
-	//記憶 選項 file >> Dialog
-	CFile SaveSet;
-	CFileException fx;
-	if (SaveSet.Open(m_RememberChkPathName, CFile::modeCreate | CFile::modeWrite, &fx))
-	{
-		CArchive arch(&SaveSet, CArchive::store);
-		Serialize(arch);
-		arch.Close();
-		SaveSet.Close();
-	}
-	else
-	{
-		//例外處理
-		TCHAR buf[255];
-		fx.GetErrorMessage(buf, 255);
-		CString strPrompt;
-		strPrompt.Format("CMsrItemDlg\n%s", buf);
-		AfxMessageBox(strPrompt);
-	}
-	
-	CDialog::OnOK();
+    // TODO: Add extra validation here
+    
+    //記憶 選項 file >> Dialog
+    CFile SaveSet;
+    CFileException fx;
+    if (SaveSet.Open(m_RememberChkPathName, CFile::modeCreate | CFile::modeWrite, &fx))
+    {
+        CArchive arch(&SaveSet, CArchive::store);
+        Serialize(arch);
+        arch.Close();
+        SaveSet.Close();
+    }
+    else
+    {
+        //例外處理
+        TCHAR buf[255];
+        fx.GetErrorMessage(buf, 255);
+        CString strPrompt;
+        strPrompt.Format("CMsrItemDlg\n%s", buf);
+        AfxMessageBox(strPrompt);
+    }
+    
+    CDialog::OnOK();
 }
 
 void CMsrItemDlg::Serialize(CArchive& ar) 
@@ -454,7 +429,7 @@ void CMsrItemDlg::Serialize(CArchive& ar)
 
     BOOL chkCrossTalk;
     BOOL chkNits;
-	BOOL chkJND;
+    BOOL chkJND;
 
     BOOL chkCWP1 , chkCRP1 , chkCGP1 , chkCBP1 , chkCDP1 ;
     BOOL chkCWP5 , chkCRP5 , chkCGP5 , chkCBP5 , chkCDP5 ;
@@ -471,7 +446,7 @@ void CMsrItemDlg::Serialize(CArchive& ar)
 
         chkCrossTalk = m_chkCrossTalk.GetCheck();  ar << chkCrossTalk;
         chkNits = m_chkNits.GetCheck();            ar << chkNits;
-		chkJND  = m_chkJND.GetCheck();             ar << chkJND;
+        chkJND  = m_chkJND.GetCheck();             ar << chkJND;
         
         chkCWP21 = m_chkCWP21.GetCheck();    ar << chkCWP21;
         chkCRP21 = m_chkCRP21.GetCheck();    ar << chkCRP21;
@@ -539,7 +514,7 @@ void CMsrItemDlg::Serialize(CArchive& ar)
         
         ar >> chkCrossTalk;  m_chkCrossTalk.SetCheck(chkCrossTalk);
         ar >> chkNits;       m_chkNits.SetCheck(chkNits);
-		ar >> chkJND;        m_chkJND.SetCheck(chkJND);
+        ar >> chkJND;        m_chkJND.SetCheck(chkJND);
         
         ar >> chkCWP21;   m_chkCWP21.SetCheck(chkCWP21);
         ar >> chkCRP21;   m_chkCRP21.SetCheck(chkCRP21);
@@ -589,143 +564,143 @@ void CMsrItemDlg::Serialize(CArchive& ar)
         ar >> chkCBP1;   m_chkCBP1.SetCheck(chkCBP1);
         ar >> chkCDP1;   m_chkCDP1.SetCheck(chkCDP1);
 
-		ar >> m_nGM1;
-		ar >> m_nGM2;
-		ar >> m_f21FE;
-		ar >> m_f21Havg;
-		ar >> m_f21Vavg;
-		ar >> m_f5FE;
-		ar >> m_f9FE;
-		ar >> m_fGammaSetp;
-		ar >> m_n25RectSide;
-		ar >> m_fCrsTlkRectFE;
-		ar >> m_fNits;
+        ar >> m_nGM1;
+        ar >> m_nGM2;
+        ar >> m_f21FE;
+        ar >> m_f21Havg;
+        ar >> m_f21Vavg;
+        ar >> m_f5FE;
+        ar >> m_f9FE;
+        ar >> m_fGammaSetp;
+        ar >> m_n25RectSide;
+        ar >> m_fCrsTlkRectFE;
+        ar >> m_fNits;
     }
 }
 
 
 void CMsrItemDlg::OnButtonSelall() 
 {
-	// TODO: Add your control notification handler code here
-	if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(TRUE);
-	if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(TRUE);
-	if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(TRUE);
-	
-	if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(TRUE);
-	if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(TRUE);
-	if (m_chkCGP21.IsWindowEnabled())        m_chkCGP21.SetCheck(TRUE);
-	if (m_chkCBP21.IsWindowEnabled())        m_chkCBP21.SetCheck(TRUE);
-	if (m_chkCDP21.IsWindowEnabled())        m_chkCDP21.SetCheck(TRUE);
-	
-	if (m_chkCWP9.IsWindowEnabled())        m_chkCWP9.SetCheck(TRUE);
-	if (m_chkCRP9.IsWindowEnabled())        m_chkCRP9.SetCheck(TRUE);
-	if (m_chkCGP9.IsWindowEnabled())        m_chkCGP9.SetCheck(TRUE);
-	if (m_chkCBP9.IsWindowEnabled())        m_chkCBP9.SetCheck(TRUE);
-	if (m_chkCDP9.IsWindowEnabled())        m_chkCDP9.SetCheck(TRUE);
-	
-	if (m_chkCWP5.IsWindowEnabled())        m_chkCWP5.SetCheck(TRUE);
-	if (m_chkCRP5.IsWindowEnabled())        m_chkCRP5.SetCheck(TRUE);
-	if (m_chkCGP5.IsWindowEnabled())        m_chkCGP5.SetCheck(TRUE);
-	if (m_chkCBP5.IsWindowEnabled())        m_chkCBP5.SetCheck(TRUE);
-	if (m_chkCDP5.IsWindowEnabled())        m_chkCDP5.SetCheck(TRUE);
-	
-	if (m_chkCWP49.IsWindowEnabled())        m_chkCWP49.SetCheck(TRUE);
-	if (m_chkCRP49.IsWindowEnabled())        m_chkCRP49.SetCheck(TRUE);
-	if (m_chkCGP49.IsWindowEnabled())        m_chkCGP49.SetCheck(TRUE);
-	if (m_chkCBP49.IsWindowEnabled())        m_chkCBP49.SetCheck(TRUE);
-	if (m_chkCDP49.IsWindowEnabled())        m_chkCDP49.SetCheck(TRUE);
-	
-	if (m_chkCWP25.IsWindowEnabled())        m_chkCWP25.SetCheck(TRUE);
-	if (m_chkCRP25.IsWindowEnabled())        m_chkCRP25.SetCheck(TRUE);
-	if (m_chkCGP25.IsWindowEnabled())        m_chkCGP25.SetCheck(TRUE);
-	if (m_chkCBP25.IsWindowEnabled())        m_chkCBP25.SetCheck(TRUE);
-	if (m_chkCDP25.IsWindowEnabled())        m_chkCDP25.SetCheck(TRUE);
-	
-	if (m_chkCWP13.IsWindowEnabled())        m_chkCWP13.SetCheck(TRUE);
-	if (m_chkCRP13.IsWindowEnabled())        m_chkCRP13.SetCheck(TRUE);
-	if (m_chkCGP13.IsWindowEnabled())        m_chkCGP13.SetCheck(TRUE);
-	if (m_chkCBP13.IsWindowEnabled())        m_chkCBP13.SetCheck(TRUE);
-	if (m_chkCDP13.IsWindowEnabled())        m_chkCDP13.SetCheck(TRUE);
-	
-	if (m_chkCWGM.IsWindowEnabled())        m_chkCWGM.SetCheck(TRUE);
-	if (m_chkCRGM.IsWindowEnabled())        m_chkCRGM.SetCheck(TRUE);
-	if (m_chkCGGM.IsWindowEnabled())        m_chkCGGM.SetCheck(TRUE);
-	if (m_chkCBGM.IsWindowEnabled())        m_chkCBGM.SetCheck(TRUE);
-	if (m_chkCDGM.IsWindowEnabled())        m_chkCDGM.SetCheck(TRUE);
-	
-	if (m_chkCWP1.IsWindowEnabled())        m_chkCWP1.SetCheck(TRUE);
-	if (m_chkCRP1.IsWindowEnabled())        m_chkCRP1.SetCheck(TRUE);
-	if (m_chkCGP1.IsWindowEnabled())        m_chkCGP1.SetCheck(TRUE);
-	if (m_chkCBP1.IsWindowEnabled())        m_chkCBP1.SetCheck(TRUE);
-	if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(TRUE);
+    // TODO: Add your control notification handler code here
+    if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(TRUE);
+    if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(TRUE);
+    if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(TRUE);
+    
+    if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(TRUE);
+    if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(TRUE);
+    if (m_chkCGP21.IsWindowEnabled())        m_chkCGP21.SetCheck(TRUE);
+    if (m_chkCBP21.IsWindowEnabled())        m_chkCBP21.SetCheck(TRUE);
+    if (m_chkCDP21.IsWindowEnabled())        m_chkCDP21.SetCheck(TRUE);
+    
+    if (m_chkCWP9.IsWindowEnabled())        m_chkCWP9.SetCheck(TRUE);
+    if (m_chkCRP9.IsWindowEnabled())        m_chkCRP9.SetCheck(TRUE);
+    if (m_chkCGP9.IsWindowEnabled())        m_chkCGP9.SetCheck(TRUE);
+    if (m_chkCBP9.IsWindowEnabled())        m_chkCBP9.SetCheck(TRUE);
+    if (m_chkCDP9.IsWindowEnabled())        m_chkCDP9.SetCheck(TRUE);
+    
+    if (m_chkCWP5.IsWindowEnabled())        m_chkCWP5.SetCheck(TRUE);
+    if (m_chkCRP5.IsWindowEnabled())        m_chkCRP5.SetCheck(TRUE);
+    if (m_chkCGP5.IsWindowEnabled())        m_chkCGP5.SetCheck(TRUE);
+    if (m_chkCBP5.IsWindowEnabled())        m_chkCBP5.SetCheck(TRUE);
+    if (m_chkCDP5.IsWindowEnabled())        m_chkCDP5.SetCheck(TRUE);
+    
+    if (m_chkCWP49.IsWindowEnabled())        m_chkCWP49.SetCheck(TRUE);
+    if (m_chkCRP49.IsWindowEnabled())        m_chkCRP49.SetCheck(TRUE);
+    if (m_chkCGP49.IsWindowEnabled())        m_chkCGP49.SetCheck(TRUE);
+    if (m_chkCBP49.IsWindowEnabled())        m_chkCBP49.SetCheck(TRUE);
+    if (m_chkCDP49.IsWindowEnabled())        m_chkCDP49.SetCheck(TRUE);
+    
+    if (m_chkCWP25.IsWindowEnabled())        m_chkCWP25.SetCheck(TRUE);
+    if (m_chkCRP25.IsWindowEnabled())        m_chkCRP25.SetCheck(TRUE);
+    if (m_chkCGP25.IsWindowEnabled())        m_chkCGP25.SetCheck(TRUE);
+    if (m_chkCBP25.IsWindowEnabled())        m_chkCBP25.SetCheck(TRUE);
+    if (m_chkCDP25.IsWindowEnabled())        m_chkCDP25.SetCheck(TRUE);
+    
+    if (m_chkCWP13.IsWindowEnabled())        m_chkCWP13.SetCheck(TRUE);
+    if (m_chkCRP13.IsWindowEnabled())        m_chkCRP13.SetCheck(TRUE);
+    if (m_chkCGP13.IsWindowEnabled())        m_chkCGP13.SetCheck(TRUE);
+    if (m_chkCBP13.IsWindowEnabled())        m_chkCBP13.SetCheck(TRUE);
+    if (m_chkCDP13.IsWindowEnabled())        m_chkCDP13.SetCheck(TRUE);
+    
+    if (m_chkCWGM.IsWindowEnabled())        m_chkCWGM.SetCheck(TRUE);
+    if (m_chkCRGM.IsWindowEnabled())        m_chkCRGM.SetCheck(TRUE);
+    if (m_chkCGGM.IsWindowEnabled())        m_chkCGGM.SetCheck(TRUE);
+    if (m_chkCBGM.IsWindowEnabled())        m_chkCBGM.SetCheck(TRUE);
+    if (m_chkCDGM.IsWindowEnabled())        m_chkCDGM.SetCheck(TRUE);
+    
+    if (m_chkCWP1.IsWindowEnabled())        m_chkCWP1.SetCheck(TRUE);
+    if (m_chkCRP1.IsWindowEnabled())        m_chkCRP1.SetCheck(TRUE);
+    if (m_chkCGP1.IsWindowEnabled())        m_chkCGP1.SetCheck(TRUE);
+    if (m_chkCBP1.IsWindowEnabled())        m_chkCBP1.SetCheck(TRUE);
+    if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(TRUE);
 }
 
 void CMsrItemDlg::OnButtonSelno() 
 {
-	// TODO: Add your control notification handler code here
-	if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(FALSE);
-	if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(FALSE);
-	if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(FALSE);
-	
-	if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(FALSE);
-	if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(FALSE);
-	if (m_chkCGP21.IsWindowEnabled())        m_chkCGP21.SetCheck(FALSE);
-	if (m_chkCBP21.IsWindowEnabled())        m_chkCBP21.SetCheck(FALSE);
-	if (m_chkCDP21.IsWindowEnabled())        m_chkCDP21.SetCheck(FALSE);
-	
-	if (m_chkCWP9.IsWindowEnabled())        m_chkCWP9.SetCheck(FALSE);
-	if (m_chkCRP9.IsWindowEnabled())        m_chkCRP9.SetCheck(FALSE);
-	if (m_chkCGP9.IsWindowEnabled())        m_chkCGP9.SetCheck(FALSE);
-	if (m_chkCBP9.IsWindowEnabled())        m_chkCBP9.SetCheck(FALSE);
-	if (m_chkCDP9.IsWindowEnabled())        m_chkCDP9.SetCheck(FALSE);
-	
-	if (m_chkCWP5.IsWindowEnabled())        m_chkCWP5.SetCheck(FALSE);
-	if (m_chkCRP5.IsWindowEnabled())        m_chkCRP5.SetCheck(FALSE);
-	if (m_chkCGP5.IsWindowEnabled())        m_chkCGP5.SetCheck(FALSE);
-	if (m_chkCBP5.IsWindowEnabled())        m_chkCBP5.SetCheck(FALSE);
-	if (m_chkCDP5.IsWindowEnabled())        m_chkCDP5.SetCheck(FALSE);
-	
-	if (m_chkCWP49.IsWindowEnabled())        m_chkCWP49.SetCheck(FALSE);
-	if (m_chkCRP49.IsWindowEnabled())        m_chkCRP49.SetCheck(FALSE);
-	if (m_chkCGP49.IsWindowEnabled())        m_chkCGP49.SetCheck(FALSE);
-	if (m_chkCBP49.IsWindowEnabled())        m_chkCBP49.SetCheck(FALSE);
-	if (m_chkCDP49.IsWindowEnabled())        m_chkCDP49.SetCheck(FALSE);
-	
-	if (m_chkCWP25.IsWindowEnabled())        m_chkCWP25.SetCheck(FALSE);
-	if (m_chkCRP25.IsWindowEnabled())        m_chkCRP25.SetCheck(FALSE);
-	if (m_chkCGP25.IsWindowEnabled())        m_chkCGP25.SetCheck(FALSE);
-	if (m_chkCBP25.IsWindowEnabled())        m_chkCBP25.SetCheck(FALSE);
-	if (m_chkCDP25.IsWindowEnabled())        m_chkCDP25.SetCheck(FALSE);
-	
-	if (m_chkCWP13.IsWindowEnabled())        m_chkCWP13.SetCheck(FALSE);
-	if (m_chkCRP13.IsWindowEnabled())        m_chkCRP13.SetCheck(FALSE);
-	if (m_chkCGP13.IsWindowEnabled())        m_chkCGP13.SetCheck(FALSE);
-	if (m_chkCBP13.IsWindowEnabled())        m_chkCBP13.SetCheck(FALSE);
-	if (m_chkCDP13.IsWindowEnabled())        m_chkCDP13.SetCheck(FALSE);
-	
-	if (m_chkCWGM.IsWindowEnabled())        m_chkCWGM.SetCheck(FALSE);
-	if (m_chkCRGM.IsWindowEnabled())        m_chkCRGM.SetCheck(FALSE);
-	if (m_chkCGGM.IsWindowEnabled())        m_chkCGGM.SetCheck(FALSE);
-	if (m_chkCBGM.IsWindowEnabled())        m_chkCBGM.SetCheck(FALSE);
-	if (m_chkCDGM.IsWindowEnabled())        m_chkCDGM.SetCheck(FALSE);
-	
-	if (m_chkCWP1.IsWindowEnabled())        m_chkCWP1.SetCheck(FALSE);
-	if (m_chkCRP1.IsWindowEnabled())        m_chkCRP1.SetCheck(FALSE);
-	if (m_chkCGP1.IsWindowEnabled())        m_chkCGP1.SetCheck(FALSE);
-	if (m_chkCBP1.IsWindowEnabled())        m_chkCBP1.SetCheck(FALSE);
-	if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(FALSE);
+    // TODO: Add your control notification handler code here
+    if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(FALSE);
+    if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(FALSE);
+    if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(FALSE);
+    
+    if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(FALSE);
+    if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(FALSE);
+    if (m_chkCGP21.IsWindowEnabled())        m_chkCGP21.SetCheck(FALSE);
+    if (m_chkCBP21.IsWindowEnabled())        m_chkCBP21.SetCheck(FALSE);
+    if (m_chkCDP21.IsWindowEnabled())        m_chkCDP21.SetCheck(FALSE);
+    
+    if (m_chkCWP9.IsWindowEnabled())        m_chkCWP9.SetCheck(FALSE);
+    if (m_chkCRP9.IsWindowEnabled())        m_chkCRP9.SetCheck(FALSE);
+    if (m_chkCGP9.IsWindowEnabled())        m_chkCGP9.SetCheck(FALSE);
+    if (m_chkCBP9.IsWindowEnabled())        m_chkCBP9.SetCheck(FALSE);
+    if (m_chkCDP9.IsWindowEnabled())        m_chkCDP9.SetCheck(FALSE);
+    
+    if (m_chkCWP5.IsWindowEnabled())        m_chkCWP5.SetCheck(FALSE);
+    if (m_chkCRP5.IsWindowEnabled())        m_chkCRP5.SetCheck(FALSE);
+    if (m_chkCGP5.IsWindowEnabled())        m_chkCGP5.SetCheck(FALSE);
+    if (m_chkCBP5.IsWindowEnabled())        m_chkCBP5.SetCheck(FALSE);
+    if (m_chkCDP5.IsWindowEnabled())        m_chkCDP5.SetCheck(FALSE);
+    
+    if (m_chkCWP49.IsWindowEnabled())        m_chkCWP49.SetCheck(FALSE);
+    if (m_chkCRP49.IsWindowEnabled())        m_chkCRP49.SetCheck(FALSE);
+    if (m_chkCGP49.IsWindowEnabled())        m_chkCGP49.SetCheck(FALSE);
+    if (m_chkCBP49.IsWindowEnabled())        m_chkCBP49.SetCheck(FALSE);
+    if (m_chkCDP49.IsWindowEnabled())        m_chkCDP49.SetCheck(FALSE);
+    
+    if (m_chkCWP25.IsWindowEnabled())        m_chkCWP25.SetCheck(FALSE);
+    if (m_chkCRP25.IsWindowEnabled())        m_chkCRP25.SetCheck(FALSE);
+    if (m_chkCGP25.IsWindowEnabled())        m_chkCGP25.SetCheck(FALSE);
+    if (m_chkCBP25.IsWindowEnabled())        m_chkCBP25.SetCheck(FALSE);
+    if (m_chkCDP25.IsWindowEnabled())        m_chkCDP25.SetCheck(FALSE);
+    
+    if (m_chkCWP13.IsWindowEnabled())        m_chkCWP13.SetCheck(FALSE);
+    if (m_chkCRP13.IsWindowEnabled())        m_chkCRP13.SetCheck(FALSE);
+    if (m_chkCGP13.IsWindowEnabled())        m_chkCGP13.SetCheck(FALSE);
+    if (m_chkCBP13.IsWindowEnabled())        m_chkCBP13.SetCheck(FALSE);
+    if (m_chkCDP13.IsWindowEnabled())        m_chkCDP13.SetCheck(FALSE);
+    
+    if (m_chkCWGM.IsWindowEnabled())        m_chkCWGM.SetCheck(FALSE);
+    if (m_chkCRGM.IsWindowEnabled())        m_chkCRGM.SetCheck(FALSE);
+    if (m_chkCGGM.IsWindowEnabled())        m_chkCGGM.SetCheck(FALSE);
+    if (m_chkCBGM.IsWindowEnabled())        m_chkCBGM.SetCheck(FALSE);
+    if (m_chkCDGM.IsWindowEnabled())        m_chkCDGM.SetCheck(FALSE);
+    
+    if (m_chkCWP1.IsWindowEnabled())        m_chkCWP1.SetCheck(FALSE);
+    if (m_chkCRP1.IsWindowEnabled())        m_chkCRP1.SetCheck(FALSE);
+    if (m_chkCGP1.IsWindowEnabled())        m_chkCGP1.SetCheck(FALSE);
+    if (m_chkCBP1.IsWindowEnabled())        m_chkCBP1.SetCheck(FALSE);
+    if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(FALSE);
 }
 
 void CMsrItemDlg::OnCancel() 
 {
-	// TODO: Add extra cleanup here
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pMainFrm);
-	
-	CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    // TODO: Add extra cleanup here
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-	pDoc->GetMsrDataChain().Empty();
-	
-	CDialog::OnCancel();
+    pDoc->GetMsrDataChain().Empty();
+    
+    CDialog::OnCancel();
 }

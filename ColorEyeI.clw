@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CColorEyeIApp
+LastClass=CEnterValueDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -16,17 +16,17 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDR_MAINFRAME
+Resource1=IDD_CASETUP_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_OMDTOEXCEL
-Resource3=IDD_CASETUP_DIALOG
+Resource2=IDR_MAINFRAME
+Resource3=IDD_MSR_ITEM
 Resource4=IDD_EDIT_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_ABOUTBOX
-Resource7=IDD_MSR_ITEM
+Resource6=IDD_PATTERN_DIALOG
+Resource7=IDD_OMDTOEXCEL
 Class7=CCaSetupDlg
-Resource8=IDD_PATTERN_DIALOG
+Resource8=IDD_ABOUTBOX
 Class8=CReadBarCodeDialog
 Resource9=IDD_DIALOG_BARCODE
 

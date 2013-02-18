@@ -14,12 +14,18 @@
 //可以調整成只要Bolt進來
 #include "../MainFrm.h"
 #include "../ColorEyeIDoc.h"
-
+#include "../xMsrPoint/Nucleotide.h"
+#include "../xMsrPoint/DNA.h"
+#include "../RNA.h"
+#include "../OmdFile/TxtFile.h"
 /////////////////////////////////////////////////////////////////////////////
 // CMsrItemDlg dialog
 
 class CMsrItemDlg : public CDialog
 {
+#ifdef _DEBUG
+	std::vector<CString> m_dTxt;
+#endif // _DEBUG
 //    CPatternDlg* m_pDlgPattern;
 	CString m_RememberChkPathName;
 //    Bolt *p_Pusher;
@@ -134,8 +140,10 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 public:
-    void SetBolt(Bolt* _p);  //在CPatternDlg::InitDataDlgType()有用到
-	unsigned int ListBoxUpdate(const CDataChain& );
+//    void SetBolt(Bolt* _p);  //在CPatternDlg::InitDataDlgType()有用到
+	void ListBoxUpdate(RNA& );
+private:
+	DNA GetSelMsrItem();
 };
 
 //{{AFX_INSERT_LOCATION}}

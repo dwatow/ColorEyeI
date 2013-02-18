@@ -38,7 +38,7 @@ void CPatternDlg::InitDataDlgType()
     switch(InitDataType)
     {
     case MsrForItem:
-        dlgMsrItem.SetBolt(&m_GunMchn);
+//        dlgMsrItem.SetBolt(&m_GunMchn);
         dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
 		break;
     }
@@ -341,20 +341,14 @@ COLORREF CPatternDlg::InvrtColor(COLORREF clr) const
 
 CString CPatternDlg::SetupLCMSize()
 {
-	CString LCMSize;
-    LCMSize = m_pCA210->GetLcmSize();
-    if (!atoi(LCMSize))
+    if (!atoi(m_pCA210->GetLcmSize()))
     {
-        CEnterValueDlg dlgEnterValue("無法判別LCM Size");
-        dlgEnterValue.SetValueKind("LCM Size");
+        CEnterValueDlg dlgEnterValue("無法判別LCM Size", "LCM Size");
 
         if (dlgEnterValue.DoModal() == IDOK)
-		{
-            LCMSize = dlgEnterValue.m_strValue;
-			m_pCA210->SetLcmSize(LCMSize);
-		}
+			m_pCA210->SetLcmSize(dlgEnterValue.m_strValue);
     }
-	return LCMSize;
+	return m_pCA210->GetLcmSize();
 }
 
 //BOOL CPatternDlg::Magazine()
