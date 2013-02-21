@@ -8,7 +8,7 @@
 
 class TranScripter
 {
-	UINT m_nScrmH, m_nScrmV;
+	const int m_nScrmH, m_nScrmV;
 	std::vector<Nucleotide>::iterator m_tranPointer;
 
 public:
@@ -32,13 +32,11 @@ private:
 	CPoint getGammaPoint()           const;
 	CPoint getJND()                  const;
 
-	UINT cm2pixel(const double) const;
+	int cm2pixel(const double) const;
 
-	void setSquence(Cartridge2&, std::vector<Nucleotide>::size_type) const;
+	void setSquence(Cartridge2&, std::vector<Nucleotide>::size_type, int) const;
     
-
-	//RNA processor
-//private:
-
+	void checkPointValue(const int x, const int y = 1) const;
+	void checkPointValue(const double fe, const int cm = 1) const;
 };
 #endif

@@ -14,6 +14,12 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef _DEBUG
+#define DebugCode( code_fragment ) { code_fragment }
+#else
+#define DebugCode( code_fragment )
+#endif
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -39,12 +45,12 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_f25FE = 0.0f;
     m_f5FE = 0.0f;
     m_f9FE = 6.0f;
+    m_f13FE = 0.0f;
     m_fGammaSetp = 255.0f;
     m_n25RectSide = 10;
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
-    m_jsdGray = 0;
-    m_f13FE = 0.0f;
+    m_JndGray = 0;
     //}}AFX_DATA_INIT
 }
 
@@ -122,6 +128,8 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDV_MinMaxFloat(pDX, m_f5FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P9FE, m_f9FE);
     DDV_MinMaxFloat(pDX, m_f9FE, 0.f, 100.f);
+    DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
+    DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_GM3, m_fGammaSetp);
     DDV_MinMaxFloat(pDX, m_fGammaSetp, 1.f, 255.f);
     DDX_Text(pDX, IDC_EDIT_P25RECTSIDE, m_n25RectSide);
@@ -130,10 +138,8 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
-    DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_jsdGray);
-    DDV_MinMaxUInt(pDX, m_jsdGray, 0, 255);
-    DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
-    DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
+    DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_JndGray);
+    DDV_MinMaxUInt(pDX, m_JndGray, 0, 255);
     //}}AFX_DATA_MAP
 }
 
@@ -204,120 +210,104 @@ void CMsrItemDlg::OnPaint()
     // Do not call CDialog::OnPaint() for painting messages
 }
 
-// void CMsrItemDlg::SetBolt(Bolt* _p)
-// {
-//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-//     ASSERT_VALID(pMainFrm);
-//     
-//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-//     ASSERT_VALID(pDoc);
-// 
-//     pDoc->GetMsrDataChain().SetBolt(_p);
-// }
-
-void CMsrItemDlg::ListBoxUpdate(RNA& Datas)
+void CMsrItemDlg::listBoxUpdate()
 {
     m_lstMsrItems.ResetContent();
-    
-    if (Datas.IsEmpty())
-        m_btnDelItems.EnableWindow(FALSE);
-    else
-    {
-        m_btnDelItems.EnableWindow(TRUE);
-        
-        for (std::vector<Cartridge2>::const_iterator itor = Datas.Begin(); itor != Datas.End(); ++itor)
-            m_lstMsrItems.AddString(itor->GetDescrip());
-    }
-    m_btnOK.EnableWindow(Datas.Size());
+    m_btnDelItems.EnableWindow(m_RNA.Size());
+    m_btnOK.EnableWindow(m_RNA.Size());
 
-#ifdef _DEBUG
-    CTxtFile fTxt;
+    if (m_RNA.Size())
+        for (std::vector<Cartridge2>::iterator itor = m_RNA.Begin(); itor != m_RNA.End(); ++itor)
+        {
+            m_lstMsrItems.AddString(itor->GetDescrip());
+			DebugCode(m_dTxt.push_back(itor->showMe());)
+        }
+
+DebugCode(
+	CTxtFile fTxt;
     CFileException fx;
     fTxt.Save("C://Users//1004066//Desktop//DNA.log", fx);
     fTxt.iTxtData(m_dTxt);
     fTxt.Close();
-#endif
+)
 }
 
-DNA CMsrItemDlg::GetSelMsrItem()
+void CMsrItemDlg::selMsrItem2DNA()
 {
-	DNA ballistic;  //彈道
-
     //準備DNA
     //填入參數
     //JND
-    if (m_chkJND.GetState())  ballistic.AddCell(JND , Pn1);
-	
+    if (m_chkJND.GetState())  m_DNA.AddCell(JND , Pn1, m_JndGray);
+    
     //中心點
-    if (m_chkCWP1.GetState())  ballistic.AddCell(White, Pn1);
-    if (m_chkCRP1.GetState())  ballistic.AddCell(Red  , Pn1);
-    if (m_chkCGP1.GetState())  ballistic.AddCell(Green, Pn1);
-    if (m_chkCBP1.GetState())  ballistic.AddCell(Blue , Pn1);
-    if (m_chkCDP1.GetState())  ballistic.AddCell(Dark , Pn1);
+    if (m_chkCWP1.GetState())  m_DNA.AddCell(White, Pn1);
+    if (m_chkCRP1.GetState())  m_DNA.AddCell(Red  , Pn1);
+    if (m_chkCGP1.GetState())  m_DNA.AddCell(Green, Pn1);
+    if (m_chkCBP1.GetState())  m_DNA.AddCell(Blue , Pn1);
+    if (m_chkCDP1.GetState())  m_DNA.AddCell(Dark , Pn1);
     
     //Nits
-    if (m_chkNits.GetState())  ballistic.AddCell(Nits, Pn9, m_fNits, m_cbxSelNitsKind.GetCurSel());
-	
+    if (m_chkNits.GetState())  m_DNA.AddCell(Nits, Pn9, m_fNits, m_cbxSelNitsKind.GetCurSel());
+    
     //5點
-    if (m_chkCWP5.GetState())    ballistic.AddCell(White, Pn5, m_f5FE);
-    if (m_chkCRP5.GetState())    ballistic.AddCell(Red  , Pn5, m_f5FE);
-    if (m_chkCGP5.GetState())    ballistic.AddCell(Green, Pn5, m_f5FE);
-    if (m_chkCBP5.GetState())    ballistic.AddCell(Blue , Pn5, m_f5FE);
-    if (m_chkCDP5.GetState())    ballistic.AddCell(Dark , Pn5, m_f5FE);
+    if (m_chkCWP5.GetState())    m_DNA.AddCell(White, Pn5, m_f5FE);
+    if (m_chkCRP5.GetState())    m_DNA.AddCell(Red  , Pn5, m_f5FE);
+    if (m_chkCGP5.GetState())    m_DNA.AddCell(Green, Pn5, m_f5FE);
+    if (m_chkCBP5.GetState())    m_DNA.AddCell(Blue , Pn5, m_f5FE);
+    if (m_chkCDP5.GetState())    m_DNA.AddCell(Dark , Pn5, m_f5FE);
     
     //9點
-    if (m_chkCWP9.GetState())    ballistic.AddCell(White, Pn9, m_f9FE);
-    if (m_chkCRP9.GetState())    ballistic.AddCell(Red  , Pn9, m_f9FE);
-    if (m_chkCGP9.GetState())    ballistic.AddCell(Green, Pn9, m_f9FE);
-    if (m_chkCBP9.GetState())    ballistic.AddCell(Blue , Pn9, m_f9FE);
-    if (m_chkCDP9.GetState())    ballistic.AddCell(Dark , Pn9, m_f9FE);
+    if (m_chkCWP9.GetState())    m_DNA.AddCell(White, Pn9, (int)m_f9FE);
+    if (m_chkCRP9.GetState())    m_DNA.AddCell(Red  , Pn9, (int)m_f9FE);
+    if (m_chkCGP9.GetState())    m_DNA.AddCell(Green, Pn9, (int)m_f9FE);
+    if (m_chkCBP9.GetState())    m_DNA.AddCell(Blue , Pn9, (int)m_f9FE);
+    if (m_chkCDP9.GetState())    m_DNA.AddCell(Dark , Pn9, (int)m_f9FE);
     
     //21點
-    if (m_chkCWP21.GetState())    ballistic.AddCell(White, Pn21, m_f21FE);
-    if (m_chkCRP21.GetState())    ballistic.AddCell(Red  , Pn21, m_f21FE);
-    if (m_chkCGP21.GetState())    ballistic.AddCell(Green, Pn21, m_f21FE);
-    if (m_chkCBP21.GetState())    ballistic.AddCell(Blue , Pn21, m_f21FE);
-    if (m_chkCDP21.GetState())    ballistic.AddCell(Dark , Pn21, m_f21FE);
-	
+    if (m_chkCWP21.GetState())    m_DNA.AddCell(White, Pn21, m_f21FE);
+    if (m_chkCRP21.GetState())    m_DNA.AddCell(Red  , Pn21, m_f21FE);
+    if (m_chkCGP21.GetState())    m_DNA.AddCell(Green, Pn21, m_f21FE);
+    if (m_chkCBP21.GetState())    m_DNA.AddCell(Blue , Pn21, m_f21FE);
+    if (m_chkCDP21.GetState())    m_DNA.AddCell(Dark , Pn21, m_f21FE);
+    
     //13點
-    if (m_chkCWP13.GetState())    ballistic.AddCell(White, Pn13, m_f13FE);
-    if (m_chkCRP13.GetState())    ballistic.AddCell(Red  , Pn13, m_f13FE);
-    if (m_chkCGP13.GetState())    ballistic.AddCell(Green, Pn13, m_f13FE);
-    if (m_chkCBP13.GetState())    ballistic.AddCell(Blue , Pn13, m_f13FE);
-    if (m_chkCDP13.GetState())    ballistic.AddCell(Dark , Pn13, m_f13FE);
-	
+    if (m_chkCWP13.GetState())    m_DNA.AddCell(White, Pn13, m_f13FE);
+    if (m_chkCRP13.GetState())    m_DNA.AddCell(Red  , Pn13, m_f13FE);
+    if (m_chkCGP13.GetState())    m_DNA.AddCell(Green, Pn13, m_f13FE);
+    if (m_chkCBP13.GetState())    m_DNA.AddCell(Blue , Pn13, m_f13FE);
+    if (m_chkCDP13.GetState())    m_DNA.AddCell(Dark , Pn13, m_f13FE);
+    
     //25點
-    if (m_chkCWP25.GetState())    ballistic.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCRP25.GetState())    ballistic.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCGP25.GetState())    ballistic.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCBP25.GetState())    ballistic.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCDP25.GetState())    ballistic.AddCell(Dark , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCWP25.GetState())    m_DNA.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCRP25.GetState())    m_DNA.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCGP25.GetState())    m_DNA.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCBP25.GetState())    m_DNA.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCDP25.GetState())    m_DNA.AddCell(Dark , Pn25, m_f25FE, m_n25RectSide);
     
     //49點
-    if (m_chkCWP49.GetState())    ballistic.AddCell(White, Pn49);
-    if (m_chkCRP49.GetState())    ballistic.AddCell(Red  , Pn49);
-    if (m_chkCGP49.GetState())    ballistic.AddCell(Green, Pn49);
-    if (m_chkCBP49.GetState())    ballistic.AddCell(Blue , Pn49);
-    if (m_chkCDP49.GetState())    ballistic.AddCell(Dark , Pn49);
+    if (m_chkCWP49.GetState())    m_DNA.AddCell(White, Pn49);
+    if (m_chkCRP49.GetState())    m_DNA.AddCell(Red  , Pn49);
+    if (m_chkCGP49.GetState())    m_DNA.AddCell(Green, Pn49);
+    if (m_chkCBP49.GetState())    m_DNA.AddCell(Blue , Pn49);
+    if (m_chkCDP49.GetState())    m_DNA.AddCell(Dark , Pn49);
     //排序
-	//     if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
-	//     else                             pDoc->GetMsrDataChain().SortOrigMsr();
+    //     if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
+    //     else                             pDoc->GetMsrDataChain().SortOrigMsr();
     
     //Cross Talk srot by AreaCode
-    if (m_chkCrossTalk.GetState())        ballistic.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+    if (m_chkCrossTalk.GetState())        m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
     
-    if (m_chkCWGM.GetState() || m_chkCDGM.GetState())		
-		                         ballistic.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
-    if (m_chkCRGM.GetState())    ballistic.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
-    if (m_chkCGGM.GetState())    ballistic.AddCell(Green, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Green, PnGamma);
-    if (m_chkCBGM.GetState())    ballistic.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
+    if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
+                                 m_DNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
+    if (m_chkCRGM.GetState())    m_DNA.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
+    if (m_chkCGGM.GetState())    m_DNA.AddCell(Green, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Green, PnGamma);
+    if (m_chkCBGM.GetState())    m_DNA.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
 
-#ifdef _DEBUG
-    for (std::vector<Nucleotide>::iterator Nit = ballistic.Begin(); Nit != ballistic.End(); ++Nit)
-		m_dTxt.push_back(Nit->showMe());
-#endif // _DEBUG
-
-	return ballistic;
+    DebugCode(
+    m_dTxt.clear();
+    for (std::vector<Nucleotide>::iterator Nit = m_DNA.Begin(); Nit != m_DNA.End(); ++Nit)
+        m_dTxt.push_back(Nit->showMe());
+    )
 }
 
 void CMsrItemDlg::OnButtonAdd()
@@ -325,38 +315,32 @@ void CMsrItemDlg::OnButtonAdd()
     //執行連到了這
     //1. CA-210已連線
     //2. CA-210已宣告
-	DNA _D = GetSelMsrItem();
-	RNA _R;
+    selMsrItem2DNA();
 
-	TranScripter Ts;
-	Ts.Trans(_D, _R);
+    TranScripter Ts;
+    if (m_DNA.Size()) Ts.Trans(m_DNA, m_RNA);
 
-    ListBoxUpdate(_R);
+    listBoxUpdate();
 }
 
 void CMsrItemDlg::OnButtonDel() 
 {
-    // TODO: Add your control notification handler code here
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
-
-    int* buffer = new int[m_lstMsrItems.GetSelCount()];  //弄一個buffer，準備存放選擇好的東西
+    LPINT buffer = new int[m_lstMsrItems.GetSelCount()];  //弄一個buffer，準備存放選擇好的東西
     m_lstMsrItems.GetSelItems(m_lstMsrItems.GetSelCount(), buffer);  //將選擇的選項，放進buffer
     
-    //將buffer弄成CDataChain
-    CDataChain temp;
+    //將buffer弄成RNA
+    RNA temp;
+    DebugCode(m_dTxt.clear();)
     for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
-        temp.AddCell(pDoc->GetMsrDataChain().At(buffer[it]+1));
+        temp.AddCell(m_RNA.At(buffer[it]+1));
 
-    pDoc->GetMsrDataChain().CutEqualCell(temp);
+    m_RNA.CutEqualCell(temp);
+    temp.Empty();
+    delete [] buffer;
 
     //只是更新
-//    ListBoxUpdate();
+    listBoxUpdate();
 
-    delete [] buffer;
 }
 
 BOOL CMsrItemDlg::OnInitDialog() 
@@ -364,13 +348,13 @@ BOOL CMsrItemDlg::OnInitDialog()
     CDialog::OnInitDialog();
     
     // TODO: Add extra initialization here
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
+//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+//     ASSERT_VALID(pMainFrm);
+//     
+//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+//     ASSERT_VALID(pDoc);
 
-    pDoc->GetMsrDataChain().Empty();
+//    pDoc->GetMsrDataChain().Empty();
 
     m_cbxSelNitsKind.AddString("+");
     m_cbxSelNitsKind.AddString("--");
@@ -694,13 +678,13 @@ void CMsrItemDlg::OnButtonSelno()
 void CMsrItemDlg::OnCancel() 
 {
     // TODO: Add extra cleanup here
-    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    
-    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-    ASSERT_VALID(pDoc);
-
-    pDoc->GetMsrDataChain().Empty();
+//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+//     ASSERT_VALID(pMainFrm);
+//     
+//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+//     ASSERT_VALID(pDoc);
+// 
+//     pDoc->GetMsrDataChain().Empty();
     
     CDialog::OnCancel();
 }

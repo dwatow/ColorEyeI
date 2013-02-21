@@ -16,9 +16,8 @@ class Bullet
 public:
     Bullet();
     Bullet(const Bullet&);
-//    Bullet(Bullet);
-//     Bullet::Bullet(const float&, const float&, const float&, const long&, const float&);
     virtual ~Bullet();
+
     BOOL SetLv(CString);
     BOOL SetSx(CString);
     BOOL SetSy(CString);
@@ -47,10 +46,6 @@ public:
     float GetY()   const; CString GetStrY()   const;  BOOL SetY(float);
     float GetZ()   const; CString GetStrZ()   const;  BOOL SetZ(float);
 
-    virtual void    operator() (float, float, float, long, float, float, float, float, float, float);
-	virtual void    operator() (CString, CString, CString, CString, CString, CString, CString, CString, CString, CString );
-
-    virtual void    operator() (Bullet&);
     virtual void    operator= (const Bullet&);
 
     BOOL isEmpty() const;

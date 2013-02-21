@@ -13,6 +13,12 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
+#ifdef _DEBUG
+#define debugCode( code_fragment ) { code_fragment }
+#else
+#define debugCode( code_fragment )
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 //sort
 
@@ -51,7 +57,7 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-RNA::RNA(): p_Pusher(0)
+RNA::RNA()//: p_Pusher(0)
 {
     Cartridge2 x;
     m_CarChain2.push_back(x);
@@ -65,7 +71,7 @@ RNA::~RNA()
 // std::vector<Cartridge2>::size_type RNA::StdInit()
 // {
 //    Empty();    
-// 	 Grow(JND, Pn1);
+//      Grow(JND, Pn1);
 //      Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
 //      Grow(Nits, Pn9);
 //      Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
@@ -82,12 +88,12 @@ RNA::~RNA()
 
 // void RNA::Grow(ColorType ct, PointNum pn)
 // {
-// 	BOOL delBolt = FALSE;
-// 	if (p_Pusher == 0)
-// 	{
-// 		p_Pusher = new Bolt();
-// 		delBolt = TRUE;
-// 	}
+//     BOOL delBolt = FALSE;
+//     if (p_Pusher == 0)
+//     {
+//         p_Pusher = new Bolt();
+//         delBolt = TRUE;
+//     }
 // //////////////////////////////////////////////////////////////////////////
 //     if (ct == CrsTlk)
 //     {
@@ -96,13 +102,13 @@ RNA::~RNA()
 //         Cartridge2 CrsTlk1(CrsTlk , pn);    p_Pusher->Grow(vCrossTalk, CrsTlk1);
 //         Cartridge2 CrsTlk2(CrsTlkW, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk2);
 //         Cartridge2 CrsTlk3(CrsTlkD, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk3);
-// 		
+//         
 //         SortQuackMsr(vCrossTalk);
 //         m_CarChain2.insert(m_CarChain2.end(), vCrossTalk.begin(), vCrossTalk.end());
 //     }
 //     else if (ct == JND)
-// 	{
-// 		std::vector<Cartridge2> vJND;
+//     {
+//         std::vector<Cartridge2> vJND;
 //         
 //         Cartridge2 JndX(JNDX, pn);
 //         Cartridge2 Jnd(JND, pn);
@@ -112,18 +118,18 @@ RNA::~RNA()
 //         
 //         SortQuackMsr(vJND);
 //         m_CarChain2.insert(m_CarChain2.end(), vJND.begin(), vJND.end());
-// 	}
-// 	else
+//     }
+//     else
 //     {
 //         Cartridge2 MsrItem(ct, pn);
 //         p_Pusher->Grow(m_CarChain2, MsrItem);
 //     }
 // //////////////////////////////////////////////////////////////////////////
-// 	if (delBolt == TRUE)
-// 	{
-// 		delete p_Pusher;
-// 		p_Pusher = 0;
-// 	}
+//     if (delBolt == TRUE)
+//     {
+//         delete p_Pusher;
+//         p_Pusher = 0;
+//     }
 // }
 
 // std::vector<Cartridge2>::size_type RNA::GammaInit()
@@ -132,19 +138,24 @@ RNA::~RNA()
 //     return m_CarChain2.size();
 // }
 
-Cartridge2& RNA::At(Cartridge2 _C2) 
-{
-
-    for (std::vector<Cartridge2>::iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
-        if (_C2 == *itor)
-            return m_CarChain2.at(abs(itor - m_CarChain2.begin()));
-	
-	return m_CarChain2.at(0);
-}
-// const Cartridge2& RNA::At(Cartridge2 _C2) const
+// Cartridge2& RNA::At(Cartridge2 _C2) 
 // {
+//     for (std::vector<Cartridge2>::iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
+//         if (_C2 == *itor)
+//             return m_CarChain2.at(abs(itor - m_CarChain2.begin()));
+//     
 //     return m_CarChain2.at(0);
 // }
+
+const Cartridge2& RNA::At(Cartridge2 _C2) const
+{
+    for (std::vector<Cartridge2>::const_iterator citor = m_CarChain2.begin(); citor != m_CarChain2.end(); ++citor)
+        if (_C2 == *citor)
+            return m_CarChain2.at(abs(citor - m_CarChain2.begin()));
+
+        return m_CarChain2.at(0);
+}
+
 // Cartridge2& RNA::At(ColorType clr, PointNum Large, UINT Little) 
 // {
 //     if(Little > (UINT)Large)
@@ -200,21 +211,93 @@ void RNA::Empty()
 //     }
 // }
 
-// void RNA::CutEqualCell(RNA compData)
-// {
-//     if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
-//     {
-//         //在這時m_CarChain2是舊的compData是新的
-//         std::vector<Cartridge2>::iterator compItor, removeBeginItor;
-//         //remove & cut 在新的裡面，比對舊的，代表重覆，重覆量測去除掉
-//          for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
-//          {
-//              removeBeginItor = std::remove(Begin(), End(), *compItor);
-//              m_CarChain2.erase(removeBeginItor, End());
-//          }
-//     }
-// }
-// 
+void RNA::CutEqualCell(RNA compData)
+{
+    if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
+    {
+        CString str;
+        debugCode(
+            m_dTxt.clear();
+        )
+        //在這時
+        //m_CarChain2是舊
+        //compData是新的
+        std::vector<Cartridge2>::iterator rnaitor = 0;
+        std::vector<Cartridge2>::iterator compItor, removeItor;
+        debugCode(
+            str.Format("Begin: %X, End: %X\n", Begin(), End());
+            m_dTxt.push_back(str);
+            m_dTxt.push_back("\nRNA原本的位址\n");
+
+            for (rnaitor  = m_CarChain2.begin();
+                 rnaitor != m_CarChain2.end(); ++rnaitor)
+            {
+                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
+                    rnaitor,\
+                    GetRValue(rnaitor->GetBkColor()), GetGValue(rnaitor->GetBkColor()), GetBValue(rnaitor->GetBkColor()),\
+                    rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
+                m_dTxt.push_back(str);
+            }
+
+            m_dTxt.push_back("\ncompData的位址\n");
+            for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
+            {
+                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
+                    compItor,\
+                    GetRValue(compItor->GetBkColor()), GetGValue(compItor->GetBkColor()), GetBValue(compItor->GetBkColor()),\
+                    compItor->GetPointPosi().x, compItor->GetPointPosi().y); 
+                m_dTxt.push_back(str);
+            }
+        )
+        //remove & cut 在新的裡面，比對舊的，代表重覆，重覆量測去除掉
+        removeItor = End();
+        debugCode(
+            str.Format("\nremoveItor:\n");
+            m_dTxt.push_back(str);
+        )
+        for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
+        {
+            //移動一個元素到最後，就刪掉
+            debugCode(
+                str.Format("B. %X\n", removeItor);
+                m_dTxt.push_back(str);
+            )
+            //removeItor = std::remove(Begin(), removeItor, *compItor);//確認compData的資料是沒錯的
+            removeItor = std::remove(Begin(), removeItor, *compItor);
+
+            debugCode(
+                str.Format("A. %x\n", removeItor);
+                m_dTxt.push_back(str);
+                )
+        //m_CarChain2.erase(removeItor, End());
+        }
+        
+        m_CarChain2.erase(removeItor, End());
+        
+        debugCode(
+            m_dTxt.push_back("\nRNA後來的位址\n");
+            
+            for (rnaitor  = m_CarChain2.begin();
+            rnaitor != m_CarChain2.end(); ++rnaitor)
+            {
+                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
+                    rnaitor,\
+                    GetRValue(rnaitor->GetBkColor()), GetGValue(rnaitor->GetBkColor()), GetBValue(rnaitor->GetBkColor()),\
+                    rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
+                m_dTxt.push_back(str);
+            }
+        )
+    }
+    debugCode(
+        CTxtFile fTxt;
+        CFileException fx;
+        fTxt.Save("C://Users//1004066//Desktop//RNA_address.log", fx);
+        fTxt.iTxtData(m_dTxt);
+        fTxt.Close();
+    )
+
+}
+
 // void RNA::freeEmptyCell()
 // {
 //     //適用於InitStd之後收集資料完，再free掉沒有資料的Cell

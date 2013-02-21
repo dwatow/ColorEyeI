@@ -53,7 +53,7 @@ protected:
     virtual BOOL OnInitDialog();
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     afx_msg void OnPaint();
-    afx_msg void OnTimer(UINT nIDEvent);
+    afx_msg void OnTimer(UINT nIDevent);
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
@@ -97,34 +97,33 @@ private:
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
-	CString SetupLCMSize();
-    void InitCa210();
-    void InitDataDlgType();//Call SelMsrItem
+	void initLCMSize();
+    void initCa210();
+    void initDataDlgType();//Call SelMsrItem
 
-    BOOL Trigger(std::vector<Cartridge>::iterator&);
-    BOOL NextTrigger(std::vector<Cartridge>::iterator&);
-    COLORREF ShiftColor(COLORREF clr, int shift = 55) const;
-    COLORREF InvrtColor(COLORREF clr) const;
-    void DrawMsrLabel(CDC &pDC);
-    void DrawMsringLabel(CDC &pDC);
+    BOOL trigger(std::vector<Cartridge>::iterator&);
+    BOOL nextTrigger(std::vector<Cartridge>::iterator&);
+    COLORREF shiftColor(COLORREF clr, int shift = 55) const;
+    COLORREF invrtColor(COLORREF clr) const;
+    void drawMsrLabel(CDC &pDC);
+    void drawMsringLabel(CDC &pDC);
 
-    void EventGoPrvsGoal();
-    BOOL EventGoNextGoal();
-    void EventSwCntCa210();
-    void EventRunMsrAi(BOOL isRun = 2);
-    UINT EventCatchMsrValue();
-	void EventExitDialog();
+    void eventGoPrvsGoal();
+    BOOL eventGoNextGoal();
+    void eventSwCntCa210();
+    void eventRunMsrAi(BOOL isRun = 2);
+    UINT eventCatchMsrValue();
+	void eventExitDialog();
 
-    static UINT VbrGoalThread(LPVOID LParam);
-    static UINT VbrNextGoalThread(LPVOID LParam);
+    static UINT vbrGoalThread(LPVOID LParam);
+    static UINT vbrNextGoalThread(LPVOID LParam);
 
-	void ChangeBkColor(COLORREF);
-	void FineNitsPos(int& GrayLevel);
-	void FineNitsNeg(int& GrayLevel);
+	void changeBkColor(COLORREF);
+	void fineNitsPos(int& GrayLevel);
+	void fineNitsNeg(int& GrayLevel);
 public:
     void FineNits();
 
-//    BOOL Magazine(); //¼u§X
 	void Magazine(); //¼u§X
 
     COLORREF GetBkColor() const;

@@ -6,14 +6,13 @@
 #endif // _MSC_VER > 1000
 // MsrItemDlg.h : header file
 //
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 #include "StaticText.h"
-#include "../xMsrPoint/Bolt.h"   //生成chain用的function
+//#include "../xMsrPoint/Bolt.h"   //生成chain用的function
 //#include "../xMsrPoint/PatternDlg.h"
 //可以調整成只要Bolt進來
-#include "../MainFrm.h"
-#include "../ColorEyeIDoc.h"
+
 #include "../xMsrPoint/Nucleotide.h"
 #include "../xMsrPoint/DNA.h"
 #include "../RNA.h"
@@ -26,9 +25,10 @@ class CMsrItemDlg : public CDialog
 #ifdef _DEBUG
 	std::vector<CString> m_dTxt;
 #endif // _DEBUG
-//    CPatternDlg* m_pDlgPattern;
+
 	CString m_RememberChkPathName;
-//    Bolt *p_Pusher;
+	DNA m_DNA;
+	RNA m_RNA;
 
 // Construction
 public:
@@ -104,7 +104,7 @@ public:
     UINT     m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
-	UINT     m_jsdGray;
+	UINT	m_JndGray;
 	//}}AFX_DATA
 
 
@@ -141,9 +141,9 @@ protected:
     DECLARE_INTERFACE_MAP()
 public:
 //    void SetBolt(Bolt* _p);  //在CPatternDlg::InitDataDlgType()有用到
-	void ListBoxUpdate(RNA& );
 private:
-	DNA GetSelMsrItem();
+	void listBoxUpdate();
+	void selMsrItem2DNA();
 };
 
 //{{AFX_INSERT_LOCATION}}

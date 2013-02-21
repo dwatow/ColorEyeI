@@ -1,12 +1,7 @@
 #include "stdafx.h"
 #include "Nucleotide.h"
 
-// #define _DEBUG
-// #ifdef _DEBUG
-// 
-// #endif
 
-//std::vector<Nucleotide>  == DNA
 /*******************************************
  *  Define PointSet Class member function  *
  *******************************************/
@@ -15,26 +10,53 @@ Nucleotide::Nucleotide(ColorType cy, PointNum pn, int para1, int para2, int para
 m_BkColor(cy), m_MsrFlowNum(pn),
 m_Parameters(PA_Max, -1)
 {
-
-	if (pn == PnGamma)
+	//參數填入機制
+	switch (pn)
 	{
+	case PnGamma:
 		SetPara(PA_GmaBegin, para1);
 		SetPara(PA_GmaEnd,   para2);
 		SetPara(PA_GmaAvg,   para3);
-	}
-	else
-		switch(cy)
+		m_paraStr.Format("_%d~%d, 平分%d", para1, para2, para3);
+		break;
+	//有離邊
+	case Pn4:
+		if (cy != Nits)
+			break;	
+	case Pn5:
+	case Pn9:
+		if (cy == Nits)
 		{
-		case JND:
-		case JNDX:      SetPara(PA_JndGrayLv, para1); break;
-		case Nits: 
 			SetPara(PA_NitsNum, para1);
-			SetPara(PA_NitsDir, para1); break;
-		case CrsTlk:
-		case CrsTlkD:
-		case CrsTlkW:
-		default:        SetPara(PA_FEover, para1);
+			SetPara(PA_NitsDir, para2); 
+			m_paraStr.Format("_灰階: %d%s", para1, (para2)?"↑":"↓");
+			break;
 		}
+
+	case Pn13:
+	case Pn25:
+		SetPara(PA_FEover, para1);
+		if (para1 == 0)
+			m_paraStr.Format("_貼邊");
+		else
+			m_paraStr.Format("_離邊: 1/%d", para1);
+		break;
+	//無離邊
+	//沒有特別定義，就成為空字串
+
+	case Pn1:
+		if (cy == JND || cy == JNDX)
+		{
+			SetPara(PA_JndGrayLv, para1); 
+			m_paraStr.Format("_灰階: %d", para1);
+			break;
+		}
+	case Pn21:
+	case Pn49:
+	default:
+		m_paraStr.Empty();
+
+	}
 }
 
 Nucleotide::~Nucleotide()
@@ -42,15 +64,8 @@ Nucleotide::~Nucleotide()
 	m_Parameters.clear();
 }
 
-// UINT Nucleotide::GetOrigSeqc() const              { return m_OrigSeqc;    }
-// void Nucleotide::SetOrigSeqc(UINT Orig)           { m_OrigSeqc = Orig;    }
-
-
 ColorType Nucleotide::GetBackColor() const        { return m_BkColor;     }
 void      Nucleotide::SetBackColor(ColorType clr) { m_BkColor = clr;      }
-
-// void Nucleotide::SetArea(UINT ac)                 { m_AreaCode = ac;      }
-// UINT Nucleotide::GetArea() const                  { return m_AreaCode;    } 
 
 PointNum Nucleotide::GetMsrFlowNum() const        { return m_MsrFlowNum;  }
 void Nucleotide::SetMsrFlowNum(PointNum mfNum)    { m_MsrFlowNum = mfNum; }
@@ -97,6 +112,11 @@ CString Nucleotide::GetStrColorType() const
 	return Color;
 }
 
+CString Nucleotide::GetStrPara() const
+{
+	return m_paraStr;
+}
+
 BOOL Nucleotide::operator==(const Nucleotide& vCar)
 {
 	return ( (GetMsrFlowNum() == vCar.GetMsrFlowNum()) && 
@@ -114,7 +134,7 @@ void Nucleotide::SetPara(ParaOfPara Parameter, int FromEdge)
 	m_Parameters[Parameter] = FromEdge;
 }
 
-int Nucleotide::GetPara(ParaOfPara Parameter)
+int Nucleotide::GetPara(ParaOfPara Parameter) const
 {
 	return m_Parameters[Parameter];
 }

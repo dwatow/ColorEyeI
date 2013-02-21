@@ -23,49 +23,47 @@ public:
 private:
     UINT m_sequenceFrom;
 public:
-	void setSqncFrm(UINT);
-	UINT getSqncFrm() const;
+    void setSqncFrm(UINT);
+    UINT getSqncFrm() const;
 
 private:
-	AreaKind  m_sequenceArea;
+    AreaKind  m_sequenceArea;
 public:
-	void     setSqncArea(AreaKind);
-	AreaKind getSqncArea() const;
+    void     setSqncArea(AreaKind);
+    AreaKind getSqncArea() const;
 
 private:
-	CPoint    m_PointPosition;
+    CPoint    m_PointPosition;
 public:
-	CPoint    GetPointPosi() const;
-	void      SetPointPosi(CPoint);
+    CPoint    GetPointPosi() const;
+    void      SetPointPosi(CPoint);
 
 private:
-	COLORREF  m_BkColor;
+    COLORREF  m_BkColor;
 public:
-	COLORREF  GetBkColor() const;
-	void      SetBkColor(COLORREF);
+    COLORREF  GetBkColor() const;
+    void      SetBkColor(COLORREF);
 
 private:
-	Bullet    m_Data;
+    Bullet    m_Data;
 
 public:
-	Bullet&   GetBullet();
-	Bullet    GetBullet() const;
+//    Bullet&   GetBullet();
+    Bullet    GetBullet() const;
     void      SetBullet(const Bullet& Pd);
 
-private:
-	CTime _Time;
 public:
-	CString   GetTime() const;
+    CString   GetTime() const;
 
 private:
-	CString m_Description;
+    CString m_Description;
 public:
-	void SetDescrip(CString);
-	CString GetDescrip() const;
+    void SetDescrip(CString);
+    CString GetDescrip() const;
 
 public:
     BOOL operator==(const Cartridge2& vCar);
-	void operator= (const Cartridge2& vCar);
+    void operator= (const Cartridge2& vCar);
 
     CString showMe() const;
 };
@@ -75,37 +73,47 @@ m_PointPosition(0, 0), m_BkColor(0, 0, 0)
 {}
 
 inline Cartridge2::Cartridge2(COLORREF cy, CPoint pn):
-m_PointPosition(pn), m_BkColor(cy), _Time(CTime::GetCurrentTime())
+m_PointPosition(pn), m_BkColor(cy)//, _Time(CTime::GetCurrentTime())
 {}
 
 inline Cartridge2::~Cartridge2()
 {}
 
-inline BOOL Cartridge2::operator==(const Cartridge2& vCar)
+inline BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 {
-	return ((GetPointPosi()  == vCar.GetPointPosi() ) && 
-		(GetBkColor() == vCar.GetBkColor()) ) ? TRUE : FALSE;
+    return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
+             (GetBkColor()   == vCar2.GetBkColor()  )
+            ) ? TRUE : FALSE;
 };
+
+inline CString Cartridge2::GetTime() const
+{
+    return m_Data.GetLastTime();
+}
 
 inline void Cartridge2::operator= (const Cartridge2& vCar)
 {
-	SetPointPosi(vCar.GetPointPosi());
-	SetBkColor(vCar.GetBkColor());
-	
-	SetBullet(vCar.GetBullet());
+    SetDescrip(vCar.GetDescrip());
+    setSqncArea(vCar.getSqncArea());
+    setSqncFrm(vCar.getSqncFrm());
+
+    SetPointPosi(vCar.GetPointPosi());
+    SetBkColor(vCar.GetBkColor());
+    
+    SetBullet(vCar.GetBullet());
 }
 
 inline CString Cartridge2::showMe() const
 {
-	CString str;
-	str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BeHaveData(%d), %s\n", \
-		m_sequenceFrom, 
-		m_sequenceArea, 
-		m_PointPosition.x, m_PointPosition.y, 
-		GetRValue(m_BkColor), GetGValue(m_BkColor), GetBValue(m_BkColor), 
-		m_Data.isEmpty(), 
-		m_Data.GetLastTime());
-	return str;
+    CString str;
+    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BeHaveData(%d), %s\n", \
+        m_sequenceFrom, 
+        m_sequenceArea, 
+        m_PointPosition.x, m_PointPosition.y, 
+        GetRValue(m_BkColor), GetGValue(m_BkColor), GetBValue(m_BkColor), 
+        !m_Data.isEmpty(), 
+        m_Data.GetLastTime());
+    return str;
 }
 
 #endif
