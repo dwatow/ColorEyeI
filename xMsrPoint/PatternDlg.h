@@ -97,7 +97,7 @@ private:
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
-	void initLCMSize();
+	void setupLCMSize();
     void initCa210();
     void initDataDlgType();//Call SelMsrItem
 
@@ -124,7 +124,8 @@ private:
 public:
     void FineNits();
 
-	void Magazine(); //¼u§X
+//    BOOL LoadedCartridge(); //¼u§X
+	void LoadedCartridge(); //¼u§X
 
     COLORREF GetBkColor() const;
     BOOL     SetBkColor(COLORREF);

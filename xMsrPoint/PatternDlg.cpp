@@ -8,8 +8,8 @@
 #include "PatternDlg.h"
 #include "..\EnterValueDlg.h"
 #include "..\ReadBarCodeDialog.h"
-#include "../MainFrm.h"
-#include "../ColorEyeIDoc.h"
+#include "..\MainFrm.h"
+#include "..\ColorEyeIDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -39,6 +39,7 @@ void CPatternDlg::initDataDlgType()
     switch(InitDataType)
     {
     case MsrForItem:
+//        dlgMsrItem.SetBolt(&m_GunMchn);
         dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
 		break;
     }
@@ -339,14 +340,18 @@ COLORREF CPatternDlg::invrtColor(COLORREF clr) const
     }
 }
 
-void CPatternDlg::initLCMSize()
+void CPatternDlg::setupLCMSize()
 {
+    if (!atoi(m_pCA210->GetLcmSize()))
+    {
+        CEnterValueDlg dlgEnterValue("無法判別LCM Size", "LCM Size");
 
-//	return m_pCA210->GetLcmSize();
+        if (dlgEnterValue.DoModal() == IDOK)
+			m_pCA210->SetLcmSize(dlgEnterValue.m_strValue);
+    }
 }
 
-//BOOL CPatternDlg::Magazine()
-void CPatternDlg::Magazine()
+void CPatternDlg::LoadedCartridge()
 {
     // TODO: Add extra validation here
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
@@ -374,11 +379,11 @@ void CPatternDlg::Magazine()
 		dlgReadBarCode.DoModal();
 
 		//++BeginItor;  
-		if (!m_GunMchn.Magazine(m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的槍機上膛出錯");            //上膛
+		if (!m_GunMchn.Magazine(m_EndItor))  MessageBox("Chanel選錯了\nPtnDlg->LoadedCartridge的槍機上膛出錯");            //上膛
 		trigger(m_itor);
 		nextTrigger(m_itor);
-		if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入目標靶半徑出錯");     //靶大小
-		if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->Magazine的載入下一靶半徑出錯");     //次靶大小
+		if (    !m_Goal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->LoadedCartridge的載入目標靶半徑出錯");     //靶大小
+		if (!m_NextGoal.SetRadius(m_GunMchn.GetRadius()))  MessageBox("Chanel選錯了\nPtnDlg->LoadedCartridge的載入下一靶半徑出錯");     //次靶大小
     
 		Invalidate();
     
@@ -396,8 +401,7 @@ void CPatternDlg::initCa210()
     m_pCA210 = pMainFrm->m_pCa210;
     m_pCA210->SetOnline(TRUE);
 	m_pCA210->LinkMemory();
-
-	initLCMSize();
+	setupLCMSize();
 }
 
 BOOL CPatternDlg::trigger(std::vector<Cartridge>::iterator& it)
@@ -561,7 +565,7 @@ UINT CPatternDlg::vbrNextGoalThread(LPVOID LParam)
     return 0;
 }
 
-void CPatternDlg::OnTimer(UINT nIDevent) 
+void CPatternDlg::OnTimer(UINT nIDEvent) 
 {
     //檢查連線
 //    c_bUnCntCA210 = FALSE;
@@ -625,7 +629,7 @@ void CPatternDlg::OnTimer(UINT nIDevent)
 		c_bUnCntCA210 = TRUE;
 	}
 
-    CDialog::OnTimer(nIDevent);
+    CDialog::OnTimer(nIDEvent);
 }
 
 void CPatternDlg::eventGoPrvsGoal()
