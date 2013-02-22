@@ -2,45 +2,33 @@
 #include "Circle.h"
 #include <cmath>
 
-Circle::Circle():m_Percent(0), m_nPenWidth(5)
+Circle::Circle():m_Percent(1), m_nPenWidth(5)
 {
 }
 
-BOOL Circle::SetCenter(CPoint p)
+Circle::Circle(int r):m_Percent(r), m_nPenWidth(5)
 {
-    if (p.x >= 0 && p.y >= 0)
-    {
-        SetCenter(p.x, p.y);
-        return TRUE;
-    } 
-    else
-        return FALSE;
 }
 
-BOOL Circle::SetCenter(int x, int y)
+void Circle::SetCenter(CPoint p)
 {
-    if (x >= 0 && y >= 0)
-    {
-        m_nCenter.x = x;
-        m_nCenter.y = y;
-        return TRUE;
-    } 
-    else
-        return FALSE;
+    SetCenter(p.x, p.y);
 }
 
-BOOL Circle::SetRadius(UINT r)
+void Circle::SetCenter(int x, int y)
 {
-    if (r > 0)
-    {
-        m_nRadius = r;
-        return TRUE;
-    } 
-    else
-        return FALSE;
+    ASSERT(x >= 0 && y >= 0);
+    m_nCenter.x = x;
+    m_nCenter.y = y;
 }
 
-UINT Circle::GetRadius() const
+void Circle::SetRadius(int r)
+{
+	ASSERT(r > 0);
+    m_nRadius = r;
+}
+
+int Circle::GetRadius() const
 {
     return m_nRadius;
 }
@@ -59,61 +47,58 @@ void Circle::DrawCircle(CPaintDC &dc)
     CPoint   EndPoint(m_nCenter.x, m_nCenter.y - m_nRadius);
     
     if(m_Percent > 0 && m_Percent < 100)  
-    {
-        DrawArc(EndPoint);
-        DrawClr(m_Color);
-    }
+        Draw();
+
     reSetRect();
     OldPen = dc.SelectObject(&m_Pen);
     dc.Arc(m_DrawRect, StartPoint, EndPoint);
     dc.SelectObject(OldPen);
 }
 
-UINT Circle::SetPercent(UINT percent)
+CirclePercent Circle::SetPercent(int percent)
 {
     //繼續 未滿100%
     //停止 超過100%
     if (percent < 0)
     {
         m_Percent = 0;
-        return 0;//空杯啦
+        return CP_NULL;//空杯啦
     }
     else if (percent >= 0 && percent <100)
     {
         m_Percent = percent;
-        return 1;//進行中
+        return CP_X;//進行中
     }
     else if (percent >= 100)
     {
         m_Percent = 100;
-        return 2;//滿出來啦
+        return CP_FULL;//滿出來啦
     }
-    else
-        return 3;
+	else
+	{
+		ASSERT(0);
+		return CP_FULL;
+	}
 }
-UINT Circle::GetPercent() const
+int Circle::GetPercent() const
 {
     return m_Percent;
 }
 
-BOOL Circle::SetColor(COLORREF clr)
+void Circle::SetColor(const COLORREF clr)
 {
-    int O = 0x000000FF & (clr >>24);
-    int B = GetBValue(clr);
-    int G = GetGValue(clr);
-    int R = GetRValue(clr);
+    const int O = 0x000000FF & (clr >>24);
+    const int B = GetBValue(clr);
+    const int G = GetGValue(clr);
+    const int R = GetRValue(clr);
 
-    if(O == 0 && R >= 0 && R <256
-              && G >= 0 && G <256 
-              && B >= 0 && B <256 )
-    {
-        m_Color = clr;
-        m_Pen.DeleteObject();
-        m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color);//變色
-        return TRUE;
-    }    
-    else 
-        return FALSE;
+    ASSERT(O == 0 && R >= 0 && R <256
+                  && G >= 0 && G <256 
+                  && B >= 0 && B <256 );
+
+    m_Color = clr;
+    m_Pen.DeleteObject();
+    m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color);//變色
 }
 
 COLORREF Circle::GetColor() const
@@ -121,11 +106,29 @@ COLORREF Circle::GetColor() const
     return m_Color;
 }
 
-CRect Circle::VbrFun(UINT k, UINT x0)
+// void Circle::elasticAnimation(LPVOID LParam)
+// {
+//     CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
+// 	Circle *pCircle = (Circle*)(PtnDlg->m_Goal);
+// 
+// 	ASSERT_VALID(PtnDlg);
+// 	ASSERT(pInfo1);
+// 	ASSERT(pCircle);
+// 
+// 	for (UINT i = 0; i < 16; ++i)
+//     {
+//         pCircle->VbrFun(i, pCircle->GetRadius());
+//         Sleep(15); //調節動畫重畫時是否看得到
+//     }
+// }
+
+CRect Circle::VbrFun(int k, int x0)
 {
     //max = 375
     //min = 0
     //375-15/15
+	ASSERT(k>=0);
+	ASSERT(x0>=0);
     int T0 = 15;
     CSingleLock csl(&m_cs);
     csl.Lock();
@@ -136,17 +139,17 @@ CRect Circle::VbrFun(UINT k, UINT x0)
     return m_DrawRect;
 }
 
-void Circle::reSetRect(int range)
+void Circle::reSetRect(int expnd)
 {
-    m_DrawRect.left   = (long)(m_nCenter.x - m_nRadius - range);
-    m_DrawRect.top    = (long)(m_nCenter.y - m_nRadius - range);
-    m_DrawRect.right  = (long)(m_nCenter.x + m_nRadius + range);
-    m_DrawRect.bottom = (long)(m_nCenter.y + m_nRadius + range);
+    m_DrawRect.left   = (long)(m_nCenter.x - m_nRadius - expnd);
+    m_DrawRect.top    = (long)(m_nCenter.y - m_nRadius - expnd);
+    m_DrawRect.right  = (long)(m_nCenter.x + m_nRadius + expnd);
+    m_DrawRect.bottom = (long)(m_nCenter.y + m_nRadius + expnd);
 }
 
 #ifdef _DEBUG
 
-CString Circle::GetSetupValue() const
+CString Circle::showMe() const
 {
     CString str;
     

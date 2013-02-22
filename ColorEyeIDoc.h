@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include "Omdfile/COmdFile0.h"
+#include "RNA.h"
 
 class CColorEyeIDoc : public CDocument
 {
@@ -63,6 +64,13 @@ private:
 public:
 	CDataChain& GetMsrDataChain(){ return m_MsrData; };//新的一條鍊 vChain2
     void RestructureVector();
+
+
+private:
+	RNA m_docRNA;
+public:
+	void UpdateDocRNA(RNA& _docRNA){ m_docRNA.Empty(); m_docRNA = _docRNA; };
+	RNA  GetDocRNA(){ return m_docRNA; };
 
 protected: // create from serialization only
     CColorEyeIDoc();

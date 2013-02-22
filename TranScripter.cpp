@@ -23,8 +23,38 @@ void TranScripter::checkPointValue(const int _hCI, const int _vCI) const
 
 void TranScripter::checkPointValue(const double dFE, const int _cm2pixel) const
 {
-	ASSERT(_cm2pixel > 0);  //cm2pixel(2.3)
 	ASSERT(dFE >= 0); //dFE
+	ASSERT(_cm2pixel > 0);  //Cm2pixel(2.3)
+}
+
+CPoint TranScripter::getCenterPoint() const
+{
+//運算第幾個（以九點為計）
+    //ScrmV 螢幕垂直pixel數
+    //ScrmH 螢幕水平pixel數
+    const int hCenter(m_nScrmH/2);
+    const int vCenter(m_nScrmV/2);
+
+	checkPointValue(hCenter, vCenter);
+	
+/*
++------------------------------+
+|                              |
+|                              |
+|                              |
+|                              |
+|              04              |
+|                              |
+|                              |
+|                              |
+|                              |
++------------------------------+
+*/
+    const CPoint PointD(hCenter  ,vCenter);
+
+//回傳一個點
+	return PointD;
+
 }
 
 CPoint TranScripter::getFE9Point(UINT few) const
@@ -33,14 +63,14 @@ CPoint TranScripter::getFE9Point(UINT few) const
 	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : cm2pixel(2.3));
-    const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : cm2pixel(2.3));
+    const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
+    const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));
     const int RightEdge(m_nScrmH - LeftEdge);
     const int BottomEdge(m_nScrmV - TopEdge);
     const int hCenter(m_nScrmH/2);
     const int vCenter(m_nScrmV/2);
 
-	checkPointValue(dFE, cm2pixel(2.3));
+	checkPointValue(dFE, Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -95,15 +125,15 @@ CPoint TranScripter::getFE5Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const int dFE = (double)m_tranPointer->GetPara(PA_FEover);
-    const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : cm2pixel(2.3);
-    const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : cm2pixel(2.3);
+	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
+    const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
     const int RightEdge  = m_nScrmH - LeftEdge;
     const int BottomEdge = m_nScrmV - TopEdge;
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
 
-	checkPointValue(dFE, cm2pixel(2.3));
+	checkPointValue(dFE, Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -147,13 +177,13 @@ CPoint TranScripter::get5nits9Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const int LeftEdge   = cm2pixel(10);
+    const int LeftEdge   = Cm2pixel(10);
     const int TopEdge    = static_cast<int>(m_nScrmV / 6);//六分之一上邊緣
     const int RightEdge  = m_nScrmH - LeftEdge;
     const int BottomEdge = m_nScrmV - TopEdge;
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
-	checkPointValue(cm2pixel(2.3));
+	checkPointValue(Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -209,10 +239,10 @@ CPoint TranScripter::getD13Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const int dFE = (double)m_tranPointer->GetPara(PA_FEover);
+	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
 
-	const int LeftEdge  ((dFE) ? static_cast<int>(m_nScrmH / dFE) : cm2pixel(2.3));//左邊緣
-    const int TopEdge   ((dFE) ? static_cast<int>(m_nScrmV / dFE) : cm2pixel(2.3));//上邊緣
+	const int LeftEdge  ((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));//左邊緣
+    const int TopEdge   ((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));//上邊緣
     const int RightEdge (m_nScrmH - LeftEdge);
     const int BottomEdge(m_nScrmV - TopEdge);
 
@@ -227,7 +257,7 @@ CPoint TranScripter::getD13Point(UINT few) const
 
     const int R1(hCenter + hPitch);
     const int B1(vCenter + vPitch);
-	checkPointValue(dFE, cm2pixel(2.3));
+	checkPointValue(dFE, Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -294,9 +324,9 @@ CPoint TranScripter::getD21Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const int dFE = (double)m_tranPointer->GetPara(PA_FEover);
-    const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : cm2pixel(2.3));
-    const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : cm2pixel(2.3));
+	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
+    const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));
     const int RightEdge(m_nScrmH - LeftEdge);
     const int BottomEdge(m_nScrmV - TopEdge);
 
@@ -309,8 +339,8 @@ CPoint TranScripter::getD21Point(UINT few) const
 
 	if (dFE)
 	{
-		hPitch = ((float)m_nScrmH - ((m_nScrmH/dFE)*2.0)) / 7.0;
-		vPitch = ((float)m_nScrmV - ((m_nScrmV/dFE)*2.0)) / 5.0;
+		hPitch = (m_nScrmH - ((m_nScrmH/dFE)*2.0)) / 7.0;
+		vPitch = (m_nScrmV - ((m_nScrmV/dFE)*2.0)) / 5.0;
 	}
 
     const int L2(hCenter - hPitch), L1(L2 - hPitch), R2(hCenter + hPitch), R1(R2 + hPitch);
@@ -318,7 +348,7 @@ CPoint TranScripter::getD21Point(UINT few) const
     const int T1(vCenter - vPitch);
     const int B1(vCenter + vPitch);
 
-	checkPointValue(dFE, cm2pixel(2.3));
+	checkPointValue(dFE, Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -386,32 +416,32 @@ CPoint TranScripter::getD25Point(UINT few) const
 {
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const int dFE = (double)m_tranPointer->GetPara(PA_FEover);
+	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
 	const int fRectSide = m_tranPointer->GetPara(PA_D25RectSide);
 
-    const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : cm2pixel(2.3);
-    const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : cm2pixel(2.3);
+    const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
+    const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
 
- //   const int LeftEdge   = cm2pixel(2.3);
-    const int L1    = LeftEdge + cm2pixel(fRectSide/2);
-    const int L2    = L1       + cm2pixel(fRectSide/2);
+ //   const int LeftEdge   = Cm2pixel(2.3);
+    const int L1    = LeftEdge + Cm2pixel(fRectSide/2);
+    const int L2    = L1       + Cm2pixel(fRectSide/2);
 
     const int RightEdge  = m_nScrmH - LeftEdge;
-    const int R1   = RightEdge - cm2pixel(fRectSide/2);
-    const int R2   = R1        - cm2pixel(fRectSide/2);
+    const int R1   = RightEdge - Cm2pixel(fRectSide/2);
+    const int R2   = R1        - Cm2pixel(fRectSide/2);
     
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
 
-//    const int TopEdge    = cm2pixel(2.3);//上邊緣
-    const int T1     = TopEdge + cm2pixel(fRectSide/2);
-    const int T2     = T1  + cm2pixel(fRectSide/2);
+//    const int TopEdge    = Cm2pixel(2.3);//上邊緣
+    const int T1     = TopEdge + Cm2pixel(fRectSide/2);
+    const int T2     = T1  + Cm2pixel(fRectSide/2);
 
     const int BottomEdge = m_nScrmV - TopEdge;
-    const int B1  = BottomEdge - cm2pixel(fRectSide/2);
-    const int B2  = B1  - cm2pixel(fRectSide/2);
+    const int B1  = BottomEdge - Cm2pixel(fRectSide/2);
+    const int B2  = B1  - Cm2pixel(fRectSide/2);
 
-	checkPointValue(dFE, cm2pixel(2.3));
+	checkPointValue(dFE, Cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -419,7 +449,7 @@ CPoint TranScripter::getD25Point(UINT few) const
 	checkPointValue(L1, T1);
 	checkPointValue(R1, B1);	
 	checkPointValue(L2, T2);
-	checkPointValue(B2, R2);
+	checkPointValue(R2, B2);
 
 
 /* L1L2                  R2R1
@@ -521,11 +551,11 @@ CPoint TranScripter::getW49Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const int LeftEdge  = m_nScrmH  / 12;   //左數1直排
+    const int LeftEdge = m_nScrmH  / 12;   //左數1直排
     const int L1 = LeftEdge  *  2;   //左數2直排
     const int L2 = L1 *  2;   //左數3直排
 
-    const int TopEdge   = m_nScrmV / 12;    //上數1橫排
+    const int TopEdge = m_nScrmV / 12;    //上數1橫排
     const int T1  = TopEdge  * 2;    //上數2橫排
     const int T2  = T1 * 2;    //上數2橫排
 
@@ -540,7 +570,6 @@ CPoint TranScripter::getW49Point(UINT few) const
     const int hCenter = m_nScrmH/2;  //水平中心
     const int vCenter = m_nScrmV/2;  //垂直中心
 
-	checkPointValue(cm2pixel(2.3));
 	checkPointValue(LeftEdge, TopEdge);
 	checkPointValue(RightEdge, BottomEdge);
 	checkPointValue(hCenter, vCenter);
@@ -548,7 +577,7 @@ CPoint TranScripter::getW49Point(UINT few) const
 	checkPointValue(L1, T1);
 	checkPointValue(R1, B1);	
 	checkPointValue(L2, T2);
-	checkPointValue(B2, R2);
+	checkPointValue(R2, B2);
 
 /*   L1  L2          R2  R1
 +------------------------------+
@@ -693,7 +722,7 @@ CPoint TranScripter::getCrossTalk(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const int dFE = (double)m_tranPointer->GetPara(PA_FEover)* 2;
+	const double dFE = (double)m_tranPointer->GetPara(PA_FEover)* 2;
 
     const int LeftEdge   = static_cast<int>(m_nScrmH / dFE);    //上
     const int TopEdge    = static_cast<int>(m_nScrmV / dFE);    //下
@@ -701,6 +730,11 @@ CPoint TranScripter::getCrossTalk(UINT few) const
     const int BottomEdge = m_nScrmV - TopEdge;   //右
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
+
+	checkPointValue(LeftEdge, TopEdge);
+	checkPointValue(RightEdge, BottomEdge);
+	checkPointValue(hCenter, vCenter);
+	checkPointValue(dFE);
 /*
 +------------------------------+
 |                              |
@@ -733,34 +767,7 @@ CPoint TranScripter::getCrossTalk(UINT few) const
     }
 }
 
-CPoint TranScripter::getGammaPoint() const
-{
-//運算第幾個
-    //ScrmV 螢幕垂直pixel數
-    //ScrmH 螢幕水平pixel數
-
-    const int hCenter    = m_nScrmH/2;
-    const int vCenter    = m_nScrmV/2;
-/*
-+------------------------------+
-|                              |
-|                              |  
-|                              |  
-|                              |
-|              00              |
-|                              |
-|                              |  
-|                              |  
-|                              |
-+------------------------------+
-*/
-    const CPoint PointD (hCenter, vCenter);
-
-//回傳一個點
-	return PointD;
-}
-
-int TranScripter::cm2pixel(const double cm) const
+int TranScripter::Cm2pixel(const double cm) const
 {    
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
 	ASSERT_VALID(pMainFrm);
@@ -849,7 +856,7 @@ CPoint TranScripter::tranPoint(unsigned int flowNo) const
 {
 	switch(m_tranPointer->GetMsrFlowNum())
 	{
-    case Pn1:        return getFE9Point(4);        //中心點定義不分
+    case Pn1:        return getCenterPoint();        //中心點定義不分
     case Pn4:        return getCrossTalk(flowNo);
     case Pn5:        return getFE5Point(flowNo);
     case Pn9:    if (m_tranPointer->GetBackColor() == Nits)          //九點週邊定義各有不同
@@ -860,7 +867,7 @@ CPoint TranScripter::tranPoint(unsigned int flowNo) const
     case Pn21:       return getD21Point(flowNo);
     case Pn25:       return getD25Point(flowNo);
     case Pn49:       return getW49Point(flowNo);
-	case PnGamma:    return getGammaPoint();
+	case PnGamma:    return getCenterPoint();
     default:         return getFE9Point(0);
 	}	
 }

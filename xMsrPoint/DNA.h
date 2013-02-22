@@ -21,5 +21,7 @@ public:
 	std::vector<Nucleotide>::const_iterator      End  () const { return nChain.end();   };
 
 	std::vector<Nucleotide>::size_type           Size () const { return nChain.size();  };
+	void Empty(){ nChain.clear(); };
+//	BOOL IsEmpty(){ nChain.empty(); };
 };
 #endif

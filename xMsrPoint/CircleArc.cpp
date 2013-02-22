@@ -2,7 +2,7 @@
 #include <cmath>
 #include "CircleArc.h"
 
-void CircleArc::DrawArc(CPoint& endpt)
+void CircleArc::Draw()
 {
     int oX, oY;
 
@@ -28,6 +28,6 @@ void CircleArc::DrawArc(CPoint& endpt)
         oX = (int)(m_nRadius / cos(0.0628318 * m_Percent));
         oY = (int)(m_nRadius / sin(0.0628318 * m_Percent));
     }
-    endpt.x = oX + m_nCenter.x;
-    endpt.y = oY + m_nCenter.y;
+    m_nCenter.x = oX + m_nCenter.x;
+    m_nCenter.y = oY + m_nCenter.y;
 }

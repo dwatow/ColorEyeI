@@ -139,11 +139,10 @@ protected:
     //}}AFX_DISPATCH
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
-public:
-//    void SetBolt(Bolt* _p);  //在CPatternDlg::InitDataDlgType()有用到
 private:
 	void listBoxUpdate();
 	void selMsrItem2DNA();
+	void rememberSelMsrItems();
 };
 
 //{{AFX_INSERT_LOCATION}}

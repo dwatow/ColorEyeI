@@ -14,6 +14,7 @@ class TranScripter
 public:
 	TranScripter();
 	void Trans(DNA&, RNA&);
+	int Cm2pixel(const double) const;
 private:
 	COLORREF tranColor(UINT) const;
 	CPoint   tranPoint(UINT) const;
@@ -22,17 +23,15 @@ private:
     CPoint get5nits9Point(UINT few) const;
     CPoint getCrossTalk(UINT few) const;// 6/26新增
 	
-    CPoint getFE5Point(UINT few)     const;
-    CPoint getFE9Point(UINT few = 4) const;
-    CPoint getW49Point(UINT few)     const;
-    CPoint getD25Point(UINT few)     const;//side 幾公分
-    CPoint getD29Point(UINT few)     const;
-    CPoint getD21Point(UINT few)     const;
-    CPoint getD13Point(UINT few)     const;
-	CPoint getGammaPoint()           const;
-	CPoint getJND()                  const;
-
-	int cm2pixel(const double) const;
+	CPoint getCenterPoint()      const;
+    CPoint getFE5Point(UINT few) const;
+    CPoint getFE9Point(UINT few) const;
+    CPoint getW49Point(UINT few) const;
+    CPoint getD25Point(UINT few) const;//side 幾公分
+    CPoint getD29Point(UINT few) const;
+    CPoint getD21Point(UINT few) const;
+    CPoint getD13Point(UINT few) const;
+	CPoint getJND()              const;
 
 	void setSquence(Cartridge2&, std::vector<Nucleotide>::size_type, int) const;
     

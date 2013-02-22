@@ -21,19 +21,20 @@ m_Parameters(PA_Max, -1)
 		break;
 	//¦³Â÷Ãä
 	case Pn4:
-		if (cy != Nits)
-			break;	
+		if (cy != CrsTlk)
+			break;
 	case Pn5:
 	case Pn9:
 		if (cy == Nits)
 		{
 			SetPara(PA_NitsNum, para1);
 			SetPara(PA_NitsDir, para2); 
-			m_paraStr.Format("_¦Ç¶¥: %d%s", para1, (para2)?"¡ô":"¡õ");
+			m_paraStr.Format("_¦Ç¶¥: %d%s", para1, (para2)?"¡õ":"¡ô");
 			break;
 		}
 
 	case Pn13:
+	case Pn21:
 	case Pn25:
 		SetPara(PA_FEover, para1);
 		if (para1 == 0)
@@ -51,7 +52,6 @@ m_Parameters(PA_Max, -1)
 			m_paraStr.Format("_¦Ç¶¥: %d", para1);
 			break;
 		}
-	case Pn21:
 	case Pn49:
 	default:
 		m_paraStr.Empty();

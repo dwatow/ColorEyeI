@@ -58,6 +58,7 @@ protected:
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
+	RNA m_RNA;
     CaState Recoil();
     
     //手動可調
@@ -81,9 +82,9 @@ private:
 
     Ca210* m_pCA210;
 
-    std::vector<Cartridge>::iterator m_itor;
-    std::vector<Cartridge>::iterator m_BeginItor;
-    std::vector<Cartridge>::iterator m_EndItor;
+    std::vector<Cartridge2>::iterator m_itor;
+    std::vector<Cartridge2>::iterator m_BeginItor;
+    std::vector<Cartridge2>::iterator m_EndItor;
 
     CBrush   m_BkBrush;
     COLORREF m_BkColor;    //背景色
@@ -97,12 +98,14 @@ private:
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
+private:
 	void setupLCMSize();
     void initCa210();
     void initDataDlgType();//Call SelMsrItem
+	void initDocument();
 
-    BOOL trigger(std::vector<Cartridge>::iterator&);
-    BOOL nextTrigger(std::vector<Cartridge>::iterator&);
+    BOOL trigger();
+    BOOL nextTrigger();
     COLORREF shiftColor(COLORREF clr, int shift = 55) const;
     COLORREF invrtColor(COLORREF clr) const;
     void drawMsrLabel(CDC &pDC);
@@ -119,26 +122,24 @@ private:
     static UINT vbrNextGoalThread(LPVOID LParam);
 
 	void changeBkColor(COLORREF);
+    void fineNits();
 	void fineNitsPos(int& GrayLevel);
 	void fineNitsNeg(int& GrayLevel);
+
+	void checkColor(COLORREF) const;
+    void setBkColor(COLORREF);
 public:
-    void FineNits();
-
-//    BOOL LoadedCartridge(); //彈匣
 	void LoadedCartridge(); //彈匣
-
-    COLORREF GetBkColor() const;
-    BOOL     SetBkColor(COLORREF);
-
-        CPoint   GetGoalPosi() const;
-        BOOL     SetGoalPosi(CPoint);
-
-        UINT     GetGoalRadius() const;
-        BOOL     SetGoalRadius(UINT );
-
-        COLORREF GetGoalColor() const;
-        BOOL     SetGoalColor(COLORREF);
 };
+
+
+inline void CPatternDlg::checkColor(COLORREF clr) const
+{
+    ASSERT((0x000000FF & (clr >>24)) >= 0);
+    ASSERT(GetRValue(clr) >= 0);    ASSERT(GetRValue(clr) < 256);
+    ASSERT(GetGValue(clr) >= 0);    ASSERT(GetGValue(clr) < 256);
+    ASSERT(GetBValue(clr) >= 0);    ASSERT(GetBValue(clr) < 256);
+}
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

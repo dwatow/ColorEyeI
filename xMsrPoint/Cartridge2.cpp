@@ -7,7 +7,7 @@
 
 void Cartridge2::setSqncFrm(UINT _F)
 {
-	ASSERT(_F > 0);
+//	ASSERT(_F > 0);
 	m_sequenceFrom = _F;
 }
 
@@ -18,7 +18,7 @@ UINT Cartridge2::getSqncFrm() const
 
 void Cartridge2::setSqncArea(AreaKind _A)
 {
-	ASSERT(_A > 0);
+//	ASSERT(_A > 0);
 	m_sequenceArea = _A;
 }
 
@@ -65,7 +65,7 @@ COLORREF Cartridge2::GetBkColor() const
 
 void Cartridge2::SetDescrip(CString str)
 {
-	ASSERT(str.GetLength());
+//	ASSERT(str.Empty());
 	m_Description = str;
 }
 

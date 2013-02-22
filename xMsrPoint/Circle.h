@@ -1,48 +1,56 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 #include <afxmt.h>
+enum CirclePercent {CP_NULL, CP_X, CP_FULL};
 
 class Circle
 {
     CPen m_Pen;
-    int m_nPenWidth;
+    int  m_nPenWidth;
     COLORREF m_BkColor;
-public:
-    Circle();
-     void reSetRect(int range = 0);
-//     CRect GetRect() const;
-
-    BOOL SetColor(COLORREF clr);
-    COLORREF GetColor() const;
-
-//     BOOL SetBkColor(COLORREF clr);
-//     COLORREF GetBkColor() const;
-
-    BOOL SetRadius(UINT r);
-    UINT GetRadius() const;
-
-    BOOL SetCenter(CPoint p);
-    BOOL SetCenter(int x, int y);
-    CPoint GetCenter() const;
-
-    UINT SetPercent(UINT pct);
-    UINT GetPercent() const;
-
-    virtual void DrawCircle(CPaintDC&);
-    virtual CRect VbrFun(UINT, UINT);
-
-#ifdef _DEBUG
-    CString GetSetupValue() const;
-#endif
 
 protected:
     CCriticalSection m_cs; //單一執行緒的鎖
     CRect    m_DrawRect;
-    UINT     m_nRadius;
-    UINT     m_Percent;
+    int      m_nRadius;
+    int      m_Percent;
     CPoint   m_nCenter;
     COLORREF m_Color;
-    virtual void DrawArc(CPoint& ){};
-    virtual void DrawClr(COLORREF& ){};
+    virtual void Draw(){};
+
+private:
+	void reSetRect(int expnd = 0);
+public:
+    Circle();
+    Circle(int r);
+
+    void SetColor(const COLORREF clr);
+    COLORREF GetColor() const;
+
+    void SetRadius(int r);
+    int GetRadius() const;
+
+    void SetCenter(CPoint p);
+    void SetCenter(int x, int y);
+    CPoint GetCenter() const;
+
+    CirclePercent SetPercent(int pct);
+    int GetPercent() const;
+
+    virtual void DrawCircle(CPaintDC&);
+    virtual CRect VbrFun(int, int);
+
+private:
+	struct myThreadInfo
+    {
+        Circle* pCircle;
+    }Info1;
+public:
+	static void elasticAnimation(LPVOID LParam);
+
+#ifdef _DEBUG
+    CString showMe() const;
+#endif
+
 };
 #endif

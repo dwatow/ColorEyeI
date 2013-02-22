@@ -7,6 +7,8 @@
 #include "../xMsrPoint/PatternDlg.h"
 #include "../ColorEyeI.h"
 #include "../TranScripter.h"
+#include "../MainFrm.h"
+#include "../ColorEyeIDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -295,7 +297,8 @@ void CMsrItemDlg::selMsrItem2DNA()
     //     else                             pDoc->GetMsrDataChain().SortOrigMsr();
     
     //Cross Talk srot by AreaCode
-    if (m_chkCrossTalk.GetState())        m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+    if (m_chkCrossTalk.GetState())
+		m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
     
     if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
                                  m_DNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
@@ -319,6 +322,7 @@ void CMsrItemDlg::OnButtonAdd()
 
     TranScripter Ts;
     if (m_DNA.Size()) Ts.Trans(m_DNA, m_RNA);
+	m_DNA.Empty();
 
     listBoxUpdate();
 }
@@ -383,7 +387,19 @@ BOOL CMsrItemDlg::OnInitDialog()
 void CMsrItemDlg::OnOK() 
 {
     // TODO: Add extra validation here
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
     
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+
+	pDoc->UpdateDocRNA(m_RNA);
+
+	rememberSelMsrItems();
+}
+
+void CMsrItemDlg::rememberSelMsrItems()
+{
     //°O¾Ð ¿ï¶µ file >> Dialog
     CFile SaveSet;
     CFileException fx;
@@ -678,13 +694,7 @@ void CMsrItemDlg::OnButtonSelno()
 void CMsrItemDlg::OnCancel() 
 {
     // TODO: Add extra cleanup here
-//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-//     ASSERT_VALID(pMainFrm);
-//     
-//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-//     ASSERT_VALID(pDoc);
-// 
-//     pDoc->GetMsrDataChain().Empty();
+
     
     CDialog::OnCancel();
 }

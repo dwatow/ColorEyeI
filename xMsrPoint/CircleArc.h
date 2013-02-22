@@ -2,5 +2,5 @@
 
 class CircleArc : public Circle
 {
-    void DrawArc(CPoint& );
+    void Draw();
 };
