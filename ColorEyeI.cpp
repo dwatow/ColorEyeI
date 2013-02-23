@@ -156,7 +156,9 @@ BOOL CColorEyeIApp::InitInstance()
 //     SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
 //    BCFandODFPath.Format("%s",szPath);
 
-
+	SHGetSpecialFolderPath(0, m_desktopPath.GetBuffer(MAX_PATH+1), CSIDL_DESKTOPDIRECTORY,0);
+	m_desktopPath.ReleaseBuffer();
+	
 
     return TRUE;
 }
@@ -256,6 +258,11 @@ CString CColorEyeIApp::GetPathName()
 CString CColorEyeIApp::GetPath()
 {
     return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
+}
+
+CString CColorEyeIApp::GetDesktopPath()
+{
+	return m_desktopPath;
 }
 
 void CColorEyeIApp::DelMsrItemDlgSetupFile()

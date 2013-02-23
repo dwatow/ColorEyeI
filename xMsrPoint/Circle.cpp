@@ -2,10 +2,6 @@
 #include "Circle.h"
 #include <cmath>
 
-Circle::Circle():m_Percent(1), m_nPenWidth(5)
-{
-}
-
 Circle::Circle(int r):m_Percent(r), m_nPenWidth(5)
 {
 }
@@ -122,22 +118,22 @@ COLORREF Circle::GetColor() const
 //     }
 // }
 
-CRect Circle::VbrFun(int k, int x0)
-{
-    //max = 375
-    //min = 0
-    //375-15/15
-	ASSERT(k>=0);
-	ASSERT(x0>=0);
-    int T0 = 15;
-    CSingleLock csl(&m_cs);
-    csl.Lock();
-    double timeX = 24*k;
-    m_nRadius  = (long)(x0*-exp(-0.01*(timeX+T0))*sin(0.0209439*(timeX+T0)+1.570795)) + x0;
-    reSetRect(m_nPenWidth+4);
-    csl.Unlock();
-    return m_DrawRect;
-}
+// CRect Circle::VbrFun(int k, int x0)
+// {
+//     //max = 375
+//     //min = 0
+//     //375-15/15
+// 	ASSERT(k>=0);
+// 	ASSERT(x0>=0);
+//     int T0 = 15;
+//     CSingleLock csl(&m_cs);
+//     csl.Lock();
+//     double timeX = 24*k;
+//     m_nRadius  = (long)(x0*-exp(-0.01*(timeX+T0))*sin(0.0209439*(timeX+T0)+1.570795)) + x0;
+//     reSetRect(m_nPenWidth+4);
+//     csl.Unlock();
+//     return m_DrawRect;
+// }
 
 void Circle::reSetRect(int expnd)
 {

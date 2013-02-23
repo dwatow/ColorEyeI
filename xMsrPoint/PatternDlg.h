@@ -92,7 +92,7 @@ private:
      CircleArc m_Goal;        //目標圈圈
 //     CircleArc m_NextGoal;    //下一個目標圈圈
 //    Circle    m_Goal;        //目標圈圈
-    Circle    m_NextGoal;    //下一個目標圈圈
+//    Circle    m_NextGoal;    //下一個目標圈圈
 
     UINT m_Percent;
     Bolt m_GunMchn;
@@ -104,8 +104,8 @@ private:
     void initDataDlgType();//Call SelMsrItem
 	void initDocument();
 
-    BOOL trigger();
-    BOOL nextTrigger();
+    void trigger();
+    void checkMsrLimit();
     COLORREF shiftColor(COLORREF clr, int shift = 55) const;
     COLORREF invrtColor(COLORREF clr) const;
     void drawMsrLabel(CDC &pDC);
@@ -118,8 +118,8 @@ private:
     UINT eventCatchMsrValue();
 	void eventExitDialog();
 
-    static UINT vbrGoalThread(LPVOID LParam);
-    static UINT vbrNextGoalThread(LPVOID LParam);
+//     static UINT vbrGoalThread(LPVOID LParam);
+//     static UINT vbrNextGoalThread(LPVOID LParam);
 
 	void changeBkColor(COLORREF);
     void fineNits();

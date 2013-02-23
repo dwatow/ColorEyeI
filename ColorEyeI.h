@@ -26,12 +26,14 @@ class CCaSetupDlg;
 class CColorEyeIApp : public CWinApp
 {
 	CString m_strPathName;
+	CString m_desktopPath;
     CPatternDlg *m_pdlgPattern;
 	CCaSetupDlg *m_pdlgCaSetup;
 public:
 	void DelMsrItemDlgSetupFile();
 	CString GetPath();
 	CString GetPathName();
+	CString GetDesktopPath();
     CColorEyeIApp();
     ~CColorEyeIApp();
 // Overrides

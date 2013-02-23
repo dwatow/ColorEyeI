@@ -27,6 +27,7 @@ class CMsrItemDlg : public CDialog
 #endif // _DEBUG
 
 	CString m_RememberChkPathName;
+	CString m_desktopPath;
 	DNA m_DNA;
 	RNA m_RNA;
 

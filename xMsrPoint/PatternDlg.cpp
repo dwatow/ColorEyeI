@@ -296,6 +296,7 @@ void CPatternDlg::setBkColor(COLORREF clr)
 
 COLORREF CPatternDlg::shiftColor(COLORREF clr, int shift) const
 {
+	checkColor(clr);
     const int O = 0x000000FF & (clr >>24);
     int B = GetBValue(clr);
     int G = GetGValue(clr);
@@ -304,29 +305,23 @@ COLORREF CPatternDlg::shiftColor(COLORREF clr, int shift) const
     R = (R < shift)?(R + shift):(R - shift);
     G = (G < shift)?(G + shift):(G - shift);
     B = (B < shift)?(B + shift):(B - shift);
-	checkColor(clr);
 	checkColor(RGB(R, G, B));
     return RGB(R, G, B);
 }
 
 COLORREF CPatternDlg::invrtColor(COLORREF clr) const
 {
+	checkColor(clr);
     const int O = 0x000000FF & (clr >>24);
     int B = GetBValue(clr);
     int G = GetGValue(clr);
     int R = GetRValue(clr);
     
-    if (O != 0)
-        return RGB(R, G, B);
-    else
-    {
-        R = ((R < 130) && (R > 120))?(130 - R):(255 - R);
-        G = ((G < 130) && (G > 120))?(130 - G):(255 - G);
-        B = ((B < 130) && (B > 120))?(130 - B):(255 - B);
-		checkColor(clr);
-		checkColor(RGB(R, G, B));
-       return RGB(R, G, B);
-    }
+    R = ((R < 130) && (R > 120))?(130 - R):(255 - R);
+    G = ((G < 130) && (G > 120))?(130 - G):(255 - G);
+    B = ((B < 130) && (B > 120))?(130 - B):(255 - B);
+	checkColor(RGB(R, G, B));
+    return RGB(R, G, B);
 }
 
 void CPatternDlg::setupLCMSize()
@@ -372,7 +367,7 @@ void CPatternDlg::LoadedCartridge()
 	{
 		//++BeginItor;
 		trigger();
-		nextTrigger();
+//		nextTrigger();
     
 		Invalidate();
     
@@ -382,7 +377,7 @@ void CPatternDlg::LoadedCartridge()
 	}
 }
 
-BOOL CPatternDlg::trigger()
+void CPatternDlg::trigger()
 {
 		c_bGoalPercent = FALSE;
 		//目前這一點是不是5nits的中心點？2=是
@@ -402,38 +397,37 @@ BOOL CPatternDlg::trigger()
 		m_Goal.SetCenter(m_itor->GetPointPosi());  //靶位置
 		m_Goal.SetPercent(0);
 
-		if ( !c_bMsrEndnMsred /*|| it->GetMsrFlowNum() != PnGamma*/ && m_itor != m_RNA.Begin())
-			vbrGoalThread((LPVOID)&Info1);
-
-	c_bMsrBegin = (m_itor == m_RNA.Begin()) ? TRUE : FALSE;
-
-    return TRUE;
+// 		if ( !c_bMsrEndnMsred /*|| it->GetMsrFlowNum() != PnGamma*/ && m_itor != m_RNA.Begin())
+// 			vbrGoalThread((LPVOID)&Info1);
+		checkMsrLimit();
 }
 
-BOOL CPatternDlg::nextTrigger()
+void CPatternDlg::checkMsrLimit()
 {
-    m_itor++;
-    if (m_itor != m_RNA.End())
-    {
+	c_bMsrBegin = (m_itor == m_RNA.Begin()) ? TRUE : FALSE;
+	c_bMsrEnd   = (m_itor+1 == m_RNA.End() ) ? TRUE : FALSE;
+	c_bMsrEndnMsred = ( (m_itor+1 == m_RNA.End()) && (m_itor->GetBullet().isEmpty()) ) ? FALSE : TRUE;
+
+//     if (m_itor != m_RNA.End())
+//     {
 //         m_NextGoal.SetColor(shiftColor(m_itor->GetBkColor()));          //下一個靶顏色
 //         m_NextGoal.SetCenter(m_itor->GetPointPosi());  //靶位置
 // 		if (/*it->GetMsrFlowNum() != PnGamma &&*/ m_itor != m_RNA.Begin())
 // 	        vbrNextGoalThread((LPVOID)&Info1);
 
-        m_itor--;
+//        m_itor--;
 //        m_GunMchn.Trigger(it);
 
-        c_bMsrEnd = FALSE;
-        //還可以繼續
-    }
-    else
-    {
-        m_itor--;
-        c_bMsrEnd = TRUE;
-		c_bMsrEndnMsred = (m_itor->GetBullet().isEmpty()) ? FALSE : TRUE;
+//        c_bMsrEnd = FALSE;
+//         //還可以繼續
+//     }
+//     else
+//     {
+//        m_itor--;
+//        c_bMsrEnd = TRUE;
+//		c_bMsrEndnMsred = (m_itor->GetBullet().isEmpty()) ? FALSE : TRUE;
         //結束自動量測的訊號
-    }
-    return !c_bMsrEnd;
+//    }
 }
 
 BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg) 
@@ -492,35 +486,35 @@ CaState CPatternDlg::Recoil()
     return camsrResult;
 }
 
-UINT CPatternDlg::vbrGoalThread(LPVOID LParam)
-{
-    //圈圈跳出動畫
-    MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
-    CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
-    Circle *pGoal = (Circle*)&(PtnDlg->m_Goal);//(pInfo1->crl);
-
-	ASSERT_VALID(PtnDlg);
-	ASSERT(pInfo1);
-	ASSERT(pGoal);
-
-    UINT oriR = pGoal->GetRadius(), 
-         varR = 0;
-    
-    CPoint p1(pGoal->GetCenter());
-
-    if (PtnDlg->c_bMsrValues) PtnDlg->c_bMsrValues = FALSE; //動畫的時候，關掉
-    PtnDlg->Invalidate();
-    PtnDlg->UpdateWindow();
-    
-    for (UINT i = 0; i < 16; ++i)
-    {        
-        PtnDlg->InvalidateRect(pGoal->VbrFun(i, oriR));
-        PtnDlg->UpdateWindow();
-        Sleep(15); //調節動畫重畫時是否看得到
-    }
-    //PtnDlg->c_bGoalPercent = TRUE;
-    return 0;
-}
+// UINT CPatternDlg::vbrGoalThread(LPVOID LParam)
+// {
+//     //圈圈跳出動畫
+//     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
+//     CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
+//     Circle *pGoal = (Circle*)&(PtnDlg->m_Goal);//(pInfo1->crl);
+// 
+// 	ASSERT_VALID(PtnDlg);
+// 	ASSERT(pInfo1);
+// 	ASSERT(pGoal);
+// 
+//     UINT oriR = pGoal->GetRadius(), 
+//          varR = 0;
+//     
+//     CPoint p1(pGoal->GetCenter());
+// 
+//     if (PtnDlg->c_bMsrValues) PtnDlg->c_bMsrValues = FALSE; //動畫的時候，關掉
+//     PtnDlg->Invalidate();
+//     PtnDlg->UpdateWindow();
+//     
+//     for (UINT i = 0; i < 16; ++i)
+//     {        
+//         PtnDlg->InvalidateRect(pGoal->VbrFun(i, oriR));
+//         PtnDlg->UpdateWindow();
+//         Sleep(15); //調節動畫重畫時是否看得到
+//     }
+//     //PtnDlg->c_bGoalPercent = TRUE;
+//     return 0;
+// }
 
 // UINT CPatternDlg::vbrNextGoalThread(LPVOID LParam)
 // {
@@ -623,7 +617,7 @@ void CPatternDlg::eventGoPrvsGoal()
         if (m_itor != m_RNA.Begin())    m_itor--;
         
         trigger(); //它會等於0，就是從最後一回返回一次        
-//        nextTrigger(m_itor);
+//         nextTrigger();
         Invalidate();
 //         if (m_itor->GetBackColor() == JND || JNDX) 
 // 			c_bMsrValues = FALSE;
@@ -650,7 +644,7 @@ BOOL CPatternDlg::eventGoNextGoal()
 
 	//重新畫圈圈+動畫
 	trigger();
-//	nextTrigger(m_itor);
+//	nextTrigger();
 	c_bMsring = FALSE;
 	c_bMsrValues = FALSE;
 	Invalidate();

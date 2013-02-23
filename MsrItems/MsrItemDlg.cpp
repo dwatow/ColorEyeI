@@ -37,6 +37,7 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     ASSERT_VALID(pApp);
 
     m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
+	m_desktopPath.Format("%s", pApp->GetDesktopPath());
     
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
@@ -228,7 +229,7 @@ void CMsrItemDlg::listBoxUpdate()
 DebugCode(
 	CTxtFile fTxt;
     CFileException fx;
-    fTxt.Save("C://Users//1004066//Desktop//DNA.log", fx);
+    fTxt.Save(m_desktopPath+"//DNA.log", fx);
     fTxt.iTxtData(m_dTxt);
     fTxt.Close();
 )

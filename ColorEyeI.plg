@@ -6,17 +6,7 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP562F.tmp" with contents
-[
-/nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\GitHub\ColorEyeI\xMsrPoint\Circle.cpp"
-"D:\GitHub\ColorEyeI\xMsrPoint\CircleArc.cpp"
-"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
-"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
-"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
-]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP562F.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP5630.tmp" with contents
+Creating temporary file "C:\Users\KX\AppData\Local\Temp\RSP54EE.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\Bolt.obj
@@ -62,19 +52,10 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP5630.tmp"
+Creating command line "link.exe @C:\Users\KX\AppData\Local\Temp\RSP54EE.tmp"
 <h3>Output Window</h3>
-Compiling...
-Circle.cpp
-CircleArc.cpp
-Generating Code...
-Compiling...
-ColorEyeI.cpp
-MsrItemDlg.cpp
-PatternDlg.cpp
-Generating Code...
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP764E.tmp" with contents
+Creating temporary file "C:\Users\KX\AppData\Local\Temp\RSP55D9.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -118,7 +99,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP764E.tmp" with c
 .\Debug\XlsOQC2.sbr
 .\Debug\XlsRA1.sbr
 .\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP764E.tmp"
+Creating command line "bscmake.exe @C:\Users\KX\AppData\Local\Temp\RSP55D9.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

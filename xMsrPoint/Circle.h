@@ -21,8 +21,7 @@ protected:
 private:
 	void reSetRect(int expnd = 0);
 public:
-    Circle();
-    Circle(int r);
+    Circle(int r = 1);
 
     void SetColor(const COLORREF clr);
     COLORREF GetColor() const;
@@ -38,15 +37,15 @@ public:
     int GetPercent() const;
 
     virtual void DrawCircle(CPaintDC&);
-    virtual CRect VbrFun(int, int);
+//    virtual CRect VbrFun(int, int);
 
-private:
-	struct myThreadInfo
-    {
-        Circle* pCircle;
-    }Info1;
-public:
-	static void elasticAnimation(LPVOID LParam);
+// private:
+// 	struct myThreadInfo
+//     {
+//         Circle* pCircle;
+//     }Info1;
+// public:
+// 	static void elasticAnimation(LPVOID LParam);
 
 #ifdef _DEBUG
     CString showMe() const;
