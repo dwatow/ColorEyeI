@@ -48,6 +48,7 @@ void Circle::DrawCircle(CPaintDC &dc)
     reSetRect();
     OldPen = dc.SelectObject(&m_Pen);
     dc.Arc(m_DrawRect, StartPoint, EndPoint);
+
     dc.SelectObject(OldPen);
 }
 
@@ -101,6 +102,7 @@ COLORREF Circle::GetColor() const
 {
     return m_Color;
 }
+
 
 // void Circle::elasticAnimation(LPVOID LParam)
 // {

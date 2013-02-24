@@ -244,48 +244,36 @@ DebugCode(
         temp.Format("");
     TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
 
-
     // TODO: Add your message handler code here
     // Do not call CDialog::OnPaint() for painting messages
 }
 
 void CPatternDlg::drawMsrLabel(CDC &aDC)
 {
-    CRect* rect1 = new CRect
-        (m_Goal.GetCenter().x - (m_Goal.GetRadius()+10)     , m_Goal.GetCenter().y - (m_Goal.GetRadius()+20), \
-         m_Goal.GetCenter().x - (m_Goal.GetRadius()+10) + 88, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) + 158); //設定文字區塊
+	const int r = m_Goal.GetRadius();
+	const CSize Area(88, 158);
+	CPoint shift(-10-r, -20-r);
+
+	CRect rect1(m_Goal.GetCenter(), shift + Area);
+	aDC.SetTextColor(invrtColor(m_BkColor));
     
-    aDC.SetTextColor(invrtColor(m_BkColor));
-    CString temp;
-    temp.Format(" Lv =%3.2f\nx =%1.4f \ny =%1.4f\nT =%3d \nΔuv=%1.4f\nu' =%1.4f\nv' =%1.4f\nX = %3.2f\nY = %3.2f\nZ = %3.2f", \
-        m_itor->GetBullet().GetLv(), m_itor->GetBullet().GetSx(), m_itor->GetBullet().GetSy(), m_itor->GetBullet().GetT(), m_itor->GetBullet().GetDuv(), m_itor->GetBullet().GetDu(), m_itor->GetBullet().GetDv(), m_itor->GetBullet().GetX(), m_itor->GetBullet().GetY(), m_itor->GetBullet().GetZ());
+	//已量過的數據
+    aDC.DrawText(m_itor->GetBullet().MsgBoxStr(), rect1, DT_LEFT | DT_VCENTER);
 
-    aDC.DrawText(temp, rect1, DT_LEFT | DT_VCENTER);
-
-    delete rect1;
 }
 
 void CPatternDlg::drawMsringLabel(CDC &aDC)
 {    
-    CRect* rect2;
-    
-    if (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))
-    {
-        rect2= new CRect
-            (m_Goal.GetCenter().x + (m_Goal.GetRadius()+40)     , m_Goal.GetCenter().y - (m_Goal.GetRadius()+20), \
-             m_Goal.GetCenter().x + (m_Goal.GetRadius()+40) + 88, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) + 158); //設定文字區塊
-    }
-    else
-    {
-        rect2= new CRect
-            (m_Goal.GetCenter().x - (m_Goal.GetRadius()+125)     , m_Goal.GetCenter().y - (m_Goal.GetRadius()+20), \
-             m_Goal.GetCenter().x - (m_Goal.GetRadius()+125) + 88, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) + 158); //設定文字區塊
-    }
+	const int r = m_Goal.GetRadius();
+	const CSize Area(88, 158);
+	CPoint shift(0, -20-r);
+	shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
 
+	CRect rect2(m_Goal.GetCenter(), shift+Area);
     aDC.SetTextColor(shiftColor(m_BkColor));
-    aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
 
-    delete rect2;
+	//正在量的數據
+    aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
 }
 
 void CPatternDlg::setBkColor(COLORREF clr)
@@ -367,8 +355,6 @@ void CPatternDlg::LoadedCartridge()
 	{
 		//++BeginItor;
 		trigger();
-//		nextTrigger();
-    
 		Invalidate();
     
 	    //return TRUE;  //有子彈可以量測
@@ -407,27 +393,6 @@ void CPatternDlg::checkMsrLimit()
 	c_bMsrBegin = (m_itor == m_RNA.Begin()) ? TRUE : FALSE;
 	c_bMsrEnd   = (m_itor+1 == m_RNA.End() ) ? TRUE : FALSE;
 	c_bMsrEndnMsred = ( (m_itor+1 == m_RNA.End()) && (m_itor->GetBullet().isEmpty()) ) ? FALSE : TRUE;
-
-//     if (m_itor != m_RNA.End())
-//     {
-//         m_NextGoal.SetColor(shiftColor(m_itor->GetBkColor()));          //下一個靶顏色
-//         m_NextGoal.SetCenter(m_itor->GetPointPosi());  //靶位置
-// 		if (/*it->GetMsrFlowNum() != PnGamma &&*/ m_itor != m_RNA.Begin())
-// 	        vbrNextGoalThread((LPVOID)&Info1);
-
-//        m_itor--;
-//        m_GunMchn.Trigger(it);
-
-//        c_bMsrEnd = FALSE;
-//         //還可以繼續
-//     }
-//     else
-//     {
-//        m_itor--;
-//        c_bMsrEnd = TRUE;
-//		c_bMsrEndnMsred = (m_itor->GetBullet().isEmpty()) ? FALSE : TRUE;
-        //結束自動量測的訊號
-//    }
 }
 
 BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg) 
@@ -485,60 +450,6 @@ CaState CPatternDlg::Recoil()
 
     return camsrResult;
 }
-
-// UINT CPatternDlg::vbrGoalThread(LPVOID LParam)
-// {
-//     //圈圈跳出動畫
-//     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
-//     CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
-//     Circle *pGoal = (Circle*)&(PtnDlg->m_Goal);//(pInfo1->crl);
-// 
-// 	ASSERT_VALID(PtnDlg);
-// 	ASSERT(pInfo1);
-// 	ASSERT(pGoal);
-// 
-//     UINT oriR = pGoal->GetRadius(), 
-//          varR = 0;
-//     
-//     CPoint p1(pGoal->GetCenter());
-// 
-//     if (PtnDlg->c_bMsrValues) PtnDlg->c_bMsrValues = FALSE; //動畫的時候，關掉
-//     PtnDlg->Invalidate();
-//     PtnDlg->UpdateWindow();
-//     
-//     for (UINT i = 0; i < 16; ++i)
-//     {        
-//         PtnDlg->InvalidateRect(pGoal->VbrFun(i, oriR));
-//         PtnDlg->UpdateWindow();
-//         Sleep(15); //調節動畫重畫時是否看得到
-//     }
-//     //PtnDlg->c_bGoalPercent = TRUE;
-//     return 0;
-// }
-
-// UINT CPatternDlg::vbrNextGoalThread(LPVOID LParam)
-// {
-//     //圈圈跳出動畫
-//     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
-//     CPatternDlg *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
-//     Circle *pNextGoal = (Circle*)&(PtnDlg->m_NextGoal);//(pInfo1->crl);
-//     
-//     UINT oriR = pNextGoal->GetRadius(), 
-//          varR = 0;
-//     
-//     CPoint p1(pNextGoal->GetCenter());
-//     
-//     PtnDlg->Invalidate();
-//     PtnDlg->UpdateWindow();
-//     
-//     for (UINT i = 0; i < 16; ++i)
-//     {        
-//         PtnDlg->InvalidateRect(pNextGoal->VbrFun(i, oriR));
-//         PtnDlg->UpdateWindow();
-//         Sleep(15);
-//     }
-//     return 0;
-// }
 
 void CPatternDlg::OnTimer(UINT nIDEvent) 
 {
@@ -617,7 +528,6 @@ void CPatternDlg::eventGoPrvsGoal()
         if (m_itor != m_RNA.Begin())    m_itor--;
         
         trigger(); //它會等於0，就是從最後一回返回一次        
-//         nextTrigger();
         Invalidate();
 //         if (m_itor->GetBackColor() == JND || JNDX) 
 // 			c_bMsrValues = FALSE;
@@ -644,7 +554,6 @@ BOOL CPatternDlg::eventGoNextGoal()
 
 	//重新畫圈圈+動畫
 	trigger();
-//	nextTrigger();
 	c_bMsring = FALSE;
 	c_bMsrValues = FALSE;
 	Invalidate();
@@ -860,3 +769,58 @@ void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	// TODO: Add your message handler code here
 	m_pCA210->SetOnline(bShow);	
 }
+
+
+// UINT CPatternDlg::vbrGoalThread(LPVOID LParam)
+// {
+//     //圈圈跳出動畫
+//     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
+//     CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
+//     Circle *pGoal = (Circle*)&(PtnDlg->m_Goal);//(pInfo1->crl);
+// 
+// 	ASSERT_VALID(PtnDlg);
+// 	ASSERT(pInfo1);
+// 	ASSERT(pGoal);
+// 
+//     UINT oriR = pGoal->GetRadius(), 
+//          varR = 0;
+//     
+//     CPoint p1(pGoal->GetCenter());
+// 
+//     if (PtnDlg->c_bMsrValues) PtnDlg->c_bMsrValues = FALSE; //動畫的時候，關掉
+//     PtnDlg->Invalidate();
+//     PtnDlg->UpdateWindow();
+//     
+//     for (UINT i = 0; i < 16; ++i)
+//     {        
+//         PtnDlg->InvalidateRect(pGoal->VbrFun(i, oriR));
+//         PtnDlg->UpdateWindow();
+//         Sleep(15); //調節動畫重畫時是否看得到
+//     }
+//     //PtnDlg->c_bGoalPercent = TRUE;
+//     return 0;
+// }
+
+// UINT CPatternDlg::vbrNextGoalThread(LPVOID LParam)
+// {
+//     //圈圈跳出動畫
+//     MyThreadInfo *pInfo1 = (MyThreadInfo *)LParam;
+//     CPatternDlg *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
+//     Circle *pNextGoal = (Circle*)&(PtnDlg->m_NextGoal);//(pInfo1->crl);
+//     
+//     UINT oriR = pNextGoal->GetRadius(), 
+//          varR = 0;
+//     
+//     CPoint p1(pNextGoal->GetCenter());
+//     
+//     PtnDlg->Invalidate();
+//     PtnDlg->UpdateWindow();
+//     
+//     for (UINT i = 0; i < 16; ++i)
+//     {        
+//         PtnDlg->InvalidateRect(pNextGoal->VbrFun(i, oriR));
+//         PtnDlg->UpdateWindow();
+//         Sleep(15);
+//     }
+//     return 0;
+// }

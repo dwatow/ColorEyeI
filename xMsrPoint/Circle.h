@@ -1,6 +1,8 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 #include <afxmt.h>
+#include "Bullet.h"
+
 enum CirclePercent {CP_NULL, CP_X, CP_FULL};
 
 class Circle
@@ -16,6 +18,8 @@ protected:
     int      m_Percent;
     CPoint   m_nCenter;
     COLORREF m_Color;
+
+	CString m_valuesLabel;
     virtual void Draw(){};
 
 private:
