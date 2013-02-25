@@ -2,14 +2,15 @@
 #define CIRCLE_H
 #include <afxmt.h>
 #include "Bullet.h"
+#include "../CColorRef.h"
 
 enum CirclePercent {CP_NULL, CP_X, CP_FULL};
 
 class Circle
 {
+	CDC *m_pDC;
     CPen m_Pen;
     int  m_nPenWidth;
-    COLORREF m_BkColor;
 
 protected:
     CCriticalSection m_cs; //單一執行緒的鎖
@@ -17,7 +18,7 @@ protected:
     int      m_nRadius;
     int      m_Percent;
     CPoint   m_nCenter;
-    COLORREF m_Color;
+    ColorRef m_Color;
 
 	CString m_valuesLabel;
     virtual void Draw(){};
@@ -27,8 +28,8 @@ private:
 public:
     Circle(int r = 1);
 
-    void SetColor(const COLORREF clr);
-    COLORREF GetColor() const;
+    void SetColor(const ColorRef clr);
+    ColorRef GetColor() const;
 
     void SetRadius(int r);
     int GetRadius() const;

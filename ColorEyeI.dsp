@@ -130,6 +130,10 @@ SOURCE=.\CaSetupDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CColorRef.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\Circle.cpp
 # End Source File
 # Begin Source File
@@ -304,6 +308,10 @@ SOURCE=.\xMsrPoint\Cartridge2.h
 # Begin Source File
 
 SOURCE=.\CaSetupDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CColorRef.h
 # End Source File
 # Begin Source File
 

@@ -234,7 +234,7 @@ void RNA::CutEqualCell(RNA compData)
             {
                 str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
                     rnaitor,\
-                    GetRValue(rnaitor->GetBkColor()), GetGValue(rnaitor->GetBkColor()), GetBValue(rnaitor->GetBkColor()),\
+                    rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
                     rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
                 m_dTxt.push_back(str);
             }
@@ -244,7 +244,7 @@ void RNA::CutEqualCell(RNA compData)
             {
                 str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
                     compItor,\
-                    GetRValue(compItor->GetBkColor()), GetGValue(compItor->GetBkColor()), GetBValue(compItor->GetBkColor()),\
+                    compItor->GetBkColor().R(), compItor->GetBkColor().G(), compItor->GetBkColor().B(),\
                     compItor->GetPointPosi().x, compItor->GetPointPosi().y); 
                 m_dTxt.push_back(str);
             }
@@ -282,7 +282,7 @@ void RNA::CutEqualCell(RNA compData)
             {
                 str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
                     rnaitor,\
-                    GetRValue(rnaitor->GetBkColor()), GetGValue(rnaitor->GetBkColor()), GetBValue(rnaitor->GetBkColor()),\
+                    rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
                     rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
                 m_dTxt.push_back(str);
             }

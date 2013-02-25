@@ -49,16 +49,12 @@ CPoint Cartridge2::GetPointPosi() const
     return m_PointPosition;
 }
 
-void Cartridge2::SetBkColor(COLORREF _C)
+void Cartridge2::SetBkColor(ColorRef _C)
 {
-	ASSERT(GetRValue(_C) >= 0);  ASSERT(GetRValue(_C) <= 255);
-	ASSERT(GetGValue(_C) >= 0);  ASSERT(GetGValue(_C) <= 255);
-	ASSERT(GetBValue(_C) >= 0);  ASSERT(GetBValue(_C) <= 255);
-
 	m_BkColor = _C;
 }
 
-COLORREF Cartridge2::GetBkColor() const
+ColorRef Cartridge2::GetBkColor() const
 {
     return m_BkColor;
 }

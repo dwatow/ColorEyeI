@@ -4,6 +4,7 @@
 #include "CircleArc.h"    // Added by ClassView
 #include "CA210.h"
 #include "..\MsrItems\MsrItemDlg.h"
+#include "..\CColorRef.h"
 
 #include <cmath>
 #include <vector>
@@ -87,7 +88,7 @@ private:
     std::vector<Cartridge2>::iterator m_EndItor;
 
     CBrush   m_BkBrush;
-    COLORREF m_BkColor;    //背景色
+    ColorRef m_BkColor;    //背景色
 
      CircleArc m_Goal;        //目標圈圈
 //     CircleArc m_NextGoal;    //下一個目標圈圈
@@ -106,8 +107,8 @@ private:
 
     void trigger();
     void checkMsrLimit();
-    COLORREF shiftColor(COLORREF clr, int shift = 55) const;
-    COLORREF invrtColor(COLORREF clr) const;
+//     ColorRef shiftColor(ColorRef clr, int shift = 55) const;
+//     ColorRef invrtColor(ColorRef clr) const;
     void drawMsrLabel(CDC &pDC);
     void drawMsringLabel(CDC &pDC);
 
@@ -121,25 +122,25 @@ private:
 //     static UINT vbrGoalThread(LPVOID LParam);
 //     static UINT vbrNextGoalThread(LPVOID LParam);
 
-	void changeBkColor(COLORREF);
+	void changeBkColor(ColorRef);
     void fineNits();
 	void fineNitsPos(int& GrayLevel);
 	void fineNitsNeg(int& GrayLevel);
 
-	void checkColor(COLORREF) const;
-    void setBkColor(COLORREF);
+// 	void checkColor(ColorRef) const;
+    void setBkColor(ColorRef);
 public:
 	void LoadedCartridge(); //彈匣
 };
 
 
-inline void CPatternDlg::checkColor(COLORREF clr) const
-{
-    ASSERT((0x000000FF & (clr >>24)) >= 0);
-    ASSERT(GetRValue(clr) >= 0);    ASSERT(GetRValue(clr) < 256);
-    ASSERT(GetGValue(clr) >= 0);    ASSERT(GetGValue(clr) < 256);
-    ASSERT(GetBValue(clr) >= 0);    ASSERT(GetBValue(clr) < 256);
-}
+// inline void CPatternDlg::checkColor(ColorRef clr) const
+// {
+//     ASSERT((0x000000FF & (clr >>24)) >= 0);
+//     ASSERT(GetRValue(clr) >= 0);    ASSERT(GetRValue(clr) < 256);
+//     ASSERT(GetGValue(clr) >= 0);    ASSERT(GetGValue(clr) < 256);
+//     ASSERT(GetBValue(clr) >= 0);    ASSERT(GetBValue(clr) < 256);
+// }
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

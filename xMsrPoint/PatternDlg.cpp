@@ -109,7 +109,8 @@ BOOL CPatternDlg::OnInitDialog()
 
     Info1.ptnDlg = this;
 
-    m_Goal.SetColor(shiftColor(RGB(255, 0, 127), 5));
+    ColorRef tempClr(255, 0, 127); //深紅色
+    m_Goal.SetColor(tempClr.Shift(5));
 
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE
@@ -118,7 +119,7 @@ BOOL CPatternDlg::OnInitDialog()
 HBRUSH CPatternDlg::OnCtlColor(CDC* , CWnd* , UINT ) 
 {
     m_BkBrush.DeleteObject();
-    m_BkBrush.CreateSolidBrush(m_BkColor);
+    m_BkBrush.CreateSolidBrush(m_BkColor.oRGB());
     
     return m_BkBrush;
 }
@@ -147,7 +148,7 @@ void CPatternDlg::OnPaint()
     CPaintDC dc(this); // device context for painting
     CString temp;
     dc.SetBkMode(OPAQUE);
-    dc.SetBkColor(m_BkColor);
+    dc.SetBkColor(m_BkColor.oRGB());
 
     //Cross Talk 的背景色
 // 	ColorType SpecelPattern(m_GunMchn.GetColorType());
@@ -163,7 +164,7 @@ void CPatternDlg::OnPaint()
 //         m_NextGoal.DrawCircle(dc);
 
 DebugCode(
-		  dc.SetTextColor(shiftColor(m_BkColor));
+		  dc.SetTextColor(m_BkColor.Shift());
 
         //Pattern運作參數
         //Goal訊息
@@ -187,8 +188,8 @@ DebugCode(
                      c_bDrawGold, c_bDrawNextGold, c_bStateBar, c_bMsrValues, c_bMsring, m_Goal.GetPercent(), c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
         TextOut(dc, 0, 48, temp, temp.GetLength());
 
-        temp.Format("翻譯器資訊: %s", m_GunMchn.GetSetupValue());
-        TextOut(dc, 0, 64, temp, temp.GetLength());
+//         temp.Format("翻譯器資訊: %s", m_GunMchn.GetSetupValue());
+//         TextOut(dc, 0, 64, temp, temp.GetLength());
 
         temp.Format("這一點的資訊: %s", m_itor->showMe());
         TextOut(dc, 0, 80, temp, temp.GetLength());
@@ -202,7 +203,7 @@ DebugCode(
         TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %2.1f inch", \
-            m_pCA210->isOnline() ? "連線" : "離線" , m_GunMchn.GetMsrFlowName(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize());//LCM Size這樣抓會有問題
+            m_pCA210->isOnline() ? "連線" : "離線" , m_itor->GetDescrip(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize());//LCM Size這樣抓會有問題
         TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
     }
 
@@ -227,7 +228,7 @@ DebugCode(
     if (c_bMsrValues)
         drawMsrLabel(dc);
 
-    dc.SetTextColor(invrtColor(m_BkColor));
+    dc.SetTextColor(m_BkColor.Invrt());
 
     if (c_bMsrEnd && c_bRunMsrAI && c_bMsrEndnMsred)
     {
@@ -255,7 +256,7 @@ void CPatternDlg::drawMsrLabel(CDC &aDC)
 	CPoint shift(-10-r, -20-r);
 
 	CRect rect1(m_Goal.GetCenter(), shift + Area);
-	aDC.SetTextColor(invrtColor(m_BkColor));
+	aDC.SetTextColor(m_BkColor.Invrt());
     
 	//已量過的數據
     aDC.DrawText(m_itor->GetBullet().MsgBoxStr(), rect1, DT_LEFT | DT_VCENTER);
@@ -270,47 +271,18 @@ void CPatternDlg::drawMsringLabel(CDC &aDC)
 	shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
 
 	CRect rect2(m_Goal.GetCenter(), shift+Area);
-    aDC.SetTextColor(shiftColor(m_BkColor));
+    aDC.SetTextColor(m_BkColor.Shift());
 
 	//正在量的數據
     aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
 }
 
-void CPatternDlg::setBkColor(COLORREF clr)
+void CPatternDlg::setBkColor(ColorRef clr)
 {
-    checkColor(clr);
     m_BkColor = clr;
 }
 
-COLORREF CPatternDlg::shiftColor(COLORREF clr, int shift) const
-{
-	checkColor(clr);
-    const int O = 0x000000FF & (clr >>24);
-    int B = GetBValue(clr);
-    int G = GetGValue(clr);
-    int R = GetRValue(clr);
-	
-    R = (R < shift)?(R + shift):(R - shift);
-    G = (G < shift)?(G + shift):(G - shift);
-    B = (B < shift)?(B + shift):(B - shift);
-	checkColor(RGB(R, G, B));
-    return RGB(R, G, B);
-}
 
-COLORREF CPatternDlg::invrtColor(COLORREF clr) const
-{
-	checkColor(clr);
-    const int O = 0x000000FF & (clr >>24);
-    int B = GetBValue(clr);
-    int G = GetGValue(clr);
-    int R = GetRValue(clr);
-    
-    R = ((R < 130) && (R > 120))?(130 - R):(255 - R);
-    G = ((G < 130) && (G > 120))?(130 - G):(255 - G);
-    B = ((B < 130) && (B > 120))?(130 - B):(255 - B);
-	checkColor(RGB(R, G, B));
-    return RGB(R, G, B);
-}
 
 void CPatternDlg::setupLCMSize()
 {
@@ -655,16 +627,16 @@ void CPatternDlg::eventExitDialog()
 	
     pDoc->RestructureVector();
 	pDoc->UpdateAllViews(NULL);
-	int a = (int)(GetRValue(m_GunMchn.Get5NitsBkColor()));
-	pDoc->SetNitsLv(a);
+// 	int a = (int)(GetRValue(m_GunMchn.Get5NitsBkColor()));
+//	pDoc->SetNitsLv(a);
 }
 
 //////////////////////////////////////////////////////////////////////////
 //find 5 nits
 
-void CPatternDlg::changeBkColor(COLORREF color)
+void CPatternDlg::changeBkColor(ColorRef color)
 {
-	setBkColor(RGB(color, color, color));
+	setBkColor(color);
 	Invalidate();
     UpdateWindow();
 }
@@ -758,7 +730,7 @@ void CPatternDlg::fineNits()
  		else if (m_GunMchn.GetNitsKind() == NK_NEG) fineNitsNeg(Graylevel);
 		else MessageBox("找Nits出問題。");
 	}
-    m_GunMchn.Set5NitsBkColor(m_BkColor);
+    m_GunMchn.Set5NitsBkColor(m_BkColor.oRGB());
     c_bMsring = c_bFind5nits = !c_bMsring;  //5Nits特別流程結束
 }
 

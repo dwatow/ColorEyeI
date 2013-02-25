@@ -82,23 +82,14 @@ int Circle::GetPercent() const
     return m_Percent;
 }
 
-void Circle::SetColor(const COLORREF clr)
+void Circle::SetColor(const ColorRef clr)
 {
-    const int O = 0x000000FF & (clr >>24);
-    const int B = GetBValue(clr);
-    const int G = GetGValue(clr);
-    const int R = GetRValue(clr);
-
-    ASSERT(O == 0 && R >= 0 && R <256
-                  && G >= 0 && G <256 
-                  && B >= 0 && B <256 );
-
     m_Color = clr;
     m_Pen.DeleteObject();
-    m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color);//變色
+    m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color.oRGB());//變色
 }
 
-COLORREF Circle::GetColor() const
+ColorRef Circle::GetColor() const
 {
     return m_Color;
 }
@@ -152,7 +143,7 @@ CString Circle::showMe() const
     CString str;
     
     str.Format("中心點(%d, %d), 顏色(%d, %d, %d), 半徑 = %d, 百分比 = %d%% 圖形範圍 = %d, %d", \
-        m_nCenter.x, m_nCenter.y, GetRValue(m_Color), GetGValue(m_Color), GetBValue(m_Color), m_nRadius, m_Percent, m_DrawRect.right - m_DrawRect.left, m_DrawRect.bottom - m_DrawRect.top);
+        m_nCenter.x, m_nCenter.y, m_Color.R(), m_Color.G(), m_Color.B(), m_nRadius, m_Percent, m_DrawRect.right - m_DrawRect.left, m_DrawRect.bottom - m_DrawRect.top);
 
     return str;
 }

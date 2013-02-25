@@ -19,7 +19,6 @@
 // CColorEyeIApp:
 // See ColorEyeI.cpp for the implementation of this class
 //
-
 class CPatternDlg;
 class CCaSetupDlg;
 

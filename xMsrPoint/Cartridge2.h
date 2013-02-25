@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "../Enum.h"
 #include "Bolt.h"
+#include "../CColorRef.h"
 //Belt ºu¡Â
 //Bolt ∫jæ˜
 //Bullet ºu¿Y
@@ -17,7 +18,7 @@ class Cartridge2
 {
 public:
     Cartridge2();
-    Cartridge2(COLORREF , CPoint );
+    Cartridge2(ColorRef , CPoint );
     virtual  ~Cartridge2();
 
 private:
@@ -39,10 +40,10 @@ public:
     void      SetPointPosi(CPoint);
 
 private:
-    COLORREF  m_BkColor;
+    ColorRef  m_BkColor;
 public:
-    COLORREF  GetBkColor() const;
-    void      SetBkColor(COLORREF);
+    ColorRef  GetBkColor() const;
+    void      SetBkColor(ColorRef);
 
 private:
     Bullet    m_Data;
@@ -72,7 +73,7 @@ inline Cartridge2::Cartridge2():
 m_PointPosition(0, 0), m_BkColor(0, 0, 0)
 {}
 
-inline Cartridge2::Cartridge2(COLORREF cy, CPoint pn):
+inline Cartridge2::Cartridge2(ColorRef cy, CPoint pn):
 m_PointPosition(pn), m_BkColor(cy)//, _Time(CTime::GetCurrentTime())
 {}
 
@@ -110,7 +111,7 @@ inline CString Cartridge2::showMe() const
         m_sequenceFrom, 
         m_sequenceArea, 
         m_PointPosition.x, m_PointPosition.y, 
-        GetRValue(m_BkColor), GetGValue(m_BkColor), GetBValue(m_BkColor), 
+        m_BkColor.R(), m_BkColor.G(), m_BkColor.B(),
         !m_Data.isEmpty(), 
         m_Data.GetLastTime());
     return str;

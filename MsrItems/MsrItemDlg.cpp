@@ -9,6 +9,7 @@
 #include "../TranScripter.h"
 #include "../MainFrm.h"
 #include "../ColorEyeIDoc.h"
+#include "../CColorRef.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -183,17 +184,17 @@ HBRUSH CMsrItemDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
     HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
     // TODO: Change any attributes of the DC here
-    const COLORREF DarkClr  = RGB(  0,   0,   0);
-    const COLORREF RedClr   = RGB(255,   0,   0);
-    const COLORREF GreenClr = RGB(  0, 255,   0);
-    const COLORREF BlueClr  = RGB(  0,   0, 255);
-    const COLORREF WhiteClr = RGB(255, 255, 255);
+    const ColorRef DarkClr  = RGB(  0,   0,   0);
+    const ColorRef RedClr   = RGB(255,   0,   0);
+    const ColorRef GreenClr = RGB(  0, 255,   0);
+    const ColorRef BlueClr  = RGB(  0,   0, 255);
+    const ColorRef WhiteClr = RGB(255, 255, 255);
 
-    m_stcWhite.SetTextColor(pWnd, pDC, WhiteClr);
-    m_stcRed.  SetTextColor(pWnd, pDC, RedClr);
-    m_stcGreen.SetTextColor(pWnd, pDC, GreenClr);
-    m_stcBlue. SetTextColor(pWnd, pDC, BlueClr);
-    m_stcDark. SetTextColor(pWnd, pDC, DarkClr);
+    m_stcWhite.SetTextColor(pWnd, pDC, WhiteClr.oRGB());
+    m_stcRed.  SetTextColor(pWnd, pDC, RedClr.oRGB());
+    m_stcGreen.SetTextColor(pWnd, pDC, GreenClr.oRGB());
+    m_stcBlue. SetTextColor(pWnd, pDC, BlueClr.oRGB());
+    m_stcDark. SetTextColor(pWnd, pDC, DarkClr.oRGB());
 
     // TODO: Return a different brush if the default is not desired
     return hbr;

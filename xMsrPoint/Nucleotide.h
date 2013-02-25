@@ -10,7 +10,7 @@ class Nucleotide
 //    UINT      m_MsrPointType;//處理參數的方式
 
 public:
-     Nucleotide(ColorType _C = NoColor, PointNum _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
+	Nucleotide(ColorType _C = NoColor, PointNum _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
     ~Nucleotide();
 
 //該項目共幾點    
