@@ -23,10 +23,10 @@ class CPatternDlg : public CDialog
 {
     initType InitDataType;
 
-    struct MyThreadInfo
-    {
-        CPatternDlg* ptnDlg;
-    }Info1;
+//     struct MyThreadInfo
+//     {
+//         CPatternDlg* ptnDlg;
+//     }Info1;
 // Construction
 public:
     CPatternDlg(initType it, CWnd* pParent = NULL);   // standard constructor
@@ -55,11 +55,11 @@ protected:
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     afx_msg void OnPaint();
     afx_msg void OnTimer(UINT nIDevent);
-	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
-	//}}AFX_MSG
+    afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+    //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
-	RNA m_RNA;
+    RNA m_RNA;
     CaState Recoil();
     
     //手動可調
@@ -71,7 +71,7 @@ private:
     BOOL c_bMsrValues;
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
-	BOOL c_bMsrEndnMsred;
+    BOOL c_bMsrEndnMsred;
     BOOL c_bMsring;
     BOOL c_bGoalPercent;
     BOOL c_bRunMsrAI;
@@ -90,7 +90,7 @@ private:
     CBrush   m_BkBrush;
     ColorRef m_BkColor;    //背景色
 
-     CircleArc m_Goal;        //目標圈圈
+    Circle m_Goal;        //目標圈圈
 //     CircleArc m_NextGoal;    //下一個目標圈圈
 //    Circle    m_Goal;        //目標圈圈
 //    Circle    m_NextGoal;    //下一個目標圈圈
@@ -100,10 +100,10 @@ private:
     Bolt m_NextGunMchn;
 
 private:
-	void setupLCMSize();
+    void setupLCMSize();
     void initCa210();
     void initDataDlgType();//Call SelMsrItem
-	void initDocument();
+    void initDocument();
 
     void trigger();
     void checkMsrLimit();
@@ -117,20 +117,20 @@ private:
     void eventSwCntCa210();
     void eventRunMsrAi(BOOL isRun = 2);
     UINT eventCatchMsrValue();
-	void eventExitDialog();
+    void eventExitDialog();
 
 //     static UINT vbrGoalThread(LPVOID LParam);
 //     static UINT vbrNextGoalThread(LPVOID LParam);
 
-	void changeBkColor(ColorRef);
+    void changeBkColor(ColorRef);
     void fineNits();
-	void fineNitsPos(int& GrayLevel);
-	void fineNitsNeg(int& GrayLevel);
+    void fineNitsPos(int& GrayLevel);
+    void fineNitsNeg(int& GrayLevel);
 
-// 	void checkColor(ColorRef) const;
+//     void checkColor(ColorRef) const;
     void setBkColor(ColorRef);
 public:
-	void LoadedCartridge(); //彈匣
+    void LoadedCartridge(); //彈匣
 };
 
 

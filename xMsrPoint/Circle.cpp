@@ -2,8 +2,10 @@
 #include "Circle.h"
 #include <cmath>
 
-Circle::Circle(int r):m_Percent(r), m_nPenWidth(5)
+Circle::Circle(CWnd* cWnd, int r):
+m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd)
 {
+    m_Info1.pCircle = this;
 }
 
 void Circle::SetCenter(CPoint p)
@@ -20,7 +22,7 @@ void Circle::SetCenter(int x, int y)
 
 void Circle::SetRadius(int r)
 {
-	ASSERT(r > 0);
+    ASSERT(r > 0);
     m_nRadius = r;
 }
 
@@ -45,9 +47,9 @@ void Circle::DrawCircle(CPaintDC &dc)
     if(m_Percent > 0 && m_Percent < 100)  
         Draw();
 
-    reSetRect();
-    OldPen = dc.SelectObject(&m_Pen);
+    //expandRect(m_nRadius);
     dc.Arc(m_DrawRect, StartPoint, EndPoint);
+    OldPen = dc.SelectObject(&m_Pen);
 
     dc.SelectObject(OldPen);
 }
@@ -71,11 +73,11 @@ CirclePercent Circle::SetPercent(int percent)
         m_Percent = 100;
         return CP_FULL;//滿出來啦
     }
-	else
-	{
-		ASSERT(0);
-		return CP_FULL;
-	}
+    else
+    {
+        ASSERT(0);
+        return CP_FULL;
+    }
 }
 int Circle::GetPercent() const
 {
@@ -94,46 +96,89 @@ ColorRef Circle::GetColor() const
     return m_Color;
 }
 
-
-// void Circle::elasticAnimation(LPVOID LParam)
-// {
-//     CPatternDlg  *PtnDlg = (CPatternDlg*)(pInfo1->ptnDlg);
-// 	Circle *pCircle = (Circle*)(PtnDlg->m_Goal);
-// 
-// 	ASSERT_VALID(PtnDlg);
-// 	ASSERT(pInfo1);
-// 	ASSERT(pCircle);
-// 
-// 	for (UINT i = 0; i < 16; ++i)
-//     {
-//         pCircle->VbrFun(i, pCircle->GetRadius());
-//         Sleep(15); //調節動畫重畫時是否看得到
-//     }
-// }
-
-// CRect Circle::VbrFun(int k, int x0)
-// {
-//     //max = 375
-//     //min = 0
-//     //375-15/15
-// 	ASSERT(k>=0);
-// 	ASSERT(x0>=0);
-//     int T0 = 15;
-//     CSingleLock csl(&m_cs);
-//     csl.Lock();
-//     double timeX = 24*k;
-//     m_nRadius  = (long)(x0*-exp(-0.01*(timeX+T0))*sin(0.0209439*(timeX+T0)+1.570795)) + x0;
-//     reSetRect(m_nPenWidth+4);
-//     csl.Unlock();
-//     return m_DrawRect;
-// }
-
-void Circle::reSetRect(int expnd)
+void Circle::Draw()
 {
-    m_DrawRect.left   = (long)(m_nCenter.x - m_nRadius - expnd);
-    m_DrawRect.top    = (long)(m_nCenter.y - m_nRadius - expnd);
-    m_DrawRect.right  = (long)(m_nCenter.x + m_nRadius + expnd);
-    m_DrawRect.bottom = (long)(m_nCenter.y + m_nRadius + expnd);
+    int oX, oY;
+    
+    oX = (int)(m_nRadius / cos(0.0628318 * m_Percent));
+    oY = (int)(m_nRadius / sin(0.0628318 * m_Percent));
+    if (m_Percent > 0 && m_Percent <= 25)
+    {
+        oX = (int)(m_nRadius / cos(0.0628318 * (m_Percent+50)));
+        oY = (int)(m_nRadius / sin(0.0628318 * (m_Percent+50)));
+    } 
+    else if (m_Percent > 25 && m_Percent <= 50)
+    {
+        oX = (int)(m_nRadius / cos(0.0628318 * m_Percent));
+        oY = (int)(m_nRadius / sin(0.0628318 * m_Percent));
+    } 
+    else if (m_Percent > 50 && m_Percent <= 75)
+    {
+        oX = (int)(m_nRadius / cos(0.0628318 * (m_Percent-50)));
+        oY = (int)(m_nRadius / sin(0.0628318 * (m_Percent-50)));
+    } 
+    else if (m_Percent > 75 && m_Percent < 100)
+    {
+        oX = (int)(m_nRadius / cos(0.0628318 * m_Percent));
+        oY = (int)(m_nRadius / sin(0.0628318 * m_Percent));
+    }
+    m_nCenter.x = oX + m_nCenter.x;
+    m_nCenter.y = oY + m_nCenter.y;
+}
+
+void Circle::Animation()
+{
+	if (m_pdlgcWnd != NULL)
+		elasticAnimation((LPVOID)&m_Info1);
+};
+
+void Circle::elasticAnimation(LPVOID LParam)
+{
+    myThreadInfo *pInfo1 = (myThreadInfo *)LParam;
+    Circle *_pCircle = (Circle*)(pInfo1->pCircle);
+
+    ASSERT(_pCircle);
+    ASSERT(_pCircle->GetRadius() > 0);
+
+    const int r = _pCircle->GetRadius();
+    _pCircle->gethWnd()->Invalidate();
+    _pCircle->gethWnd()->UpdateWindow();
+
+    CRect _rect;
+    for (UINT i = 0; i < 16; ++i)
+    {
+        _rect = _pCircle->DampingVibration(i, r);
+		_pCircle->gethWnd()->RedrawWindow(&_rect);
+//         _pCircle->gethWnd()->InvalidateRect(&_rect, TRUE);
+//         _pCircle->gethWnd()->UpdateWindow();
+        Sleep(15); //調節動畫重畫時是否看得到
+    }
+}
+
+CRect Circle::DampingVibration(int k, int x0)
+{
+    //max = 375
+    //min = 0
+    //375-15/15
+    ASSERT(k>=0);
+    ASSERT(x0>=0);
+    int T0 = 15;
+    CSingleLock csl(&m_cs);
+    csl.Lock();
+    double timeX = 24*k;
+	int trmpR = (long)(x0*-exp(-0.01*(timeX+T0))*sin(0.0209439*(timeX+T0)+1.570795)) + x0;
+    csl.Unlock();
+    return expandRect(trmpR);//(m_nPenWidth+4);
+}
+
+CRect Circle::expandRect(int expnd)
+{
+    m_DrawRect.left   = (long)(m_nCenter.x - expnd);
+    m_DrawRect.top    = (long)(m_nCenter.y - expnd);
+    m_DrawRect.right  = (long)(m_nCenter.x + expnd);
+    m_DrawRect.bottom = (long)(m_nCenter.y + expnd);
+
+	return m_DrawRect;
 }
 
 #ifdef _DEBUG
