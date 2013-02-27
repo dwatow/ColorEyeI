@@ -79,19 +79,19 @@ CaState Ca210sim::Measure()
     {
         // Make Data for m_pIProbe;
         srand(time(NULL));
-        m_pIProbe->SetLv((float)(rand()%100000)/100);    //%3.2f
-        m_pIProbe->SetSx((float)(rand()%10000 +1)/(float)10000);  //%1.4f
-        m_pIProbe->SetSy((float)(rand()%10000 +1)/(float)10000);  //%1.4f
+        m_pIProbe->i(VluK_Lv, (rand()%100000)/100.0);    //%3.2f
+        m_pIProbe->i(VluK_Sx, (rand()%10000 +1)/10000.0);  //%1.4f
+        m_pIProbe->i(VluK_Sy, (rand()%10000 +1)/10000.0);  //%1.4f
         
-        m_pIProbe->SetT(rand()%1000);//%3d
-        m_pIProbe->SetDuv((float)(rand()%100000)/10000);  //%1.4f
+        m_pIProbe->i(VluK_T, rand()%1000);//%3d
+        m_pIProbe->i(VluK_Duv, (rand()%100000)/10000);  //%1.4f
         
-        m_pIProbe->SetDu((float)(rand()%100000)/10000);  //%1.4f
-        m_pIProbe->SetDv((float)(rand()%100000)/10000);  //%1.4f
+        m_pIProbe->i(VluK_Du, (rand()%100000)/10000.0);  //%1.4f
+        m_pIProbe->i(VluK_Dv, (rand()%100000)/10000.0);  //%1.4f
         
-        m_pIProbe->SetX((float)(rand()%100000)/100);  //%3.2f
-        m_pIProbe->SetY((float)(rand()%100000)/100);  //%3.2f
-        m_pIProbe->SetZ((float)(rand()%100000)/100);  //%3.2f
+        m_pIProbe->i(VluK_X, (rand()%100000)/100.0);  //%3.2f
+        m_pIProbe->i(VluK_Y, (rand()%100000)/100.0);  //%3.2f
+        m_pIProbe->i(VluK_Z, (rand()%100000)/100.0);  //%3.2f
     }
     return Mode;
 }
@@ -106,16 +106,16 @@ MsrAiState Ca210sim::MsrAI(float MsrDeviation)
 	if (Measure() == CA_MsrMode)
 	{
 		//抓參考值
-         XFristValue = m_pIProbe->GetX();
-         YFristValue = m_pIProbe->GetY();
-         ZFristValue = m_pIProbe->GetZ();
+         XFristValue = m_pIProbe->oFlt(VluK_X);
+         YFristValue = m_pIProbe->oFlt(VluK_Y);
+         ZFristValue = m_pIProbe->oFlt(VluK_Z);
 		
 		Measure();
 		
 		//誤差取絕對值
-         deltaX = ((XFristValue-m_pIProbe->GetX())>=0) ? XFristValue - m_pIProbe->GetX() : m_pIProbe->GetX() - XFristValue;
-         deltaY = ((YFristValue-m_pIProbe->GetY())>=0) ? YFristValue - m_pIProbe->GetY() : m_pIProbe->GetY() - YFristValue;
-         deltaZ = ((ZFristValue-m_pIProbe->GetZ())>=0) ? ZFristValue - m_pIProbe->GetZ() : m_pIProbe->GetZ() - ZFristValue;
+         deltaX = ((XFristValue-m_pIProbe->oFlt(VluK_X))>=0) ? XFristValue - m_pIProbe->oFlt(VluK_X) : m_pIProbe->oFlt(VluK_X) - XFristValue;
+         deltaY = ((YFristValue-m_pIProbe->oFlt(VluK_Y))>=0) ? YFristValue - m_pIProbe->oFlt(VluK_Y) : m_pIProbe->oFlt(VluK_Y) - YFristValue;
+         deltaZ = ((ZFristValue-m_pIProbe->oFlt(VluK_Z))>=0) ? ZFristValue - m_pIProbe->oFlt(VluK_Z) : m_pIProbe->oFlt(VluK_Z) - ZFristValue;
 		
 		
 		deltaAll = deltaX * deltaY * deltaZ;
@@ -173,19 +173,19 @@ Bullet Ca210sim::GetMsrData()
 {
     if (isOnline())
     {
-        m_blt.SetLv(m_pIProbe->GetLv());
-        m_blt.SetSx(m_pIProbe->GetSx());
-        m_blt.SetSy(m_pIProbe->GetSy());
+        m_blt.i(VluK_Lv, m_pIProbe->oFlt(VluK_Lv));
+        m_blt.i(VluK_Sx, m_pIProbe->oFlt(VluK_Sx));
+        m_blt.i(VluK_Sy, m_pIProbe->oFlt(VluK_Sy));
 
-        m_blt.SetT(m_pIProbe->GetT());
-        m_blt.SetDuv(m_pIProbe->GetDuv());
+        m_blt.i(VluK_T, m_pIProbe->oFlt(VluK_T));
+        m_blt.i(VluK_Duv, m_pIProbe->oFlt(VluK_Duv));
 
-        m_blt.SetDu(m_pIProbe->GetDu());  //Bullet function
-        m_blt.SetDv(m_pIProbe->GetDv());  //Bullet function
+        m_blt.i(VluK_Du, m_pIProbe->oFlt(VluK_Du));  //Bullet function
+        m_blt.i(VluK_Dv, m_pIProbe->oFlt(VluK_Dv));  //Bullet function
 
-        m_blt.SetX(m_pIProbe->GetX());
-        m_blt.SetY(m_pIProbe->GetY());
-        m_blt.SetZ(m_pIProbe->GetZ());
+        m_blt.i(VluK_X, m_pIProbe->oFlt(VluK_X));
+        m_blt.i(VluK_Y, m_pIProbe->oFlt(VluK_Y));
+        m_blt.i(VluK_Z, m_pIProbe->oFlt(VluK_Z));
     }
     return m_blt;
 }

@@ -258,11 +258,11 @@ void CPatternDlg::drawMsrLabel(CDC &aDC)
     const CSize Area(88, 158);
     CPoint shift(-10-r, -20-r);
 
-    CRect rect1(m_Goal.GetCenter(), shift + Area);
+    CRect rect1(m_Goal.GetCenter() + shift, Area);
     aDC.SetTextColor(m_BkColor.Invrt());
     
     //已量過的數據
-    aDC.DrawText(m_itor->GetBullet().MsgBoxStr(), rect1, DT_LEFT | DT_VCENTER);
+    aDC.DrawText(m_itor->GetBullet().showStr(), rect1, DT_LEFT | DT_VCENTER);
 
 }
 
@@ -273,7 +273,7 @@ void CPatternDlg::drawMsringLabel(CDC &aDC)
     CPoint shift(0, -20-r);
     shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
 
-    CRect rect2(m_Goal.GetCenter(), shift+Area);
+    CRect rect2(m_Goal.GetCenter() + shift, Area);
     aDC.SetTextColor(m_BkColor.Shift());
 
     //正在量的數據
@@ -661,7 +661,7 @@ void CPatternDlg::fineNitsPos(int& _gl)
         //量測抓值
         if (m_pCA210->Measure() == CA_ZeroCalMode)
             MessageBox("檔位不在MEAS");
-        fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
     }
 
     while(fLv < m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
@@ -671,7 +671,7 @@ void CPatternDlg::fineNitsPos(int& _gl)
         Sleep(60);
         //量測抓值
         m_pCA210->Measure();
-        fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
     }
 }
 
@@ -687,7 +687,7 @@ void CPatternDlg::fineNitsNeg(int& _gl)
         //量測抓值
         if (m_pCA210->Measure() == CA_ZeroCalMode)
             MessageBox("檔位不在MEAS");
-        fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
     }
     
     while(fLv > m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
@@ -697,7 +697,7 @@ void CPatternDlg::fineNitsNeg(int& _gl)
         Sleep(60);
         //量測抓值
         m_pCA210->Measure();
-        fLv = m_pCA210->GetMsrData().GetLv();  //m_IProbe.GetLv();
+        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
     }
 }
 

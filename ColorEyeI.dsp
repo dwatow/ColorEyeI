@@ -427,6 +427,10 @@ SOURCE=.\OmdFile\TxtFile.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ValuesLabel.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\VersionNo.h
 # End Source File
 # Begin Source File

@@ -1,61 +1,43 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include <vector>
+#include <iterator>
+
+enum ValueKind{VluK_Lv, VluK_Sx, VluK_Sy, VluK_T, VluK_Duv, VluK_Du, VluK_Dv, VluK_X, VluK_Y, VluK_Z, VluK_Total};
+
 //Bullet ºu¿Y
 class Bullet
 {
-    float m_fLv;                                     float m_fX;
-    float m_fSx;    long  m_lT;      float m_fDu;    float m_fY;
-    float m_fSy;    float m_fDuv;    float m_fDv;    float m_fZ;
+private:
+	std::vector<float> m_vfValues;
+public:
+	float oFlt(ValueKind) const;
+	void i(ValueKind, float);
+	CString Bullet::showFlt() const;
 
-    CString m_strLv;                                            CString m_strX;
-    CString m_strSx;    CString m_strT;     CString m_strDu;    CString m_strY;
-    CString m_strSy;    CString m_strDuv;   CString m_strDv;    CString m_strZ;
+private:
+	std::vector<CString> m_vstrValues;
+public:
+	CString oStr(ValueKind) const;
+	void i(ValueKind, CString);
+	CString Bullet::showStr() const;
 
+private:
 	CTime 	m_LastModifyTime;
+public:
+	CString GetLastTime() const;
+
 public:
     Bullet();
     Bullet(const Bullet&);
     virtual ~Bullet();
-
-    BOOL SetLv(CString);
-    BOOL SetSx(CString);
-    BOOL SetSy(CString);
-    
-    BOOL SetT(CString);
-    BOOL SetDuv(CString);
-    
-    BOOL SetDu(CString Du);
-    BOOL SetDv(CString Dv);
-    
-    BOOL SetX(CString X);
-    BOOL SetY(CString Y);
-    BOOL SetZ(CString Z);
-    
-    float GetLv()  const; CString GetStrLv()  const;  BOOL SetLv(float);
-    float GetSx()  const; CString GetStrSx()  const;  BOOL SetSx(float);
-    float GetSy()  const; CString GetStrSy()  const;  BOOL SetSy(float);
-
-    long  GetT()   const; CString GetStrT()   const;  BOOL SetT(long);
-    float GetDuv() const; CString GetStrDuv() const;  BOOL SetDuv(float);
-
-    float GetDu()  const; CString GetStrDu()  const;  BOOL SetDu(float);
-    float GetDv()  const; CString GetStrDv()  const;  BOOL SetDv(float);
-
-    float GetX()   const; CString GetStrX()   const;  BOOL SetX(float);
-    float GetY()   const; CString GetStrY()   const;  BOOL SetY(float);
-    float GetZ()   const; CString GetStrZ()   const;  BOOL SetZ(float);
-
+    BOOL isEmpty() const;
     virtual void    operator= (const Bullet&);
 
-    BOOL isEmpty() const;
-	CString GetLastTime() const;
-
-    //////////////////////////////////////////////////////////////////////////
-    //debug function
-#ifdef _DEBUG
-    CString MsgBoxStr() const;
-#endif
+private:
+	float str2flt(CString ) const;
+	CString flt2str(float ) const;
 };
 
 #endif

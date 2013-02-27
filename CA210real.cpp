@@ -3,15 +3,19 @@
 #include <cstdlib>
 #include <ctime>
 
+#ifdef _CA210DEBUG
+#define DebugCode( code_fragment ) { code_fragment }
+#else
+#define DebugCode( code_fragment )
+#endif
 //虛擬函數的初始化，還是要初始父類別指標，所以連線函數必須移走，不可以放在共同的部份！
 //不然就是做一個共同的基礎類別。
 Ca210real::Ca210real():
 ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上，另存成圖檔\n2. Mail給此程式設計者，詳細描述使用過程並將圖檔存成附件\n這是尚未預測到出現的問題。（應該不會發生的那種。）"),
 m_pICa200(0), m_pICa(0), m_pIProbe(0), m_pIProbeInfo(0), m_pIMemory(0)
 {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of Ca210real()");
-#endif
+	DebugCode( DBugModeBox("TRUE of Ca210real()"); )
+
     if (initCreatCa200())
     if (initConnectCa210())
     if (initAttachCa())
@@ -21,9 +25,7 @@ m_pICa200(0), m_pICa(0), m_pIProbe(0), m_pIProbeInfo(0), m_pIMemory(0)
 
 Ca210real::~Ca210real()
 {
-#ifdef _CA210DEBUG
-    DBugModeBox("TRUE of ~Ca210real()");
-#endif
+	DebugCode( DBugModeBox("TRUE of ~Ca210real()"); )
     if (isOnline())
         SetOnline(FALSE);
     m_pIMemory->DetachDispatch();        delete m_pIMemory;
@@ -120,9 +122,7 @@ CaState Ca210real::CalZero()
     */
     if (isOnline())
     {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of CalZero()");
-#endif
+        DebugCode( DBugModeBox("TRUE of CalZero()"); )
 		int flag(0);
         do 
         {
@@ -145,9 +145,7 @@ CaState Ca210real::CalZero()
     }
     else
     {
-#ifdef _CA210DEBUG
-        DBugModeBox("CalZero() Offline.");
-#endif
+        DebugCode( DBugModeBox("CalZero() Offline."); )
         return m_caState = CA_Offline;
     }
 }
@@ -156,9 +154,7 @@ void Ca210real::LinkMemory()
 {
     if (isOnline())
     {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of LinkMemory()");
-#endif
+		DebugCode( DBugModeBox("TRUE of LinkMemory()"); )
         try
         {
             if (m_pIMemory == 0)
@@ -172,12 +168,7 @@ void Ca210real::LinkMemory()
             MsgFrmt(e, "LinkMemory(pMemory);出問題", ImpsbStr);
         }
     } 
-#ifdef _CA210DEBUG
-    else
-    {
-        DBugModeBox("FALSE of LinkMemory()");
-    }
-#endif
+	DebugCode( else{ DBugModeBox("FALSE of LinkMemory()"); } )
 }
 
 CaState Ca210real::Measure()
@@ -190,9 +181,7 @@ CaState Ca210real::Measure()
     CaState Mode = m_caState;
     if(isOnline())
     {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of Measure()");
-#endif
+        DebugCode(  DBugModeBox("TRUE of Measure()"); )
 		int flag = 0;
 
         do 
@@ -231,9 +220,8 @@ CaState Ca210real::Measure()
 
 MsrAiState Ca210real::MsrAI(float MsrDeviation)
 {
-#ifdef _CA210DEBUG
-	DBugModeBox("TRUE of MsrAI(float MsrDeviation)");
-#endif        //第一筆資料暫存空間  //宣告誤差值計算空間
+	DebugCode( DBugModeBox("TRUE of MsrAI(float MsrDeviation)"); )
+		//第一筆資料暫存空間  //宣告誤差值計算空間
 	
 	float XFristValue = 0.0, deltaX = 0.0,
 		YFristValue = 0.0, deltaY = 0.0,
@@ -266,9 +254,7 @@ MsrAiState Ca210real::MsrAI(float MsrDeviation)
 
 void Ca210real::SetOnline(BOOL isOnline)
 {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of SetOnline(BOOL isOnline)");
-#endif
+    DebugCode( DBugModeBox("TRUE of SetOnline(BOOL isOnline)"); )
     try
     {
         m_pICa->SetRemoteMode(isOnline);
@@ -291,9 +277,7 @@ CString Ca210real::GetLcmSize()
 {
     if(isOnline())
     {
-#ifdef _CA210DEBUG
-            DBugModeBox("TRUE of GetLcmSize()");
-#endif
+        DebugCode( DBugModeBox("TRUE of GetLcmSize()"); )           
         try
         {
 			if (m_LCMsize.IsEmpty())
@@ -318,11 +302,11 @@ CString Ca210real::GetChData()
     {
         try
         {
-#ifdef _CA210DEBUG
-            CString str;
-            str.Format("%s of GetChData()", m_Online ? "TRUE" : "FALSE");
-            DBugModeBox(str);
-#endif
+            DebugCode(
+				CString str;
+				str.Format("%s of GetChData()", m_Online ? "TRUE" : "FALSE");
+				DBugModeBox(str);
+			)
             temp.Format("%ld - %s", m_pIMemory->GetChannelNO(), m_pIMemory->GetChannelID());
         }
         catch (CException* e)
@@ -339,24 +323,22 @@ Bullet Ca210real::GetMsrData()
 {
     if (isOnline())
     {
-#ifdef _CA210DEBUG
-        DBugModeBox("TRUE of GetMsrData()");
-#endif
+        DebugCode( DBugModeBox("TRUE of GetMsrData()"); )
         try
         {
-            m_blt.SetLv(m_pIProbe->GetLv());
-            m_blt.SetSx(m_pIProbe->GetSx());
-            m_blt.SetSy(m_pIProbe->GetSy());
+            m_blt.i(VluK_Lv, m_pIProbe->GetLv());
+            m_blt.i(VluK_Sx, m_pIProbe->GetSx());
+            m_blt.i(VluK_Sy, m_pIProbe->GetSy());
             
-            m_blt.SetT(m_pIProbe->GetT());
-            m_blt.SetDuv(m_pIProbe->GetDuv());
+            m_blt.i(VluK_T, m_pIProbe->GetT());
+            m_blt.i(VluK_Duv, m_pIProbe->GetDuv());
             
-            m_blt.SetDu(m_pIProbe->GetUd());
-            m_blt.SetDv(m_pIProbe->GetVd());
+            m_blt.i(VluK_Du, m_pIProbe->GetUd());
+            m_blt.i(VluK_Dv, m_pIProbe->GetVd());
             
-            m_blt.SetX(m_pIProbe->GetX());
-            m_blt.SetY(m_pIProbe->GetY());
-            m_blt.SetZ(m_pIProbe->GetZ());
+            m_blt.i(VluK_X, m_pIProbe->GetX());
+            m_blt.i(VluK_Y, m_pIProbe->GetY());
+            m_blt.i(VluK_Z, m_pIProbe->GetZ());
         }
         catch (CException* e)
         {

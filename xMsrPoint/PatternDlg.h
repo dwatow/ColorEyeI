@@ -22,7 +22,6 @@ enum initType{  MsrForItem = 0, MsrForPoint, MsrForForm  };
 class CPatternDlg : public CDialog
 {
     initType InitDataType;
-
 //     struct MyThreadInfo
 //     {
 //         CPatternDlg* ptnDlg;
@@ -132,15 +131,6 @@ private:
 public:
     void LoadedCartridge(); //¼u§X
 };
-
-
-// inline void CPatternDlg::checkColor(ColorRef clr) const
-// {
-//     ASSERT((0x000000FF & (clr >>24)) >= 0);
-//     ASSERT(GetRValue(clr) >= 0);    ASSERT(GetRValue(clr) < 256);
-//     ASSERT(GetGValue(clr) >= 0);    ASSERT(GetGValue(clr) < 256);
-//     ASSERT(GetBValue(clr) >= 0);    ASSERT(GetBValue(clr) < 256);
-// }
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

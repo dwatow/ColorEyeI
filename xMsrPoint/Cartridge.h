@@ -43,19 +43,19 @@ public:
 	CString   GetStrColorType() const;
     void      SetBackColor(ColorType clr);
 
-    float GetLv()  const;   CString GetStrLv()  const;    BOOL SetLv(float);   BOOL SetLv(CString);
-    float GetSx()  const;   CString GetStrSx()  const;    BOOL SetSx(float);   BOOL SetSx(CString);
-    float GetSy()  const;   CString GetStrSy()  const;    BOOL SetSy(float);   BOOL SetSy(CString);
+    float GetLv()  const;   CString GetStrLv()  const;    void SetLv(float);   void SetLv(CString);
+    float GetSx()  const;   CString GetStrSx()  const;    void SetSx(float);   void SetSx(CString);
+    float GetSy()  const;   CString GetStrSy()  const;    void SetSy(float);   void SetSy(CString);
     
-    long  GetT()   const;   CString GetStrT()   const;    BOOL SetT(long);     BOOL SetT(CString);
-    float GetDuv() const;   CString GetStrDuv() const;    BOOL SetDuv(float);  BOOL SetDuv(CString);
+    long  GetT()   const;   CString GetStrT()   const;    void SetT(float);     void SetT(CString);
+    float GetDuv() const;   CString GetStrDuv() const;    void SetDuv(float);  void SetDuv(CString);
     
-    float GetDu()  const;   CString GetStrDu()  const;    BOOL SetDu(float);   BOOL SetDu(CString);
-    float GetDv()  const;   CString GetStrDv()  const;    BOOL SetDv(float);   BOOL SetDv(CString);
+    float GetDu()  const;   CString GetStrDu()  const;    void SetDu(float);   void SetDu(CString);
+    float GetDv()  const;   CString GetStrDv()  const;    void SetDv(float);   void SetDv(CString);
     
-    float GetX()   const;   CString GetStrX()   const;    BOOL SetX(float);    BOOL SetX(CString);
-    float GetY()   const;   CString GetStrY()   const;    BOOL SetY(float);    BOOL SetY(CString);
-    float GetZ()   const;   CString GetStrZ()   const;    BOOL SetZ(float);    BOOL SetZ(CString);
+    float GetX()   const;   CString GetStrX()   const;    void SetX(float);    void SetX(CString);
+    float GetY()   const;   CString GetStrY()   const;    void SetY(float);    void SetY(CString);
+    float GetZ()   const;   CString GetStrZ()   const;    void SetZ(float);    void SetZ(CString);
 
 	Bullet  GetBullet() const;
     void   SetBullet(const Bullet& Pd);

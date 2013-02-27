@@ -5,49 +5,49 @@
  *    Define PointSet Class member function  *
  *******************************************/
 //Ä~©Ó±¼ªº¤¶­±
-BOOL Cartridge::SetLv(float L){    return m_Data.SetLv(L);}
-BOOL Cartridge::SetSx(float x){    return m_Data.SetSx(x);}
-BOOL Cartridge::SetSy(float y){    return m_Data.SetSy(y);}
+void Cartridge::SetLv(float L){    m_Data.i(VluK_Lv, L); }
+void Cartridge::SetSx(float x){    m_Data.i(VluK_Sx, x); }
+void Cartridge::SetSy(float y){    m_Data.i(VluK_Sy, y); }
 
-BOOL Cartridge::SetT(long T)        {    return m_Data.SetT(T);}
-BOOL Cartridge::SetDuv(float Duv)    {    return m_Data.SetDuv(Duv);}
+void Cartridge::SetT(float T)        {    m_Data.i(VluK_T, T);}
+void Cartridge::SetDuv(float Duv)    {    m_Data.i(VluK_Duv, Duv);}
 
-BOOL Cartridge::SetDu(float Du){    return m_Data.SetDu(Du);}
-BOOL Cartridge::SetDv(float Dv){    return m_Data.SetDv(Dv);}
+void Cartridge::SetDu(float Du){    m_Data.i(VluK_Du, Du);}
+void Cartridge::SetDv(float Dv){    m_Data.i(VluK_Dv, Dv);}
 
-BOOL Cartridge::SetX(float X){    return m_Data.SetX(X);}
-BOOL Cartridge::SetY(float Y){    return m_Data.SetY(Y);}
-BOOL Cartridge::SetZ(float Z){    return m_Data.SetZ(Z);}
-
-
-BOOL Cartridge::SetLv(CString L){    return m_Data.SetLv(L);}
-BOOL Cartridge::SetSx(CString x){    return m_Data.SetSx(x);}
-BOOL Cartridge::SetSy(CString y){    return m_Data.SetSy(y);}
-
-BOOL Cartridge::SetT(CString T)        {    return m_Data.SetT(T);}
-BOOL Cartridge::SetDuv(CString Duv)    {    return m_Data.SetDuv(Duv);}
-
-BOOL Cartridge::SetDu(CString Du){    return m_Data.SetDu(Du);}
-BOOL Cartridge::SetDv(CString Dv){    return m_Data.SetDv(Dv);}
-
-BOOL Cartridge::SetX(CString X){    return m_Data.SetX(X);}
-BOOL Cartridge::SetY(CString Y){    return m_Data.SetY(Y);}
-BOOL Cartridge::SetZ(CString Z){    return m_Data.SetZ(Z);}
+void Cartridge::SetX(float X){    m_Data.i(VluK_X, X);}
+void Cartridge::SetY(float Y){    m_Data.i(VluK_Y, Y);}
+void Cartridge::SetZ(float Z){    m_Data.i(VluK_Z, Z);}
 
 
-float Cartridge::GetLv() const { return m_Data.GetLv();}    CString Cartridge::GetStrLv()  const {    return m_Data.GetStrLv();}
-float Cartridge::GetSx() const { return m_Data.GetSx();}    CString Cartridge::GetStrSx()  const {    return m_Data.GetStrSx();}
-float Cartridge::GetSy() const { return m_Data.GetSy();}    CString Cartridge::GetStrSy()  const {    return m_Data.GetStrSy();}
+void Cartridge::SetLv(CString L){    m_Data.i(VluK_Lv, L);}
+void Cartridge::SetSx(CString x){    m_Data.i(VluK_Sx, x);}
+void Cartridge::SetSy(CString y){    m_Data.i(VluK_Sy, y);}
 
-long  Cartridge::GetT()  const  { return m_Data.GetT();}    CString Cartridge::GetStrT()    const {    return m_Data.GetStrT();}
-float Cartridge::GetDuv() const { return m_Data.GetDuv();}    CString Cartridge::GetStrDuv() const {    return m_Data.GetStrDuv();}
+void Cartridge::SetT(CString T)        {    m_Data.i(VluK_T, T);}
+void Cartridge::SetDuv(CString Duv)    {    m_Data.i(VluK_Duv, Duv);}
 
-float Cartridge::GetDu() const { return m_Data.GetDu();}    CString Cartridge::GetStrDu()  const {    return m_Data.GetStrDu();}
-float Cartridge::GetDv() const { return m_Data.GetDv();}    CString Cartridge::GetStrDv()  const {    return m_Data.GetStrDv();}
+void Cartridge::SetDu(CString Du){    m_Data.i(VluK_Du, Du);}
+void Cartridge::SetDv(CString Dv){    m_Data.i(VluK_Dv, Dv);}
 
-float Cartridge::GetX() const { return m_Data.GetX();}    CString Cartridge::GetStrX()   const {    return m_Data.GetStrX();}
-float Cartridge::GetY() const { return m_Data.GetY();}    CString Cartridge::GetStrY()   const {    return m_Data.GetStrY();}
-float Cartridge::GetZ() const { return m_Data.GetZ();}    CString Cartridge::GetStrZ()   const {    return m_Data.GetStrZ();}
+void Cartridge::SetX(CString X){    m_Data.i(VluK_X, X);}
+void Cartridge::SetY(CString Y){    m_Data.i(VluK_Y, Y);}
+void Cartridge::SetZ(CString Z){    m_Data.i(VluK_Z, Z);}
+
+
+float Cartridge::GetLv() const { return m_Data.oFlt(VluK_Lv);}    CString Cartridge::GetStrLv()  const {    return m_Data.oStr(VluK_Lv);}
+float Cartridge::GetSx() const { return m_Data.oFlt(VluK_Sx);}    CString Cartridge::GetStrSx()  const {    return m_Data.oStr(VluK_Sx);}
+float Cartridge::GetSy() const { return m_Data.oFlt(VluK_Sy);}    CString Cartridge::GetStrSy()  const {    return m_Data.oStr(VluK_Sy);}
+
+long  Cartridge::GetT()  const  { return m_Data.oFlt(VluK_T);}    CString Cartridge::GetStrT()    const {    return m_Data.oStr(VluK_T);}
+float Cartridge::GetDuv() const { return m_Data.oFlt(VluK_Duv);}    CString Cartridge::GetStrDuv() const {    return m_Data.oStr(VluK_Duv);}
+
+float Cartridge::GetDu() const { return m_Data.oFlt(VluK_Du);}    CString Cartridge::GetStrDu()  const {    return m_Data.oStr(VluK_Du);}
+float Cartridge::GetDv() const { return m_Data.oFlt(VluK_Dv);}    CString Cartridge::GetStrDv()  const {    return m_Data.oStr(VluK_Dv);}
+
+float Cartridge::GetX() const { return m_Data.oFlt(VluK_X);}    CString Cartridge::GetStrX()   const {    return m_Data.oStr(VluK_X);}
+float Cartridge::GetY() const { return m_Data.oFlt(VluK_Y);}    CString Cartridge::GetStrY()   const {    return m_Data.oStr(VluK_Y);}
+float Cartridge::GetZ() const { return m_Data.oFlt(VluK_Z);}    CString Cartridge::GetStrZ()   const {    return m_Data.oStr(VluK_Z);}
 
 // Bullet& Cartridge::GetBullet()
 // {    
@@ -55,7 +55,7 @@ float Cartridge::GetZ() const { return m_Data.GetZ();}    CString Cartridge::Get
 // 	//     Pd.SetLv(m_fLv);                                            Pd.SetX(m_fX);
 // 	//     Pd.SetSx(m_fSx);    Pd.SetT(m_lT);        Pd.SetDu(m_fDu);    Pd.SetY(m_fY);
 // 	//     Pd.SetSy(m_fSy);    Pd.SetDuv(m_fDuv);    Pd.SetDv(m_fDv);    Pd.SetZ(m_fZ);
-//     return m_Data;    
+//     m_Data;    
 // }
 
 Bullet Cartridge::GetBullet() const
@@ -179,7 +179,7 @@ CString Cartridge::MsgBoxStr() const
 {
     CString str;
     str.Format("AreaCode   = %d\nBackColor  = %d\nMsrFlowNo  = %d\nMsrFlowNum = %d\n%s"\
-        , m_AreaCode, m_BkColor, m_MsrFlowNo, m_MsrFlowNum, m_Data.MsgBoxStr());
+        , m_AreaCode, m_BkColor, m_MsrFlowNo, m_MsrFlowNum, m_Data.showStr());
     
     return str;
 }
