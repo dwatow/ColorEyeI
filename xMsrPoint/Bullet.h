@@ -13,15 +13,10 @@ private:
 	std::vector<float> m_vfValues;
 public:
 	float oFlt(ValueKind) const;
-	void i(ValueKind, float);
-	CString Bullet::showFlt() const;
-
-private:
-	std::vector<CString> m_vstrValues;
-public:
 	CString oStr(ValueKind) const;
+	void i(ValueKind, float);
 	void i(ValueKind, CString);
-	CString Bullet::showStr() const;
+
 
 private:
 	CTime 	m_LastModifyTime;
@@ -34,6 +29,7 @@ public:
     virtual ~Bullet();
     BOOL isEmpty() const;
     virtual void    operator= (const Bullet&);
+	CString Bullet::show() const;
 
 private:
 	float str2flt(CString ) const;

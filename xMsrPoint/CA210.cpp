@@ -14,9 +14,9 @@ CString Ca210::OutData()
     try
     {
 		if(isOnline())
-			return m_blt.showStr();
+			return m_blt.show();
 		else
-			return m_blt.showStr() + "\n차퐑ㄴ...";
+			return m_blt.show() + "\n차퐑ㄴ...";
     }
     catch (CException* e)
     {

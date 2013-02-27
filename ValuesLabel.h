@@ -7,7 +7,7 @@ enum ValueKind{VL_Lv, VL_Sx, VL_Sy, VL_T, VL_Duv, VL_Du, VL_Dv, VL_X, VL_Y, VL_Z
 
 class ValuesLabel
 {
-	std::vector<CString> m_Values;
+	std::vector<CString> m_ValuesSPEC;
 public:
 	ValuesLabel();
 	void i(ValueKind, CString&);

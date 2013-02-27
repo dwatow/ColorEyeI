@@ -262,7 +262,7 @@ void CPatternDlg::drawMsrLabel(CDC &aDC)
     aDC.SetTextColor(m_BkColor.Invrt());
     
     //已量過的數據
-    aDC.DrawText(m_itor->GetBullet().showStr(), rect1, DT_LEFT | DT_VCENTER);
+    aDC.DrawText(m_itor->GetBullet().show(), rect1, DT_LEFT | DT_VCENTER);
 
 }
 
@@ -335,7 +335,7 @@ void CPatternDlg::LoadedCartridge()
     
         //return TRUE;  //有子彈可以量測
         ShowWindow(SW_MAXIMIZE);
-       SetFocus();
+        SetFocus();
 
         //m_Goal.setWnd(GetTopWindow());
         //m_Goal.setWnd(dynamic_cast<CPatternDlg*>(GetLastActivePopup()));

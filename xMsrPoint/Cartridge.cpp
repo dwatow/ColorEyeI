@@ -179,7 +179,7 @@ CString Cartridge::MsgBoxStr() const
 {
     CString str;
     str.Format("AreaCode   = %d\nBackColor  = %d\nMsrFlowNo  = %d\nMsrFlowNum = %d\n%s"\
-        , m_AreaCode, m_BkColor, m_MsrFlowNo, m_MsrFlowNum, m_Data.showStr());
+        , m_AreaCode, m_BkColor, m_MsrFlowNo, m_MsrFlowNum, m_Data.show());
     
     return str;
 }
