@@ -8,6 +8,7 @@ enum CirclePercent {CP_NULL, CP_X, CP_FULL};
 
 class Circle
 {
+	CPen* tracePen;
 //private:
     struct myThreadInfo
     {
@@ -23,8 +24,10 @@ class Circle
 
 //protected:
     CCriticalSection m_cs; //單一執行緒的鎖
-    CRect    m_DrawRect;
+    CRect    m_DrawCircleRect;
+	CRect    m_reDeawRect;
     int      m_nRadius;
+	int      m_MaxRadius;
     int      m_Percent;
     CPoint   m_nCenter;
     ColorRef m_Color;
@@ -32,12 +35,13 @@ class Circle
     CString m_valuesLabel;
     virtual void Draw();
     CWnd* gethWnd(){ return m_pdlgcWnd; };
+	void reDrawWindow();
 
 private:
-    CRect expandRect(int expnd = 1);
+	CRect r2rect(int);
+	void readRadius(int&);
 public:
     Circle(CWnd* cWnd = NULL, int r = 1);
-//     Circle(CWnd* cWnd, int r = 1);
      void setWnd(CWnd* cWnd){ m_pdlgcWnd = cWnd; };
 
     void SetColor(const ColorRef clr);
@@ -53,7 +57,7 @@ public:
     CirclePercent SetPercent(int pct);
     int GetPercent() const;
 
-    CRect DampingVibration(int, int);
+    int DampingVibration(int, int);
     virtual void DrawCircle(CPaintDC&);
     void Animation();
 

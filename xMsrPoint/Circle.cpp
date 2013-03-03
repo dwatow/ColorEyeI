@@ -36,6 +36,14 @@ CPoint Circle::GetCenter() const
     return m_nCenter;
 }
 
+void Circle::SetColor(const ColorRef clr)
+{
+	m_Color = clr;
+	m_Pen.DeleteObject();
+	m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color.oRGB());//變色
+	tracePen = &m_Pen;
+}
+
 void Circle::DrawCircle(CPaintDC &dc)
 {
     //設定畫筆
@@ -48,10 +56,12 @@ void Circle::DrawCircle(CPaintDC &dc)
         Draw();
 
     //expandRect(m_nRadius);
-    dc.Arc(m_DrawRect, StartPoint, EndPoint);
     OldPen = dc.SelectObject(&m_Pen);
+    dc.Arc(m_DrawCircleRect, StartPoint, EndPoint);
 
-    dc.SelectObject(OldPen);
+	CPen* tempPen;
+    tempPen = dc.SelectObject(OldPen);
+	ASSERT(tracePen == tempPen);
 }
 
 CirclePercent Circle::SetPercent(int percent)
@@ -82,13 +92,6 @@ CirclePercent Circle::SetPercent(int percent)
 int Circle::GetPercent() const
 {
     return m_Percent;
-}
-
-void Circle::SetColor(const ColorRef clr)
-{
-    m_Color = clr;
-    m_Pen.DeleteObject();
-    m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color.oRGB());//變色
 }
 
 ColorRef Circle::GetColor() const
@@ -129,8 +132,25 @@ void Circle::Draw()
 void Circle::Animation()
 {
 	if (m_pdlgcWnd != NULL)
+	{
+		CSingleLock csl(&m_cs);
+		csl.Lock();
 		elasticAnimation((LPVOID)&m_Info1);
+		csl.Unlock();
+	}
+	else
+		ASSERT(0);
 };
+
+void Circle::readRadius(int& dyR)
+{
+	if (m_MaxRadius < dyR)
+		m_MaxRadius = dyR;
+	m_reDeawRect = r2rect(m_MaxRadius);
+
+	m_nRadius = dyR;
+	m_DrawCircleRect = r2rect(m_nRadius);
+}
 
 void Circle::elasticAnimation(LPVOID LParam)
 {
@@ -144,41 +164,40 @@ void Circle::elasticAnimation(LPVOID LParam)
     _pCircle->gethWnd()->Invalidate();
     _pCircle->gethWnd()->UpdateWindow();
 
-    CRect _rect;
-    for (UINT i = 0; i < 16; ++i)
+	int dynamicR;
+    for (int i = 0; i < 16; ++i)
     {
-        _rect = _pCircle->DampingVibration(i, r);
-		_pCircle->gethWnd()->RedrawWindow(&_rect);
-//         _pCircle->gethWnd()->InvalidateRect(&_rect, TRUE);
-//         _pCircle->gethWnd()->UpdateWindow();
+		dynamicR = _pCircle->DampingVibration(i, r);
+		_pCircle->readRadius(dynamicR);
+		_pCircle->reDrawWindow();
         Sleep(15); //調節動畫重畫時是否看得到
     }
 }
-
-CRect Circle::DampingVibration(int k, int x0)
+ 
+void Circle::reDrawWindow()
 {
+	gethWnd()->RedrawWindow(&m_reDeawRect);
+}
+
+int Circle::DampingVibration(int k, int x0) 
+{
+	//震動阻尼函數，除非修改震動的情況（阻尼大小或者是震盪時間）
+	//否則的話，不用修改
     //max = 375
     //min = 0
     //375-15/15
     ASSERT(k>=0);
     ASSERT(x0>=0);
-    int T0 = 15;
-    CSingleLock csl(&m_cs);
-    csl.Lock();
-    double timeX = 24*k;
-	int trmpR = (long)(x0*-exp(-0.01*(timeX+T0))*sin(0.0209439*(timeX+T0)+1.570795)) + x0;
-    csl.Unlock();
-    return expandRect(trmpR);//(m_nPenWidth+4);
+	const int trmpR = (long)((x0*-exp(-0.01*(24*k+15))*sin(0.0209439*(24*k+15)+1.570795)) + x0);
+	return trmpR;
 }
 
-CRect Circle::expandRect(int expnd)
+CRect Circle::r2rect(int expnd)
 {
-    m_DrawRect.left   = (long)(m_nCenter.x - expnd);
-    m_DrawRect.top    = (long)(m_nCenter.y - expnd);
-    m_DrawRect.right  = (long)(m_nCenter.x + expnd);
-    m_DrawRect.bottom = (long)(m_nCenter.y + expnd);
+	CRect _rect((long)(m_nCenter.x - expnd), (long)(m_nCenter.y - expnd),
+		(long)(m_nCenter.x + expnd), (long)(m_nCenter.y + expnd));
 
-	return m_DrawRect;
+	return _rect;
 }
 
 #ifdef _DEBUG
@@ -188,7 +207,7 @@ CString Circle::showMe() const
     CString str;
     
     str.Format("中心點(%d, %d), 顏色(%d, %d, %d), 半徑 = %d, 百分比 = %d%% 圖形範圍 = %d, %d", \
-        m_nCenter.x, m_nCenter.y, m_Color.R(), m_Color.G(), m_Color.B(), m_nRadius, m_Percent, m_DrawRect.right - m_DrawRect.left, m_DrawRect.bottom - m_DrawRect.top);
+        m_nCenter.x, m_nCenter.y, m_Color.R(), m_Color.G(), m_Color.B(), m_nRadius, m_Percent, m_DrawCircleRect.right - m_DrawCircleRect.left, m_DrawCircleRect.bottom - m_DrawCircleRect.top);
 
     return str;
 }
