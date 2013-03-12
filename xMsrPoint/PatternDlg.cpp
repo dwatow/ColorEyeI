@@ -331,14 +331,9 @@ void CPatternDlg::LoadedCartridge()
     {
         //++BeginItor;
         trigger();
-        Invalidate();
-    
-        //return TRUE;  //有子彈可以量測
+
         ShowWindow(SW_MAXIMIZE);
         SetFocus();
-
-        //m_Goal.setWnd(GetTopWindow());
-        //m_Goal.setWnd(dynamic_cast<CPatternDlg*>(GetLastActivePopup()));
     }
 }
 
@@ -362,8 +357,8 @@ void CPatternDlg::trigger()
     m_Goal.SetCenter(m_itor->GetPointPosi());  //靶位置
     m_Goal.SetPercent(0);
 
-    if ( /*!c_bMsrEndnMsred || it->GetMsrFlowNum() != PnGamma && */m_itor != m_RNA.Begin())
-        m_Goal.Animation();
+    //if ( /*!c_bMsrEndnMsred || it->GetMsrFlowNum() != PnGamma && */m_itor != m_RNA.Begin())
+    m_Goal.Animation();
     
 	checkMsrLimit();
 }
@@ -521,8 +516,8 @@ void CPatternDlg::eventGoPrvsGoal()
 BOOL CPatternDlg::eventGoNextGoal()
 {
     //下一個點
-    m_Goal.SetPercent(0);
-    m_Percent = m_Goal.GetPercent();
+    //m_Goal.SetPercent(0);
+    //m_Percent = m_Goal.GetPercent();
 
     if (!c_bMsrEnd)
     {

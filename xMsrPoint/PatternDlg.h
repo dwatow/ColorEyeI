@@ -94,7 +94,7 @@ private:
 //    Circle    m_Goal;        //目標圈圈
 //    Circle    m_NextGoal;    //下一個目標圈圈
 
-    UINT m_Percent;
+    int  m_Percent;
     Bolt m_GunMchn;
     Bolt m_NextGunMchn;
 
