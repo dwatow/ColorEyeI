@@ -67,11 +67,11 @@ private:
     BOOL c_bStateBar;
 
     //自動使用的參數
-    BOOL c_bMsrValues;
+//     BOOL c_bMsrValues;
+//     BOOL c_bMsring;
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
     BOOL c_bMsrEndnMsred;
-    BOOL c_bMsring;
     BOOL c_bGoalPercent;
     BOOL c_bRunMsrAI;
     BOOL c_bUnCntCA210;

@@ -103,8 +103,8 @@ BOOL CPatternDlg::OnInitDialog()
     c_bMsrBegin     = FALSE;
     c_bMsrEnd       = FALSE;
     c_bMsrEndnMsred = FALSE;
-    c_bMsrValues    = FALSE;
-    c_bMsring       = FALSE;
+//     c_bMsrValues    = FALSE;
+//     c_bMsring       = FALSE;
     c_bGoalPercent  = FALSE;
     c_bRunMsrAI     = TRUE;
     c_bUnCntCA210   = FALSE;
@@ -113,7 +113,7 @@ BOOL CPatternDlg::OnInitDialog()
 //    Info1.ptnDlg = this;
 
     ColorRef tempClr(255, 0, 127); //深紅色
-    m_Goal.SetColor(tempClr.Shift(5));
+    m_Goal.SetArcColor(tempClr.Shift(5));
 
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE
@@ -148,6 +148,7 @@ void CPatternDlg::OnPaint()
     end的字
     */
 
+	const int wordHight(18);
     CPaintDC dc(this); // device context for painting
     CString temp;
     dc.SetBkMode(OPAQUE);
@@ -166,76 +167,69 @@ void CPatternDlg::OnPaint()
 //     if (c_bDrawNextGold) 
 //         m_NextGoal.DrawCircle(dc);
 
-DebugCode(
-          dc.SetTextColor(m_BkColor.Shift());
 
+DebugCode(
+		  dc.SetTextColor(m_BkColor.Shift());
+
+		int lineNum(0);
         //Pattern運作參數
         //Goal訊息
         temp.Format("  Goal%s", m_Goal.showMe());
-        TextOut(dc, 0, 0, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
         
         //NextGoal訊息
 //         temp.Format("nGoal%s", m_NextGoal.showMe());
-//         TextOut(dc, 0, 16, temp, temp.GetLength());
+//         TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
 
         //鍵盤訊息
     //     KeyMessage.Format("nChar = %d, nRepCnt = %d, nFlags = %d", key1, key2, key3);
-    //     TextOut(dc, 0, 15, KeyMessage, 40);
+    //     TextOut(dc, 0, wordHight*lineNum++, KeyMessage, 40);
 
         //iterator的訊息
         CString isEnd(m_itor == m_RNA.Begin()? "Begin" : m_itor == m_RNA.End() ? "End" : "Other");
         temp.Format("迭代器資訊: itor.begin = 0x%x, itor.end = 0x%x, itor(位址 / 位置) = 0x%x / %s", m_RNA.Begin(), m_RNA.End(), m_itor, isEnd);
-        TextOut(dc, 0, 32, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
 
-        temp.Format("PatternDlg旗標: Goal/nGoal = %d/%d, StateBar = %d;  Msr/Msring = %d/%d, 量測百分比 = %d%%, 第一點 = %d, 最後一點 = %d, 自動量測模式 = %d, 連結CA-210 = %d, 5Nits中心點 = %d", \
-                     c_bDrawGold, c_bDrawNextGold, c_bStateBar, c_bMsrValues, c_bMsring, m_Goal.GetPercent(), c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
-        TextOut(dc, 0, 48, temp, temp.GetLength());
+        temp.Format("PatternDlg旗標: Goal/nGoal = %d/%d, StateBar = %d; 量測百分比 = %d%%, 第一點 = %d, 最後一點 = %d, 自動量測模式 = %d, 連結CA-210 = %d, 5Nits中心點 = %d", \
+                     c_bDrawGold, c_bDrawNextGold, c_bStateBar, m_Goal.GetPercent(), c_bMsrBegin, c_bMsrEnd, !c_bRunMsrAI, c_bUnCntCA210, c_bFind5nits);
+        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
 
 //         temp.Format("翻譯器資訊: %s", m_GunMchn.GetSetupValue());
 //         TextOut(dc, 0, 64, temp, temp.GetLength());
 
         temp.Format("這一點的資訊: %s", m_itor->showMe());
-        TextOut(dc, 0, 80, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
 )
 
     //狀態列
     if (c_bStateBar)
     {
+		dc.SetTextColor(m_BkColor.Shift());
         //操作說明（左）
         temp.Format("上一點: ←, 下一點: →, 抓值+下一點: Enter, 自動量測: ↓");
-        TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
+        TextOut(dc, 0, GetSystemMetrics(SM_CYSCREEN) - wordHight*1, temp, temp.GetLength());
         //狀態（右）
         temp.Format("連線狀態: %s, 目前量測: %s,  解析度: %d×%d,  Channel: %s,  LCM size: %2.1f inch", \
             m_pCA210->isOnline() ? "連線" : "離線" , m_itor->GetDescrip(), GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), m_pCA210->GetChData(), m_pCA210->GetLcmSize());//LCM Size這樣抓會有問題
-        TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - 15, temp, temp.GetLength());
+        TextOut(dc, GetSystemMetrics(SM_CXSCREEN) - (int)(temp.GetLength()*6.7), GetSystemMetrics(SM_CYSCREEN) - wordHight*1, temp, temp.GetLength());
     }
 
     //主要量測指示
     if (c_bDrawGold)
-        m_Goal.DrawCircle(dc);//量測目標
-
-    if (c_bGoalPercent)
-    {
-    //百分比顯示
-        temp.Format("%3d%% \0", m_Goal.GetPercent());
-        TextOut(dc, m_Goal.GetCenter().x - 15, m_Goal.GetCenter().y - (m_Goal.GetRadius()+20) , (LPCSTR)temp, temp.GetLength());  //上
-        TextOut(dc, m_Goal.GetCenter().x - 15, m_Goal.GetCenter().y + (m_Goal.GetRadius()+2 ) , (LPCSTR)temp, temp.GetLength());  //下
-        TextOut(dc, m_Goal.GetCenter().x - (m_Goal.GetRadius()+40),  m_Goal.GetCenter().y -7 , (LPCSTR)temp, temp.GetLength());  //左
-        TextOut(dc, m_Goal.GetCenter().x + (m_Goal.GetRadius()+2) ,  m_Goal.GetCenter().y -7 , (LPCSTR)temp, temp.GetLength());  //右
-    }
+        m_Goal.Draw(dc);//量測目標
 
     //量測數據指示
-    if (c_bMsring)
-        drawMsringLabel(dc);
+//     if (c_bMsring)
+//         drawMsringLabel(dc);
+// 
+//     if (c_bMsrValues)
+//         drawMsrLabel(dc);
 
-    if (c_bMsrValues)
-        drawMsrLabel(dc);
-
-    dc.SetTextColor(m_BkColor.Invrt());
 
     if (c_bMsrEnd && c_bRunMsrAI && c_bMsrEndnMsred)
     {
         temp.Format("按ESC離開。");    
+		dc.SetTextColor(m_BkColor.Invrt());
         if ((m_Goal.GetCenter().x == GetSystemMetrics(SM_CXSCREEN)/2) && (m_Goal.GetCenter().y == GetSystemMetrics(SM_CYSCREEN)/2))
             TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8-m_Goal.GetRadius()*2, temp, temp.GetLength());
         else
@@ -246,6 +240,8 @@ DebugCode(
         temp.Format("未連接CA-210。");
     else
         temp.Format("");
+
+	dc.SetTextColor(m_BkColor.Invrt());
     TextOut(dc, GetSystemMetrics(SM_CXSCREEN)/2 - 75, GetSystemMetrics(SM_CYSCREEN)/2-8, temp, temp.GetLength());
 
     // TODO: Add your message handler code here
@@ -266,19 +262,19 @@ void CPatternDlg::drawMsrLabel(CDC &aDC)
 
 }
 
-void CPatternDlg::drawMsringLabel(CDC &aDC)
-{    
-    const int r = m_Goal.GetRadius();
-    const CSize Area(88, 158);
-    CPoint shift(0, -20-r);
-    shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
-
-    CRect rect2(m_Goal.GetCenter() + shift, Area);
-    aDC.SetTextColor(m_BkColor.Shift());
-
-    //正在量的數據
-    aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
-}
+// void CPatternDlg::drawMsringLabel(CDC &aDC)
+// {    
+//     const int r = m_Goal.GetRadius();
+//     const CSize Area(88, 158);
+//     CPoint shift(0, -20-r);
+//     shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
+// 
+//     CRect rect2(m_Goal.GetCenter() + shift, Area);
+//     aDC.SetTextColor(m_BkColor.Shift());
+// 
+//     //正在量的數據
+//     aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
+// }
 
 void CPatternDlg::setBkColor(ColorRef clr)
 {
@@ -354,6 +350,9 @@ void CPatternDlg::trigger()
     //c_bFind5nits = (m_GunMchn.trigger(it) == TS_Find_Nits)? TRUE : FALSE;
 
     setBkColor(m_itor->GetBkColor());          //靶背景
+	m_Goal.SetupLabel(m_itor->GetBullet());
+	m_Goal.SetStrColor(m_BkColor.Shift());
+	
     m_Goal.SetCenter(m_itor->GetPointPosi());  //靶位置
     m_Goal.SetPercent(0);
 
@@ -365,9 +364,9 @@ void CPatternDlg::trigger()
 
 void CPatternDlg::checkMsrLimit()
 {
-    c_bMsrBegin = (m_itor == m_RNA.Begin()) ? TRUE : FALSE;
-    c_bMsrEnd   = (m_itor+1 == m_RNA.End() ) ? TRUE : FALSE;
-    c_bMsrEndnMsred = ( (m_itor+1 == m_RNA.End()) && (m_itor->GetBullet().isEmpty()) ) ? FALSE : TRUE;
+    c_bMsrBegin     = (  m_itor   == m_RNA.Begin()) ? TRUE : FALSE;
+    c_bMsrEnd       = (  m_itor+1 == m_RNA.End()  ) ? TRUE : FALSE;
+    c_bMsrEndnMsred = (  c_bMsrEnd && (m_itor->GetBullet().isEmpty()) ) ? FALSE : TRUE;
 }
 
 BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg) 
@@ -396,12 +395,12 @@ CaState CPatternDlg::Recoil()
     BOOL OldDrawNextGold = c_bDrawNextGold;
     BOOL OldDrawGold     = c_bDrawGold;
     BOOL OldStateBar     = c_bStateBar;
-    BOOL OldMsrValues    = c_bMsrValues;
-    BOOL OldMsring       = c_bMsring;
+//     BOOL OldMsrValues    = c_bMsrValues;
+//     BOOL OldMsring       = c_bMsring;
     BOOL OldGoalPercent  = c_bGoalPercent;
 
     //固定關掉所有螢幕顯示/隱藏狀態
-    c_bDrawNextGold = c_bDrawGold = c_bStateBar = c_bMsrValues = c_bMsring = c_bGoalPercent = FALSE;
+    c_bDrawNextGold = c_bDrawGold = c_bStateBar = c_bGoalPercent = FALSE;
 
     Invalidate();
     UpdateWindow();
@@ -416,8 +415,8 @@ CaState CPatternDlg::Recoil()
     c_bDrawNextGold = OldDrawNextGold;
     c_bDrawGold     = OldDrawGold;
     c_bStateBar     = OldStateBar;
-    c_bMsrValues    = OldMsrValues;
-    c_bMsring       = OldMsring;
+//     c_bMsrValues    = OldMsrValues;
+//     c_bMsring       = OldMsring;
     c_bGoalPercent  = OldGoalPercent;
 
     Invalidate();
@@ -463,7 +462,7 @@ void CPatternDlg::OnTimer(UINT nIDEvent)
                         m_Percent += rand()%50+rand()%50+1;
                         break;
                     case 2://滿出來啦
-                        c_bMsrValues = /*TRUE;*/c_bMsring = FALSE;
+                        //c_bMsrValues = /*TRUE;*/c_bMsring = FALSE;
                         if (m_Percent > 83)
                         {
                             eventRunMsrAi(FALSE);
@@ -507,10 +506,10 @@ void CPatternDlg::eventGoPrvsGoal()
 //         if (m_itor->GetBackColor() == JND || JNDX) 
 //             c_bMsrValues = FALSE;
 //         else
-             c_bMsrValues = TRUE;
-
-        c_bMsring = FALSE;
+//             c_bMsrValues = TRUE;
     }
+
+        //c_bMsring = FALSE;
 }
 
 BOOL CPatternDlg::eventGoNextGoal()
@@ -525,13 +524,13 @@ BOOL CPatternDlg::eventGoNextGoal()
         ++m_itor;
         if (m_itor == m_RNA.End()) m_itor--;
         if (m_itor == m_RNA.End()) m_itor--;
-    }
 
     //重新畫圈圈+動畫
     trigger();
-    c_bMsring = FALSE;
-    c_bMsrValues = FALSE;
+//     c_bMsring = FALSE;
+//     c_bMsrValues = FALSE;
     Invalidate();
+    }
 
     return !c_bMsrEnd;
 }
@@ -588,8 +587,8 @@ void CPatternDlg::eventRunMsrAi(int isRun)
     case 1://自動量測啟始點
             SetTimer(1, 180, NULL);
 
-            c_bMsring = TRUE;
-            c_bMsrValues = FALSE;
+//             c_bMsring = TRUE;
+//             c_bMsrValues = FALSE;
 
             if (isRun)    break;
         }
@@ -598,8 +597,8 @@ void CPatternDlg::eventRunMsrAi(int isRun)
     case 0:
             KillTimer(1);
 
-            c_bMsring = FALSE;
-            c_bMsrValues = FALSE;
+//             c_bMsring = FALSE;
+//             c_bMsrValues = FALSE;
 
             m_Goal.SetPercent(0);
             m_Percent = m_Goal.GetPercent();
@@ -698,8 +697,8 @@ void CPatternDlg::fineNitsNeg(int& _gl)
 
 void CPatternDlg::fineNits()
 {
-    c_bMsring = TRUE;
-    c_bMsrValues = FALSE;
+//     c_bMsring = TRUE;
+//     c_bMsrValues = FALSE;
     int i;
 
     //夾擊演算法
@@ -734,7 +733,8 @@ void CPatternDlg::fineNits()
         else MessageBox("找Nits出問題。");
     }
     m_GunMchn.Set5NitsBkColor(m_BkColor.oRGB());
-    c_bMsring = c_bFind5nits = !c_bMsring;  //5Nits特別流程結束
+    //c_bMsring = c_bFind5nits = !c_bMsring;  //5Nits特別流程結束
+	c_bFind5nits = FALSE;
 }
 
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 

@@ -3,7 +3,7 @@
 #include <cmath>
 
 Circle::Circle(CWnd* cWnd, int r):
-m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd)
+m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd), m_isShowPercentNum(FALSE), m_isShowLabel(FALSE)
 {
     m_Info1.pCircle = this;
 }
@@ -11,6 +11,8 @@ m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd)
 void Circle::SetCenter(CPoint p)
 {
     SetCenter(p.x, p.y);
+	//放在這，就是「點在哪，標籤就在哪」
+	m_Label.comCircle(m_nRadius, m_nCenter);
 }
 
 void Circle::SetCenter(int x, int y)
@@ -36,15 +38,29 @@ CPoint Circle::GetCenter() const
     return m_nCenter;
 }
 
-void Circle::SetColor(const ColorRef clr)
+void Circle::SetArcColor(const ColorRef clr)
 {
-	m_Color = clr;
+	m_arcColor = clr;
 	m_Pen.DeleteObject();
-	m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_Color.oRGB());//變色
+	m_Pen.CreatePen(PS_SOLID, m_nPenWidth, m_arcColor.oRGB());//變色
 	tracePen = &m_Pen;
 }
 
-void Circle::DrawCircle(CPaintDC &dc)
+void Circle::SetStrColor(const ColorRef clr)
+{
+	m_strColor = clr;
+}
+
+void Circle::Draw(CPaintDC &dc)
+{
+	drawCircle(dc);
+	if (m_isShowPercentNum)
+		drawPercentNum(dc);
+	if (m_isShowLabel)
+		m_Label.Draw(dc);
+}
+
+void Circle::drawCircle(CPaintDC &dc)
 {
     //設定畫筆
     CPen* OldPen;
@@ -53,7 +69,7 @@ void Circle::DrawCircle(CPaintDC &dc)
     CPoint   EndPoint(m_nCenter.x, m_nCenter.y - m_nRadius);
     
     if(m_Percent > 0 && m_Percent < 100)  
-        Draw();
+        drawPercent();
 
     //expandRect(m_nRadius);
     OldPen = dc.SelectObject(&m_Pen);
@@ -62,6 +78,17 @@ void Circle::DrawCircle(CPaintDC &dc)
 	CPen* tempPen;
     tempPen = dc.SelectObject(OldPen);
 	ASSERT(tracePen == tempPen);
+}
+
+void Circle::drawPercentNum(CPaintDC &dc)
+{
+ 	dc.SetTextColor(m_strColor.oRGB());
+	CString percent;
+	percent.Format("%3d%% \0", GetPercent());
+	TextOut(dc, GetCenter().x - 15, GetCenter().y - (GetRadius()+20) , (LPCSTR)percent, percent.GetLength());  //上
+	TextOut(dc, GetCenter().x - 15, GetCenter().y + (GetRadius()+2 ) , (LPCSTR)percent, percent.GetLength());  //下
+	TextOut(dc, GetCenter().x - (GetRadius()+40),  GetCenter().y -7 , (LPCSTR)percent, percent.GetLength());  //左
+	TextOut(dc, GetCenter().x + (GetRadius()+2) ,  GetCenter().y -7 , (LPCSTR)percent, percent.GetLength());  //右
 }
 
 CirclePercent Circle::SetPercent(int percent)
@@ -94,12 +121,17 @@ int Circle::GetPercent() const
     return m_Percent;
 }
 
-ColorRef Circle::GetColor() const
+ColorRef Circle::GetArcColor() const
 {
-    return m_Color;
+    return m_arcColor;
 }
 
-void Circle::Draw()
+ColorRef Circle::GetStrColor() const
+{
+	return m_strColor;
+}
+
+void Circle::drawPercent()
 {
     int oX, oY;
     
@@ -131,12 +163,17 @@ void Circle::Draw()
 
 void Circle::Animation()
 {
+
 	if (m_pdlgcWnd != NULL)
 	{
+		m_isShowPercentNum = FALSE;
+		m_isShowLabel = FALSE;
 		CSingleLock csl(&m_cs);
 		csl.Lock();
 		elasticAnimation((LPVOID)&m_Info1);
 		csl.Unlock();
+		m_isShowPercentNum = TRUE;
+		m_isShowLabel = TRUE;
 	}
 	else
 		ASSERT(0);
@@ -200,6 +237,13 @@ CRect Circle::r2rect(int expnd)
 	return _rect;
 }
 
+void Circle::SetupLabel(Bullet& blt)
+{
+	m_Label.SetData(blt);
+	//放在這，就是「點剛剛在哪，標籤就在哪」
+	m_Label.comCircle(m_nRadius, m_nCenter);
+}
+
 #ifdef _DEBUG
 
 CString Circle::showMe() const
@@ -207,7 +251,7 @@ CString Circle::showMe() const
     CString str;
     
     str.Format("中心點(%d, %d), 顏色(%d, %d, %d), 半徑 = %d, 百分比 = %d%% 圖形範圍 = %d, %d", \
-        m_nCenter.x, m_nCenter.y, m_Color.R(), m_Color.G(), m_Color.B(), m_nRadius, m_Percent, m_DrawCircleRect.right - m_DrawCircleRect.left, m_DrawCircleRect.bottom - m_DrawCircleRect.top);
+        m_nCenter.x, m_nCenter.y, m_arcColor.R(), m_arcColor.G(), m_arcColor.B(), m_nRadius, m_Percent, m_DrawCircleRect.right - m_DrawCircleRect.left, m_DrawCircleRect.bottom - m_DrawCircleRect.top);
 
     return str;
 }

@@ -17,7 +17,6 @@ public:
 	void i(ValueKind, float);
 	void i(ValueKind, CString);
 
-
 private:
 	CTime 	m_LastModifyTime;
 public:
