@@ -1,6 +1,81 @@
 #include "stdafx.h"
 #include "Cartridge2.h"
 
+Cartridge2::Cartridge2():
+m_sequenceArea(AA_00), m_sequenceFrom(0),
+m_PointPosition(0, 0), m_BkColor(0, 0, 0),
+m_Description(""),
+m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
+{}
+
+Cartridge2::Cartridge2(const Cartridge2& _C):
+m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
+m_PointPosition(_C.m_PointPosition), m_BkColor(_C.m_BkColor),
+m_Description(_C.m_Description), m_Data(_C.m_Data),
+m_centerRect(_C.m_centerRect), m_bColor(_C.m_bColor)
+{}
+
+Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
+m_sequenceArea(AA_00), m_sequenceFrom(0),
+m_PointPosition(pn), m_BkColor(cy), 
+m_Description(""),
+m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
+{}
+
+Cartridge2::~Cartridge2(){}
+
+BOOL Cartridge2::operator==(const Cartridge2& vCar2)
+{
+    return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
+		   (  GetBkColor()   == vCar2.GetBkColor()  )
+		   ) ? TRUE : FALSE;
+};
+
+void Cartridge2::operator= (const Cartridge2& vCar)
+{
+    SetDescrip(vCar.GetDescrip());
+    setSqncArea(vCar.getSqncArea());
+    setSqncFrm(vCar.getSqncFrm());
+	
+    SetPointPosi(vCar.GetPointPosi());
+    SetBkColor(vCar.GetBkColor());
+    
+    SetBullet(vCar.GetBullet());
+}
+
+CString Cartridge2::showMe() const
+{
+    CString str;
+    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BeHaveData(%d), %s\n", \
+        m_sequenceFrom, 
+        m_sequenceArea, 
+        m_PointPosition.x, m_PointPosition.y, 
+        m_BkColor.R(), m_BkColor.G(), m_BkColor.B(),
+        !m_Data.isEmpty(), 
+        m_Data.GetLastTime());
+    return str;
+}
+
+void Cartridge2::setCrsTlkRect(CRect& _rect, ColorRef& clr)
+{
+	//在DNA轉RNA時使用
+	// 	m_centerRect.top    = 10;
+	// 	m_centerRect.bottom = 200;
+	// 	m_centerRect.left   = 10;
+	// 	m_centerRect.right  = 200;
+	// 	m_centerRectBrush.CreateSolidBrush(RGB(0, 0, 255));
+	m_centerRect = _rect;
+	m_bColor = clr;
+}
+
+void Cartridge2::DrawCrsTlkRect(CPaintDC& dc)
+{
+	//在CPatternDlg使用
+	// Cross Talk 的背景色
+	CBrush _brush(m_bColor.oRGB());
+    dc.FillRect(m_centerRect, &_brush);
+}
+
 /*******************************************
  *    Define PointSet Class member function  *
  *******************************************/

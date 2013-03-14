@@ -247,6 +247,10 @@ SOURCE=.\OmdFile\TxtFile.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ValuesLabel.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SelXls\xlef.cpp
 # End Source File
 # Begin Source File

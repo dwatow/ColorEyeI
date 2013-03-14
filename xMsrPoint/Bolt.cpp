@@ -793,10 +793,10 @@ COLORREF Bolt::GetBkColor() const
 void Bolt::CenterRect(CDC* pDC, COLORREF CntrClr)
 {
     CRect* pCenterArea = new CRect( (long)( m_nScrmH / m_fCrsTlkRectFE ), 
-		                            (long)( m_nScrmV / m_fCrsTlkRectFE ), 
-									(long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
-									(long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
-
+		(long)( m_nScrmV / m_fCrsTlkRectFE ), 
+		(long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
+		(long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
+	
     CBrush* pBrush = new CBrush(CntrClr);
     pDC->FillRect(pCenterArea, pBrush);
     delete pBrush;

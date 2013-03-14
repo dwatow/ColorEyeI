@@ -72,13 +72,14 @@ private:
 	void drawPercentNum(CPaintDC &dc);
 public:	
 	void SetupLabel(Bullet&);
-	void SetStrColor(const ColorRef clr);
+	void SetStrColor(const ColorRef clr);  //Ãþ¦ü­I´º¦â
 	ColorRef GetStrColor() const;
+	void ShowLabel(BOOL);
 
 private:
     ColorRef m_arcColor;
 public:
-	void SetArcColor(const ColorRef clr);
+	void SetArcColor(const ColorRef clr);  //¬õºñ¿OÃC¦â
     ColorRef GetArcColor() const;
 			
 	virtual void Draw(CPaintDC&);

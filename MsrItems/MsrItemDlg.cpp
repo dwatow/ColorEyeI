@@ -241,7 +241,11 @@ void CMsrItemDlg::selMsrItem2DNA()
     //準備DNA
     //填入參數
     //JND
-    if (m_chkJND.GetState())  m_DNA.AddCell(JND , Pn1, m_JndGray);
+    if (m_chkJND.GetState())
+	{
+		m_DNA.AddCell(JNDX , Pn1, m_JndGray);
+		m_DNA.AddCell(JND , Pn1, m_JndGray);
+	}
     
     //中心點
     if (m_chkCWP1.GetState())  m_DNA.AddCell(White, Pn1);
@@ -300,7 +304,11 @@ void CMsrItemDlg::selMsrItem2DNA()
     
     //Cross Talk srot by AreaCode
     if (m_chkCrossTalk.GetState())
+	{
 		m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+		m_DNA.AddCell(CrsTlkD, Pn4, m_fCrsTlkRectFE);  
+		m_DNA.AddCell(CrsTlkW, Pn4, m_fCrsTlkRectFE);  
+	}
     
     if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
                                  m_DNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  

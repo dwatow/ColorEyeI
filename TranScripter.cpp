@@ -14,17 +14,17 @@
  ***************************************************/
 void TranScripter::checkPointValue(const int _hCI, const int _vCI) const
 {
-	ASSERT(_hCI > 0);
-	ASSERT(_hCI < m_nScrmH);
+    ASSERT(_hCI > 0);
+    ASSERT(_hCI < m_nScrmH);
 
-	ASSERT(_vCI > 0);
-	ASSERT(_vCI < m_nScrmV);
+    ASSERT(_vCI > 0);
+    ASSERT(_vCI < m_nScrmV);
 }
 
 void TranScripter::checkPointValue(const double dFE, const int _cm2pixel) const
 {
-	ASSERT(dFE >= 0); //dFE
-	ASSERT(_cm2pixel > 0);  //Cm2pixel(2.3)
+    ASSERT(dFE >= 0); //dFE
+    ASSERT(_cm2pixel > 0);  //Cm2pixel(2.3)
 }
 
 CPoint TranScripter::getCenterPoint() const
@@ -35,8 +35,8 @@ CPoint TranScripter::getCenterPoint() const
     const int hCenter(m_nScrmH/2);
     const int vCenter(m_nScrmV/2);
 
-	checkPointValue(hCenter, vCenter);
-	
+    checkPointValue(hCenter, vCenter);
+    
 /*
 +------------------------------+
 |                              |
@@ -53,14 +53,14 @@ CPoint TranScripter::getCenterPoint() const
     const CPoint PointD(hCenter  ,vCenter);
 
 //回傳一個點
-	return PointD;
+    return PointD;
 
 }
 
 CPoint TranScripter::getFE9Point(UINT few) const
 {
 //運算第幾個（以九點為計）
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
     const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
@@ -70,11 +70,11 @@ CPoint TranScripter::getFE9Point(UINT few) const
     const int hCenter(m_nScrmH/2);
     const int vCenter(m_nScrmV/2);
 
-	checkPointValue(dFE, Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	
+    checkPointValue(dFE, Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    
 /*
 +------------------------------+
 |                              |
@@ -125,7 +125,7 @@ CPoint TranScripter::getFE5Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
     const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
     const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
     const int RightEdge  = m_nScrmH - LeftEdge;
@@ -133,10 +133,10 @@ CPoint TranScripter::getFE5Point(UINT few) const
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
 
-	checkPointValue(dFE, Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
+    checkPointValue(dFE, Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
 /*
 +------------------------------+
 |                              |
@@ -183,12 +183,12 @@ CPoint TranScripter::get5nits9Point(UINT few) const
     const int BottomEdge = m_nScrmV - TopEdge;
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
-	checkPointValue(Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	
-	/*5nits
+    checkPointValue(Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    
+    /*5nits
 +------------------------------+
 |                              |
 |    00        01        02    |
@@ -239,9 +239,9 @@ CPoint TranScripter::getD13Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
 
-	const int LeftEdge  ((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));//左邊緣
+    const int LeftEdge  ((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));//左邊緣
     const int TopEdge   ((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));//上邊緣
     const int RightEdge (m_nScrmH - LeftEdge);
     const int BottomEdge(m_nScrmV - TopEdge);
@@ -249,23 +249,23 @@ CPoint TranScripter::getD13Point(UINT few) const
     const int hCenter(m_nScrmH/2);
     const int vCenter(m_nScrmV/2);
 
-	const int hPitch((RightEdge-LeftEdge)/4);
-	const int vPitch((BottomEdge-TopEdge)/4);
+    const int hPitch((RightEdge-LeftEdge)/4);
+    const int vPitch((BottomEdge-TopEdge)/4);
 
     const int L1(hCenter - hPitch);
     const int T1(vCenter - vPitch);
 
     const int R1(hCenter + hPitch);
     const int B1(vCenter + vPitch);
-	checkPointValue(dFE, Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
+    checkPointValue(dFE, Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
 
-	checkPointValue(hPitch, vPitch);
-	checkPointValue(L1, T1);
-	checkPointValue(R1, B1);
-	
+    checkPointValue(hPitch, vPitch);
+    checkPointValue(L1, T1);
+    checkPointValue(R1, B1);
+    
 /*
  LE     L1     HC     R1     RE
 +------------------------------+
@@ -283,8 +283,8 @@ CPoint TranScripter::getD13Point(UINT few) const
     const CPoint 
         Point00(LeftEdge ,TopEdge),        Point01(hCenter  ,TopEdge),        Point02(RightEdge,TopEdge),
 
-		                       Point09(L1, T1),                     Point10(R1, T1),
-		
+                               Point09(L1, T1),                     Point10(R1, T1),
+        
         Point03(LeftEdge ,vCenter),        Point04(hCenter  ,vCenter),        Point05(RightEdge,vCenter),
 
                                Point11(L1, B1),                     Point12(R1 ,B1),
@@ -324,7 +324,7 @@ CPoint TranScripter::getD21Point(UINT few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
     const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
     const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));
     const int RightEdge(m_nScrmH - LeftEdge);
@@ -334,32 +334,32 @@ CPoint TranScripter::getD21Point(UINT few) const
     const int vCenter(m_nScrmV/2);
 
 
-	int hPitch( m_nScrmH / 6 );
-	int vPitch( m_nScrmV / 4 );
+    int hPitch( m_nScrmH / 6 );
+    int vPitch( m_nScrmV / 4 );
 
-	if (dFE)
-	{
-		hPitch = (m_nScrmH - ((m_nScrmH/dFE)*2.0)) / 7.0;
-		vPitch = (m_nScrmV - ((m_nScrmV/dFE)*2.0)) / 5.0;
-	}
+    if (dFE)
+    {
+        hPitch = (m_nScrmH - ((m_nScrmH/dFE)*2.0)) / 7.0;
+        vPitch = (m_nScrmV - ((m_nScrmV/dFE)*2.0)) / 5.0;
+    }
 
     const int L2(hCenter - hPitch), L1(L2 - hPitch), R2(hCenter + hPitch), R1(R2 + hPitch);
 
     const int T1(vCenter - vPitch);
     const int B1(vCenter + vPitch);
 
-	checkPointValue(dFE, Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	
-	checkPointValue(hPitch, vPitch);
-	checkPointValue(L1, T1);
-	checkPointValue(L2, T1);
-	checkPointValue(R1, B1);	
-	checkPointValue(R2, B1);
+    checkPointValue(dFE, Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    
+    checkPointValue(hPitch, vPitch);
+    checkPointValue(L1, T1);
+    checkPointValue(L2, T1);
+    checkPointValue(R1, B1);    
+    checkPointValue(R2, B1);
 
-	
+    
 /*21點
      L1  L2      R2  R1
 +--------------------------+
@@ -416,8 +416,8 @@ CPoint TranScripter::getD25Point(UINT few) const
 {
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
-	const int fRectSide = m_tranPointer->GetPara(PA_D25RectSide);
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+    const int fRectSide = m_tranPointer->GetPara(PA_D25RectSide);
 
     const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
     const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
@@ -441,15 +441,15 @@ CPoint TranScripter::getD25Point(UINT few) const
     const int B1  = BottomEdge - Cm2pixel(fRectSide/2);
     const int B2  = B1  - Cm2pixel(fRectSide/2);
 
-	checkPointValue(dFE, Cm2pixel(2.3));
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	
-	checkPointValue(L1, T1);
-	checkPointValue(R1, B1);	
-	checkPointValue(L2, T2);
-	checkPointValue(R2, B2);
+    checkPointValue(dFE, Cm2pixel(2.3));
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    
+    checkPointValue(L1, T1);
+    checkPointValue(R1, B1);    
+    checkPointValue(L2, T2);
+    checkPointValue(R2, B2);
 
 
 /* L1L2                  R2R1
@@ -570,14 +570,14 @@ CPoint TranScripter::getW49Point(UINT few) const
     const int hCenter = m_nScrmH/2;  //水平中心
     const int vCenter = m_nScrmV/2;  //垂直中心
 
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	
-	checkPointValue(L1, T1);
-	checkPointValue(R1, B1);	
-	checkPointValue(L2, T2);
-	checkPointValue(R2, B2);
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    
+    checkPointValue(L1, T1);
+    checkPointValue(R1, B1);    
+    checkPointValue(L2, T2);
+    checkPointValue(R2, B2);
 
 /*   L1  L2          R2  R1
 +------------------------------+
@@ -718,11 +718,11 @@ CPoint TranScripter::getW49Point(UINT few) const
 CPoint TranScripter::getCrossTalk(UINT few) const
 {
 //運算第幾個（以九點為計）
-	//不可以貼邊
+    //不可以貼邊
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-	const double dFE = (double)m_tranPointer->GetPara(PA_FEover)* 2;
+    const double dFE = (double)m_tranPointer->GetPara(PA_FEover)* 2;
 
     const int LeftEdge   = static_cast<int>(m_nScrmH / dFE);    //上
     const int TopEdge    = static_cast<int>(m_nScrmV / dFE);    //下
@@ -731,10 +731,10 @@ CPoint TranScripter::getCrossTalk(UINT few) const
     const int hCenter    = m_nScrmH/2;
     const int vCenter    = m_nScrmV/2;
 
-	checkPointValue(LeftEdge, TopEdge);
-	checkPointValue(RightEdge, BottomEdge);
-	checkPointValue(hCenter, vCenter);
-	checkPointValue(dFE);
+    checkPointValue(LeftEdge, TopEdge);
+    checkPointValue(RightEdge, BottomEdge);
+    checkPointValue(hCenter, vCenter);
+    checkPointValue(dFE);
 /*
 +------------------------------+
 |                              |
@@ -769,17 +769,17 @@ CPoint TranScripter::getCrossTalk(UINT few) const
 
 int TranScripter::Cm2pixel(const double cm) const
 {    
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-	ASSERT_VALID(pMainFrm);
-	ASSERT(pMainFrm->m_pCa210);
-	//開啟舊檔時, pMainFrm->m_pCa210 為空指標
-	//有量測（與CA-210連線）時, pMainFrm->m_pCa210 有指向儀器
-	float LCMsize;
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    ASSERT(pMainFrm->m_pCa210);
+    //開啟舊檔時, pMainFrm->m_pCa210 為空指標
+    //有量測（與CA-210連線）時, pMainFrm->m_pCa210 有指向儀器
+    float LCMsize;
 
-	if(pMainFrm->m_pCa210 == 0)
-		LCMsize = 0.0;
-	else
-		LCMsize = atof(pMainFrm->m_pCa210->GetLcmSize());
+    if(pMainFrm->m_pCa210 == 0)
+        LCMsize = 0.0;
+    else
+        LCMsize = atof(pMainFrm->m_pCa210->GetLcmSize());
 
     return (int)(m_nScrmV*cm / (LCMsize * sin( atan((double)m_nScrmV/(double)m_nScrmH) ) * 2.54));
 }
@@ -799,122 +799,152 @@ m_nScrmV(GetSystemMetrics(SM_CYSCREEN))
 
 void TranScripter::Trans(DNA& _vN, RNA& _vR)
 {
-	ASSERT(_vN.Size());
-	CPoint ScrmCenter(m_nScrmH/2, m_nScrmV/2);
+    ASSERT(_vN.Size());
+    CPoint ScrmCenter(m_nScrmH/2, m_nScrmV/2);
 
-	m_tranPointer = _vN.Begin();
-	for (m_tranPointer = _vN.Begin(); m_tranPointer != _vN.End(); ++m_tranPointer)
-	{
-		UINT msrFrowNoMax = m_tranPointer->GetMsrFlowNum();
-		for (unsigned int msrFlowNo = 0; msrFlowNo < msrFrowNoMax; ++msrFlowNo)
-		{
-			Cartridge2 abc;
-			
-			abc.SetBkColor(tranColor(msrFlowNo));
-			abc.SetPointPosi(tranPoint(msrFlowNo));
-			
-			setSquence(abc, _vR.Size(), msrFlowNo);
-			abc.SetDescrip(tranDescrip(msrFlowNo));			
-			
-			_vR.AddCell(abc);
-		}
-	}
+    m_tranPointer = _vN.Begin();
+    for (m_tranPointer = _vN.Begin(); m_tranPointer != _vN.End(); ++m_tranPointer)
+    {
+        UINT msrFrowNoMax = m_tranPointer->GetMsrFlowNum();
+        for (unsigned int msrFlowNo = 0; msrFlowNo < msrFrowNoMax; ++msrFlowNo)
+        {
+            Cartridge2 tempCar;
 
+			//CrsTlk 不需要矩形
+            if ( //m_tranPointer->GetBackColor() == CrsTlk  || 
+                 m_tranPointer->GetBackColor() == CrsTlkD || 
+                 m_tranPointer->GetBackColor() == CrsTlkW )
+            {
+            //    tempCar = new CartridgeCrsTlk();
+                tranForCrsTlk(tempCar, m_tranPointer->GetBackColor());
+            }
+//             else
+//                 tempCar = new Cartridge2();
+            
+            tempCar.SetBkColor(tranColor(msrFlowNo));
+            tempCar.SetPointPosi(tranPoint(msrFlowNo));
+            
+            setSquence(tempCar, _vR.Size(), msrFlowNo);
+            tempCar.SetDescrip(tranDescrip(msrFlowNo));            
+            
+            _vR.AddCell(tempCar);
+        }
+    }
+}
+
+void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
+{
+    int m_fCrsTlkRectFE = m_tranPointer->GetPara(PA_FEover);
+    ASSERT(m_fCrsTlkRectFE > 0);
+
+    CRect _rect = 
+        new CRect( (long)( m_nScrmH / m_fCrsTlkRectFE ), 
+                   (long)( m_nScrmV / m_fCrsTlkRectFE ), 
+                   (long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
+                   (long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
+
+    ColorRef _clr;
+    if (clrType == CrsTlkD)
+        _clr.iRGB(0, 0, 0);
+    else if (clrType == CrsTlkW)
+        _clr.iRGB(255, 255, 255);
+
+    crtg.setCrsTlkRect(_rect, _clr);
 }
 
 COLORREF TranScripter::tranColor(UINT flowNo) const
 {
-	if (m_tranPointer->GetMsrFlowNum() == PnGamma)
-		switch(m_tranPointer->GetBackColor())
-	{
-		case Red:      return RGB( flowNo,      0,      0);
-		case Green:    return RGB(      0, flowNo,      0);
-		case Blue:     return RGB(      0,      0, flowNo);
-		case White:    
-		case Dark:     
-		default:       return RGB( flowNo, flowNo, flowNo);
-	}
-	else
-		switch(m_tranPointer->GetBackColor())
-	{
-		case White:    return RGB( 255, 255, 255);
-		case Dark:     return RGB(   0,   0,   0);
-		case Red:      return RGB( 255,   0,   0);
-		case Green:    return RGB(   0, 255,   0);
-		case Blue:     return RGB(   0,   0, 255);
-		case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
-		case JNDX:
-		case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
-		case CrsTlk: 
-		case CrsTlkW:
-		case CrsTlkD:  return RGB( 128, 128, 128);
-		default:       return RGB( 192, 212,  49);
-	}
+    if (m_tranPointer->GetMsrFlowNum() == PnGamma)
+        switch(m_tranPointer->GetBackColor())
+        {
+            case Red:      return RGB( flowNo,      0,      0);
+            case Green:    return RGB(      0, flowNo,      0);
+            case Blue:     return RGB(      0,      0, flowNo);
+            case White:    
+            case Dark:     
+            default:       return RGB( flowNo, flowNo, flowNo);
+        }
+    else
+        switch(m_tranPointer->GetBackColor())
+        {
+            case White:    return RGB( 255, 255, 255);
+            case Dark:     return RGB(   0,   0,   0);
+            case Red:      return RGB( 255,   0,   0);
+            case Green:    return RGB(   0, 255,   0);
+            case Blue:     return RGB(   0,   0, 255);
+            case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
+            case JNDX:
+            case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
+            case CrsTlk: 
+            case CrsTlkW:
+            case CrsTlkD:  return RGB( 128, 128, 128);
+            default:       return RGB( 192, 212,  49);
+        }
 }
 
 CPoint TranScripter::tranPoint(unsigned int flowNo) const
 {
-	switch(m_tranPointer->GetMsrFlowNum())
-	{
+    switch(m_tranPointer->GetMsrFlowNum())
+    {
     case Pn1:        return getCenterPoint();        //中心點定義不分
     case Pn4:        return getCrossTalk(flowNo);
     case Pn5:        return getFE5Point(flowNo);
     case Pn9:    if (m_tranPointer->GetBackColor() == Nits)          //九點週邊定義各有不同
-					 return get5nits9Point(flowNo);        //分白、黑、5Nits
-		         else
-					 return getFE9Point(flowNo);
+                     return get5nits9Point(flowNo);        //分白、黑、5Nits
+                 else
+                     return getFE9Point(flowNo);
     case Pn13:       return getD13Point(flowNo);
     case Pn21:       return getD21Point(flowNo);
     case Pn25:       return getD25Point(flowNo);
     case Pn49:       return getW49Point(flowNo);
-	case PnGamma:    return getCenterPoint();
+    case PnGamma:    return getCenterPoint();
     default:         return getFE9Point(0);
-	}	
+    }    
 }
 
 CString TranScripter::tranDescrip(UINT flowNo) const
 {
-	CString color, poNum, poNo, para;
+    CString color, poNum, poNo, para;
 
-	color = m_tranPointer->GetStrColorType();
-	poNum = m_tranPointer->GetStrPointNum();
-	para  = m_tranPointer->GetStrPara();
-	
-	poNo.Format(", 第%d點", flowNo+1 );
-	
-	return color + poNum + poNo + para;
+    color = m_tranPointer->GetStrColorType();
+    poNum = m_tranPointer->GetStrPointNum();
+    para  = m_tranPointer->GetStrPara();
+    
+    poNo.Format(", 第%d點", flowNo+1 );
+    
+    return color + poNum + poNo + para;
 }
 
 void TranScripter::setSquence(Cartridge2& _Car, std::vector<Nucleotide>::size_type size, int msrFlowNo) const
 {
-	const CPoint center(m_nScrmH/2, m_nScrmV/2);
-	const CPoint carPoint(_Car.GetPointPosi());
-	const int shift = 5;
-	const CPoint aP(center.x - shift, center.y - shift), 
-	             dP(center.x + shift, center.y + shift);
-	
-	//從point判斷area code
-	if (carPoint.y < aP.y)
-	{
-		if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_02); 
-		else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_03);
-		else                                                     _Car.setSqncArea(AA_07);
-	}
-	else if ((carPoint.y >= aP.y) && (carPoint.y <= dP.y))
-	{
-		if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_04); 
-		else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_01);
-		else                                                     _Car.setSqncArea(AA_08);
-	}
-	else
-	{
-		if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_05); 
-		else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_06);
-		else                                                     _Car.setSqncArea(AA_09);
-	}
+    const CPoint center(m_nScrmH/2, m_nScrmV/2);
+    const CPoint carPoint(_Car.GetPointPosi());
+    const int shift = 5;
+    const CPoint aP(center.x - shift, center.y - shift), 
+                 dP(center.x + shift, center.y + shift);
+    
+    //從point判斷area code
+    if (carPoint.y < aP.y)
+    {
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_02); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_03);
+        else                                                     _Car.setSqncArea(AA_07);
+    }
+    else if ((carPoint.y >= aP.y) && (carPoint.y <= dP.y))
+    {
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_04); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_01);
+        else                                                     _Car.setSqncArea(AA_08);
+    }
+    else
+    {
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_05); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_06);
+        else                                                     _Car.setSqncArea(AA_09);
+    }
 
-	//依area code判斷順序的選擇
-	if (msrFlowNo <  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 2); 
-	if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(1);
-	if (msrFlowNo >  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 1);
+    //依area code判斷順序的選擇
+    if (msrFlowNo <  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 2); 
+    if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(1);
+    if (msrFlowNo >  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 1);
 }

@@ -35,11 +35,6 @@ CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
     //}}AFX_DATA_INIT
     
     //之間的順序要固定，不要修改了！
-//    m_Goal.setWnd();
-//     CString str;
-//     str.Format("%x\n", GetSafeOwner()->m_hWnd);
-//     AfxMessageBox(str);
-
     initCa210();
     initDataDlgType();
 
@@ -66,7 +61,6 @@ void CPatternDlg::initDataDlgType()
     {
     case MsrForItem:
         dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
-//        LoadedCartridge(dlgMsrItem.MsrItem());
         break;
     }
 }
@@ -103,8 +97,6 @@ BOOL CPatternDlg::OnInitDialog()
     c_bMsrBegin     = FALSE;
     c_bMsrEnd       = FALSE;
     c_bMsrEndnMsred = FALSE;
-//     c_bMsrValues    = FALSE;
-//     c_bMsring       = FALSE;
     c_bGoalPercent  = FALSE;
     c_bRunMsrAI     = TRUE;
     c_bUnCntCA210   = FALSE;
@@ -121,9 +113,9 @@ BOOL CPatternDlg::OnInitDialog()
 
 HBRUSH CPatternDlg::OnCtlColor(CDC* , CWnd* , UINT ) 
 {
+	//永遠都不需要修改
     m_BkBrush.DeleteObject();
     m_BkBrush.CreateSolidBrush(m_BkColor.oRGB());
-    
     return m_BkBrush;
 }
 
@@ -154,20 +146,10 @@ void CPatternDlg::OnPaint()
     dc.SetBkMode(OPAQUE);
     dc.SetBkColor(m_BkColor.oRGB());
 
-    //Cross Talk 的背景色
-//     ColorType SpecelPattern(m_GunMchn.GetColorType());
-//     switch(SpecelPattern)
-//     {
-//     case CrsTlkW: m_GunMchn.CenterRect(&dc, RGB(255, 255, 255));  break;
-//     case CrsTlkD: m_GunMchn.CenterRect(&dc, RGB(0, 0, 0));        break;
-//     case JNDX:    m_GunMchn.CenterCross(&dc, RGB(255, 255, 255)); break;
-//     }
-
+	m_itor->DrawCrsTlkRect(dc);
 
 //     if (c_bDrawNextGold) 
 //         m_NextGoal.DrawCircle(dc);
-
-
 DebugCode(
 		  dc.SetTextColor(m_BkColor.Shift());
 
@@ -218,13 +200,6 @@ DebugCode(
     if (c_bDrawGold)
         m_Goal.Draw(dc);//量測目標
 
-    //量測數據指示
-//     if (c_bMsring)
-//         drawMsringLabel(dc);
-// 
-//     if (c_bMsrValues)
-//         drawMsrLabel(dc);
-
 
     if (c_bMsrEnd && c_bRunMsrAI && c_bMsrEndnMsred)
     {
@@ -247,41 +222,6 @@ DebugCode(
     // TODO: Add your message handler code here
     // Do not call CDialog::OnPaint() for painting messages
 }
-
-void CPatternDlg::drawMsrLabel(CDC &aDC)
-{
-    const int r = m_Goal.GetRadius();
-    const CSize Area(88, 158);
-    CPoint shift(-10-r, -20-r);
-
-    CRect rect1(m_Goal.GetCenter() + shift, Area);
-    aDC.SetTextColor(m_BkColor.Invrt());
-    
-    //已量過的數據
-    aDC.DrawText(m_itor->GetBullet().show(), rect1, DT_LEFT | DT_VCENTER);
-
-}
-
-// void CPatternDlg::drawMsringLabel(CDC &aDC)
-// {    
-//     const int r = m_Goal.GetRadius();
-//     const CSize Area(88, 158);
-//     CPoint shift(0, -20-r);
-//     shift.x = (m_Goal.GetCenter().x < (LONG)((m_Goal.GetRadius()+125) + 88))? 40-r : -125-r;
-// 
-//     CRect rect2(m_Goal.GetCenter() + shift, Area);
-//     aDC.SetTextColor(m_BkColor.Shift());
-// 
-//     //正在量的數據
-//     aDC.DrawText(m_pCA210->OutData(), rect2, DT_LEFT | DT_VCENTER);
-// }
-
-void CPatternDlg::setBkColor(ColorRef clr)
-{
-    m_BkColor = clr;
-}
-
-
 
 void CPatternDlg::setupLCMSize()
 {
@@ -306,12 +246,16 @@ void CPatternDlg::initDocument()
     pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
     pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 
-    //SetPanelID
-    CReadBarCodeDialog dlgReadBarCode;
-    dlgReadBarCode.DoModal();
 
     m_RNA = pDoc->GetDocRNA();
     m_itor = m_RNA.Begin();
+
+	//SetPanelID
+    if (m_RNA.Size())
+	{
+		CReadBarCodeDialog dlgReadBarCode;
+		dlgReadBarCode.DoModal();
+	}
 }
 
 void CPatternDlg::LoadedCartridge()
@@ -351,14 +295,14 @@ void CPatternDlg::trigger()
 
     setBkColor(m_itor->GetBkColor());          //靶背景
 	m_Goal.SetupLabel(m_itor->GetBullet());
-	m_Goal.SetStrColor(m_BkColor.Shift());
-	
+ 	m_Goal.SetStrColor(m_BkColor.Shift());
+
     m_Goal.SetCenter(m_itor->GetPointPosi());  //靶位置
     m_Goal.SetPercent(0);
 
     //if ( /*!c_bMsrEndnMsred || it->GetMsrFlowNum() != PnGamma && */m_itor != m_RNA.Begin())
     m_Goal.Animation();
-    
+
 	checkMsrLimit();
 }
 
@@ -395,8 +339,6 @@ CaState CPatternDlg::Recoil()
     BOOL OldDrawNextGold = c_bDrawNextGold;
     BOOL OldDrawGold     = c_bDrawGold;
     BOOL OldStateBar     = c_bStateBar;
-//     BOOL OldMsrValues    = c_bMsrValues;
-//     BOOL OldMsring       = c_bMsring;
     BOOL OldGoalPercent  = c_bGoalPercent;
 
     //固定關掉所有螢幕顯示/隱藏狀態
@@ -415,8 +357,6 @@ CaState CPatternDlg::Recoil()
     c_bDrawNextGold = OldDrawNextGold;
     c_bDrawGold     = OldDrawGold;
     c_bStateBar     = OldStateBar;
-//     c_bMsrValues    = OldMsrValues;
-//     c_bMsring       = OldMsring;
     c_bGoalPercent  = OldGoalPercent;
 
     Invalidate();
@@ -501,23 +441,20 @@ void CPatternDlg::eventGoPrvsGoal()
         if (m_itor != m_RNA.Begin())    m_itor--;
         if (m_itor != m_RNA.Begin())    m_itor--;
         
-        trigger(); //它會等於0，就是從最後一回返回一次        
+        trigger(); //它會等於0，就是從最後一回返回一次  
+		m_Goal.ShowLabel(TRUE);
+
         Invalidate();
 //         if (m_itor->GetBackColor() == JND || JNDX) 
 //             c_bMsrValues = FALSE;
 //         else
 //             c_bMsrValues = TRUE;
     }
-
-        //c_bMsring = FALSE;
 }
 
 BOOL CPatternDlg::eventGoNextGoal()
 {
     //下一個點
-    //m_Goal.SetPercent(0);
-    //m_Percent = m_Goal.GetPercent();
-
     if (!c_bMsrEnd)
     {
         //計算下一顆
@@ -527,8 +464,7 @@ BOOL CPatternDlg::eventGoNextGoal()
 
     //重新畫圈圈+動畫
     trigger();
-//     c_bMsring = FALSE;
-//     c_bMsrValues = FALSE;
+	m_Goal.ShowLabel(FALSE);
     Invalidate();
     }
 
@@ -636,9 +572,10 @@ void CPatternDlg::eventExitDialog()
 //////////////////////////////////////////////////////////////////////////
 //find 5 nits
 
-void CPatternDlg::changeBkColor(ColorRef color)
+void CPatternDlg::setBkColor(ColorRef clr)
 {
-    setBkColor(color);
+    m_BkColor = clr;
+	//m_itor->graphBack(m_BkColor);   //把顏色放進去畫
     Invalidate();
     UpdateWindow();
 }
@@ -650,7 +587,7 @@ void CPatternDlg::fineNitsPos(int& _gl)
     while(fLv >  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
     {
         _gl -= 2;
-        changeBkColor(_gl);  //變成m_BkColor
+        setBkColor(_gl);  //變成m_BkColor
 //        Sleep(0);
         //量測抓值
         if (m_pCA210->Measure() == CA_ZeroCalMode)
@@ -661,7 +598,7 @@ void CPatternDlg::fineNitsPos(int& _gl)
     while(fLv < m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
     {
         ++_gl;
-        changeBkColor(_gl);
+        setBkColor(_gl);
         Sleep(60);
         //量測抓值
         m_pCA210->Measure();
@@ -676,7 +613,7 @@ void CPatternDlg::fineNitsNeg(int& _gl)
     while(fLv <  m_GunMchn.GetNitsSpec())  //若亮度還沒有到5以下，就減少
     {
         _gl += 2;
-        changeBkColor(_gl);
+        setBkColor(_gl);
 //        Sleep(0);
         //量測抓值
         if (m_pCA210->Measure() == CA_ZeroCalMode)
@@ -687,7 +624,7 @@ void CPatternDlg::fineNitsNeg(int& _gl)
     while(fLv > m_GunMchn.GetNitsSpec())   //若亮度還在5以下，就...變亮
     {
         --_gl;
-        changeBkColor(_gl);
+        setBkColor(_gl);
         Sleep(60);
         //量測抓值
         m_pCA210->Measure();
@@ -697,8 +634,6 @@ void CPatternDlg::fineNitsNeg(int& _gl)
 
 void CPatternDlg::fineNits()
 {
-//     c_bMsring = TRUE;
-//     c_bMsrValues = FALSE;
     int i;
 
     //夾擊演算法
@@ -707,7 +642,7 @@ void CPatternDlg::fineNits()
 //     while ((glvMax - glvMin) > 2)
 //     {
 //         Graylevel = (glvMax + glvMin)/2;
-//         changeBkColor(Graylevel);
+//         setBkColor(Graylevel);
 //         m_pCA210->Measure();
 //         fLv = m_pCA210->GetMsrData().GetLv();
 //         
@@ -740,6 +675,5 @@ void CPatternDlg::fineNits()
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
     CDialog::OnShowWindow(bShow, nStatus);
-    
     m_pCA210->SetOnline(bShow);    
 }

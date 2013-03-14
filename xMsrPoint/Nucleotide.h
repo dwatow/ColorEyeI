@@ -30,6 +30,7 @@ public:
     CString   GetStrColorType() const;
     void      SetBackColor(ColorType clr);
 
+//參數串
 private:
 	CString m_paraStr;
     std::vector<int> m_Parameters;
@@ -38,28 +39,12 @@ public:
     int GetPara(ParaOfPara) const;
 	CString GetStrPara() const;
 
+
+//其它操作
     BOOL operator==(const Nucleotide& vNucl);
     void operator= (const Nucleotide& vNucl);
 
     CString showMe();
 };
-
-inline CString Nucleotide::showMe()
-{
-    CString str, Para;
-    //ex: 黑色25點, 6, 10...
-    
-    str.Format("%s%s%s", GetStrColorType(), GetStrPointNum(), GetStrPara());
-    for ( std::vector<int>::iterator it  = m_Parameters.begin();
-                                     it != m_Parameters.end();
-                                   ++it)
-    {
-        Para.Format(" %d", *it);
-        str += Para;
-    }
-    return str + "\n";
-
-    //type: 直接用type看
-}
 
 #endif

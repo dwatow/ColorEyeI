@@ -4,7 +4,6 @@
 #include "RNA.h"
 #include "xMsrPoint/DNA.h"
 #include "xMsrPoint/Nucleotide.h"
-#include "xMsrPoint/Cartridge2.h"
 
 class TranScripter
 {
@@ -19,6 +18,8 @@ private:
 	COLORREF tranColor(UINT) const;
 	CPoint   tranPoint(UINT) const;
 	CString  tranDescrip(UINT) const;
+
+	void tranForCrsTlk(Cartridge2&, ColorType);
 	//DNA to RNA
     CPoint get5nits9Point(UINT few) const;
     CPoint getCrossTalk(UINT few) const;// 6/26·s¼W

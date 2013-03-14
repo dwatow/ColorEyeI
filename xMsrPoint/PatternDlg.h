@@ -67,8 +67,6 @@ private:
     BOOL c_bStateBar;
 
     //自動使用的參數
-//     BOOL c_bMsrValues;
-//     BOOL c_bMsring;
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
     BOOL c_bMsrEndnMsred;
@@ -106,10 +104,6 @@ private:
 
     void trigger();
     void checkMsrLimit();
-//     ColorRef shiftColor(ColorRef clr, int shift = 55) const;
-//     ColorRef invrtColor(ColorRef clr) const;
-    void drawMsrLabel(CDC &pDC);
-    void drawMsringLabel(CDC &pDC);
 
     void eventGoPrvsGoal();
     BOOL eventGoNextGoal();
@@ -118,16 +112,11 @@ private:
     UINT eventCatchMsrValue();
     void eventExitDialog();
 
-//     static UINT vbrGoalThread(LPVOID LParam);
-//     static UINT vbrNextGoalThread(LPVOID LParam);
-
-    void changeBkColor(ColorRef);
+    void setBkColor(ColorRef);
     void fineNits();
     void fineNitsPos(int& GrayLevel);
     void fineNitsNeg(int& GrayLevel);
 
-//     void checkColor(ColorRef) const;
-    void setBkColor(ColorRef);
 public:
     void LoadedCartridge(); //彈匣
 };

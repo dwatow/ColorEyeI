@@ -21,7 +21,7 @@ m_Parameters(PA_Max, -1)
 		break;
 	//有離邊
 	case Pn4:
-		if (cy != CrsTlk)
+		if (cy != CrsTlk && cy != CrsTlkD && cy != CrsTlkW)
 			break;
 	case Pn5:
 	case Pn9:
@@ -101,11 +101,11 @@ CString Nucleotide::GetStrColorType() const
 	case Blue:   Color.Format("藍色");   break;
 	case Dark:   Color.Format("黑色");   break;
 	case Nits:   Color.Format("Nits");  break;
-	case CrsTlkW:
-	case CrsTlkD:
-	case CrsTlk: Color.Format("CrossTalk"); break;
-	case JNDX:
-	case JND:    Color.Format("JND"); break;
+	case CrsTlkW:Color.Format("CrossTalk白矩形"); break;
+	case CrsTlkD:Color.Format("CrossTalk黑矩形"); break;
+	case CrsTlk: Color.Format("CrossTalk無矩形"); break;
+	case JNDX:	 Color.Format("JND十字"); break;
+	case JND:    Color.Format("JND空白"); break;
 	case NoColor:
 	default:     Color.Format("未定義色彩");
     }
@@ -139,6 +139,23 @@ int Nucleotide::GetPara(ParaOfPara Parameter) const
 	return m_Parameters[Parameter];
 }
 
+CString Nucleotide::showMe()
+{
+    CString str, Para;
+    //ex: 黑色25點, 6, 10...
+    
+    str.Format("%s%s%s", GetStrColorType(), GetStrPointNum(), GetStrPara());
+    for ( std::vector<int>::iterator it  = m_Parameters.begin();
+	it != m_Parameters.end();
+	++it)
+    {
+        Para.Format(" %d", *it);
+        str += Para;
+    }
+    return str + "\n";
+	
+    //type: 直接用type看
+}
 //////////////////////////////////////////////////////////////////////////
 //debug function
 

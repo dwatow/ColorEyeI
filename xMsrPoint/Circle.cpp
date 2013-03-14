@@ -80,6 +80,11 @@ void Circle::drawCircle(CPaintDC &dc)
 	ASSERT(tracePen == tempPen);
 }
 
+void Circle::ShowLabel(BOOL _B)
+{
+	m_isShowLabel = _B;
+}
+
 void Circle::drawPercentNum(CPaintDC &dc)
 {
  	dc.SetTextColor(m_strColor.oRGB());
@@ -163,17 +168,20 @@ void Circle::drawPercent()
 
 void Circle::Animation()
 {
-
 	if (m_pdlgcWnd != NULL)
 	{
-		m_isShowPercentNum = FALSE;
+		
+		BOOL t_isShowLabel(m_isShowLabel);
 		m_isShowLabel = FALSE;
+		m_isShowPercentNum = FALSE;
+		
 		CSingleLock csl(&m_cs);
 		csl.Lock();
 		elasticAnimation((LPVOID)&m_Info1);
 		csl.Unlock();
+		
 		m_isShowPercentNum = TRUE;
-		m_isShowLabel = TRUE;
+		m_isShowLabel = t_isShowLabel;
 	}
 	else
 		ASSERT(0);
