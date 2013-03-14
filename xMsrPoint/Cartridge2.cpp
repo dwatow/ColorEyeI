@@ -4,21 +4,21 @@
 Cartridge2::Cartridge2():
 m_sequenceArea(AA_00), m_sequenceFrom(0),
 m_PointPosition(0, 0), m_BkColor(0, 0, 0),
-m_Description(""),
+m_Description(""), m_bkStatus(BGS_Normal),
 m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
 {}
 
 Cartridge2::Cartridge2(const Cartridge2& _C):
 m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
-m_PointPosition(_C.m_PointPosition), m_BkColor(_C.m_BkColor),
-m_Description(_C.m_Description), m_Data(_C.m_Data),
+m_PointPosition(_C.m_PointPosition), m_BkColor(_C.m_BkColor), m_bkStatus(_C.m_bkStatus),
+m_Description(_C.m_Description), m_Data(_C.m_Data), 
 m_centerRect(_C.m_centerRect), m_bColor(_C.m_bColor)
 {}
 
 Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
 m_sequenceArea(AA_00), m_sequenceFrom(0),
 m_PointPosition(pn), m_BkColor(cy), 
-m_Description(""),
+m_Description(""), m_bkStatus(BGS_Normal), 
 m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
 {}
 
@@ -33,14 +33,15 @@ BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 
 void Cartridge2::operator= (const Cartridge2& vCar)
 {
-    SetDescrip(vCar.GetDescrip());
-    setSqncArea(vCar.getSqncArea());
-    setSqncFrm(vCar.getSqncFrm());
-	
-    SetPointPosi(vCar.GetPointPosi());
-    SetBkColor(vCar.GetBkColor());
-    
-    SetBullet(vCar.GetBullet());
+    m_sequenceFrom  = vCar.m_sequenceFrom;
+    m_sequenceArea  = vCar.m_sequenceArea;
+    m_PointPosition = vCar.m_PointPosition;
+	m_BkColor       = vCar.m_BkColor;
+	m_bkStatus      = vCar.m_bkStatus;
+    m_Data          = vCar.m_Data;
+	m_Description   = vCar.m_Description;
+	m_bColor        = vCar.m_bColor;
+	m_centerRect    = vCar.m_centerRect;
 }
 
 CString Cartridge2::showMe() const

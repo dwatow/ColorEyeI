@@ -19,6 +19,7 @@ public:
     COLORREF  Invrt() const;
 
 	void iRGB(const int&, const int&, const int&);
+	void iGray(const int&);
 	void operator= (const ColorRef& clr);
 	BOOL operator==(const ColorRef& clr);
 

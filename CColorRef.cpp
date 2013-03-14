@@ -38,3 +38,9 @@ void ColorRef::iRGB(const int& r, const int& g, const int& b)
     checkColor(r, g, b);
     m_color = RGB(r, g, b);
 }
+
+void ColorRef::iGray(const int& gray)
+{
+    checkColor(gray, gray, gray);
+    m_color = RGB(gray, gray, gray);
+}

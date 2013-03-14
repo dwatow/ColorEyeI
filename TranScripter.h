@@ -38,5 +38,7 @@ private:
     
 	void checkPointValue(const int x, const int y = 1) const;
 	void checkPointValue(const double fe, const int cm = 1) const;
+
+	void tranBkSuatus(Cartridge2&);
 };
 #endif

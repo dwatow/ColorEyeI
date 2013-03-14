@@ -113,9 +113,9 @@ private:
     void eventExitDialog();
 
     void setBkColor(ColorRef);
-    void fineNits();
-    void fineNitsPos(int& GrayLevel);
-    void fineNitsNeg(int& GrayLevel);
+    void fineNits(BackGroundStatus);
+    void fineNitsPos();
+    void fineNitsNeg();
 
 public:
     void LoadedCartridge(); //¼u§X

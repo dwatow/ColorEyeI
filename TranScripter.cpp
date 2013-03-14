@@ -820,11 +820,12 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
             }
 //             else
 //                 tempCar = new Cartridge2();
-            
+			
             tempCar.SetBkColor(tranColor(msrFlowNo));
             tempCar.SetPointPosi(tranPoint(msrFlowNo));
             
             setSquence(tempCar, _vR.Size(), msrFlowNo);
+            tranBkSuatus(tempCar);
             tempCar.SetDescrip(tranDescrip(msrFlowNo));            
             
             _vR.AddCell(tempCar);
@@ -832,6 +833,18 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
     }
 }
 
+void TranScripter::tranBkSuatus(Cartridge2& tCar)
+{
+	if (m_tranPointer->GetBackColor() == Nits && tCar.getSqncFrm() == 1 && tCar.getSqncArea() == AA_01)
+	{
+		if (m_tranPointer->GetPara(PA_NitsDir) == 1) //Neg
+			tCar.SetBkStatus(BGS_NitsNeg);
+		else if (m_tranPointer->GetPara(PA_NitsDir) == 0) //Pos
+			tCar.SetBkStatus(BGS_NitsPos);
+	}
+	else
+		tCar.SetBkStatus(BGS_Normal);
+}
 void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
 {
     int m_fCrsTlkRectFE = m_tranPointer->GetPara(PA_FEover);

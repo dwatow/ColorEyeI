@@ -22,7 +22,7 @@ Bullet::~Bullet()
 
 void Bullet::i(ValueKind _VK, float _F)
 {
-    ASSERT( _F>=0 && _F<=0.8 ); 
+//    ASSERT( _F>=0 && _F<=0.8 ); 
     m_vfValues[_VK] = _F;
     m_LastModifyTime = CTime::GetCurrentTime(); 
 }
