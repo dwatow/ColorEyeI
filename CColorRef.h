@@ -8,7 +8,9 @@ class ColorRef
 public:
 	ColorRef();
 	ColorRef(const int&, const int&, const int&);
-	ColorRef(COLORREF clr);
+	ColorRef(const COLORREF& clr);
+	ColorRef(const ColorRef& clr);
+
 
 	COLORREF oRGB() const;
 	unsigned char R() const;

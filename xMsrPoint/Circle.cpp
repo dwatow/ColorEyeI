@@ -177,7 +177,9 @@ void Circle::Animation()
 		
 		CSingleLock csl(&m_cs);
 		csl.Lock();
+// 		int r = GetRadius();
 		elasticAnimation((LPVOID)&m_Info1);
+// 		SetRadius(r);
 		csl.Unlock();
 		
 		m_isShowPercentNum = TRUE;
@@ -210,12 +212,12 @@ void Circle::elasticAnimation(LPVOID LParam)
     _pCircle->gethWnd()->UpdateWindow();
 
 	int dynamicR;
-    for (int i = 0; i < 16; ++i)
+    for (int i = 1; i < 17; ++i)
     {
 		dynamicR = _pCircle->DampingVibration(i, r);
 		_pCircle->readRadius(dynamicR);
 		_pCircle->reDrawWindow();
-        Sleep(15); //調節動畫重畫時是否看得到
+        Sleep(16); //調節動畫重畫時是否看得到
     }
 }
  

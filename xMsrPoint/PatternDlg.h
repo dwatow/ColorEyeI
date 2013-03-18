@@ -113,12 +113,22 @@ private:
     void eventExitDialog();
 
     void setBkColor(ColorRef);
-    void fineNits(BackGroundStatus);
-    void fineNitsPos();
-    void fineNitsNeg();
 
 public:
     void LoadedCartridge(); //¼u§X
+
+
+    //crossTalk
+// private:    
+//             int orderNits;
+//             ColorRef m_bColor;
+//             CRect   m_centerRect;
+//             void setCrsTlkRect(CRect&, ColorRef&);
+//             void DrawCrsTlkRect(CPaintDC& dc);
+//             //nits
+// private:    void Nits_fine(BackGroundStatus);
+//             void Nits_finePos(const int&);
+//             void Nits_fineNeg(const int&);
 };
 
 //{{AFX_INSERT_LOCATION}}

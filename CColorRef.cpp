@@ -6,11 +6,14 @@ ColorRef::ColorRef():m_color(0, 0, 0)
 ColorRef::ColorRef(const int& r, const int& g, const int& b):m_color(r, g, b)
 { checkColor(R(), G(), B()); };
 
-ColorRef::ColorRef(COLORREF clr):m_color(clr)
+ColorRef::ColorRef(const COLORREF& clr):m_color(clr)
 { checkColor(R(), G(), B()); };
 
-COLORREF ColorRef::oRGB() const{ return m_color; };
+ColorRef::ColorRef(const ColorRef& clr):m_color(clr.m_color)
+{ checkColor(R(), G(), B()); }
 
+
+COLORREF ColorRef::oRGB() const{ return m_color; };
 unsigned char ColorRef::R() const{ return GetRValue(m_color); };
 unsigned char ColorRef::G() const{ return GetGValue(m_color); };
 unsigned char ColorRef::B() const{ return GetBValue(m_color); };

@@ -15,7 +15,7 @@ public:
 	void Trans(DNA&, RNA&);
 	int Cm2pixel(const double) const;
 private:
-	COLORREF tranColor(UINT) const;
+	ColorRef tranColor(UINT) const;
 	CPoint   tranPoint(UINT) const;
 	CString  tranDescrip(UINT) const;
 

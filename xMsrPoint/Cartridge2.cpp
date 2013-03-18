@@ -3,24 +3,30 @@
 
 Cartridge2::Cartridge2():
 m_sequenceArea(AA_00), m_sequenceFrom(0),
-m_PointPosition(0, 0), m_BkColor(0, 0, 0),
-m_Description(""), m_bkStatus(BGS_Normal),
-m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
+m_PointPosition(0, 0), m_pBackGorund(0),
+m_Description(""), m_bkStatus(BGS_Normal)
 {}
 
 Cartridge2::Cartridge2(const Cartridge2& _C):
 m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
-m_PointPosition(_C.m_PointPosition), m_BkColor(_C.m_BkColor), m_bkStatus(_C.m_bkStatus),
-m_Description(_C.m_Description), m_Data(_C.m_Data), 
-m_centerRect(_C.m_centerRect), m_bColor(_C.m_bColor)
-{}
+m_PointPosition(_C.m_PointPosition), m_pBackGorund(_C.m_pBackGorund), 
+m_bkStatus(_C.m_bkStatus),
+m_Description(_C.m_Description), m_Data(_C.m_Data)
+{
+}
 
 Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
 m_sequenceArea(AA_00), m_sequenceFrom(0),
-m_PointPosition(pn), m_BkColor(cy), 
-m_Description(""), m_bkStatus(BGS_Normal), 
-m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0)
-{}
+m_PointPosition(pn), m_bkStatus(BGS_Normal), 
+m_Description("")
+{
+	m_pBackGorund = new BkNormal();
+	const int r = cy.R();
+	const int g = cy.G();
+	const int b = cy.B();
+	m_pBackGorund->GetBkColor().iRGB(r, g, b);
+// 	ASSERT(m_pBackGorund->GetBkColor().oRGB() == cy.oRGB());
+}
 
 Cartridge2::~Cartridge2(){}
 
@@ -36,12 +42,10 @@ void Cartridge2::operator= (const Cartridge2& vCar)
     m_sequenceFrom  = vCar.m_sequenceFrom;
     m_sequenceArea  = vCar.m_sequenceArea;
     m_PointPosition = vCar.m_PointPosition;
-	m_BkColor       = vCar.m_BkColor;
+	m_pBackGorund   = vCar.m_pBackGorund;
 	m_bkStatus      = vCar.m_bkStatus;
     m_Data          = vCar.m_Data;
 	m_Description   = vCar.m_Description;
-	m_bColor        = vCar.m_bColor;
-	m_centerRect    = vCar.m_centerRect;
 }
 
 CString Cartridge2::showMe() const
@@ -51,30 +55,10 @@ CString Cartridge2::showMe() const
         m_sequenceFrom, 
         m_sequenceArea, 
         m_PointPosition.x, m_PointPosition.y, 
-        m_BkColor.R(), m_BkColor.G(), m_BkColor.B(),
+        m_pBackGorund->GetBkColor().R(), m_pBackGorund->GetBkColor().G(), m_pBackGorund->GetBkColor().B(),
         !m_Data.isEmpty(), 
         m_Data.GetLastTime());
     return str;
-}
-
-void Cartridge2::setCrsTlkRect(CRect& _rect, ColorRef& clr)
-{
-	//在DNA轉RNA時使用
-	// 	m_centerRect.top    = 10;
-	// 	m_centerRect.bottom = 200;
-	// 	m_centerRect.left   = 10;
-	// 	m_centerRect.right  = 200;
-	// 	m_centerRectBrush.CreateSolidBrush(RGB(0, 0, 255));
-	m_centerRect = _rect;
-	m_bColor = clr;
-}
-
-void Cartridge2::DrawCrsTlkRect(CPaintDC& dc)
-{
-	//在CPatternDlg使用
-	// Cross Talk 的背景色
-	CBrush _brush(m_bColor.oRGB());
-    dc.FillRect(m_centerRect, &_brush);
 }
 
 /*******************************************
@@ -83,7 +67,6 @@ void Cartridge2::DrawCrsTlkRect(CPaintDC& dc)
 
 void Cartridge2::setSqncFrm(UINT _F)
 {
-//	ASSERT(_F > 0);
 	m_sequenceFrom = _F;
 }
 
@@ -94,7 +77,6 @@ UINT Cartridge2::getSqncFrm() const
 
 void Cartridge2::setSqncArea(AreaKind _A)
 {
-//	ASSERT(_A > 0);
 	m_sequenceArea = _A;
 }
 
@@ -126,18 +108,32 @@ CPoint Cartridge2::GetPointPosi() const
 }
 
 void Cartridge2::SetBkColor(ColorRef _C)
+{ m_pBackGorund->SetBkColor(_C); }
+ColorRef Cartridge2::GetBkColor() const
+{ ASSERT(m_pBackGorund);
+	return m_pBackGorund->GetBkColor(); }
+
+void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 {
-	m_BkColor = _C;
+	m_bkStatus = _BGS;
+	if (m_pBackGorund != 0)
+		delete m_pBackGorund;
+	switch(_BGS)
+	{
+	case BGS_CrossTalkWrite:
+		m_pBackGorund = new BkCrossTalk();
+		break;
+	case BGS_Normal:
+		m_pBackGorund = new BkNormal();
+		break;
+	}
 }
 
-ColorRef Cartridge2::GetBkColor() const
-{
-    return m_BkColor;
-}
+BackGroundStatus Cartridge2::GetBkStatus() const
+{ return m_bkStatus; }
 
 void Cartridge2::SetDescrip(CString str)
 {
-//	ASSERT(str.Empty());
 	m_Description = str;
 }
 

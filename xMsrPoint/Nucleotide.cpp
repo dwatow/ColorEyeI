@@ -32,11 +32,18 @@ m_Parameters(PA_Max, -1)
 			m_paraStr.Format("_¶«∂•: %d%s", para1, (para2)?"°ı":"°Ù");
 			break;
 		}
+		if (cy == Dark)
+		{
+			SetPara(PA_FEover, 0);
+			m_paraStr.Format("_∂K√‰");
+			break;
+		}
 
 	case Pn13:
 	case Pn21:
 	case Pn25:
 		SetPara(PA_FEover, para1);
+		if (cy == Dark) SetPara(PA_D25RectSide, para2);
 		if (para1 == 0)
 			m_paraStr.Format("_∂K√‰");
 		else

@@ -6,13 +6,22 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP794E.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC767.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_AFXDLL" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\xMsrPoint\Cartridge2.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
 "D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\ReadBarCodeDialog.cpp"
+"D:\GitHub\ColorEyeI\RNA.cpp"
+"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\TranScripter.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP794E.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP795F.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPC767.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC778.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\Bolt.obj
@@ -59,13 +68,26 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsRA1.obj
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
+.\Debug\BkMaker.obj
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP795F.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPC778.tmp"
 <h3>Output Window</h3>
 Compiling...
+TranScripter.cpp
+Generating Code...
+Compiling...
+Cartridge2.cpp
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+MsrItemDlg.cpp
 PatternDlg.cpp
+ReadBarCodeDialog.cpp
+RNA.cpp
+SelExcelDlg.cpp
+Generating Code...
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP83CC.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP63.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -110,8 +132,9 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP83CC.tmp" with c
 .\Debug\XlsOQC1.sbr
 .\Debug\XlsOQC2.sbr
 .\Debug\XlsRA1.sbr
-.\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP83CC.tmp"
+.\Debug\XlsSEC1.sbr
+.\Debug\BkMaker.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP63.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

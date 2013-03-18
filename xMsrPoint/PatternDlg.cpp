@@ -28,7 +28,8 @@ static char THIS_FILE[] = __FILE__;
 
 
 CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
-    : CDialog(CPatternDlg::IDD, pParent), InitDataType(it)
+: CDialog(CPatternDlg::IDD, pParent), InitDataType(it)
+// m_centerRect(0, 0, 0, 0), m_bColor(0, 0, 0),
 {
     //{{AFX_DATA_INIT(CPatternDlg)
         // NOTE: the ClassWizard will add member initialization here
@@ -144,7 +145,7 @@ void CPatternDlg::OnPaint()
     dc.SetBkMode(OPAQUE);
     dc.SetBkColor(m_BkColor.oRGB());
 
-	m_itor->DrawCrsTlkRect(dc);
+//	DrawCrsTlkRect(dc);
 
 //     if (c_bDrawNextGold) 
 //         m_NextGoal.DrawCircle(dc);
@@ -291,9 +292,9 @@ void CPatternDlg::trigger()
 //     }
     //c_bFind5nits = (m_GunMchn.trigger(it) == TS_Find_Nits)? TRUE : FALSE;
 
-	fineNits(m_itor->GetBkStatus());
+//	Nits_fine(m_itor->GetBkStatus());
+	setBkColor(m_itor->GetBkColor());
 
-	setBkColor(m_BkColor);
 	m_Goal.SetupLabel(m_itor->GetBullet());
  	m_Goal.SetStrColor(m_BkColor.Shift());
 
@@ -574,72 +575,68 @@ void CPatternDlg::setBkColor(ColorRef clr)
     UpdateWindow();
 }
 
-void CPatternDlg::fineNitsPos()
-{
-	int _gl= 60;
-    float fLv = 0;
-//     int Graylevel = 55;
-    while(fLv >  m_itor->GetNitsNum())  //若亮度還沒有到5以下，就減少
-    {
-        _gl -= 2;
-		m_BkColor.iGray(_gl);
-		Invalidate();
-		UpdateWindow();
+// void CPatternDlg::Nits_finePos(const int& specNits)
+// {
+// 	int _gl= 60;//     int Graylevel = 55;
+//     float fLv = 0;
+//     while(fLv >  specNits)  //若亮度還沒有到5以下，就減少
+//     {
+//         _gl -= 2;
+// 		m_BkColor.iGray(_gl);
+// 		Invalidate();
+// 		UpdateWindow();
+//         //量測抓值
+//         if (m_pCA210->Measure() == CA_ZeroCalMode)
+//             MessageBox("檔位不在MEAS");
+//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
+//     }
+// 
+//     while(fLv < specNits)   //若亮度還在5以下，就...變亮
+//     {
+//         ++_gl;
+// 		m_BkColor.iGray(_gl);
+// 		Invalidate();
+// 		UpdateWindow();
+//         Sleep(60);
+// //      量測抓值
+//         m_pCA210->Measure();
+//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
+//     }
+// }
+// 
+// void CPatternDlg::Nits_fineNeg(const int& specNits)
+// {
+//     float fLv = 0;
+// 	int _gl = 55;
+// 
+//     while(fLv < specNits)  //若亮度還沒有到5以下，就減少
+//     {
+//         _gl += 2;
+// 		m_BkColor.iGray(_gl);
+// 		Invalidate();
+// 		UpdateWindow();
+// //        Sleep(0);
+// //        量測抓值
+//         if (m_pCA210->Measure() == CA_ZeroCalMode)
+//             MessageBox("檔位不在MEAS");
+//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
+//     }
+//     
+//     while(fLv > specNits)   //若亮度還在5以下，就...變亮
+//     {
+//         --_gl;
+// 		m_BkColor.iGray(_gl);
+// 		Invalidate();
+// 		UpdateWindow();
+// 		Sleep(60);
+//         //量測抓值
+//         m_pCA210->Measure();
+//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
+//     }
+// }
 
-//        setBkColor(_gl);  //變成m_BkColor
-//        Sleep(0);
-        //量測抓值
-        if (m_pCA210->Measure() == CA_ZeroCalMode)
-            MessageBox("檔位不在MEAS");
-        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-
-    while(fLv < m_itor->GetNitsNum())   //若亮度還在5以下，就...變亮
-    {
-        ++_gl;
-		m_BkColor.iGray(_gl);
-		Invalidate();
-		UpdateWindow();
-        Sleep(60);
-        //量測抓值
-        m_pCA210->Measure();
-        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-}
-
-void CPatternDlg::fineNitsNeg()
-{
-    float fLv = 0;
-	int _gl = 55;
-
-    while(fLv < m_itor->GetNitsNum())  //若亮度還沒有到5以下，就減少
-    {
-        _gl += 2;
-		m_BkColor.iGray(_gl);
-		Invalidate();
-		UpdateWindow();
-//        Sleep(0);
-        //量測抓值
-        if (m_pCA210->Measure() == CA_ZeroCalMode)
-            MessageBox("檔位不在MEAS");
-        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-    
-    while(fLv > m_itor->GetNitsNum())   //若亮度還在5以下，就...變亮
-    {
-        --_gl;
-		m_BkColor.iGray(_gl);
-		Invalidate();
-		UpdateWindow();
-		Sleep(60);
-        //量測抓值
-        m_pCA210->Measure();
-        fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-}
-
-void CPatternDlg::fineNits(BackGroundStatus _BKS)
-{
+// void CPatternDlg::Nits_fine(BackGroundStatus _BKS)
+// {
 
     //夾擊演算法
 //    int glvMax = 255, glvMin = 0;
@@ -651,9 +648,9 @@ void CPatternDlg::fineNits(BackGroundStatus _BKS)
 //         m_pCA210->Measure();
 //         fLv = m_pCA210->GetMsrData().GetLv();
 //         
-//         if( fLv > m_itor->GetNitsNum() )
+//         if( fLv > m_itor->specNits )
 //             glvMax = Graylevel;
-//         else// if (fLv > m_itor->GetNitsNum() )
+//         else// if (fLv > m_itor->specNits )
 //             glvMin = Graylevel;
 //     }
 // 
@@ -661,24 +658,51 @@ void CPatternDlg::fineNits(BackGroundStatus _BKS)
 //     str.Format("max:%d\nmin%d\ngraylv:%d", glvMax, glvMin, Graylevel);
 //     AfxMessageBox(str)
 //	int Graylevel;
-	switch(_BKS)
-	{
-	case BGS_NitsNeg:
-		fineNitsPos();
-		break;
-	case BGS_NitsPos:
-		fineNitsPos();
-		break;
-	case BGS_Normal:
-		break;
-	default:
-		MessageBox("找Nits出問題。");
-	}
-	//執行完顏色會存在m_BkColor
-}
+// 	switch(_BKS)
+// 	{
+// 	case BGS_CrossTalkWrite:
+// 		break;
+// 	case GBS_CrossTalkDark:
+// 		break;
+// 	case BGS_NitsNeg:
+// //		Nits_finePos();
+// 		break;
+// 	case BGS_NitsPos:
+// //		Nits_fineNeg();
+// 		break;
+// 	case BGS_Normal:
+// 		setBkColor(m_BkColor);
+// 		break;
+// 	default:
+// 		MessageBox("找Nits出問題。");
+// 	}
+// 	//執行完顏色會存在m_BkColor
+// }
 
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
     CDialog::OnShowWindow(bShow, nStatus);
     m_pCA210->SetOnline(bShow);    
 }
+
+//////////////////////////////////////////////////////////////////////////
+// void CPatternDlg::setCrsTlkRect(CRect& _rect, ColorRef& clr)
+// {
+// 	//在DNA轉RNA時使用
+// 	// 	m_centerRect.top    = 10;
+// 	// 	m_centerRect.bottom = 200;
+// 	// 	m_centerRect.left   = 10;
+// 	// 	m_centerRect.right  = 200;
+// 	// 	m_centerRectBrush.CreateSolidBrush(RGB(0, 0, 255));
+// 	m_centerRect = _rect;
+// 	m_bColor = clr;
+// }
+// 
+// void CPatternDlg::DrawCrsTlkRect(CPaintDC& dc)
+// {
+// 	//在CPatternDlg使用
+// 	// Cross Talk 的背景色
+// 	CBrush _brush(m_bColor.oRGB());
+//     dc.FillRect(m_centerRect, &_brush);
+// }
+

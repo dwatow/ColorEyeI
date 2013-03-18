@@ -94,6 +94,10 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\BkMaker.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\Bolt.cpp
 # End Source File
 # Begin Source File
@@ -277,6 +281,18 @@ SOURCE=.\SelXls\XlsSEC1.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\BkCrossTalk.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\BkMaker.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\BkNormal.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\xMsrPoint\Bolt.h

@@ -809,23 +809,22 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
         for (unsigned int msrFlowNo = 0; msrFlowNo < msrFrowNoMax; ++msrFlowNo)
         {
             Cartridge2 tempCar;
-
 			//CrsTlk 不需要矩形
-            if ( //m_tranPointer->GetBackColor() == CrsTlk  || 
-                 m_tranPointer->GetBackColor() == CrsTlkD || 
-                 m_tranPointer->GetBackColor() == CrsTlkW )
-            {
-            //    tempCar = new CartridgeCrsTlk();
-                tranForCrsTlk(tempCar, m_tranPointer->GetBackColor());
-            }
+//             if ( //m_tranPointer->GetBackColor() == CrsTlk  || 
+//                  m_tranPointer->GetBackColor() == CrsTlkD || 
+//                  m_tranPointer->GetBackColor() == CrsTlkW )
+//             {
+//             //    tempCar = new CartridgeCrsTlk();
+//                 tranForCrsTlk(tempCar, m_tranPointer->GetBackColor());
+//             }
 //             else
 //                 tempCar = new Cartridge2();
+			tranBkSuatus(tempCar);
 			
             tempCar.SetBkColor(tranColor(msrFlowNo));
             tempCar.SetPointPosi(tranPoint(msrFlowNo));
             
             setSquence(tempCar, _vR.Size(), msrFlowNo);
-            tranBkSuatus(tempCar);
             tempCar.SetDescrip(tranDescrip(msrFlowNo));            
             
             _vR.AddCell(tempCar);
@@ -842,9 +841,14 @@ void TranScripter::tranBkSuatus(Cartridge2& tCar)
 		else if (m_tranPointer->GetPara(PA_NitsDir) == 0) //Pos
 			tCar.SetBkStatus(BGS_NitsPos);
 	}
+	else if (m_tranPointer->GetBackColor() == CrsTlkD)
+		tCar.SetBkStatus(GBS_CrossTalkDark);
+	else if (m_tranPointer->GetBackColor() == CrsTlkW)
+		tCar.SetBkStatus(BGS_CrossTalkWrite);
 	else
 		tCar.SetBkStatus(BGS_Normal);
 }
+
 void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
 {
     int m_fCrsTlkRectFE = m_tranPointer->GetPara(PA_FEover);
@@ -862,40 +866,42 @@ void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
     else if (clrType == CrsTlkW)
         _clr.iRGB(255, 255, 255);
 
-    crtg.setCrsTlkRect(_rect, _clr);
+  crtg.m_pBackGorund->setRect(_rect, _clr);
 }
 
-COLORREF TranScripter::tranColor(UINT flowNo) const
+ColorRef TranScripter::tranColor(UINT flowNo) const
 {
+	ColorRef clr;
     if (m_tranPointer->GetMsrFlowNum() == PnGamma)
         switch(m_tranPointer->GetBackColor())
         {
-            case Red:      return RGB( flowNo,      0,      0);
-            case Green:    return RGB(      0, flowNo,      0);
-            case Blue:     return RGB(      0,      0, flowNo);
+            case Red:      clr.iRGB( flowNo,      0,      0); break;
+            case Green:    clr.iRGB(      0, flowNo,      0); break;
+            case Blue:     clr.iRGB(      0,      0, flowNo); break;
             case White:    
             case Dark:     
-            default:       return RGB( flowNo, flowNo, flowNo);
+            default:       clr.iRGB(flowNo, flowNo, flowNo);
         }
     else
         switch(m_tranPointer->GetBackColor())
         {
-            case White:    return RGB( 255, 255, 255);
-            case Dark:     return RGB(   0,   0,   0);
-            case Red:      return RGB( 255,   0,   0);
-            case Green:    return RGB(   0, 255,   0);
-            case Blue:     return RGB(   0,   0, 255);
-            case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
-            case JNDX:
-            case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
-            case CrsTlk: 
-            case CrsTlkW:
-            case CrsTlkD:  return RGB( 128, 128, 128);
-            default:       return RGB( 192, 212,  49);
+            case White:    clr.iRGB( 255, 255, 255); break;
+            case Dark:     clr.iRGB(   0,   0,   0); break;
+            case Red:      clr.iRGB( 255,   0,   0); break;
+            case Green:    clr.iRGB(   0, 255,   0); break;
+            case Blue:     clr.iRGB(   0,   0, 255); break;
+//             case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
+//             case JNDX:
+//             case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
+//             case CrsTlk: 
+//             case CrsTlkW:
+            case CrsTlkD:  clr.iRGB( 128, 128, 128); break;
+            default:       clr.iRGB( 192, 212,  49);
         }
+	return clr;
 }
 
-CPoint TranScripter::tranPoint(unsigned int flowNo) const
+CPoint TranScripter::tranPoint(UINT flowNo) const
 {
     switch(m_tranPointer->GetMsrFlowNum())
     {
