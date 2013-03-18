@@ -145,7 +145,9 @@ void CPatternDlg::OnPaint()
     dc.SetBkMode(OPAQUE);
     dc.SetBkColor(m_BkColor.oRGB());
 
-//	DrawCrsTlkRect(dc);
+	if (m_itor->m_pBackGorund != 0)
+		m_itor->m_pBackGorund->Draw(dc);
+	//DrawCrsTlkRect(dc);
 
 //     if (c_bDrawNextGold) 
 //         m_NextGoal.DrawCircle(dc);

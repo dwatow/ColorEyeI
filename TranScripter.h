@@ -18,8 +18,9 @@ private:
 	ColorRef tranColor(UINT) const;
 	CPoint   tranPoint(UINT) const;
 	CString  tranDescrip(UINT) const;
+	BackGroundStatus tranBkStatus(UINT few) const;
 
-	void tranForCrsTlk(Cartridge2&, ColorType);
+	void forCrsTlk(Cartridge2&);
 	//DNA to RNA
     CPoint get5nits9Point(UINT few) const;
     CPoint getCrossTalk(UINT few) const;// 6/26·s¼W
@@ -39,6 +40,5 @@ private:
 	void checkPointValue(const int x, const int y = 1) const;
 	void checkPointValue(const double fe, const int cm = 1) const;
 
-	void tranBkSuatus(Cartridge2&);
 };
 #endif

@@ -5,14 +5,18 @@ Cartridge2::Cartridge2():
 m_sequenceArea(AA_00), m_sequenceFrom(0),
 m_PointPosition(0, 0), m_pBackGorund(0),
 m_Description(""), m_bkStatus(BGS_Normal)
-{}
+{
+	SetBkStatus(m_bkStatus);
+}
 
 Cartridge2::Cartridge2(const Cartridge2& _C):
 m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
-m_PointPosition(_C.m_PointPosition), m_pBackGorund(_C.m_pBackGorund), 
+m_PointPosition(_C.m_PointPosition), m_pBackGorund(0), 
 m_bkStatus(_C.m_bkStatus),
 m_Description(_C.m_Description), m_Data(_C.m_Data)
 {
+	SetBkStatus(_C.m_bkStatus);
+	*(m_pBackGorund) = *(_C.m_pBackGorund);
 }
 
 Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
@@ -25,10 +29,13 @@ m_Description("")
 	const int g = cy.G();
 	const int b = cy.B();
 	m_pBackGorund->GetBkColor().iRGB(r, g, b);
-// 	ASSERT(m_pBackGorund->GetBkColor().oRGB() == cy.oRGB());
 }
 
-Cartridge2::~Cartridge2(){}
+Cartridge2::~Cartridge2()
+{ 
+	if (m_pBackGorund != 0)
+		delete m_pBackGorund;
+}
 
 BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 {
@@ -39,10 +46,11 @@ BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 
 void Cartridge2::operator= (const Cartridge2& vCar)
 {
+	SetBkStatus(vCar.m_bkStatus);
+	*(m_pBackGorund) = *(vCar.m_pBackGorund);
     m_sequenceFrom  = vCar.m_sequenceFrom;
     m_sequenceArea  = vCar.m_sequenceArea;
     m_PointPosition = vCar.m_PointPosition;
-	m_pBackGorund   = vCar.m_pBackGorund;
 	m_bkStatus      = vCar.m_bkStatus;
     m_Data          = vCar.m_Data;
 	m_Description   = vCar.m_Description;
@@ -108,10 +116,16 @@ CPoint Cartridge2::GetPointPosi() const
 }
 
 void Cartridge2::SetBkColor(ColorRef _C)
-{ m_pBackGorund->SetBkColor(_C); }
+{
+	ASSERT(m_pBackGorund);
+	m_pBackGorund->SetBkColor(_C); 
+}
+
 ColorRef Cartridge2::GetBkColor() const
-{ ASSERT(m_pBackGorund);
-	return m_pBackGorund->GetBkColor(); }
+{ 
+	ASSERT(m_pBackGorund);
+	return m_pBackGorund->GetBkColor(); 
+}
 
 void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 {
@@ -120,12 +134,15 @@ void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 		delete m_pBackGorund;
 	switch(_BGS)
 	{
+	case BGS_CrossTalkDark:
+		m_pBackGorund = new BkCrossTalk(RGB(0, 0, 0));
+		break;
 	case BGS_CrossTalkWrite:
-		m_pBackGorund = new BkCrossTalk();
+		m_pBackGorund = new BkCrossTalk(RGB(255, 255, 255));
 		break;
 	case BGS_Normal:
+	default:
 		m_pBackGorund = new BkNormal();
-		break;
 	}
 }
 

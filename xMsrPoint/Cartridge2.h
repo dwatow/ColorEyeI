@@ -38,10 +38,10 @@ public:     CPoint    GetPointPosi() const;
 		    void      SetPointPosi(CPoint);
 //­I´º
 private:
-public:    BkMaker*  m_pBackGorund;
-           ColorRef  GetBkColor() const;
+public:     BkMaker*  m_pBackGorund;
+            ColorRef  GetBkColor() const;
 		    void      SetBkColor(ColorRef);
-		//	BkMaker*  getBackGround(){ return m_pBackGorund; };
+
 private:    BackGroundStatus m_bkStatus;
 public:     void      SetBkStatus(BackGroundStatus);
 			BackGroundStatus GetBkStatus() const;

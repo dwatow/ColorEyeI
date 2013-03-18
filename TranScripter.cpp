@@ -810,46 +810,40 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
         {
             Cartridge2 tempCar;
 			//CrsTlk 不需要矩形
-//             if ( //m_tranPointer->GetBackColor() == CrsTlk  || 
-//                  m_tranPointer->GetBackColor() == CrsTlkD || 
-//                  m_tranPointer->GetBackColor() == CrsTlkW )
-//             {
-//             //    tempCar = new CartridgeCrsTlk();
-//                 tranForCrsTlk(tempCar, m_tranPointer->GetBackColor());
-//             }
-//             else
-//                 tempCar = new Cartridge2();
-			tranBkSuatus(tempCar);
-			
+			tempCar.SetBkStatus(tranBkStatus(msrFlowNo));
             tempCar.SetBkColor(tranColor(msrFlowNo));
             tempCar.SetPointPosi(tranPoint(msrFlowNo));
             
             setSquence(tempCar, _vR.Size(), msrFlowNo);
-            tempCar.SetDescrip(tranDescrip(msrFlowNo));            
+			forCrsTlk(tempCar);
             
+            tempCar.SetDescrip(tranDescrip(msrFlowNo));            
             _vR.AddCell(tempCar);
         }
     }
 }
 
-void TranScripter::tranBkSuatus(Cartridge2& tCar)
+BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const
 {
-	if (m_tranPointer->GetBackColor() == Nits && tCar.getSqncFrm() == 1 && tCar.getSqncArea() == AA_01)
+	BackGroundStatus status;
+	ColorType ct = m_tranPointer->GetBackColor();
+	if ( (ct == Nits) && (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) )
 	{
 		if (m_tranPointer->GetPara(PA_NitsDir) == 1) //Neg
-			tCar.SetBkStatus(BGS_NitsNeg);
+			status = BGS_NitsNeg;
 		else if (m_tranPointer->GetPara(PA_NitsDir) == 0) //Pos
-			tCar.SetBkStatus(BGS_NitsPos);
+			status = BGS_NitsPos;
 	}
-	else if (m_tranPointer->GetBackColor() == CrsTlkD)
-		tCar.SetBkStatus(GBS_CrossTalkDark);
-	else if (m_tranPointer->GetBackColor() == CrsTlkW)
-		tCar.SetBkStatus(BGS_CrossTalkWrite);
+	else if (ct == CrsTlkD)
+		status = BGS_CrossTalkDark;
+	else if (ct == CrsTlkW)
+		status = BGS_CrossTalkWrite;
 	else
-		tCar.SetBkStatus(BGS_Normal);
+		status = BGS_Normal;
+	return status;
 }
 
-void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
+void TranScripter::forCrsTlk(Cartridge2& crtg)
 {
     int m_fCrsTlkRectFE = m_tranPointer->GetPara(PA_FEover);
     ASSERT(m_fCrsTlkRectFE > 0);
@@ -860,13 +854,14 @@ void TranScripter::tranForCrsTlk(Cartridge2& crtg, ColorType clrType)
                    (long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
                    (long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
 
-    ColorRef _clr;
-    if (clrType == CrsTlkD)
+	ColorRef _clr;
+    ColorType ct = m_tranPointer->GetBackColor();
+    if (ct == CrsTlkD)
         _clr.iRGB(0, 0, 0);
-    else if (clrType == CrsTlkW)
+    else if (ct = CrsTlkW)
         _clr.iRGB(255, 255, 255);
 
-  crtg.m_pBackGorund->setRect(_rect, _clr);
+    crtg.m_pBackGorund->setRect(_rect, _clr);
 }
 
 ColorRef TranScripter::tranColor(UINT flowNo) const
@@ -890,11 +885,11 @@ ColorRef TranScripter::tranColor(UINT flowNo) const
             case Red:      clr.iRGB( 255,   0,   0); break;
             case Green:    clr.iRGB(   0, 255,   0); break;
             case Blue:     clr.iRGB(   0,   0, 255); break;
-//             case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
-//             case JNDX:
-//             case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
-//             case CrsTlk: 
-//             case CrsTlkW:
+            case Nits:     return m_tranPointer->GetPara(PA_NitsNum);
+            case JNDX:
+            case JND:      return m_tranPointer->GetPara(PA_JndGrayLv);
+            case CrsTlk: 
+            case CrsTlkW:
             case CrsTlkD:  clr.iRGB( 128, 128, 128); break;
             default:       clr.iRGB( 192, 212,  49);
         }

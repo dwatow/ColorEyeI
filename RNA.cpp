@@ -13,7 +13,8 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-#ifdef _DEBUG
+
+#ifdef _DEBUG2
 #define debugCode( code_fragment ) { code_fragment }
 #else
 #define debugCode( code_fragment )
@@ -268,17 +269,17 @@ void RNA::CutEqualCell(RNA compData)
             debugCode(
                 str.Format("A. %x\n", removeItor);
                 m_dTxt.push_back(str);
-                )
+            )
         //m_CarChain2.erase(removeItor, End());
         }
         
         m_CarChain2.erase(removeItor, End());
-        
+
         debugCode(
             m_dTxt.push_back("\nRNA後來的位址\n");
             
-            for (rnaitor  = m_CarChain2.begin();
-            rnaitor != m_CarChain2.end(); ++rnaitor)
+            for (rnaitor = m_CarChain2.begin();
+                 rnaitor != m_CarChain2.end(); ++rnaitor)
             {
                 str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
                     rnaitor,\

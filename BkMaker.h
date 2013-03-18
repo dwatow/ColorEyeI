@@ -2,7 +2,7 @@
 #define BKMAKER_H
 
 #include "CColorRef.h"
-enum BackGroundStatus{BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, GBS_CrossTalkDark};
+enum BackGroundStatus{BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark};
 
 class BkMaker
 {
@@ -18,7 +18,7 @@ virtual void Draw(CPaintDC& dc) = 0;
 
 };
 
-inline BkMaker::BkMaker()
+inline BkMaker::BkMaker(): m_BkColor(0)
 {}
 
 inline BkMaker::BkMaker(const BkMaker& bkN)
