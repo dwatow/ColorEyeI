@@ -809,15 +809,17 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
         for (unsigned int msrFlowNo = 0; msrFlowNo < msrFrowNoMax; ++msrFlowNo)
         {
             Cartridge2 tempCar;
-			//CrsTlk 不需要矩形
 			tempCar.SetBkStatus(tranBkStatus(msrFlowNo));
             tempCar.SetBkColor(tranColor(msrFlowNo));
             tempCar.SetPointPosi(tranPoint(msrFlowNo));
             
             setSquence(tempCar, _vR.Size(), msrFlowNo);
-			forCrsTlk(tempCar);
+// 			forCrsTlk(tempCar);
             
-            tempCar.SetDescrip(tranDescrip(msrFlowNo));            
+            tempCar.SetDescrip(tranDescrip(msrFlowNo));
+
+			forCrsTlk(tempCar);
+
             _vR.AddCell(tempCar);
         }
     }

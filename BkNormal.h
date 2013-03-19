@@ -10,8 +10,10 @@ public:
 	BkNormal(const BkNormal& bkN);
 	ColorRef  GetBkColor() const;
     void      SetBkColor(ColorRef);
-	void setRect(CRect& _rect, ColorRef& clr){};
-	void Draw(CPaintDC& dc){};
+    void setRect(CRect& _rect, ColorRef& clr){};
+    void setRect(CRect& _rect){};
+    void setRect(ColorRef& clr){};
+    void Draw(CPaintDC& dc){};
 };
 
 inline BkNormal::BkNormal()

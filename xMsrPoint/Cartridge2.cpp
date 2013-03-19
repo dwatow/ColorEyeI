@@ -17,6 +17,7 @@ m_Description(_C.m_Description), m_Data(_C.m_Data)
 {
 	SetBkStatus(_C.m_bkStatus);
 	*(m_pBackGorund) = *(_C.m_pBackGorund);
+// 	CRect rect1 = m_pBackGorund->, rect2;
 }
 
 Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):

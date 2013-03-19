@@ -8,12 +8,16 @@ class BkMaker
 {
 protected:
 	ColorRef m_BkColor;
+	CRect     m_centerRect;  //放在之才讀得到？見鬼了！
+	ColorRef  m_rectColor;  //放在之才讀得到？見鬼了！
 public:    
 	BkMaker();
 	BkMaker(const BkMaker& bkN);
 virtual ColorRef  GetBkColor() const = 0;
 virtual void      SetBkColor(ColorRef) = 0;
 virtual void setRect(CRect& _rect, ColorRef& clr) = 0;
+virtual void setRect(CRect& _rect) = 0;
+virtual void setRect(ColorRef& clr) = 0;
 virtual void Draw(CPaintDC& dc) = 0;
 
 };

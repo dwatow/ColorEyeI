@@ -6,8 +6,6 @@
 class BkCrossTalk : public BkMaker
 {
 	/*private:*/
-	CRect     m_centerRect;
-	ColorRef  m_rectColor;
 public:	
 	BkCrossTalk(ColorRef);
 	BkCrossTalk(const BkCrossTalk& bkN);
@@ -29,9 +27,9 @@ inline BkCrossTalk::BkCrossTalk(ColorRef clr)
 
 inline BkCrossTalk::BkCrossTalk(const BkCrossTalk& bkN)
 {
-	m_rectColor = bkN.m_rectColor;
+	m_rectColor  = bkN.m_rectColor;
 	m_centerRect = bkN.m_centerRect;
-	m_BkColor = bkN.m_BkColor;
+	m_BkColor    = bkN.m_BkColor;
 }
 
 inline ColorRef BkCrossTalk::GetBkColor() const
