@@ -8,29 +8,28 @@ class BkNormal : public BkMaker
 public:
 	BkNormal();
 	BkNormal(const BkNormal& bkN);
-	ColorRef  GetBkColor() const;
-    void      SetBkColor(ColorRef);
-    void setRect(CRect& _rect, ColorRef& clr){};
-    void setRect(CRect& _rect){};
-    void setRect(ColorRef& clr){};
+    void SetRect(const CRect& _rect, const ColorRef& clr){};
     void Draw(CPaintDC& dc){};
+	void setRect(const CRect& _rect){};
+	void setRect(const ColorRef& clr){};
+	CRect getRect() const{ return m_centerRect;};
+	ColorRef getRectColor() const{ return m_rectColor; };
+
+	ColorRef nits2color(){ return GetBkColor(); };
+	void setWnd(CWnd* cWnd){};
+	void setCa(Ca210* pCa){};
+
 };
 
 inline BkNormal::BkNormal()
-{}
+{
+	ColorRef clr(0, 0, 0);
+	SetBkColor(clr);
+}
 
 inline BkNormal::BkNormal(const BkNormal& bkN)
 {
-	m_BkColor = bkN.m_BkColor;
+	SetBkColor(bkN.GetBkColor());
 }
 
-inline ColorRef BkNormal::GetBkColor() const
-{
-	return m_BkColor;
-}
-
-inline void BkNormal::SetBkColor(ColorRef _CLR)
-{
-	m_BkColor = _CLR;
-}
 #endif

@@ -8,7 +8,7 @@ enum ParaOfPara{ PA_FEover = 0, PA_FEnum, PA_D25RectSide, PA_NitsNum, PA_NitsDir
 class Nucleotide
 {
 //    UINT      m_MsrPointType;//處理參數的方式
-
+//	Nucleotide(){};
 public:
 	Nucleotide(ColorType _C = NoColor, PointNum _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
     ~Nucleotide();

@@ -6,33 +6,33 @@
  *  Define PointSet Class member function  *
  *******************************************/
 
-Nucleotide::Nucleotide(ColorType cy, PointNum pn, int para1, int para2, int para3):
-m_BkColor(cy), m_MsrFlowNum(pn),
+Nucleotide::Nucleotide(ColorType _C, PointNum _P, int _N1, int _N2, int _N3):
+m_BkColor(_C), m_MsrFlowNum(_P),
 m_Parameters(PA_Max, -1)
 {
 	//參數填入機制
-	switch (pn)
+	switch (_P)
 	{
 	case PnGamma:
-		SetPara(PA_GmaBegin, para1);
-		SetPara(PA_GmaEnd,   para2);
-		SetPara(PA_GmaAvg,   para3);
-		m_paraStr.Format("_%d~%d, 平分%d", para1, para2, para3);
+		SetPara(PA_GmaBegin, _N1);
+		SetPara(PA_GmaEnd,   _N2);
+		SetPara(PA_GmaAvg,   _N3);
+		m_paraStr.Format("_%d~%d, 平分%d", _N1, _N2, _N3);
 		break;
 	//有離邊
 	case Pn4:
-		if (cy != CrsTlk && cy != CrsTlkD && cy != CrsTlkW)
+		if (_C != CrsTlk && _C != CrsTlkD && _C != CrsTlkW)
 			break;
 	case Pn5:
 	case Pn9:
-		if (cy == Nits)
+		if (_C == Nits)
 		{
-			SetPara(PA_NitsNum, para1);
-			SetPara(PA_NitsDir, para2); 
-			m_paraStr.Format("_灰階: %d%s", para1, (para2)?"↓":"↑");
+			SetPara(PA_NitsNum, _N1);
+			SetPara(PA_NitsDir, _N2); 
+			m_paraStr.Format("_灰階: %d%s", _N1, (_N2)?"↓":"↑");
 			break;
 		}
-		if (cy == Dark)
+		if (_C == Dark)
 		{
 			SetPara(PA_FEover, 0);
 			m_paraStr.Format("_貼邊");
@@ -42,27 +42,26 @@ m_Parameters(PA_Max, -1)
 	case Pn13:
 	case Pn21:
 	case Pn25:
-		SetPara(PA_FEover, para1);
-		if (cy == Dark) SetPara(PA_D25RectSide, para2);
-		if (para1 == 0)
+		SetPara(PA_FEover, _N1);
+		if (_C == Dark) SetPara(PA_D25RectSide, _N2);
+		if (_N1 == 0)
 			m_paraStr.Format("_貼邊");
 		else
-			m_paraStr.Format("_離邊: 1/%d", para1);
+			m_paraStr.Format("_離邊: 1/%d", _N1);
 		break;
 	//無離邊
 	//沒有特別定義，就成為空字串
 
 	case Pn1:
-		if (cy == JND || cy == JNDX)
+		if (_C == JND || _C == JNDX)
 		{
-			SetPara(PA_JndGrayLv, para1); 
-			m_paraStr.Format("_灰階: %d", para1);
+			SetPara(PA_JndGrayLv, _N1); 
+			m_paraStr.Format("_灰階: %d", _N1);
 			break;
 		}
 	case Pn49:
 	default:
 		m_paraStr.Empty();
-
 	}
 }
 

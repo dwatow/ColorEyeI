@@ -94,10 +94,6 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\BkMaker.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\xMsrPoint\Bolt.cpp
 # End Source File
 # Begin Source File
@@ -288,6 +284,10 @@ SOURCE=.\BkCrossTalk.h
 # Begin Source File
 
 SOURCE=.\BkMaker.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\BkNits.h
 # End Source File
 # Begin Source File
 

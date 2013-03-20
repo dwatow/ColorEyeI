@@ -142,7 +142,8 @@ protected:
     DECLARE_INTERFACE_MAP()
 private:
 	void listBoxUpdate();
-	void selMsrItem2DNA();
+	void selMsrItem2DNA_sortable();
+	void selMsrItem2DNA_Unsortable();
 	void rememberSelMsrItems();
 };
 

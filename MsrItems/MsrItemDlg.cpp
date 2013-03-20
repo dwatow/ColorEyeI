@@ -38,7 +38,7 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     ASSERT_VALID(pApp);
 
     m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
-	m_desktopPath.Format("%s", pApp->GetDesktopPath());
+    m_desktopPath.Format("%s", pApp->GetDesktopPath());
     
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
@@ -224,28 +224,28 @@ void CMsrItemDlg::listBoxUpdate()
         for (std::vector<Cartridge2>::iterator itor = m_RNA.Begin(); itor != m_RNA.End(); ++itor)
         {
             m_lstMsrItems.AddString(itor->GetDescrip());
-			DebugCode(m_dTxt.push_back(itor->showMe());)
+            DebugCode(m_dTxt.push_back(itor->showMe());)
         }
 
 DebugCode(
-	CTxtFile fTxt;
-    CFileException fx;
-    fTxt.Save(m_desktopPath+"//DNA.log", fx);
-    fTxt.iTxtData(m_dTxt);
-    fTxt.Close();
-)
+        CTxtFile fTxt;
+        CFileException fx;
+        fTxt.Save(m_desktopPath+"//DNA.log", fx);
+        fTxt.iTxtData(m_dTxt);
+        fTxt.Close();
+    )
 }
 
-void CMsrItemDlg::selMsrItem2DNA()
+void CMsrItemDlg::selMsrItem2DNA_sortable()
 {
     //準備DNA
     //填入參數
     //JND
     if (m_chkJND.GetState())
-	{
-		m_DNA.AddCell(JNDX , Pn1, m_JndGray);
-		m_DNA.AddCell(JND , Pn1, m_JndGray);
-	}
+    {
+        m_DNA.AddCell(JNDX , Pn1, m_JndGray);
+        m_DNA.AddCell(JND , Pn1, m_JndGray);
+    }
     
     //中心點
     if (m_chkCWP1.GetState())  m_DNA.AddCell(White, Pn1);
@@ -298,23 +298,30 @@ void CMsrItemDlg::selMsrItem2DNA()
     if (m_chkCGP49.GetState())    m_DNA.AddCell(Green, Pn49);
     if (m_chkCBP49.GetState())    m_DNA.AddCell(Blue , Pn49);
     if (m_chkCDP49.GetState())    m_DNA.AddCell(Dark , Pn49);
-    //排序
-    //     if (m_chkQuickMsr.GetState())    pDoc->GetMsrDataChain().SortQuackMsr();
-    //     else                             pDoc->GetMsrDataChain().SortOrigMsr();
     
+    DebugCode(
+    m_dTxt.clear();
+    for (std::vector<Nucleotide>::iterator Nit = m_DNA.Begin(); Nit != m_DNA.End(); ++Nit)
+        m_dTxt.push_back(Nit->showMe());
+    )
+}
+
+void CMsrItemDlg::selMsrItem2DNA_Unsortable()
+{
     //Cross Talk srot by AreaCode
     if (m_chkCrossTalk.GetState())
-	{
-		m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
-		m_DNA.AddCell(CrsTlkD, Pn4, m_fCrsTlkRectFE);  
-		m_DNA.AddCell(CrsTlkW, Pn4, m_fCrsTlkRectFE);  
-	}
+    {
+        m_DNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+        m_DNA.AddCell(CrsTlkD, Pn4, m_fCrsTlkRectFE);  
+        m_DNA.AddCell(CrsTlkW, Pn4, m_fCrsTlkRectFE);  
+    }
     
     if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
-                                 m_DNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
+        m_DNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
     if (m_chkCRGM.GetState())    m_DNA.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
     if (m_chkCGGM.GetState())    m_DNA.AddCell(Green, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Green, PnGamma);
     if (m_chkCBGM.GetState())    m_DNA.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
+    
 
     DebugCode(
     m_dTxt.clear();
@@ -328,11 +335,19 @@ void CMsrItemDlg::OnButtonAdd()
     //執行連到了這
     //1. CA-210已連線
     //2. CA-210已宣告
-    selMsrItem2DNA();
+    selMsrItem2DNA_sortable();
 
     TranScripter Ts;
     if (m_DNA.Size()) Ts.Trans(m_DNA, m_RNA);
-	m_DNA.Empty();
+    m_DNA.Empty();
+
+    //排序
+    if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
+    else                                 m_RNA.SortOrigMsr();
+
+    selMsrItem2DNA_Unsortable();
+    if (m_DNA.Size()) Ts.Trans(m_DNA, m_RNA);
+    m_DNA.Empty();
 
     listBoxUpdate();
 }
@@ -354,7 +369,6 @@ void CMsrItemDlg::OnButtonDel()
 
     //只是更新
     listBoxUpdate();
-
 }
 
 BOOL CMsrItemDlg::OnInitDialog() 
@@ -397,15 +411,15 @@ BOOL CMsrItemDlg::OnInitDialog()
 void CMsrItemDlg::OnOK() 
 {
     // TODO: Add extra validation here
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-	pDoc->UpdateDocRNA(m_RNA);
+    pDoc->UpdateDocRNA(m_RNA);
 
-	rememberSelMsrItems();
+    rememberSelMsrItems();
 }
 
 void CMsrItemDlg::rememberSelMsrItems()

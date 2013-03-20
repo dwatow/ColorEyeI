@@ -31,8 +31,6 @@ public:
     void CutEqualCell(RNA );
 //    void CutEqualCell(std::vector<Cartridge2> );
 //    void Grow(ColorType ct, PointNum pn);
-//    void SortQuackMsr();
-//    void SortOrigMsr();
 //    void freeEmptyCell();
 // 	  void SetBolt(Bolt *_P){ p_Pusher = _P; };
 // 	  Bolt* GetBolt(){ return p_Pusher; };
@@ -64,19 +62,24 @@ public:
  		std::vector<Cartridge2>::const_iterator _F, 
  		std::vector<Cartridge2>::const_iterator _L);
      void AddCell(const Cartridge2& _X);
-	//sorting
+
+//sorting
+public:
+	 void SortQuackMsr();
+	 void SortOrigMsr();
 private:
-// 	static bool AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
-// 	static bool OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
+	static bool AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
+	static bool OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
 // 	void SortQuackMsr(std::vector<Cartridge2>& vCar) const;
 // 	void SortOrigMsr (std::vector<Cartridge2>& vCar) const;
-	//operator
+	
+//operator
 public:
  	void operator+(const Cartridge2&  _X);
 // 	void operator+(      RNA& _X) { AddCell(m_CarChain2.end(), _X.Begin(), _X.End()); };
 	////
 	//debug
-public:
+// public:
 //	std::vector<CString> InsideData();
 };
 

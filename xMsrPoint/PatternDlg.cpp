@@ -281,6 +281,9 @@ void CPatternDlg::LoadedCartridge()
 void CPatternDlg::trigger()
 {
     c_bGoalPercent = FALSE;
+	m_itor->m_pBackGorund->setWnd(GetActiveWindow());
+	m_itor->m_pBackGorund->setCa(m_pCA210);
+
     //目前這一點是不是5nits的中心點？2=是
 //     TrigStatus ts(TS_Normal);
 //     ts = m_GunMchn.Trigger(it);
@@ -577,109 +580,7 @@ void CPatternDlg::setBkColor(ColorRef clr)
     UpdateWindow();
 }
 
-// void CPatternDlg::Nits_finePos(const int& specNits)
-// {
-// 	int _gl= 60;//     int Graylevel = 55;
-//     float fLv = 0;
-//     while(fLv >  specNits)  //若亮度還沒有到5以下，就減少
-//     {
-//         _gl -= 2;
-// 		m_BkColor.iGray(_gl);
-// 		Invalidate();
-// 		UpdateWindow();
-//         //量測抓值
-//         if (m_pCA210->Measure() == CA_ZeroCalMode)
-//             MessageBox("檔位不在MEAS");
-//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-//     }
-// 
-//     while(fLv < specNits)   //若亮度還在5以下，就...變亮
-//     {
-//         ++_gl;
-// 		m_BkColor.iGray(_gl);
-// 		Invalidate();
-// 		UpdateWindow();
-//         Sleep(60);
-// //      量測抓值
-//         m_pCA210->Measure();
-//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-//     }
-// }
-// 
-// void CPatternDlg::Nits_fineNeg(const int& specNits)
-// {
-//     float fLv = 0;
-// 	int _gl = 55;
-// 
-//     while(fLv < specNits)  //若亮度還沒有到5以下，就減少
-//     {
-//         _gl += 2;
-// 		m_BkColor.iGray(_gl);
-// 		Invalidate();
-// 		UpdateWindow();
-// //        Sleep(0);
-// //        量測抓值
-//         if (m_pCA210->Measure() == CA_ZeroCalMode)
-//             MessageBox("檔位不在MEAS");
-//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-//     }
-//     
-//     while(fLv > specNits)   //若亮度還在5以下，就...變亮
-//     {
-//         --_gl;
-// 		m_BkColor.iGray(_gl);
-// 		Invalidate();
-// 		UpdateWindow();
-// 		Sleep(60);
-//         //量測抓值
-//         m_pCA210->Measure();
-//         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-//     }
-// }
 
-// void CPatternDlg::Nits_fine(BackGroundStatus _BKS)
-// {
-
-    //夾擊演算法
-//    int glvMax = 255, glvMin = 0;
-
-//     while ((glvMax - glvMin) > 2)
-//     {
-//         Graylevel = (glvMax + glvMin)/2;
-//         setBkColor(Graylevel);
-//         m_pCA210->Measure();
-//         fLv = m_pCA210->GetMsrData().GetLv();
-//         
-//         if( fLv > m_itor->specNits )
-//             glvMax = Graylevel;
-//         else// if (fLv > m_itor->specNits )
-//             glvMin = Graylevel;
-//     }
-// 
-//     CString str;
-//     str.Format("max:%d\nmin%d\ngraylv:%d", glvMax, glvMin, Graylevel);
-//     AfxMessageBox(str)
-//	int Graylevel;
-// 	switch(_BKS)
-// 	{
-// 	case BGS_CrossTalkWrite:
-// 		break;
-// 	case GBS_CrossTalkDark:
-// 		break;
-// 	case BGS_NitsNeg:
-// //		Nits_finePos();
-// 		break;
-// 	case BGS_NitsPos:
-// //		Nits_fineNeg();
-// 		break;
-// 	case BGS_Normal:
-// 		setBkColor(m_BkColor);
-// 		break;
-// 	default:
-// 		MessageBox("找Nits出問題。");
-// 	}
-// 	//執行完顏色會存在m_BkColor
-// }
 
 void CPatternDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {

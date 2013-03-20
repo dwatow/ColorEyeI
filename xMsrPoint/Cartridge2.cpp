@@ -15,22 +15,21 @@ m_PointPosition(_C.m_PointPosition), m_pBackGorund(0),
 m_bkStatus(_C.m_bkStatus),
 m_Description(_C.m_Description), m_Data(_C.m_Data)
 {
-	SetBkStatus(_C.m_bkStatus);
+	SetBkStatus(_C.GetBkStatus());
 	*(m_pBackGorund) = *(_C.m_pBackGorund);
-// 	CRect rect1 = m_pBackGorund->, rect2;
 }
 
-Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
-m_sequenceArea(AA_00), m_sequenceFrom(0),
-m_PointPosition(pn), m_bkStatus(BGS_Normal), 
-m_Description("")
-{
-	m_pBackGorund = new BkNormal();
-	const int r = cy.R();
-	const int g = cy.G();
-	const int b = cy.B();
-	m_pBackGorund->GetBkColor().iRGB(r, g, b);
-}
+// Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
+// m_sequenceArea(AA_00), m_sequenceFrom(0),
+// m_PointPosition(pn), m_bkStatus(BGS_CrossTalkDark), 
+// m_Description("")
+// {
+// 	m_pBackGorund = new BkNormal();
+// 	const int r = cy.R();
+// 	const int g = cy.G();
+// 	const int b = cy.B();
+// 	m_pBackGorund->GetBkColor().iRGB(r, g, b);
+// }
 
 Cartridge2::~Cartridge2()
 { 
@@ -41,7 +40,8 @@ Cartridge2::~Cartridge2()
 BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 {
     return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
-		   (  GetBkColor()   == vCar2.GetBkColor()  )
+		   (  GetBkColor()   == vCar2.GetBkColor()  ) &&
+		   (  GetBkStatus()  == vCar2.GetBkStatus() )
 		   ) ? TRUE : FALSE;
 };
 
@@ -60,11 +60,12 @@ void Cartridge2::operator= (const Cartridge2& vCar)
 CString Cartridge2::showMe() const
 {
     CString str;
-    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BeHaveData(%d), %s\n", \
+    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BkStatus: %s, BeHaveData(%d), %s\n", \
         m_sequenceFrom, 
         m_sequenceArea, 
         m_PointPosition.x, m_PointPosition.y, 
         m_pBackGorund->GetBkColor().R(), m_pBackGorund->GetBkColor().G(), m_pBackGorund->GetBkColor().B(),
+		GetStrBkStatus(), 
         !m_Data.isEmpty(), 
         m_Data.GetLastTime());
     return str;
@@ -149,6 +150,33 @@ void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 
 BackGroundStatus Cartridge2::GetBkStatus() const
 { return m_bkStatus; }
+
+CString Cartridge2::GetStrBkStatus() const
+{
+	//{BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark };
+	CString str;
+	switch(m_bkStatus)
+	{
+	case BGS_Normal:
+		str.Format("單色背景");
+		break;
+	case BGS_NitsPos:
+		str.Format("追縱Nits略高背景");
+		break;
+	case BGS_NitsNeg:
+		str.Format("追縱Nits略低背景");
+		break;
+	case BGS_CrossTalkWrite:
+		str.Format("Cross Talk+白矩形背景");
+		break;
+	case BGS_CrossTalkDark:
+		str.Format("Cross Talk+黑矩形背景");
+		break;
+	default:
+		str.Format("不該出現的無定義背景");
+	}
+	return m_bkStatus; 
+}
 
 void Cartridge2::SetDescrip(CString str)
 {

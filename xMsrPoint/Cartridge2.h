@@ -12,6 +12,7 @@
 //Bolt 槍機
 //Bullet 彈頭
 //Cartridge2 子彈
+enum BackGroundStatus{BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark };
 
 /***************************************
  *    Define Belt Class member function*
@@ -22,7 +23,7 @@ class Cartridge2
 public:
     Cartridge2();
 	Cartridge2(const Cartridge2&);
-    Cartridge2(const ColorRef& , const CPoint& );
+//     Cartridge2(const ColorRef& , const CPoint& );
     virtual  ~Cartridge2();
 //表格順序
 private:    UINT m_sequenceFrom;
@@ -45,6 +46,7 @@ public:     BkMaker*  m_pBackGorund;
 private:    BackGroundStatus m_bkStatus;
 public:     void      SetBkStatus(BackGroundStatus);
 			BackGroundStatus GetBkStatus() const;
+			CString   GetStrBkStatus() const;
 //資料
 private:    Bullet    m_Data;
 public:     Bullet    GetBullet() const;

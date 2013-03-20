@@ -23,15 +23,15 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////////
 //sort
 
-// bool RNA::AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
-// {
-//     return (sp1.getSqncArea() < sp2.getSqncArea()) ? 1 : 0;
-// }
-// 
-// bool RNA::OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
-// {
-//     return (sp1.getSqncFrm() < sp2.getSqncFrm()) ? 1 : 0;
-// }
+bool RNA::AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
+{
+    return (sp1.getSqncArea() < sp2.getSqncArea()) ? 1 : 0;
+}
+
+bool RNA::OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
+{
+    return (sp1.getSqncFrm() < sp2.getSqncFrm()) ? 1 : 0;
+}
 
 
 // void RNA::SortQuackMsr(std::vector<Cartridge2>& vCar) const
@@ -43,16 +43,16 @@ static char THIS_FILE[]=__FILE__;
 // {
 //     std::stable_sort(vCar.begin(), vCar.end(), OrigPriority);
 // }
-// 
-// void RNA::SortQuackMsr()
-// {
-//     std::stable_sort(Begin(), End(), AreaPriority);
-// }
-// 
-// void RNA::SortOrigMsr()
-// {
-//     std::stable_sort(Begin(), End(), OrigPriority);
-// }
+
+void RNA::SortQuackMsr()
+{
+    std::stable_sort(Begin(), End(), AreaPriority);
+}
+
+void RNA::SortOrigMsr()
+{
+    std::stable_sort(Begin(), End(), OrigPriority);
+}
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

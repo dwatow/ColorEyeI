@@ -15,12 +15,12 @@ Class3=CAboutDlg
 Class4=CMsrItemsDlgAutoProxy
 
 ResourceCount=5
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_MSRITEMS_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_PATTERN_DIALOG
+Resource3=IDD_ABOUTBOX
 Class5=CMsrItemDlg
 Class6=CStaticText
-Resource4=IDD_MSRITEMS_DIALOG
+Resource4=IDD_PATTERN_DIALOG
 Resource5=IDD_MSR_ITEM
 
 [CLS:CMsrItemsApp]
@@ -99,7 +99,7 @@ HeaderFile=MsrItemDlg.h
 ImplementationFile=MsrItemDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CMsrItemDlg
+LastObject=IDC_BUTTON_ADD
 VirtualFilter=dWC
 
 [CLS:CStaticText]
