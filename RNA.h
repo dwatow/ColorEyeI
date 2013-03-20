@@ -58,7 +58,7 @@ public:
  	std::vector<Cartridge2>::size_type      Size() const;
 // 	
 //     std::vector<Cartridge2>& operator=(const std::vector<Cartridge2>&);
-     void AddCell(std::vector<Cartridge2>::iterator _P, 
+     void AddCell(//std::vector<Cartridge2>::iterator _P, 
  		std::vector<Cartridge2>::const_iterator _F, 
  		std::vector<Cartridge2>::const_iterator _L);
      void AddCell(const Cartridge2& _X);
@@ -92,10 +92,10 @@ inline const Cartridge2& RNA::At(std::vector<Cartridge2>::size_type _P) const
 inline BOOL RNA::IsEmpty() const
 { return (m_CarChain2.size() <= 1) ? TRUE : FALSE; };
 
-inline void RNA::AddCell(std::vector<Cartridge2>::iterator _P, 
+inline void RNA::AddCell(//std::vector<Cartridge2>::iterator _P, 
 						 std::vector<Cartridge2>::const_iterator _F, 
 						 std::vector<Cartridge2>::const_iterator _L)
-{ m_CarChain2.insert(_P, _F, _L); };
+{ m_CarChain2.insert(End(), _F, _L); };
 inline void RNA::AddCell(const Cartridge2& _X)
 { m_CarChain2.push_back(_X);      };
 

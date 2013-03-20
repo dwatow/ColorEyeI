@@ -24,6 +24,7 @@ public:
 
 inline BkCrossTalk::BkCrossTalk(ColorRef clr)
 {
+	BkMaker::BkMaker();
 	setRect(clr);
 	clr.iGray(128);
 	SetBkColor(clr);
@@ -31,6 +32,7 @@ inline BkCrossTalk::BkCrossTalk(ColorRef clr)
 
 inline BkCrossTalk::BkCrossTalk(const BkCrossTalk& bkN)
 {
+	BkMaker::BkMaker();
 	setRect(bkN.getRect());
 	setRect(bkN.getRectColor());
 	SetBkColor(bkN.GetBkColor());

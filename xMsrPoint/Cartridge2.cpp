@@ -19,18 +19,6 @@ m_Description(_C.m_Description), m_Data(_C.m_Data)
 	*(m_pBackGorund) = *(_C.m_pBackGorund);
 }
 
-// Cartridge2::Cartridge2(const ColorRef& cy, const CPoint& pn):
-// m_sequenceArea(AA_00), m_sequenceFrom(0),
-// m_PointPosition(pn), m_bkStatus(BGS_CrossTalkDark), 
-// m_Description("")
-// {
-// 	m_pBackGorund = new BkNormal();
-// 	const int r = cy.R();
-// 	const int g = cy.G();
-// 	const int b = cy.B();
-// 	m_pBackGorund->GetBkColor().iRGB(r, g, b);
-// }
-
 Cartridge2::~Cartridge2()
 { 
 	if (m_pBackGorund != 0)
@@ -136,6 +124,12 @@ void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 		delete m_pBackGorund;
 	switch(_BGS)
 	{
+// 	case BGS_NitsPos:
+// 		m_pBackGorund = new BkNits();
+// 		break;
+// 	case BGS_NitsNeg:
+// 		m_pBackGorund = new BkNits();
+// 		break;
 	case BGS_CrossTalkDark:
 		m_pBackGorund = new BkCrossTalk(RGB(0, 0, 0));
 		break;
@@ -175,7 +169,7 @@ CString Cartridge2::GetStrBkStatus() const
 	default:
 		str.Format("不該出現的無定義背景");
 	}
-	return m_bkStatus; 
+	return str; 
 }
 
 void Cartridge2::SetDescrip(CString str)

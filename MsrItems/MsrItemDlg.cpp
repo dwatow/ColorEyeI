@@ -33,13 +33,11 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CMsrItemDlg::IDD, pParent)
 {
     EnableAutomation();
+	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+	ASSERT_VALID(pApp);
 
-    CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
-    ASSERT_VALID(pApp);
-
-    m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
-    m_desktopPath.Format("%s", pApp->GetDesktopPath());
-    
+               m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
+	DebugCode( m_desktopPath.Format("%s", pApp->GetDesktopPath()); )
     //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
     m_nGM2 = 255;

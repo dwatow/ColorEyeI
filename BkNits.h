@@ -24,12 +24,14 @@ public:
 
 inline BkNits::BkNits(const int& nits, const NitsType& nt)
 {
+	BkMaker::BkMaker();
 	m_Nits = nits;
 	m_Ntype = nt;
 }
 
 inline BkNits::BkNits(const BkNits& bkN)
 {
+	BkMaker::BkMaker();
 	SetNitsType(NitsType bkN.m_Ntype);
 	SetBkColor(bkN.m_BkColor);
 }

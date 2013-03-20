@@ -23,7 +23,6 @@ class Cartridge2
 public:
     Cartridge2();
 	Cartridge2(const Cartridge2&);
-//     Cartridge2(const ColorRef& , const CPoint& );
     virtual  ~Cartridge2();
 //表格順序
 private:    UINT m_sequenceFrom;
@@ -44,9 +43,9 @@ public:     BkMaker*  m_pBackGorund;
 		    void      SetBkColor(ColorRef);
 
 private:    BackGroundStatus m_bkStatus;
+			CString   GetStrBkStatus() const;
 public:     void      SetBkStatus(BackGroundStatus);
 			BackGroundStatus GetBkStatus() const;
-			CString   GetStrBkStatus() const;
 //資料
 private:    Bullet    m_Data;
 public:     Bullet    GetBullet() const;
@@ -58,8 +57,8 @@ public:     void SetDescrip(CString);
 //運算子和其它
 public:     BOOL operator==(const Cartridge2& vCar);
 		    void operator= (const Cartridge2& vCar);
-		    CString showMe() const;
 //////////////////////////////////////////////////////////////////////////
+			CString showMe() const;
 };
 
 

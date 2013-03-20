@@ -23,13 +23,15 @@ public:
 
 inline BkNormal::BkNormal()
 {
-	ColorRef clr(0, 0, 0);
-	SetBkColor(clr);
+	BkMaker::BkMaker();
+// 	ColorRef clr(0, 0, 0);
+// 	SetBkColor(clr);
 }
 
 inline BkNormal::BkNormal(const BkNormal& bkN)
 {
-	SetBkColor(bkN.GetBkColor());
+	BkMaker::BkMaker(bkN);
+//	SetBkColor(bkN.GetBkColor());
 }
 
 #endif

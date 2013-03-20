@@ -4,9 +4,16 @@
 #include "RNA.h"
 #include "xMsrPoint/DNA.h"
 #include "xMsrPoint/Nucleotide.h"
+#include "OmdFile/TxtFile.h"
+#include "ColorEyeI.h"
 
 class TranScripter
 {
+#ifdef _DEBUG
+	std::vector<CString> m_dTxt;
+	CString m_desktopPath;
+#endif // _DEBUG
+
 	const int m_nScrmH, m_nScrmV;
 	std::vector<Nucleotide>::iterator m_tranPointer;
 

@@ -2,6 +2,12 @@
 #include "MainFrm.h"
 #include <cmath>
 
+#ifdef _DEBUG
+#define DebugCode( code_fragment ) { code_fragment }
+#else
+#define DebugCode( code_fragment )
+#endif
+
 /***************************************************
  *    getFE9Point(UINT few, float FromEdge)  const *
  *    getFE5Point(UINT few, float FromEdge)  const *
@@ -795,17 +801,25 @@ int TranScripter::Cm2pixel(const double cm) const
 TranScripter::TranScripter():
 m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), 
 m_nScrmV(GetSystemMetrics(SM_CYSCREEN))
-{}
-
-void TranScripter::Trans(DNA& _vN, RNA& _vR)
 {
-    ASSERT(_vN.Size());
-//     CPoint ScrmCenter(m_nScrmH/2, m_nScrmV/2);
+//	DebugCode(
+		CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+		ASSERT_VALID(pApp);
+		m_desktopPath.Format("%s", pApp->GetDesktopPath());
+//    )
+}
 
-    m_tranPointer = _vN.Begin();
-    for (m_tranPointer = _vN.Begin(); m_tranPointer != _vN.End(); ++m_tranPointer)
+void TranScripter::Trans(DNA& _vD, RNA& _vR)
+{
+    ASSERT(_vD.Size());
+
+	std::vector<Cartridge2> tempNits;
+	BkMaker* NitsClr = 0;
+
+    m_tranPointer = _vD.Begin();
+    for (m_tranPointer = _vD.Begin(); m_tranPointer != _vD.End(); ++m_tranPointer)
     {
-        UINT msrFrowNoMax = m_tranPointer->GetMsrFlowNum();
+        const UINT msrFrowNoMax = m_tranPointer->GetMsrFlowNum();
         for (unsigned int msrFlowNo = 0; msrFlowNo < msrFrowNoMax; ++msrFlowNo)
         {
             Cartridge2 tempCar;
@@ -818,10 +832,41 @@ void TranScripter::Trans(DNA& _vN, RNA& _vR)
             tempCar.SetDescrip(tranDescrip(msrFlowNo));
 
 			forCrsTlk(tempCar);
+//////////////////////////////////////////////////////////////////////////
+			if (m_tranPointer->GetBackColor() == Nits)
+			{
+				//if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2)
+				if (tempCar.getSqncFrm() == 1)
+				{
+					NitsClr = tempCar.m_pBackGorund;
+ 					_vR.AddCell(tempCar);
+				}
+				else
+					tempNits.push_back(tempCar);
+			}
+ 			else
+				_vR.AddCell(tempCar);
 
-            _vR.AddCell(tempCar);
+//////////////////////////////////////////////////////////////////////////
         }
+
+		for (std::vector<Cartridge2>::iterator nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
+		{
+			delete nitsitor->m_pBackGorund;
+			nitsitor->m_pBackGorund = NitsClr;
+		}
+		_vR.AddCell(tempNits.begin(), tempNits.end());
+		for (  nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
+			nitsitor->m_pBackGorund = 0;
     }
+	DebugCode(
+
+        CTxtFile fTxt;
+		CFileException fx;
+		fTxt.Save(m_desktopPath+"//TranS.log", fx);
+		fTxt.iTxtData(m_dTxt);
+		fTxt.Close();
+    )
 }
 
 BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const

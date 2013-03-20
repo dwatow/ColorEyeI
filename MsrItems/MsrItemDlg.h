@@ -24,10 +24,10 @@ class CMsrItemDlg : public CDialog
 {
 #ifdef _DEBUG
 	std::vector<CString> m_dTxt;
+	CString m_desktopPath;
 #endif // _DEBUG
 
 	CString m_RememberChkPathName;
-	CString m_desktopPath;
 	DNA m_DNA;
 	RNA m_RNA;
 
