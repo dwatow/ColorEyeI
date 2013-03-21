@@ -7,109 +7,50 @@ class BkNits : public BkMaker
 {
 	//m_pCA210
 	//hWnd
+	void n2cPos();
+	void n2cNeg();
 public:
- 	BkNits(const int&, const NitsType&);
+ 	BkNits(const NitsDirect&);
     BkNits(const BkNits& bkN);
 
-	void setWnd(CWnd* cWnd){ m_pdlgcWnd = cWnd; };
-	void setCa(Ca210* pCa){ m_pCa210 = pCa; };
-	void SetBkColor(const ColorRef&);
-    void SetRect(const CRect& _rect, const ColorRef& clr){};
-    void Draw(CPaintDC& dc){};
+	void NT_SetWnd(CWnd* cWnd){ m_pdlgcWnd = cWnd; };
+	void NT_SetCa(Ca210* pCa){ m_pCa210 = pCa; };
 
-	ColorRef nits2color();
-	ColorRef n2cPos();
-	ColorRef n2cNeg();
+	void       NT_nits2color();
+	void       NT_SetNitsDirect(NitsDirect nd);
+	NitsDirect NT_GetNitsDirect() const;
 };
 
-inline BkNits::BkNits(const int& nits, const NitsType& nt)
+inline BkNits::BkNits(const NitsDirect& nt)
 {
 	BkMaker::BkMaker();
-	m_Nits = nits;
-	m_Ntype = nt;
+	m_NitsDirect = nt;
 }
 
 inline BkNits::BkNits(const BkNits& bkN)
 {
 	BkMaker::BkMaker();
-	SetNitsType(NitsType bkN.m_Ntype);
-	SetBkColor(bkN.m_BkColor);
+	NT_SetNitsDirect(bkN.NT_GetNitsDirect());
+	_SetBkColor(bkN._GetBkColor());
 }
 
-inline ColorRef BkNits::nits2color()
+inline void BkNits::NT_nits2color()
 {
-	switch(m_Ntype)
+	switch(m_NitsDirect)
 	{
-	case NT_Pos:
-		return n2cPos();
+	case ND_Pos:
+		n2cPos();
 		break;
-	case NT_Neg:
+	case ND_Neg:
 	default:
-		return n2cNeg();		
+		n2cNeg();		
 	}
 }
 
-inline ColorRef BkNits::n2cPos()
-{
-	ColorRef clr;
-	return clr;
-	int _gl= 60;//     int Graylevel = 55;
-    float fLv = 0;
-    while(fLv >  m_Nits)  //若亮度還沒有到5以下，就減少
-    {
-        _gl -= 2;
-		m_BkColor.iGray(_gl);
-		m_pdlgcWnd->Invalidate();
-		m_pdlgcWnd->UpdateWindow();
-        //量測抓值
-        if (m_pCa210->Measure() == CA_ZeroCalMode)
-            MessageBox("檔位不在MEAS");
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-
-    while(fLv < m_Nits)   //若亮度還在5以下，就...變亮
-    {
-        ++_gl;
-		m_BkColor.iGray(_gl);
-		m_pdlgcWnd->Invalidate();
-		m_pdlgcWnd->UpdateWindow();
-        Sleep(60);
-//      量測抓值
-        m_pCa210->Measure();
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-}
-
-inline ColorRef BkNits::n2cNeg()
-{
-    float fLv = 0;
-	int _gl = 55;
-
-    while(fLv < m_Nits)  //若亮度還沒有到5以下，就減少
-    {
-        _gl += 2;
-		m_BkColor.iGray(_gl);
-		m_pdlgcWnd->Invalidate();
-		m_pdlgcWnd->UpdateWindow();
-//        Sleep(0);
-//        量測抓值
-        if (m_pCa210->Measure() == CA_ZeroCalMode)
-            MessageBox("檔位不在MEAS");
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-    
-    while(fLv > m_Nits)   //若亮度還在5以下，就...變亮
-    {
-        --_gl;
-		m_BkColor.iGray(_gl);
-		m_pdlgcWnd->Invalidate();
-		m_pdlgcWnd->UpdateWindow();
-		Sleep(60);
-        //量測抓值
-        m_pCa210->Measure();
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
-    }
-}
+inline void BkNits::NT_SetNitsDirect(NitsDirect nd)
+{ m_NitsDirect = nd;};
+inline NitsDirect BkNits::NT_GetNitsDirect() const
+{ return m_NitsDirect; };
 
 // void CPatternDlg::Nits_finePos(const int& specNits)
 // {
@@ -118,19 +59,19 @@ inline ColorRef BkNits::n2cNeg()
 //     while(fLv >  specNits)  //若亮度還沒有到5以下，就減少
 //     {
 //         _gl -= 2;
-// 		m_BkColor.iGray(_gl);
+// 		_GetBkColor().iGray(_gl);
 // 		Invalidate();
 // 		UpdateWindow();
 //         //量測抓值
 //         if (m_pCA210->Measure() == CA_ZeroCalMode)
-//             MessageBox("檔位不在MEAS");
+//             AfxMessageBox("檔位不在MEAS");
 //         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
 //     }
 // 
 //     while(fLv < specNits)   //若亮度還在5以下，就...變亮
 //     {
 //         ++_gl;
-// 		m_BkColor.iGray(_gl);
+// 		_GetBkColor().iGray(_gl);
 // 		Invalidate();
 // 		UpdateWindow();
 //         Sleep(60);
@@ -148,20 +89,20 @@ inline ColorRef BkNits::n2cNeg()
 //     while(fLv < specNits)  //若亮度還沒有到5以下，就減少
 //     {
 //         _gl += 2;
-// 		m_BkColor.iGray(_gl);
+// 		_GetBkColor().iGray(_gl);
 // 		Invalidate();
 // 		UpdateWindow();
 // //        Sleep(0);
 // //        量測抓值
 //         if (m_pCA210->Measure() == CA_ZeroCalMode)
-//             MessageBox("檔位不在MEAS");
+//             AfxMessageBox("檔位不在MEAS");
 //         fLv = m_pCA210->GetMsrData().oFlt(VluK_Lv);  //m_IProbe.GetLv();
 //     }
 //     
 //     while(fLv > specNits)   //若亮度還在5以下，就...變亮
 //     {
 //         --_gl;
-// 		m_BkColor.iGray(_gl);
+// 		_GetBkColor().iGray(_gl);
 // 		Invalidate();
 // 		UpdateWindow();
 // 		Sleep(60);
@@ -192,7 +133,7 @@ inline ColorRef BkNits::n2cNeg()
 // 
 //     CString str;
 //     str.Format("max:%d\nmin%d\ngraylv:%d", glvMax, glvMin, Graylevel);
-//     AfxMessageBox(str)
+//     AfxAfxMessageBox(str)
 // 	int Graylevel;
 // 	switch(_BKS)
 // 	{
@@ -203,12 +144,12 @@ inline ColorRef BkNits::n2cNeg()
 // 		Nits_fineNeg();
 // 		break;
 // 	case BGS_Normal:
-// 		setBkColor(m_BkColor);
+// 		setBkColor(_GetBkColor());
 // 		break;
 // 	default:
-// 		MessageBox("找Nits出問題。");
+// 		AfxMessageBox("找Nits出問題。");
 // 	}
-// 	//執行完顏色會存在m_BkColor
+// 	//執行完顏色會存在_GetBkColor()
 // }
 
 #endif

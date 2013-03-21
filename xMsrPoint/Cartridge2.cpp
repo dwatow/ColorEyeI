@@ -11,17 +11,17 @@ m_Description(""), m_bkStatus(BGS_Normal)
 
 Cartridge2::Cartridge2(const Cartridge2& _C):
 m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
-m_PointPosition(_C.m_PointPosition), m_pBackGorund(0), 
-m_bkStatus(_C.m_bkStatus),
+m_PointPosition(_C.m_PointPosition), m_pBackGorund(_C.m_pBackGorund), //m_pBackGorund(0), 
+m_bkStatus(_C.m_bkStatus), 
 m_Description(_C.m_Description), m_Data(_C.m_Data)
 {
-	SetBkStatus(_C.GetBkStatus());
-	*(m_pBackGorund) = *(_C.m_pBackGorund);
+// 	SetBkStatus(_C.GetBkStatus());
+// 	*(m_pBackGorund) = *(_C.m_pBackGorund);
 }
 
 Cartridge2::~Cartridge2()
 { 
-	if (m_pBackGorund != 0)
+	if (m_pBackGorund->cnt == 0)
 		delete m_pBackGorund;
 }
 
@@ -35,8 +35,9 @@ BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 
 void Cartridge2::operator= (const Cartridge2& vCar)
 {
-	SetBkStatus(vCar.m_bkStatus);
-	*(m_pBackGorund) = *(vCar.m_pBackGorund);
+// 	SetBkStatus(vCar.m_bkStatus);
+// 	*(m_pBackGorund) = *(vCar.m_pBackGorund);
+	m_pBackGorund   = vCar.m_pBackGorund;
     m_sequenceFrom  = vCar.m_sequenceFrom;
     m_sequenceArea  = vCar.m_sequenceArea;
     m_PointPosition = vCar.m_PointPosition;
@@ -48,11 +49,18 @@ void Cartridge2::operator= (const Cartridge2& vCar)
 CString Cartridge2::showMe() const
 {
     CString str;
-    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BkStatus: %s, BeHaveData(%d), %s\n", \
+    str.Format("Sequence: %d, AreaCode: %d, Point(%d, %d), BkColor(%d, %d, %d), BkAdd: 0x%X, BkCnt: %d, BkStatus: %s, BeHaveData(%d), %s\n", \
         m_sequenceFrom, 
         m_sequenceArea, 
         m_PointPosition.x, m_PointPosition.y, 
-        m_pBackGorund->GetBkColor().R(), m_pBackGorund->GetBkColor().G(), m_pBackGorund->GetBkColor().B(),
+
+        m_pBackGorund->_GetBkColor().R(), 
+		m_pBackGorund->_GetBkColor().G(), 
+		m_pBackGorund->_GetBkColor().B(),
+
+		m_pBackGorund,
+		*(m_pBackGorund->cnt),
+
 		GetStrBkStatus(), 
         !m_Data.isEmpty(), 
         m_Data.GetLastTime());
@@ -108,13 +116,13 @@ CPoint Cartridge2::GetPointPosi() const
 void Cartridge2::SetBkColor(ColorRef _C)
 {
 	ASSERT(m_pBackGorund);
-	m_pBackGorund->SetBkColor(_C); 
+	m_pBackGorund->_SetBkColor(_C); 
 }
 
 ColorRef Cartridge2::GetBkColor() const
 { 
 	ASSERT(m_pBackGorund);
-	return m_pBackGorund->GetBkColor(); 
+	return m_pBackGorund->_GetBkColor(); 
 }
 
 void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
@@ -124,12 +132,12 @@ void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 		delete m_pBackGorund;
 	switch(_BGS)
 	{
-// 	case BGS_NitsPos:
-// 		m_pBackGorund = new BkNits();
-// 		break;
-// 	case BGS_NitsNeg:
-// 		m_pBackGorund = new BkNits();
-// 		break;
+	case BGS_NitsPos:
+		m_pBackGorund = new BkNits(ND_Pos);
+		break;
+	case BGS_NitsNeg:
+		m_pBackGorund = new BkNits(ND_Neg);
+		break;
 	case BGS_CrossTalkDark:
 		m_pBackGorund = new BkCrossTalk(RGB(0, 0, 0));
 		break;
@@ -138,7 +146,7 @@ void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
 		break;
 	case BGS_Normal:
 	default:
-		m_pBackGorund = new BkNormal();
+		m_pBackGorund = new BkMaker();
 	}
 }
 

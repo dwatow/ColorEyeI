@@ -802,11 +802,11 @@ TranScripter::TranScripter():
 m_nScrmH(GetSystemMetrics(SM_CXSCREEN)), 
 m_nScrmV(GetSystemMetrics(SM_CYSCREEN))
 {
-//	DebugCode(
+	DebugCode(
 		CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
 		ASSERT_VALID(pApp);
 		m_desktopPath.Format("%s", pApp->GetDesktopPath());
-//    )
+    )
 }
 
 void TranScripter::Trans(DNA& _vD, RNA& _vR)
@@ -832,35 +832,36 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
             tempCar.SetDescrip(tranDescrip(msrFlowNo));
 
 			forCrsTlk(tempCar);
-//////////////////////////////////////////////////////////////////////////
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//中間不要動！5nits靠它了！
 			if (m_tranPointer->GetBackColor() == Nits)
 			{
 				//if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2)
 				if (tempCar.getSqncFrm() == 1)
 				{
 					NitsClr = tempCar.m_pBackGorund;
+					NitsClr->_SetBkColor(RGB(123, 123, 123));
  					_vR.AddCell(tempCar);
 				}
 				else
 					tempNits.push_back(tempCar);
 			}
  			else
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 				_vR.AddCell(tempCar);
-
-//////////////////////////////////////////////////////////////////////////
         }
-
-		for (std::vector<Cartridge2>::iterator nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//中間不要動！5nits靠它了！
+		if (m_tranPointer->GetBackColor() == Nits)
 		{
-			delete nitsitor->m_pBackGorund;
-			nitsitor->m_pBackGorund = NitsClr;
+			for (std::vector<Cartridge2>::iterator nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
+			{
+				delete nitsitor->m_pBackGorund;
+				nitsitor->m_pBackGorund = NitsClr;
+			}
+			_vR.AddCell(tempNits.begin(), tempNits.end());
 		}
-		_vR.AddCell(tempNits.begin(), tempNits.end());
-		for (  nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
-			nitsitor->m_pBackGorund = 0;
     }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 	DebugCode(
-
         CTxtFile fTxt;
 		CFileException fx;
 		fTxt.Save(m_desktopPath+"//TranS.log", fx);
@@ -909,7 +910,7 @@ void TranScripter::forCrsTlk(Cartridge2& crtg)
 			(long)( m_nScrmH - m_nScrmH / m_fCrsTlkRectFE), 
 			(long)( m_nScrmV - m_nScrmV / m_fCrsTlkRectFE) );
 		
-		crtg.m_pBackGorund->SetRect(_rect, _clr);
+		crtg.m_pBackGorund->CT_SetRect(_rect, _clr);
 	}
 }
 

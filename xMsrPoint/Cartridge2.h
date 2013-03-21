@@ -6,8 +6,9 @@
 #include "../Enum.h"
 #include "Bolt.h"
 #include "../CColorRef.h"
-#include "../BkNormal.h"
 #include "../BkCrossTalk.h"
+#include "../BkNits.h"
+#include "../AutoPtr.h"
 //Belt ºu¡Â
 //Bolt ∫jæ˜
 //Bullet ºu¿Y
@@ -41,6 +42,7 @@ private:
 public:     BkMaker*  m_pBackGorund;
             ColorRef  GetBkColor() const;
 		    void      SetBkColor(ColorRef);
+			void      GrabBKM(Cartridge2&);
 
 private:    BackGroundStatus m_bkStatus;
 			CString   GetStrBkStatus() const;
@@ -61,6 +63,10 @@ public:     BOOL operator==(const Cartridge2& vCar);
 			CString showMe() const;
 };
 
-
+inline void Cartridge2::GrabBKM(Cartridge2& _C)
+{
+	m_pBackGorund = _C.m_pBackGorund;
+	_C.m_pBackGorund = 0;
+}
 
 #endif

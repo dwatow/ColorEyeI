@@ -281,8 +281,8 @@ void CPatternDlg::LoadedCartridge()
 void CPatternDlg::trigger()
 {
     c_bGoalPercent = FALSE;
-	m_itor->m_pBackGorund->setWnd(GetActiveWindow());
-	m_itor->m_pBackGorund->setCa(m_pCA210);
+	m_itor->m_pBackGorund->NT_SetWnd(GetActiveWindow());
+	m_itor->m_pBackGorund->NT_SetCa(m_pCA210);
 
     //目前這一點是不是5nits的中心點？2=是
 //     TrigStatus ts(TS_Normal);

@@ -2,67 +2,61 @@
 #define BKMAKER_H
 
 #include "CColorRef.h"
-#include "CA210.h"
+#include "xMsrPoint\CA210.h"
 
-enum NitsType{NT_Pos, NT_Neg};
+enum NitsDirect{ND_NoDefine = 0, ND_Pos, ND_Neg};
 
 class BkMaker
 {
+//smart ptr
+public:
+	int* ptr_i;
+	int* cnt;
 public:
     BkMaker();
     BkMaker(const BkMaker& bkN);
+	~BkMaker();
+	BkMaker& operator=(const BkMaker& sp);
 
 //背景色
 private:
 	ColorRef  m_BkColor;
 public:
-    ColorRef  GetBkColor() const;
-	ColorRef&  GetBkColorRef(){ return m_BkColor; };
-    virtual	void SetBkColor(const ColorRef&);
+    ColorRef _GetBkColor() const;
+    void     _SetBkColor(const ColorRef&);
 
 //Crosstalk的介面
 protected:
+	ColorRef  m_rectColor;
 	CRect     m_centerRect;
-    ColorRef  m_rectColor;
 public:
-    virtual	void SetRect(const CRect& _rect, const ColorRef& clr) = 0;
-	virtual	void setRect(const CRect& _rect) = 0;
-	virtual	void setRect(const ColorRef& clr) = 0;
-	virtual	CRect getRect() const = 0;
-	virtual	ColorRef getRectColor() const = 0;
+    virtual	void  CT_SetRect(const CRect& _rect, const ColorRef& clr){};
 
 //Nits的介面
-private:
+protected:
 	CWnd* m_pdlgcWnd;
 	Ca210* m_pCa210;
-
 	int m_Nits;
-	NitsType m_Ntype;
-	virtual	ColorRef nits2color() = 0;
-public:
-	virtual	void setWnd(CWnd* cWnd) = 0;
-	virtual void setCa(Ca210* pCa) = 0;
 
-	void SetNitsType(NitsType nt);
-	NitsType GetNitsType() const;
+public:
+	virtual void NT_SetWnd(CWnd* cWnd){};
+	virtual void NT_SetCa(Ca210* pCa){};
+
+protected:
+	NitsDirect m_NitsDirect;
+// public:
+	virtual	void       NT_nits2color(){};
+	virtual void       NT_SetNitsDirect(NitsDirect nd){ };
+	virtual NitsDirect NT_GetNitsDirect() const{ return m_NitsDirect; };
 //共用介面
 public:
-	virtual void Draw(CPaintDC& dc) = 0;
-
+	virtual void Draw(CPaintDC& dc);
+protected:
+	int ptrNum;
+public:
+// 	BkMaker* operator new(size_t){ ptrNum++; return this;};
+// 	void operator delete(BkMaker*, size_t){ ptrNum--; };
 };
-
-inline BkMaker::BkMaker(): m_BkColor(0), m_centerRect(0, 0, 0, 0), m_rectColor(0), m_pdlgcWnd(0), m_pCa210(0), m_Nits(0)//, m_Ntype(0)
-{}
-
-inline BkMaker::BkMaker(const BkMaker& bkN): m_BkColor(bkN.m_BkColor), 
-m_centerRect(bkN.m_centerRect), m_rectColor(bkN.m_rectColor), m_pdlgcWnd(bkN.m_pdlgcWnd), m_pCa210(m_pCa210), m_Nits(bkN.m_Nits)//, m_Ntype(0)
-{}
-
-inline ColorRef BkMaker::GetBkColor() const
-{ return m_BkColor; }
-inline void BkMaker::SetBkColor(const ColorRef& clr)
-{ m_BkColor = clr; }
-
 
 
 #endif
