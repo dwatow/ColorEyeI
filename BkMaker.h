@@ -36,18 +36,18 @@ public:
 protected:
 	CWnd* m_pdlgcWnd;
 	Ca210* m_pCa210;
-	int m_Nits;
-
 public:
 	virtual void NT_SetWnd(CWnd* cWnd){};
 	virtual void NT_SetCa(Ca210* pCa){};
 
 protected:
 	NitsDirect m_NitsDirect;
-// public:
-	virtual	void       NT_nits2color(){};
-	virtual void       NT_SetNitsDirect(NitsDirect nd){ };
-	virtual NitsDirect NT_GetNitsDirect() const{ return m_NitsDirect; };
+	int m_Nits;
+public:
+	virtual	void NT_SetNitsNum(const int&){};
+	virtual	int  NT_GetNitsNum() const{ return m_Nits; };
+	virtual	void NT_colorReviseByNits(ColorRef&){};
+
 //¦@¥Î¤¶­±
 public:
 	virtual void Draw(CPaintDC& dc);
@@ -57,6 +57,8 @@ public:
 // 	BkMaker* operator new(size_t){ ptrNum++; return this;};
 // 	void operator delete(BkMaker*, size_t){ ptrNum--; };
 };
+
+
 
 
 #endif

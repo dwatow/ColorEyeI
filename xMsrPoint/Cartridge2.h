@@ -13,7 +13,7 @@
 //Bolt 槍機
 //Bullet 彈頭
 //Cartridge2 子彈
-enum BackGroundStatus{BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark };
+enum BackGroundStatus { BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark };
 
 /***************************************
  *    Define Belt Class member function*
@@ -46,7 +46,7 @@ public:     BkMaker*  m_pBackGorund;
 
 private:    BackGroundStatus m_bkStatus;
 			CString   GetStrBkStatus() const;
-public:     void      SetBkStatus(BackGroundStatus);
+public:     void      SetBkStatus( BackGroundStatus BGS, BOOL creatBGS = TRUE);
 			BackGroundStatus GetBkStatus() const;
 //資料
 private:    Bullet    m_Data;

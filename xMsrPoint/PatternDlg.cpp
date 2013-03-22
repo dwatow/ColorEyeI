@@ -484,6 +484,8 @@ UINT CPatternDlg::eventCatchMsrValue()
     //不然就是下一點
 //     if (c_bFind5nits)
 //         fineNits();//找背景亮度
+	if (m_itor->GetBkStatus() == BGS_NitsNeg || m_itor->GetBkStatus() == BGS_NitsPos)
+		m_itor->m_pBackGorund->NT_colorReviseByNits(m_BkColor);
     /*
     Recoil() 
     0 沒連線
@@ -574,8 +576,7 @@ void CPatternDlg::eventExitDialog()
 
 void CPatternDlg::setBkColor(ColorRef clr)
 {
-    m_BkColor = clr;
-	//m_itor->graphBack(m_BkColor);   //把顏色放進去畫
+	m_BkColor = clr;
     Invalidate();
     UpdateWindow();
 }

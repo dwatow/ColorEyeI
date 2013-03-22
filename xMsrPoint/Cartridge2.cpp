@@ -125,28 +125,31 @@ ColorRef Cartridge2::GetBkColor() const
 	return m_pBackGorund->_GetBkColor(); 
 }
 
-void Cartridge2::SetBkStatus(BackGroundStatus _BGS)
+void Cartridge2::SetBkStatus(BackGroundStatus _BGS, BOOL creatBGS)
 {
 	m_bkStatus = _BGS;
-	if (m_pBackGorund != 0)
-		delete m_pBackGorund;
-	switch(_BGS)
+	if (creatBGS)//一般都要執行生成m_pBackGorund，除非特殊的地方需要純設定Status
 	{
-	case BGS_NitsPos:
-		m_pBackGorund = new BkNits(ND_Pos);
-		break;
-	case BGS_NitsNeg:
-		m_pBackGorund = new BkNits(ND_Neg);
-		break;
-	case BGS_CrossTalkDark:
-		m_pBackGorund = new BkCrossTalk(RGB(0, 0, 0));
-		break;
-	case BGS_CrossTalkWrite:
-		m_pBackGorund = new BkCrossTalk(RGB(255, 255, 255));
-		break;
-	case BGS_Normal:
-	default:
-		m_pBackGorund = new BkMaker();
+		if (m_pBackGorund != 0)
+			delete m_pBackGorund;
+		switch(_BGS)
+		{
+		case BGS_NitsPos:
+			m_pBackGorund = new BkNits(ND_Pos);
+			break;
+		case BGS_NitsNeg:
+			m_pBackGorund = new BkNits(ND_Neg);
+			break;
+		case BGS_CrossTalkDark:
+			m_pBackGorund = new BkCrossTalk(RGB(0, 0, 0));
+			break;
+		case BGS_CrossTalkWrite:
+			m_pBackGorund = new BkCrossTalk(RGB(255, 255, 255));
+			break;
+		case BGS_Normal:
+		default:
+			m_pBackGorund = new BkMaker();
+		}
 	}
 }
 

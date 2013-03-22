@@ -122,7 +122,7 @@ void CMainFrame::OnMsrConnectca210()
 #ifndef _DEBUG
         m_pCa210 = new Ca210real();
 #else
-        m_pCa210 = new Ca210sim();
+        m_pCa210 = new Ca210real();
 #endif
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;

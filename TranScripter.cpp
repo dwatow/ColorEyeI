@@ -814,7 +814,6 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
     ASSERT(_vD.Size());
 
 	std::vector<Cartridge2> tempNits;
-	BkMaker* NitsClr = 0;
 
     m_tranPointer = _vD.Begin();
     for (m_tranPointer = _vD.Begin(); m_tranPointer != _vD.End(); ++m_tranPointer)
@@ -832,7 +831,7 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
             tempCar.SetDescrip(tranDescrip(msrFlowNo));
 
 			forCrsTlk(tempCar);
-			forNits(tempCar, NitsClr);
+			forNits(tempCar);
 
 			_vR.AddCell(tempCar);
         }
@@ -850,7 +849,7 @@ BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const
 {
 	BackGroundStatus status;
 	ColorType ct = m_tranPointer->GetBackColor();
-	if ( (ct == Nits) && (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) )
+	if ( (ct == Nits)/* && (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2)*/ )
 	{
 		if (m_tranPointer->GetPara(PA_NitsDir) == 1) //Neg
 			status = BGS_NitsNeg;
@@ -866,22 +865,27 @@ BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const
 	return status;
 }
 
-void TranScripter::forNits(Cartridge2& crtg, BkMaker* BKMptr)
+void TranScripter::forNits(Cartridge2& crtg)
 {
+	static BkMaker* NitsClr = 0;
+
 	if (m_tranPointer->GetBackColor() == Nits)
 	{
-		if (BKMptr == 0)
+		if (NitsClr == 0)
 		{
-			BKMptr = crtg.m_pBackGorund;
-			BKMptr->_SetBkColor(RGB(123, 123, 123));
+			crtg.m_pBackGorund->NT_SetNitsNum(m_tranPointer->GetPara(PA_NitsNum));
+			NitsClr = crtg.m_pBackGorund;
+ 			NitsClr->_SetBkColor(RGB(123, 123, 123));
 		}
 		else
 		{
 			delete crtg.m_pBackGorund;
-			crtg.m_pBackGorund = BKMptr;
-			
+			crtg.m_pBackGorund = NitsClr;
 		}
 	}
+	//重新調整BkSuatus，在PatternDialog可以正確觸發調背景顏色的function
+	if (crtg.getSqncArea() != AA_01)
+		crtg.SetBkStatus(BGS_Normal, FALSE);
 }
 
 void TranScripter::forCrsTlk(Cartridge2& crtg)
