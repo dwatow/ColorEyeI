@@ -832,35 +832,11 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
             tempCar.SetDescrip(tranDescrip(msrFlowNo));
 
 			forCrsTlk(tempCar);
-//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//中間不要動！5nits靠它了！
-			if (m_tranPointer->GetBackColor() == Nits)
-			{
-				//if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2)
-				if (tempCar.getSqncFrm() == 1)
-				{
-					NitsClr = tempCar.m_pBackGorund;
-					NitsClr->_SetBkColor(RGB(123, 123, 123));
- 					_vR.AddCell(tempCar);
-				}
-				else
-					tempNits.push_back(tempCar);
-			}
- 			else
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
-				_vR.AddCell(tempCar);
+			forNits(tempCar, NitsClr);
+
+			_vR.AddCell(tempCar);
         }
-//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//中間不要動！5nits靠它了！
-		if (m_tranPointer->GetBackColor() == Nits)
-		{
-			for (std::vector<Cartridge2>::iterator nitsitor = tempNits.begin(); nitsitor != tempNits.end(); ++nitsitor)
-			{
-				delete nitsitor->m_pBackGorund;
-				nitsitor->m_pBackGorund = NitsClr;
-			}
-			_vR.AddCell(tempNits.begin(), tempNits.end());
-		}
     }
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 	DebugCode(
         CTxtFile fTxt;
 		CFileException fx;
@@ -888,6 +864,24 @@ BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const
 	else
 		status = BGS_Normal;
 	return status;
+}
+
+void TranScripter::forNits(Cartridge2& crtg, BkMaker* BKMptr)
+{
+	if (m_tranPointer->GetBackColor() == Nits)
+	{
+		if (BKMptr == 0)
+		{
+			BKMptr = crtg.m_pBackGorund;
+			BKMptr->_SetBkColor(RGB(123, 123, 123));
+		}
+		else
+		{
+			delete crtg.m_pBackGorund;
+			crtg.m_pBackGorund = BKMptr;
+			
+		}
+	}
 }
 
 void TranScripter::forCrsTlk(Cartridge2& crtg)

@@ -6,13 +6,13 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7652.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP6B1B.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_AFXDLL" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "D:\GitHub\ColorEyeI\TranScripter.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP7652.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7662.tmp" with contents
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP6B1B.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP6B1C.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\BkMaker.obj
@@ -62,13 +62,12 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP7662.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP6B1C.tmp"
 <h3>Output Window</h3>
 Compiling...
 TranScripter.cpp
-d:\github\coloreyei\xmsrpoint\cartridge2.h(11) : fatal error C1083: Cannot open include file: '../AutoPtr.h': No such file or directory
-Error executing cl.exe.
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7D65.tmp" with contents
+Linking...
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP73B5.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -116,16 +115,14 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP7D65.tmp" with c
 .\Debug\XlsOQC2.sbr
 .\Debug\XlsRA1.sbr
 .\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP7D65.tmp"
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP73B5.tmp"
 Creating browse info file...
-BSCMAKE: error BK1506 : cannot open file '.\Debug\TranScripter.sbr': No such file or directory
-Error executing bscmake.exe.
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 2 error(s), 0 warning(s)
+ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

@@ -8,7 +8,7 @@
 #include "../CColorRef.h"
 #include "../BkCrossTalk.h"
 #include "../BkNits.h"
-#include "../AutoPtr.h"
+
 //Belt ºu¡Â
 //Bolt ∫jæ˜
 //Bullet ºu¿Y

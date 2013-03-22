@@ -28,6 +28,7 @@ private:
 	BackGroundStatus tranBkStatus(UINT few) const;
 
 	void forCrsTlk(Cartridge2&);
+	void forNits(Cartridge2&, BkMaker*);
 	//DNA to RNA
     CPoint get5nits9Point(UINT few) const;
     CPoint getCrossTalk(UINT few) const;// 6/26·s¼W
