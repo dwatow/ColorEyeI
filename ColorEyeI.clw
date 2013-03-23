@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CEnterValueDlg
+LastClass=CMainFrame
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -16,17 +16,17 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_OMDTOEXCEL
+Resource1=IDD_CASETUP_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_ABOUTBOX
-Resource3=IDD_MSR_ITEM
-Resource4=IDD_EDIT_DIALOG
+Resource2=IDD_PATTERN_DIALOG
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDR_MAINFRAME
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_PATTERN_DIALOG
-Resource7=IDD_CASETUP_DIALOG
+Resource6=IDD_OMDTOEXCEL
+Resource7=IDD_ABOUTBOX
 Class7=CCaSetupDlg
-Resource8=IDR_MAINFRAME
+Resource8=IDD_MSR_ITEM
 Class8=CReadBarCodeDialog
 Resource9=IDD_DIALOG_BARCODE
 
@@ -63,7 +63,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=ID_SETUP_CA210
+LastObject=ID_MSR_CONNECTCA210
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -266,9 +266,9 @@ Control86=IDC_STATIC,static,1342308352
 Control87=IDC_STATIC,static,1342308352
 Control88=IDC_STATIC,static,1342308352
 Control89=IDC_STATIC,static,1342308352
-Control90=IDC_CHECK_JND,button,1342242819
-Control91=IDC_EDIT_JND_GRAYVALUE,edit,1350631552
-Control92=IDC_STATIC,static,1342308352
+Control90=IDC_CHECK_JND,button,1073807363
+Control91=IDC_EDIT_JND_GRAYVALUE,edit,1082196096
+Control92=IDC_STATIC,static,1073872896
 Control93=IDC_STATIC,button,1342177287
 Control94=IDC_STATIC,button,1342177287
 Control95=IDC_BUTTON_SELALL,button,1342242816

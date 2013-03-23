@@ -606,7 +606,7 @@ void CMsrItemDlg::OnButtonSelall()
     // TODO: Add your control notification handler code here
     if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(TRUE);
     if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(TRUE);
-    if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(TRUE);
+//     if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(TRUE);
     
     if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(TRUE);
     if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(TRUE);
@@ -662,7 +662,7 @@ void CMsrItemDlg::OnButtonSelno()
     // TODO: Add your control notification handler code here
     if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(FALSE);
     if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(FALSE);
-    if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(FALSE);
+//     if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(FALSE);
     
     if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(FALSE);
     if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(FALSE);

@@ -24,7 +24,10 @@ BkMaker::~BkMaker()
 	if (--(*cnt) == 0)
 	{
 		delete cnt;
+		cnt = 0;
+		
 		delete ptr_i;
+		ptr_i = 0;
 	}
 }
 
@@ -36,7 +39,10 @@ BkMaker& BkMaker::operator=(const BkMaker& sp)
 		if (--(*cnt) == 0)
 		{
 			delete cnt;
+			cnt = 0;
+
 			delete ptr_i;
+			ptr_i = 0;
 		}
 		//copy the ptr and ref_cnt and increment the ref_cnt
 		ptr_i = sp.ptr_i;
@@ -44,11 +50,11 @@ BkMaker& BkMaker::operator=(const BkMaker& sp)
 		(*cnt)++;
 
 		m_BkColor = sp.m_BkColor;
-		m_centerRect = sp.m_centerRect; 
-		m_rectColor = sp.m_rectColor; 
-		m_pdlgcWnd = sp.m_pdlgcWnd; 
-		m_pCa210 = sp.m_pCa210; 
-		m_Nits = sp.m_Nits; 
+		m_centerRect = sp.m_centerRect;
+		m_rectColor = sp.m_rectColor;
+		m_pdlgcWnd = sp.m_pdlgcWnd;
+		m_pCa210 = sp.m_pCa210;
+		m_Nits = sp.m_Nits;
 		m_NitsDirect = sp.m_NitsDirect;
 	}
 	return *this;

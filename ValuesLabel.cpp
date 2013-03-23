@@ -5,7 +5,7 @@ ValuesLabel::ValuesLabel(): m_cWidth(88), m_cHight(158),
 m_DisplayArea(m_cWidth, m_cHight), m_clrNG(192, 0, 0)
 {}
 
-void ValuesLabel::comCircle(const int _r, const CPoint _p)
+void ValuesLabel::BindCircle(const int _r, const CPoint _p)
 {
     //Msred
     CPoint pointShow(-10 - _r, -20 - _r);
@@ -18,7 +18,7 @@ void ValuesLabel::comCircle(const int _r, const CPoint _p)
     m_pointMsring = _p + pointMsring;
 }
 
-void ValuesLabel::SetData(Bullet& _B)
+void ValuesLabel::SetData(const Bullet& _B)
 {
     m_bltData = _B;
 }

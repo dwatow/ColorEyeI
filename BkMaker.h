@@ -9,9 +9,11 @@ enum NitsDirect{ND_NoDefine = 0, ND_Pos, ND_Neg};
 class BkMaker
 {
 //smart ptr
-public:
 	int* ptr_i;
 	int* cnt;
+public:
+	BOOL IsPtrToNull() const;
+	int GetPtrCnt() const;
 public:
     BkMaker();
     BkMaker(const BkMaker& bkN);
@@ -30,35 +32,38 @@ protected:
 	ColorRef  m_rectColor;
 	CRect     m_centerRect;
 public:
-    virtual	void  CT_SetRect(const CRect& _rect, const ColorRef& clr){};
+    virtual	void  CT_SetRect(const CRect& _rect, const ColorRef& clr){ };
 
 //Nits的介面
 protected:
 	CWnd* m_pdlgcWnd;
 	Ca210* m_pCa210;
 public:
-	virtual void NT_SetWnd(CWnd* cWnd){};
-	virtual void NT_SetCa(Ca210* pCa){};
+	virtual void NT_SetWnd(CWnd* cWnd){ };
+	virtual void NT_SetCa(Ca210* pCa){ };
 
 protected:
 	NitsDirect m_NitsDirect;
 	int m_Nits;
 public:
-	virtual	void NT_SetNitsNum(const int&){};
-	virtual	int  NT_GetNitsNum() const{ return m_Nits; };
-	virtual	void NT_colorReviseByNits(ColorRef&){};
+	virtual	void NT_SetNitsNum(const int&){  };
+	virtual	int  NT_GetNitsNum() const{  return m_Nits; };
+	virtual	void NT_colorReviseByNits(ColorRef&){  };
 
 //共用介面
 public:
 	virtual void Draw(CPaintDC& dc);
-protected:
-	int ptrNum;
-public:
-// 	BkMaker* operator new(size_t){ ptrNum++; return this;};
-// 	void operator delete(BkMaker*, size_t){ ptrNum--; };
 };
 
+inline BOOL BkMaker::IsPtrToNull() const
+{
+	return (cnt == 0) ? TRUE : FALSE ;
+}
 
+inline int BkMaker::GetPtrCnt() const
+{
+	return *cnt;
+}
 
 
 #endif

@@ -14,14 +14,11 @@ m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
 m_PointPosition(_C.m_PointPosition), m_pBackGorund(_C.m_pBackGorund), //m_pBackGorund(0), 
 m_bkStatus(_C.m_bkStatus), 
 m_Description(_C.m_Description), m_Data(_C.m_Data)
-{
-// 	SetBkStatus(_C.GetBkStatus());
-// 	*(m_pBackGorund) = *(_C.m_pBackGorund);
-}
+{}
 
 Cartridge2::~Cartridge2()
 { 
-	if (m_pBackGorund->cnt == 0)
+	if (m_pBackGorund->IsPtrToNull())
 		delete m_pBackGorund;
 }
 
@@ -35,8 +32,6 @@ BOOL Cartridge2::operator==(const Cartridge2& vCar2)
 
 void Cartridge2::operator= (const Cartridge2& vCar)
 {
-// 	SetBkStatus(vCar.m_bkStatus);
-// 	*(m_pBackGorund) = *(vCar.m_pBackGorund);
 	m_pBackGorund   = vCar.m_pBackGorund;
     m_sequenceFrom  = vCar.m_sequenceFrom;
     m_sequenceArea  = vCar.m_sequenceArea;
@@ -59,7 +54,7 @@ CString Cartridge2::showMe() const
 		m_pBackGorund->_GetBkColor().B(),
 
 		m_pBackGorund,
-		*(m_pBackGorund->cnt),
+		m_pBackGorund->GetPtrCnt(),
 
 		GetStrBkStatus(), 
         !m_Data.isEmpty(), 

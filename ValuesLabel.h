@@ -21,8 +21,8 @@ class ValuesLabel
 	void printx(CPaintDC& , int);
 public:
 	ValuesLabel();
-	void comCircle(const int, const CPoint );
-	void SetData(Bullet& );
+	void BindCircle(const int, const CPoint );
+	void SetData(const Bullet& );
 	void Draw(CPaintDC& );
 };
 

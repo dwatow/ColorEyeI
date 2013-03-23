@@ -59,24 +59,21 @@ protected:
     DECLARE_MESSAGE_MAP()
 private:
     RNA m_RNA;
-    CaState Recoil();
     
     //手動可調
-    BOOL c_bDrawGold;
-    BOOL c_bDrawNextGold;
-    BOOL c_bStateBar;
+//     BOOL c_bDrawGold;
+//    BOOL c_bDrawNextGold;
+    BOOL c_bStatusBar;
 
     //自動使用的參數
     BOOL c_bMsrBegin;
     BOOL c_bMsrEnd;
     BOOL c_bMsrEndnMsred;
-    BOOL c_bGoalPercent;
     BOOL c_bRunMsrAI;
     BOOL c_bUnCntCA210;
-    BOOL c_bFind5nits;
 
-    UINT SetPercentValue;
-    MsrAiState MsrAIValue;
+//     UINT SetPercentValue;
+//     MsrAiState m_msrStatus;
 
     Ca210* m_pCA210;
 
@@ -88,22 +85,22 @@ private:
     ColorRef m_BkColor;    //背景色
 
     Circle m_Goal;        //目標圈圈
-//     CircleArc m_NextGoal;    //下一個目標圈圈
-//    Circle    m_Goal;        //目標圈圈
-//    Circle    m_NextGoal;    //下一個目標圈圈
 
-    int  m_Percent;
-    Bolt m_GunMchn;
-    Bolt m_NextGunMchn;
+//     int  m_Percent;
+//     Bolt m_GunMchn;
+//     Bolt m_NextGunMchn;
 
 private:
-    void setupLCMSize();
+    void initLCMSize() const;
     void initCa210();
-    void initDataDlgType();//Call SelMsrItem
+    void initDataDlgType() const;//Call SelMsrItem
     void initDocument();
 
     void trigger();
     void checkMsrLimit();
+    void setBkColor(const ColorRef&);
+    CaState recoil();
+	void MsrKernel();
 
     void eventGoPrvsGoal();
     BOOL eventGoNextGoal();
@@ -111,24 +108,8 @@ private:
     void eventRunMsrAi(BOOL isRun = 2);
     UINT eventCatchMsrValue();
     void eventExitDialog();
-
-    void setBkColor(ColorRef);
-
 public:
     void LoadedCartridge(); //彈匣
-
-
-    //crossTalk
-// private:    
-//             int orderNits;
-//             ColorRef m_bColor;
-//             CRect   m_centerRect;
-//             void setCrsTlkRect(CRect&, ColorRef&);
-//             void DrawCrsTlkRect(CPaintDC& dc);
-//             //nits
-// private:    void Nits_fine(BackGroundStatus);
-//             void Nits_finePos(const int&);
-//             void Nits_fineNeg(const int&);
 };
 
 //{{AFX_INSERT_LOCATION}}

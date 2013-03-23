@@ -14,7 +14,7 @@ enum AvgMode   { AM_SLOW = 0, AM_FAST, AM_AUTO};
 enum BrigUnit  { BU_fL =0, BU_cdm2 };
 enum CalStand  { CS_6500K = 1, CS_9300K };
 
-enum CaState    { CA_Offline, CA_BeforeZeroCal, CA_ZeroCalMode, CA_MsrMode};
+enum CaState    { CA_Offline, CA_not_yet_ZeroCal, CA_ZeroCalMode, CA_MsrMode};
 enum MsrAiState { MA_nonMsr, MA_InDeviation, MA_OutDeviation };
 
 class Ca210

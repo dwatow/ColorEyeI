@@ -14,18 +14,18 @@ Ca210real::Ca210real():
 ImpsbStr("1. 按「Prt Scm鍵」抓下目前的螢幕，並開小畫家貼上，另存成圖檔\n2. Mail給此程式設計者，詳細描述使用過程並將圖檔存成附件\n這是尚未預測到出現的問題。（應該不會發生的那種。）"),
 m_pICa200(0), m_pICa(0), m_pIProbe(0), m_pIProbeInfo(0), m_pIMemory(0)
 {
-	DebugCode( DBugModeBox("TRUE of Ca210real()"); )
+    DebugCode( DBugModeBox("TRUE of Ca210real()"); )
 
     if (initCreatCa200())
     if (initConnectCa210())
     if (initAttachCa())
     if (initAttchProbe())
-        m_caState = CA_BeforeZeroCal;
+        m_caState = CA_not_yet_ZeroCal;
 }
 
 Ca210real::~Ca210real()
 {
-	DebugCode( DBugModeBox("TRUE of ~Ca210real()"); )
+    DebugCode( DBugModeBox("TRUE of ~Ca210real()"); )
     if (isOnline())
         SetOnline(FALSE);
     m_pIMemory->DetachDispatch();        delete m_pIMemory;
@@ -42,13 +42,13 @@ BOOL Ca210real::initCreatCa200()
         if (m_pICa200 == 0)            
             m_pICa200 = new ICa200();
         m_pICa200->CreateDispatch("CA200Srvr.Ca200.1");
-		return TRUE;
+        return TRUE;
     }
     catch (CException* e)
     {
         MsgFrmt(e, "CreatCa200();出問題", "1. 檢查USB線和量筒\n2. 按確定");        
         m_pICa200->ReleaseDispatch();
-		return FALSE;
+        return FALSE;
     }
 }
 
@@ -58,7 +58,7 @@ BOOL Ca210real::initConnectCa210()
     {
         m_pICa200->m_bAutoRelease = TRUE;        
         m_pICa200->AutoConnect();
-		return TRUE;
+        return TRUE;
     }            
     catch (CException* e)
     {
@@ -77,7 +77,7 @@ BOOL  Ca210real::initAttachCa()
         LPDISPATCH pICa(0);
         pICa = m_pICa200->GetSingleCa();
         m_pICa->AttachDispatch(pICa);
-		return TRUE;
+        return TRUE;
     }            
     catch (CException* e)
     {
@@ -99,7 +99,7 @@ BOOL Ca210real::initAttchProbe()
 
         m_pIProbe->AttachDispatch(pIProbe);
         m_pIProbeInfo->AttachDispatch(pIProbe);
-		return TRUE;
+        return TRUE;
    }            
     catch (CException* e)
     {
@@ -123,7 +123,7 @@ CaState Ca210real::CalZero()
     if (isOnline())
     {
         DebugCode( DBugModeBox("TRUE of CalZero()"); )
-		int flag(0);
+        int flag(0);
         do 
         {
             try
@@ -141,7 +141,7 @@ CaState Ca210real::CalZero()
                 flag++;
             }
         } while (flag);
-		return m_caState = CA_ZeroCalMode;
+        return m_caState = CA_ZeroCalMode;
     }
     else
     {
@@ -154,11 +154,11 @@ void Ca210real::LinkMemory()
 {
     if (isOnline())
     {
-		DebugCode( DBugModeBox("TRUE of LinkMemory()"); )
+        DebugCode( DBugModeBox("TRUE of LinkMemory()"); )
         try
         {
             if (m_pIMemory == 0)
-				m_pIMemory = new IMemory();
+                m_pIMemory = new IMemory();
             LPDISPATCH pMemory(0);
             pMemory = m_pICa->GetMemory();
             m_pIMemory->AttachDispatch(pMemory);
@@ -168,49 +168,51 @@ void Ca210real::LinkMemory()
             MsgFrmt(e, "LinkMemory(pMemory);出問題", ImpsbStr);
         }
     } 
-	DebugCode( else{ DBugModeBox("FALSE of LinkMemory()"); } )
+    DebugCode( else{ DBugModeBox("FALSE of LinkMemory()"); } )
 }
 
 CaState Ca210real::Measure()
 {
-    /*
-    2 尚未Zero Cal
-    3 檔位不在MEAS
-    4 量測正常
-    */
     CaState Mode = m_caState;
     if(isOnline())
     {
         DebugCode(  DBugModeBox("TRUE of Measure()"); )
-		int flag = 0;
+        int flag = 0;
 
         do 
         {
             try
             {
                 m_pICa->Measure(0);
+
+				//已經ZeroCal，檢查檔位是否正確
                 if (m_pIProbe->GetLv() < 0.01)
-                    Mode = CA_ZeroCalMode;  //is0-Cal檔
+                    Mode = CA_ZeroCalMode;     //is0-Cal檔
                 else
-                    Mode = CA_MsrMode;
+                    Mode = CA_MsrMode;        //已ZeroCal, 檔位正確
                 flag = 0;
             }
             catch (CException* e)
             {
+				//MsrError
                 SetOnline();
-                if (m_caState == CA_BeforeZeroCal)
+                if (m_caState == CA_not_yet_ZeroCal)  //還沒ZeroCal
                 {
-					if (CalZero() == CA_Offline)
-						Mode = CA_Offline;
-					++flag;
+                    if (CalZero() == CA_Offline)
+                        Mode = CA_Offline;
+                    ++flag;
                 }
                 else
                 {
-					TCHAR buf[255];
-					e->GetErrorMessage(buf, 255);
-	//                     MsgFrmt(e, "量測出問題", "剛剛是不是不正常使用量筒（像是搖它或對著強光源...之類的）\n否則，不要移動量筒按確定重量剛剛的點");
-	//                     flag++;
-					continue;
+                    TCHAR buf[255];
+                    e->GetErrorMessage(buf, 255);
+					++flag;
+					if (flag > 10)
+						//重覆太多次，導致類當機的情況。
+						break;
+					else
+						//在這不做任何動作，重覆執行迴圈內的東西。						
+						continue;
                 }
             }
         } while (flag);
@@ -220,36 +222,38 @@ CaState Ca210real::Measure()
 
 MsrAiState Ca210real::MsrAI(float MsrDeviation)
 {
-	DebugCode( DBugModeBox("TRUE of MsrAI(float MsrDeviation)"); )
-		//第一筆資料暫存空間  //宣告誤差值計算空間
-	
-	float XFristValue = 0.0, deltaX = 0.0,
-		YFristValue = 0.0, deltaY = 0.0,
-		ZFristValue = 0.0, deltaZ = 0.0, deltaAll;
-	
-	if (Measure() == CA_MsrMode)
-	{
-		//抓參考值
+    DebugCode( DBugModeBox("TRUE of MsrAI(float MsrDeviation)"); )
+        //第一筆資料暫存空間  //宣告誤差值計算空間
+    
+    float XFristValue = 0.0, deltaX = 0.0,
+          YFristValue = 0.0, deltaY = 0.0,
+          ZFristValue = 0.0, deltaZ = 0.0, deltaAll;
+    
+    if ( Measure() == CA_MsrMode )
+    {
+        //抓參考值
         XFristValue = m_pIProbe->GetX();
         YFristValue = m_pIProbe->GetY();
         ZFristValue = m_pIProbe->GetZ();
-		
-		Measure();
-		
-		//誤差取絕對值
-        deltaX = ((XFristValue-m_pIProbe->GetX())>=0) ? XFristValue - m_pIProbe->GetX() : m_pIProbe->GetX() - XFristValue;
-        deltaY = ((YFristValue-m_pIProbe->GetY())>=0) ? YFristValue - m_pIProbe->GetY() : m_pIProbe->GetY() - YFristValue;
-        deltaZ = ((ZFristValue-m_pIProbe->GetZ())>=0) ? ZFristValue - m_pIProbe->GetZ() : m_pIProbe->GetZ() - ZFristValue;
-		
-		
-		deltaAll = deltaX * deltaY * deltaZ;
-		
-		if (deltaAll < MsrDeviation )    return MA_InDeviation;//門檻值內
-		else                             return MA_OutDeviation;//門檻值外
-	}
-	else
-		return MA_nonMsr;
-	//無效量測，可能是沒連線之類的
+        
+        if ( Measure() == CA_MsrMode )
+		{
+			//誤差取絕對值
+			deltaX = ((XFristValue-m_pIProbe->GetX()) >= 0) ? XFristValue - m_pIProbe->GetX() : m_pIProbe->GetX() - XFristValue;
+			deltaY = ((YFristValue-m_pIProbe->GetY()) >= 0) ? YFristValue - m_pIProbe->GetY() : m_pIProbe->GetY() - YFristValue;
+			deltaZ = ((ZFristValue-m_pIProbe->GetZ()) >= 0) ? ZFristValue - m_pIProbe->GetZ() : m_pIProbe->GetZ() - ZFristValue;
+        
+			deltaAll = deltaX * deltaY * deltaZ;
+
+			if (deltaAll < MsrDeviation )    return MA_InDeviation;//門檻值內
+			else                             return MA_OutDeviation;//門檻值外
+		}
+		else
+			return MA_nonMsr;
+    }
+    else
+        return MA_nonMsr;
+    //無效量測，可能是沒連線之類的
 }
 
 void Ca210real::SetOnline(BOOL isOnline)
@@ -264,13 +268,13 @@ void Ca210real::SetOnline(BOOL isOnline)
         MsgFrmt(e, "連線/離線出問題", ImpsbStr);
     }
 
-	if (isOnline == FALSE) 
-	{
-		m_caStateTemp = m_caState;
-		m_caState = CA_Offline;
-	}
-	else
-		m_caState = m_caStateTemp;
+    if (isOnline == FALSE) 
+    {
+        m_caStateTemp = m_caState;
+        m_caState = CA_Offline;
+    }
+    else
+        m_caState = m_caStateTemp;  //真的沒問題嗎？
 }
 
 CString Ca210real::GetLcmSize()
@@ -280,14 +284,14 @@ CString Ca210real::GetLcmSize()
         DebugCode( DBugModeBox("TRUE of GetLcmSize()"); )           
         try
         {
-			if (m_LCMsize.IsEmpty())
+            if (m_LCMsize.IsEmpty())
                 m_LCMsize.Format("%s", m_pIMemory->GetChannelID().Left(2));
         }
         catch (CException* e)
-		{
-			MsgFrmt(e, "模組尺寸大小設定出問題", ImpsbStr);
-			m_LCMsize.Format("-1");
-		}
+        {
+            MsgFrmt(e, "模組尺寸大小設定出問題", ImpsbStr);
+            m_LCMsize.Format("-1");
+        }
     }
     else 
         m_LCMsize.Format("-1");
@@ -303,10 +307,10 @@ CString Ca210real::GetChData()
         try
         {
             DebugCode(
-				CString str;
-				str.Format("%s of GetChData()", m_Online ? "TRUE" : "FALSE");
-				DBugModeBox(str);
-			)
+                CString str;
+                str.Format("%s of GetChData()", m_Online ? "TRUE" : "FALSE");
+                DBugModeBox(str);
+            )
             temp.Format("%ld - %s", m_pIMemory->GetChannelNO(), m_pIMemory->GetChannelID());
         }
         catch (CException* e)
