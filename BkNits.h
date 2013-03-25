@@ -9,8 +9,6 @@ class BkNits : public BkMaker
 	//hWnd
 	void n2cPos(ColorRef&);
 	void n2cNeg(ColorRef&);
-// 	void       NT_SetNitsDirect(NitsDirect nd);
-// 	NitsDirect NT_GetNitsDirect() const;
 public:
  	BkNits(const NitsDirect&);
     BkNits(const BkNits& bkN);
@@ -21,7 +19,7 @@ public:
 	void NT_colorReviseByNits(ColorRef&);
 
 	void NT_SetNitsNum(const int&);
-	int  NT_GetNitsNum()const;
+	const int  NT_GetNitsNum()const;
 
 };
 
@@ -40,7 +38,7 @@ inline BkNits::BkNits(const BkNits& bkN)
 
 inline void BkNits::NT_SetNitsNum(const int& _N)
 { m_Nits = _N*100; };
-inline int BkNits::NT_GetNitsNum() const
+inline const int BkNits::NT_GetNitsNum() const
 { return m_Nits/100; };
 
 inline void BkNits::NT_colorReviseByNits(ColorRef& Bkclr)

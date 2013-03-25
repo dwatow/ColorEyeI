@@ -28,7 +28,7 @@ class CPatternDlg : public CDialog
 //     }Info1;
 // Construction
 public:
-    CPatternDlg(initType it, CWnd* pParent = NULL);   // standard constructor
+    CPatternDlg(const initType& it, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
     //{{AFX_DATA(CPatternDlg)
@@ -61,8 +61,6 @@ private:
     RNA m_RNA;
     
     //手動可調
-//     BOOL c_bDrawGold;
-//    BOOL c_bDrawNextGold;
     BOOL c_bStatusBar;
 
     //自動使用的參數
@@ -72,11 +70,6 @@ private:
     BOOL c_bRunMsrAI;
     BOOL c_bUnCntCA210;
 
-//     UINT SetPercentValue;
-//     MsrAiState m_msrStatus;
-
-    Ca210* m_pCA210;
-
     std::vector<Cartridge2>::iterator m_itor;
     std::vector<Cartridge2>::iterator m_BeginItor;
     std::vector<Cartridge2>::iterator m_EndItor;
@@ -85,10 +78,7 @@ private:
     ColorRef m_BkColor;    //背景色
 
     Circle m_Goal;        //目標圈圈
-
-//     int  m_Percent;
-//     Bolt m_GunMchn;
-//     Bolt m_NextGunMchn;
+    Ca210* m_pCA210;
 
 private:
     void initLCMSize() const;
@@ -99,7 +89,7 @@ private:
     void trigger();
     void checkMsrLimit();
     void setBkColor(const ColorRef&);
-    CaState recoil();
+    const CaState recoil();
 	void MsrKernel();
 
     void eventGoPrvsGoal();

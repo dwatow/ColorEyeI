@@ -30,11 +30,11 @@ protected:
 public:
 // 	int GetCurFileList(CComboBox& ComboBox, CString FileNameExt);
 // 	int GetCurFileList(CListBox& ListBox, CString FileNameExt);
- 	int GetCurFileList(std::vector<CString>& vstrFilePath, CString FileNameExt);
+ 	const int GetCurFileList(std::vector<CString>& vstrFilePath, const CString& FileNameExt);
 // 	int GetSelFileList(CComboBox& ComboBox);
 // 	int GetSelFileList(CListBox& ListBox);
-	int GetSelFileList(std::vector<CString>& vstrFilePath);
-	void SetMultiFileNameBuffer(const int);
+	const int GetSelFileList(std::vector<CString>& vstrFilePath);
+	void SetMultiFileNameBuffer(const int&);
 };
 
 //{{AFX_INSERT_LOCATION}}

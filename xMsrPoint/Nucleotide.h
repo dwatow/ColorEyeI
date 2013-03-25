@@ -7,44 +7,42 @@ enum ParaOfPara{ PA_FEover = 0, PA_FEnum, PA_D25RectSide, PA_NitsNum, PA_NitsDir
 
 class Nucleotide
 {
-//    UINT      m_MsrPointType;//處理參數的方式
-//	Nucleotide(){};
+//建解構子
 public:
-	Nucleotide(ColorType _C = NoColor, PointNum _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
+    Nucleotide(const ColorType& _C = NoColor, const PointNum& _P = NoPn, const int& _N1 = -1, const int& _N2 = -1, const int& _N3 = -1);
     ~Nucleotide();
 
 //該項目共幾點    
 private:
     PointNum  m_MsrFlowNum;  
 public:
-    PointNum GetMsrFlowNum() const;
-    void     SetMsrFlowNum(PointNum);
+    const PointNum GetMsrFlowNum() const;
+              void SetMsrFlowNum(const PointNum&);
 
-    CString  GetStrPointNum() const;
+    const  CString GetStrPointNum() const;
 
 //背景顏色
 private:
     ColorType m_BkColor;
 public:
-    ColorType GetBackColor() const;
-    CString   GetStrColorType() const;
-    void      SetBackColor(ColorType clr);
+    const ColorType GetBackColor() const;
+    const   CString GetStrColorType() const;
+    void      SetBackColor(const ColorType& clr);
 
 //參數串
 private:
-	CString m_paraStr;
+             CString m_paraStr;
     std::vector<int> m_Parameters;
 public:
-    void SetPara(ParaOfPara, const int);
-    int GetPara(ParaOfPara) const;
-	CString GetStrPara() const;
+             void SetPara(const ParaOfPara&, const int&);
+    const     int GetPara(const ParaOfPara&) const;
+    const CString GetStrPara() const;
 
+//運算子
+    const BOOL operator==(const Nucleotide& vNucl) const;
+          void operator= (const Nucleotide& vNucl);
 
-//其它操作
-    BOOL operator==(const Nucleotide& vNucl);
-    void operator= (const Nucleotide& vNucl);
-
-    CString showMe();
+    const CString showMe();
 };
 
 #endif

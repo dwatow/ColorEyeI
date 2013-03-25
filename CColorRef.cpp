@@ -4,7 +4,7 @@ ColorRef::ColorRef():m_color(0, 0, 0)
 {};
 
 
-BOOL ColorRef::operator==(const ColorRef& clr)
+const BOOL ColorRef::operator==(const ColorRef& clr) const
 {
     return ( R() == clr.R() && G() == clr.G() && B() == clr.B() )? TRUE : FALSE ;
 }
@@ -12,13 +12,6 @@ BOOL ColorRef::operator==(const ColorRef& clr)
 void ColorRef::operator= (const ColorRef& clr)
 {
     iRGB(clr.R(), clr.G(), clr.B());
-}
-
-BOOL ColorRef::midBand(const int& subclr) const
-{
-	const int BandWidth(10);
-	const int Limit((256 - BandWidth)/2);
-	return (subclr < 255-Limit) && (subclr > Limit);
 }
 
 void ColorRef::checkColor(const int& r, const int& g, const int& b) const
@@ -37,39 +30,36 @@ ColorRef::ColorRef(const COLORREF& clrR):m_color(clrR)
 ColorRef::ColorRef(const ColorRef& clr):m_color(clr.m_color)
 { checkColor(R(), G(), B()); }
 
-// ColorRef::~ColorRef()
-// {
-// 	delete m_color;
-// }
 
-COLORREF ColorRef::oRGB() const{ return m_color; };
-unsigned char ColorRef::R() const{ return GetRValue(m_color); };
-unsigned char ColorRef::G() const{ return GetGValue(m_color); };
-unsigned char ColorRef::B() const{ return GetBValue(m_color); };
-// COLORREF* ColorRef::oPtr() const{ return m_color; }
+const COLORREF ColorRef::oRGB() const{ return m_color; };
+const unsigned char ColorRef::R() const{ return GetRValue(m_color); };
+const unsigned char ColorRef::G() const{ return GetGValue(m_color); };
+const unsigned char ColorRef::B() const{ return GetBValue(m_color); };
 
-COLORREF ColorRef::Invrt() const
+const COLORREF ColorRef::Invrt() const
 {
-    const int r = ( midBand(R()) )?(130 - R()):(255 - R());
-    const int g = ( midBand(G()) )?(130 - G()):(255 - G());
-    const int b = ( midBand(B()) )?(130 - B()):(255 - B());
+    const int r = ( checkInv(R()) )?(130 - R()):(255 - R());
+    const int g = ( checkInv(G()) )?(130 - G()):(255 - G());
+    const int b = ( checkInv(B()) )?(130 - B()):(255 - B());
 
     return RGB(r, g, b);
 }
 
-COLORREF ColorRef::Shift(int shift) const
+const BOOL ColorRef::checkInv(const int& subclr) const
+{
+    const int BandWidth(10);
+    const int Limit((256 - BandWidth)/2);
+    return (subclr < 255-Limit) && (subclr > Limit);
+}
+
+const COLORREF ColorRef::Shift(int shift) const
 {
     const int r = (R() < shift)?(R() + shift):(R() - shift);
     const int g = (G() < shift)?(G() + shift):(G() - shift);
     const int b = (B() < shift)?(B() + shift):(B() - shift);
-	
-	return RGB(r, g, b);
+    
+    return RGB(r, g, b);
 }
-
-// void ColorRef::iPtr(COLORREF* pClr)
-// {
-// 	m_color = pClr;
-// }
 
 void ColorRef::iRGB(const int& r, const int& g, const int& b)
 {

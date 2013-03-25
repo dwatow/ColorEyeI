@@ -7,29 +7,6 @@ m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd), m_isShowPercentNum(FALSE), m_isS
     m_Info1.pCircle = this;
 }
 
-BOOL Circle::isVisible() const
-{ return m_Visible; }
-void Circle::Visible(BOOL _V)
-{ m_Visible = _V; }
-
-void Circle::SetCenter(const CPoint& p)
-{ SetCenter(p.x, p.y); }
-CPoint Circle::GetCenter() const
-{ return m_nCenter; }
-
-
-void Circle::SetPercent(int percent)
-{ m_Percent = percent; }
-int Circle::GetPercent() const
-{ return m_Percent; }
-ColorRef Circle::GetArcColor() const
-{  return m_arcColor; }
-ColorRef Circle::GetStrColor() const
-{ return m_strColor; }
-
-void Circle::reDrawWindow()
-{ gethWnd()->RedrawWindow(&m_reDeawRect); }
-
 void Circle::SetCenter(const int& x, const int& y)
 {
     ASSERT(x >= 0 && y >= 0);
@@ -45,7 +22,7 @@ void Circle::SetRadius(const int& r)
 	m_Label.BindCircle(GetRadius(), GetCenter());
 }
 
-void Circle::SetArcColor(const ColorRef clr)
+void Circle::SetArcColor(const ColorRef& clr)
 {
 	m_arcColor = clr;
 	m_Pen.DeleteObject();
@@ -53,8 +30,8 @@ void Circle::SetArcColor(const ColorRef clr)
 	tracePen = &m_Pen;
 }
 
-void Circle::SetStrColor(const ColorRef clr)
-{ m_strColor = clr; }
+void Circle::SetPrcntColor(const ColorRef clr)
+{ m_percentColor = clr; }
 
 void Circle::Draw(CPaintDC &dc)
 {
@@ -82,7 +59,7 @@ void Circle::drawCircle(CPaintDC &dc)
 	ASSERT(tracePen == tempPen);
 }
 
-void Circle::ShowLabel(BOOL _B)
+void Circle::ShowLabel(const BOOL& _B)
 { m_isShowLabel = _B; }
 
 void Circle::drawPercent(CPaintDC& dc)
@@ -121,7 +98,7 @@ void Circle::drawPercent(CPaintDC& dc)
 
 void Circle::drawPercentNum(CPaintDC &dc)
 {
- 	dc.SetTextColor(m_strColor.oRGB());
+ 	dc.SetTextColor(m_percentColor.oRGB());
 	CString percent;
 	percent.Format("%3d%%", GetPercent());
 	TextOut(dc, GetCenter().x - 15, GetCenter().y - (GetRadius()+20) , (LPCSTR)percent, percent.GetLength());  //¤W
@@ -140,7 +117,7 @@ void Circle::readRadius(const int& dyR)
 	m_DrawCircleRect = r2rect(m_nRadius);
 }
 
-CRect Circle::r2rect(int expnd)
+const CRect Circle::r2rect(const int& expnd)
 {
 	CRect _rect((long)(m_nCenter.x - expnd), (long)(m_nCenter.y - expnd),
 		        (long)(m_nCenter.x + expnd), (long)(m_nCenter.y + expnd));
@@ -152,7 +129,6 @@ void Circle::SetData(const Bullet& blt)
 {
 	m_Label.SetData(blt);
 }
-
 
 #ifdef _DEBUG
 

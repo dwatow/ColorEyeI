@@ -23,50 +23,43 @@ class Cartridge2
 //建解構子
 public:
     Cartridge2();
-	Cartridge2(const Cartridge2&);
-    virtual  ~Cartridge2();
+    Cartridge2(const Cartridge2&);
+    ~Cartridge2();
 //表格順序
-private:    UINT m_sequenceFrom;
-public:     void setSqncFrm(UINT);
-		    UINT getSqncFrm() const;
+private:              UINT m_sequenceFrom;
+public:               void SetSqncFrm(const UINT&);
+                const UINT GetSqncFrm() const;
 //區域順序
-private:    AreaKind m_sequenceArea;
-public:     void     setSqncArea(AreaKind);
-			AreaKind getSqncArea() const;
+private:          AreaKind m_sequenceArea;
+public:               void SetSqncArea(const AreaKind&);
+            const AreaKind GetSqncArea() const;
 //點位置
-private:    CPoint    m_PointPosition;
-public:     CPoint    GetPointPosi() const;
-		    void      SetPointPosi(CPoint);
+private:            CPoint m_PointPosition;
+public:       const CPoint GetPointPosi() const;
+                      void SetPointPosi(const CPoint&);
 //背景
 private:
-public:     BkMaker*  m_pBackGorund;
-            ColorRef  GetBkColor() const;
-		    void      SetBkColor(ColorRef);
-			void      GrabBKM(Cartridge2&);
-
-private:    BackGroundStatus m_bkStatus;
-			CString   GetStrBkStatus() const;
-public:     void      SetBkStatus( BackGroundStatus BGS, BOOL creatBGS = TRUE);
-			BackGroundStatus GetBkStatus() const;
+public:           BkMaker* m_pBackGorund;
+                  ColorRef GetBkColor() const;  //operator==() can't return const
+                      void SetBkColor(const ColorRef&);
+//背景狀態（描述符）
+private:  BackGroundStatus m_bkStatus;
+public:               void SetBkStatus( const BackGroundStatus& _BGS, const BOOL& creatBGS = TRUE);
+          BackGroundStatus GetBkStatus() const;
+		     const CString GetStrBkStatus() const;
 //資料
-private:    Bullet    m_Data;
-public:     Bullet    GetBullet() const;
-			void      SetBullet(const Bullet& Pd);
+private:            Bullet m_Data;
+public:       const Bullet GetBullet() const;
+                      void SetBullet(const Bullet& Pd);
 //文字描述
-private:    CString m_Description;
-public:     void SetDescrip(CString);
-			CString GetDescrip() const;
+private:           CString m_Description;
+public:               void SetDescrip(const CString&);
+             const CString GetDescrip() const;
 //運算子和其它
-public:     BOOL operator==(const Cartridge2& vCar);
-		    void operator= (const Cartridge2& vCar);
+public:         const BOOL operator==(const Cartridge2& vCar) const;
+                      void operator= (const Cartridge2& vCar);
 //////////////////////////////////////////////////////////////////////////
-			CString showMe() const;
+             const CString showMe() const;
 };
-
-inline void Cartridge2::GrabBKM(Cartridge2& _C)
-{
-	m_pBackGorund = _C.m_pBackGorund;
-	_C.m_pBackGorund = 0;
-}
 
 #endif

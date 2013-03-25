@@ -374,14 +374,6 @@ BOOL CMsrItemDlg::OnInitDialog()
     CDialog::OnInitDialog();
     
     // TODO: Add extra initialization here
-//     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-//     ASSERT_VALID(pMainFrm);
-//     
-//     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
-//     ASSERT_VALID(pDoc);
-
-//    pDoc->GetMsrDataChain().Empty();
-
     m_cbxSelNitsKind.AddString("+");
     m_cbxSelNitsKind.AddString("--");
     m_cbxSelNitsKind.SetCurSel(0);

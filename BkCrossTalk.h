@@ -10,14 +10,14 @@ public:
 	BkCrossTalk(const BkCrossTalk& bkN);
 
 private:
-	void     setRect(const CRect& _rect);
-	void     setRect(const ColorRef& clr);
-	CRect    getRect()      const;
-	ColorRef getRectColor() const;
+	          void setRect(const CRect& _rect);
+	          void setRect(const ColorRef& clr);
+	const    CRect getRect()      const;
+	const ColorRef getRectColor() const;
 public:	
-	void     CT_SetRect(const CRect& _rect, const ColorRef& clr);
+    	      void CT_SetRect(const CRect& _rect, const ColorRef& clr);
 public:	
-	void Draw(CPaintDC& dc);
+              void Draw(CPaintDC& dc);
 };
 
 inline BkCrossTalk::BkCrossTalk(ColorRef clrRrect)
@@ -43,9 +43,9 @@ inline void BkCrossTalk::setRect(const CRect& _rect)
 inline void BkCrossTalk::setRect(const ColorRef& clr)
 { m_rectColor = clr; }
 
-inline CRect BkCrossTalk::getRect() const
+inline const CRect BkCrossTalk::getRect() const
 { return m_centerRect; }
-inline ColorRef BkCrossTalk::getRectColor() const
+inline const ColorRef BkCrossTalk::getRectColor() const
 { return m_rectColor; }
 
 inline void BkCrossTalk::CT_SetRect(const CRect& _rect, const ColorRef& clr)

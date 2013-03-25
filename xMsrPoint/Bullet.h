@@ -9,30 +9,34 @@ enum ValueKind{VluK_Lv, VluK_Sx, VluK_Sy, VluK_T, VluK_Duv, VluK_Du, VluK_Dv, Vl
 //Bullet 彈頭
 class Bullet
 {
-private:
-	std::vector<float> m_vfValues;
-public:
-	float oFlt(ValueKind) const;
-	CString oStr(ValueKind) const;
-	void i(ValueKind, float);
-	void i(ValueKind, CString);
-
-private:
-	CTime 	m_LastModifyTime;
-public:
-	CString GetLastTime() const;
-
+//建解構子
 public:
     Bullet();
     Bullet(const Bullet&);
-    virtual ~Bullet();
-    BOOL isEmpty() const;
-    virtual void    operator= (const Bullet&);
-	CString Bullet::show() const;
+    ~Bullet();
 
+//資料儲存串
 private:
-	float str2flt(CString ) const;
-	CString flt2str(float ) const;
+    std::vector<float> m_vfValues;
+public:
+      const float oFlt(const ValueKind&) const;
+    const CString oStr(const ValueKind&) const;
+             void i(const ValueKind&, const float&);
+             void i(const ValueKind&, const CString&);
+//最後更新時間
+private:
+            CTime m_LastModifyTime;
+public:
+    const CString GetLastTime() const;
+//float, String轉換
+private:
+      const float str2flt(CString ) const;
+    const CString flt2str(const float& ) const;
+//運算子
+public:
+             void operator= (const Bullet&);
+       const BOOL isEmpty() const;
+    const CString Bullet::show() const;
 };
 
 #endif

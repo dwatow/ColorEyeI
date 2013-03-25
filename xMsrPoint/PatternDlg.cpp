@@ -27,7 +27,7 @@ static char THIS_FILE[] = __FILE__;
 // CPatternDlg dialog
 
 
-CPatternDlg::CPatternDlg(initType it, CWnd* pParent /*=NULL*/)
+CPatternDlg::CPatternDlg(const initType& it, CWnd* pParent /*=NULL*/)
 : CDialog(CPatternDlg::IDD, pParent), InitDataType(it)
 {
     //{{AFX_DATA_INIT(CPatternDlg)
@@ -273,7 +273,7 @@ void CPatternDlg::trigger()
     setBkColor(m_itor->GetBkColor());
 
     m_Goal.SetData(m_itor->GetBullet());
-    m_Goal.SetStrColor(m_BkColor.Shift());
+    m_Goal.SetPrcntColor(m_BkColor.Shift());
 
     m_Goal.SetCenter(m_itor->GetPointPosi());  //靶位置
     m_Goal.SetPercent(0);
@@ -307,7 +307,7 @@ BOOL CPatternDlg::PreTranslateMessage(MSG* pMsg)
     return CDialog::PreTranslateMessage(pMsg);
 }
 
-CaState CPatternDlg::recoil()
+const CaState CPatternDlg::recoil()
 {
     //暫存目前的螢幕顯示/隱藏狀態
     BOOL OldDrawGold  = m_Goal.isVisible();
@@ -322,7 +322,7 @@ CaState CPatternDlg::recoil()
 
     Sleep(70);
 
-    CaState camsrResult(m_pCA210->Measure());
+    const CaState camsrResult(m_pCA210->Measure());
 
     m_itor->SetBullet(m_pCA210->GetMsrData());
 	m_Goal.SetData(m_itor->GetBullet());
@@ -383,7 +383,7 @@ void CPatternDlg::OnTimer(UINT nIDEvent)
 
 void CPatternDlg::MsrKernel()
 {
-	int percent = m_Goal.GetPercent();
+	int percent(m_Goal.GetPercent());
 	if (percent < 0)
     {
 		m_Goal.SetPercent(rand()%20+10);
@@ -395,13 +395,10 @@ void CPatternDlg::MsrKernel()
     }
     else if (percent >= 100)
     {
-// 		if (m_Goal.GetPercent() > 83)
-// 		{
 		eventRunMsrAi(FALSE);
 		if ((eventCatchMsrValue() == 1) //最複雜的步驟
 			|| (c_bMsrEndnMsred == FALSE))
 			eventRunMsrAi(TRUE);
-// 		}
     }
     else
         ASSERT(0);

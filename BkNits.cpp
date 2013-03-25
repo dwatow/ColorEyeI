@@ -13,7 +13,7 @@ void BkNits::n2cPos(ColorRef& Bkclr)
         //量測抓值
         if (m_pCa210->Measure() == CA_ZeroCalMode)
             AfxMessageBox("檔位不在MEAS");
-        fLv = (m_pCa210->GetMsrData().oFlt(VluK_Lv))*100;  //m_IProbe.GetLv();
+        fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
 	
     while(fLv < m_Nits)   //若亮度還在5以下，就...變亮
@@ -25,7 +25,7 @@ void BkNits::n2cPos(ColorRef& Bkclr)
         Sleep(60);
 		//      量測抓值
         m_pCa210->Measure();
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv)*100;  //m_IProbe.GetLv();
+        fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
 	_SetBkColor(Bkclr);
 }
@@ -45,7 +45,7 @@ void BkNits::n2cNeg(ColorRef& Bkclr)
 		//        量測抓值
         if (m_pCa210->Measure() == CA_ZeroCalMode)
             AfxMessageBox("檔位不在MEAS");
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv)*100;  //m_IProbe.GetLv();
+        fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
     
     while(fLv > m_Nits)   //若亮度還在5以下，就...變亮
@@ -57,7 +57,7 @@ void BkNits::n2cNeg(ColorRef& Bkclr)
 		Sleep(60);
         //量測抓值
         m_pCa210->Measure();
-        fLv = m_pCa210->GetMsrData().oFlt(VluK_Lv)*100;  //m_IProbe.GetLv();
+        fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
 	_SetBkColor(Bkclr);
 }

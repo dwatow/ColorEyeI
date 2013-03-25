@@ -31,14 +31,14 @@ public:
 // Implementation
 public:
     //OnCtlColor of Dlg
-    CStaticText& SetTextColor(CWnd* pWnd, CDC* pDC, COLORREF clr);
-    CStaticText& SetBkColor(CWnd* pWnd, CDC* pDC, COLORREF clr);
-    COLORREF GetTextColor(CDC* pDC);
-    COLORREF GetBkColor(CDC* pDC);
+    const CStaticText& SetTextColor(const CWnd* pWnd, CDC* pDC, const COLORREF& clr);
+    const CStaticText& SetBkColor  (const CWnd* pWnd, CDC* pDC, const COLORREF& clr);
+    const    COLORREF  GetTextColor(const CDC* pDC) const;
+    const    COLORREF  GetBkColor  (const CDC* pDC) const;
 
-    CStaticText& SetFontFace(LPCTSTR FontFace);
-    CStaticText& SetFont(CFont* pFont);
-    CFont* GetFont();
+    const CStaticText& SetFontFace(const LPCTSTR& FontFace);
+    const CStaticText& SetFont(const CFont* pFont);
+    const       CFont* GetFont() const;
 
     virtual ~CStaticText();
 

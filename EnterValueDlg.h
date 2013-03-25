@@ -15,7 +15,7 @@ class CEnterValueDlg : public CDialog
 // Construction
 	CString m_dlgTitle;
 public:
-	CEnterValueDlg(const CString dlgTitle, const CString str, CWnd* pParent = NULL);   // standard constructor
+	CEnterValueDlg(const CString& dlgTitle, const CString& str, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CEnterValueDlg)

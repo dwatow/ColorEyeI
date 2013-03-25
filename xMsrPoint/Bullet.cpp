@@ -20,36 +20,37 @@ Bullet::~Bullet()
     m_vfValues.clear();
 }
 
-void Bullet::i(ValueKind _VK, float _F)
+void Bullet::i(const ValueKind& _VK, const float& _F)
 {
 //    ASSERT( _F>=0 && _F<=0.8 ); 
+//不是只會輸入色度，所以不需要檢查定義域
     m_vfValues[_VK] = _F;
     m_LastModifyTime = CTime::GetCurrentTime(); 
 }
 
-void Bullet::i(ValueKind _VK, CString _S)
+void Bullet::i(const ValueKind& _VK, const CString& _S)
 {
     ASSERT( str2flt(_S)>=0 && str2flt(_S)<=0.8 ); 
     m_vfValues[_VK] = str2flt(_S);
     m_LastModifyTime = CTime::GetCurrentTime(); 
 }
 
-float Bullet::oFlt(ValueKind _VK) const
+const float Bullet::oFlt(const ValueKind& _VK) const
 {
     return m_vfValues[_VK];
 }
 
-CString Bullet::oStr(ValueKind _VK) const
+const CString Bullet::oStr(const ValueKind& _VK) const
 {
     return flt2str(m_vfValues[_VK]);
 }
 //////////////////////////////////////////////////////////////////////////
-float Bullet::str2flt(CString _Str) const
+const float Bullet::str2flt(CString _Str) const
 {
     return atof(_Str.GetBuffer(0));
 }
 
-CString Bullet::flt2str(float _F) const
+const CString Bullet::flt2str(const float& _F) const
 {
     CString str;
     str.Format("%f", _F);
@@ -63,7 +64,7 @@ void Bullet::operator= (const Bullet& xp)
     m_LastModifyTime = xp.m_LastModifyTime;
 }
 
-BOOL Bullet::isEmpty() const
+const BOOL Bullet::isEmpty() const
 {
 	for (std::vector<float>::const_iterator vitor = m_vfValues.begin(); vitor != m_vfValues.end(); ++vitor)
 		if ( *vitor == 0.0 ) 
@@ -72,7 +73,7 @@ BOOL Bullet::isEmpty() const
     return FALSE ;
 }
 
-CString Bullet::GetLastTime() const
+const CString Bullet::GetLastTime() const
 {
     CString str;
     str.Format("%d/%d/%d, %d:%d:%d", 
@@ -82,7 +83,7 @@ CString Bullet::GetLastTime() const
     return str;
 }
 
-CString Bullet::show() const
+const CString Bullet::show() const
 {
     return " Lv =" + flt2str(m_vfValues[VluK_Lv]) + "\n" 
 		+ "  x =" + flt2str(m_vfValues[VluK_Sx]) + "\n" 

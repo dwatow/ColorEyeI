@@ -60,11 +60,10 @@ BkMaker& BkMaker::operator=(const BkMaker& sp)
 	return *this;
 }
 
-ColorRef BkMaker::_GetBkColor() const
+const ColorRef BkMaker::_GetBkColor() const
 { return m_BkColor; }
 void BkMaker::_SetBkColor(const ColorRef& clr)
 { m_BkColor = clr; }
 
-void BkMaker::Draw(CPaintDC& dc)
-{};
+void BkMaker::Draw(CPaintDC& dc){};
 

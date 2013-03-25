@@ -250,17 +250,17 @@ void CColorEyeIApp::OnMsrForItem()
 	m_pdlgPattern->LoadedCartridge();
 }
 
-CString CColorEyeIApp::GetPathName()
+const CString CColorEyeIApp::GetPathName()
 {
     return m_strPathName;
 }
 
-CString CColorEyeIApp::GetPath()
+const CString CColorEyeIApp::GetPath()
 {
     return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
 }
 
-CString CColorEyeIApp::GetDesktopPath()
+const CString CColorEyeIApp::GetDesktopPath()
 {
 	return m_desktopPath;
 }

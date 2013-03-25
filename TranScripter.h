@@ -20,33 +20,32 @@ class TranScripter
 public:
 	TranScripter();
 	void Trans(DNA&, RNA&);
-	int Cm2pixel(const double) const;
+	const int Cm2pixel(const double&) const;
 private:
-	ColorRef tranColor(UINT) const;
-	CPoint   tranPoint(UINT) const;
-	CString  tranDescrip(UINT) const;
-	BackGroundStatus tranBkStatus(UINT few) const;
+	const ColorRef tranColor(const UINT&) const;
+	const CPoint   tranPoint(const UINT&) const;
+	const CString  tranDescrip(const UINT&) const;
+	const BackGroundStatus tranBkStatus(const UINT&) const;
 
 	void forCrsTlk(Cartridge2&);
 	void forNits(Cartridge2&);
 	//DNA to RNA
-    CPoint get5nits9Point(UINT few) const;
-    CPoint getCrossTalk(UINT few) const;// 6/26新增
+    const CPoint get5nits9Point(const UINT& few) const;
+    const CPoint getCrossTalk(const UINT& few) const;// 6/26新增
 	
-	CPoint getCenterPoint()      const;
-    CPoint getFE5Point(UINT few) const;
-    CPoint getFE9Point(UINT few) const;
-    CPoint getW49Point(UINT few) const;
-    CPoint getD25Point(UINT few) const;//side 幾公分
-    CPoint getD29Point(UINT few) const;
-    CPoint getD21Point(UINT few) const;
-    CPoint getD13Point(UINT few) const;
-	CPoint getJND()              const;
+	const CPoint getCenterPoint()      const;
+    const CPoint getFE5Point(const UINT& few) const;
+    const CPoint getFE9Point(const UINT& few) const;
+    const CPoint getW49Point(const UINT& few) const;
+    const CPoint getD25Point(const UINT& few) const;//side 幾公分
+//     const CPoint getD29Point(const UINT& few) const;
+    const CPoint getD21Point(const UINT& few) const;
+    const CPoint getD13Point(const UINT& few) const;
+// 	CPoint getJND()              const;
 
-	void setSquence(Cartridge2&, std::vector<Nucleotide>::size_type, int) const;
+	void setSquence(Cartridge2&, const std::vector<Nucleotide>::size_type&, const int&) const;
     
-	void checkPointValue(const int x, const int y = 1) const;
-	void checkPointValue(const double fe, const int cm = 1) const;
-
+	void checkPointValue(const int& x, const int& y = 1) const;
+	void checkPointValue(const double& fe, const int& cm = 1) const;
 };
 #endif

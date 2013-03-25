@@ -14,7 +14,7 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 
-#ifdef _DEBUG2
+#ifdef _DEBUG
 #define debugCode( code_fragment ) { code_fragment }
 #else
 #define debugCode( code_fragment )
@@ -25,14 +25,13 @@ static char THIS_FILE[]=__FILE__;
 
 bool RNA::AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
 {
-    return (sp1.getSqncArea() < sp2.getSqncArea()) ? 1 : 0;
+    return (sp1.GetSqncArea() < sp2.GetSqncArea()) ? 1 : 0;
 }
 
 bool RNA::OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
 {
-    return (sp1.getSqncFrm() < sp2.getSqncFrm()) ? 1 : 0;
+    return (sp1.GetSqncFrm() < sp2.GetSqncFrm()) ? 1 : 0;
 }
-
 
 // void RNA::SortQuackMsr(std::vector<Cartridge2>& vCar) const
 // {
@@ -148,7 +147,7 @@ RNA::~RNA()
 //     return m_CarChain2.at(0);
 // }
 
-const Cartridge2& RNA::At(Cartridge2 _C2) const
+const Cartridge2& RNA::At(const Cartridge2& _C2) const
 {
     for (std::vector<Cartridge2>::const_iterator citor = m_CarChain2.begin(); citor != m_CarChain2.end(); ++citor)
         if (_C2 == *citor)
@@ -156,6 +155,9 @@ const Cartridge2& RNA::At(Cartridge2 _C2) const
 
         return m_CarChain2.at(0);
 }
+
+const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
+{ return m_CarChain2.at(_P);   };
 
 // Cartridge2& RNA::At(ColorType clr, PointNum Large, UINT Little) 
 // {
@@ -212,7 +214,7 @@ void RNA::Empty()
 //     }
 // }
 
-void RNA::CutEqualCell(RNA compData)
+void RNA::CutEqualCell(const RNA& compData)
 {
     if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
     {
@@ -223,39 +225,41 @@ void RNA::CutEqualCell(RNA compData)
         //在這時
         //m_CarChain2是舊
         //compData是新的
-        std::vector<Cartridge2>::iterator rnaitor = 0;
-        std::vector<Cartridge2>::iterator compItor, removeItor;
+        std::vector<Cartridge2>::const_iterator rnaitor = 0, compItor;
         debugCode(
             str.Format("Begin: %X, End: %X\n", Begin(), End());
             m_dTxt.push_back(str);
-            m_dTxt.push_back("\nRNA原本的位址\n");
 
-            for (rnaitor  = m_CarChain2.begin();
-                 rnaitor != m_CarChain2.end(); ++rnaitor)
-            {
-                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
-                    rnaitor,\
-                    rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
-                    rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
-                m_dTxt.push_back(str);
-            }
+            m_dTxt.push_back("\nRNA原本的位址\n");
+				for (rnaitor  = m_CarChain2.begin();
+					 rnaitor != m_CarChain2.end(); ++rnaitor)
+				{
+					str.Format("%X, c(%d, %d, %d), P(%d, %d), status: %s\n",\
+						rnaitor,\
+						rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
+						rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y,\
+						rnaitor->GetStrBkStatus()); 
+					m_dTxt.push_back(str);
+				}
 
             m_dTxt.push_back("\ncompData的位址\n");
-            for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
-            {
-                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
-                    compItor,\
-                    compItor->GetBkColor().R(), compItor->GetBkColor().G(), compItor->GetBkColor().B(),\
-                    compItor->GetPointPosi().x, compItor->GetPointPosi().y); 
-                m_dTxt.push_back(str);
-            }
+				for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
+				{
+					str.Format("%X, c(%d, %d, %d), P(%d, %d), status: %s\n",\
+						compItor,\
+						compItor->GetBkColor().R(), compItor->GetBkColor().G(), compItor->GetBkColor().B(),\
+						compItor->GetPointPosi().x, compItor->GetPointPosi().y,\
+						compItor->GetStrBkStatus()); 
+					m_dTxt.push_back(str);
+				}
         )
         //remove & cut 在新的裡面，比對舊的，代表重覆，重覆量測去除掉
-        removeItor = End();
+//         removeItor = ;
         debugCode(
             str.Format("\nremoveItor:\n");
             m_dTxt.push_back(str);
         )
+        std::vector<Cartridge2>::iterator removeItor(End());
         for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
         {
             //移動一個元素到最後，就刪掉
@@ -270,21 +274,20 @@ void RNA::CutEqualCell(RNA compData)
                 str.Format("A. %x\n", removeItor);
                 m_dTxt.push_back(str);
             )
-        //m_CarChain2.erase(removeItor, End());
         }
         
         m_CarChain2.erase(removeItor, End());
 
         debugCode(
             m_dTxt.push_back("\nRNA後來的位址\n");
-            
             for (rnaitor = m_CarChain2.begin();
                  rnaitor != m_CarChain2.end(); ++rnaitor)
             {
-                str.Format("%X, c(%d, %d, %d), P(%d, %d)\n",\
+                str.Format("%X, c(%d, %d, %d), P(%d, %d), status: %s\n",\
                     rnaitor,\
                     rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
-                    rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y); 
+                    rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y,\
+					rnaitor->GetStrBkStatus());
                 m_dTxt.push_back(str);
             }
         )

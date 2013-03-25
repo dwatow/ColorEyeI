@@ -15,6 +15,7 @@
 
 class CColorEyeIDoc : public CDocument
 {
+//basic information in Doc
     CString m_PnlID;
     CString m_MsrDvc;
     CString m_Prb;
@@ -28,11 +29,11 @@ public:
     CString& GetCHID  () { return m_CHID;   };
 	CString& GetNitsLv() { return m_nitsBkClr; };
 
-    void SetPnlID  (CString& _S) { m_PnlID  =  _S; };
-    void SetMsrDvc (CString& _S) { m_MsrDvc =  _S; };
-    void SetPrb    (CString& _S) { m_Prb    =  _S; };
-    void SetCHID   (CString& _S) { m_CHID   =  _S; };
-	void SetNitsLv (int& _I)     { m_nitsBkClr.Format("%d", _I); };
+    void SetPnlID  (const CString& _S) { m_PnlID  =  _S; };
+    void SetMsrDvc (const CString& _S) { m_MsrDvc =  _S; };
+    void SetPrb    (const CString& _S) { m_Prb    =  _S; };
+    void SetCHID   (const CString& _S) { m_CHID   =  _S; };
+	void SetNitsLv (const int& _I)     { m_nitsBkClr.Format("%d", _I); };
 //File Error
 	CFileException m_ErrorFx;
 //OMD File
@@ -70,7 +71,7 @@ private:
 	RNA m_docRNA;
 public:
 	void UpdateDocRNA(RNA& _docRNA){ m_docRNA.Empty(); m_docRNA = _docRNA; };
-	RNA  GetDocRNA(){ return m_docRNA; };
+	RNA  GetDocRNA() const{ return m_docRNA; };
 
 protected: // create from serialization only
     CColorEyeIDoc();

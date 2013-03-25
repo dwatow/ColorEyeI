@@ -26,7 +26,6 @@ enum FormType{ FORM_Nothing = 0, FORM_RA, FORM_OQC_TRIAL_PRODUCTION, FORM_SEC, F
 
 class CSelExcelDlg : public CDialog
 {
-//    COmdFile0* m_pOmdfile;
     FormType   m_ft;
     int        m_fileNumLimit;
     CString    m_strXlsFilePath;  //XlsFilepath
@@ -85,7 +84,7 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-	CString GetXlsFilePath();
+	const CString GetXlsFilePath() const;
 	void OutToExcel(CXlsFile2* );
     void NewVector();
     void InitXlsFileList(CComboBox& ComboBox, CString FileNameExt);

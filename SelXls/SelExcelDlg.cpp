@@ -278,7 +278,7 @@ void CSelExcelDlg::OnOK()
     CDialog::OnOK();
 }
 
-CString CSelExcelDlg::GetXlsFilePath()
+const CString CSelExcelDlg::GetXlsFilePath() const
 {
     CString strXlsFilePath;
     CString strFileName;

@@ -18,7 +18,7 @@
  *    getW49Point(UINT few)                  const *
  *    getCrossTalk(UINT few, float FromEdge) const *
  ***************************************************/
-void TranScripter::checkPointValue(const int _hCI, const int _vCI) const
+void TranScripter::checkPointValue(const int& _hCI, const int& _vCI) const
 {
     ASSERT(_hCI > 0);
     ASSERT(_hCI < m_nScrmH);
@@ -27,13 +27,13 @@ void TranScripter::checkPointValue(const int _hCI, const int _vCI) const
     ASSERT(_vCI < m_nScrmV);
 }
 
-void TranScripter::checkPointValue(const double dFE, const int _cm2pixel) const
+void TranScripter::checkPointValue(const double& dFE, const int& _cm2pixel) const
 {
     ASSERT(dFE >= 0); //dFE
     ASSERT(_cm2pixel > 0);  //Cm2pixel(2.3)
 }
 
-CPoint TranScripter::getCenterPoint() const
+const CPoint TranScripter::getCenterPoint() const
 {
 //運算第幾個（以九點為計）
     //ScrmV 螢幕垂直pixel數
@@ -63,7 +63,7 @@ CPoint TranScripter::getCenterPoint() const
 
 }
 
-CPoint TranScripter::getFE9Point(UINT few) const
+const CPoint TranScripter::getFE9Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
     const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
@@ -125,7 +125,7 @@ CPoint TranScripter::getFE9Point(UINT few) const
     }
 }
 
-CPoint TranScripter::getFE5Point(UINT few) const
+const CPoint TranScripter::getFE5Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
 
@@ -177,7 +177,7 @@ CPoint TranScripter::getFE5Point(UINT few) const
     }
 }
 
-CPoint TranScripter::get5nits9Point(UINT few) const
+const CPoint TranScripter::get5nits9Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
 
@@ -239,7 +239,7 @@ CPoint TranScripter::get5nits9Point(UINT few) const
     }
 }
 
-CPoint TranScripter::getD13Point(UINT few) const
+const CPoint TranScripter::getD13Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
 
@@ -277,25 +277,25 @@ CPoint TranScripter::getD13Point(UINT few) const
 +------------------------------+
 |00            01            02|TE
 |                              |  
-|       09            10       |T1
+|       03            04       |T1
 |                              |
-|03            04            05|VC
+|05            06            07|VC
 |                              |
-|       11            12       |B1  
+|       08            09       |B1  
 |                              |  
-|06            07            08|BE
+|10            11            12|BE
 +------------------------------+
 */
     const CPoint 
         Point00(LeftEdge ,TopEdge),        Point01(hCenter  ,TopEdge),        Point02(RightEdge,TopEdge),
 
-                               Point09(L1, T1),                     Point10(R1, T1),
+                               Point03(L1, T1),                     Point04(R1, T1),
         
-        Point03(LeftEdge ,vCenter),        Point04(hCenter  ,vCenter),        Point05(RightEdge,vCenter),
+        Point05(LeftEdge ,vCenter),        Point06(hCenter  ,vCenter),        Point07(RightEdge,vCenter),
 
-                               Point11(L1, B1),                     Point12(R1 ,B1),
+                               Point08(L1, B1),                     Point09(R1 ,B1),
 
-        Point06(LeftEdge ,BottomEdge),     Point07(hCenter  ,BottomEdge),     Point08(RightEdge,BottomEdge),
+        Point10(LeftEdge ,BottomEdge),     Point11(hCenter  ,BottomEdge),     Point12(RightEdge,BottomEdge),
 
 
         PointD(hCenter  ,vCenter);
@@ -324,7 +324,7 @@ CPoint TranScripter::getD13Point(UINT few) const
     }
 }
 
-CPoint TranScripter::getD21Point(UINT few) const
+const CPoint TranScripter::getD21Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
 
@@ -418,7 +418,7 @@ CPoint TranScripter::getD21Point(UINT few) const
     }
 }
 
-CPoint TranScripter::getD25Point(UINT few) const
+const CPoint TranScripter::getD25Point(const UINT& few) const
 {
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
@@ -551,7 +551,7 @@ CPoint TranScripter::getD25Point(UINT few) const
     }
 }
 
-CPoint TranScripter::getW49Point(UINT few) const
+const CPoint TranScripter::getW49Point(const UINT& few) const
 {
 //運算第幾個（以49點為計）
 
@@ -721,7 +721,7 @@ CPoint TranScripter::getW49Point(UINT few) const
 }
 
 
-CPoint TranScripter::getCrossTalk(UINT few) const
+const CPoint TranScripter::getCrossTalk(const UINT& few) const
 {
 //運算第幾個（以九點為計）
     //不可以貼邊
@@ -773,14 +773,14 @@ CPoint TranScripter::getCrossTalk(UINT few) const
     }
 }
 
-int TranScripter::Cm2pixel(const double cm) const
+const int TranScripter::Cm2pixel(const double& cm) const
 {    
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     ASSERT(pMainFrm->m_pCa210);
     //開啟舊檔時, pMainFrm->m_pCa210 為空指標
     //有量測（與CA-210連線）時, pMainFrm->m_pCa210 有指向儀器
-    float LCMsize;
+    float LCMsize(0.0);
 
     if(pMainFrm->m_pCa210 == 0)
         LCMsize = 0.0;
@@ -845,7 +845,7 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
     )
 }
 
-BackGroundStatus TranScripter::tranBkStatus(UINT msrFlowNo) const
+const BackGroundStatus TranScripter::tranBkStatus(const UINT& msrFlowNo) const
 {
 	BackGroundStatus status;
 	ColorType ct = m_tranPointer->GetBackColor();
@@ -882,10 +882,10 @@ void TranScripter::forNits(Cartridge2& crtg)
 			delete crtg.m_pBackGorund;
 			crtg.m_pBackGorund = NitsClr;
 		}
-	}
 	//重新調整BkSuatus，在PatternDialog可以正確觸發調背景顏色的function
-	if (crtg.getSqncArea() != AA_01)
+	if (crtg.GetSqncArea() != AA_01)
 		crtg.SetBkStatus(BGS_Normal, FALSE);
+	}
 }
 
 void TranScripter::forCrsTlk(Cartridge2& crtg)
@@ -912,7 +912,7 @@ void TranScripter::forCrsTlk(Cartridge2& crtg)
 	}
 }
 
-ColorRef TranScripter::tranColor(UINT flowNo) const
+const ColorRef TranScripter::tranColor(const UINT& flowNo) const
 {
 	ColorRef clr;
     if (m_tranPointer->GetMsrFlowNum() == PnGamma)
@@ -946,15 +946,15 @@ ColorRef TranScripter::tranColor(UINT flowNo) const
 	return clr;
 }
 
-CPoint TranScripter::tranPoint(UINT flowNo) const
+const CPoint TranScripter::tranPoint(const UINT& flowNo) const
 {
     switch(m_tranPointer->GetMsrFlowNum())
     {
     case Pn1:        return getCenterPoint();        //中心點定義不分
     case Pn4:        return getCrossTalk(flowNo);
     case Pn5:        return getFE5Point(flowNo);
-    case Pn9:    if (m_tranPointer->GetBackColor() == Nits)          //九點週邊定義各有不同
-                     return get5nits9Point(flowNo);        //分白、黑、5Nits
+    case Pn9:    if (m_tranPointer->GetBackColor() == Nits)   //九點週邊定義各有不同
+                     return get5nits9Point(flowNo);           //分白、黑、5Nits
                  else
                      return getFE9Point(flowNo);
     case Pn13:       return getD13Point(flowNo);
@@ -966,7 +966,7 @@ CPoint TranScripter::tranPoint(UINT flowNo) const
     }    
 }
 
-CString TranScripter::tranDescrip(UINT flowNo) const
+const CString TranScripter::tranDescrip(const UINT& flowNo) const
 {
     CString color, poNum, poNo, para;
 
@@ -979,7 +979,7 @@ CString TranScripter::tranDescrip(UINT flowNo) const
     return color + poNum + poNo + para;
 }
 
-void TranScripter::setSquence(Cartridge2& _Car, std::vector<Nucleotide>::size_type size, int msrFlowNo) const
+void TranScripter::setSquence(Cartridge2& _Car, const std::vector<Nucleotide>::size_type& size, const int& msrFlowNo) const
 {
     const CPoint center(m_nScrmH/2, m_nScrmV/2);
     const CPoint carPoint(_Car.GetPointPosi());
@@ -990,25 +990,35 @@ void TranScripter::setSquence(Cartridge2& _Car, std::vector<Nucleotide>::size_ty
     //從point判斷area code
     if (carPoint.y < aP.y)
     {
-        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_02); 
-        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_03);
-        else                                                     _Car.setSqncArea(AA_07);
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_02); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_03);
+        else                                                     _Car.SetSqncArea(AA_07);
     }
     else if ((carPoint.y >= aP.y) && (carPoint.y <= dP.y))
     {
-        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_04); 
-        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_01);
-        else                                                     _Car.setSqncArea(AA_08);
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_04); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_01);
+        else                                                     _Car.SetSqncArea(AA_08);
     }
     else
     {
-        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.setSqncArea(AA_05); 
-        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.setSqncArea(AA_06);
-        else                                                     _Car.setSqncArea(AA_09);
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_05); 
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_06);
+        else                                                     _Car.SetSqncArea(AA_09);
     }
 
     //依area code判斷順序的選擇
-    if (msrFlowNo <  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 2); 
-    if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(1);
-    if (msrFlowNo >  m_tranPointer->GetMsrFlowNum()/2) _Car.setSqncFrm(size + 1);
+	if (m_tranPointer->GetMsrFlowNum() == Pn21)
+	{
+		if (msrFlowNo+1 == m_tranPointer->GetMsrFlowNum()) 
+			_Car.SetSqncFrm(1);
+		else
+			_Car.SetSqncFrm(size + 2);
+	}
+	else
+	{
+		if (msrFlowNo <  m_tranPointer->GetMsrFlowNum()/2) _Car.SetSqncFrm(size + 2); 
+		if (msrFlowNo == m_tranPointer->GetMsrFlowNum()/2) _Car.SetSqncFrm(1);
+		if (msrFlowNo >  m_tranPointer->GetMsrFlowNum()/2) _Car.SetSqncFrm(size + 1);
+	}
 }

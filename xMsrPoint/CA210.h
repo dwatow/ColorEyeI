@@ -21,74 +21,74 @@ class Ca210
 {
     CString ImpsbStr;
     CaState m_caState;
-	CaState m_caStateTemp;
+    CaState m_caStateTemp;
 protected:
-	CString m_LCMsize;
+    CString m_LCMsize;
     Bullet m_blt;
-    virtual void MsgFrmt(CException* e, CString, CString) = 0;
-    virtual void MsgFrmt(CString) = 0;
-
-public:
-	Ca210(): m_LCMsize(""){};
-    virtual ~Ca210(){};
 //////////////////////////////////////////////////////////////////////////
+    virtual void MsgFrmt(CException* e, const CString&, const CString&) = 0;
+    virtual void MsgFrmt(const CString&) = 0;
 
 public:
- 	virtual CaState CalZero() = 0;
-    virtual CaState Measure() = 0;
+    Ca210(): m_LCMsize(""){};
+    virtual ~Ca210(){};
+
+public:
+    virtual const CaState CalZero() = 0;
+    virtual const CaState Measure() = 0;
  
-    virtual void LinkMemory() = 0;
+    virtual          void LinkMemory() = 0;
  
-    virtual MsrAiState MsrAI(float) = 0;
+    virtual const MsrAiState MsrAI(const float&) = 0;
  
-    virtual void SetOnline(BOOL) = 0;
-	virtual BOOL isOnline() const = 0;
-	void    SetLcmSize(CString _S){ m_LCMsize = _S; };
-    virtual CString GetLcmSize() = 0;
-    virtual CString GetChData() = 0;
-    virtual Bullet  GetMsrData() = 0;
-    CString OutData();
+    virtual          void SetOnline(const BOOL&) = 0;
+    virtual    const BOOL isOnline() const = 0;
+                     void SetLcmSize(const CString& _S){ m_LCMsize = _S; };
+    virtual const CString GetLcmSize() = 0;
+    virtual const CString GetChData() = 0;
+    virtual const Bullet  GetMsrData() = 0;
+            const CString OutData();
 
  //for setup Dialog Value
- 	virtual float   GetRangeColor1() = 0;
- 	virtual float   GetRangeColor2() = 0;
- 	virtual float   GetRangeFAM() = 0;
+    virtual const float GetRangeColor1() const = 0;
+    virtual const float GetRangeColor2() const = 0;
+    virtual const float GetRangeFAM()    const = 0;
  
- 	virtual void    SetChId(LPCTSTR& ) = 0;
- 	virtual CString GetChId() = 0;
- 	virtual CString GetChId(long&) = 0;
+    virtual          void SetChId(const LPCTSTR& )   = 0;
+    virtual const CString GetChId()            const = 0;
+    virtual const CString GetChId(const long&) const = 0;
  
-  	virtual void    SetChNo(long&) = 0;
-    virtual CString GetChStrNo() = 0;
- 	virtual long    GetChNo() = 0;
+    virtual          void SetChNo(const long&) = 0;
+    virtual const    long GetChNo() const      = 0;
+    virtual const CString GetChStrNo()         = 0;
 
-	virtual CString GetProb() = 0;
-    virtual CString GetDeviceType() = 0;
-	virtual CString GetCaVersion() = 0;
+    virtual const CString GetProb()       const = 0;
+    virtual const CString GetDeviceType() const = 0;
+    virtual const CString GetCaVersion()  const = 0;
 
-	virtual CString GetRefProbe() = 0;
-	virtual CString GetCalProbe() = 0;
-	virtual CString GetCalMode() = 0;
-	
-	virtual CString GetRefLv() = 0;
-	virtual CString GetRefSx() = 0;
-	virtual CString GetRefSy() = 0;
+    virtual const CString GetRefProbe() const = 0;
+    virtual const CString GetCalProbe() const = 0;
+    virtual const CString GetCalMode()  const = 0;
+    
+    virtual const CString GetRefLv() const = 0;
+    virtual const CString GetRefSx() const = 0;
+    virtual const CString GetRefSy() const = 0;
 
 //for setup dialog combo box ItemString
-	virtual CString GetSynMode(SynMode) = 0;
-	virtual CString GetDisplayMode(DisPlay) = 0;
-	virtual CString GetDisplayDigits(DisDigits) = 0;
-	virtual CString GetAvgingMode(AvgMode) = 0;
-	virtual CString GetBrigUnit(BrigUnit) = 0;
-	virtual CString GetCalStandard(CalStand) = 0;
+    virtual const CString GetSynMode      (const   SynMode&) const = 0;
+    virtual const CString GetDisplayMode  (const   DisPlay&) const = 0;
+    virtual const CString GetDisplayDigits(const DisDigits&) const = 0;
+    virtual const CString GetAvgingMode   (const   AvgMode&) const = 0;
+    virtual const CString GetBrigUnit     (const  BrigUnit&) const = 0;
+    virtual const CString GetCalStandard  (const  CalStand&) const = 0;
 
 //Get and Set of CA-SDK 
-	virtual void    SetSynMode(SynMode) = 0;			virtual float   GetSynMode() = 0;
-	virtual void    SetDisplayMode(DisPlay) = 0;		virtual long    GetDisplayMode() = 0;
-	virtual void    SetDisplayDigits(DisDigits) = 0;	virtual long    GetDisplayDigits() = 0;
-	virtual void    SetAvgingMode(AvgMode) = 0;			virtual long    GetAvgingMode() = 0;
-	virtual void    SetBrigUnit(BrigUnit) = 0;			virtual long    GetBrigUnit() = 0;
-	virtual void    SetCalStandard(CalStand) = 0;		virtual long    GetCalStandard() = 0;
+    virtual void SetSynMode      (const   SynMode&) = 0; virtual const float GetSynMode()       const = 0;
+    virtual void SetDisplayMode  (const   DisPlay&) = 0; virtual const long  GetDisplayMode()   const = 0;
+    virtual void SetDisplayDigits(const DisDigits&) = 0; virtual const long  GetDisplayDigits() const = 0;
+    virtual void SetAvgingMode   (const   AvgMode&) = 0; virtual const long  GetAvgingMode()    const = 0;
+    virtual void SetBrigUnit     (const  BrigUnit&) = 0; virtual const long  GetBrigUnit()      const = 0;
+    virtual void SetCalStandard  (const  CalStand&) = 0; virtual const long  GetCalStandard()   const = 0;
 };
 
 #endif

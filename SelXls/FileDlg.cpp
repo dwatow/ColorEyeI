@@ -30,7 +30,7 @@ BEGIN_MESSAGE_MAP(CFileDlg, CFileDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-int CFileDlg::GetCurFileList(std::vector<CString>& vstrFilePath, CString FileNameExt)
+const int CFileDlg::GetCurFileList(std::vector<CString>& vstrFilePath, const CString& FileNameExt)
 {
 	//抓取程式目錄下的.xls表格
 	WIN32_FIND_DATA FindFileData;  //一個結構，找到的檔案
@@ -146,7 +146,7 @@ int CFileDlg::GetCurFileList(std::vector<CString>& vstrFilePath, CString FileNam
 // 	return ListBox.GetCount();
 // }
 
-int CFileDlg::GetSelFileList(std::vector<CString>& vstrFilePath)
+const int CFileDlg::GetSelFileList(std::vector<CString>& vstrFilePath)
 {
 	// 取得第一個檔案名稱的位置 若沒有的話傳回NULL
 	POSITION pos = GetStartPosition();
@@ -156,7 +156,7 @@ int CFileDlg::GetSelFileList(std::vector<CString>& vstrFilePath)
 	return (int)vstrFilePath.size();
 }
 
-void CFileDlg::SetMultiFileNameBuffer(const int FileMaxBuffer)
+void CFileDlg::SetMultiFileNameBuffer(const int& FileMaxBuffer)
 {
 	const int BufferSize = (FileMaxBuffer * (MAX_PATH + 1)) + 1;
 	m_ofn.nMaxFile = BufferSize;

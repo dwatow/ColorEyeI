@@ -14,14 +14,8 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CStaticText
 
-CStaticText::CStaticText()
-{
-}
-
-CStaticText::~CStaticText()
-{
-}
-
+CStaticText::CStaticText(){}
+CStaticText::~CStaticText(){}
 
 BEGIN_MESSAGE_MAP(CStaticText, CStatic)
     //{{AFX_MSG_MAP(CStaticText)
@@ -32,7 +26,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CStaticText message handlers
 
-CStaticText& CStaticText::SetFontFace(LPCTSTR FontFace)
+const CStaticText& CStaticText::SetFontFace(const LPCTSTR& FontFace)
 {
     CFont *pFont = new CFont;
     pFont->CreateFont(16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, FF_MODERN, FontFace);
@@ -43,19 +37,12 @@ CStaticText& CStaticText::SetFontFace(LPCTSTR FontFace)
     return *this;
 }
 
-CStaticText& CStaticText::SetFont(CFont* pFont)
-{
-    SetFont(pFont);
-    
-    return *this;
-}
-CFont* CStaticText::GetFont()
-{
-    return CWnd::GetFont();
-}
+const CStaticText& CStaticText::SetFont(const CFont* pFont)
+{ SetFont(pFont); return *this; }
+const CFont* CStaticText::GetFont() const
+{ return CWnd::GetFont(); }
 
-
-CStaticText& CStaticText::SetTextColor(CWnd* pWnd, CDC* pDC, COLORREF clr)
+const CStaticText& CStaticText::SetTextColor(const CWnd* pWnd, CDC* pDC, const COLORREF& clr)
 {
     if (pWnd->GetDlgCtrlID() == GetDlgCtrlID())
         pDC->SetTextColor(clr);
@@ -63,7 +50,7 @@ CStaticText& CStaticText::SetTextColor(CWnd* pWnd, CDC* pDC, COLORREF clr)
     return *this;
 }
 
-CStaticText& CStaticText::SetBkColor(CWnd* pWnd, CDC* pDC, COLORREF clr)
+const CStaticText& CStaticText::SetBkColor(const CWnd* pWnd, CDC* pDC, const COLORREF& clr)
 {
     if (pWnd->GetDlgCtrlID() == GetDlgCtrlID())
         pDC->SetBkColor(clr);
@@ -71,5 +58,5 @@ CStaticText& CStaticText::SetBkColor(CWnd* pWnd, CDC* pDC, COLORREF clr)
     return *this;
 }
 
-COLORREF CStaticText::GetTextColor(CDC* pDC){return pDC->GetTextColor();}
-COLORREF CStaticText::GetBkColor(CDC* pDC)  {return pDC->GetBkColor();}
+const COLORREF CStaticText::GetTextColor(const CDC* pDC) const { return pDC->GetTextColor(); }
+const COLORREF CStaticText::GetBkColor  (const CDC* pDC) const { return pDC->GetBkColor();   }

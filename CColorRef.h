@@ -4,34 +4,29 @@
 
 class ColorRef
 {
-// 	COLORREF* m_pColor;
-	COLORREF  m_color;
+    COLORREF  m_color;
 public:
-	ColorRef();
-	ColorRef(const int&, const int&, const int&);
-	ColorRef(const COLORREF& clr);
-	ColorRef(const ColorRef& clr);
-// 	~ColorRef();
+    ColorRef();
+    ColorRef(const int&, const int&, const int&);
+    ColorRef(const COLORREF& clr);
+    ColorRef(const ColorRef& clr);
+//彩色
+                   void iRGB(const int&, const int&, const int&);
+    const      COLORREF oRGB() const;
+    const unsigned char R() const;
+    const unsigned char G() const;
+    const unsigned char B() const;
+//變色
+    const      COLORREF Shift(int shift = 55) const;
+    const      COLORREF Invrt() const;
+//灰階
+                   void iGray(const int&);
+//運算子
+public:            void operator= (const ColorRef& clr);
+    const          BOOL operator==(const ColorRef& clr) const;
 
-// 	COLORREF* oPtr() const;
-// 	void iPtr(COLORREF*);
-
-	COLORREF  oRGB() const;
-	unsigned char R() const;
-	unsigned char G() const;
-	unsigned char B() const;
-
-    COLORREF  Shift(int shift = 55) const;
-    COLORREF  Invrt() const;
-
-	void iRGB(const int&, const int&, const int&);
-	void iGray(const int&);
-	void operator= (const ColorRef& clr);
-	BOOL operator==(const ColorRef& clr);
-
-private:
-	void checkColor(const int& r, const int& g, const int& b) const;
-	BOOL midBand(const int&) const;
+private:           void checkColor(const int& r, const int& g, const int& b) const;
+             const BOOL checkInv(const int&) const;
 };
 
 

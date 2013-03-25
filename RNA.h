@@ -14,11 +14,14 @@
 
 class RNA
 {
-
+#ifdef _DEBUG
 	std::vector<CString> m_dTxt;
-	//public:
+#endif
+
+private:
 	std::vector<Cartridge2> m_CarChain2;
-    	
+
+//建解構子
 public:
 	RNA();
 	virtual ~RNA();
@@ -28,7 +31,7 @@ public:
 //    std::vector<Cartridge2>::size_type StdInit();
 // 	  std::vector<Cartridge2>::size_type GammaInit();
 //    void DelCell(std::vector<Cartridge2>::size_type index){ m_CarChain2.erase(&m_CarChain2.at(index)); };
-    void CutEqualCell(RNA );
+    void CutEqualCell(const RNA& );
 //    void CutEqualCell(std::vector<Cartridge2> );
 //    void Grow(ColorType ct, PointNum pn);
 //    void freeEmptyCell();
@@ -40,27 +43,26 @@ public:
 //     const Cartridge2& At (ColorType, PointNum, UINT )const ;
 // 	
      void Empty(); 
-     BOOL IsEmpty() const;
+     const BOOL IsEmpty() const;
 	
 	//不管名字像不像直接由vector 回傳
 public:
 //	Cartridge2& At(Cartridge2);
-    const Cartridge2& At(Cartridge2) const;
+    const Cartridge2& At(const Cartridge2&) const;
 // 	Cartridge2& At(std::vector<Cartridge2>::size_type _P)       { return m_CarChain2.at(_P);   };
-     const Cartridge2& At(std::vector<Cartridge2>::size_type _P) const;
+    const Cartridge2& At(const std::vector<Cartridge2>::size_type& _P) const;
 
 	std::vector<Cartridge2>::iterator       Begin();
-//	std::vector<Cartridge2>::const_iterator Begin() const;
+	std::vector<Cartridge2>::const_iterator Begin() const;  //using by CutEqualCell(const RNA)
 	
 	std::vector<Cartridge2>::iterator       End();
-//	std::vector<Cartridge2>::const_iterator End() const;
+	std::vector<Cartridge2>::const_iterator End() const;  //using by CutEqualCell(const RNA)
 
- 	std::vector<Cartridge2>::size_type      Size() const;
+ 	const std::vector<Cartridge2>::size_type Size() const;
 // 	
 //     std::vector<Cartridge2>& operator=(const std::vector<Cartridge2>&);
-     void AddCell(//std::vector<Cartridge2>::iterator _P, 
- 		std::vector<Cartridge2>::const_iterator _F, 
- 		std::vector<Cartridge2>::const_iterator _L);
+     void AddCell( std::vector<Cartridge2>::const_iterator& _F, 
+ 		           std::vector<Cartridge2>::const_iterator& _L );
      void AddCell(const Cartridge2& _X);
 
 //sorting
@@ -83,33 +85,26 @@ public:
 //	std::vector<CString> InsideData();
 };
 
-
-
-
-inline const Cartridge2& RNA::At(std::vector<Cartridge2>::size_type _P) const
-{ return m_CarChain2.at(_P);   };
-
-inline BOOL RNA::IsEmpty() const
+inline const BOOL RNA::IsEmpty() const
 { return (m_CarChain2.size() <= 1) ? TRUE : FALSE; };
 
-inline void RNA::AddCell(//std::vector<Cartridge2>::iterator _P, 
-						 std::vector<Cartridge2>::const_iterator _F, 
-						 std::vector<Cartridge2>::const_iterator _L)
+inline void RNA::AddCell(std::vector<Cartridge2>::const_iterator& _F, 
+						 std::vector<Cartridge2>::const_iterator& _L)
 { m_CarChain2.insert(End(), _F, _L); };
 inline void RNA::AddCell(const Cartridge2& _X)
 { m_CarChain2.push_back(_X);      };
 
 inline std::vector<Cartridge2>::iterator RNA::Begin()
 { return (m_CarChain2.size() == 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
-// inline std::vector<Cartridge2>::const_iterator RNA::Begin() const
-// { return (m_CarChain2.end() - m_CarChain2.begin() == 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
+inline std::vector<Cartridge2>::const_iterator RNA::Begin() const
+{ return (m_CarChain2.end() - m_CarChain2.begin() == 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
 
 inline std::vector<Cartridge2>::iterator RNA::End()
 { return m_CarChain2.end();};
-// inline std::vector<Cartridge2>::const_iterator RNA::End() const 
-// { return m_CarChain2.end();};
+inline std::vector<Cartridge2>::const_iterator RNA::End() const 
+{ return m_CarChain2.end();};
 
-inline std::vector<Cartridge2>::size_type RNA::Size () const
+inline const std::vector<Cartridge2>::size_type RNA::Size () const
 { return m_CarChain2.size()-1; };
 
 inline void RNA::operator+(const Cartridge2&  _X)

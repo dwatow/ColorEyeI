@@ -35,7 +35,7 @@ Ca210real::~Ca210real()
     m_pICa200->ReleaseDispatch();        delete m_pICa200;
 }
 
-BOOL Ca210real::initCreatCa200()
+const BOOL Ca210real::initCreatCa200()
 {
     try
     {
@@ -52,7 +52,7 @@ BOOL Ca210real::initCreatCa200()
     }
 }
 
-BOOL Ca210real::initConnectCa210()
+const BOOL Ca210real::initConnectCa210()
 {
     try
     {
@@ -68,7 +68,7 @@ BOOL Ca210real::initConnectCa210()
     }
 }
 
-BOOL  Ca210real::initAttachCa()
+const BOOL  Ca210real::initAttachCa()
 {
     try
     {
@@ -87,7 +87,7 @@ BOOL  Ca210real::initAttachCa()
     }
 }
 
-BOOL Ca210real::initAttchProbe()
+const BOOL Ca210real::initAttchProbe()
 {
     try
     {
@@ -110,7 +110,7 @@ BOOL Ca210real::initAttchProbe()
     }
 }
 
-CaState Ca210real::CalZero()
+const CaState Ca210real::CalZero()
 {
     /*
     連線 實機
@@ -171,7 +171,7 @@ void Ca210real::LinkMemory()
     DebugCode( else{ DBugModeBox("FALSE of LinkMemory()"); } )
 }
 
-CaState Ca210real::Measure()
+const CaState Ca210real::Measure()
 {
     CaState Mode = m_caState;
     if(isOnline())
@@ -220,7 +220,7 @@ CaState Ca210real::Measure()
     return Mode;
 }
 
-MsrAiState Ca210real::MsrAI(float MsrDeviation)
+const MsrAiState Ca210real::MsrAI(const float& MsrDeviation)
 {
     DebugCode( DBugModeBox("TRUE of MsrAI(float MsrDeviation)"); )
         //第一筆資料暫存空間  //宣告誤差值計算空間
@@ -256,7 +256,7 @@ MsrAiState Ca210real::MsrAI(float MsrDeviation)
     //無效量測，可能是沒連線之類的
 }
 
-void Ca210real::SetOnline(BOOL isOnline)
+void Ca210real::SetOnline(const BOOL& isOnline)
 {
     DebugCode( DBugModeBox("TRUE of SetOnline(BOOL isOnline)"); )
     try
@@ -277,7 +277,7 @@ void Ca210real::SetOnline(BOOL isOnline)
         m_caState = m_caStateTemp;  //真的沒問題嗎？
 }
 
-CString Ca210real::GetLcmSize()
+const CString Ca210real::GetLcmSize()
 {
     if(isOnline())
     {
@@ -299,7 +299,7 @@ CString Ca210real::GetLcmSize()
     return m_LCMsize;
 }
 
-CString Ca210real::GetChData()
+const CString Ca210real::GetChData()// const
 {
     CString temp;
     if(isOnline())
@@ -323,7 +323,7 @@ CString Ca210real::GetChData()
     return temp;
 }
 
-Bullet Ca210real::GetMsrData()
+const Bullet Ca210real::GetMsrData()
 {
     if (isOnline())
     {
@@ -355,28 +355,28 @@ Bullet Ca210real::GetMsrData()
 
 
 //////////////////////////////////////////////////////////////////////////
-float Ca210real::GetRangeColor1()
+const float Ca210real::GetRangeColor1() const
 {
     float clr1, clr2;
     m_pICa->GetAnalogRange(&clr1, &clr2);
     return clr1;
 }
 
-float Ca210real::GetRangeColor2()
+const float Ca210real::GetRangeColor2() const
 {
     float clr1, clr2;
     m_pICa->GetAnalogRange(&clr1, &clr2);
     return clr2;
 }
 
-float Ca210real::GetRangeFAM()
+const float Ca210real::GetRangeFAM() const
 {
     float FMA;
     m_pICa->GetFMAAnalogRange(&FMA);
     return FMA;
 }
 
-CString Ca210real::GetRefSx()
+const CString Ca210real::GetRefSx() const
 {
     float Lv, Sx, Sy;
     m_pIMemory->GetReferenceColor(m_pIProbe->GetId(), &Sx, &Sy, &Lv);
@@ -385,7 +385,7 @@ CString Ca210real::GetRefSx()
     return strSx;
 }
 
-CString Ca210real::GetRefSy()
+const CString Ca210real::GetRefSy() const
 {
     float Lv, Sx, Sy;
     m_pIMemory->GetReferenceColor(m_pIProbe->GetId(), &Sx, &Sy, &Lv);
@@ -394,7 +394,7 @@ CString Ca210real::GetRefSy()
     return strSy;
 }
 
-CString Ca210real::GetRefLv()
+const CString Ca210real::GetRefLv() const
 {
     float Lv, Sx, Sy;
     m_pIMemory->GetReferenceColor(m_pIProbe->GetId(), &Sx, &Sy, &Lv);
@@ -403,7 +403,7 @@ CString Ca210real::GetRefLv()
     return strLv;
 }
 
-CString Ca210real::GetRefProbe()
+const CString Ca210real::GetRefProbe() const
 {
     long CalProbe, RefProbe, CalMode;
     m_pIMemory->GetMemoryStatus(m_pIProbe->GetNumber(), &CalProbe, &RefProbe, &CalMode);
@@ -412,7 +412,7 @@ CString Ca210real::GetRefProbe()
     return str;
 }
 
-CString Ca210real::GetCalProbe()
+const CString Ca210real::GetCalProbe() const
 {
     long CalProbe, RefProbe, CalMode;
     m_pIMemory->GetMemoryStatus(m_pIProbe->GetNumber(), &CalProbe, &RefProbe, &CalMode);
@@ -421,7 +421,7 @@ CString Ca210real::GetCalProbe()
     return str;
 }
 
-CString Ca210real::GetCalMode()
+const CString Ca210real::GetCalMode() const
 {
     long CalProbe, RefProbe, CalMode;
     m_pIMemory->GetMemoryStatus(m_pIProbe->GetNumber(), &CalProbe, &RefProbe, &CalMode);
@@ -431,12 +431,12 @@ CString Ca210real::GetCalMode()
 }
 //////////////////////////////////////////////////////////////////////////
 
-void Ca210real::SetSynMode(SynMode SmType)
+void Ca210real::SetSynMode(const SynMode& SmType)
 {
     m_pICa->SetSyncMode(ChooseSynMode(SmType));
 }
 
-float Ca210real::ChooseSynMode(SynMode SmType)
+const float Ca210real::ChooseSynMode(const SynMode& SmType) const
 {
     switch(SmType)
     {
@@ -449,7 +449,7 @@ float Ca210real::ChooseSynMode(SynMode SmType)
     }
 }
 
-CString Ca210real::GetSynMode(SynMode SmType)
+const CString Ca210real::GetSynMode(const SynMode& SmType) const
 {
     switch(SmType)
     {
@@ -462,22 +462,22 @@ CString Ca210real::GetSynMode(SynMode SmType)
     }
 }
 
-float Ca210real::GetSynMode()
+const float Ca210real::GetSynMode() const
 {
     return m_pICa->GetSyncMode();
 }
 //////////////////////////////////////////////////////////////////////////
-void Ca210real::SetDisplayMode(DisPlay DpType)
+void Ca210real::SetDisplayMode(const DisPlay& DpType)
 {
     m_pICa->SetDisplayMode(ChooseDisplayMode(DpType));
 }
 
-int Ca210real::ChooseDisplayMode(DisPlay DpType)
+const int Ca210real::ChooseDisplayMode(const DisPlay& DpType) const
 {
     return (int)DpType;
 }
 
-CString Ca210real::GetDisplayMode(DisPlay DpType)
+const CString Ca210real::GetDisplayMode(const DisPlay& DpType) const
 {
     switch(DpType)
     {
@@ -494,18 +494,18 @@ CString Ca210real::GetDisplayMode(DisPlay DpType)
     }
 }
 
-long Ca210real::GetDisplayMode()
+const long Ca210real::GetDisplayMode() const
 {
     return m_pICa->GetDisplayMode();
 }
 //////////////////////////////////////////////////////////////////////////
 
-void Ca210real::SetDisplayDigits(DisDigits DdType)
+void Ca210real::SetDisplayDigits(const DisDigits& DdType)
 {
     m_pICa->SetDisplayDigits(ChooseDisplayDigits(DdType));
 }
 
-int Ca210real::ChooseDisplayDigits(DisDigits DdType)
+const int Ca210real::ChooseDisplayDigits(const DisDigits& DdType) const
 {
     switch(DdType)
     {
@@ -515,7 +515,7 @@ int Ca210real::ChooseDisplayDigits(DisDigits DdType)
     }    
 }
 
-CString Ca210real::GetDisplayDigits(DisDigits DdType)
+const CString Ca210real::GetDisplayDigits(const DisDigits& DdType) const
 {
     switch(DdType)
     {
@@ -525,17 +525,17 @@ CString Ca210real::GetDisplayDigits(DisDigits DdType)
     }
 }
 
-long Ca210real::GetDisplayDigits()
+const long Ca210real::GetDisplayDigits() const
 {
     return m_pICa->GetDisplayDigits();
 }
 //////////////////////////////////////////////////////////////////////////
-void Ca210real::SetAvgingMode(AvgMode AmType)
+void Ca210real::SetAvgingMode(const AvgMode& AmType)
 {
     m_pICa->SetAveragingMode(ChooseAvgingMode(AmType));
 }
 
-int Ca210real::ChooseAvgingMode(AvgMode AmType)
+const int Ca210real::ChooseAvgingMode(const AvgMode& AmType) const
 {
     switch(AmType)
     {
@@ -546,7 +546,7 @@ int Ca210real::ChooseAvgingMode(AvgMode AmType)
     }    
 }
 
-CString Ca210real::GetAvgingMode(AvgMode AmType)
+const CString Ca210real::GetAvgingMode(const AvgMode& AmType) const
 {
     switch(AmType)
     {
@@ -557,17 +557,17 @@ CString Ca210real::GetAvgingMode(AvgMode AmType)
     }
 }
 
-long Ca210real::GetAvgingMode()
+const long Ca210real::GetAvgingMode() const
 {
     return m_pICa->GetAveragingMode();
 }
 //////////////////////////////////////////////////////////////////////////
-void Ca210real::SetBrigUnit(BrigUnit BuType)
+void Ca210real::SetBrigUnit(const BrigUnit& BuType)
 {
     m_pICa->SetBrightnessUnit(ChooseBrigUnit(BuType));
 }
 
-int Ca210real::ChooseBrigUnit(BrigUnit BuType)
+const int Ca210real::ChooseBrigUnit(const BrigUnit& BuType) const
 {
     switch(BuType)
     {
@@ -577,7 +577,7 @@ int Ca210real::ChooseBrigUnit(BrigUnit BuType)
     }    
 }
 
-CString Ca210real::GetBrigUnit(BrigUnit BuType)
+const CString Ca210real::GetBrigUnit(const BrigUnit& BuType) const
 {
     switch(BuType)
     {
@@ -587,28 +587,28 @@ CString Ca210real::GetBrigUnit(BrigUnit BuType)
     }
 }
 
-long Ca210real::GetBrigUnit()
+const long Ca210real::GetBrigUnit() const
 {
     return m_pICa->GetBrightnessUnit();
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Ca210real::SetCalStandard(CalStand CsType)
+void Ca210real::SetCalStandard(const CalStand& CsType)
 {
     m_pICa->SetCalStandard(ChooseCalStandard(CsType));
 }
 
-int Ca210real::ChooseCalStandard(CalStand CsType)
+const int Ca210real::ChooseCalStandard(const CalStand& CsType) const
 {
     switch(CsType)
     {
-    case CS_6500K: return 1;
-    case CS_9300K: return 2;
+    case CS_6500K: return  1;
+    case CS_9300K: return  2;
     default:       return -1;
     }
 }
 
-CString Ca210real::GetCalStandard(CalStand CsType)
+const CString Ca210real::GetCalStandard(const CalStand& CsType) const
 {
     switch(CsType)
     {
@@ -618,14 +618,14 @@ CString Ca210real::GetCalStandard(CalStand CsType)
     }
 }
 
-long Ca210real::GetCalStandard()
+const long Ca210real::GetCalStandard() const
 {
     return m_pICa->GetCalStandard();
 }
 //////////////////////////////////////////////////////////////////////////
 
 //設定警告標示的標準格式
-void Ca210real::MsgFrmt(CException* e, CString mean, CString steps)
+void Ca210real::MsgFrmt(CException* e, const CString& mean, const CString& steps)
 {
     CString str;
     TCHAR buf[255];
@@ -635,7 +635,7 @@ void Ca210real::MsgFrmt(CException* e, CString mean, CString steps)
     AfxMessageBox(str);
 }
 
-void Ca210real::MsgFrmt(CString steps)
+void Ca210real::MsgFrmt(const CString& steps)
 {
     CString str;
     str.Format("你發呆嗎？\n%s", steps);
@@ -655,7 +655,7 @@ CString Ca210real::GetSetupValue() const
     return str;
 }
 
-void Ca210real::DBugModeBox(CString str) const
+void Ca210real::DBugModeBox(const CString& str) const
 {
     CString strTemp;
     strTemp.Format("%s\n%s模式, %s", str, m_isTrue?"真實":"模擬", m_Online?"連線":"離線");

@@ -24,17 +24,27 @@ class CCaSetupDlg;
 
 class CColorEyeIApp : public CWinApp
 {
+//執行檔所在目錄及檔名
+private:
 	CString m_strPathName;
+public:
+	const CString GetPath();
+	const CString GetPathName();
+
+//桌面路徑
+private:
 	CString m_desktopPath;
+public:
+	const CString GetDesktopPath();
+
+//對話框指標（在此生成及銷毀）
+private:
     CPatternDlg *m_pdlgPattern;
 	CCaSetupDlg *m_pdlgCaSetup;
 public:
-	void DelMsrItemDlgSetupFile();
-	CString GetPath();
-	CString GetPathName();
-	CString GetDesktopPath();
     CColorEyeIApp();
     ~CColorEyeIApp();
+	void DelMsrItemDlgSetupFile();
 // Overrides
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CColorEyeIApp)
