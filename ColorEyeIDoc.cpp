@@ -103,6 +103,8 @@ void CColorEyeIDoc::OnFileNew()
 	CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
     m_dOmd.Empty();          //清空記憶體空間m_OmdData
+    m_docDNA.Empty();
+    m_docRNA.Empty();
 
     m_PnlID.Empty();
     m_MsrDvc.Empty();
@@ -297,13 +299,6 @@ void CColorEyeIDoc::OnFileSave()
 	SetModifiedFlag(FALSE);
 }
 
-void CColorEyeIDoc::RestructureVector()
-{
-    m_dOmd.CutEqualCell(m_MsrData);  //erase
-    m_dOmd.AddCell(m_dOmd.End(), m_MsrData.Begin(), m_MsrData.End());  //insert
-	SetModifiedFlag(TRUE);
-}
-
 void CColorEyeIDoc::DebugByTxt(CString pathName)
 {
     std::vector<CString> vStr;
@@ -345,3 +340,33 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
         file.Close();
     }
 }
+//////////////////////////////////////////////////////////////////////////
+void CColorEyeIDoc::UpdateDocRNA(const RNA& _docRNA)
+{
+    
+    for (std::vector<Cartridge2>::const_iterator itor = _docRNA.Begin(); itor != _docRNA.End(); ++itor)
+        m_TextData.push_back(itor->showMe());
+
+    m_docRNA.Empty(); m_docRNA = _docRNA;
+
+CTxtFile fTxt;
+CFileException fx;
+fTxt.Save("C://Users//1004066//Desktop//docRNA.log", fx);
+fTxt.iTxtData(m_TextData);
+fTxt.Close();
+
+};
+
+void CColorEyeIDoc::UpdateDocDNA(const DNA& _docDNA)
+{
+    for (std::vector<Nucleotide>::const_iterator itor = _docDNA.Begin(); itor != _docDNA.End(); ++itor)
+        m_TextData.push_back(itor->showMe());
+
+    m_docDNA.Empty(); m_docDNA = _docDNA;
+
+    CTxtFile fTxt;
+    CFileException fx;
+    fTxt.Save("C://Users//1004066//Desktop//docDNA.log", fx);
+    fTxt.iTxtData(m_TextData);
+    fTxt.Close();
+};

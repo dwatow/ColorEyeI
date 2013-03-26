@@ -61,8 +61,9 @@ public:
  	const std::vector<Cartridge2>::size_type Size() const;
 // 	
 //     std::vector<Cartridge2>& operator=(const std::vector<Cartridge2>&);
-     void AddCell( std::vector<Cartridge2>::const_iterator& _F, 
- 		           std::vector<Cartridge2>::const_iterator& _L );
+//     void AddCell( std::vector<Cartridge2>::const_iterator& _F, 
+// 		           std::vector<Cartridge2>::const_iterator& _L );
+// 	void AddCell(const RNA&);
      void AddCell(const Cartridge2& _X);
 
 //sorting
@@ -78,6 +79,7 @@ private:
 //operator
 public:
  	void operator+(const Cartridge2&  _X);
+	void operator+(const RNA& _R);
 // 	void operator+(      RNA& _X) { AddCell(m_CarChain2.end(), _X.Begin(), _X.End()); };
 	////
 	//debug
@@ -88,16 +90,18 @@ public:
 inline const BOOL RNA::IsEmpty() const
 { return (m_CarChain2.size() <= 1) ? TRUE : FALSE; };
 
-inline void RNA::AddCell(std::vector<Cartridge2>::const_iterator& _F, 
-						 std::vector<Cartridge2>::const_iterator& _L)
-{ m_CarChain2.insert(End(), _F, _L); };
+//inline void RNA::AddCell(std::vector<Cartridge2>::const_iterator& _F, 
+//						 std::vector<Cartridge2>::const_iterator& _L)
+//{ m_CarChain2.insert(End(), _F, _L); };
+// inline void RNA::AddCell(const RNA& _R)
+// { m_CarChain2.insert(End(), _R.Begin(), _R.End()); }
 inline void RNA::AddCell(const Cartridge2& _X)
 { m_CarChain2.push_back(_X);      };
 
 inline std::vector<Cartridge2>::iterator RNA::Begin()
-{ return (m_CarChain2.size() == 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
+{ return (m_CarChain2.size() <= 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
 inline std::vector<Cartridge2>::const_iterator RNA::Begin() const
-{ return (m_CarChain2.end() - m_CarChain2.begin() == 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
+{ return (m_CarChain2.size() <= 1) ? m_CarChain2.end() : m_CarChain2.begin() +1; }
 
 inline std::vector<Cartridge2>::iterator RNA::End()
 { return m_CarChain2.end();};
@@ -107,6 +111,8 @@ inline std::vector<Cartridge2>::const_iterator RNA::End() const
 inline const std::vector<Cartridge2>::size_type RNA::Size () const
 { return m_CarChain2.size()-1; };
 
+// inline void RNA::operator+(const RNA& _R)
+// { AddCell(_R); };
 inline void RNA::operator+(const Cartridge2&  _X)
 { AddCell(_X); };
 

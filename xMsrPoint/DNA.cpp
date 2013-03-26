@@ -15,3 +15,8 @@ void DNA::DelCell(std::vector<Nucleotide>::size_type index)
 {
 	nChain.erase(&nChain.at(index));
 }
+
+void DNA::AddCell(const DNA& _D)
+{
+	nChain.insert(End(), _D.Begin(), _D.End());
+}

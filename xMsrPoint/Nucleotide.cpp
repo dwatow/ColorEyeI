@@ -126,14 +126,25 @@ const CString Nucleotide::GetStrPara() const
 
 const BOOL Nucleotide::operator==(const Nucleotide& vCar) const
 {
-    return ( (GetMsrFlowNum() == vCar.GetMsrFlowNum()) && 
-             (GetBackColor()  == vCar.GetBackColor() ) ) ? TRUE : FALSE;
+    BOOL b(FALSE);
+    std::vector<int>::const_iterator vCitor = vCar.m_Parameters.begin();
+    if ((GetMsrFlowNum() == vCar.GetMsrFlowNum()) && (GetBackColor()  == vCar.GetBackColor() ))
+        for ( std::vector<int>::const_iterator initor = m_Parameters.begin(); 
+              initor != m_Parameters.end(), vCitor != vCar.m_Parameters.end(); 
+              ++initor, ++vCitor)
+                  if (initor == vCitor)
+                      b = TRUE;
+                  else
+                      b = FALSE;
+    return b;
 };
 
 void Nucleotide::operator= (const Nucleotide& vCar)
 {
     SetMsrFlowNum(vCar.GetMsrFlowNum());
     SetBackColor(vCar.GetBackColor());
+    m_Parameters.clear();
+    m_Parameters = vCar.m_Parameters;
 }
 
 void Nucleotide::SetPara(const ParaOfPara& Parameter, const int& FromEdge)
@@ -146,21 +157,15 @@ const int Nucleotide::GetPara(const ParaOfPara& Parameter) const
     return m_Parameters[Parameter];
 }
 
-const CString Nucleotide::showMe()
+const CString Nucleotide::showMe() const
 {
     CString str, Para;
     //ex: 黑色25點, 6, 10...
     
-    str.Format("%s%s%s", GetStrColorType(), GetStrPointNum(), GetStrPara());
-    for ( std::vector<int>::iterator it  = m_Parameters.begin();
-                                     it != m_Parameters.end();
-                                   ++it)
-    {
-        Para.Format(" %d", *it);
-        str += Para;
-    }
-    return str + "\n";
-    
+    str.Format("%s%s%s %d, %d, %d, %d, %d, %d\n",\
+        GetStrColorType(), GetStrPointNum(), GetStrPara(),\
+        m_Parameters[0], m_Parameters[1], m_Parameters[2], m_Parameters[3], m_Parameters[4], m_Parameters[5], m_Parameters[6], m_Parameters[7], m_Parameters[8], m_Parameters[0]);
+    return str;
     //type: 直接用type看
 }
 //////////////////////////////////////////////////////////////////////////

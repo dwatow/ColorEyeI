@@ -12,6 +12,7 @@
 #include <algorithm>
 #include "Omdfile/COmdFile0.h"
 #include "RNA.h"
+#include "xMsrPoint/DNA.h"
 
 class CColorEyeIDoc : public CDocument
 {
@@ -60,19 +61,24 @@ public:
 public:
 	void AutoSave(int); //0: Txt, 1: Omd
 //MsrDataChain
+//private:
+//	CDataChain m_MsrData;
+//public:
+//	CDataChain& GetMsrDataChain(){ return m_MsrData; };//新的一條鍊 vChain2
+//    void RestructureVector();
+
 private:
-	CDataChain m_MsrData;
+    RNA m_docRNA;
 public:
-	CDataChain& GetMsrDataChain(){ return m_MsrData; };//新的一條鍊 vChain2
-    void RestructureVector();
-
+    void UpdateDocRNA(const RNA& _docRNA);//{ m_docRNA.Empty(); m_docRNA = _docRNA; };
+    RNA GetDocRNA() const { return m_docRNA; };
 
 private:
-	RNA m_docRNA;
+    DNA m_docDNA;
 public:
-	void UpdateDocRNA(RNA& _docRNA){ m_docRNA.Empty(); m_docRNA = _docRNA; };
-	RNA  GetDocRNA() const{ return m_docRNA; };
-
+    void UpdateDocDNA(const DNA& _docDNA);//{ m_docDNA.Empty(); m_docDNA = _docDNA; };
+    const DNA GetDocDNA() const { return m_docDNA; };
+    
 protected: // create from serialization only
     CColorEyeIDoc();
     DECLARE_DYNCREATE(CColorEyeIDoc)

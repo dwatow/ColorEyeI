@@ -42,7 +42,7 @@ public:
     const BOOL operator==(const Nucleotide& vNucl) const;
           void operator= (const Nucleotide& vNucl);
 
-    const CString showMe();
+    const CString showMe() const;
 };
 
 #endif
