@@ -526,7 +526,7 @@ void CPatternDlg::eventExitDialog()
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
     
-//     pDoc->RestructureVector();
+	pDoc->UpdateDocRNA(m_RNA);
     pDoc->UpdateAllViews(NULL);
 }
 

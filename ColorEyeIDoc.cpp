@@ -342,31 +342,33 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::UpdateDocRNA(const RNA& _docRNA)
-{
-    
-    for (std::vector<Cartridge2>::const_iterator itor = _docRNA.Begin(); itor != _docRNA.End(); ++itor)
-        m_TextData.push_back(itor->showMe());
-
-    m_docRNA.Empty(); m_docRNA = _docRNA;
-
-CTxtFile fTxt;
-CFileException fx;
-fTxt.Save("C://Users//1004066//Desktop//docRNA.log", fx);
-fTxt.iTxtData(m_TextData);
-fTxt.Close();
-
-};
+{ m_docRNA.Empty(); m_docRNA = _docRNA; }
+// {
+//     
+//     for (std::vector<Cartridge2>::const_iterator itor = _docRNA.Begin(); itor != _docRNA.End(); ++itor)
+//         m_TextData.push_back(itor->showMe());
+// 
+//     m_docRNA.Empty(); m_docRNA = _docRNA;
+// 
+// CTxtFile fTxt;
+// CFileException fx;
+// fTxt.Save("C://Users//1004066//Desktop//docRNA.log", fx);
+// fTxt.iTxtData(m_TextData);
+// fTxt.Close();
+// 
+// };
 
 void CColorEyeIDoc::UpdateDocDNA(const DNA& _docDNA)
-{
-    for (std::vector<Nucleotide>::const_iterator itor = _docDNA.Begin(); itor != _docDNA.End(); ++itor)
-        m_TextData.push_back(itor->showMe());
-
-    m_docDNA.Empty(); m_docDNA = _docDNA;
-
-    CTxtFile fTxt;
-    CFileException fx;
-    fTxt.Save("C://Users//1004066//Desktop//docDNA.log", fx);
-    fTxt.iTxtData(m_TextData);
-    fTxt.Close();
-};
+{ m_docDNA.Empty(); m_docDNA = _docDNA; }
+// {
+//     for (std::vector<Nucleotide>::const_iterator itor = _docDNA.Begin(); itor != _docDNA.End(); ++itor)
+//         m_TextData.push_back(itor->showMe());
+// 
+//     m_docDNA.Empty(); m_docDNA = _docDNA;
+// 
+//     CTxtFile fTxt;
+//     CFileException fx;
+//     fTxt.Save("C://Users//1004066//Desktop//docDNA.log", fx);
+//     fTxt.iTxtData(m_TextData);
+//     fTxt.Close();
+// };
