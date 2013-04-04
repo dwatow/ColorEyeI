@@ -9,18 +9,19 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "COmdFilePtr.h"
+#include "COmdFileFactor.h"
 
-class COmdFile1 : public COmdFilePtr
+class COmdFile1 : public COmdFileFactor
 {
 	BOOL m_isOld;
 public:
-    COmdFile1(BOOL old = FALSE);
+    COmdFile1(const BOOL& old = FALSE);
 	virtual ~COmdFile1();
 	
 private:
 	void o2tW5();
-	void o2tW49();
+	void o2tW49_01to28();
+	void o2tW49_29to49();
     void o2tD13();
 	void o2tD21();
 	void o2tD25();
@@ -30,6 +31,7 @@ private:
 	void o2tWRGB1nNits();
 
 	void t2oInfo();
+
 	void t2oW5();
 	void t2oWRGBD();
 	void t2oW9();
@@ -45,15 +47,8 @@ private:
 	void OmdToTxt();
 };
 
-
-
-inline COmdFile1::COmdFile1(BOOL isOld)
-{
-    m_isOld = isOld;
-};
-
-inline COmdFile1::~COmdFile1()
-{}
+inline COmdFile1::COmdFile1(const BOOL& isOld){ m_isOld = isOld; };
+inline COmdFile1::~COmdFile1(){};
 
 
 #endif //OMDFILE1_H

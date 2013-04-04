@@ -2,7 +2,6 @@
 #define DNA_H
 
 #include "Nucleotide.h"
-#include "../Enum.h"
 
 class DNA
 {

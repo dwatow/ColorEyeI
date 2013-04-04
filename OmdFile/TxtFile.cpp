@@ -16,7 +16,7 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-BOOL CTxtFile::Open(CString path, CFileException& fx)
+BOOL CTxtFile::Open(LPCTSTR path, CFileException& fx)
 {
 	if (PathFileExists(path))
 	{
@@ -44,7 +44,7 @@ void CTxtFile::FileToMem()
     }
 }
 
-BOOL CTxtFile::Save(CString path, CFileException& fx)
+BOOL CTxtFile::Save(LPCTSTR path, CFileException& fx)
 {
     if (ftxt_Std.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::typeText, &fx))
         return TRUE;

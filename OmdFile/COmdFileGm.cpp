@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "COmdFileGm.h"
+#include "../xMsrPoint\Nucleotide.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -24,12 +25,13 @@ void COmdFileGm::OmdToTxt()
 
     m_dTxt.push_back("Panel ID\t"           + m_PnlID  + "\tGamma curve\tL\t\t\t\tx\t\t\t\ty\t\t\t\tT\tduv\n");
 	m_dTxt.push_back("Measurement device\t" + m_MsrDvc + "\tLevel\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tRed\tGreen\tBlue\tWhite\tWhite\n");
-	m_dTxt.push_back("Probe\t"              + m_Prb    + "\t0\t" + m_dOmd.At(White, PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, 0).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, 0).GetStrDuv() + "\n");
-	m_dTxt.push_back("CH\t"                 + m_CHID   + "\t1\t" + m_dOmd.At(White, PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, 1).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, 1).GetStrDuv() + "\n");
+	m_dTxt.push_back("Probe\t"              + m_Prb    + "\t0\t" + m_dOmd.Find("白","gamma", "0","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("紅","gamma", "0","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("藍","gamma", "0","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("綠","gamma", "0","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("紅","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("藍","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("綠","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("紅","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("藍","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("綠","gamma", "0","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","gamma", "0","0 255 255").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","gamma", "0","0 255 255").GetBullet().oStr(VluK_Duv) + "\n");
+	m_dTxt.push_back("CH\t"                 + m_CHID   + "\t1\t" + m_dOmd.Find("白","gamma", "1","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("紅","gamma", "1","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("藍","gamma", "1","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("綠","gamma", "1","0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("紅","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("藍","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("綠","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("紅","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("藍","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("綠","gamma", "1","0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","gamma", "1","0 255 255").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","gamma", "1","0 255 255").GetBullet().oStr(VluK_Duv) + "\n");
+
 	for (int n = 2; n < PnGamma; ++n)
 	{
 		nlv.Format("%d", n);
-		m_dTxt.push_back("\t\t"                        + nlv + "\t" + m_dOmd.At(White, PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrLv() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrSx() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Red  , PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Blue , PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(Green, PnGamma, n).GetStrSy() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrT() + "\t" + m_dOmd.At(White, PnGamma, n).GetStrDuv() + "\n");
+		m_dTxt.push_back("\t\t" + nlv + "\t" + m_dOmd.Find("白","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("紅","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("藍","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("綠","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("紅","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("藍","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("綠","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("紅","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("藍","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("綠","gamma", nlv,"0 255 255").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","gamma", "n","0 255 255").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","gamma", "n","0 255 255").GetBullet().oStr(VluK_Duv) + "\n");
 	}
 
     m_fTxt.iTxtData(m_dTxt);
@@ -38,7 +40,7 @@ void COmdFileGm::OmdToTxt()
 
 void COmdFileGm::TxtToOmd()
 {
-	m_dOmd.GammaInit();
+//	m_dOmd.GammaInit();
 	m_fTxt.oTxtData(m_dTxt);
 
 //檔頭
@@ -49,27 +51,29 @@ void COmdFileGm::TxtToOmd()
 
 //檔案資料      
     //Gamma
+	CString gammaIndex;
 	for (int level = 0; level < PnGamma; ++level)
 	{
-		m_dOmd.At(White, PnGamma, level).SetLv( GetCell('D', 3 + level) );
-		m_dOmd.At(Red  , PnGamma, level).SetLv( GetCell('E', 3 + level) );
-		m_dOmd.At(Green, PnGamma, level).SetLv( GetCell('F', 3 + level) );
-		m_dOmd.At(Blue , PnGamma, level).SetLv( GetCell('G', 3 + level) );
+		gammaIndex.Format("%d",gammaIndex);
+		m_dOmd.Find("白","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Lv, GetCell('D', 3 + level) );
+		m_dOmd.Find("紅","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Lv, GetCell('E', 3 + level) );
+		m_dOmd.Find("綠","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Lv, GetCell('F', 3 + level) );
+		m_dOmd.Find("藍","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Lv, GetCell('G', 3 + level) );
 
-		m_dOmd.At(White, PnGamma, level).SetSx( GetCell('H', 3 + level) );
-		m_dOmd.At(Red  , PnGamma, level).SetSx( GetCell('I', 3 + level) );
-		m_dOmd.At(Green, PnGamma, level).SetSx( GetCell('J', 3 + level) );
-		m_dOmd.At(Blue , PnGamma, level).SetSx( GetCell('K', 3 + level) );
+		m_dOmd.Find("白","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sx, GetCell('H', 3 + level) );
+		m_dOmd.Find("紅","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sx, GetCell('I', 3 + level) );
+		m_dOmd.Find("綠","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sx, GetCell('J', 3 + level) );
+		m_dOmd.Find("藍","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sx, GetCell('K', 3 + level) );
 
-		m_dOmd.At(White, PnGamma, level).SetSy( GetCell('L', 3 + level) );
-		m_dOmd.At(Red  , PnGamma, level).SetSy( GetCell('M', 3 + level) );
-		m_dOmd.At(Green, PnGamma, level).SetSy( GetCell('N', 3 + level) );
-		m_dOmd.At(Blue , PnGamma, level).SetSy( GetCell('O', 3 + level) );
+		m_dOmd.Find("白","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sy, GetCell('L', 3 + level) );
+		m_dOmd.Find("紅","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sy, GetCell('M', 3 + level) );
+		m_dOmd.Find("綠","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sy, GetCell('N', 3 + level) );
+		m_dOmd.Find("藍","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Sy, GetCell('O', 3 + level) );
 
-		m_dOmd.At(White, PnGamma, level).SetT ( GetCell('P', 3 + level) );
-		m_dOmd.At(White, PnGamma, level).SetDuv(GetCell('Q', 3 + level) );
+		m_dOmd.Find("白","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_T, GetCell('P', 3 + level) );
+		m_dOmd.Find("白","gamma",gammaIndex,"0 255 255").GetBullet().i(VluK_Duv, GetCell('Q', 3 + level) );
 	}
-	m_dOmd.freeEmptyCell();
+// 	m_dOmd.freeEmptyCell();
 	m_dTxt.clear();
 }
 	

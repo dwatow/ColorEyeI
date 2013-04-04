@@ -253,7 +253,7 @@ void CSelExcelDlg::OnFindOmdFile()
 
 void CSelExcelDlg::NewVector()
 {
-    m_vOmdtoXls.StdInit();
+//    m_vOmdtoXls.StdInit();
 }
 
 void CSelExcelDlg::OnOK()
@@ -327,6 +327,6 @@ void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 {
     pDocfXls->InitForm();
-    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iNitsLv(m_pDoc->GetNitsLv())->iData(m_pDoc->GetOmdData());
+    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iNitsLv(m_pDoc->GetNitsLv());//->iData(m_pDoc->GetOmdData());
 }
 

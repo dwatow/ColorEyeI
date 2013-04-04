@@ -8,9 +8,9 @@
 #include "PatternDlg.h"
 #include "..\EnterValueDlg.h"
 #include "..\ReadBarCodeDialog.h"
+#include "..\TranScripter.h"
 #include "..\MainFrm.h"
 #include "..\ColorEyeIDoc.h"
-#include "..\TranScripter.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

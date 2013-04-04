@@ -134,6 +134,10 @@ SOURCE=.\xMsrPoint\Cartridge2.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CartridgeFinder.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CaSetupDlg.cpp
 # End Source File
 # Begin Source File
@@ -178,11 +182,11 @@ SOURCE=.\OmdFile\COmdFile1.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileGm.cpp
+SOURCE=.\OmdFile\COmdFileFactor.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFilePtr.cpp
+SOURCE=.\OmdFile\COmdFileGm.cpp
 # End Source File
 # Begin Source File
 
@@ -263,6 +267,10 @@ SOURCE=.\SelXls\xlef.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SelXls\XlsFile2.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SelXls\XlsGamma.cpp
 # End Source File
 # Begin Source File
@@ -331,6 +339,10 @@ SOURCE=.\xMsrPoint\Cartridge2.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\CartridgeFinder.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\CaSetupDlg.h
 # End Source File
 # Begin Source File
@@ -367,11 +379,11 @@ SOURCE=.\OmdFile\COmdFile1.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileGm.h
+SOURCE=.\OmdFile\COmdFileFactor.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFilePtr.h
+SOURCE=.\OmdFile\COmdFileGm.h
 # End Source File
 # Begin Source File
 

@@ -15,7 +15,6 @@
 
 #include "../excel.h"
 #include "stdafx.h"
-#include "../xMsrPoint/Cartridge.h"
 #include <vector>
 
 enum Boarder_Style

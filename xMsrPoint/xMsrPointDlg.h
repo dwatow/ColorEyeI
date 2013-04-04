@@ -4,13 +4,13 @@
 #if !defined(AFX_XMSRPOINTDLG_H__C69B1908_A89D_43A7_A705_CDDB58D14833__INCLUDED_)
 #define AFX_XMSRPOINTDLG_H__C69B1908_A89D_43A7_A705_CDDB58D14833__INCLUDED_
 
-#include "ca200srvr.h"    // Added by ClassView
+//#include "ca200srvr.h"    // Added by ClassView
 //Bullet 彈頭
 //Cartridge 子彈
 //Loader填彈器
 //Belt 彈鍊
-#include "Cartridge.h"
-#include "PatternDlg.h"
+// #include "Cartridge2.h"
+// #include "PatternDlg.h"
 #include <algorithm>
 
 //#include "Bullet.h"    // Added by ClassView
@@ -26,9 +26,9 @@ class CXMsrPointDlgAutoProxy;
 class CXMsrPointDlg : public CDialog
 {
     //CA-SDK用的變數
-	Ca210*       m_pCA210;
-    CPatternDlg* p_PtnDlg;
-	std::vector<Cartridge> vChain1;
+// 	Ca210*       m_pCA210;
+//     CPatternDlg* p_PtnDlg;
+// 	std::vector<Cartridge> vChain1;
 
     DECLARE_DYNAMIC(CXMsrPointDlg);
     friend class CXMsrPointDlgAutoProxy;
@@ -79,10 +79,10 @@ protected:
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:
-	static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
-	static bool OrigPriority(const Cartridge &sp1, const Cartridge &sp2);
-	void QuackMsrSort(std::vector<Cartridge>& vCar) const;
-	void OrigMsrSort(std::vector<Cartridge>& vCar) const;
+// 	static bool AreaPriority(const Cartridge &sp1, const Cartridge &sp2);
+// 	static bool OrigPriority(const Cartridge &sp1, const Cartridge &sp2);
+// 	void QuackMsrSort(std::vector<Cartridge>& vCar) const;
+// 	void OrigMsrSort(std::vector<Cartridge>& vCar) const;
 };
 
 //{{AFX_INSERT_LOCATION}}

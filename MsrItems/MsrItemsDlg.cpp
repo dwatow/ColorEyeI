@@ -249,14 +249,14 @@ BOOL CMsrItemsDlg::CanExit()
 void CMsrItemsDlg::OnButton1() 
 {
 	// TODO: Add your control notification handler code here
-	std::vector<Cartridge> vcar;
-
-
-	CMsrItemDlg MIDlg;
-	if (MIDlg.DoModal() == IDOK)
-	{
-		MIDlg.Ready(vcar);
-	}
+// 	std::vector<Cartridge> vcar;
+// 
+// 
+// 	CMsrItemDlg MIDlg;
+// 	if (MIDlg.DoModal() == IDOK)
+// 	{
+// 		MIDlg.Ready(vcar);
+// 	}
 	
 }
 

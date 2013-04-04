@@ -9,9 +9,9 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "COmdFilePtr.h"
+#include "COmdFileFactor.h"
 
-class COmdFileGm : public COmdFilePtr
+class COmdFileGm : public COmdFileFactor
 {
 
 public:

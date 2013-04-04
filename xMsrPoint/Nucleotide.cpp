@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "Nucleotide.h"
 
 
@@ -62,7 +62,7 @@ m_Parameters(PA_Max, -1)
         }
     case Pn49:
     default:
-        m_paraStr.Empty();
+        m_paraStr.Format("_");
     }
 }
 

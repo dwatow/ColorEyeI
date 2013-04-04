@@ -7,6 +7,8 @@
 #include "OmdFile/TxtFile.h"
 #include "ColorEyeI.h"
 
+enum TrigStatus{ TS_FinalPoint = 0, TS_Normal, TS_Find_Nits, TS_JND, TS_JNDX};
+
 class TranScripter
 {
 #ifdef _DEBUG

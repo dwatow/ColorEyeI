@@ -21,8 +21,8 @@ class CTxtFile
 public:
     CTxtFile(){};
     virtual ~CTxtFile(){};
-    BOOL Open(CString, CFileException&);
-    BOOL Save(CString, CFileException&);
+    BOOL Open(LPCTSTR, CFileException&);
+    BOOL Save(LPCTSTR, CFileException&);
 
 	void Close(){ ftxt_Std.Close(); };
 

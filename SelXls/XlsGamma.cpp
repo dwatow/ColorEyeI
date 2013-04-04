@@ -16,22 +16,22 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CXlsFile2* CXlsGamma::iCellNO(std::vector<Cartridge>::size_type ModuleNO)
+CXlsFile2* CXlsGamma::iCellNO(std::vector<Cartridge2>::size_type ModuleNO)
 {
     m_ModuleNO = ModuleNO;
     return this;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CXlsFile2* CXlsGamma::iPanelID(CString strPanelID , std::vector<Cartridge>::size_type ModuleNO)
+CXlsFile2* CXlsGamma::iPanelID(CString strPanelID , std::vector<Cartridge2>::size_type ModuleNO)
 {
 	iCellNO(ModuleNO)->iPanelID(strPanelID);
 	return this;
 }
 
-CXlsFile2* CXlsGamma::iData(CDataChain&, std::vector<Cartridge>::size_type ModuleNO)
+CXlsFile2* CXlsGamma::iData(RNA&, std::vector<Cartridge2>::size_type ModuleNO)
 {
-	iCellNO(ModuleNO)->iData(m_vCar);
+// 	iCellNO(ModuleNO)->iData(m_vCar);
 	return this;
 }
 
@@ -42,9 +42,9 @@ CXlsFile2* CXlsGamma::iPanelID(CString strPanelID)
 	return this;
 }
 
-CXlsFile2* CXlsGamma::iData(CDataChain& vCar)
+CXlsFile2* CXlsGamma::iData(RNA& vCar)
 {
-	m_vCar = vCar;
+// 	m_vCar = vCar;
     idGamma();	
 	SetVisible(true);
     return this;
@@ -53,11 +53,11 @@ CXlsFile2* CXlsGamma::iData(CDataChain& vCar)
 void CXlsGamma::idGamma()
 {
 	SelectSheet(1);
-	int i(0);
-    for(i = 0; i < PnGamma; ++i)
-	{
-		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.At(White, PnGamma, i).GetLv());
-		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSx());
-        SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSy());
-	}
+// 	int i(0);
+//     for(i = 0; i < PnGamma; ++i)
+// 	{
+// 		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.At(White, PnGamma, i).GetLv());
+// 		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSx());
+//         SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSy());
+// 	}
 }

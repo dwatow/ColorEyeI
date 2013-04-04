@@ -14,6 +14,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIView
 
@@ -169,7 +170,7 @@ CColorEyeIDoc* CColorEyeIView::GetDocument() // non-debug version is inline
     ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CColorEyeIDoc)));
     return (CColorEyeIDoc*)m_pDocument;
 }
-#endif //_DEBUG
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIView message handlers

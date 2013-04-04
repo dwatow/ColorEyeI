@@ -17,17 +17,17 @@ static char THIS_FILE[]=__FILE__;
 //iForm()  input  form
 //////////////////////////////////////////////////////////////////////////
 
-COmdFilePtr::COmdFilePtr():
+COmdFileFactor::COmdFileFactor():
 m_PnlID(""), m_MsrDvc(""), m_Prb(""), m_CHID(""), m_nitsLv("")
 {};
 
-COmdFilePtr::~COmdFilePtr()
+COmdFileFactor::~COmdFileFactor()
 {
     m_dOmd.Empty(); 
 	m_dTxt.clear();
 };
 
-BOOL COmdFilePtr::Open(CString path, CFileException& fx)
+BOOL COmdFileFactor::Open(LPCTSTR path, CFileException& fx)
 {
 	if (m_fTxt.Open(path, fx))
 		return TRUE;
@@ -38,7 +38,7 @@ BOOL COmdFilePtr::Open(CString path, CFileException& fx)
 	}
 }
 
-BOOL COmdFilePtr::Save(CString path, CFileException& fx)
+BOOL COmdFileFactor::Save(LPCTSTR path, CFileException& fx)
 {
 	if (m_fTxt.Save(path, fx))
 	{
@@ -52,7 +52,7 @@ BOOL COmdFilePtr::Save(CString path, CFileException& fx)
 	}
 }
 
-CString COmdFilePtr::GetLine(UINT LineNum)
+const CString COmdFileFactor::GetLine(const int& LineNum)//OK
 {
     if (LineNum <= 0)
         return "出現錯誤: 參數 < 1";
@@ -62,7 +62,7 @@ CString COmdFilePtr::GetLine(UINT LineNum)
         return m_dTxt.at((std::vector<CString>::size_type)LineNum - 1);
 }
 
-CString COmdFilePtr::GetCell(UINT Word, UINT Line)
+const CString COmdFileFactor::GetCell(const int& Word, const int& Line)
 {
     CString strBuf1;
     CString strBuf2;
@@ -71,9 +71,9 @@ CString COmdFilePtr::GetCell(UINT Word, UINT Line)
     
     if (!strBuf1.IsEmpty())
     {
-        UINT wBegin = 0, wLength = 0;
+        int wBegin = 0, wLength = 0;
 		
-        for (UINT i = 0; i < Word; ++i)
+        for (int i = 0; i < Word; ++i)
         {
             wLength = strBuf1.Right(strBuf1.GetLength() - wBegin).Find('\t');
             strBuf2.Format("%s", strBuf1.Mid(wBegin, wLength));
@@ -85,14 +85,14 @@ CString COmdFilePtr::GetCell(UINT Word, UINT Line)
     return strBuf2;
 }
 
-CString COmdFilePtr::GetCell(TCHAR c, UINT n)
+const CString COmdFileFactor::GetCell(const TCHAR& c, const int& n)
 {
-    UINT x;
+    int x;
     x = c - 'A' + 1;
     return GetCell(x, n);
 }
 
-CString COmdFilePtr::GetCell(PTCHAR c, UINT n)
+const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n)
 {
     CString str;
     str.Format("%s", c);
@@ -102,18 +102,18 @@ CString COmdFilePtr::GetCell(PTCHAR c, UINT n)
     c1 = *(str.Left(1).GetBuffer(str.Left(1).GetLength()));
     c2 = *(str.Right(1).GetBuffer(str.Left(1).GetLength()));
 	
-    UINT x;
+    int x;
     x = (c1 - 'A' + 1) + (c2 - 'A' + 1) + 25;//+25是因為這個部份是從AA開始算，所以要跳過A~Z
     	
     return GetCell(x, n);
 }
 
-void COmdFilePtr::ErrorMsg(CFileException& fx)
+void COmdFileFactor::ErrorMsg(CFileException& fx)
 {
 	//例外處理
 	TCHAR buf[255];
 	fx.GetErrorMessage(buf, 255);
 	CString strPrompt;
-	strPrompt.Format("COmdFilePtr::LoadData()\n%s", buf);
+	strPrompt.Format("COmdFileFactor::LoadData()\n%s", buf);
 	AfxMessageBox(strPrompt);
 }

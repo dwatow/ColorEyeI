@@ -18,8 +18,8 @@ enum KindOfOmd { OMD_OLD = 0, OMD_AtYPE, OMD_GAMMA  };
 class COmdFile0
 {
 //Diff of Txt file
-	COmdFilePtr *m_Omd;
-	COmdFilePtr *m_GmOmd;
+	COmdFileFactor *m_Omd;
+	COmdFileFactor *m_GmOmd;
 	TxtStrData m_dTxt;
 
 public:
@@ -37,19 +37,24 @@ public:
 public:
 	COmdFile0():m_Omd(0), m_GmOmd(0){};
 	virtual ~COmdFile0() { delete m_Omd; };
-    BOOL Open(CString _S, CFileException& _Fx);
-    BOOL Save(CString _S, CFileException& _Fx, OmdCarData _D);
+    BOOL Open(LPCTSTR _S, CFileException& _Fx);
+    BOOL Save(LPCTSTR _S, CFileException& _Fx, RNA& _D);
+//    BOOL Save(CString _S, CFileException& _Fx, OmdCarData _D);
     
 	void Close(){ if (m_GmOmd != 0) m_GmOmd->Close();   m_Omd->Close(); };
 
-	void iOmdData(OmdCarData& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
-	void oOmdData(OmdCarData& data){ m_Omd->oOmdData(data); };
-//	OmdCarData oOmdData(){ return m_Omd->oOmdData(); };
+	void iOmdData(RNA& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
+	void oOmdData(RNA& data){ m_Omd->oOmdData(data); };
+// 	void iOmdData(OmdCarData& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
+// 	void oOmdData(OmdCarData& data){ m_Omd->oOmdData(data); };
+
+	//	OmdCarData oOmdData(){ return m_Omd->oOmdData(); };
 
 private:
 	void openWhichKindOmefile();
-	void saveWhichKindOmefile(OmdCarData);
-	void GetOpenSample(CString , CFileException& );
+	void saveWhichKindOmefile(RNA&);
+//	void saveWhichKindOmefile(OmdCarData);
+	void GetOpenSample(LPCTSTR , CFileException& );
 };
 
 #endif // OMDFILE0_H

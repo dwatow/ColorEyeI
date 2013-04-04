@@ -9,9 +9,6 @@
 #include <vector>
 #include <algorithm>
 #include "StaticText.h"
-//#include "../xMsrPoint/Bolt.h"   //生成chain用的function
-//#include "../xMsrPoint/PatternDlg.h"
-//可以調整成只要Bolt進來
 
 #include "../xMsrPoint/Nucleotide.h"
 #include "../xMsrPoint/DNA.h"

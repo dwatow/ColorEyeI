@@ -75,7 +75,7 @@ private:
     std::vector<Cartridge2>::iterator m_EndItor;
 
     CBrush   m_BkBrush;
-    ColorRef m_BkColor;    //背景色
+    ColorRef m_BkColor;   //背景色
 
     Circle m_Goal;        //目標圈圈
     Ca210* m_pCA210;
@@ -83,7 +83,7 @@ private:
 private:
     void initLCMSize() const;
     void initCa210();
-    void initDataDlgType() const;//Call SelMsrItem
+    void initDataDlgType() const;  //Call SelMsrItem
     void initDocument();
 
     void trigger();

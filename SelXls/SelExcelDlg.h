@@ -11,7 +11,6 @@
 #include "../ColorEyeIDoc.h"
 #include "cderr.h"   //for   definition   of   FNERR_BUFFERTOOSMALL 
 #include "FileDlg.h"
-#include "../DataChain.h"
 
 #if _MSC_VER > 1000
 #pragma once
@@ -30,7 +29,8 @@ class CSelExcelDlg : public CDialog
     int        m_fileNumLimit;
     CString    m_strXlsFilePath;  //XlsFilepath
 
-    CDataChain m_vOmdtoXls;
+    RNA m_vOmdtoXls;
+//    CDataChain m_vOmdtoXls;
     std::vector<CString>   m_vOmdFilePathList;
 
     CMainFrame*    m_pMainFrm;

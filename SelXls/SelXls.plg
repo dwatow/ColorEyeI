@@ -6,58 +6,6 @@
 --------------------Configuration: SelXls - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPBC99.tmp" with contents
-[
-/nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\GitHub\ColorEyeI\SelXls\SelExcelDlg.cpp"
-]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPBC99.tmp" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPBCA9.tmp" with contents
-[
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/SelXls.pdb" /debug /machine:I386 /out:"Debug/SelXls.exe" /pdbtype:sept 
-.\Debug\Bullet.obj
-.\Debug\Cartridge.obj
-.\Debug\DlgProxy.obj
-.\Debug\excel.obj
-.\Debug\FileDlg.obj
-.\Debug\OmdFile1.obj
-.\Debug\SelExcelDlg.obj
-.\Debug\SelXls.obj
-.\Debug\SelXlsDlg.obj
-.\Debug\StdAfx.obj
-.\Debug\TxtFile.obj
-.\Debug\xlef.obj
-.\Debug\XlsOQC1.obj
-.\Debug\XlsRA1.obj
-.\Debug\XlsSEC1.obj
-.\Debug\SelXls.res
-]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPBCA9.tmp"
-<h3>Output Window</h3>
-Compiling...
-SelExcelDlg.cpp
-Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPC542.tmp" with contents
-[
-/nologo /o"Debug/SelXls.bsc" 
-.\Debug\StdAfx.sbr
-.\Debug\Bullet.sbr
-.\Debug\Cartridge.sbr
-.\Debug\DlgProxy.sbr
-.\Debug\excel.sbr
-.\Debug\FileDlg.sbr
-.\Debug\OmdFile1.sbr
-.\Debug\SelExcelDlg.sbr
-.\Debug\SelXls.sbr
-.\Debug\SelXlsDlg.sbr
-.\Debug\TxtFile.sbr
-.\Debug\xlef.sbr
-.\Debug\XlsOQC1.sbr
-.\Debug\XlsRA1.sbr
-.\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPC542.tmp"
-Creating browse info file...
-<h3>Output Window</h3>
 
 
 

@@ -26,7 +26,8 @@ void COmdFile1::OmdToTxt()
 	o2tD9();    
 	o2tCT();
 	o2tD25();
-	o2tW49();
+	o2tW49_01to28();
+	o2tW49_29to49();
 	o2tD21();
 	o2tD13();
 	o2tW5();
@@ -37,205 +38,217 @@ void COmdFile1::OmdToTxt()
 void COmdFile1::o2tWRGB1nNits()
 {
 	m_dTxt.push_back("中心點\tL\tx\ty\tu'\tv'\t5nits 9點均齊度\tL\t\t\t\t\t5nits 9點均齊度\tx\t\t\t\t\t5nits 9點均齊度\ty\t\t\t\t\t5nits 9點均齊度\tT\t\t\t\t\t5nits 9點均齊度\tduv\n");
-    m_dTxt.push_back("White\t" + m_dOmd.At(White, Pn1, 0).GetStrLv() + "\t" + m_dOmd.At(White, Pn1, 0).GetStrSx() + "\t" + m_dOmd.At(White, Pn1, 0).GetStrSy() + "\t" + m_dOmd.At(White, Pn1, 0).GetStrDu() + "\t" + m_dOmd.At(White, Pn1, 0).GetStrDv() + "\t灰階:" + m_nitsLv + "\t" + m_dOmd.At(Nits, Pn9, 0).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 1).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 0).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 1).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 2).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 0).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 1).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 2).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 0).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 1).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 2).GetStrT() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 0).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 1).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 2).GetStrDuv() + "\n");
-    m_dTxt.push_back("Red  \t" + m_dOmd.At(Red  , Pn1, 0).GetStrLv() + "\t" + m_dOmd.At(Red  , Pn1, 0).GetStrSx() + "\t" + m_dOmd.At(Red  , Pn1, 0).GetStrSy() + "\t" + m_dOmd.At(Red  , Pn1, 0).GetStrDu() + "\t" + m_dOmd.At(Red  , Pn1, 0).GetStrDv() + "\t\t"               + m_dOmd.At(Nits, Pn9, 3).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 4).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 5).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 3).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 4).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 5).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 3).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 4).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 5).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 3).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 4).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 5).GetStrT() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 3).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 4).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 5).GetStrDuv() + "\n");
-    m_dTxt.push_back("Green\t" + m_dOmd.At(Green, Pn1, 0).GetStrLv() + "\t" + m_dOmd.At(Green, Pn1, 0).GetStrSx() + "\t" + m_dOmd.At(Green, Pn1, 0).GetStrSy() + "\t" + m_dOmd.At(Green, Pn1, 0).GetStrDu() + "\t" + m_dOmd.At(Green, Pn1, 0).GetStrDv() + "\t\t"               + m_dOmd.At(Nits, Pn9, 6).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 7).GetStrLv() + "\t" + m_dOmd.At(Nits, Pn9, 8).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 6).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 7).GetStrSx() + "\t" + m_dOmd.At(Nits, Pn9, 8).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 6).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 7).GetStrSy() + "\t" + m_dOmd.At(Nits, Pn9, 8).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 6).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 7).GetStrT() + "\t" + m_dOmd.At(Nits, Pn9, 8).GetStrT() + "\t\t\t\t" + m_dOmd.At(Nits, Pn9, 6).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 7).GetStrDuv() + "\t" + m_dOmd.At(Nits, Pn9, 8).GetStrDuv() + "\n");
-    m_dTxt.push_back("Blue \t" + m_dOmd.At(Blue , Pn1, 0).GetStrLv() + "\t" + m_dOmd.At(Blue , Pn1, 0).GetStrSx() + "\t" + m_dOmd.At(Blue , Pn1, 0).GetStrSy() + "\t" + m_dOmd.At(Blue , Pn1, 0).GetStrDu() + "\t" + m_dOmd.At(Blue , Pn1, 0).GetStrDv() + "\n");
+    m_dTxt.push_back("白色\t" + m_dOmd.Find("白", "1", "1"," ").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白", "1", "1"," ").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白", "1", "1"," ").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白", "1", "1"," ").GetBullet().oStr(VluK_Du) + "\t" + m_dOmd.Find("白", "1", "1"," ").GetBullet().oStr(VluK_Dv) + "\t灰階:" + m_nitsLv + "\t" + 
+		m_dOmd.Find("Nits","9","1","5-").GetBullet().oStr(VluK_Lv) + "\t" + 
+		m_dOmd.Find("Nits","9","2","5-").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("Nits","9","3","5-").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("Nits","9","1","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","2","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","3","5-").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("Nits","9","1","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","2","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","3","5-").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("Nits","9","1","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","2","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","3","5-").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("Nits","9","1","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","2","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","3","5-").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("紅色\t" + m_dOmd.Find("紅", "1", "1"," ").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("紅", "1", "1"," ").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("紅", "1", "1"," ").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("紅", "1", "1"," ").GetBullet().oStr(VluK_Du) + "\t" + m_dOmd.Find("紅", "1", "1"," ").GetBullet().oStr(VluK_Dv) + "\t\t"                     + m_dOmd.Find("Nits","9","4","5-").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("Nits","9","5","5-").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("Nits","9","6","5-").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("Nits","9","4","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","5","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","6","5-").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("Nits","9","4","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","5","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","6","5-").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("Nits","9","4","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","5","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","6","5-").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("Nits","9","4","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","5","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","6","5-").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("綠色\t" + m_dOmd.Find("綠", "1", "1"," ").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("綠", "1", "1"," ").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("綠", "1", "1"," ").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("綠", "1", "1"," ").GetBullet().oStr(VluK_Du) + "\t" + m_dOmd.Find("綠", "1", "1"," ").GetBullet().oStr(VluK_Dv) + "\t\t"                     + m_dOmd.Find("Nits","9","7","5-").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("Nits","9","8","5-").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("Nits","9","9","5-").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("Nits","9","7","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","8","5-").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("Nits","9","9","5-").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("Nits","9","7","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","8","5-").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("Nits","9","9","5-").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("Nits","9","7","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","8","5-").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("Nits","9","9","5-").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("Nits","9","7","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","8","5-").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("Nits","9","9","5-").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("藍色\t" + m_dOmd.Find("藍", "1", "1"," ").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("藍", "1", "1"," ").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("藍", "1", "1"," ").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("藍", "1", "1"," ").GetBullet().oStr(VluK_Du) + "\t" + m_dOmd.Find("藍", "1", "1"," ").GetBullet().oStr(VluK_Dv) + "\n");
 }
 void COmdFile1::o2tW9nD1()
 {
-	m_dTxt.push_back("Dark \t" + m_dOmd.At(Dark , Pn1, 0).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn1, 0).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn1, 0).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn1, 0).GetStrDu() + "\t" + m_dOmd.At(Dark , Pn1, 0).GetStrDv() + "\t"               + "9點均齊度\tL\t\t\t\t\t9點均齊度\tx\t\t\t\t\t9點均齊度\ty\t\t\t\t\t9點均齊度\tT\t\t\t\t\t9點均齊度\tduv\n");
-	m_dTxt.push_back("\t\t\t\t\t\t離邊6分之1\t" + m_dOmd.At(White, Pn9, 0).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 1).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 0).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 1).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 2).GetStrSx() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 0).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 1).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 2).GetStrSy() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 0).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 1).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 2).GetStrT() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 0).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 1).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 2).GetStrDuv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.At(White, Pn9, 3).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 4).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 5).GetStrLv() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 3).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 4).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 5).GetStrSx() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 3).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 4).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 5).GetStrSy() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 3).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 4).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 5).GetStrT() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 3).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 4).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 5).GetStrDuv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.At(White, Pn9, 6).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 7).GetStrLv() + "\t" + m_dOmd.At(White, Pn9, 8).GetStrLv() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 6).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 7).GetStrSx() + "\t" + m_dOmd.At(White, Pn9, 8).GetStrSx() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 6).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 7).GetStrSy() + "\t" + m_dOmd.At(White, Pn9, 8).GetStrSy() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 6).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 7).GetStrT() + "\t" + m_dOmd.At(White, Pn9, 8).GetStrT() + "\t\t\t\t" + m_dOmd.At(White, Pn9, 6).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 7).GetStrDuv() + "\t" + m_dOmd.At(White, Pn9, 8).GetStrDuv() + "\n");
+	m_dTxt.push_back("Dark \t" + 
+		m_dOmd.Find("黑", "1", "1"," ").GetBullet().oStr(VluK_Lv) + "\t" + 
+		m_dOmd.Find("黑", "1", "1"," ").GetBullet().oStr(VluK_Sx) + "\t" + 
+		m_dOmd.Find("黑", "1", "1"," ").GetBullet().oStr(VluK_Sy) + "\t" + 
+		m_dOmd.Find("黑", "1", "1"," ").GetBullet().oStr(VluK_Du) + "\t" + 
+		m_dOmd.Find("黑", "1", "1"," ").GetBullet().oStr(VluK_Dv) + "\t" +
+		"9點均齊度\tL\t\t\t\t\t9點均齊度\tx\t\t\t\t\t9點均齊度\ty\t\t\t\t\t9點均齊度\tT\t\t\t\t\t9點均齊度\tduv\n");
+	m_dTxt.push_back("\t\t\t\t\t\t離邊6分之1\t" + m_dOmd.Find("白","9","1","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","2","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","3","1/6").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("白","9","1","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","2","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","3","1/6").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("白","9","1","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","2","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","3","1/6").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("白","9","1","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","2","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","3","1/6").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("白","9","1","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","2","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","3","1/6").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.Find("白","9","4","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","5","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","6","1/6").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("白","9","4","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","5","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","6","1/6").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("白","9","4","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","5","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","6","1/6").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("白","9","4","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","5","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","6","1/6").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("白","9","4","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","5","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","6","1/6").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.Find("白","9","7","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","8","1/6").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("白","9","9","1/6").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("白","9","7","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","8","1/6").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("白","9","9","1/6").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("白","9","7","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","8","1/6").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("白","9","9","1/6").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("白","9","7","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","8","1/6").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("白","9","9","1/6").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("白","9","7","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","8","1/6").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","9","9","1/6").GetBullet().oStr(VluK_Duv) + "\n");
     m_dTxt.push_back("\n");
 }
 void COmdFile1::o2tD9()
 {
 	m_dTxt.push_back("\t\t\t\t\t\t黑色9點均齊度\tL\t\t\t\t\t黑色9點均齊度\tx\t\t\t\t\t黑色9點均齊度\ty\t\t\t\t\t黑色9點均齊度\tT\t\t\t\t\t黑色9點均齊度\tduv\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(Dark , Pn9, 0).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 1).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 0).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 1).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 2).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 0).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 1).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 2).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 0).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 1).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 2).GetStrT() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 0).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 1).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 2).GetStrDuv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(Dark , Pn9, 3).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 4).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 5).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 3).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 4).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 5).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 3).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 4).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 5).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 3).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 4).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 5).GetStrT() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 3).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 4).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 5).GetStrDuv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrLv() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrLv() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrSx() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrSx() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrSy() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrSy() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrT() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrT() + "\t\t\t\t" + m_dOmd.At(Dark , Pn9, 6).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 7).GetStrDuv() + "\t" + m_dOmd.At(Dark , Pn9, 8).GetStrDuv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("黑","9","1","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","2","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","3","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("黑","9","1","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","2","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","3","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("黑","9","1","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","2","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","3","0").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("黑","9","1","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","2","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","3","0").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("黑","9","1","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","2","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","3","0").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("黑","9","4","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","5","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","6","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("黑","9","4","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","5","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","6","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("黑","9","4","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","5","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","6","0").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("黑","9","4","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","5","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","6","0").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("黑","9","4","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","5","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","6","0").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("黑","9","7","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","8","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","9","9","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("黑","9","7","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","8","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","9","9","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("黑","9","7","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","8","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","9","9","0").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("黑","9","7","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","8","0").GetBullet().oStr(VluK_T) + "\t" + m_dOmd.Find("黑","9","9","0").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("黑","9","7","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","8","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","9","9","0").GetBullet().oStr(VluK_Duv) + "\n");
     m_dTxt.push_back("\n");
 }
 void COmdFile1::o2tCT()
 {
     m_dTxt.push_back("\t\t\t\t\t\tCross Talk\tYa\t\t\t\t\tCross Talk\tYb\t\t\t\t\tCross Talk\tYb\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlk , Pn4, 0).GetStrLv() +                                         "\t\t\t\t\t\t"                                          + m_dOmd.At(CrsTlkW , Pn4, 0).GetStrLv() +                                          "\t\t\t\t\t\t"                                      + m_dOmd.At(CrsTlkD , Pn4, 0).GetStrLv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(CrsTlk , Pn4, 1).GetStrLv() +                "\t灰\t"               + m_dOmd.At(CrsTlk , Pn4, 2).GetStrLv() +   "\t\t\t\t"   + m_dOmd.At(CrsTlkW , Pn4, 1).GetStrLv() +                   "\t白\t"              + m_dOmd.At(CrsTlkW , Pn4, 2).GetStrLv() + "\t\t\t\t" + m_dOmd.At(CrsTlkD , Pn4, 1).GetStrLv() +                  "\t黑\t"              + m_dOmd.At(CrsTlkD , Pn4, 2).GetStrLv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlk , Pn4, 3).GetStrLv() +                                         "\t\t\t\t\t\t"                                          + m_dOmd.At(CrsTlkW , Pn4, 3).GetStrLv() +                                         "\t\t\t\t\t\t"                                       + m_dOmd.At(CrsTlkD , Pn4, 3).GetStrLv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                               + m_dOmd.Find("cross","4","0","1/4").GetBullet().oStr(VluK_Lv) +                                                 "\t\t\t\t\t\t"                                                 + m_dOmd.Find("crossW","4","0","1/4").GetBullet().oStr(VluK_Lv) +                                                 "\t\t\t\t\t\t"                                               + m_dOmd.Find("crossD","4","0","1/4").GetBullet().oStr(VluK_Lv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("cross","4","1","1/4").GetBullet().oStr(VluK_Lv) +                    "\t灰\t"                   + m_dOmd.Find("cross","4","2","1/4").GetBullet().oStr(VluK_Lv) +   "\t\t\t\t"   + m_dOmd.Find("crossW","4","1","1/4").GetBullet().oStr(VluK_Lv) +                      "\t白\t"                  + m_dOmd.Find("crossW","4","2","1/4").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("crossD","4","1","1/4").GetBullet().oStr(VluK_Lv) +                     "\t黑\t"                   + m_dOmd.Find("crossD","4","2","1/4").GetBullet().oStr(VluK_Lv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                               + m_dOmd.Find("cross","4","3","1/4").GetBullet().oStr(VluK_Lv) +                                                 "\t\t\t\t\t\t"                                                  + m_dOmd.Find("crossW","4","3","1/4").GetBullet().oStr(VluK_Lv) +                                                 "\t\t\t\t\t\t"                                              + m_dOmd.Find("crossD","4","3","1/4").GetBullet().oStr(VluK_Lv) + "\n");
     m_dTxt.push_back("\n\n\n\n");
 }
+
 void COmdFile1::o2tD25()
 {
 	m_dTxt.push_back("\t\t\t\t\t\t25點暗態\tL\t\t\t\t\t\t\t25點暗態\tx\t\t\t\t\t\t\t25點暗態\ty\t\t\t\t\t\t\t25點暗態\tT\t\t\t\t\t\t\t25點暗態\tduv\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn25, 0).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrLv()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 0).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrSx()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 0).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrSy()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 0).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrT()   + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 0).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 1).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 5).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 7).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 6).GetStrDuv() + "\n");
+		m_dOmd.Find("黑","25","1","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","2","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","25","6","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","25","8","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","7","0").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+		m_dOmd.Find("黑","25","1","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","2","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","25","6","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","25","8","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","7","0").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+		m_dOmd.Find("黑","25","1","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","2","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","25","6","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","25","8","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","7","0").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+		m_dOmd.Find("黑","25","1","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","2","0").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("黑","25","6","0").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("黑","25","8","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","7","0").GetBullet().oStr(VluK_T)   + "\t\t" +
+		m_dOmd.Find("黑","25","1","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","2","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","25","6","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","25","8","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","7","0").GetBullet().oStr(VluK_Duv) + "\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25,  4).GetStrLv()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrLv()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25,  4).GetStrSx()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrSx()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25,  4).GetStrSy()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrSy()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25,  4).GetStrT()   + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrT()   + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25,  4).GetStrDuv() + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 10).GetStrDuv() + "\n");
+        m_dOmd.Find("黑","25","5","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t" + m_dOmd.Find("黑","25","11","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","5","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t" + m_dOmd.Find("黑","25","11","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","5","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t" + m_dOmd.Find("黑","25","11","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","5","0").GetBullet().oStr(VluK_T)   + "\t\t\t\t" + m_dOmd.Find("黑","25","11","0").GetBullet().oStr(VluK_T)   + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","5","0").GetBullet().oStr(VluK_Duv) + "\t\t\t\t" + m_dOmd.Find("黑","25","11","0").GetBullet().oStr(VluK_Duv) + "\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn25, 2).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrLv()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 2).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrSx()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 2).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrSy()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 2).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrT()   + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 2).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 3).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 9).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 8).GetStrDuv() + "\n");
+		m_dOmd.Find("黑","25","3","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","4","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","10","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","9","0").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+		m_dOmd.Find("黑","25","3","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","4","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","10","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","9","0").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+		m_dOmd.Find("黑","25","3","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","4","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","10","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","9","0").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+		m_dOmd.Find("黑","25","3","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","4","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","10","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","9","0").GetBullet().oStr(VluK_T)   + "\t\t" +
+		m_dOmd.Find("黑","25","3","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","4","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","10","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","9","0").GetBullet().oStr(VluK_Duv) + "\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn25, 11).GetStrLv()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrLv()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrLv()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 11).GetStrSx()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrSx()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrSx()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 11).GetStrSy()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrSy()  + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrSy()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 11).GetStrT()   + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrT()   + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrT()   + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 11).GetStrDuv() + "\t\t\t" + m_dOmd.At(Dark, Pn25, 12).GetStrDuv() + "\t\t\t" + m_dOmd.At(Dark, Pn25, 13).GetStrDuv() + "\n");
+		m_dOmd.Find("黑","25","12","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t" + m_dOmd.Find("黑","25","13","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t" + m_dOmd.Find("黑","25","14","0").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+		m_dOmd.Find("黑","25","12","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t" + m_dOmd.Find("黑","25","13","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t" + m_dOmd.Find("黑","25","14","0").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+		m_dOmd.Find("黑","25","12","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t" + m_dOmd.Find("黑","25","13","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t" + m_dOmd.Find("黑","25","14","0").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+		m_dOmd.Find("黑","25","12","0").GetBullet().oStr(VluK_T)   + "\t\t\t" + m_dOmd.Find("黑","25","13","0").GetBullet().oStr(VluK_T)   + "\t\t\t" + m_dOmd.Find("黑","25","14","0").GetBullet().oStr(VluK_T)   + "\t\t" +
+		m_dOmd.Find("黑","25","12","0").GetBullet().oStr(VluK_Duv) + "\t\t\t" + m_dOmd.Find("黑","25","13","0").GetBullet().oStr(VluK_Duv) + "\t\t\t" + m_dOmd.Find("黑","25","14","0").GetBullet().oStr(VluK_Duv) + "\n");
 	
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn25, 16).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrLv()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 16).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrSx()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 16).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrSy()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 16).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrT()   + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 16).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 17).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 23).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 22).GetStrDuv() + "\n");
+		m_dOmd.Find("黑","25","17","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","18","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","24","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","23","0").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+		m_dOmd.Find("黑","25","17","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","18","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","24","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","23","0").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+		m_dOmd.Find("黑","25","17","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","18","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","24","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","23","0").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+		m_dOmd.Find("黑","25","17","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","18","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","24","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","23","0").GetBullet().oStr(VluK_T)   + "\t\t" +
+		m_dOmd.Find("黑","25","17","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","18","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","24","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","23","0").GetBullet().oStr(VluK_Duv) + "\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25, 18).GetStrLv()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrLv()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25, 18).GetStrSx()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrSx()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25, 18).GetStrSy()  + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrSy()  + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25, 18).GetStrT()   + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrT()   + "\t\t\t\t" +
-        m_dOmd.At(Dark, Pn25, 18).GetStrDuv() + "\t\t\t\t" + m_dOmd.At(Dark, Pn25, 24).GetStrDuv() + "\n");
-	
+        m_dOmd.Find("黑","25","19","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t" + m_dOmd.Find("黑","25","25","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","19","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t" + m_dOmd.Find("黑","25","25","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","19","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t" + m_dOmd.Find("黑","25","25","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","19","0").GetBullet().oStr(VluK_T)   + "\t\t\t\t" + m_dOmd.Find("黑","25","25","0").GetBullet().oStr(VluK_T)   + "\t\t\t\t" +
+        m_dOmd.Find("黑","25","19","0").GetBullet().oStr(VluK_Duv) + "\t\t\t\t" + m_dOmd.Find("黑","25","25","0").GetBullet().oStr(VluK_Duv) + "\n");
+
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn25, 14).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrLv()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 14).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrSx()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 14).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrSy()  + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 14).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrT()   + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrT()   + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrT()   + "\t\t" +
-		m_dOmd.At(Dark, Pn25, 14).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 15).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 19).GetStrDuv() + "\t" + m_dOmd.At(Dark, Pn25, 21).GetStrDuv() + "\t\t" + m_dOmd.At(Dark, Pn25, 20).GetStrDuv() + "\n");
-    
+		m_dOmd.Find("黑","25","15","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","16","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","25","20","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","25","22","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","25","21","0").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+		m_dOmd.Find("黑","25","15","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","16","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","25","20","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","25","22","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","25","21","0").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+		m_dOmd.Find("黑","25","15","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","16","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","25","20","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","25","22","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","25","21","0").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+		m_dOmd.Find("黑","25","15","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","16","0").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("黑","25","20","0").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("黑","25","22","0").GetBullet().oStr(VluK_T)   + "\t\t" + m_dOmd.Find("黑","25","21","0").GetBullet().oStr(VluK_T)   + "\t\t" +
+		m_dOmd.Find("黑","25","15","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","16","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","25","20","0").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("黑","25","22","0").GetBullet().oStr(VluK_Duv) + "\t\t" + m_dOmd.Find("黑","25","21","0").GetBullet().oStr(VluK_Duv) + "\n");
+
     m_dTxt.push_back("\n");
 }
+
 void COmdFile1::o2tD21()
 {
 	m_dTxt.push_back("\t\t\t\t\t\t黑色21點均齊度\tL\t\t\t\t\t\t\t黑色21點均齊度\tx\t\t\t\t\t\t\t黑色21點均齊度\ty\n");
-	
+
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn21, 5).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn21, 6).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 7).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 8).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 9).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 10).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 11).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 5).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn21, 6).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 7).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 8).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 9).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 10).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 11).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 5).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn21, 6).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 7).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 8).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 9).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 10).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 11).GetStrSy() + "\n" );
-	
+		m_dOmd.Find("黑","21","5","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","21","6","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","7","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","8","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","9","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","10","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","11","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","21","5","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","21","6","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","7","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","8","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","9","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","10","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","11","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","21","5","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","21","6","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","7","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","8","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","9","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","10","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","11","0").GetBullet().oStr(VluK_Sy) + "\n" );
+
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn21, 4).GetStrLv()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 12).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 4).GetStrSx()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 12).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 4).GetStrSy()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 12).GetStrSy() + "\n" );
-	
+		m_dOmd.Find("黑","21","4","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","12","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","21","4","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","12","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","21","4","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","12","0").GetBullet().oStr(VluK_Sy) + "\n" );
+
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn21, 3).GetStrLv()  + "\t\t\t" + m_dOmd.At(Dark, Pn21, 0).GetStrLv() + "\t\t\t" + m_dOmd.At(Dark, Pn21, 13).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 3).GetStrSx()  + "\t\t\t" + m_dOmd.At(Dark, Pn21, 0).GetStrSx() + "\t\t\t" + m_dOmd.At(Dark, Pn21, 13).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 3).GetStrSy()  + "\t\t\t" + m_dOmd.At(Dark, Pn21, 0).GetStrSy() + "\t\t\t" + m_dOmd.At(Dark, Pn21, 13).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","21","3","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t" + m_dOmd.Find("黑","21","21","0").GetBullet().oStr(VluK_Lv) + "\t\t\t" + m_dOmd.Find("黑","21","13","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","21","3","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t" + m_dOmd.Find("黑","21","21","0").GetBullet().oStr(VluK_Sx) + "\t\t\t" + m_dOmd.Find("黑","21","13","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","21","3","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t" + m_dOmd.Find("黑","21","21","0").GetBullet().oStr(VluK_Sy) + "\t\t\t" + m_dOmd.Find("黑","21","13","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn21, 2).GetStrLv()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 14).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 2).GetStrSx()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 14).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 2).GetStrSy()  + "\t\t\t\t\t\t" + m_dOmd.At(Dark, Pn21, 14).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","21","2","0").GetBullet().oStr(VluK_Lv)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","14","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","21","2","0").GetBullet().oStr(VluK_Sx)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","14","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","21","2","0").GetBullet().oStr(VluK_Sy)  + "\t\t\t\t\t\t" + m_dOmd.Find("黑","21","14","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn21, 1).GetStrLv()  + "\t" + m_dOmd.At(Dark, Pn21, 20).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 19).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 18).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 17).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 16).GetStrLv() + "\t" + m_dOmd.At(Dark, Pn21, 15).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 1).GetStrSx()  + "\t" + m_dOmd.At(Dark, Pn21, 20).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 19).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 18).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 17).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 16).GetStrSx() + "\t" + m_dOmd.At(Dark, Pn21, 15).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn21, 1).GetStrSy()  + "\t" + m_dOmd.At(Dark, Pn21, 20).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 19).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 18).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 17).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 16).GetStrSy() + "\t" + m_dOmd.At(Dark, Pn21, 15).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","21","1","0").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("黑","21","20","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","19","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","18","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","17","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","16","0").GetBullet().oStr(VluK_Lv) + "\t" + m_dOmd.Find("黑","21","15","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","21","1","0").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("黑","21","20","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","19","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","18","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","17","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","16","0").GetBullet().oStr(VluK_Sx) + "\t" + m_dOmd.Find("黑","21","15","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","21","1","0").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("黑","21","20","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","19","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","18","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","17","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","16","0").GetBullet().oStr(VluK_Sy) + "\t" + m_dOmd.Find("黑","21","15","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
     m_dTxt.push_back(" \n");
 }
 
-void COmdFile1::o2tW49()
+void COmdFile1::o2tW49_01to28()
 {
     m_dTxt.push_back("\t\t\t\t\t\t49點均齊度\tL\t\t\t\t\t\t\t49點均齊度\tx\t\t\t\t\t\t\t49點均齊度\ty\t\t\t\t\t\t\t49點均齊度\tT\t\t\t\t\t\t\t49點均齊度\tduv\n");
     
     m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(White, Pn49, 0).GetStrLv()  + "\t" + m_dOmd.At(White, Pn49, 1).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 2).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 3).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 4).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 5).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 6).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 0).GetStrSx()  + "\t" + m_dOmd.At(White, Pn49, 1).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 2).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 3).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 4).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 5).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 6).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 0).GetStrSy()  + "\t" + m_dOmd.At(White, Pn49, 1).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 2).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 3).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 4).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 5).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 6).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49, 0).GetStrT()   + "\t" + m_dOmd.At(White, Pn49, 1).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 2).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 3).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 4).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 5).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 6).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 0).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 1).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 2).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 3).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 4).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 5).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 6).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49,  7).GetStrLv() + "\t" + m_dOmd.At(White, Pn49,  8).GetStrLv() + "\t" + m_dOmd.At(White, Pn49,  9).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 10).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 11).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 12).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 13).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49,  7).GetStrSx() + "\t" + m_dOmd.At(White, Pn49,  8).GetStrSx() + "\t" + m_dOmd.At(White, Pn49,  9).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 10).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 11).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 12).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 13).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49,  7).GetStrSy() + "\t" + m_dOmd.At(White, Pn49,  8).GetStrSy() + "\t" + m_dOmd.At(White, Pn49,  9).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 10).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 11).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 12).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 13).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49,  7).GetStrT()  + "\t" + m_dOmd.At(White, Pn49,  8).GetStrT()  + "\t" + m_dOmd.At(White, Pn49,  9).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 10).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 11).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 12).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 13).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49,  7).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49,  8).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49,  9).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 10).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 11).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 12).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 13).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49, 14).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 15).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 16).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 17).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 18).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 19).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 20).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 14).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 15).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 16).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 17).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 18).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 19).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 20).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 14).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 15).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 16).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 17).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 18).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 19).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 20).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49, 14).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 15).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 16).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 17).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 18).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 19).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 20).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 14).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 15).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 16).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 17).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 18).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 19).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 20).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49, 21).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 22).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 23).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 24).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 25).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 26).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 27).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 21).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 22).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 23).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 24).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 25).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 26).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 27).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 21).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 22).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 23).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 24).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 25).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 26).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 27).GetStrSy() + "\t\t" + 
-		m_dOmd.At(White, Pn49, 21).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 22).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 23).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 24).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 25).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 26).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 27).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 21).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 22).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 23).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 24).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 25).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 26).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 27).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49, 28).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 29).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 30).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 31).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 32).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 33).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 34).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 28).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 29).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 30).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 31).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 32).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 33).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 34).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 28).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 29).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 30).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 31).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 32).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 33).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 34).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49, 28).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 29).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 30).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 31).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 32).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 33).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 34).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 28).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 29).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 30).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 31).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 32).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 33).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 34).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49, 35).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 36).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 37).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 38).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 39).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 40).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 41).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 35).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 36).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 37).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 38).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 39).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 40).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 41).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 35).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 36).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 37).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 38).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 39).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 40).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 41).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49, 35).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 36).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 37).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 38).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 39).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 40).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 41).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 35).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 36).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 37).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 38).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 39).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 40).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 41).GetStrDuv() + "\n");
-    
-    m_dTxt.push_back("\t\t\t\t\t\t\t" +
-		m_dOmd.At(White, Pn49, 42).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 43).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 44).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 45).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 46).GetStrLv() + "\t" + m_dOmd.At(White, Pn49, 47).GetStrLv() + "\t" +  m_dOmd.At(White, Pn49, 48).GetStrLv() + "\t\t" +
-		m_dOmd.At(White, Pn49, 42).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 43).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 44).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 45).GetStrSx() + "\t" +  m_dOmd.At(White, Pn49, 46).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 47).GetStrSx() + "\t" + m_dOmd.At(White, Pn49, 48).GetStrSx() + "\t\t" +
-		m_dOmd.At(White, Pn49, 42).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 43).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 44).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 45).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 46).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 47).GetStrSy() + "\t" + m_dOmd.At(White, Pn49, 48).GetStrSy() + "\t\t" +
-		m_dOmd.At(White, Pn49, 42).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 43).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 44).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 45).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 46).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 47).GetStrT()  + "\t" + m_dOmd.At(White, Pn49, 48).GetStrT()  + "\t\t" +
-		m_dOmd.At(White, Pn49, 42).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 43).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 44).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 45).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 46).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 47).GetStrDuv() + "\t" + m_dOmd.At(White, Pn49, 48).GetStrDuv() + "\n");
+        m_dOmd.Find("白","49","1"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","2"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","3"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","4"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","5"," ").GetBullet().oStr(VluK_Lv) +  "\t" + m_dOmd.Find("白","49","6"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","7"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","1"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","2"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","3"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","4"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","5"," ").GetBullet().oStr(VluK_Sx) +  "\t" + m_dOmd.Find("白","49","6"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","7"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","1"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","2"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","3"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","4"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","5"," ").GetBullet().oStr(VluK_Sy) +  "\t" + m_dOmd.Find("白","49","6"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","7"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","1"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","2"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","3"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","4"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","5"," ").GetBullet().oStr(VluK_T)  +  "\t" + m_dOmd.Find("白","49","6"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","7"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","1"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","2"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","3"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","4"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","5"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","6"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","7"," ").GetBullet().oStr(VluK_Duv) + "\n");
 	
-    m_dTxt.push_back(" \n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","8"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","9"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","10"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","11"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","12"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","13"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","14"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","8"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","9"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","10"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","11"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","12"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","13"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","14"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","8"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","9"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","10"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","11"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","12"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","13"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","14"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","8"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","9"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","10"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","11"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","12"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","13"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","14"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","8"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","9"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","10"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","11"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","12"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","13"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","14"," ").GetBullet().oStr(VluK_Duv) + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","15"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","16"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","17"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","18"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","19"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","20"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","21"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","15"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","16"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","17"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","18"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","19"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","20"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","21"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","15"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","16"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","17"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","18"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","19"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","20"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","21"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","15"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","16"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","17"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","18"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","19"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","20"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","21"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","15"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","16"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","17"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","18"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","19"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","20"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","21"," ").GetBullet().oStr(VluK_Duv) + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","22"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","23"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","24"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","25"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","26"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","27"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","28"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","22"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","23"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","24"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","25"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","26"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","27"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","28"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","22"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","23"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","24"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","25"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","26"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","27"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","28"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" + 
+        m_dOmd.Find("白","49","22"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","23"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","24"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","25"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","26"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","27"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","28"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","22"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","23"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","24"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","25"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","26"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","27"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","28"," ").GetBullet().oStr(VluK_Duv) + "\n");
 }
 
+void COmdFile1::o2tW49_29to49()
+{
+	m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","29"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","30"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","31"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","32"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","33"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","34"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","35"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","29"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","30"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","31"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","32"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","33"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","34"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","35"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","29"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","30"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","31"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","32"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","33"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","34"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","35"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","29"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","30"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","31"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","32"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","33"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","34"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","35"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","29"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","30"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","31"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","32"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","33"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","34"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","35"," ").GetBullet().oStr(VluK_Duv) + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","36"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","37"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","38"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","39"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","40"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","41"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","42"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","36"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","37"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","38"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","39"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","40"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","41"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","42"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","36"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","37"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","38"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","39"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","40"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","41"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","42"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","36"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","37"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","38"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","39"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","40"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","41"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","42"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","36"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","37"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","38"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","39"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","40"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","41"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","42"," ").GetBullet().oStr(VluK_Duv) + "\n");
+    
+    m_dTxt.push_back("\t\t\t\t\t\t\t" +
+        m_dOmd.Find("白","49","43"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","44"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","45"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","46"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","47"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","48"," ").GetBullet().oStr(VluK_Lv)  + "\t" + m_dOmd.Find("白","49","49"," ").GetBullet().oStr(VluK_Lv)  + "\t\t" +
+        m_dOmd.Find("白","49","43"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","44"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","45"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","46"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","47"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","48"," ").GetBullet().oStr(VluK_Sx)  + "\t" + m_dOmd.Find("白","49","49"," ").GetBullet().oStr(VluK_Sx)  + "\t\t" +
+        m_dOmd.Find("白","49","43"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","44"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","45"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","46"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","47"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","48"," ").GetBullet().oStr(VluK_Sy)  + "\t" + m_dOmd.Find("白","49","49"," ").GetBullet().oStr(VluK_Sy)  + "\t\t" +
+        m_dOmd.Find("白","49","43"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","44"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","45"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","46"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","47"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","48"," ").GetBullet().oStr(VluK_T)   + "\t" + m_dOmd.Find("白","49","49"," ").GetBullet().oStr(VluK_T)   + "\t\t" +
+        m_dOmd.Find("白","49","43"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","44"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","45"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","46"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","47"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","48"," ").GetBullet().oStr(VluK_Duv) + "\t" + m_dOmd.Find("白","49","49"," ").GetBullet().oStr(VluK_Duv) + "\n");
+    
+    m_dTxt.push_back(" \n");
+}
 void COmdFile1::o2tD13()
 {
     m_dTxt.push_back("\t\t\t\t\t\t黑色13點均齊度\tL\t\t\t\t\t黑色13點均齊度\tx\t\t\t\t\t黑色13點均齊度\ty\n");
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn13, 0).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn13, 1).GetStrLv() + "\t\t" + m_dOmd.At(Dark, Pn13, 2).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 0).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn13, 1).GetStrSx() + "\t\t" + m_dOmd.At(Dark, Pn13, 2).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 0).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn13, 1).GetStrSy() + "\t\t" + m_dOmd.At(Dark, Pn13, 2).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","13","0","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","13","1","0").GetBullet().oStr(VluK_Lv) + "\t\t" + m_dOmd.Find("黑","13","2","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","13","0","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","13","1","0").GetBullet().oStr(VluK_Sx) + "\t\t" + m_dOmd.Find("黑","13","2","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","13","0","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","13","1","0").GetBullet().oStr(VluK_Sy) + "\t\t" + m_dOmd.Find("黑","13","2","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
 	m_dTxt.push_back("\t\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn13, 9).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn13, 10).GetStrLv() + "\t\t\t\t" +
-		m_dOmd.At(Dark, Pn13, 9).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn13, 10).GetStrSx() + "\t\t\t\t" +
-		m_dOmd.At(Dark, Pn13, 9).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn13, 10).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","13","9","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","13","10","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" +
+		m_dOmd.Find("黑","13","9","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","13","10","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" +
+		m_dOmd.Find("黑","13","9","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","13","10","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn13, 3).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn13, 4).GetStrLv() + "\t\t" + m_dOmd.At(Dark, Pn13, 5).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 3).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn13, 4).GetStrSx() + "\t\t" + m_dOmd.At(Dark, Pn13, 5).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 3).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn13, 4).GetStrSy() + "\t\t" + m_dOmd.At(Dark, Pn13, 5).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","13","3","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","13","4","0").GetBullet().oStr(VluK_Lv) + "\t\t" + m_dOmd.Find("黑","13","5","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","13","3","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","13","4","0").GetBullet().oStr(VluK_Sx) + "\t\t" + m_dOmd.Find("黑","13","5","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","13","3","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","13","4","0").GetBullet().oStr(VluK_Sy) + "\t\t" + m_dOmd.Find("黑","13","5","0").GetBullet().oStr(VluK_Sy) + "\n" );
 	
 	m_dTxt.push_back("\t\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn13, 11).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn13, 12).GetStrLv() + "\t\t\t\t" +
-		m_dOmd.At(Dark, Pn13, 11).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn13, 12).GetStrSx() + "\t\t\t\t" +
-		m_dOmd.At(Dark, Pn13, 11).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn13, 12).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","13","11","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","13","12","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" +
+		m_dOmd.Find("黑","13","11","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","13","12","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" +
+		m_dOmd.Find("黑","13","11","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","13","12","0").GetBullet().oStr(VluK_Sy) + "\n" );
 
 	m_dTxt.push_back("\t\t\t\t\t\t\t" + 
-		m_dOmd.At(Dark, Pn13, 6).GetStrLv()  + "\t\t" + m_dOmd.At(Dark, Pn13, 7).GetStrLv() + "\t\t" + m_dOmd.At(Dark, Pn13, 8).GetStrLv() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 6).GetStrSx()  + "\t\t" + m_dOmd.At(Dark, Pn13, 7).GetStrSx() + "\t\t" + m_dOmd.At(Dark, Pn13, 8).GetStrSx() + "\t\t" +
-		m_dOmd.At(Dark, Pn13, 6).GetStrSy()  + "\t\t" + m_dOmd.At(Dark, Pn13, 7).GetStrSy() + "\t\t" + m_dOmd.At(Dark, Pn13, 8).GetStrSy() + "\n" );
+		m_dOmd.Find("黑","13","6","0").GetBullet().oStr(VluK_Lv)  + "\t\t" + m_dOmd.Find("黑","13","7","0").GetBullet().oStr(VluK_Lv) + "\t\t" + m_dOmd.Find("黑","13","8","0").GetBullet().oStr(VluK_Lv) + "\t\t" +
+		m_dOmd.Find("黑","13","6","0").GetBullet().oStr(VluK_Sx)  + "\t\t" + m_dOmd.Find("黑","13","7","0").GetBullet().oStr(VluK_Sx) + "\t\t" + m_dOmd.Find("黑","13","8","0").GetBullet().oStr(VluK_Sx) + "\t\t" +
+		m_dOmd.Find("黑","13","6","0").GetBullet().oStr(VluK_Sy)  + "\t\t" + m_dOmd.Find("黑","13","7","0").GetBullet().oStr(VluK_Sy) + "\t\t" + m_dOmd.Find("黑","13","8","0").GetBullet().oStr(VluK_Sy) + "\n" );
 
 	    m_dTxt.push_back("\n");
 }
@@ -243,16 +256,16 @@ void COmdFile1::o2tD13()
 void COmdFile1::o2tW5()
 {
     m_dTxt.push_back("\t\t\t\t\t\t5點四角\tL\t\t\t\t\t5點四角\tx\t\t\t\t\t5點四角\ty\t\t\t\t\t5點四角\tT\t\t\t\t\t5點四角\tduv\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(White , Pn5, 0).GetStrLv() + "\t\t"                              + m_dOmd.At(White , Pn5, 1).GetStrLv() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 0).GetStrSx() + "\t\t"                              + m_dOmd.At(White , Pn5, 1).GetStrSx() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 0).GetStrSy() + "\t\t"                              + m_dOmd.At(White , Pn5, 1).GetStrSy() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 0).GetStrT() + "\t\t"                                    + m_dOmd.At(White , Pn5, 1).GetStrT() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 0).GetStrDuv() + "\t\t"                               + m_dOmd.At(White , Pn5, 1).GetStrDuv() + "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                     + m_dOmd.At(White , Pn5, 2).GetStrLv()                                       + "\t\t\t\t\t\t"                                   + m_dOmd.At(White , Pn5, 2).GetStrSx()                                       + "\t\t\t\t\t\t"                                   + m_dOmd.At(White , Pn5, 2).GetStrSy()                                       + "\t\t\t\t\t" +                                    "\t" + m_dOmd.At(White , Pn5, 2).GetStrT()                                      + "\t\t\t\t\t\t" +                                    m_dOmd.At(White , Pn5, 2).GetStrDuv() +                                        "\n");
-    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.At(White , Pn5, 3).GetStrLv() + "\t\t"                              + m_dOmd.At(White , Pn5, 4).GetStrLv() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 3).GetStrSx() + "\t\t"                              + m_dOmd.At(White , Pn5, 4).GetStrSx() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 3).GetStrSy() + "\t\t"                              + m_dOmd.At(White , Pn5, 4).GetStrSy() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 3).GetStrT() + "\t\t"                                    + m_dOmd.At(White , Pn5, 4).GetStrT() + "\t\t\t\t" + m_dOmd.At(White , Pn5, 3).GetStrDuv() + "\t\t"                               + m_dOmd.At(White , Pn5, 4).GetStrDuv() + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("白" ,"5","0","0").GetBullet().oStr(VluK_Lv) + "\t\t"                              + m_dOmd.Find("白" ,"5","1","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","0","0").GetBullet().oStr(VluK_Sx) + "\t\t"                              + m_dOmd.Find("白" ,"5","1","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","0","0").GetBullet().oStr(VluK_Sy) + "\t\t"                              + m_dOmd.Find("白" ,"5","1","0").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","0","0").GetBullet().oStr(VluK_T) + "\t\t"                                    + m_dOmd.Find("白" ,"5","1","0").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","0","0").GetBullet().oStr(VluK_Duv) + "\t\t"                               + m_dOmd.Find("白" ,"5","1","0").GetBullet().oStr(VluK_Duv) + "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t\t"                                     + m_dOmd.Find("白" ,"5","2","0").GetBullet().oStr(VluK_Lv)                                       + "\t\t\t\t\t\t"                                   + m_dOmd.Find("白" ,"5","2","0").GetBullet().oStr(VluK_Sx)                                       + "\t\t\t\t\t\t"                                   + m_dOmd.Find("白" ,"5","2","0").GetBullet().oStr(VluK_Sy)                                       + "\t\t\t\t\t" +                                    "\t" + m_dOmd.Find("白" ,"5","2","0").GetBullet().oStr(VluK_T)                                      + "\t\t\t\t\t\t" +                                    m_dOmd.Find("白" ,"5","2","0").GetBullet().oStr(VluK_Duv) +                                        "\n");
+    m_dTxt.push_back("\t\t\t\t\t\t\t" + m_dOmd.Find("白" ,"5","3","0").GetBullet().oStr(VluK_Lv) + "\t\t"                              + m_dOmd.Find("白" ,"5","4","0").GetBullet().oStr(VluK_Lv) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","3","0").GetBullet().oStr(VluK_Sx) + "\t\t"                              + m_dOmd.Find("白" ,"5","4","0").GetBullet().oStr(VluK_Sx) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","3","0").GetBullet().oStr(VluK_Sy) + "\t\t"                              + m_dOmd.Find("白" ,"5","4","0").GetBullet().oStr(VluK_Sy) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","3","0").GetBullet().oStr(VluK_T) + "\t\t"                                    + m_dOmd.Find("白" ,"5","4","0").GetBullet().oStr(VluK_T) + "\t\t\t\t" + m_dOmd.Find("白" ,"5","3","0").GetBullet().oStr(VluK_Duv) + "\t\t"                               + m_dOmd.Find("白" ,"5","4","0").GetBullet().oStr(VluK_Duv) + "\n");
 
     m_dTxt.push_back("\n");
 }
 
 void COmdFile1::TxtToOmd()
 {
-	m_dOmd.StdInit();	
+// 	m_dOmd.StdInit();	
 	m_fTxt.oTxtData(m_dTxt);
 
 //檔頭
@@ -269,7 +282,7 @@ void COmdFile1::TxtToOmd()
 	t2oD13();
 	t2oW5();
 
-	m_dOmd.freeEmptyCell();
+// 	m_dOmd.freeEmptyCell();
 	m_dTxt.clear();
 }
 
@@ -295,743 +308,743 @@ void COmdFile1::t2oInfo()
 
 void COmdFile1::t2oWRGBD()
 {
-	m_dOmd.At(White, Pn1, 0).SetLv( GetCell('B', 3) );
-    m_dOmd.At(White, Pn1, 0).SetSx( GetCell('C', 3) );
-    m_dOmd.At(White, Pn1, 0).SetSy( GetCell('D', 3) );
-    m_dOmd.At(White, Pn1, 0).SetDu( GetCell('E', 3) );
-    m_dOmd.At(White, Pn1, 0).SetDv( GetCell('F', 3) );
+	m_dOmd.Find("白", "1", "1", " ").GetBullet().i(VluK_Lv, GetCell('B', 3) );
+    m_dOmd.Find("白", "1", "1", " ").GetBullet().i(VluK_Sx, GetCell('C', 3) );
+    m_dOmd.Find("白", "1", "1", " ").GetBullet().i(VluK_Sy, GetCell('D', 3) );
+    m_dOmd.Find("白", "1", "1", " ").GetBullet().i(VluK_Du, GetCell('E', 3) );
+    m_dOmd.Find("白", "1", "1", " ").GetBullet().i(VluK_Dv, GetCell('F', 3) );
 	
-    m_dOmd.At(Red, Pn1, 0).SetLv( GetCell('B', 4) );
-    m_dOmd.At(Red, Pn1, 0).SetSx( GetCell('C', 4) );
-    m_dOmd.At(Red, Pn1, 0).SetSy( GetCell('D', 4) );
-    m_dOmd.At(Red, Pn1, 0).SetDu( GetCell('E', 4) );
-    m_dOmd.At(Red, Pn1, 0).SetDv( GetCell('F', 4) );
+    m_dOmd.Find("紅", "1", "1", " ").GetBullet().i(VluK_Lv, GetCell('B', 4) );
+    m_dOmd.Find("紅", "1", "1", " ").GetBullet().i(VluK_Sx, GetCell('C', 4) );
+    m_dOmd.Find("紅", "1", "1", " ").GetBullet().i(VluK_Sy, GetCell('D', 4) );
+    m_dOmd.Find("紅", "1", "1", " ").GetBullet().i(VluK_Du, GetCell('E', 4) );
+    m_dOmd.Find("紅", "1", "1", " ").GetBullet().i(VluK_Dv, GetCell('F', 4) );
     
-    m_dOmd.At(Green, Pn1, 0).SetLv( GetCell('B', 5) );
-    m_dOmd.At(Green, Pn1, 0).SetSx( GetCell('C', 5) );
-    m_dOmd.At(Green, Pn1, 0).SetSy( GetCell('D', 5) );
-    m_dOmd.At(Green, Pn1, 0).SetDu( GetCell('E', 5) );
-    m_dOmd.At(Green, Pn1, 0).SetDv( GetCell('F', 5) );
+    m_dOmd.Find("綠", "1", "1", " ").GetBullet().i(VluK_Lv, GetCell('B', 5) );
+    m_dOmd.Find("綠", "1", "1", " ").GetBullet().i(VluK_Sx, GetCell('C', 5) );
+    m_dOmd.Find("綠", "1", "1", " ").GetBullet().i(VluK_Sy, GetCell('D', 5) );
+    m_dOmd.Find("綠", "1", "1", " ").GetBullet().i(VluK_Du, GetCell('E', 5) );
+    m_dOmd.Find("綠", "1", "1", " ").GetBullet().i(VluK_Dv, GetCell('F', 5) );
     
-    m_dOmd.At(Blue, Pn1, 0).SetLv( GetCell('B', 6) );
-    m_dOmd.At(Blue, Pn1, 0).SetSx( GetCell('C', 6) );
-    m_dOmd.At(Blue, Pn1, 0).SetSy( GetCell('D', 6) );
-    m_dOmd.At(Blue, Pn1, 0).SetDu( GetCell('E', 6) );
-    m_dOmd.At(Blue, Pn1, 0).SetDv( GetCell('F', 6) );
+    m_dOmd.Find("藍", "1", "1", " ").GetBullet().i(VluK_Lv, GetCell('B', 6) );
+    m_dOmd.Find("藍", "1", "1", " ").GetBullet().i(VluK_Sx, GetCell('C', 6) );
+    m_dOmd.Find("藍", "1", "1", " ").GetBullet().i(VluK_Sy, GetCell('D', 6) );
+    m_dOmd.Find("藍", "1", "1", " ").GetBullet().i(VluK_Du, GetCell('E', 6) );
+    m_dOmd.Find("藍", "1", "1", " ").GetBullet().i(VluK_Dv, GetCell('F', 6) );
 	
-    m_dOmd.At(Dark, Pn1, 0).SetLv( GetCell('B', 7) );
-    m_dOmd.At(Dark, Pn1, 0).SetSx( GetCell('C', 7) );
-    m_dOmd.At(Dark, Pn1, 0).SetSy( GetCell('D', 7) );
-    m_dOmd.At(Dark, Pn1, 0).SetDu( GetCell('E', 7) );
-    m_dOmd.At(Dark, Pn1, 0).SetDv( GetCell('F', 7) );
+    m_dOmd.Find("黑", "1", "1", " ").GetBullet().i(VluK_Lv, GetCell('B', 7) );
+    m_dOmd.Find("黑", "1", "1", " ").GetBullet().i(VluK_Sx, GetCell('C', 7) );
+    m_dOmd.Find("黑", "1", "1", " ").GetBullet().i(VluK_Sy, GetCell('D', 7) );
+    m_dOmd.Find("黑", "1", "1", " ").GetBullet().i(VluK_Du, GetCell('E', 7) );
+    m_dOmd.Find("黑", "1", "1", " ").GetBullet().i(VluK_Dv, GetCell('F', 7) );
 }
 
 void COmdFile1::t2oNits()
 {
-	m_dOmd.At(Nits, Pn9, 0).SetLv( GetCell('H', 3) );
-    m_dOmd.At(Nits, Pn9, 1).SetLv( GetCell('I', 3) );
-    m_dOmd.At(Nits, Pn9, 2).SetLv( GetCell('J', 3) );
-    m_dOmd.At(Nits, Pn9, 3).SetLv( GetCell('H', 4) );
-    m_dOmd.At(Nits, Pn9, 4).SetLv( GetCell('I', 4) );
-    m_dOmd.At(Nits, Pn9, 5).SetLv( GetCell('J', 4) );
-    m_dOmd.At(Nits, Pn9, 6).SetLv( GetCell('H', 5) );
-    m_dOmd.At(Nits, Pn9, 7).SetLv( GetCell('I', 5) );
-    m_dOmd.At(Nits, Pn9, 8).SetLv( GetCell('J', 5) );
-	
-    m_dOmd.At(Nits, Pn9, 0).SetSx( GetCell('N', 3) );
-    m_dOmd.At(Nits, Pn9, 1).SetSx( GetCell('O', 3) );
-    m_dOmd.At(Nits, Pn9, 2).SetSx( GetCell('P', 3) );
-    m_dOmd.At(Nits, Pn9, 3).SetSx( GetCell('N', 4) );
-    m_dOmd.At(Nits, Pn9, 4).SetSx( GetCell('O', 4) );
-    m_dOmd.At(Nits, Pn9, 5).SetSx( GetCell('P', 4) );
-    m_dOmd.At(Nits, Pn9, 6).SetSx( GetCell('N', 5) );
-    m_dOmd.At(Nits, Pn9, 7).SetSx( GetCell('O', 5) );
-    m_dOmd.At(Nits, Pn9, 8).SetSx( GetCell('P', 5) );
-	
-    m_dOmd.At(Nits, Pn9, 0).SetSy( GetCell('T', 3) );
-    m_dOmd.At(Nits, Pn9, 1).SetSy( GetCell('U', 3) );
-    m_dOmd.At(Nits, Pn9, 2).SetSy( GetCell('V', 3) );
-    m_dOmd.At(Nits, Pn9, 3).SetSy( GetCell('T', 4) );
-    m_dOmd.At(Nits, Pn9, 4).SetSy( GetCell('U', 4) );
-    m_dOmd.At(Nits, Pn9, 5).SetSy( GetCell('V', 4) );
-    m_dOmd.At(Nits, Pn9, 6).SetSy( GetCell('T', 5) );
-    m_dOmd.At(Nits, Pn9, 7).SetSy( GetCell('U', 5) );
-    m_dOmd.At(Nits, Pn9, 8).SetSy( GetCell('V', 5) );
-	
-    m_dOmd.At(Nits, Pn9, 0).SetT( GetCell('Z' , 3) );
-    m_dOmd.At(Nits, Pn9, 1).SetT( GetCell("AA", 3) );
-    m_dOmd.At(Nits, Pn9, 2).SetT( GetCell("AB", 3) );
-    m_dOmd.At(Nits, Pn9, 3).SetT( GetCell('Z' , 4) );
-    m_dOmd.At(Nits, Pn9, 4).SetT( GetCell("AA", 4) );
-    m_dOmd.At(Nits, Pn9, 5).SetT( GetCell("AB", 4) );
-    m_dOmd.At(Nits, Pn9, 6).SetT( GetCell('Z' , 5) );
-    m_dOmd.At(Nits, Pn9, 7).SetT( GetCell("AA", 5) );
-    m_dOmd.At(Nits, Pn9, 8).SetT( GetCell("AB", 5) );
-	
-    m_dOmd.At(Nits, Pn9, 0).SetDuv( GetCell("AF", 3) );
-    m_dOmd.At(Nits, Pn9, 1).SetDuv( GetCell("AG", 3) );
-    m_dOmd.At(Nits, Pn9, 2).SetDuv( GetCell("AH", 3) );
-    m_dOmd.At(Nits, Pn9, 3).SetDuv( GetCell("AF", 4) );
-    m_dOmd.At(Nits, Pn9, 4).SetDuv( GetCell("AG", 4) );
-    m_dOmd.At(Nits, Pn9, 5).SetDuv( GetCell("AH", 4) );
-    m_dOmd.At(Nits, Pn9, 6).SetDuv( GetCell("AF", 5) );
-    m_dOmd.At(Nits, Pn9, 7).SetDuv( GetCell("AG", 5) );
-    m_dOmd.At(Nits, Pn9, 8).SetDuv( GetCell("AH", 5) );
+    m_dOmd.Find("Nits","9","1","5-").GetBullet().i(VluK_Lv, GetCell('H', 3) );
+    m_dOmd.Find("Nits","9","2","5-").GetBullet().i(VluK_Lv, GetCell('I', 3) );
+    m_dOmd.Find("Nits","9","3","5-").GetBullet().i(VluK_Lv, GetCell('J', 3) );
+    m_dOmd.Find("Nits","9","4","5-").GetBullet().i(VluK_Lv, GetCell('H', 4) );
+    m_dOmd.Find("Nits","9","5","5-").GetBullet().i(VluK_Lv, GetCell('I', 4) );
+    m_dOmd.Find("Nits","9","6","5-").GetBullet().i(VluK_Lv, GetCell('J', 4) );
+    m_dOmd.Find("Nits","9","7","5-").GetBullet().i(VluK_Lv, GetCell('H', 5) );
+    m_dOmd.Find("Nits","9","8","5-").GetBullet().i(VluK_Lv, GetCell('I', 5) );
+    m_dOmd.Find("Nits","9","9","5-").GetBullet().i(VluK_Lv, GetCell('J', 5) );
+    
+    m_dOmd.Find("Nits","9","1","5-").GetBullet().i(VluK_Sx, GetCell('N', 3) );
+    m_dOmd.Find("Nits","9","2","5-").GetBullet().i(VluK_Sx, GetCell('O', 3) );
+    m_dOmd.Find("Nits","9","3","5-").GetBullet().i(VluK_Sx, GetCell('P', 3) );
+    m_dOmd.Find("Nits","9","4","5-").GetBullet().i(VluK_Sx, GetCell('N', 4) );
+    m_dOmd.Find("Nits","9","5","5-").GetBullet().i(VluK_Sx, GetCell('O', 4) );
+    m_dOmd.Find("Nits","9","6","5-").GetBullet().i(VluK_Sx, GetCell('P', 4) );
+    m_dOmd.Find("Nits","9","7","5-").GetBullet().i(VluK_Sx, GetCell('N', 5) );
+    m_dOmd.Find("Nits","9","8","5-").GetBullet().i(VluK_Sx, GetCell('O', 5) );
+    m_dOmd.Find("Nits","9","9","5-").GetBullet().i(VluK_Sx, GetCell('P', 5) );
+    
+    m_dOmd.Find("Nits","9","1","5-").GetBullet().i(VluK_Sy, GetCell('T', 3) );
+    m_dOmd.Find("Nits","9","2","5-").GetBullet().i(VluK_Sy, GetCell('U', 3) );
+    m_dOmd.Find("Nits","9","3","5-").GetBullet().i(VluK_Sy, GetCell('V', 3) );
+    m_dOmd.Find("Nits","9","4","5-").GetBullet().i(VluK_Sy, GetCell('T', 4) );
+    m_dOmd.Find("Nits","9","5","5-").GetBullet().i(VluK_Sy, GetCell('U', 4) );
+    m_dOmd.Find("Nits","9","6","5-").GetBullet().i(VluK_Sy, GetCell('V', 4) );
+    m_dOmd.Find("Nits","9","7","5-").GetBullet().i(VluK_Sy, GetCell('T', 5) );
+    m_dOmd.Find("Nits","9","8","5-").GetBullet().i(VluK_Sy, GetCell('U', 5) );
+    m_dOmd.Find("Nits","9","9","5-").GetBullet().i(VluK_Sy, GetCell('V', 5) );
+    
+    m_dOmd.Find("Nits","9","1","5-").GetBullet().i(VluK_T,  GetCell('Z' , 3) );
+    m_dOmd.Find("Nits","9","2","5-").GetBullet().i(VluK_T,  GetCell("AA", 3) );
+    m_dOmd.Find("Nits","9","3","5-").GetBullet().i(VluK_T,  GetCell("AB", 3) );
+    m_dOmd.Find("Nits","9","4","5-").GetBullet().i(VluK_T,  GetCell('Z' , 4) );
+    m_dOmd.Find("Nits","9","5","5-").GetBullet().i(VluK_T,  GetCell("AA", 4) );
+    m_dOmd.Find("Nits","9","6","5-").GetBullet().i(VluK_T,  GetCell("AB", 4) );
+    m_dOmd.Find("Nits","9","7","5-").GetBullet().i(VluK_T,  GetCell('Z' , 5) );
+    m_dOmd.Find("Nits","9","8","5-").GetBullet().i(VluK_T,  GetCell("AA", 5) );
+    m_dOmd.Find("Nits","9","9","5-").GetBullet().i(VluK_T,  GetCell("AB", 5) );
+    
+    m_dOmd.Find("Nits","9","1","5-").GetBullet().i(VluK_Duv,  GetCell("AF", 3) );
+    m_dOmd.Find("Nits","9","2","5-").GetBullet().i(VluK_Duv,  GetCell("AG", 3) );
+    m_dOmd.Find("Nits","9","3","5-").GetBullet().i(VluK_Duv,  GetCell("AH", 3) );
+    m_dOmd.Find("Nits","9","4","5-").GetBullet().i(VluK_Duv,  GetCell("AF", 4) );
+    m_dOmd.Find("Nits","9","5","5-").GetBullet().i(VluK_Duv,  GetCell("AG", 4) );
+    m_dOmd.Find("Nits","9","6","5-").GetBullet().i(VluK_Duv,  GetCell("AH", 4) );
+    m_dOmd.Find("Nits","9","7","5-").GetBullet().i(VluK_Duv,  GetCell("AF", 5) );
+    m_dOmd.Find("Nits","9","8","5-").GetBullet().i(VluK_Duv,  GetCell("AG", 5) );
+    m_dOmd.Find("Nits","9","9","5-").GetBullet().i(VluK_Duv,  GetCell("AH", 5) );
 }
 
 void COmdFile1::t2oW9()
 {
-	m_dOmd.At(White, Pn9, 0).SetLv( GetCell('H', 8) );
-    m_dOmd.At(White, Pn9, 1).SetLv( GetCell('I', 8) );
-    m_dOmd.At(White, Pn9, 2).SetLv( GetCell('J', 8) );
-    m_dOmd.At(White, Pn9, 3).SetLv( GetCell('H', 9) );
-    m_dOmd.At(White, Pn9, 4).SetLv( GetCell('I', 9) );
-    m_dOmd.At(White, Pn9, 5).SetLv( GetCell('J', 9) );
-    m_dOmd.At(White, Pn9, 6).SetLv( GetCell('H', 10) );
-    m_dOmd.At(White, Pn9, 7).SetLv( GetCell('I', 10) );
-    m_dOmd.At(White, Pn9, 8).SetLv( GetCell('J', 10) );
+	m_dOmd.Find("白","9","1","1/6").GetBullet().i(VluK_Lv, GetCell('H', 8) );
+    m_dOmd.Find("白","9","2","1/6").GetBullet().i(VluK_Lv, GetCell('I', 8) );
+    m_dOmd.Find("白","9","3","1/6").GetBullet().i(VluK_Lv, GetCell('J', 8) );
+    m_dOmd.Find("白","9","4","1/6").GetBullet().i(VluK_Lv, GetCell('H', 9) );
+    m_dOmd.Find("白","9","5","1/6").GetBullet().i(VluK_Lv, GetCell('I', 9) );
+    m_dOmd.Find("白","9","6","1/6").GetBullet().i(VluK_Lv, GetCell('J', 9) );
+    m_dOmd.Find("白","9","7","1/6").GetBullet().i(VluK_Lv, GetCell('H', 10) );
+    m_dOmd.Find("白","9","8","1/6").GetBullet().i(VluK_Lv, GetCell('I', 10) );
+    m_dOmd.Find("白","9","9","1/6").GetBullet().i(VluK_Lv, GetCell('J', 10) );
 	
-    m_dOmd.At(White, Pn9, 0).SetSx( GetCell('N', 8) );
-    m_dOmd.At(White, Pn9, 1).SetSx( GetCell('O', 8) );
-    m_dOmd.At(White, Pn9, 2).SetSx( GetCell('P', 8) );
-    m_dOmd.At(White, Pn9, 3).SetSx( GetCell('N', 9) );
-    m_dOmd.At(White, Pn9, 4).SetSx( GetCell('O', 9) );
-    m_dOmd.At(White, Pn9, 5).SetSx( GetCell('P', 9) );
-    m_dOmd.At(White, Pn9, 6).SetSx( GetCell('N', 10) );
-    m_dOmd.At(White, Pn9, 7).SetSx( GetCell('O', 10) );
-    m_dOmd.At(White, Pn9, 8).SetSx( GetCell('P', 10) );
+    m_dOmd.Find("白","9","1","1/6").GetBullet().i(VluK_Sx, GetCell('N', 8) );
+    m_dOmd.Find("白","9","2","1/6").GetBullet().i(VluK_Sx, GetCell('O', 8) );
+    m_dOmd.Find("白","9","3","1/6").GetBullet().i(VluK_Sx, GetCell('P', 8) );
+    m_dOmd.Find("白","9","4","1/6").GetBullet().i(VluK_Sx, GetCell('N', 9) );
+    m_dOmd.Find("白","9","5","1/6").GetBullet().i(VluK_Sx, GetCell('O', 9) );
+    m_dOmd.Find("白","9","6","1/6").GetBullet().i(VluK_Sx, GetCell('P', 9) );
+    m_dOmd.Find("白","9","7","1/6").GetBullet().i(VluK_Sx, GetCell('N', 10) );
+    m_dOmd.Find("白","9","8","1/6").GetBullet().i(VluK_Sx, GetCell('O', 10) );
+    m_dOmd.Find("白","9","9","1/6").GetBullet().i(VluK_Sx, GetCell('P', 10) );
     
-    m_dOmd.At(White, Pn9, 0).SetSy( GetCell('T', 8) );
-    m_dOmd.At(White, Pn9, 1).SetSy( GetCell('U', 8) );
-    m_dOmd.At(White, Pn9, 2).SetSy( GetCell('V', 8) );
-    m_dOmd.At(White, Pn9, 3).SetSy( GetCell('T', 9) );
-    m_dOmd.At(White, Pn9, 4).SetSy( GetCell('U', 9) );
-    m_dOmd.At(White, Pn9, 5).SetSy( GetCell('V', 9) );
-    m_dOmd.At(White, Pn9, 6).SetSy( GetCell('T', 10) );
-    m_dOmd.At(White, Pn9, 7).SetSy( GetCell('U', 10) );
-    m_dOmd.At(White, Pn9, 8).SetSy( GetCell('V', 10) );
+    m_dOmd.Find("白","9","1","1/6").GetBullet().i(VluK_Sy, GetCell('T', 8) );
+    m_dOmd.Find("白","9","2","1/6").GetBullet().i(VluK_Sy, GetCell('U', 8) );
+    m_dOmd.Find("白","9","3","1/6").GetBullet().i(VluK_Sy, GetCell('V', 8) );
+    m_dOmd.Find("白","9","4","1/6").GetBullet().i(VluK_Sy, GetCell('T', 9) );
+    m_dOmd.Find("白","9","5","1/6").GetBullet().i(VluK_Sy, GetCell('U', 9) );
+    m_dOmd.Find("白","9","6","1/6").GetBullet().i(VluK_Sy, GetCell('V', 9) );
+    m_dOmd.Find("白","9","7","1/6").GetBullet().i(VluK_Sy, GetCell('T', 10) );
+    m_dOmd.Find("白","9","8","1/6").GetBullet().i(VluK_Sy, GetCell('U', 10) );
+    m_dOmd.Find("白","9","9","1/6").GetBullet().i(VluK_Sy, GetCell('V', 10) );
     
-    m_dOmd.At(White, Pn9, 0).SetT( GetCell('Z' , 8) );
-    m_dOmd.At(White, Pn9, 1).SetT( GetCell("AA", 8) );
-    m_dOmd.At(White, Pn9, 2).SetT( GetCell("AB", 8) );
-    m_dOmd.At(White, Pn9, 3).SetT( GetCell('Z' , 9) );
-    m_dOmd.At(White, Pn9, 4).SetT( GetCell("AA", 9) );
-    m_dOmd.At(White, Pn9, 5).SetT( GetCell("AB", 9) );
-    m_dOmd.At(White, Pn9, 6).SetT( GetCell('Z' , 10) );
-    m_dOmd.At(White, Pn9, 7).SetT( GetCell("AA", 10) );
-    m_dOmd.At(White, Pn9, 8).SetT( GetCell("AB", 10) );
+    m_dOmd.Find("白","9","1","1/6").GetBullet().i(VluK_T,  GetCell('Z' , 8) );
+    m_dOmd.Find("白","9","2","1/6").GetBullet().i(VluK_T,  GetCell("AA", 8) );
+    m_dOmd.Find("白","9","3","1/6").GetBullet().i(VluK_T,  GetCell("AB", 8) );
+    m_dOmd.Find("白","9","4","1/6").GetBullet().i(VluK_T,  GetCell('Z' , 9) );
+    m_dOmd.Find("白","9","5","1/6").GetBullet().i(VluK_T,  GetCell("AA", 9) );
+    m_dOmd.Find("白","9","6","1/6").GetBullet().i(VluK_T,  GetCell("AB", 9) );
+    m_dOmd.Find("白","9","7","1/6").GetBullet().i(VluK_T,  GetCell('Z' , 10) );
+    m_dOmd.Find("白","9","8","1/6").GetBullet().i(VluK_T,  GetCell("AA", 10) );
+    m_dOmd.Find("白","9","9","1/6").GetBullet().i(VluK_T,  GetCell("AB", 10) );
 	
-    m_dOmd.At(White, Pn9, 0).SetDuv( GetCell("AF", 8) );
-    m_dOmd.At(White, Pn9, 1).SetDuv( GetCell("AG", 8) );
-    m_dOmd.At(White, Pn9, 2).SetDuv( GetCell("AH", 8) );
-    m_dOmd.At(White, Pn9, 3).SetDuv( GetCell("AF", 9) );
-    m_dOmd.At(White, Pn9, 4).SetDuv( GetCell("AG", 9) );
-    m_dOmd.At(White, Pn9, 5).SetDuv( GetCell("AH", 9) );
-    m_dOmd.At(White, Pn9, 6).SetDuv( GetCell("AF", 10) );
-    m_dOmd.At(White, Pn9, 7).SetDuv( GetCell("AG", 10) );
-    m_dOmd.At(White, Pn9, 8).SetDuv( GetCell("AH", 10) );
+    m_dOmd.Find("白","9","1","1/6").GetBullet().i(VluK_Duv,  GetCell("AF", 8) );
+    m_dOmd.Find("白","9","2","1/6").GetBullet().i(VluK_Duv,  GetCell("AG", 8) );
+    m_dOmd.Find("白","9","3","1/6").GetBullet().i(VluK_Duv,  GetCell("AH", 8) );
+    m_dOmd.Find("白","9","4","1/6").GetBullet().i(VluK_Duv,  GetCell("AF", 9) );
+    m_dOmd.Find("白","9","5","1/6").GetBullet().i(VluK_Duv,  GetCell("AG", 9) );
+    m_dOmd.Find("白","9","6","1/6").GetBullet().i(VluK_Duv,  GetCell("AH", 9) );
+    m_dOmd.Find("白","9","7","1/6").GetBullet().i(VluK_Duv,  GetCell("AF", 10) );
+    m_dOmd.Find("白","9","8","1/6").GetBullet().i(VluK_Duv,  GetCell("AG", 10) );
+    m_dOmd.Find("白","9","9","1/6").GetBullet().i(VluK_Duv,  GetCell("AH", 10) );
 }
 
 void COmdFile1::t2oD9()
 {
-    m_dOmd.At(Dark, Pn9, 0).SetLv( GetCell('H', 13) );
-    m_dOmd.At(Dark, Pn9, 1).SetLv( GetCell('I', 13) );
-    m_dOmd.At(Dark, Pn9, 2).SetLv( GetCell('J', 13) );
-    m_dOmd.At(Dark, Pn9, 3).SetLv( GetCell('H', 14) );
-    m_dOmd.At(Dark, Pn9, 4).SetLv( GetCell('I', 14) );
-    m_dOmd.At(Dark, Pn9, 5).SetLv( GetCell('J', 14) );
-    m_dOmd.At(Dark, Pn9, 6).SetLv( GetCell('H', 15) );
-    m_dOmd.At(Dark, Pn9, 7).SetLv( GetCell('I', 15) );
-    m_dOmd.At(Dark, Pn9, 8).SetLv( GetCell('J', 15) );
+    m_dOmd.Find("黑","9","1","0").GetBullet().i(VluK_Lv, GetCell('H', 13) );
+    m_dOmd.Find("黑","9","2","0").GetBullet().i(VluK_Lv, GetCell('I', 13) );
+    m_dOmd.Find("黑","9","3","0").GetBullet().i(VluK_Lv, GetCell('J', 13) );
+    m_dOmd.Find("黑","9","4","0").GetBullet().i(VluK_Lv, GetCell('H', 14) );
+    m_dOmd.Find("黑","9","5","0").GetBullet().i(VluK_Lv, GetCell('I', 14) );
+    m_dOmd.Find("黑","9","6","0").GetBullet().i(VluK_Lv, GetCell('J', 14) );
+    m_dOmd.Find("黑","9","7","0").GetBullet().i(VluK_Lv, GetCell('H', 15) );
+    m_dOmd.Find("黑","9","8","0").GetBullet().i(VluK_Lv, GetCell('I', 15) );
+    m_dOmd.Find("黑","9","9","0").GetBullet().i(VluK_Lv, GetCell('J', 15) );
     
-    m_dOmd.At(Dark, Pn9, 0).SetSx( GetCell('N', 13) );
-    m_dOmd.At(Dark, Pn9, 1).SetSx( GetCell('O', 13) );
-    m_dOmd.At(Dark, Pn9, 2).SetSx( GetCell('P', 13) );
-    m_dOmd.At(Dark, Pn9, 3).SetSx( GetCell('N', 14) );
-    m_dOmd.At(Dark, Pn9, 4).SetSx( GetCell('O', 14) );
-    m_dOmd.At(Dark, Pn9, 5).SetSx( GetCell('P', 14) );
-    m_dOmd.At(Dark, Pn9, 6).SetSx( GetCell('N', 15) );
-    m_dOmd.At(Dark, Pn9, 7).SetSx( GetCell('O', 15) );
-    m_dOmd.At(Dark, Pn9, 8).SetSx( GetCell('P', 15) );
+    m_dOmd.Find("黑","9","1","0").GetBullet().i(VluK_Sx, GetCell('N', 13) );
+    m_dOmd.Find("黑","9","2","0").GetBullet().i(VluK_Sx, GetCell('O', 13) );
+    m_dOmd.Find("黑","9","3","0").GetBullet().i(VluK_Sx, GetCell('P', 13) );
+    m_dOmd.Find("黑","9","4","0").GetBullet().i(VluK_Sx, GetCell('N', 14) );
+    m_dOmd.Find("黑","9","5","0").GetBullet().i(VluK_Sx, GetCell('O', 14) );
+    m_dOmd.Find("黑","9","6","0").GetBullet().i(VluK_Sx, GetCell('P', 14) );
+    m_dOmd.Find("黑","9","7","0").GetBullet().i(VluK_Sx, GetCell('N', 15) );
+    m_dOmd.Find("黑","9","8","0").GetBullet().i(VluK_Sx, GetCell('O', 15) );
+    m_dOmd.Find("黑","9","9","0").GetBullet().i(VluK_Sx, GetCell('P', 15) );
     
-    m_dOmd.At(Dark, Pn9, 0).SetSy( GetCell('T', 13) );
-    m_dOmd.At(Dark, Pn9, 1).SetSy( GetCell('U', 13) );
-    m_dOmd.At(Dark, Pn9, 2).SetSy( GetCell('V', 13) );
-    m_dOmd.At(Dark, Pn9, 3).SetSy( GetCell('T', 14) );
-    m_dOmd.At(Dark, Pn9, 4).SetSy( GetCell('U', 14) );
-    m_dOmd.At(Dark, Pn9, 5).SetSy( GetCell('V', 14) );
-    m_dOmd.At(Dark, Pn9, 6).SetSy( GetCell('T', 15) );
-    m_dOmd.At(Dark, Pn9, 7).SetSy( GetCell('U', 15) );
-    m_dOmd.At(Dark, Pn9, 8).SetSy( GetCell('V', 15) );
+    m_dOmd.Find("黑","9","1","0").GetBullet().i(VluK_Sy, GetCell('T', 13) );
+    m_dOmd.Find("黑","9","2","0").GetBullet().i(VluK_Sy, GetCell('U', 13) );
+    m_dOmd.Find("黑","9","3","0").GetBullet().i(VluK_Sy, GetCell('V', 13) );
+    m_dOmd.Find("黑","9","4","0").GetBullet().i(VluK_Sy, GetCell('T', 14) );
+    m_dOmd.Find("黑","9","5","0").GetBullet().i(VluK_Sy, GetCell('U', 14) );
+    m_dOmd.Find("黑","9","6","0").GetBullet().i(VluK_Sy, GetCell('V', 14) );
+    m_dOmd.Find("黑","9","7","0").GetBullet().i(VluK_Sy, GetCell('T', 15) );
+    m_dOmd.Find("黑","9","8","0").GetBullet().i(VluK_Sy, GetCell('U', 15) );
+    m_dOmd.Find("黑","9","9","0").GetBullet().i(VluK_Sy, GetCell('V', 15) );
     
-    m_dOmd.At(Dark, Pn9, 0).SetT( GetCell('Z' , 13) );
-    m_dOmd.At(Dark, Pn9, 1).SetT( GetCell("AA", 13) );
-    m_dOmd.At(Dark, Pn9, 2).SetT( GetCell("AB", 13) );
-    m_dOmd.At(Dark, Pn9, 3).SetT( GetCell('Z' , 14) );
-    m_dOmd.At(Dark, Pn9, 4).SetT( GetCell("AA", 14) );
-    m_dOmd.At(Dark, Pn9, 5).SetT( GetCell("AB", 14) );
-    m_dOmd.At(Dark, Pn9, 6).SetT( GetCell('Z' , 15) );
-    m_dOmd.At(Dark, Pn9, 7).SetT( GetCell("AA", 15) );
-    m_dOmd.At(Dark, Pn9, 8).SetT( GetCell("AB", 15) );
+    m_dOmd.Find("黑","9","1","0").GetBullet().i(VluK_T,  GetCell('Z' , 13) );
+    m_dOmd.Find("黑","9","2","0").GetBullet().i(VluK_T,  GetCell("AA", 13) );
+    m_dOmd.Find("黑","9","3","0").GetBullet().i(VluK_T,  GetCell("AB", 13) );
+    m_dOmd.Find("黑","9","4","0").GetBullet().i(VluK_T,  GetCell('Z' , 14) );
+    m_dOmd.Find("黑","9","5","0").GetBullet().i(VluK_T,  GetCell("AA", 14) );
+    m_dOmd.Find("黑","9","6","0").GetBullet().i(VluK_T,  GetCell("AB", 14) );
+    m_dOmd.Find("黑","9","7","0").GetBullet().i(VluK_T,  GetCell('Z' , 15) );
+    m_dOmd.Find("黑","9","8","0").GetBullet().i(VluK_T,  GetCell("AA", 15) );
+    m_dOmd.Find("黑","9","9","0").GetBullet().i(VluK_T,  GetCell("AB", 15) );
     
-    m_dOmd.At(Dark, Pn9, 0).SetDuv( GetCell("AF", 13) );
-    m_dOmd.At(Dark, Pn9, 1).SetDuv( GetCell("AG", 13) );
-    m_dOmd.At(Dark, Pn9, 2).SetDuv( GetCell("AH", 13) );
-    m_dOmd.At(Dark, Pn9, 3).SetDuv( GetCell("AF", 14) );
-    m_dOmd.At(Dark, Pn9, 4).SetDuv( GetCell("AG", 14) );
-    m_dOmd.At(Dark, Pn9, 5).SetDuv( GetCell("AH", 14) );
-    m_dOmd.At(Dark, Pn9, 6).SetDuv( GetCell("AF", 15) );
-    m_dOmd.At(Dark, Pn9, 7).SetDuv( GetCell("AG", 15) );
-    m_dOmd.At(Dark, Pn9, 8).SetDuv( GetCell("AH", 15) );
+    m_dOmd.Find("黑","9","1","0").GetBullet().i(VluK_Duv,  GetCell("AF", 13) );
+    m_dOmd.Find("黑","9","2","0").GetBullet().i(VluK_Duv,  GetCell("AG", 13) );
+    m_dOmd.Find("黑","9","3","0").GetBullet().i(VluK_Duv,  GetCell("AH", 13) );
+    m_dOmd.Find("黑","9","4","0").GetBullet().i(VluK_Duv,  GetCell("AF", 14) );
+    m_dOmd.Find("黑","9","5","0").GetBullet().i(VluK_Duv,  GetCell("AG", 14) );
+    m_dOmd.Find("黑","9","6","0").GetBullet().i(VluK_Duv,  GetCell("AH", 14) );
+    m_dOmd.Find("黑","9","7","0").GetBullet().i(VluK_Duv,  GetCell("AF", 15) );
+    m_dOmd.Find("黑","9","8","0").GetBullet().i(VluK_Duv,  GetCell("AG", 15) );
+    m_dOmd.Find("黑","9","9","0").GetBullet().i(VluK_Duv,  GetCell("AH", 15) );
 }
 
 void COmdFile1::t2oCT()
 {
-    m_dOmd.At(CrsTlk, Pn4, 0).SetLv( GetCell('I', 18) );
-    m_dOmd.At(CrsTlk, Pn4, 1).SetLv( GetCell('H', 19) );
-    m_dOmd.At(CrsTlk, Pn4, 2).SetLv( GetCell('J', 19) );
-    m_dOmd.At(CrsTlk, Pn4, 3).SetLv( GetCell('I', 20) );
+    m_dOmd.Find("cross","4","1","1/4").GetBullet().i(VluK_Lv, GetCell('I', 18) );
+    m_dOmd.Find("cross","4","2","1/4").GetBullet().i(VluK_Lv, GetCell('H', 19) );
+    m_dOmd.Find("cross","4","3","1/4").GetBullet().i(VluK_Lv, GetCell('J', 19) );
+    m_dOmd.Find("cross","4","4","1/4").GetBullet().i(VluK_Lv, GetCell('I', 20) );
 	
-    m_dOmd.At(CrsTlkW, Pn4, 0).SetLv( GetCell('O', 18) );
-    m_dOmd.At(CrsTlkW, Pn4, 1).SetLv( GetCell('N', 19) );
-    m_dOmd.At(CrsTlkW, Pn4, 2).SetLv( GetCell('P', 19) );
-    m_dOmd.At(CrsTlkW, Pn4, 3).SetLv( GetCell('O', 20) );
+    m_dOmd.Find("crossW","4","1","1/4").GetBullet().i(VluK_Lv, GetCell('O', 18) );
+    m_dOmd.Find("crossW","4","2","1/4").GetBullet().i(VluK_Lv, GetCell('N', 19) );
+    m_dOmd.Find("crossW","4","3","1/4").GetBullet().i(VluK_Lv, GetCell('P', 19) );
+    m_dOmd.Find("crossW","4","4","1/4").GetBullet().i(VluK_Lv, GetCell('O', 20) );
 	
-    m_dOmd.At(CrsTlkD, Pn4, 0).SetLv( GetCell('U', 18) );
-    m_dOmd.At(CrsTlkD, Pn4, 1).SetLv( GetCell('T', 19) );
-    m_dOmd.At(CrsTlkD, Pn4, 2).SetLv( GetCell('V', 19) );
-    m_dOmd.At(CrsTlkD, Pn4, 3).SetLv( GetCell('U', 20) );
+    m_dOmd.Find("crossD","4","1","1/4").GetBullet().i(VluK_Lv, GetCell('U', 18) );
+    m_dOmd.Find("crossD","4","2","1/4").GetBullet().i(VluK_Lv, GetCell('T', 19) );
+    m_dOmd.Find("crossD","4","3","1/4").GetBullet().i(VluK_Lv, GetCell('V', 19) );
+    m_dOmd.Find("crossD","4","4","1/4").GetBullet().i(VluK_Lv, GetCell('U', 20) );
 }
 
 void COmdFile1::t2oD25()
 {
-     m_dOmd.At(Dark, Pn25,  0).SetLv( GetCell('H', 26) );
-    m_dOmd.At(Dark, Pn25,  1).SetLv( GetCell('J', 26) );
-    m_dOmd.At(Dark, Pn25,  2).SetLv( GetCell('H', 28) );
-    m_dOmd.At(Dark, Pn25,  3).SetLv( GetCell('J', 28) );
-    m_dOmd.At(Dark, Pn25,  4).SetLv( GetCell('I', 27) );
-    m_dOmd.At(Dark, Pn25,  5).SetLv( GetCell('K', 26) );
-    m_dOmd.At(Dark, Pn25,  6).SetLv( GetCell('N', 26) );
-    m_dOmd.At(Dark, Pn25,  7).SetLv( GetCell('L', 26) );
-    m_dOmd.At(Dark, Pn25,  8).SetLv( GetCell('N', 28) );
-    m_dOmd.At(Dark, Pn25,  9).SetLv( GetCell('L', 28) );
-    m_dOmd.At(Dark, Pn25, 10).SetLv( GetCell('M', 27) );
-    m_dOmd.At(Dark, Pn25, 11).SetLv( GetCell('H', 29) );
-    m_dOmd.At(Dark, Pn25, 12).SetLv( GetCell('K', 29) );
-    m_dOmd.At(Dark, Pn25, 13).SetLv( GetCell('N', 29) );
-    m_dOmd.At(Dark, Pn25, 14).SetLv( GetCell('H', 32) );
-    m_dOmd.At(Dark, Pn25, 15).SetLv( GetCell('J', 32) );
-    m_dOmd.At(Dark, Pn25, 16).SetLv( GetCell('H', 30) );
-    m_dOmd.At(Dark, Pn25, 17).SetLv( GetCell('J', 30) );
-    m_dOmd.At(Dark, Pn25, 18).SetLv( GetCell('I', 31) );
-    m_dOmd.At(Dark, Pn25, 19).SetLv( GetCell('K', 32) );
-    m_dOmd.At(Dark, Pn25, 20).SetLv( GetCell('N', 32) );
-    m_dOmd.At(Dark, Pn25, 21).SetLv( GetCell('L', 32) );
-    m_dOmd.At(Dark, Pn25, 22).SetLv( GetCell('N', 30) );
-    m_dOmd.At(Dark, Pn25, 23).SetLv( GetCell('L', 30) );
-    m_dOmd.At(Dark, Pn25, 24).SetLv( GetCell('M', 31) );
+    m_dOmd.Find("黑","25","1","0").GetBullet().i(VluK_Lv, GetCell('H', 26) );
+    m_dOmd.Find("黑","25","2","0").GetBullet().i(VluK_Lv, GetCell('J', 26) );
+    m_dOmd.Find("黑","25","3","0").GetBullet().i(VluK_Lv, GetCell('H', 28) );
+    m_dOmd.Find("黑","25","4","0").GetBullet().i(VluK_Lv, GetCell('J', 28) );
+    m_dOmd.Find("黑","25","5","0").GetBullet().i(VluK_Lv, GetCell('I', 27) );
+    m_dOmd.Find("黑","25","6","0").GetBullet().i(VluK_Lv, GetCell('K', 26) );
+    m_dOmd.Find("黑","25","7","0").GetBullet().i(VluK_Lv, GetCell('N', 26) );
+    m_dOmd.Find("黑","25","8","0").GetBullet().i(VluK_Lv, GetCell('L', 26) );
+    m_dOmd.Find("黑","25","9","0").GetBullet().i(VluK_Lv, GetCell('N', 28) );
+    m_dOmd.Find("黑","25","10","0").GetBullet().i(VluK_Lv, GetCell('L', 28) );
+    m_dOmd.Find("黑","25","11","0").GetBullet().i(VluK_Lv, GetCell('M', 27) );
+    m_dOmd.Find("黑","25","12","0").GetBullet().i(VluK_Lv, GetCell('H', 29) );
+    m_dOmd.Find("黑","25","13","0").GetBullet().i(VluK_Lv, GetCell('K', 29) );
+    m_dOmd.Find("黑","25","14","0").GetBullet().i(VluK_Lv, GetCell('N', 29) );
+    m_dOmd.Find("黑","25","15","0").GetBullet().i(VluK_Lv, GetCell('H', 32) );
+    m_dOmd.Find("黑","25","16","0").GetBullet().i(VluK_Lv, GetCell('J', 32) );
+    m_dOmd.Find("黑","25","17","0").GetBullet().i(VluK_Lv, GetCell('H', 30) );
+    m_dOmd.Find("黑","25","18","0").GetBullet().i(VluK_Lv, GetCell('J', 30) );
+    m_dOmd.Find("黑","25","19","0").GetBullet().i(VluK_Lv, GetCell('I', 31) );
+    m_dOmd.Find("黑","25","20","0").GetBullet().i(VluK_Lv, GetCell('K', 32) );
+    m_dOmd.Find("黑","25","21","0").GetBullet().i(VluK_Lv, GetCell('N', 32) );
+    m_dOmd.Find("黑","25","22","0").GetBullet().i(VluK_Lv, GetCell('L', 32) );
+    m_dOmd.Find("黑","25","23","0").GetBullet().i(VluK_Lv, GetCell('N', 30) );
+    m_dOmd.Find("黑","25","24","0").GetBullet().i(VluK_Lv, GetCell('L', 30) );
+    m_dOmd.Find("黑","25","25","0").GetBullet().i(VluK_Lv, GetCell('M', 31) );
 
-    m_dOmd.At(Dark, Pn25,  0).SetSx( GetCell('P', 26) );
-    m_dOmd.At(Dark, Pn25,  1).SetSx( GetCell('R', 26) );
-    m_dOmd.At(Dark, Pn25,  2).SetSx( GetCell('P', 28) );
-    m_dOmd.At(Dark, Pn25,  3).SetSx( GetCell('R', 28) );
-    m_dOmd.At(Dark, Pn25,  4).SetSx( GetCell('Q', 27) );
-    m_dOmd.At(Dark, Pn25,  5).SetSx( GetCell('S', 26) );
-    m_dOmd.At(Dark, Pn25,  6).SetSx( GetCell('V', 26) );
-    m_dOmd.At(Dark, Pn25,  7).SetSx( GetCell('T', 26) );
-    m_dOmd.At(Dark, Pn25,  8).SetSx( GetCell('V', 28) );
-    m_dOmd.At(Dark, Pn25,  9).SetSx( GetCell('T', 28) );
-    m_dOmd.At(Dark, Pn25, 10).SetSx( GetCell('U', 27) );
-    m_dOmd.At(Dark, Pn25, 11).SetSx( GetCell('P', 29) );
-    m_dOmd.At(Dark, Pn25, 12).SetSx( GetCell('S', 29) );
-    m_dOmd.At(Dark, Pn25, 13).SetSx( GetCell('V', 29) );
-    m_dOmd.At(Dark, Pn25, 14).SetSx( GetCell('P', 32) );
-    m_dOmd.At(Dark, Pn25, 15).SetSx( GetCell('R', 32) );
-    m_dOmd.At(Dark, Pn25, 16).SetSx( GetCell('P', 30) );
-    m_dOmd.At(Dark, Pn25, 17).SetSx( GetCell('R', 30) );
-    m_dOmd.At(Dark, Pn25, 18).SetSx( GetCell('Q', 31) );
-    m_dOmd.At(Dark, Pn25, 19).SetSx( GetCell('S', 32) );
-    m_dOmd.At(Dark, Pn25, 20).SetSx( GetCell('V', 32) );
-    m_dOmd.At(Dark, Pn25, 21).SetSx( GetCell('T', 32) );
-    m_dOmd.At(Dark, Pn25, 22).SetSx( GetCell('V', 30) );
-    m_dOmd.At(Dark, Pn25, 23).SetSx( GetCell('T', 30) );
-    m_dOmd.At(Dark, Pn25, 24).SetSx( GetCell('U', 31) );
+    m_dOmd.Find("黑","25","1","0").GetBullet().i(VluK_Sx, GetCell('P', 26) );
+    m_dOmd.Find("黑","25","2","0").GetBullet().i(VluK_Sx, GetCell('R', 26) );
+    m_dOmd.Find("黑","25","3","0").GetBullet().i(VluK_Sx, GetCell('P', 28) );
+    m_dOmd.Find("黑","25","4","0").GetBullet().i(VluK_Sx, GetCell('R', 28) );
+    m_dOmd.Find("黑","25","5","0").GetBullet().i(VluK_Sx, GetCell('Q', 27) );
+    m_dOmd.Find("黑","25","6","0").GetBullet().i(VluK_Sx, GetCell('S', 26) );
+    m_dOmd.Find("黑","25","7","0").GetBullet().i(VluK_Sx, GetCell('V', 26) );
+    m_dOmd.Find("黑","25","8","0").GetBullet().i(VluK_Sx, GetCell('T', 26) );
+    m_dOmd.Find("黑","25","9","0").GetBullet().i(VluK_Sx, GetCell('V', 28) );
+    m_dOmd.Find("黑","25","10","0").GetBullet().i(VluK_Sx, GetCell('T', 28) );
+    m_dOmd.Find("黑","25","11","0").GetBullet().i(VluK_Sx, GetCell('U', 27) );
+    m_dOmd.Find("黑","25","12","0").GetBullet().i(VluK_Sx, GetCell('P', 29) );
+    m_dOmd.Find("黑","25","13","0").GetBullet().i(VluK_Sx, GetCell('S', 29) );
+    m_dOmd.Find("黑","25","14","0").GetBullet().i(VluK_Sx, GetCell('V', 29) );
+    m_dOmd.Find("黑","25","15","0").GetBullet().i(VluK_Sx, GetCell('P', 32) );
+    m_dOmd.Find("黑","25","16","0").GetBullet().i(VluK_Sx, GetCell('R', 32) );
+    m_dOmd.Find("黑","25","17","0").GetBullet().i(VluK_Sx, GetCell('P', 30) );
+    m_dOmd.Find("黑","25","18","0").GetBullet().i(VluK_Sx, GetCell('R', 30) );
+    m_dOmd.Find("黑","25","19","0").GetBullet().i(VluK_Sx, GetCell('Q', 31) );
+    m_dOmd.Find("黑","25","20","0").GetBullet().i(VluK_Sx, GetCell('S', 32) );
+    m_dOmd.Find("黑","25","21","0").GetBullet().i(VluK_Sx, GetCell('V', 32) );
+    m_dOmd.Find("黑","25","22","0").GetBullet().i(VluK_Sx, GetCell('T', 32) );
+    m_dOmd.Find("黑","25","23","0").GetBullet().i(VluK_Sx, GetCell('V', 30) );
+    m_dOmd.Find("黑","25","24","0").GetBullet().i(VluK_Sx, GetCell('T', 30) );
+    m_dOmd.Find("黑","25","25","0").GetBullet().i(VluK_Sx, GetCell('U', 31) );
 
-    m_dOmd.At(Dark, Pn25,  0).SetSy( GetCell('X' , 26) );
-    m_dOmd.At(Dark, Pn25,  1).SetSy( GetCell('Z' , 26) );
-    m_dOmd.At(Dark, Pn25,  2).SetSy( GetCell('X' , 28) );
-    m_dOmd.At(Dark, Pn25,  3).SetSy( GetCell('Z' , 28) );
-    m_dOmd.At(Dark, Pn25,  4).SetSy( GetCell('Y' , 27) );
-    m_dOmd.At(Dark, Pn25,  5).SetSy( GetCell("AA", 26) );
-    m_dOmd.At(Dark, Pn25,  6).SetSy( GetCell("AD", 26) );
-    m_dOmd.At(Dark, Pn25,  7).SetSy( GetCell("AB", 26) );
-    m_dOmd.At(Dark, Pn25,  8).SetSy( GetCell("AD", 28) );
-    m_dOmd.At(Dark, Pn25,  9).SetSy( GetCell("AB", 28) );
-    m_dOmd.At(Dark, Pn25, 10).SetSy( GetCell("AC", 27) );
-    m_dOmd.At(Dark, Pn25, 11).SetSy( GetCell('X' , 29) );
-    m_dOmd.At(Dark, Pn25, 12).SetSy( GetCell("AA", 29) );
-    m_dOmd.At(Dark, Pn25, 13).SetSy( GetCell("AD", 29) );
-    m_dOmd.At(Dark, Pn25, 14).SetSy( GetCell('X' , 32) );
-    m_dOmd.At(Dark, Pn25, 15).SetSy( GetCell('Z' , 32) );
-    m_dOmd.At(Dark, Pn25, 16).SetSy( GetCell('X' , 30) );
-    m_dOmd.At(Dark, Pn25, 17).SetSy( GetCell('Z' , 30) );
-    m_dOmd.At(Dark, Pn25, 18).SetSy( GetCell('Y' , 31) );
-    m_dOmd.At(Dark, Pn25, 19).SetSy( GetCell("AA", 32) );
-    m_dOmd.At(Dark, Pn25, 20).SetSy( GetCell("AD", 32) );
-    m_dOmd.At(Dark, Pn25, 21).SetSy( GetCell("AB", 32) );
-    m_dOmd.At(Dark, Pn25, 22).SetSy( GetCell("AD", 30) );
-    m_dOmd.At(Dark, Pn25, 23).SetSy( GetCell("AB", 30) );
-    m_dOmd.At(Dark, Pn25, 24).SetSy( GetCell("AC", 31) );
+    m_dOmd.Find("黑","25","1","0").GetBullet().i(VluK_Sy, GetCell('X' , 26) );
+    m_dOmd.Find("黑","25","2","0").GetBullet().i(VluK_Sy, GetCell('Z' , 26) );
+    m_dOmd.Find("黑","25","3","0").GetBullet().i(VluK_Sy, GetCell('X' , 28) );
+    m_dOmd.Find("黑","25","4","0").GetBullet().i(VluK_Sy, GetCell('Z' , 28) );
+    m_dOmd.Find("黑","25","5","0").GetBullet().i(VluK_Sy, GetCell('Y' , 27) );
+    m_dOmd.Find("黑","25","6","0").GetBullet().i(VluK_Sy, GetCell("AA", 26) );
+    m_dOmd.Find("黑","25","7","0").GetBullet().i(VluK_Sy, GetCell("AD", 26) );
+    m_dOmd.Find("黑","25","8","0").GetBullet().i(VluK_Sy, GetCell("AB", 26) );
+    m_dOmd.Find("黑","25","9","0").GetBullet().i(VluK_Sy, GetCell("AD", 28) );
+    m_dOmd.Find("黑","25","10","0").GetBullet().i(VluK_Sy, GetCell("AB", 28) );
+    m_dOmd.Find("黑","25","11","0").GetBullet().i(VluK_Sy, GetCell("AC", 27) );
+    m_dOmd.Find("黑","25","12","0").GetBullet().i(VluK_Sy, GetCell('X' , 29) );
+    m_dOmd.Find("黑","25","13","0").GetBullet().i(VluK_Sy, GetCell("AA", 29) );
+    m_dOmd.Find("黑","25","14","0").GetBullet().i(VluK_Sy, GetCell("AD", 29) );
+    m_dOmd.Find("黑","25","15","0").GetBullet().i(VluK_Sy, GetCell('X' , 32) );
+    m_dOmd.Find("黑","25","16","0").GetBullet().i(VluK_Sy, GetCell('Z' , 32) );
+    m_dOmd.Find("黑","25","17","0").GetBullet().i(VluK_Sy, GetCell('X' , 30) );
+    m_dOmd.Find("黑","25","18","0").GetBullet().i(VluK_Sy, GetCell('Z' , 30) );
+    m_dOmd.Find("黑","25","19","0").GetBullet().i(VluK_Sy, GetCell('Y' , 31) );
+    m_dOmd.Find("黑","25","20","0").GetBullet().i(VluK_Sy, GetCell("AA", 32) );
+    m_dOmd.Find("黑","25","21","0").GetBullet().i(VluK_Sy, GetCell("AD", 32) );
+    m_dOmd.Find("黑","25","22","0").GetBullet().i(VluK_Sy, GetCell("AB", 32) );
+    m_dOmd.Find("黑","25","23","0").GetBullet().i(VluK_Sy, GetCell("AD", 30) );
+    m_dOmd.Find("黑","25","24","0").GetBullet().i(VluK_Sy, GetCell("AB", 30) );
+    m_dOmd.Find("黑","25","25","0").GetBullet().i(VluK_Sy, GetCell("AC", 31) );
     
-	m_dOmd.At(Dark, Pn25,  0).SetT( GetCell("AF", 26) );
-    m_dOmd.At(Dark, Pn25,  1).SetT( GetCell("AH", 26) );
-    m_dOmd.At(Dark, Pn25,  2).SetT( GetCell("AF", 28) );
-    m_dOmd.At(Dark, Pn25,  3).SetT( GetCell("AH", 28) );
-    m_dOmd.At(Dark, Pn25,  4).SetT( GetCell("AG", 27) );
-    m_dOmd.At(Dark, Pn25,  5).SetT( GetCell("AI", 26) );
-    m_dOmd.At(Dark, Pn25,  6).SetT( GetCell("AL", 26) );
-    m_dOmd.At(Dark, Pn25,  7).SetT( GetCell("AJ", 26) );
-    m_dOmd.At(Dark, Pn25,  8).SetT( GetCell("AL", 28) );
-    m_dOmd.At(Dark, Pn25,  9).SetT( GetCell("AJ", 28) );
-    m_dOmd.At(Dark, Pn25, 10).SetT( GetCell("AK", 27) );
-    m_dOmd.At(Dark, Pn25, 11).SetT( GetCell("AF", 29) );
-    m_dOmd.At(Dark, Pn25, 12).SetT( GetCell("AI", 29) );
-    m_dOmd.At(Dark, Pn25, 13).SetT( GetCell("AL", 29) );
-    m_dOmd.At(Dark, Pn25, 14).SetT( GetCell("AF", 32) );
-    m_dOmd.At(Dark, Pn25, 15).SetT( GetCell("AH", 32) );
-    m_dOmd.At(Dark, Pn25, 16).SetT( GetCell("AF", 30) );
-    m_dOmd.At(Dark, Pn25, 17).SetT( GetCell("AH", 30) );
-    m_dOmd.At(Dark, Pn25, 18).SetT( GetCell("AG", 31) );
-    m_dOmd.At(Dark, Pn25, 19).SetT( GetCell("AI", 32) );
-    m_dOmd.At(Dark, Pn25, 20).SetT( GetCell("AL", 32) );
-    m_dOmd.At(Dark, Pn25, 21).SetT( GetCell("AJ", 32) );
-    m_dOmd.At(Dark, Pn25, 22).SetT( GetCell("AL", 30) );
-    m_dOmd.At(Dark, Pn25, 23).SetT( GetCell("AJ", 30) );
-    m_dOmd.At(Dark, Pn25, 24).SetT( GetCell("AK", 31) );
+	m_dOmd.Find("黑","25","1","0").GetBullet().i(VluK_T,  GetCell("AF", 26) );
+    m_dOmd.Find("黑","25","2","0").GetBullet().i(VluK_T,  GetCell("AH", 26) );
+    m_dOmd.Find("黑","25","3","0").GetBullet().i(VluK_T,  GetCell("AF", 28) );
+    m_dOmd.Find("黑","25","4","0").GetBullet().i(VluK_T,  GetCell("AH", 28) );
+    m_dOmd.Find("黑","25","5","0").GetBullet().i(VluK_T,  GetCell("AG", 27) );
+    m_dOmd.Find("黑","25","6","0").GetBullet().i(VluK_T,  GetCell("AI", 26) );
+    m_dOmd.Find("黑","25","7","0").GetBullet().i(VluK_T,  GetCell("AL", 26) );
+    m_dOmd.Find("黑","25","8","0").GetBullet().i(VluK_T,  GetCell("AJ", 26) );
+    m_dOmd.Find("黑","25","9","0").GetBullet().i(VluK_T,  GetCell("AL", 28) );
+    m_dOmd.Find("黑","25","10","0").GetBullet().i(VluK_T,  GetCell("AJ", 28) );
+    m_dOmd.Find("黑","25","11","0").GetBullet().i(VluK_T,  GetCell("AK", 27) );
+    m_dOmd.Find("黑","25","12","0").GetBullet().i(VluK_T,  GetCell("AF", 29) );
+    m_dOmd.Find("黑","25","13","0").GetBullet().i(VluK_T,  GetCell("AI", 29) );
+    m_dOmd.Find("黑","25","14","0").GetBullet().i(VluK_T,  GetCell("AL", 29) );
+    m_dOmd.Find("黑","25","15","0").GetBullet().i(VluK_T,  GetCell("AF", 32) );
+    m_dOmd.Find("黑","25","16","0").GetBullet().i(VluK_T,  GetCell("AH", 32) );
+    m_dOmd.Find("黑","25","17","0").GetBullet().i(VluK_T,  GetCell("AF", 30) );
+    m_dOmd.Find("黑","25","18","0").GetBullet().i(VluK_T,  GetCell("AH", 30) );
+    m_dOmd.Find("黑","25","19","0").GetBullet().i(VluK_T,  GetCell("AG", 31) );
+    m_dOmd.Find("黑","25","20","0").GetBullet().i(VluK_T,  GetCell("AI", 32) );
+    m_dOmd.Find("黑","25","21","0").GetBullet().i(VluK_T,  GetCell("AL", 32) );
+    m_dOmd.Find("黑","25","22","0").GetBullet().i(VluK_T,  GetCell("AJ", 32) );
+    m_dOmd.Find("黑","25","23","0").GetBullet().i(VluK_T,  GetCell("AL", 30) );
+    m_dOmd.Find("黑","25","24","0").GetBullet().i(VluK_T,  GetCell("AJ", 30) );
+    m_dOmd.Find("黑","25","25","0").GetBullet().i(VluK_T,  GetCell("AK", 31) );
 
-    m_dOmd.At(Dark, Pn25,  0).SetDuv( GetCell("AN", 26) );
-    m_dOmd.At(Dark, Pn25,  1).SetDuv( GetCell("AP", 26) );
-    m_dOmd.At(Dark, Pn25,  2).SetDuv( GetCell("AN", 28) );
-    m_dOmd.At(Dark, Pn25,  3).SetDuv( GetCell("AP", 28) );
-    m_dOmd.At(Dark, Pn25,  4).SetDuv( GetCell("AO", 27) );
-    m_dOmd.At(Dark, Pn25,  5).SetDuv( GetCell("AQ", 26) );
-    m_dOmd.At(Dark, Pn25,  6).SetDuv( GetCell("AT", 26) );
-    m_dOmd.At(Dark, Pn25,  7).SetDuv( GetCell("AR", 26) );
-    m_dOmd.At(Dark, Pn25,  8).SetDuv( GetCell("AT", 28) );
-    m_dOmd.At(Dark, Pn25,  9).SetDuv( GetCell("AR", 28) );
-    m_dOmd.At(Dark, Pn25, 10).SetDuv( GetCell("AS", 27) );
-    m_dOmd.At(Dark, Pn25, 11).SetDuv( GetCell("AN", 29) );
-    m_dOmd.At(Dark, Pn25, 12).SetDuv( GetCell("AQ", 29) );
-    m_dOmd.At(Dark, Pn25, 13).SetDuv( GetCell("AT", 29) );
-    m_dOmd.At(Dark, Pn25, 14).SetDuv( GetCell("AN", 32) );
-    m_dOmd.At(Dark, Pn25, 15).SetDuv( GetCell("AP", 32) );
-    m_dOmd.At(Dark, Pn25, 16).SetDuv( GetCell("AN", 30) );
-    m_dOmd.At(Dark, Pn25, 17).SetDuv( GetCell("AP", 30) );
-    m_dOmd.At(Dark, Pn25, 18).SetDuv( GetCell("AO", 31) );
-    m_dOmd.At(Dark, Pn25, 19).SetDuv( GetCell("AQ", 32) );
-    m_dOmd.At(Dark, Pn25, 20).SetDuv( GetCell("AT", 32) );
-    m_dOmd.At(Dark, Pn25, 21).SetDuv( GetCell("AR", 32) );
-    m_dOmd.At(Dark, Pn25, 22).SetDuv( GetCell("AT", 30) );
-    m_dOmd.At(Dark, Pn25, 23).SetDuv( GetCell("AR", 30) );
-    m_dOmd.At(Dark, Pn25, 24).SetDuv( GetCell("AS", 31) );
+    m_dOmd.Find("黑","25","1","0").GetBullet().i(VluK_Duv,  GetCell("AN", 26) );
+    m_dOmd.Find("黑","25","2","0").GetBullet().i(VluK_Duv,  GetCell("AP", 26) );
+    m_dOmd.Find("黑","25","3","0").GetBullet().i(VluK_Duv,  GetCell("AN", 28) );
+    m_dOmd.Find("黑","25","4","0").GetBullet().i(VluK_Duv,  GetCell("AP", 28) );
+    m_dOmd.Find("黑","25","5","0").GetBullet().i(VluK_Duv,  GetCell("AO", 27) );
+    m_dOmd.Find("黑","25","6","0").GetBullet().i(VluK_Duv,  GetCell("AQ", 26) );
+    m_dOmd.Find("黑","25","7","0").GetBullet().i(VluK_Duv,  GetCell("AT", 26) );
+    m_dOmd.Find("黑","25","8","0").GetBullet().i(VluK_Duv,  GetCell("AR", 26) );
+    m_dOmd.Find("黑","25","9","0").GetBullet().i(VluK_Duv,  GetCell("AT", 28) );
+    m_dOmd.Find("黑","25","10","0").GetBullet().i(VluK_Duv,  GetCell("AR", 28) );
+    m_dOmd.Find("黑","25","11","0").GetBullet().i(VluK_Duv,  GetCell("AS", 27) );
+    m_dOmd.Find("黑","25","12","0").GetBullet().i(VluK_Duv,  GetCell("AN", 29) );
+    m_dOmd.Find("黑","25","13","0").GetBullet().i(VluK_Duv,  GetCell("AQ", 29) );
+    m_dOmd.Find("黑","25","14","0").GetBullet().i(VluK_Duv,  GetCell("AT", 29) );
+    m_dOmd.Find("黑","25","15","0").GetBullet().i(VluK_Duv,  GetCell("AN", 32) );
+    m_dOmd.Find("黑","25","16","0").GetBullet().i(VluK_Duv,  GetCell("AP", 32) );
+    m_dOmd.Find("黑","25","17","0").GetBullet().i(VluK_Duv,  GetCell("AN", 30) );
+    m_dOmd.Find("黑","25","18","0").GetBullet().i(VluK_Duv,  GetCell("AP", 30) );
+    m_dOmd.Find("黑","25","19","0").GetBullet().i(VluK_Duv,  GetCell("AO", 31) );
+    m_dOmd.Find("黑","25","20","0").GetBullet().i(VluK_Duv,  GetCell("AQ", 32) );
+    m_dOmd.Find("黑","25","21","0").GetBullet().i(VluK_Duv,  GetCell("AT", 32) );
+    m_dOmd.Find("黑","25","22","0").GetBullet().i(VluK_Duv,  GetCell("AR", 32) );
+    m_dOmd.Find("黑","25","23","0").GetBullet().i(VluK_Duv,  GetCell("AT", 30) );
+    m_dOmd.Find("黑","25","24","0").GetBullet().i(VluK_Duv,  GetCell("AR", 30) );
+    m_dOmd.Find("黑","25","25","0").GetBullet().i(VluK_Duv,  GetCell("AS", 31) );
 }
 
 void COmdFile1::t2oW49()
 {
-     m_dOmd.At(White, Pn49,  0).SetLv( GetCell('H', 35) );
-    m_dOmd.At(White, Pn49,  1).SetLv( GetCell('I', 35) );
-    m_dOmd.At(White, Pn49,  2).SetLv( GetCell('J', 35) );
-    m_dOmd.At(White, Pn49,  3).SetLv( GetCell('K', 35) );
-    m_dOmd.At(White, Pn49,  4).SetLv( GetCell('L', 35) );
-    m_dOmd.At(White, Pn49,  5).SetLv( GetCell('M', 35) );
-    m_dOmd.At(White, Pn49,  6).SetLv( GetCell('N', 35) );
-    m_dOmd.At(White, Pn49,  7).SetLv( GetCell('H', 36) );
-    m_dOmd.At(White, Pn49,  8).SetLv( GetCell('I', 36) );
-    m_dOmd.At(White, Pn49,  9).SetLv( GetCell('J', 36) );
-    m_dOmd.At(White, Pn49, 10).SetLv( GetCell('K', 36) );
-    m_dOmd.At(White, Pn49, 11).SetLv( GetCell('L', 36) );
-    m_dOmd.At(White, Pn49, 12).SetLv( GetCell('M', 36) );
-    m_dOmd.At(White, Pn49, 13).SetLv( GetCell('N', 36) );
-    m_dOmd.At(White, Pn49, 14).SetLv( GetCell('H', 37) );
-    m_dOmd.At(White, Pn49, 15).SetLv( GetCell('I', 37) );
-    m_dOmd.At(White, Pn49, 16).SetLv( GetCell('J', 37) );
-    m_dOmd.At(White, Pn49, 17).SetLv( GetCell('K', 37) );
-    m_dOmd.At(White, Pn49, 18).SetLv( GetCell('L', 37) );
-    m_dOmd.At(White, Pn49, 19).SetLv( GetCell('M', 37) );
-    m_dOmd.At(White, Pn49, 20).SetLv( GetCell('N', 37) );
-    m_dOmd.At(White, Pn49, 21).SetLv( GetCell('H', 38) );
-    m_dOmd.At(White, Pn49, 22).SetLv( GetCell('I', 38) );
-    m_dOmd.At(White, Pn49, 23).SetLv( GetCell('J', 38) );
-    m_dOmd.At(White, Pn49, 24).SetLv( GetCell('K', 38) );
-    m_dOmd.At(White, Pn49, 25).SetLv( GetCell('L', 38) );
-    m_dOmd.At(White, Pn49, 26).SetLv( GetCell('M', 38) );
-    m_dOmd.At(White, Pn49, 27).SetLv( GetCell('N', 38) );
-    m_dOmd.At(White, Pn49, 28).SetLv( GetCell('H', 39) );
-    m_dOmd.At(White, Pn49, 29).SetLv( GetCell('I', 39) );
-    m_dOmd.At(White, Pn49, 30).SetLv( GetCell('J', 39) );
-    m_dOmd.At(White, Pn49, 31).SetLv( GetCell('K', 39) );
-    m_dOmd.At(White, Pn49, 32).SetLv( GetCell('L', 39) );
-    m_dOmd.At(White, Pn49, 33).SetLv( GetCell('M', 39) );
-    m_dOmd.At(White, Pn49, 34).SetLv( GetCell('N', 39) );
-    m_dOmd.At(White, Pn49, 35).SetLv( GetCell('H', 40) );
-    m_dOmd.At(White, Pn49, 36).SetLv( GetCell('I', 40) );
-    m_dOmd.At(White, Pn49, 37).SetLv( GetCell('J', 40) );
-    m_dOmd.At(White, Pn49, 38).SetLv( GetCell('K', 40) );
-    m_dOmd.At(White, Pn49, 39).SetLv( GetCell('L', 40) );
-    m_dOmd.At(White, Pn49, 40).SetLv( GetCell('M', 40) );
-    m_dOmd.At(White, Pn49, 41).SetLv( GetCell('N', 40) );
-    m_dOmd.At(White, Pn49, 42).SetLv( GetCell('H', 41) );
-    m_dOmd.At(White, Pn49, 43).SetLv( GetCell('I', 41) );
-    m_dOmd.At(White, Pn49, 44).SetLv( GetCell('J', 41) );
-    m_dOmd.At(White, Pn49, 45).SetLv( GetCell('K', 41) );
-    m_dOmd.At(White, Pn49, 46).SetLv( GetCell('L', 41) );
-    m_dOmd.At(White, Pn49, 47).SetLv( GetCell('M', 41) );
-    m_dOmd.At(White, Pn49, 48).SetLv( GetCell('N', 41) );
+    m_dOmd.Find("白","49","1"," ").GetBullet().i(VluK_Lv, GetCell('H', 35) );
+    m_dOmd.Find("白","49","2"," ").GetBullet().i(VluK_Lv, GetCell('I', 35) );
+    m_dOmd.Find("白","49","3"," ").GetBullet().i(VluK_Lv, GetCell('J', 35) );
+    m_dOmd.Find("白","49","4"," ").GetBullet().i(VluK_Lv, GetCell('K', 35) );
+    m_dOmd.Find("白","49","5"," ").GetBullet().i(VluK_Lv, GetCell('L', 35) );
+    m_dOmd.Find("白","49","6"," ").GetBullet().i(VluK_Lv, GetCell('M', 35) );
+    m_dOmd.Find("白","49","7"," ").GetBullet().i(VluK_Lv, GetCell('N', 35) );
+    m_dOmd.Find("白","49","8"," ").GetBullet().i(VluK_Lv, GetCell('H', 36) );
+    m_dOmd.Find("白","49","9"," ").GetBullet().i(VluK_Lv, GetCell('I', 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_Lv, GetCell('J', 36) );
+    m_dOmd.Find("白","49","11"," ").GetBullet().i(VluK_Lv, GetCell('K', 36) );
+    m_dOmd.Find("白","49","12"," ").GetBullet().i(VluK_Lv, GetCell('L', 36) );
+    m_dOmd.Find("白","49","13"," ").GetBullet().i(VluK_Lv, GetCell('M', 36) );
+    m_dOmd.Find("白","49","14"," ").GetBullet().i(VluK_Lv, GetCell('N', 36) );
+    m_dOmd.Find("白","49","15"," ").GetBullet().i(VluK_Lv, GetCell('H', 37) );
+    m_dOmd.Find("白","49","16"," ").GetBullet().i(VluK_Lv, GetCell('I', 37) );
+    m_dOmd.Find("白","49","17"," ").GetBullet().i(VluK_Lv, GetCell('J', 37) );
+    m_dOmd.Find("白","49","18"," ").GetBullet().i(VluK_Lv, GetCell('K', 37) );
+    m_dOmd.Find("白","49","19"," ").GetBullet().i(VluK_Lv, GetCell('L', 37) );
+    m_dOmd.Find("白","49","20"," ").GetBullet().i(VluK_Lv, GetCell('M', 37) );
+    m_dOmd.Find("白","49","21"," ").GetBullet().i(VluK_Lv, GetCell('N', 37) );
+    m_dOmd.Find("白","49","22"," ").GetBullet().i(VluK_Lv, GetCell('H', 38) );
+    m_dOmd.Find("白","49","23"," ").GetBullet().i(VluK_Lv, GetCell('I', 38) );
+    m_dOmd.Find("白","49","24"," ").GetBullet().i(VluK_Lv, GetCell('J', 38) );
+    m_dOmd.Find("白","49","25"," ").GetBullet().i(VluK_Lv, GetCell('K', 38) );
+    m_dOmd.Find("白","49","26"," ").GetBullet().i(VluK_Lv, GetCell('L', 38) );
+    m_dOmd.Find("白","49","27"," ").GetBullet().i(VluK_Lv, GetCell('M', 38) );
+    m_dOmd.Find("白","49","28"," ").GetBullet().i(VluK_Lv, GetCell('N', 38) );
+    m_dOmd.Find("白","49","29"," ").GetBullet().i(VluK_Lv, GetCell('H', 39) );
+    m_dOmd.Find("白","49","30"," ").GetBullet().i(VluK_Lv, GetCell('I', 39) );
+    m_dOmd.Find("白","49","31"," ").GetBullet().i(VluK_Lv, GetCell('J', 39) );
+    m_dOmd.Find("白","49","32"," ").GetBullet().i(VluK_Lv, GetCell('K', 39) );
+    m_dOmd.Find("白","49","33"," ").GetBullet().i(VluK_Lv, GetCell('L', 39) );
+    m_dOmd.Find("白","49","34"," ").GetBullet().i(VluK_Lv, GetCell('M', 39) );
+    m_dOmd.Find("白","49","35"," ").GetBullet().i(VluK_Lv, GetCell('N', 39) );
+    m_dOmd.Find("白","49","36"," ").GetBullet().i(VluK_Lv, GetCell('H', 40) );
+    m_dOmd.Find("白","49","37"," ").GetBullet().i(VluK_Lv, GetCell('I', 40) );
+    m_dOmd.Find("白","49","38"," ").GetBullet().i(VluK_Lv, GetCell('J', 40) );
+    m_dOmd.Find("白","49","39"," ").GetBullet().i(VluK_Lv, GetCell('K', 40) );
+    m_dOmd.Find("白","49","40"," ").GetBullet().i(VluK_Lv, GetCell('L', 40) );
+    m_dOmd.Find("白","49","41"," ").GetBullet().i(VluK_Lv, GetCell('M', 40) );
+    m_dOmd.Find("白","49","42"," ").GetBullet().i(VluK_Lv, GetCell('N', 40) );
+    m_dOmd.Find("白","49","43"," ").GetBullet().i(VluK_Lv, GetCell('H', 41) );
+    m_dOmd.Find("白","49","44"," ").GetBullet().i(VluK_Lv, GetCell('I', 41) );
+    m_dOmd.Find("白","49","45"," ").GetBullet().i(VluK_Lv, GetCell('J', 41) );
+    m_dOmd.Find("白","49","46"," ").GetBullet().i(VluK_Lv, GetCell('K', 41) );
+    m_dOmd.Find("白","49","47"," ").GetBullet().i(VluK_Lv, GetCell('L', 41) );
+    m_dOmd.Find("白","49","48"," ").GetBullet().i(VluK_Lv, GetCell('M', 41) );
+    m_dOmd.Find("白","49","49"," ").GetBullet().i(VluK_Lv, GetCell('N', 41) );
 
-    m_dOmd.At(White, Pn49,  0).SetSx( GetCell('P', 35) );
-    m_dOmd.At(White, Pn49,  1).SetSx( GetCell('Q', 35) );
-    m_dOmd.At(White, Pn49,  2).SetSx( GetCell('R', 35) );
-    m_dOmd.At(White, Pn49,  3).SetSx( GetCell('S', 35) );
-    m_dOmd.At(White, Pn49,  4).SetSx( GetCell('T', 35) );
-    m_dOmd.At(White, Pn49,  5).SetSx( GetCell('U', 35) );
-    m_dOmd.At(White, Pn49,  6).SetSx( GetCell('V', 35) );
-    m_dOmd.At(White, Pn49,  7).SetSx( GetCell('P', 36) );
-    m_dOmd.At(White, Pn49,  8).SetSx( GetCell('Q', 36) );
-    m_dOmd.At(White, Pn49,  9).SetSx( GetCell('R', 36) );
-    m_dOmd.At(White, Pn49, 10).SetSx( GetCell('S', 36) );
-    m_dOmd.At(White, Pn49, 11).SetSx( GetCell('T', 36) );
-    m_dOmd.At(White, Pn49, 12).SetSx( GetCell('U', 36) );
-    m_dOmd.At(White, Pn49, 13).SetSx( GetCell('V', 36) );
-    m_dOmd.At(White, Pn49, 14).SetSx( GetCell('P', 37) );
-    m_dOmd.At(White, Pn49, 15).SetSx( GetCell('Q', 37) );
-    m_dOmd.At(White, Pn49, 16).SetSx( GetCell('R', 37) );
-    m_dOmd.At(White, Pn49, 17).SetSx( GetCell('S', 37) );
-    m_dOmd.At(White, Pn49, 18).SetSx( GetCell('T', 37) );
-    m_dOmd.At(White, Pn49, 19).SetSx( GetCell('U', 37) );
-    m_dOmd.At(White, Pn49, 20).SetSx( GetCell('V', 37) );
-    m_dOmd.At(White, Pn49, 21).SetSx( GetCell('P', 38) );
-    m_dOmd.At(White, Pn49, 22).SetSx( GetCell('Q', 38) );
-    m_dOmd.At(White, Pn49, 23).SetSx( GetCell('R', 38) );
-    m_dOmd.At(White, Pn49, 24).SetSx( GetCell('S', 38) );
-    m_dOmd.At(White, Pn49, 25).SetSx( GetCell('T', 38) );
-    m_dOmd.At(White, Pn49, 26).SetSx( GetCell('U', 38) );
-    m_dOmd.At(White, Pn49, 27).SetSx( GetCell('V', 38) );
-    m_dOmd.At(White, Pn49, 28).SetSx( GetCell('P', 39) );
-    m_dOmd.At(White, Pn49, 29).SetSx( GetCell('Q', 39) );
-    m_dOmd.At(White, Pn49, 30).SetSx( GetCell('R', 39) );
-    m_dOmd.At(White, Pn49, 31).SetSx( GetCell('S', 39) );
-    m_dOmd.At(White, Pn49, 32).SetSx( GetCell('T', 39) );
-    m_dOmd.At(White, Pn49, 33).SetSx( GetCell('U', 39) );
-    m_dOmd.At(White, Pn49, 34).SetSx( GetCell('V', 39) );
-    m_dOmd.At(White, Pn49, 35).SetSx( GetCell('P', 40) );
-    m_dOmd.At(White, Pn49, 36).SetSx( GetCell('Q', 40) );
-    m_dOmd.At(White, Pn49, 37).SetSx( GetCell('R', 40) );
-    m_dOmd.At(White, Pn49, 38).SetSx( GetCell('S', 40) );
-    m_dOmd.At(White, Pn49, 39).SetSx( GetCell('T', 40) );
-    m_dOmd.At(White, Pn49, 40).SetSx( GetCell('U', 40) );
-    m_dOmd.At(White, Pn49, 41).SetSx( GetCell('V', 40) );
-    m_dOmd.At(White, Pn49, 42).SetSx( GetCell('P', 41) );
-    m_dOmd.At(White, Pn49, 43).SetSx( GetCell('Q', 41) );
-    m_dOmd.At(White, Pn49, 44).SetSx( GetCell('R', 41) );
-    m_dOmd.At(White, Pn49, 45).SetSx( GetCell('S', 41) );
-    m_dOmd.At(White, Pn49, 46).SetSx( GetCell('T', 41) );
-    m_dOmd.At(White, Pn49, 47).SetSx( GetCell('U', 41) );
-    m_dOmd.At(White, Pn49, 48).SetSx( GetCell('V', 41) );
+    m_dOmd.Find("白","49","1"," ").GetBullet().i(VluK_Sx, GetCell('P', 35) );
+    m_dOmd.Find("白","49","2"," ").GetBullet().i(VluK_Sx, GetCell('Q', 35) );
+    m_dOmd.Find("白","49","3"," ").GetBullet().i(VluK_Sx, GetCell('R', 35) );
+    m_dOmd.Find("白","49","4"," ").GetBullet().i(VluK_Sx, GetCell('S', 35) );
+    m_dOmd.Find("白","49","5"," ").GetBullet().i(VluK_Sx, GetCell('T', 35) );
+    m_dOmd.Find("白","49","6"," ").GetBullet().i(VluK_Sx, GetCell('U', 35) );
+    m_dOmd.Find("白","49","7"," ").GetBullet().i(VluK_Sx, GetCell('V', 35) );
+    m_dOmd.Find("白","49","8"," ").GetBullet().i(VluK_Sx, GetCell('P', 36) );
+    m_dOmd.Find("白","49","9"," ").GetBullet().i(VluK_Sx, GetCell('Q', 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_Sx, GetCell('R', 36) );
+    m_dOmd.Find("白","49","11"," ").GetBullet().i(VluK_Sx, GetCell('S', 36) );
+    m_dOmd.Find("白","49","12"," ").GetBullet().i(VluK_Sx, GetCell('T', 36) );
+    m_dOmd.Find("白","49","13"," ").GetBullet().i(VluK_Sx, GetCell('U', 36) );
+    m_dOmd.Find("白","49","14"," ").GetBullet().i(VluK_Sx, GetCell('V', 36) );
+    m_dOmd.Find("白","49","15"," ").GetBullet().i(VluK_Sx, GetCell('P', 37) );
+    m_dOmd.Find("白","49","16"," ").GetBullet().i(VluK_Sx, GetCell('Q', 37) );
+    m_dOmd.Find("白","49","17"," ").GetBullet().i(VluK_Sx, GetCell('R', 37) );
+    m_dOmd.Find("白","49","18"," ").GetBullet().i(VluK_Sx, GetCell('S', 37) );
+    m_dOmd.Find("白","49","19"," ").GetBullet().i(VluK_Sx, GetCell('T', 37) );
+    m_dOmd.Find("白","49","20"," ").GetBullet().i(VluK_Sx, GetCell('U', 37) );
+    m_dOmd.Find("白","49","21"," ").GetBullet().i(VluK_Sx, GetCell('V', 37) );
+    m_dOmd.Find("白","49","22"," ").GetBullet().i(VluK_Sx, GetCell('P', 38) );
+    m_dOmd.Find("白","49","23"," ").GetBullet().i(VluK_Sx, GetCell('Q', 38) );
+    m_dOmd.Find("白","49","24"," ").GetBullet().i(VluK_Sx, GetCell('R', 38) );
+    m_dOmd.Find("白","49","25"," ").GetBullet().i(VluK_Sx, GetCell('S', 38) );
+    m_dOmd.Find("白","49","26"," ").GetBullet().i(VluK_Sx, GetCell('T', 38) );
+    m_dOmd.Find("白","49","27"," ").GetBullet().i(VluK_Sx, GetCell('U', 38) );
+    m_dOmd.Find("白","49","28"," ").GetBullet().i(VluK_Sx, GetCell('V', 38) );
+    m_dOmd.Find("白","49","29"," ").GetBullet().i(VluK_Sx, GetCell('P', 39) );
+    m_dOmd.Find("白","49","30"," ").GetBullet().i(VluK_Sx, GetCell('Q', 39) );
+    m_dOmd.Find("白","49","31"," ").GetBullet().i(VluK_Sx, GetCell('R', 39) );
+    m_dOmd.Find("白","49","32"," ").GetBullet().i(VluK_Sx, GetCell('S', 39) );
+    m_dOmd.Find("白","49","33"," ").GetBullet().i(VluK_Sx, GetCell('T', 39) );
+    m_dOmd.Find("白","49","34"," ").GetBullet().i(VluK_Sx, GetCell('U', 39) );
+    m_dOmd.Find("白","49","35"," ").GetBullet().i(VluK_Sx, GetCell('V', 39) );
+    m_dOmd.Find("白","49","36"," ").GetBullet().i(VluK_Sx, GetCell('P', 40) );
+    m_dOmd.Find("白","49","37"," ").GetBullet().i(VluK_Sx, GetCell('Q', 40) );
+    m_dOmd.Find("白","49","38"," ").GetBullet().i(VluK_Sx, GetCell('R', 40) );
+    m_dOmd.Find("白","49","39"," ").GetBullet().i(VluK_Sx, GetCell('S', 40) );
+    m_dOmd.Find("白","49","40"," ").GetBullet().i(VluK_Sx, GetCell('T', 40) );
+    m_dOmd.Find("白","49","41"," ").GetBullet().i(VluK_Sx, GetCell('U', 40) );
+    m_dOmd.Find("白","49","42"," ").GetBullet().i(VluK_Sx, GetCell('V', 40) );
+    m_dOmd.Find("白","49","43"," ").GetBullet().i(VluK_Sx, GetCell('P', 41) );
+    m_dOmd.Find("白","49","44"," ").GetBullet().i(VluK_Sx, GetCell('Q', 41) );
+    m_dOmd.Find("白","49","45"," ").GetBullet().i(VluK_Sx, GetCell('R', 41) );
+    m_dOmd.Find("白","49","46"," ").GetBullet().i(VluK_Sx, GetCell('S', 41) );
+    m_dOmd.Find("白","49","47"," ").GetBullet().i(VluK_Sx, GetCell('T', 41) );
+    m_dOmd.Find("白","49","48"," ").GetBullet().i(VluK_Sx, GetCell('U', 41) );
+    m_dOmd.Find("白","49","49"," ").GetBullet().i(VluK_Sx, GetCell('V', 41) );
 
-    m_dOmd.At(White, Pn49,  0).SetSy( GetCell('X' , 35) );
-    m_dOmd.At(White, Pn49,  1).SetSy( GetCell('Y' , 35) );
-    m_dOmd.At(White, Pn49,  2).SetSy( GetCell('Z' , 35) );
-    m_dOmd.At(White, Pn49,  3).SetSy( GetCell("AA", 35) );
-    m_dOmd.At(White, Pn49,  4).SetSy( GetCell("AB", 35) );
-    m_dOmd.At(White, Pn49,  5).SetSy( GetCell("AC", 35) );
-    m_dOmd.At(White, Pn49,  6).SetSy( GetCell("AD", 35) );
-    m_dOmd.At(White, Pn49,  7).SetSy( GetCell('X' , 36) );
-    m_dOmd.At(White, Pn49,  8).SetSy( GetCell('Y' , 36) );
-    m_dOmd.At(White, Pn49,  9).SetSy( GetCell('Z' , 36) );
-    m_dOmd.At(White, Pn49, 10).SetSy( GetCell("AA", 36) );
-    m_dOmd.At(White, Pn49, 11).SetSy( GetCell("AB", 36) );
-    m_dOmd.At(White, Pn49, 12).SetSy( GetCell("AC", 36) );
-    m_dOmd.At(White, Pn49, 13).SetSy( GetCell("AD", 36) );
-    m_dOmd.At(White, Pn49, 14).SetSy( GetCell('X' , 37) );
-    m_dOmd.At(White, Pn49, 15).SetSy( GetCell('Y' , 37) );
-    m_dOmd.At(White, Pn49, 16).SetSy( GetCell('Z' , 37) );
-    m_dOmd.At(White, Pn49, 17).SetSy( GetCell("AA", 37) );
-    m_dOmd.At(White, Pn49, 18).SetSy( GetCell("AB", 37) );
-    m_dOmd.At(White, Pn49, 19).SetSy( GetCell("AC", 37) );
-    m_dOmd.At(White, Pn49, 20).SetSy( GetCell("AD", 37) );
-    m_dOmd.At(White, Pn49, 21).SetSy( GetCell('X' , 38) );
-    m_dOmd.At(White, Pn49, 22).SetSy( GetCell('Y' , 38) );
-    m_dOmd.At(White, Pn49, 23).SetSy( GetCell('Z' , 38) );
-    m_dOmd.At(White, Pn49, 24).SetSy( GetCell("AA", 38) );
-    m_dOmd.At(White, Pn49, 25).SetSy( GetCell("AB", 38) );
-    m_dOmd.At(White, Pn49, 26).SetSy( GetCell("AC", 38) );
-    m_dOmd.At(White, Pn49, 27).SetSy( GetCell("AD", 38) );
-    m_dOmd.At(White, Pn49, 28).SetSy( GetCell('X' , 39) );
-    m_dOmd.At(White, Pn49, 29).SetSy( GetCell('Y' , 39) );
-    m_dOmd.At(White, Pn49, 30).SetSy( GetCell('Z' , 39) );
-    m_dOmd.At(White, Pn49, 31).SetSy( GetCell("AA", 39) );
-    m_dOmd.At(White, Pn49, 32).SetSy( GetCell("AB", 39) );
-    m_dOmd.At(White, Pn49, 33).SetSy( GetCell("AC", 39) );
-    m_dOmd.At(White, Pn49, 34).SetSy( GetCell("AD", 39) );
-    m_dOmd.At(White, Pn49, 35).SetSy( GetCell('X' , 40) );
-    m_dOmd.At(White, Pn49, 36).SetSy( GetCell('Y' , 40) );
-    m_dOmd.At(White, Pn49, 37).SetSy( GetCell('Z' , 40) );
-    m_dOmd.At(White, Pn49, 38).SetSy( GetCell("AA", 40) );
-    m_dOmd.At(White, Pn49, 39).SetSy( GetCell("AB", 40) );
-    m_dOmd.At(White, Pn49, 40).SetSy( GetCell("AC", 40) );
-    m_dOmd.At(White, Pn49, 41).SetSy( GetCell("AD", 40) );
-    m_dOmd.At(White, Pn49, 42).SetSy( GetCell('X' , 41) );
-    m_dOmd.At(White, Pn49, 43).SetSy( GetCell('Y' , 41) );
-    m_dOmd.At(White, Pn49, 44).SetSy( GetCell('Z' , 41) );
-    m_dOmd.At(White, Pn49, 45).SetSy( GetCell("AA", 41) );
-    m_dOmd.At(White, Pn49, 46).SetSy( GetCell("AB", 41) );
-    m_dOmd.At(White, Pn49, 47).SetSy( GetCell("AC", 41) );
-    m_dOmd.At(White, Pn49, 48).SetSy( GetCell("AD", 41) );
+    m_dOmd.Find("白","49","1"," ").GetBullet().i(VluK_Sy, GetCell('X' , 35) );
+    m_dOmd.Find("白","49","2"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 35) );
+    m_dOmd.Find("白","49","3"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 35) );
+    m_dOmd.Find("白","49","4"," ").GetBullet().i(VluK_Sy, GetCell("AA", 35) );
+    m_dOmd.Find("白","49","5"," ").GetBullet().i(VluK_Sy, GetCell("AB", 35) );
+    m_dOmd.Find("白","49","6"," ").GetBullet().i(VluK_Sy, GetCell("AC", 35) );
+    m_dOmd.Find("白","49","7"," ").GetBullet().i(VluK_Sy, GetCell("AD", 35) );
+    m_dOmd.Find("白","49","8"," ").GetBullet().i(VluK_Sy, GetCell('X' , 36) );
+    m_dOmd.Find("白","49","9"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 36) );
+    m_dOmd.Find("白","49","11"," ").GetBullet().i(VluK_Sy, GetCell("AA", 36) );
+    m_dOmd.Find("白","49","12"," ").GetBullet().i(VluK_Sy, GetCell("AB", 36) );
+    m_dOmd.Find("白","49","13"," ").GetBullet().i(VluK_Sy, GetCell("AC", 36) );
+    m_dOmd.Find("白","49","14"," ").GetBullet().i(VluK_Sy, GetCell("AD", 36) );
+    m_dOmd.Find("白","49","15"," ").GetBullet().i(VluK_Sy, GetCell('X' , 37) );
+    m_dOmd.Find("白","49","16"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 37) );
+    m_dOmd.Find("白","49","17"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 37) );
+    m_dOmd.Find("白","49","18"," ").GetBullet().i(VluK_Sy, GetCell("AA", 37) );
+    m_dOmd.Find("白","49","19"," ").GetBullet().i(VluK_Sy, GetCell("AB", 37) );
+    m_dOmd.Find("白","49","20"," ").GetBullet().i(VluK_Sy, GetCell("AC", 37) );
+    m_dOmd.Find("白","49","21"," ").GetBullet().i(VluK_Sy, GetCell("AD", 37) );
+    m_dOmd.Find("白","49","22"," ").GetBullet().i(VluK_Sy, GetCell('X' , 38) );
+    m_dOmd.Find("白","49","23"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 38) );
+    m_dOmd.Find("白","49","24"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 38) );
+    m_dOmd.Find("白","49","25"," ").GetBullet().i(VluK_Sy, GetCell("AA", 38) );
+    m_dOmd.Find("白","49","26"," ").GetBullet().i(VluK_Sy, GetCell("AB", 38) );
+    m_dOmd.Find("白","49","27"," ").GetBullet().i(VluK_Sy, GetCell("AC", 38) );
+    m_dOmd.Find("白","49","28"," ").GetBullet().i(VluK_Sy, GetCell("AD", 38) );
+    m_dOmd.Find("白","49","29"," ").GetBullet().i(VluK_Sy, GetCell('X' , 39) );
+    m_dOmd.Find("白","49","30"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 39) );
+    m_dOmd.Find("白","49","31"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 39) );
+    m_dOmd.Find("白","49","32"," ").GetBullet().i(VluK_Sy, GetCell("AA", 39) );
+    m_dOmd.Find("白","49","33"," ").GetBullet().i(VluK_Sy, GetCell("AB", 39) );
+    m_dOmd.Find("白","49","34"," ").GetBullet().i(VluK_Sy, GetCell("AC", 39) );
+    m_dOmd.Find("白","49","35"," ").GetBullet().i(VluK_Sy, GetCell("AD", 39) );
+    m_dOmd.Find("白","49","36"," ").GetBullet().i(VluK_Sy, GetCell('X' , 40) );
+    m_dOmd.Find("白","49","37"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 40) );
+    m_dOmd.Find("白","49","38"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 40) );
+    m_dOmd.Find("白","49","39"," ").GetBullet().i(VluK_Sy, GetCell("AA", 40) );
+    m_dOmd.Find("白","49","40"," ").GetBullet().i(VluK_Sy, GetCell("AB", 40) );
+    m_dOmd.Find("白","49","41"," ").GetBullet().i(VluK_Sy, GetCell("AC", 40) );
+    m_dOmd.Find("白","49","42"," ").GetBullet().i(VluK_Sy, GetCell("AD", 40) );
+    m_dOmd.Find("白","49","43"," ").GetBullet().i(VluK_Sy, GetCell('X' , 41) );
+    m_dOmd.Find("白","49","44"," ").GetBullet().i(VluK_Sy, GetCell('Y' , 41) );
+    m_dOmd.Find("白","49","45"," ").GetBullet().i(VluK_Sy, GetCell('Z' , 41) );
+    m_dOmd.Find("白","49","46"," ").GetBullet().i(VluK_Sy, GetCell("AA", 41) );
+    m_dOmd.Find("白","49","47"," ").GetBullet().i(VluK_Sy, GetCell("AB", 41) );
+    m_dOmd.Find("白","49","48"," ").GetBullet().i(VluK_Sy, GetCell("AC", 41) );
+    m_dOmd.Find("白","49","49"," ").GetBullet().i(VluK_Sy, GetCell("AD", 41) );
 
-    m_dOmd.At(White, Pn49,  0).SetT( GetCell("AF", 35) );
-    m_dOmd.At(White, Pn49,  1).SetT( GetCell("AG", 35) );
-    m_dOmd.At(White, Pn49,  2).SetT( GetCell("AH", 35) );
-    m_dOmd.At(White, Pn49,  3).SetT( GetCell("AI", 35) );
-    m_dOmd.At(White, Pn49,  4).SetT( GetCell("AJ", 35) );
-    m_dOmd.At(White, Pn49,  5).SetT( GetCell("AK", 35) );
-    m_dOmd.At(White, Pn49,  6).SetT( GetCell("AL", 35) );
-    m_dOmd.At(White, Pn49,  7).SetT( GetCell("AF", 36) );
-    m_dOmd.At(White, Pn49,  8).SetT( GetCell("AG", 36) );
-    m_dOmd.At(White, Pn49,  9).SetT( GetCell("AH", 36) );
-    m_dOmd.At(White, Pn49, 10).SetT( GetCell("AI", 36) );
-    m_dOmd.At(White, Pn49, 11).SetT( GetCell("AJ", 36) );
-    m_dOmd.At(White, Pn49, 12).SetT( GetCell("AK", 36) );
-    m_dOmd.At(White, Pn49, 13).SetT( GetCell("AL", 36) );
-    m_dOmd.At(White, Pn49, 14).SetT( GetCell("AF", 37) );
-    m_dOmd.At(White, Pn49, 15).SetT( GetCell("AG", 37) );
-    m_dOmd.At(White, Pn49, 16).SetT( GetCell("AH", 37) );
-    m_dOmd.At(White, Pn49, 17).SetT( GetCell("AI", 37) );
-    m_dOmd.At(White, Pn49, 18).SetT( GetCell("AJ", 37) );
-    m_dOmd.At(White, Pn49, 19).SetT( GetCell("AK", 37) );
-    m_dOmd.At(White, Pn49, 20).SetT( GetCell("AL", 37) );
-    m_dOmd.At(White, Pn49, 21).SetT( GetCell("AF", 38) );
-    m_dOmd.At(White, Pn49, 22).SetT( GetCell("AG", 38) );
-    m_dOmd.At(White, Pn49, 23).SetT( GetCell("AH", 38) );
-    m_dOmd.At(White, Pn49, 24).SetT( GetCell("AI", 38) );
-    m_dOmd.At(White, Pn49, 25).SetT( GetCell("AJ", 38) );
-    m_dOmd.At(White, Pn49, 26).SetT( GetCell("AK", 38) );
-    m_dOmd.At(White, Pn49, 27).SetT( GetCell("AL", 38) );
-    m_dOmd.At(White, Pn49, 28).SetT( GetCell("AF", 39) );
-    m_dOmd.At(White, Pn49, 29).SetT( GetCell("AG", 39) );
-    m_dOmd.At(White, Pn49, 30).SetT( GetCell("AH", 39) );
-    m_dOmd.At(White, Pn49, 31).SetT( GetCell("AI", 39) );
-    m_dOmd.At(White, Pn49, 32).SetT( GetCell("AJ", 39) );
-    m_dOmd.At(White, Pn49, 33).SetT( GetCell("AK", 39) );
-    m_dOmd.At(White, Pn49, 34).SetT( GetCell("AL", 39) );
-    m_dOmd.At(White, Pn49, 35).SetT( GetCell("AF", 40) );
-    m_dOmd.At(White, Pn49, 36).SetT( GetCell("AG", 40) );
-    m_dOmd.At(White, Pn49, 37).SetT( GetCell("AH", 40) );
-    m_dOmd.At(White, Pn49, 38).SetT( GetCell("AI", 40) );
-    m_dOmd.At(White, Pn49, 39).SetT( GetCell("AJ", 40) );
-    m_dOmd.At(White, Pn49, 40).SetT( GetCell("AK", 40) );
-    m_dOmd.At(White, Pn49, 41).SetT( GetCell("AL", 40) );
-    m_dOmd.At(White, Pn49, 42).SetT( GetCell("AF", 41) );
-    m_dOmd.At(White, Pn49, 43).SetT( GetCell("AG", 41) );
-    m_dOmd.At(White, Pn49, 44).SetT( GetCell("AH", 41) );
-    m_dOmd.At(White, Pn49, 45).SetT( GetCell("AI", 41) );
-    m_dOmd.At(White, Pn49, 46).SetT( GetCell("AJ", 41) );
-    m_dOmd.At(White, Pn49, 47).SetT( GetCell("AK", 41) );
-    m_dOmd.At(White, Pn49, 48).SetT( GetCell("AL", 41) );
-
-    m_dOmd.At(White, Pn49,  0).SetDuv( GetCell("AN", 35) );
-    m_dOmd.At(White, Pn49,  1).SetDuv( GetCell("AO", 35) );
-    m_dOmd.At(White, Pn49,  2).SetDuv( GetCell("AP", 35) );
-    m_dOmd.At(White, Pn49,  3).SetDuv( GetCell("AQ", 35) );
-    m_dOmd.At(White, Pn49,  4).SetDuv( GetCell("AR", 35) );
-    m_dOmd.At(White, Pn49,  5).SetDuv( GetCell("AS", 35) );
-    m_dOmd.At(White, Pn49,  6).SetDuv( GetCell("AT", 35) );
-    m_dOmd.At(White, Pn49,  7).SetDuv( GetCell("AN", 36) );
-    m_dOmd.At(White, Pn49,  8).SetDuv( GetCell("AO", 36) );
-    m_dOmd.At(White, Pn49,  9).SetDuv( GetCell("AP", 36) );
-    m_dOmd.At(White, Pn49, 10).SetDuv( GetCell("AQ", 36) );
-    m_dOmd.At(White, Pn49, 11).SetDuv( GetCell("AR", 36) );
-    m_dOmd.At(White, Pn49, 12).SetDuv( GetCell("AS", 36) );
-    m_dOmd.At(White, Pn49, 13).SetDuv( GetCell("AT", 36) );
-    m_dOmd.At(White, Pn49, 14).SetDuv( GetCell("AN", 37) );
-    m_dOmd.At(White, Pn49, 15).SetDuv( GetCell("AO", 37) );
-    m_dOmd.At(White, Pn49, 16).SetDuv( GetCell("AP", 37) );
-    m_dOmd.At(White, Pn49, 17).SetDuv( GetCell("AQ", 37) );
-    m_dOmd.At(White, Pn49, 18).SetDuv( GetCell("AR", 37) );
-    m_dOmd.At(White, Pn49, 19).SetDuv( GetCell("AS", 37) );
-    m_dOmd.At(White, Pn49, 20).SetDuv( GetCell("AT", 37) );
-    m_dOmd.At(White, Pn49, 21).SetDuv( GetCell("AN", 38) );
-    m_dOmd.At(White, Pn49, 22).SetDuv( GetCell("AO", 38) );
-    m_dOmd.At(White, Pn49, 23).SetDuv( GetCell("AP", 38) );
-    m_dOmd.At(White, Pn49, 24).SetDuv( GetCell("AQ", 38) );
-    m_dOmd.At(White, Pn49, 25).SetDuv( GetCell("AR", 38) );
-    m_dOmd.At(White, Pn49, 26).SetDuv( GetCell("AS", 38) );
-    m_dOmd.At(White, Pn49, 27).SetDuv( GetCell("AT", 38) );
-    m_dOmd.At(White, Pn49, 28).SetDuv( GetCell("AN", 39) );
-    m_dOmd.At(White, Pn49, 29).SetDuv( GetCell("AO", 39) );
-    m_dOmd.At(White, Pn49, 30).SetDuv( GetCell("AP", 39) );
-    m_dOmd.At(White, Pn49, 31).SetDuv( GetCell("AQ", 39) );
-    m_dOmd.At(White, Pn49, 32).SetDuv( GetCell("AR", 39) );
-    m_dOmd.At(White, Pn49, 33).SetDuv( GetCell("AS", 39) );
-    m_dOmd.At(White, Pn49, 34).SetDuv( GetCell("AT", 39) );
-    m_dOmd.At(White, Pn49, 35).SetDuv( GetCell("AN", 40) );
-    m_dOmd.At(White, Pn49, 36).SetDuv( GetCell("AO", 40) );
-    m_dOmd.At(White, Pn49, 37).SetDuv( GetCell("AP", 40) );
-    m_dOmd.At(White, Pn49, 38).SetDuv( GetCell("AQ", 40) );
-    m_dOmd.At(White, Pn49, 39).SetDuv( GetCell("AR", 40) );
-    m_dOmd.At(White, Pn49, 40).SetDuv( GetCell("AS", 40) );
-    m_dOmd.At(White, Pn49, 41).SetDuv( GetCell("AT", 40) );
-    m_dOmd.At(White, Pn49, 42).SetDuv( GetCell("AN", 41) );
-    m_dOmd.At(White, Pn49, 43).SetDuv( GetCell("AO", 41) );
-    m_dOmd.At(White, Pn49, 44).SetDuv( GetCell("AP", 41) );
-    m_dOmd.At(White, Pn49, 45).SetDuv( GetCell("AQ", 41) );
-    m_dOmd.At(White, Pn49, 46).SetDuv( GetCell("AR", 41) );
-    m_dOmd.At(White, Pn49, 47).SetDuv( GetCell("AS", 41) );
-    m_dOmd.At(White, Pn49, 48).SetDuv( GetCell("AT", 41) );
+    m_dOmd.Find("白","49","1"," ").GetBullet().i(VluK_T,  GetCell("AF", 35) );
+    m_dOmd.Find("白","49","2"," ").GetBullet().i(VluK_T,  GetCell("AG", 35) );
+    m_dOmd.Find("白","49","3"," ").GetBullet().i(VluK_T,  GetCell("AH", 35) );
+    m_dOmd.Find("白","49","4"," ").GetBullet().i(VluK_T,  GetCell("AI", 35) );
+    m_dOmd.Find("白","49","5"," ").GetBullet().i(VluK_T,  GetCell("AJ", 35) );
+    m_dOmd.Find("白","49","6"," ").GetBullet().i(VluK_T,  GetCell("AK", 35) );
+    m_dOmd.Find("白","49","7"," ").GetBullet().i(VluK_T,  GetCell("AL", 35) );
+    m_dOmd.Find("白","49","8"," ").GetBullet().i(VluK_T,  GetCell("AF", 36) );
+    m_dOmd.Find("白","49","9"," ").GetBullet().i(VluK_T,  GetCell("AG", 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_T,  GetCell("AH", 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_T,  GetCell("AI", 36) );
+    m_dOmd.Find("白","49","11"," ").GetBullet().i(VluK_T,  GetCell("AJ", 36) );
+    m_dOmd.Find("白","49","12"," ").GetBullet().i(VluK_T,  GetCell("AK", 36) );
+    m_dOmd.Find("白","49","13"," ").GetBullet().i(VluK_T,  GetCell("AL", 36) );
+    m_dOmd.Find("白","49","14"," ").GetBullet().i(VluK_T,  GetCell("AF", 37) );
+    m_dOmd.Find("白","49","15"," ").GetBullet().i(VluK_T,  GetCell("AG", 37) );
+    m_dOmd.Find("白","49","16"," ").GetBullet().i(VluK_T,  GetCell("AH", 37) );
+    m_dOmd.Find("白","49","17"," ").GetBullet().i(VluK_T,  GetCell("AI", 37) );
+    m_dOmd.Find("白","49","18"," ").GetBullet().i(VluK_T,  GetCell("AJ", 37) );
+    m_dOmd.Find("白","49","19"," ").GetBullet().i(VluK_T,  GetCell("AK", 37) );
+    m_dOmd.Find("白","49","20"," ").GetBullet().i(VluK_T,  GetCell("AL", 37) );
+    m_dOmd.Find("白","49","21"," ").GetBullet().i(VluK_T,  GetCell("AF", 38) );
+    m_dOmd.Find("白","49","22"," ").GetBullet().i(VluK_T,  GetCell("AG", 38) );
+    m_dOmd.Find("白","49","23"," ").GetBullet().i(VluK_T,  GetCell("AH", 38) );
+    m_dOmd.Find("白","49","24"," ").GetBullet().i(VluK_T,  GetCell("AI", 38) );
+    m_dOmd.Find("白","49","25"," ").GetBullet().i(VluK_T,  GetCell("AJ", 38) );
+    m_dOmd.Find("白","49","27"," ").GetBullet().i(VluK_T,  GetCell("AK", 38) );
+    m_dOmd.Find("白","49","28"," ").GetBullet().i(VluK_T,  GetCell("AL", 38) );
+    m_dOmd.Find("白","49","29"," ").GetBullet().i(VluK_T,  GetCell("AF", 39) );
+    m_dOmd.Find("白","49","30"," ").GetBullet().i(VluK_T,  GetCell("AG", 39) );
+    m_dOmd.Find("白","49","31"," ").GetBullet().i(VluK_T,  GetCell("AH", 39) );
+    m_dOmd.Find("白","49","32"," ").GetBullet().i(VluK_T,  GetCell("AI", 39) );
+    m_dOmd.Find("白","49","33"," ").GetBullet().i(VluK_T,  GetCell("AJ", 39) );
+    m_dOmd.Find("白","49","34"," ").GetBullet().i(VluK_T,  GetCell("AK", 39) );
+    m_dOmd.Find("白","49","35"," ").GetBullet().i(VluK_T,  GetCell("AL", 39) );
+    m_dOmd.Find("白","49","36"," ").GetBullet().i(VluK_T,  GetCell("AF", 40) );
+    m_dOmd.Find("白","49","37"," ").GetBullet().i(VluK_T,  GetCell("AG", 40) );
+    m_dOmd.Find("白","49","38"," ").GetBullet().i(VluK_T,  GetCell("AH", 40) );
+    m_dOmd.Find("白","49","39"," ").GetBullet().i(VluK_T,  GetCell("AI", 40) );
+    m_dOmd.Find("白","49","40"," ").GetBullet().i(VluK_T,  GetCell("AJ", 40) );
+    m_dOmd.Find("白","49","41"," ").GetBullet().i(VluK_T,  GetCell("AK", 40) );
+    m_dOmd.Find("白","49","42"," ").GetBullet().i(VluK_T,  GetCell("AL", 40) );
+    m_dOmd.Find("白","49","43"," ").GetBullet().i(VluK_T,  GetCell("AF", 41) );
+    m_dOmd.Find("白","49","44"," ").GetBullet().i(VluK_T,  GetCell("AG", 41) );
+    m_dOmd.Find("白","49","45"," ").GetBullet().i(VluK_T,  GetCell("AH", 41) );
+    m_dOmd.Find("白","49","46"," ").GetBullet().i(VluK_T,  GetCell("AI", 41) );
+    m_dOmd.Find("白","49","47"," ").GetBullet().i(VluK_T,  GetCell("AJ", 41) );
+    m_dOmd.Find("白","49","48"," ").GetBullet().i(VluK_T,  GetCell("AK", 41) );
+    m_dOmd.Find("白","49","49"," ").GetBullet().i(VluK_T,  GetCell("AL", 41) );
+	
+    m_dOmd.Find("白","49","1"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 35) );
+    m_dOmd.Find("白","49","2"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 35) );
+    m_dOmd.Find("白","49","3"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 35) );
+    m_dOmd.Find("白","49","4"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 35) );
+    m_dOmd.Find("白","49","5"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 35) );
+    m_dOmd.Find("白","49","6"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 35) );
+    m_dOmd.Find("白","49","7"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 35) );
+    m_dOmd.Find("白","49","8"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 36) );
+    m_dOmd.Find("白","49","9"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 36) );
+    m_dOmd.Find("白","49","10"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 36) );
+    m_dOmd.Find("白","49","11"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 36) );
+    m_dOmd.Find("白","49","12"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 36) );
+    m_dOmd.Find("白","49","13"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 36) );
+    m_dOmd.Find("白","49","14"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 37) );
+    m_dOmd.Find("白","49","15"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 37) );
+    m_dOmd.Find("白","49","16"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 37) );
+    m_dOmd.Find("白","49","17"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 37) );
+    m_dOmd.Find("白","49","18"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 37) );
+    m_dOmd.Find("白","49","19"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 37) );
+    m_dOmd.Find("白","49","20"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 37) );
+    m_dOmd.Find("白","49","21"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 38) );
+    m_dOmd.Find("白","49","22"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 38) );
+    m_dOmd.Find("白","49","23"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 38) );
+    m_dOmd.Find("白","49","24"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 38) );
+    m_dOmd.Find("白","49","25"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 38) );
+    m_dOmd.Find("白","49","27"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 38) );
+    m_dOmd.Find("白","49","28"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 38) );
+    m_dOmd.Find("白","49","29"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 39) );
+    m_dOmd.Find("白","49","30"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 39) );
+    m_dOmd.Find("白","49","31"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 39) );
+    m_dOmd.Find("白","49","32"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 39) );
+    m_dOmd.Find("白","49","33"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 39) );
+    m_dOmd.Find("白","49","34"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 39) );
+    m_dOmd.Find("白","49","35"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 39) );
+    m_dOmd.Find("白","49","36"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 40) );
+    m_dOmd.Find("白","49","37"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 40) );
+    m_dOmd.Find("白","49","38"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 40) );
+    m_dOmd.Find("白","49","39"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 40) );
+    m_dOmd.Find("白","49","40"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 40) );
+    m_dOmd.Find("白","49","41"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 40) );
+    m_dOmd.Find("白","49","42"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 40) );
+    m_dOmd.Find("白","49","43"," ").GetBullet().i(VluK_Duv,  GetCell("AN", 41) );
+    m_dOmd.Find("白","49","44"," ").GetBullet().i(VluK_Duv,  GetCell("AO", 41) );
+    m_dOmd.Find("白","49","45"," ").GetBullet().i(VluK_Duv,  GetCell("AP", 41) );
+    m_dOmd.Find("白","49","46"," ").GetBullet().i(VluK_Duv,  GetCell("AQ", 41) );
+    m_dOmd.Find("白","49","47"," ").GetBullet().i(VluK_Duv,  GetCell("AR", 41) );
+    m_dOmd.Find("白","49","48"," ").GetBullet().i(VluK_Duv,  GetCell("AS", 41) );
+    m_dOmd.Find("白","49","49"," ").GetBullet().i(VluK_Duv,  GetCell("AT", 41) );
 }
 
 void COmdFile1::t2oD21()
 {
-	m_dOmd.At(Dark, Pn21,  0).SetLv( GetCell('H', 48) );
-	m_dOmd.At(Dark, Pn21,  1).SetLv( GetCell('H', 47) );
-	m_dOmd.At(Dark, Pn21,  2).SetLv( GetCell('H', 46) );
-	m_dOmd.At(Dark, Pn21,  3).SetLv( GetCell('H', 45) );
-	m_dOmd.At(Dark, Pn21,  4).SetLv( GetCell('H', 44) );
-	m_dOmd.At(Dark, Pn21,  5).SetLv( GetCell('I', 44) );
-	m_dOmd.At(Dark, Pn21,  6).SetLv( GetCell('J', 44) );
-	m_dOmd.At(Dark, Pn21,  7).SetLv( GetCell('K', 44) );
-	m_dOmd.At(Dark, Pn21,  8).SetLv( GetCell('L', 44) );
-	m_dOmd.At(Dark, Pn21,  9).SetLv( GetCell('M', 44) );
-	m_dOmd.At(Dark, Pn21, 10).SetLv( GetCell('N', 44) );
-	m_dOmd.At(Dark, Pn21, 11).SetLv( GetCell('N', 45) );
-	m_dOmd.At(Dark, Pn21, 12).SetLv( GetCell('N', 46) );
-	m_dOmd.At(Dark, Pn21, 13).SetLv( GetCell('N', 47) );
-	m_dOmd.At(Dark, Pn21, 14).SetLv( GetCell('N', 48) );
-	m_dOmd.At(Dark, Pn21, 15).SetLv( GetCell('M', 48) );
-	m_dOmd.At(Dark, Pn21, 16).SetLv( GetCell('L', 48) );
-	m_dOmd.At(Dark, Pn21, 17).SetLv( GetCell('K', 48) );
-	m_dOmd.At(Dark, Pn21, 18).SetLv( GetCell('J', 48) );
-	m_dOmd.At(Dark, Pn21, 19).SetLv( GetCell('I', 48) );
-	m_dOmd.At(Dark, Pn21, 20).SetLv( GetCell('K', 46) );
+	m_dOmd.Find("黑","21","1","0").GetBullet().i(VluK_Lv, GetCell('H', 48) );
+	m_dOmd.Find("黑","21","2","0").GetBullet().i(VluK_Lv, GetCell('H', 47) );
+	m_dOmd.Find("黑","21","3","0").GetBullet().i(VluK_Lv, GetCell('H', 46) );
+	m_dOmd.Find("黑","21","4","0").GetBullet().i(VluK_Lv, GetCell('H', 45) );
+	m_dOmd.Find("黑","21","5","0").GetBullet().i(VluK_Lv, GetCell('H', 44) );
+	m_dOmd.Find("黑","21","6","0").GetBullet().i(VluK_Lv, GetCell('I', 44) );
+	m_dOmd.Find("黑","21","7","0").GetBullet().i(VluK_Lv, GetCell('J', 44) );
+	m_dOmd.Find("黑","21","8","0").GetBullet().i(VluK_Lv, GetCell('K', 44) );
+	m_dOmd.Find("黑","21","9","0").GetBullet().i(VluK_Lv, GetCell('L', 44) );
+	m_dOmd.Find("黑","21","10","0").GetBullet().i(VluK_Lv, GetCell('M', 44) );
+	m_dOmd.Find("黑","21","11","0").GetBullet().i(VluK_Lv, GetCell('N', 44) );
+	m_dOmd.Find("黑","21","12","0").GetBullet().i(VluK_Lv, GetCell('N', 45) );
+	m_dOmd.Find("黑","21","13","0").GetBullet().i(VluK_Lv, GetCell('N', 46) );
+	m_dOmd.Find("黑","21","14","0").GetBullet().i(VluK_Lv, GetCell('N', 47) );
+	m_dOmd.Find("黑","21","15","0").GetBullet().i(VluK_Lv, GetCell('N', 48) );
+	m_dOmd.Find("黑","21","16","0").GetBullet().i(VluK_Lv, GetCell('M', 48) );
+	m_dOmd.Find("黑","21","17","0").GetBullet().i(VluK_Lv, GetCell('L', 48) );
+	m_dOmd.Find("黑","21","18","0").GetBullet().i(VluK_Lv, GetCell('K', 48) );
+	m_dOmd.Find("黑","21","19","0").GetBullet().i(VluK_Lv, GetCell('J', 48) );
+	m_dOmd.Find("黑","21","20","0").GetBullet().i(VluK_Lv, GetCell('I', 48) );
+	m_dOmd.Find("黑","21","21","0").GetBullet().i(VluK_Lv, GetCell('K', 46) );
 	
-	m_dOmd.At(Dark, Pn21,  0).SetSx( GetCell('P', 48) );
-	m_dOmd.At(Dark, Pn21,  1).SetSx( GetCell('P', 47) );
-	m_dOmd.At(Dark, Pn21,  2).SetSx( GetCell('P', 46) );
-	m_dOmd.At(Dark, Pn21,  3).SetSx( GetCell('P', 45) );
-	m_dOmd.At(Dark, Pn21,  4).SetSx( GetCell('P', 44) );
-	m_dOmd.At(Dark, Pn21,  5).SetSx( GetCell('Q', 44) );
-	m_dOmd.At(Dark, Pn21,  6).SetSx( GetCell('R', 44) );
-	m_dOmd.At(Dark, Pn21,  7).SetSx( GetCell('S', 44) );
-	m_dOmd.At(Dark, Pn21,  8).SetSx( GetCell('T', 44) );
-	m_dOmd.At(Dark, Pn21,  9).SetSx( GetCell('U', 44) );
-	m_dOmd.At(Dark, Pn21, 10).SetSx( GetCell('V', 44) );
-	m_dOmd.At(Dark, Pn21, 11).SetSx( GetCell('V', 45) );
-	m_dOmd.At(Dark, Pn21, 12).SetSx( GetCell('V', 46) );
-	m_dOmd.At(Dark, Pn21, 13).SetSx( GetCell('V', 47) );
-	m_dOmd.At(Dark, Pn21, 14).SetSx( GetCell('V', 48) );
-	m_dOmd.At(Dark, Pn21, 15).SetSx( GetCell('U', 48) );
-	m_dOmd.At(Dark, Pn21, 16).SetSx( GetCell('T', 48) );
-	m_dOmd.At(Dark, Pn21, 17).SetSx( GetCell('S', 48) );
-	m_dOmd.At(Dark, Pn21, 18).SetSx( GetCell('R', 48) );
-	m_dOmd.At(Dark, Pn21, 19).SetSx( GetCell('Q', 48) );
-	m_dOmd.At(Dark, Pn21, 20).SetSx( GetCell('S', 46) );
+	m_dOmd.Find("黑","21","1","0").GetBullet().i(VluK_Sx, GetCell('P', 48) );
+	m_dOmd.Find("黑","21","2","0").GetBullet().i(VluK_Sx, GetCell('P', 47) );
+	m_dOmd.Find("黑","21","3","0").GetBullet().i(VluK_Sx, GetCell('P', 46) );
+	m_dOmd.Find("黑","21","4","0").GetBullet().i(VluK_Sx, GetCell('P', 45) );
+	m_dOmd.Find("黑","21","5","0").GetBullet().i(VluK_Sx, GetCell('P', 44) );
+	m_dOmd.Find("黑","21","6","0").GetBullet().i(VluK_Sx, GetCell('Q', 44) );
+	m_dOmd.Find("黑","21","7","0").GetBullet().i(VluK_Sx, GetCell('R', 44) );
+	m_dOmd.Find("黑","21","8","0").GetBullet().i(VluK_Sx, GetCell('S', 44) );
+	m_dOmd.Find("黑","21","9","0").GetBullet().i(VluK_Sx, GetCell('T', 44) );
+	m_dOmd.Find("黑","21","10","0").GetBullet().i(VluK_Sx, GetCell('U', 44) );
+	m_dOmd.Find("黑","21","11","0").GetBullet().i(VluK_Sx, GetCell('V', 44) );
+	m_dOmd.Find("黑","21","12","0").GetBullet().i(VluK_Sx, GetCell('V', 45) );
+	m_dOmd.Find("黑","21","13","0").GetBullet().i(VluK_Sx, GetCell('V', 46) );
+	m_dOmd.Find("黑","21","14","0").GetBullet().i(VluK_Sx, GetCell('V', 47) );
+	m_dOmd.Find("黑","21","15","0").GetBullet().i(VluK_Sx, GetCell('V', 48) );
+	m_dOmd.Find("黑","21","16","0").GetBullet().i(VluK_Sx, GetCell('U', 48) );
+	m_dOmd.Find("黑","21","17","0").GetBullet().i(VluK_Sx, GetCell('T', 48) );
+	m_dOmd.Find("黑","21","18","0").GetBullet().i(VluK_Sx, GetCell('S', 48) );
+	m_dOmd.Find("黑","21","19","0").GetBullet().i(VluK_Sx, GetCell('R', 48) );
+	m_dOmd.Find("黑","21","20","0").GetBullet().i(VluK_Sx, GetCell('Q', 48) );
+	m_dOmd.Find("黑","21","21","0").GetBullet().i(VluK_Sx, GetCell('S', 46) );
 	
-	m_dOmd.At(Dark, Pn21,  0).SetSy( GetCell('X' , 48) );
-	m_dOmd.At(Dark, Pn21,  1).SetSy( GetCell('X' , 47) );
-	m_dOmd.At(Dark, Pn21,  2).SetSy( GetCell('X' , 46) );
-	m_dOmd.At(Dark, Pn21,  3).SetSy( GetCell('X' , 45) );
-	m_dOmd.At(Dark, Pn21,  4).SetSy( GetCell('X' , 44) );
-	m_dOmd.At(Dark, Pn21,  5).SetSy( GetCell('Y' , 44) );
-	m_dOmd.At(Dark, Pn21,  6).SetSy( GetCell('Z' , 44) );
-	m_dOmd.At(Dark, Pn21,  7).SetSy( GetCell("AA", 44) );
-	m_dOmd.At(Dark, Pn21,  8).SetSy( GetCell("AB", 44) );
-	m_dOmd.At(Dark, Pn21,  9).SetSy( GetCell("AC", 44) );
-	m_dOmd.At(Dark, Pn21, 10).SetSy( GetCell("AD", 44) );
-	m_dOmd.At(Dark, Pn21, 11).SetSy( GetCell("AD", 45) );
-	m_dOmd.At(Dark, Pn21, 12).SetSy( GetCell("AD", 46) );
-	m_dOmd.At(Dark, Pn21, 13).SetSy( GetCell("AD", 47) );
-	m_dOmd.At(Dark, Pn21, 14).SetSy( GetCell("AD", 48) );
-	m_dOmd.At(Dark, Pn21, 15).SetSy( GetCell("AC", 48) );
-	m_dOmd.At(Dark, Pn21, 16).SetSy( GetCell("AB", 48) );
-	m_dOmd.At(Dark, Pn21, 17).SetSy( GetCell("AA", 48) );
-	m_dOmd.At(Dark, Pn21, 18).SetSy( GetCell('Z' , 48) );
-	m_dOmd.At(Dark, Pn21, 19).SetSy( GetCell('Y' , 48) );
-	m_dOmd.At(Dark, Pn21, 20).SetSy( GetCell("AA", 46) );
+	m_dOmd.Find("黑","21","1","0").GetBullet().i(VluK_Sy, GetCell('X' , 48) );
+	m_dOmd.Find("黑","21","2","0").GetBullet().i(VluK_Sy, GetCell('X' , 47) );
+	m_dOmd.Find("黑","21","3","0").GetBullet().i(VluK_Sy, GetCell('X' , 46) );
+	m_dOmd.Find("黑","21","4","0").GetBullet().i(VluK_Sy, GetCell('X' , 45) );
+	m_dOmd.Find("黑","21","5","0").GetBullet().i(VluK_Sy, GetCell('X' , 44) );
+	m_dOmd.Find("黑","21","6","0").GetBullet().i(VluK_Sy, GetCell('Y' , 44) );
+	m_dOmd.Find("黑","21","7","0").GetBullet().i(VluK_Sy, GetCell('Z' , 44) );
+	m_dOmd.Find("黑","21","8","0").GetBullet().i(VluK_Sy, GetCell("AA", 44) );
+	m_dOmd.Find("黑","21","9","0").GetBullet().i(VluK_Sy, GetCell("AB", 44) );
+	m_dOmd.Find("黑","21","10","0").GetBullet().i(VluK_Sy, GetCell("AC", 44) );
+	m_dOmd.Find("黑","21","11","0").GetBullet().i(VluK_Sy, GetCell("AD", 44) );
+	m_dOmd.Find("黑","21","12","0").GetBullet().i(VluK_Sy, GetCell("AD", 45) );
+	m_dOmd.Find("黑","21","13","0").GetBullet().i(VluK_Sy, GetCell("AD", 46) );
+	m_dOmd.Find("黑","21","14","0").GetBullet().i(VluK_Sy, GetCell("AD", 47) );
+	m_dOmd.Find("黑","21","15","0").GetBullet().i(VluK_Sy, GetCell("AD", 48) );
+	m_dOmd.Find("黑","21","16","0").GetBullet().i(VluK_Sy, GetCell("AC", 48) );
+	m_dOmd.Find("黑","21","17","0").GetBullet().i(VluK_Sy, GetCell("AB", 48) );
+	m_dOmd.Find("黑","21","18","0").GetBullet().i(VluK_Sy, GetCell("AA", 48) );
+	m_dOmd.Find("黑","21","19","0").GetBullet().i(VluK_Sy, GetCell('Z' , 48) );
+	m_dOmd.Find("黑","21","20","0").GetBullet().i(VluK_Sy, GetCell('Y' , 48) );
+	m_dOmd.Find("黑","21","21","0").GetBullet().i(VluK_Sy, GetCell("AA", 46) );
 }
 
 void COmdFile1::t2oD13()
 {
-	m_dOmd.At(Dark, Pn13,  0).SetLv( GetCell('H', 51) );
-	m_dOmd.At(Dark, Pn13,  1).SetLv( GetCell('J', 51) );
-	m_dOmd.At(Dark, Pn13,  2).SetLv( GetCell('L', 51) );
-	m_dOmd.At(Dark, Pn13,  3).SetLv( GetCell('H', 53) );
-	m_dOmd.At(Dark, Pn13,  4).SetLv( GetCell('J', 53) );
-	m_dOmd.At(Dark, Pn13,  5).SetLv( GetCell('L', 53) );
-	m_dOmd.At(Dark, Pn13,  6).SetLv( GetCell('H', 55) );
-	m_dOmd.At(Dark, Pn13,  7).SetLv( GetCell('J', 55) );
-	m_dOmd.At(Dark, Pn13,  8).SetLv( GetCell('L', 55) );
-	m_dOmd.At(Dark, Pn13,  9).SetLv( GetCell('I', 52) );
-	m_dOmd.At(Dark, Pn13, 10).SetLv( GetCell('K', 52) );
-	m_dOmd.At(Dark, Pn13, 11).SetLv( GetCell('I', 54) );
-	m_dOmd.At(Dark, Pn13, 12).SetLv( GetCell('K', 54) );
+	m_dOmd.Find("黑","13","1","0").GetBullet().i(VluK_Lv, GetCell('H', 51) );
+	m_dOmd.Find("黑","13","2","0").GetBullet().i(VluK_Lv, GetCell('J', 51) );
+	m_dOmd.Find("黑","13","3","0").GetBullet().i(VluK_Lv, GetCell('L', 51) );
+	m_dOmd.Find("黑","13","4","0").GetBullet().i(VluK_Lv, GetCell('H', 53) );
+	m_dOmd.Find("黑","13","5","0").GetBullet().i(VluK_Lv, GetCell('J', 53) );
+	m_dOmd.Find("黑","13","6","0").GetBullet().i(VluK_Lv, GetCell('L', 53) );
+	m_dOmd.Find("黑","13","7","0").GetBullet().i(VluK_Lv, GetCell('H', 55) );
+	m_dOmd.Find("黑","13","8","0").GetBullet().i(VluK_Lv, GetCell('J', 55) );
+	m_dOmd.Find("黑","13","9","0").GetBullet().i(VluK_Lv, GetCell('L', 55) );
+	m_dOmd.Find("黑","13","10","0").GetBullet().i(VluK_Lv, GetCell('I', 52) );
+	m_dOmd.Find("黑","13","11","0").GetBullet().i(VluK_Lv, GetCell('K', 52) );
+	m_dOmd.Find("黑","13","12","0").GetBullet().i(VluK_Lv, GetCell('I', 54) );
+	m_dOmd.Find("黑","13","13","0").GetBullet().i(VluK_Lv, GetCell('K', 54) );
 	
-	m_dOmd.At(Dark, Pn13,  0).SetSx( GetCell('N', 51) );
-	m_dOmd.At(Dark, Pn13,  1).SetSx( GetCell('P', 51) );
-	m_dOmd.At(Dark, Pn13,  2).SetSx( GetCell('R', 51) );
-	m_dOmd.At(Dark, Pn13,  3).SetSx( GetCell('N', 53) );
-	m_dOmd.At(Dark, Pn13,  4).SetSx( GetCell('P', 53) );
-	m_dOmd.At(Dark, Pn13,  5).SetSx( GetCell('R', 53) );
-	m_dOmd.At(Dark, Pn13,  6).SetSx( GetCell('N', 55) );
-	m_dOmd.At(Dark, Pn13,  7).SetSx( GetCell('P', 55) );
-	m_dOmd.At(Dark, Pn13,  8).SetSx( GetCell('R', 55) );
-	m_dOmd.At(Dark, Pn13,  9).SetSx( GetCell('O', 52) );
-	m_dOmd.At(Dark, Pn13, 10).SetSx( GetCell('Q', 52) );
-	m_dOmd.At(Dark, Pn13, 11).SetSx( GetCell('O', 54) );
-	m_dOmd.At(Dark, Pn13, 12).SetSx( GetCell('Q', 54) );
+	m_dOmd.Find("黑","13","1","0").GetBullet().i(VluK_Sx, GetCell('N', 51) );
+	m_dOmd.Find("黑","13","2","0").GetBullet().i(VluK_Sx, GetCell('P', 51) );
+	m_dOmd.Find("黑","13","3","0").GetBullet().i(VluK_Sx, GetCell('R', 51) );
+	m_dOmd.Find("黑","13","4","0").GetBullet().i(VluK_Sx, GetCell('N', 53) );
+	m_dOmd.Find("黑","13","5","0").GetBullet().i(VluK_Sx, GetCell('P', 53) );
+	m_dOmd.Find("黑","13","6","0").GetBullet().i(VluK_Sx, GetCell('R', 53) );
+	m_dOmd.Find("黑","13","7","0").GetBullet().i(VluK_Sx, GetCell('N', 55) );
+	m_dOmd.Find("黑","13","8","0").GetBullet().i(VluK_Sx, GetCell('P', 55) );
+	m_dOmd.Find("黑","13","9","0").GetBullet().i(VluK_Sx, GetCell('R', 55) );
+	m_dOmd.Find("黑","13","10","0").GetBullet().i(VluK_Sx, GetCell('O', 52) );
+	m_dOmd.Find("黑","13","11","0").GetBullet().i(VluK_Sx, GetCell('Q', 52) );
+	m_dOmd.Find("黑","13","12","0").GetBullet().i(VluK_Sx, GetCell('O', 54) );
+	m_dOmd.Find("黑","13","13","0").GetBullet().i(VluK_Sx, GetCell('Q', 54) );
 	
-	m_dOmd.At(Dark, Pn13,  0).SetSy( GetCell('T', 51) );
-	m_dOmd.At(Dark, Pn13,  1).SetSy( GetCell('V', 51) );
-	m_dOmd.At(Dark, Pn13,  2).SetSy( GetCell('X', 51) );
-	m_dOmd.At(Dark, Pn13,  3).SetSy( GetCell('T', 53) );
-	m_dOmd.At(Dark, Pn13,  4).SetSy( GetCell('V', 53) );
-	m_dOmd.At(Dark, Pn13,  5).SetSy( GetCell('X', 53) );
-	m_dOmd.At(Dark, Pn13,  6).SetSy( GetCell('T', 55) );
-	m_dOmd.At(Dark, Pn13,  7).SetSy( GetCell('V', 55) );
-	m_dOmd.At(Dark, Pn13,  8).SetSy( GetCell('X', 55) );
-	m_dOmd.At(Dark, Pn13,  9).SetSy( GetCell('U', 52) );
-	m_dOmd.At(Dark, Pn13, 10).SetSy( GetCell('W', 52) );
-	m_dOmd.At(Dark, Pn13, 11).SetSy( GetCell('U', 54) );
-	m_dOmd.At(Dark, Pn13, 12).SetSy( GetCell('W', 54) );
+	m_dOmd.Find("黑","13","1","0").GetBullet().i(VluK_Sy, GetCell('T', 51) );
+	m_dOmd.Find("黑","13","2","0").GetBullet().i(VluK_Sy, GetCell('V', 51) );
+	m_dOmd.Find("黑","13","3","0").GetBullet().i(VluK_Sy, GetCell('X', 51) );
+	m_dOmd.Find("黑","13","4","0").GetBullet().i(VluK_Sy, GetCell('T', 53) );
+	m_dOmd.Find("黑","13","5","0").GetBullet().i(VluK_Sy, GetCell('V', 53) );
+	m_dOmd.Find("黑","13","6","0").GetBullet().i(VluK_Sy, GetCell('X', 53) );
+	m_dOmd.Find("黑","13","7","0").GetBullet().i(VluK_Sy, GetCell('T', 55) );
+	m_dOmd.Find("黑","13","8","0").GetBullet().i(VluK_Sy, GetCell('V', 55) );
+	m_dOmd.Find("黑","13","9","0").GetBullet().i(VluK_Sy, GetCell('X', 55) );
+	m_dOmd.Find("黑","13","10","0").GetBullet().i(VluK_Sy, GetCell('U', 52) );
+	m_dOmd.Find("黑","13","11","0").GetBullet().i(VluK_Sy, GetCell('W', 52) );
+	m_dOmd.Find("黑","13","12","0").GetBullet().i(VluK_Sy, GetCell('U', 54) );
+	m_dOmd.Find("黑","13","13","0").GetBullet().i(VluK_Sy, GetCell('W', 54) );
 }
 
 void COmdFile1::t2oW5()
 {
-	m_dOmd.At(White, Pn5, 0).SetLv( GetCell('H', 58) );
-	m_dOmd.At(White, Pn5, 1).SetLv( GetCell('J', 58) );
-	m_dOmd.At(White, Pn5, 2).SetLv( GetCell('I', 59) );
-	m_dOmd.At(White, Pn5, 3).SetLv( GetCell('H', 60) );
-	m_dOmd.At(White, Pn5, 4).SetLv( GetCell('J', 60) );
+	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Lv, GetCell('H', 58) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Lv, GetCell('J', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Lv, GetCell('I', 59) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Lv, GetCell('H', 60) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Lv, GetCell('J', 60) );
 	
-	m_dOmd.At(White, Pn5, 0).SetSx( GetCell('N', 58) );
-	m_dOmd.At(White, Pn5, 1).SetSx( GetCell('P', 58) );
-	m_dOmd.At(White, Pn5, 2).SetSx( GetCell('O', 59) );
-	m_dOmd.At(White, Pn5, 3).SetSx( GetCell('N', 60) );
-	m_dOmd.At(White, Pn5, 4).SetSx( GetCell('P', 60) );
+	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Sx, GetCell('N', 58) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sx, GetCell('P', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sx, GetCell('O', 59) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sx, GetCell('N', 60) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sx, GetCell('P', 60) );
 	
-	m_dOmd.At(White, Pn5, 0).SetSy( GetCell('T', 58) );
-	m_dOmd.At(White, Pn5, 1).SetSy( GetCell('V', 58) );
-	m_dOmd.At(White, Pn5, 2).SetSy( GetCell('U', 59) );
-	m_dOmd.At(White, Pn5, 3).SetSy( GetCell('T', 60) );
-	m_dOmd.At(White, Pn5, 4).SetSy( GetCell('V', 60) );
+	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Sy, GetCell('T', 58) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sy, GetCell('V', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sy, GetCell('U', 59) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sy, GetCell('T', 60) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sy, GetCell('V', 60) );
 	
-	m_dOmd.At(White, Pn5, 0).SetT( GetCell('Z' , 58) );
-	m_dOmd.At(White, Pn5, 1).SetT( GetCell("AB", 58) );
-	m_dOmd.At(White, Pn5, 2).SetT( GetCell("AA", 59) );
-	m_dOmd.At(White, Pn5, 3).SetT( GetCell('Z' , 60) );
-	m_dOmd.At(White, Pn5, 4).SetT( GetCell("AB", 60) );
+	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_T,  GetCell('Z' , 58) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_T,  GetCell("AB", 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_T,  GetCell("AA", 59) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_T,  GetCell('Z' , 60) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_T,  GetCell("AB", 60) );
 	
-	m_dOmd.At(White, Pn5, 0).SetDuv( GetCell("AF", 58) );
-	m_dOmd.At(White, Pn5, 1).SetDuv( GetCell("AH", 58) );
-	m_dOmd.At(White, Pn5, 2).SetDuv( GetCell("AG", 59) );
-	m_dOmd.At(White, Pn5, 3).SetDuv( GetCell("AF", 60) );
-	m_dOmd.At(White, Pn5, 4).SetDuv( GetCell("AH", 60) );
+	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Duv,  GetCell("AF", 58) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Duv,  GetCell("AH", 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Duv,  GetCell("AG", 59) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Duv,  GetCell("AF", 60) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Duv,  GetCell("AH", 60) );
 }

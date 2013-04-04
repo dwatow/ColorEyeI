@@ -112,6 +112,10 @@ SOURCE=..\xMsrPoint\Cartridge.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\CartridgeFinder.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\xMsrPoint\Circle.cpp
 # End Source File
 # Begin Source File

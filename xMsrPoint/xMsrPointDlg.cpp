@@ -161,7 +161,7 @@ BOOL CXMsrPointDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	m_sldViewControl.EnableWindow(FALSE);
-	m_pCA210 = 0;
+// 	m_pCA210 = 0;
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -239,76 +239,76 @@ BOOL CXMsrPointDlg::CanExit()
 void CXMsrPointDlg::OnButtonMsr() 
 {
 	// TODO: Add your control notification handler code here
-	if (m_pCA210 == 0)
-	{
-		p_PtnDlg = new CPatternDlg;
-		//m_pCA210 = new Ca210(TRUE);
-		m_pCA210 = new Ca210(FALSE);
-		
-		if (!p_PtnDlg->ConnectCa210(m_pCA210))
-			MessageBox("OnButtonMsr的CA-210連線錯誤");
-		p_PtnDlg->Create(IDD_PATTERN_DIALOG);
-
-		vChain1.clear();
-		Cartridge x;
-		vChain1.push_back(x);
-		
-		//  Cartridge R1(Red, Pn1);
-		// 	Cartridge G1(Green, Pn1);
-		// 	Cartridge B1(Blue, Pn1);
-		// 	Cartridge W9(White, Pn9);
-		// 	Cartridge D25(Dark, Pn25);
-		// 	Cartridge W49(White, Pn49);
-		Cartridge nits(Nits, Pn9);
-		
-		
-		//  p_PtnDlg->Partition(vChain1, R1);
-		// 	p_PtnDlg->Partition(vChain1, G1);
-		// 	p_PtnDlg->Partition(vChain1, B1);
-		// 
-		// 	p_PtnDlg->Partition(vChain1, W9);
-		// 	p_PtnDlg->Partition(vChain1, D25);
-		// 	p_PtnDlg->Partition(vChain1, W49);
-		p_PtnDlg->Partition(vChain1, nits);
-		//	p_PtnDlg->Partition(vChain1, W5);
-		
-		//ReadyFire
-		m_sldViewControl.SetRangeMin(0);
-		m_sldViewControl.SetRangeMax(vChain1.size()-1);
-		m_sldViewControl.EnableWindow(TRUE);
-		
-		QuackMsrSort(vChain1);
-	}
-	else
-	{
-		m_pCA210->SetOnline(TRUE);
-	}
-
-	if(!p_PtnDlg->Magazine(vChain1))	MessageBox("OnButtonMsr的彈匣出錯");
-
-	p_PtnDlg->ShowWindow(SW_MAXIMIZE);
+// 	if (m_pCA210 == 0)
+// 	{
+// 		p_PtnDlg = new CPatternDlg;
+// 		//m_pCA210 = new Ca210(TRUE);
+// 		m_pCA210 = new Ca210(FALSE);
+// 		
+// 		if (!p_PtnDlg->ConnectCa210(m_pCA210))
+// 			MessageBox("OnButtonMsr的CA-210連線錯誤");
+// 		p_PtnDlg->Create(IDD_PATTERN_DIALOG);
+// 
+// 		vChain1.clear();
+// 		Cartridge x;
+// 		vChain1.push_back(x);
+// 		
+// 		//  Cartridge R1(Red, Pn1);
+// 		// 	Cartridge G1(Green, Pn1);
+// 		// 	Cartridge B1(Blue, Pn1);
+// 		// 	Cartridge W9(White, Pn9);
+// 		// 	Cartridge D25(Dark, Pn25);
+// 		// 	Cartridge W49(White, Pn49);
+// 		Cartridge nits(Nits, Pn9);
+// 		
+// 		
+// 		//  p_PtnDlg->Partition(vChain1, R1);
+// 		// 	p_PtnDlg->Partition(vChain1, G1);
+// 		// 	p_PtnDlg->Partition(vChain1, B1);
+// 		// 
+// 		// 	p_PtnDlg->Partition(vChain1, W9);
+// 		// 	p_PtnDlg->Partition(vChain1, D25);
+// 		// 	p_PtnDlg->Partition(vChain1, W49);
+// 		p_PtnDlg->Partition(vChain1, nits);
+// 		//	p_PtnDlg->Partition(vChain1, W5);
+// 		
+// 		//ReadyFire
+// 		m_sldViewControl.SetRangeMin(0);
+// 		m_sldViewControl.SetRangeMax(vChain1.size()-1);
+// 		m_sldViewControl.EnableWindow(TRUE);
+// 		
+// 		QuackMsrSort(vChain1);
+// 	}
+// 	else
+// 	{
+// 		m_pCA210->SetOnline(TRUE);
+// 	}
+// 
+// 	if(!p_PtnDlg->Magazine(vChain1))	MessageBox("OnButtonMsr的彈匣出錯");
+// 
+// 	p_PtnDlg->ShowWindow(SW_MAXIMIZE);
 }
 
 void CXMsrPointDlg::OnReleasedcaptureSlider1(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	// TODO: Add your control notification handler code here
-	std::vector<Cartridge>::size_type i = (std::vector<Cartridge>::size_type)(m_sldViewControl.GetPos());
-
-	m_strLv.Format("Lv:%3.2f", vChain1.at(i).GetLv());
-	m_strSx.Format("x:%1.4f", vChain1.at(i).GetSx());
-	m_strSy.Format("y:%1.4f", vChain1.at(i).GetSy());
-	
-	m_strT.Format("T:%4d", vChain1.at(i).GetT());
-	m_strDuv.Format("Δuv:%1.4f", vChain1.at(i).GetDuv());
-	
-	m_strDu.Format("Δu:%1.4f", vChain1.at(i).GetDu());
-	m_strDv.Format("Δv:%1.4f", vChain1.at(i).GetDv());
-	
-	m_strX.Format("X:%3.2f", vChain1.at(i).GetX());
-	m_strY.Format("Y:%3.2f", vChain1.at(i).GetY());
-	m_strZ.Format("Z:%3.2f", vChain1.at(i).GetZ());
-
-	UpdateData(FALSE);
+// 	std::vector<Cartridge>::size_type i = (std::vector<Cartridge>::size_type)(m_sldViewControl.GetPos());
+// 
+// 	m_strLv.Format("Lv:%3.2f", vChain1.at(i).GetLv());
+// 	m_strSx.Format("x:%1.4f", vChain1.at(i).GetSx());
+// 	m_strSy.Format("y:%1.4f", vChain1.at(i).GetSy());
+// 	
+// 	m_strT.Format("T:%4d", vChain1.at(i).GetT());
+// 	m_strDuv.Format("Δuv:%1.4f", vChain1.at(i).GetDuv());
+// 	
+// 	m_strDu.Format("Δu:%1.4f", vChain1.at(i).GetDu());
+// 	m_strDv.Format("Δv:%1.4f", vChain1.at(i).GetDv());
+// 	
+// 	m_strX.Format("X:%3.2f", vChain1.at(i).GetX());
+// 	m_strY.Format("Y:%3.2f", vChain1.at(i).GetY());
+// 	m_strZ.Format("Z:%3.2f", vChain1.at(i).GetZ());
+// 
+// 	UpdateData(FALSE);
 	*pResult = 0;
 }
 
@@ -317,29 +317,29 @@ void CXMsrPointDlg::OnDestroy()
 	CDialog::OnDestroy();
 	
 	// TODO: Add your message handler code here
-	delete m_pCA210;	
+/*	delete m_pCA210;*/	
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //sort function
 
-bool CXMsrPointDlg::AreaPriority(const Cartridge &sp1, const Cartridge &sp2)
-{
-    return (sp1.GetArea() < sp2.GetArea()) ? 1 : 0;
-}
-
-bool CXMsrPointDlg::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
-{
-    return (sp1.GetOrigSeqc() < sp2.GetOrigSeqc()) ? 1 : 0;
-}
-
-
-void CXMsrPointDlg::QuackMsrSort(std::vector<Cartridge>& vCar) const
-{
-	std::sort(vCar.begin(), vCar.end(), AreaPriority);
-}
-
-void CXMsrPointDlg::OrigMsrSort(std::vector<Cartridge>& vCar) const
-{
-	std::sort(vCar.begin(), vCar.end(), OrigPriority);
-}
+// bool CXMsrPointDlg::AreaPriority(const Cartridge &sp1, const Cartridge &sp2)
+// {
+//     return (sp1.GetArea() < sp2.GetArea()) ? 1 : 0;
+// }
+// 
+// bool CXMsrPointDlg::OrigPriority(const Cartridge &sp1, const Cartridge &sp2)
+// {
+//     return (sp1.GetOrigSeqc() < sp2.GetOrigSeqc()) ? 1 : 0;
+// }
+// 
+// 
+// void CXMsrPointDlg::QuackMsrSort(std::vector<Cartridge>& vCar) const
+// {
+// 	std::sort(vCar.begin(), vCar.end(), AreaPriority);
+// }
+// 
+// void CXMsrPointDlg::OrigMsrSort(std::vector<Cartridge>& vCar) const
+// {
+// 	std::sort(vCar.begin(), vCar.end(), OrigPriority);
+// }

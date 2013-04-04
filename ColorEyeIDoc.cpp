@@ -13,6 +13,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc
 
@@ -90,7 +91,7 @@ void CColorEyeIDoc::Dump(CDumpContext& dc) const
 {
     CDocument::Dump(dc);
 }
-#endif //_DEBUG
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIDoc commands
@@ -102,7 +103,7 @@ void CColorEyeIDoc::OnFileNew()
 //	if (!GetPathName().IsEmpty())
 	CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
-    m_dOmd.Empty();          //清空記憶體空間m_OmdData
+//     m_dOmd.Empty();          //清空記憶體空間m_OmdData
     m_docDNA.Empty();
     m_docRNA.Empty();
 
@@ -135,7 +136,7 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
     // TODO: Add your specialized creation code here
     //點兩下會執行這個
     OnNewDocument();
-    OpenOmdFile(lpszPathName);
+//     OpenOmdFile(lpszPathName);
     SetPathName(lpszPathName);
     SetTitle(lpszPathName);
     SetModifiedFlag(FALSE);    
@@ -150,8 +151,8 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
 void CColorEyeIDoc::OnFileOpen() 
 {
     // TODO: Add your command handler code here
-//    OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-    OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+//   OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+     OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 	SetModifiedFlag(FALSE);
 	UpdateAllViews(NULL);
 }
@@ -159,8 +160,8 @@ void CColorEyeIDoc::OnFileOpen()
 void CColorEyeIDoc::OnFileSaveAs() 
 {
     // TODO: Add your command handler code here
-//    SaveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-    SaveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+//   SaveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+     SaveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 	SetModifiedFlag(FALSE);
 }
 //////////////////////////////////////////////////////////////////////////
@@ -252,7 +253,8 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
         AfxMessageBox("路徑有問題");
     else 
     {
-        ft_Omd.oOmdData(m_dOmd);
+//         ft_Omd.oOmdData(m_dOmd);
+        ft_Omd.oOmdData(m_docRNA);
 
         m_PnlID     = ft_Omd.GetPnlID();
         m_MsrDvc    = ft_Omd.GetMsrDvc();
@@ -269,7 +271,8 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 {
     COmdFile0 f_Omd;
 
-    if(!f_Omd.Save(FilePathName, m_ErrorFx, m_dOmd))
+//     if(!f_Omd.Save(FilePathName, m_ErrorFx, m_dOmd))
+	if(!f_Omd.Save(FilePathName, m_ErrorFx, m_docRNA))
         AfxMessageBox("路徑有問題!!");
     else
 	{
@@ -278,7 +281,8 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 		f_Omd.SetPrb   (m_Prb);
 		f_Omd.SetCHID  (m_CHID);
 		f_Omd.SetNitsLv(m_nitsBkClr);
-		f_Omd.iOmdData (m_dOmd);
+		f_Omd.iOmdData (m_docRNA);
+// 		f_Omd.iOmdData (m_dOmd);
 
         f_Omd.Close();
 	}
@@ -294,7 +298,7 @@ void CColorEyeIDoc::OnFileSave()
     {
         SetModifiedFlag(FALSE);
 //		SaveTxtFile(GetPathName());
-		SaveOmdFile(GetPathName());
+ 		SaveOmdFile(GetPathName());
     }
 	SetModifiedFlag(FALSE);
 }
@@ -306,16 +310,18 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 
     str.IsEmpty();
     vStr.clear();
-    str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
+//     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
     vStr.push_back(str);
-    for (std::vector<Cartridge>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
+//     for (std::vector<Cartridge2>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
+    for (std::vector<Cartridge2>::iterator iter = m_docRNA.Begin(); iter != m_docRNA.End(); ++iter)
     {                  
-        str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
-            iter, iter->GetOrigSeqc(), iter->GetArea(), 
-            iter->GetStrColorType(), //背景色碼
-            iter->GetMsrFlowNo(), //第幾點
-            iter->GetStrPointNum(),//量測點數
-            iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
+//         str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
+//             iter, iter->GetOrigSeqc(), iter->GetArea(), 
+//             iter->GetStrColorType(), //背景色碼
+//             iter->GetMsrFlowNo(), //第幾點
+//             iter->GetStrPointNum(),//量測點數
+//             iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
+		str.Format("%s\n", iter->GetDescrip());
         vStr.push_back(str);
     }
 
@@ -343,32 +349,5 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::UpdateDocRNA(const RNA& _docRNA)
 { m_docRNA.Empty(); m_docRNA = _docRNA; }
-// {
-//     
-//     for (std::vector<Cartridge2>::const_iterator itor = _docRNA.Begin(); itor != _docRNA.End(); ++itor)
-//         m_TextData.push_back(itor->showMe());
-// 
-//     m_docRNA.Empty(); m_docRNA = _docRNA;
-// 
-// CTxtFile fTxt;
-// CFileException fx;
-// fTxt.Save("C://Users//1004066//Desktop//docRNA.log", fx);
-// fTxt.iTxtData(m_TextData);
-// fTxt.Close();
-// 
-// };
-
 void CColorEyeIDoc::UpdateDocDNA(const DNA& _docDNA)
 { m_docDNA.Empty(); m_docDNA = _docDNA; }
-// {
-//     for (std::vector<Nucleotide>::const_iterator itor = _docDNA.Begin(); itor != _docDNA.End(); ++itor)
-//         m_TextData.push_back(itor->showMe());
-// 
-//     m_docDNA.Empty(); m_docDNA = _docDNA;
-// 
-//     CTxtFile fTxt;
-//     CFileException fx;
-//     fTxt.Save("C://Users//1004066//Desktop//docDNA.log", fx);
-//     fTxt.iTxtData(m_TextData);
-//     fTxt.Close();
-// };

@@ -96,6 +96,11 @@ const Bullet Cartridge2::GetBullet() const
     return m_Data;    
 }
 
+Bullet Cartridge2::GetBullet()
+{
+    return m_Data;    
+}
+
 void Cartridge2::SetPointPosi(const CPoint& _P)
 {
 	ASSERT(_P.x>=0);

@@ -155,7 +155,15 @@ SOURCE=.\XlsFile2.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\XlsGamma.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\XlsOQC1.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\XlsOQC2.cpp
 # End Source File
 # Begin Source File
 
@@ -219,7 +227,15 @@ SOURCE=.\XlsFile2.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\XlsGamma.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\XlsOQC1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\XlsOQC2.h
 # End Source File
 # Begin Source File
 

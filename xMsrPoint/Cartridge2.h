@@ -3,8 +3,6 @@
 
 #include "../StdAfx.h"
 #include "Bullet.h"
-#include "../Enum.h"
-#include "Bolt.h"
 #include "../CColorRef.h"
 #include "../BkCrossTalk.h"
 #include "../BkNits.h"
@@ -14,6 +12,7 @@
 //Bullet 彈頭
 //Cartridge2 子彈
 enum BackGroundStatus { BGS_Normal = 0, BGS_NitsPos, BGS_NitsNeg, BGS_CrossTalkWrite, BGS_CrossTalkDark };
+enum AreaKind { AA_00, AA_01, AA_02, AA_03, AA_04, AA_05, AA_06, AA_07, AA_08, AA_09};
 
 /***************************************
  *    Define Belt Class member function*
@@ -50,6 +49,7 @@ public:               void SetBkStatus( const BackGroundStatus& _BGS, const BOOL
 //資料
 private:            Bullet m_Data;
 public:       const Bullet GetBullet() const;
+			        Bullet GetBullet();
                       void SetBullet(const Bullet& Pd);
 //文字描述
 private:           CString m_Description;

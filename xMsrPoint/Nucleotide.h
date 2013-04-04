@@ -1,10 +1,11 @@
 #ifndef NUCLEOTIDE_H
 #define NUCLEOTIDE_H
-#include "../Enum.h"
+
+enum PointNum    {Pn1 = 1, Pn4 = 4, Pn5 = 5, Pn9=9, Pn13=13, Pn21=21, Pn25=25, Pn49=49, PnGamma = 256, NoPn = 999};
+enum ColorType   {NoColor = 0, White, Red, Green, Blue, Dark, Nits, CrsTlk, CrsTlkW, CrsTlkD, JNDX, JND};
+enum ParaOfPara  { PA_FEover = 0, PA_FElength, PA_D25RectSide, PA_NitsNum, PA_NitsDir, PA_JndGrayLv, PA_GmaBegin, PA_GmaEnd, PA_GmaAvg, PA_Max};
 #include <vector>
-
-enum ParaOfPara{ PA_FEover = 0, PA_FEnum, PA_D25RectSide, PA_NitsNum, PA_NitsDir, PA_JndGrayLv, PA_GmaBegin, PA_GmaEnd, PA_GmaAvg, PA_Max};
-
+#include "StdAfx.h"
 class Nucleotide
 {
 //建解構子
@@ -14,11 +15,10 @@ public:
 
 //該項目共幾點    
 private:
-    PointNum  m_MsrFlowNum;  
+    PointNum  m_MsrFlowNum;
 public:
     const PointNum GetMsrFlowNum() const;
-              void SetMsrFlowNum(const PointNum&);
-
+              void SetMsrFlowNum(const PointNum& pn);
     const  CString GetStrPointNum() const;
 
 //背景顏色

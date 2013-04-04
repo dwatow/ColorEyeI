@@ -30,18 +30,20 @@ class CXlsOQC2 : public CXlsFile2
 public:
     void InitForm(){  }; //畫出表格的title
 	
-    CXlsFile2* iCellNO(std::vector<Cartridge>::size_type);
+    CXlsFile2* iCellNO(std::vector<Cartridge2>::size_type);
 
-    CXlsFile2* iPanelID(CString    , std::vector<Cartridge>::size_type);
-    CXlsFile2* iProb   (CString    , std::vector<Cartridge>::size_type){ return this; };
-    CXlsFile2* iChannel(CString    , std::vector<Cartridge>::size_type);
-    CXlsFile2* iData   (CDataChain&, std::vector<Cartridge>::size_type);
-	CXlsFile2* iNitsLv (CString    , std::vector<Cartridge>::size_type);
+    CXlsFile2* iPanelID(CString    , std::vector<Cartridge2>::size_type);
+    CXlsFile2* iProb   (CString    , std::vector<Cartridge2>::size_type){ return this; };
+    CXlsFile2* iChannel(CString    , std::vector<Cartridge2>::size_type);
+    CXlsFile2* iData   (RNA&, std::vector<Cartridge2>::size_type);
+//     CXlsFile2* iData   (CDataChain&, std::vector<Cartridge2>::size_type);
+	CXlsFile2* iNitsLv (CString    , std::vector<Cartridge2>::size_type);
 
     CXlsFile2* iPanelID(CString     );
     CXlsFile2* iProb   (CString     ){ return this; };
     CXlsFile2* iChannel(CString     );
-    CXlsFile2* iData   (CDataChain& );
+    CXlsFile2* iData   (RNA& );
+//     CXlsFile2* iData   (CDataChain& );
 	CXlsFile2* iNitsLv (CString     );
 
     CXlsFile2* operator->() { return this; };

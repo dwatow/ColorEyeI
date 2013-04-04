@@ -24,11 +24,11 @@ class CColorEyeIDoc : public CDocument
 	CString m_nitsBkClr;
 
 public:    
-    CString& GetPnlID () { return m_PnlID;  };
-    CString& GetMsrDvc() { return m_MsrDvc; };
-    CString& GetPrb   () { return m_Prb;    };
-    CString& GetCHID  () { return m_CHID;   };
-	CString& GetNitsLv() { return m_nitsBkClr; };
+    CString GetPnlID () { return m_PnlID;  };
+    CString GetMsrDvc() { return m_MsrDvc; };
+    CString GetPrb   () { return m_Prb;    };
+    CString GetCHID  () { return m_CHID;   };
+	CString GetNitsLv() { return m_nitsBkClr; };
 
     void SetPnlID  (const CString& _S) { m_PnlID  =  _S; };
     void SetMsrDvc (const CString& _S) { m_MsrDvc =  _S; };
@@ -39,18 +39,20 @@ public:
 	CFileException m_ErrorFx;
 //OMD File
 private:
-    OmdCarData m_dOmd;
+//    OmdCarData m_dOmd;
+// 	RNA m_dOmd;
 public:
 	void OpenOmdDlg(LPCTSTR);
 	void SaveOmdDlg(LPCTSTR);
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
-    OmdCarData& GetOmdData(){return m_dOmd; };
+    RNA& GetOmdData(){return m_docRNA; };
+//    OmdCarData& GetOmdData(){return m_dOmd; };
 
 //TXT File
 private:
     TxtStrData m_TextData;
-public:
+// public:
 	void OpenTxtDlg(LPCTSTR);
 	void SaveTxtDlg(LPCTSTR);
     void OpenTxtFile(LPCTSTR);
@@ -58,8 +60,8 @@ public:
     TxtStrData& GetTextData(){return m_TextData; };
     //TxtStrData GetTextData(){return m_TextData; }; //¤]¥i¥H
 
-public:
-	void AutoSave(int); //0: Txt, 1: Omd
+// public:
+// 	void AutoSave(int); //0: Txt, 1: Omd
 //MsrDataChain
 //private:
 //	CDataChain m_MsrData;

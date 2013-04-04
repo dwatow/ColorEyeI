@@ -192,6 +192,178 @@ const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
 //             
 //             return m_CarChain2.at(0);
 // }
+Cartridge2& RNA::Find(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
+{
+/*	
+將關鍵字切成  1. x色, 2. x點, 3. 第x點, 4. 離邊參數   三個部份
+然後重建成三個詞（三個函數）
+再進行交集搜尋（試試可以可以使用遞迴）
+*/
+	CString clr(color);
+	CString ptTtl(ptTotal);
+	CString mrIdx(mrIndex);
+	CString fePr(fePara);
+
+	CString sample;
+	std::vector<int> vSub;
+	if (finder.Reconstr(clr, ptTtl, mrIdx, fePr))
+	{
+		sample.Format("%s%s%s%s", clr, ptTtl, mrIdx, fePr);
+		for (std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
+		{	
+			//if (sample == itor->GetDescrip())
+			if ( itor->GetDescrip().Find(sample) >= 0 )
+				vSub.push_back(itor - m_CarChain2.begin());
+		}
+	}
+
+	if (vSub.size() == 1)
+		return m_CarChain2.at(vSub.at(0));
+	else
+		return m_CarChain2.at(0);
+}
+
+Cartridge2& RNA::Find(const CString& sample)
+{
+/*	
+將關鍵字切成  1. x色, 2. x點, 3. 第x點, 4. 離邊參數   三個部份
+然後重建成三個詞（三個函數）
+再進行交集搜尋（試試可以可以使用遞迴）
+*/
+	CString smple(sample);
+	std::vector<int> vSub;
+	if (finder.Reconstr(smple))
+	{
+		for (std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
+		{	
+			//if (sample == itor->GetDescrip())
+			if ( itor->GetDescrip().Find(smple) >= 0 )
+				vSub.push_back(itor - m_CarChain2.begin());
+		}
+	}
+
+	if (vSub.size() == 1)
+		return m_CarChain2.at(vSub.at(0));
+	else
+		return m_CarChain2.at(0);
+}
+
+const int RNA::reconstrColor(CString& strResult)
+{
+	int colorName(0);
+
+	//Crosstalk+矩形
+	colorName = strResult.Find("Cross");
+	if (colorName >= 0)
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 13));
+		return colorName;
+	}
+
+	//Nits
+	colorName = strResult.Find("Nits");
+	if (colorName >= 0)
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 4));
+		return colorName;
+	}
+	
+	//x色
+	colorName = strResult.Find("色") - 2;
+
+	if (colorName >= 0)
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 2));
+		return colorName;
+	}
+
+	return colorName;
+}
+
+const int RNA::reconstrPointNum(CString& strResult)
+{ 
+	int colorName(0);
+
+	//Gamma
+	colorName = strResult.Find("Gamma");
+	if (colorName >= 0)
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 5));
+		return colorName;
+	}	
+
+	//中心點
+	colorName = strResult.Find("中心點");
+	if (colorName >= 0)
+	{
+		strResult.Format("中心點");
+		return colorName;
+	}
+	
+	colorName = strResult.Find("1點");
+	if (colorName >= 0)
+	{
+		strResult.Format("中心點");
+		return colorName;
+	}	
+
+	//數字 點
+	const int shift = 2;
+	colorName = strResult.Find("點") - (3+shift);
+	if (colorName >= 0-(3+shift) && atoi(strResult))
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 3));
+		return colorName;
+	}	
+
+	colorName = strResult.Find("點") - (2+shift);
+	if (colorName >= 0-(2+shift) && atoi(strResult))
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 2));
+		return colorName;
+	}	
+
+	colorName = strResult.Find("點") - (1+shift);
+	if (colorName >= 0-(1+shift) && atoi(strResult))
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 1));
+		return colorName;
+	}
+
+// 	if (colorName >= 0)
+// 		strResult.Format("%s", strResult.Mid(colorName, 2));
+	
+	return colorName;
+}
+const int RNA::reconstrMsrNo(CString& strResult)
+{
+	const int shift = 2;
+	int colorName(0);
+
+	colorName = strResult.Find("第") + shift;
+	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 3)))
+	{
+		strResult.Format("第%s點", strResult.Mid(colorName, 3));
+		return colorName;
+	}
+
+	colorName = strResult.Find("第") + shift;
+	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 2)))
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 2));
+		return colorName;
+	}
+
+	colorName = strResult.Find("第") + shift;
+	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 1)))
+	{
+		strResult.Format("%s", strResult.Mid(colorName, 1));
+		return colorName;
+	}
+
+	return colorName;
+}
+
 
 void RNA::Empty()
 {

@@ -17,30 +17,35 @@ static char THIS_FILE[]=__FILE__;
 //iForm()  input  form
 //////////////////////////////////////////////////////////////////////////
 
-BOOL COmdFile0::Open(CString _S, CFileException& _Fx)
+BOOL COmdFile0::Open(LPCTSTR _S, CFileException& _Fx)
 { 
 	GetOpenSample(_S, _Fx);
 	openWhichKindOmefile();
 	return  m_Omd->Open(_S, _Fx); 
 };
 
-BOOL COmdFile0::Save(CString _S, CFileException& _Fx, OmdCarData _D)
+//BOOL COmdFile0::Save(CString _S, CFileException& _Fx, OmdCarData _D)
+BOOL COmdFile0::Save(LPCTSTR _S, CFileException& _Fx, RNA& _R)
 { 
-	saveWhichKindOmefile(_D);  //問題出在這！如何選用適當的呢？
+	saveWhichKindOmefile(_R);  //如何選用適當的呢？
 
+	CString savePathName;
+	savePathName.Format("%s", _S);
 	if (m_GmOmd != 0)
 	{
-		CString pathGm;
 		CString path;
-		path = _S.Left( _S.ReverseFind('.'));
-		pathGm.Format("%s_gamma.omd", path);
+		path = savePathName.Left( savePathName.ReverseFind('.'));
+
+		CString pathGm;
+		pathGm = path + "_gamma.omd";
+
 		return m_GmOmd->Save(pathGm, _Fx) && m_Omd->Save(_S, _Fx);
 	}
 	else
-		return m_Omd->Save(_S, _Fx); 
+		return m_Omd->Save(_S, _Fx);
 };
 
-void COmdFile0::GetOpenSample(CString _path, CFileException& _fx)
+void COmdFile0::GetOpenSample(LPCTSTR _path, CFileException& _fx)
 {
 	CTxtFile *fpTxt = new CTxtFile();
 
@@ -69,16 +74,18 @@ void COmdFile0::openWhichKindOmefile()
 	}
 }
 
-void COmdFile0::saveWhichKindOmefile(OmdCarData _D)
+//void COmdFile0::saveWhichKindOmefile(OmdCarData _D)
+void COmdFile0::saveWhichKindOmefile(RNA& _R)
 {
 //	KindOfOmd omdKind = OMD_AtYPE;
-
+	CString str;
 	for (int i = 0; i < 256; ++i)
 	{
-		if ((_D.At(White, PnGamma, i).GetMsrFlowNo() != 99) ||  //有量測 = .GetMsrFlowNo() != 99
-			(_D.At(Red  , PnGamma, i).GetMsrFlowNo() != 99) ||
-			(_D.At(Green, PnGamma, i).GetMsrFlowNo() != 99) ||
-			(_D.At(Blue , PnGamma, i).GetMsrFlowNo() != 99))
+		str.Format("%d", i);
+		if ((_R.Find("白","gamma",str,"0 255 255").GetSqncArea() != AA_00) ||  //有量測 = .GetMsrFlowNo() != 99
+			(_R.Find("紅","gamma",str,"0 255 255").GetSqncArea() != AA_00) ||
+			(_R.Find("綠","gamma",str,"0 255 255").GetSqncArea() != AA_00) ||
+			(_R.Find("藍","gamma",str,"0 255 255").GetSqncArea() != AA_00))
 		{
 			//omdKind = OMD_GAMMA;
 			m_GmOmd = new COmdFileGm();

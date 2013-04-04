@@ -274,14 +274,14 @@ void CXlsSEC1::InitForm()
 
 }
 
-CXlsFile2* CXlsSEC1::iData (CDataChain& vCar   , std::vector<Cartridge>::size_type box_count)
+CXlsFile2* CXlsSEC1::iData (RNA& vCar   , std::vector<Cartridge2>::size_type box_count)
 {
 	box_count = 1;
     iCellNO(box_count)->iData(vCar);
     return this;
 }
 
-CXlsFile2* CXlsSEC1::iPanelID   (CString strProb    , std::vector<Cartridge>::size_type box_count)
+CXlsFile2* CXlsSEC1::iPanelID   (CString strProb    , std::vector<Cartridge2>::size_type box_count)
 {    
 	iCellNO(box_count)->iPanelID(strProb);
 	return this;
@@ -294,7 +294,7 @@ CXlsFile2* CXlsSEC1::iPanelID(CString strPanelID)
 	return this;
 }
 
-CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
+CXlsFile2* CXlsSEC1::iData(RNA& vCar)
 {
 
 //Step 4.秨﹍砞﹚ず甧
@@ -304,223 +304,223 @@ CXlsFile2* CXlsSEC1::iData(CDataChain& vCar)
     m_vCar = vCar;
 
 	//ぃ舼
-	if (nMsred(Red  , Pn1 )) idR1();
-	if (nMsred(Green, Pn1 )) idG1();
-    if (nMsred(Blue , Pn1 )) idB1();
-	if (nMsred(Nits , Pn9 )) idNits();
-
-	//舼
-    if (nMsred(White, Pn49)) idW49();
-	if (nMsred(White, Pn9))  idW9();
-	if (nMsred(White, Pn1 )) idW1();
-
-    if (nMsred(Dark , Pn9))  idD9();
-	if (nMsred(Dark , Pn1))  idD1();
-
-    if ((nMsred(CrsTlk , Pn4)) ||
-		(nMsred(CrsTlkW, Pn4)) ||
-		(nMsred(CrsTlkD, Pn4)) )  idCrosTalk();
+// 	if (nMsred(Red  , Pn1 )) idR1();
+// 	if (nMsred(Green, Pn1 )) idG1();
+//     if (nMsred(Blue , Pn1 )) idB1();
+// 	if (nMsred(Nits , Pn9 )) idNits();
+// 
+// 	//舼
+//     if (nMsred(White, Pn49)) idW49();
+// 	if (nMsred(White, Pn9))  idW9();
+// 	if (nMsred(White, Pn1 )) idW1();
+// 
+//     if (nMsred(Dark , Pn9))  idD9();
+// 	if (nMsred(Dark , Pn1))  idD1();
+// 
+//     if ((nMsred(CrsTlk , Pn4)) ||
+// 		(nMsred(CrsTlkW, Pn4)) ||
+// 		(nMsred(CrsTlkD, Pn4)) )  idCrosTalk();
 
 	SetVisible(true);
 
     return this;
 }
 
-// std::vector<Cartridge> CXlsSEC1::oData()
+// std::vector<Cartridge2> CXlsSEC1::oData()
 // {
-//     std::vector<Cartridge> a;
+//     std::vector<Cartridge2> a;
 //     //...
 //     return a;
 // }
 
-void CXlsSEC1::idW1()
-{
-	SelectSheet(1);
-    SelectCell("D10")->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
-    SelectCell("E10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
-    SelectCell("F10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
-
-	//单W49
-	SelectSheet(1)->SelectCell("F17")->SetCell("=D10");
-
-	//单W9
-	SelectCell("C34")->SetCell("=D10");
-	SelectCell("D34")->SetCell("=E10");
-	SelectCell("E34")->SetCell("=F10");
-	SelectCell("F34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetT()  );
-	SelectCell("G34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetDuv());
-}
-
-void CXlsSEC1::idR1()
-{
-	SelectSheet(1);
-    SelectCell("D11")->SetCell("%3.2f", m_vCar.At(Red  , Pn1, 0).GetLv());
-    SelectCell("E11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSx());
-    SelectCell("F11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSy());
-}
-
-void CXlsSEC1::idG1()
-{
-	SelectSheet(1);
-    SelectCell("D12")->SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
-    SelectCell("E12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
-    SelectCell("F12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
-}
-
-void CXlsSEC1::idB1()
-{
-	SelectSheet(1);
-    SelectCell("D13")->SetCell("%3.2f", m_vCar.At(Blue , Pn1, 0).GetLv());
-    SelectCell("E13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSx());
-    SelectCell("F13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSy());
-}
-
-void CXlsSEC1::idW49()
-{
-	SelectSheet(1);
-	int i, j;
-    for(i=0;i<7;i++){//绢
-	for(j=0;j<7;j++){//
-		SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
-    }}
-
-	//单W9
-	//Lv
-	SelectCell("C30")->SetCell("=D15");
-	SelectCell("C31")->SetCell("=F15");
-	SelectCell("C32")->SetCell("=H15");
-	SelectCell("C33")->SetCell("=D17");
-	SelectCell("C34")->SetCell("=F17");
-	SelectCell("C35")->SetCell("=H17");
-	SelectCell("C36")->SetCell("=D19");
-	SelectCell("C37")->SetCell("=F19");
-	SelectCell("C38")->SetCell("=H19");
-
-	//Sx
-	SelectCell("D30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSx());
-	SelectCell("D31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSx());
-	SelectCell("D32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSx());
-	SelectCell("D33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSx());
-	SelectCell("D34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSx());
-	SelectCell("D35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSx());
-	SelectCell("D36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSx());
-	SelectCell("D37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSx());
-	SelectCell("D38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSx());
-
-	//Sy
-	SelectCell("E30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSy());
-	SelectCell("E31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSy());
-	SelectCell("E32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSy());
-	SelectCell("E33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSy());
-	SelectCell("E34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSy());
-	SelectCell("E35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSy());
-	SelectCell("E36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSy());
-	SelectCell("E37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSy());
-	SelectCell("E38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSy());
-
-	//T
-	SelectCell("F30")->SetCell("%3d", m_vCar.At(White, Pn49,  8).GetT());
-	SelectCell("F31")->SetCell("%3d", m_vCar.At(White, Pn49, 10).GetT());
-	SelectCell("F32")->SetCell("%3d", m_vCar.At(White, Pn49, 12).GetT());
-	SelectCell("F33")->SetCell("%3d", m_vCar.At(White, Pn49, 22).GetT());
-	SelectCell("F34")->SetCell("%3d", m_vCar.At(White, Pn49, 24).GetT());
-	SelectCell("F35")->SetCell("%3d", m_vCar.At(White, Pn49, 26).GetT());
-	SelectCell("F36")->SetCell("%3d", m_vCar.At(White, Pn49, 36).GetT());
-	SelectCell("F37")->SetCell("%3d", m_vCar.At(White, Pn49, 38).GetT());
-	SelectCell("F38")->SetCell("%3d", m_vCar.At(White, Pn49, 40).GetT());
-	
-	//Duv
-	SelectCell("G30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetDuv());
-	SelectCell("G31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetDuv());
-	SelectCell("G32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetDuv());
-	SelectCell("G33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetDuv());
-	SelectCell("G34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetDuv());
-	SelectCell("G35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetDuv());
-	SelectCell("G36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetDuv());
-	SelectCell("G37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetDuv());
-	SelectCell("G38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetDuv());
-	
-	//单W1
-	SelectCell("D10")->SetCell("=C34");
-	SelectCell("F10")->SetCell("=D34");
-	SelectCell("H10")->SetCell("=E34");
-
-}
-
-void CXlsSEC1::idW9()
-{
-	SelectSheet(1);
-	int i, j;
-	for(i=0;i<5;i++){
-	for(j=0;j<9;j++){
-			 if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
-		else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
-		else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
-		else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
-		else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
-    }}
-
-	//单W1
-	SelectCell("D10")->SetCell("=C34");
-	SelectCell("F10")->SetCell("=D34");
-	SelectCell("H10")->SetCell("=E34");
-
-	//单W49
-	SelectCell("D15")->SetCell("=C30");
-	SelectCell("F15")->SetCell("=C31");
-	SelectCell("H15")->SetCell("=C32");
-	SelectCell("D17")->SetCell("=C33");
-	SelectCell("F17")->SetCell("=C34");
-	SelectCell("H17")->SetCell("=C35");
-	SelectCell("D19")->SetCell("=C36");
-	SelectCell("F19")->SetCell("=C37");
-	SelectCell("H19")->SetCell("=C38");
-
-}
-void CXlsSEC1::idD9()
-{
-	SelectSheet(1);
-	int i, j;
-    for(i=0;i<3;i++){
-	for(j=0;j<3;j++){
-        SelectCell((char)('C'+j), 26+i)->SetCell("%3.2f", m_vCar.At(Dark , Pn9, i*3+j).GetLv());
-    }}
-}
-
-void CXlsSEC1::idNits()
-{
-	SelectSheet(1);
-	int i, j;
-    for(i=0;i<3;i++){
-	for(j=0;j<3;j++){
-        SelectCell((char)('C'+j), 23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
-    }}
-}
-
-void CXlsSEC1::idCrosTalk()
-{
-	SelectSheet(2);
-	
-	//η︹よ遏
-	SelectCell("C2")->SetCell(m_vCar.At(CrsTlk, Pn4, 0).GetLv());
-	SelectCell("B3")->SetCell(m_vCar.At(CrsTlk, Pn4, 1).GetLv());
-	SelectCell("D3")->SetCell(m_vCar.At(CrsTlk, Pn4, 2).GetLv());
-	SelectCell("C4")->SetCell(m_vCar.At(CrsTlk, Pn4, 3).GetLv());
-	
-	SelectCell("C6")->SetCell(m_vCar.At(CrsTlkW, Pn4, 0).GetLv());
-	SelectCell("B7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 1).GetLv());
-	SelectCell("D7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 2).GetLv());
-	SelectCell("C8")->SetCell(m_vCar.At(CrsTlkW, Pn4, 3).GetLv());
-	
-	SelectCell("C10")->SetCell(m_vCar.At(CrsTlkD, Pn4, 0).GetLv());
-	SelectCell("B11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
-	SelectCell("D11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
-	SelectCell("C12")->SetCell(m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
-}
-
-void CXlsSEC1::idD1()
-{
-	SelectSheet(1);
-	SelectCell("D27")->SetCell("%3.2f", m_vCar.At(Dark, Pn1, 0).GetLv());
-}
-
+// void CXlsSEC1::idW1()
+// {
+// 	SelectSheet(1);
+//     SelectCell("D10")->SetCell("%3.2f", m_vCar.At(White, Pn1, 0).GetLv());
+//     SelectCell("E10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSx());
+//     SelectCell("F10")->SetCell("%1.4f", m_vCar.At(White, Pn1, 0).GetSy());
+// 
+// 	//单W49
+// 	SelectSheet(1)->SelectCell("F17")->SetCell("=D10");
+// 
+// 	//单W9
+// 	SelectCell("C34")->SetCell("=D10");
+// 	SelectCell("D34")->SetCell("=E10");
+// 	SelectCell("E34")->SetCell("=F10");
+// 	SelectCell("F34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetT()  );
+// 	SelectCell("G34")->SetCell("%1.4f"   , m_vCar.At(White, Pn1, 0).GetDuv());
+// }
+// 
+// void CXlsSEC1::idR1()
+// {
+// 	SelectSheet(1);
+//     SelectCell("D11")->SetCell("%3.2f", m_vCar.At(Red  , Pn1, 0).GetLv());
+//     SelectCell("E11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSx());
+//     SelectCell("F11")->SetCell("%1.4f", m_vCar.At(Red  , Pn1, 0).GetSy());
+// }
+// 
+// void CXlsSEC1::idG1()
+// {
+// 	SelectSheet(1);
+//     SelectCell("D12")->SetCell("%3.2f", m_vCar.At(Green, Pn1, 0).GetLv());
+//     SelectCell("E12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSx());
+//     SelectCell("F12")->SetCell("%1.4f", m_vCar.At(Green, Pn1, 0).GetSy());
+// }
+// 
+// void CXlsSEC1::idB1()
+// {
+// 	SelectSheet(1);
+//     SelectCell("D13")->SetCell("%3.2f", m_vCar.At(Blue , Pn1, 0).GetLv());
+//     SelectCell("E13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSx());
+//     SelectCell("F13")->SetCell("%1.4f", m_vCar.At(Blue , Pn1, 0).GetSy());
+// }
+// 
+// void CXlsSEC1::idW49()
+// {
+// 	SelectSheet(1);
+// 	int i, j;
+//     for(i=0;i<7;i++){//绢
+// 	for(j=0;j<7;j++){//
+// 		SelectCell((char)('C'+i), 14+j)->SetCell("%3.2f", m_vCar.At(White, Pn49, i+j*7).GetLv());
+//     }}
+// 
+// 	//单W9
+// 	//Lv
+// 	SelectCell("C30")->SetCell("=D15");
+// 	SelectCell("C31")->SetCell("=F15");
+// 	SelectCell("C32")->SetCell("=H15");
+// 	SelectCell("C33")->SetCell("=D17");
+// 	SelectCell("C34")->SetCell("=F17");
+// 	SelectCell("C35")->SetCell("=H17");
+// 	SelectCell("C36")->SetCell("=D19");
+// 	SelectCell("C37")->SetCell("=F19");
+// 	SelectCell("C38")->SetCell("=H19");
+// 
+// 	//Sx
+// 	SelectCell("D30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSx());
+// 	SelectCell("D31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSx());
+// 	SelectCell("D32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSx());
+// 	SelectCell("D33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSx());
+// 	SelectCell("D34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSx());
+// 	SelectCell("D35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSx());
+// 	SelectCell("D36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSx());
+// 	SelectCell("D37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSx());
+// 	SelectCell("D38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSx());
+// 
+// 	//Sy
+// 	SelectCell("E30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetSy());
+// 	SelectCell("E31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetSy());
+// 	SelectCell("E32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetSy());
+// 	SelectCell("E33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetSy());
+// 	SelectCell("E34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetSy());
+// 	SelectCell("E35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetSy());
+// 	SelectCell("E36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetSy());
+// 	SelectCell("E37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetSy());
+// 	SelectCell("E38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetSy());
+// 
+// 	//T
+// 	SelectCell("F30")->SetCell("%3d", m_vCar.At(White, Pn49,  8).GetT());
+// 	SelectCell("F31")->SetCell("%3d", m_vCar.At(White, Pn49, 10).GetT());
+// 	SelectCell("F32")->SetCell("%3d", m_vCar.At(White, Pn49, 12).GetT());
+// 	SelectCell("F33")->SetCell("%3d", m_vCar.At(White, Pn49, 22).GetT());
+// 	SelectCell("F34")->SetCell("%3d", m_vCar.At(White, Pn49, 24).GetT());
+// 	SelectCell("F35")->SetCell("%3d", m_vCar.At(White, Pn49, 26).GetT());
+// 	SelectCell("F36")->SetCell("%3d", m_vCar.At(White, Pn49, 36).GetT());
+// 	SelectCell("F37")->SetCell("%3d", m_vCar.At(White, Pn49, 38).GetT());
+// 	SelectCell("F38")->SetCell("%3d", m_vCar.At(White, Pn49, 40).GetT());
+// 	
+// 	//Duv
+// 	SelectCell("G30")->SetCell("%1.4f", m_vCar.At(White, Pn49,  8).GetDuv());
+// 	SelectCell("G31")->SetCell("%1.4f", m_vCar.At(White, Pn49, 10).GetDuv());
+// 	SelectCell("G32")->SetCell("%1.4f", m_vCar.At(White, Pn49, 12).GetDuv());
+// 	SelectCell("G33")->SetCell("%1.4f", m_vCar.At(White, Pn49, 22).GetDuv());
+// 	SelectCell("G34")->SetCell("%1.4f", m_vCar.At(White, Pn49, 24).GetDuv());
+// 	SelectCell("G35")->SetCell("%1.4f", m_vCar.At(White, Pn49, 26).GetDuv());
+// 	SelectCell("G36")->SetCell("%1.4f", m_vCar.At(White, Pn49, 36).GetDuv());
+// 	SelectCell("G37")->SetCell("%1.4f", m_vCar.At(White, Pn49, 38).GetDuv());
+// 	SelectCell("G38")->SetCell("%1.4f", m_vCar.At(White, Pn49, 40).GetDuv());
+// 	
+// 	//单W1
+// 	SelectCell("D10")->SetCell("=C34");
+// 	SelectCell("F10")->SetCell("=D34");
+// 	SelectCell("H10")->SetCell("=E34");
+// 
+// }
+// 
+// void CXlsSEC1::idW9()
+// {
+// 	SelectSheet(1);
+// 	int i, j;
+// 	for(i=0;i<5;i++){
+// 	for(j=0;j<9;j++){
+// 			 if(i == 0)     SelectCell((char)('C'+i), 30+j)->SetCell("%3.2f", m_vCar.At(White, Pn9, j).GetLv()); //[W][1-9][L]
+// 		else if(i == 1)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSx()); //[W][1-9][T]
+// 		else if(i == 2)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetSy()); //[W][1-9][T]
+// 		else if(i == 3)     SelectCell((char)('C'+i), 30+j)->SetCell("%4.0f", m_vCar.At(White, Pn9, j).GetT()); //[W][1-9][T]
+// 		else if(i == 4)     SelectCell((char)('C'+i), 30+j)->SetCell("%1.4f", m_vCar.At(White, Pn9, j).GetDuv()); //[W][1-9][T]
+//     }}
+// 
+// 	//单W1
+// 	SelectCell("D10")->SetCell("=C34");
+// 	SelectCell("F10")->SetCell("=D34");
+// 	SelectCell("H10")->SetCell("=E34");
+// 
+// 	//单W49
+// 	SelectCell("D15")->SetCell("=C30");
+// 	SelectCell("F15")->SetCell("=C31");
+// 	SelectCell("H15")->SetCell("=C32");
+// 	SelectCell("D17")->SetCell("=C33");
+// 	SelectCell("F17")->SetCell("=C34");
+// 	SelectCell("H17")->SetCell("=C35");
+// 	SelectCell("D19")->SetCell("=C36");
+// 	SelectCell("F19")->SetCell("=C37");
+// 	SelectCell("H19")->SetCell("=C38");
+// 
+// }
+// void CXlsSEC1::idD9()
+// {
+// 	SelectSheet(1);
+// 	int i, j;
+//     for(i=0;i<3;i++){
+// 	for(j=0;j<3;j++){
+//         SelectCell((char)('C'+j), 26+i)->SetCell("%3.2f", m_vCar.At(Dark , Pn9, i*3+j).GetLv());
+//     }}
+// }
+// 
+// void CXlsSEC1::idNits()
+// {
+// 	SelectSheet(1);
+// 	int i, j;
+//     for(i=0;i<3;i++){
+// 	for(j=0;j<3;j++){
+//         SelectCell((char)('C'+j), 23+i)->SetCell("%3.2f", m_vCar.At(Nits, Pn9, i*3+j).GetLv());
+//     }}
+// }
+// 
+// void CXlsSEC1::idCrosTalk()
+// {
+// 	SelectSheet(2);
+// 	
+// 	//η︹よ遏
+// 	SelectCell("C2")->SetCell(m_vCar.At(CrsTlk, Pn4, 0).GetLv());
+// 	SelectCell("B3")->SetCell(m_vCar.At(CrsTlk, Pn4, 1).GetLv());
+// 	SelectCell("D3")->SetCell(m_vCar.At(CrsTlk, Pn4, 2).GetLv());
+// 	SelectCell("C4")->SetCell(m_vCar.At(CrsTlk, Pn4, 3).GetLv());
+// 	
+// 	SelectCell("C6")->SetCell(m_vCar.At(CrsTlkW, Pn4, 0).GetLv());
+// 	SelectCell("B7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 1).GetLv());
+// 	SelectCell("D7")->SetCell(m_vCar.At(CrsTlkW, Pn4, 2).GetLv());
+// 	SelectCell("C8")->SetCell(m_vCar.At(CrsTlkW, Pn4, 3).GetLv());
+// 	
+// 	SelectCell("C10")->SetCell(m_vCar.At(CrsTlkD, Pn4, 0).GetLv());
+// 	SelectCell("B11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 1).GetLv());
+// 	SelectCell("D11")->SetCell(m_vCar.At(CrsTlkD, Pn4, 2).GetLv());
+// 	SelectCell("C12")->SetCell(m_vCar.At(CrsTlkD, Pn4, 3).GetLv());
+// }
+// 
+// void CXlsSEC1::idD1()
+// {
+// 	SelectSheet(1);
+// 	SelectCell("D27")->SetCell("%3.2f", m_vCar.At(Dark, Pn1, 0).GetLv());
+// }
+// 

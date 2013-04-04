@@ -5,7 +5,7 @@
 #include "SelXls.h"
 #include "SelXlsDlg.h"
 #include "DlgProxy.h"
-#include "SelExcelDlg.h"
+// #include "SelExcelDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -227,6 +227,6 @@ void CSelXlsDlg::OnButton1()
 {
 	// TODO: Add your control notification handler code here
 	
-	CSelExcelDlg dlgSelExcel;
-	dlgSelExcel.DoModal();
+// 	CSelExcelDlg dlgSelExcel;
+// 	dlgSelExcel.DoModal();
 }

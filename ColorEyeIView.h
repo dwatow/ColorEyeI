@@ -10,16 +10,16 @@
 #endif // _MSC_VER > 1000
 #include "Table.h"
 
-class ViewTable
-{
-    isMsrItem  m_MsrItem;
-    isMsrValue m_MsrValue;
-public:
-    const isMsrItem  GetMsrItem()  const               { return m_MsrItem;  }
-    const isMsrValue GetMsrValue() const               { return m_MsrValue; }
-                void SetMsrItem (const isMsrItem&  MI) { m_MsrItem  = MI;   }
-                void SetMsrValue(const isMsrValue& MV) { m_MsrValue = MV;   }
-};
+// class ViewTable
+// {
+//     isMsrItem  m_MsrItem;
+//     isMsrValue m_MsrValue;
+// public:
+//     const isMsrItem  GetMsrItem()  const               { return m_MsrItem;  }
+//     const isMsrValue GetMsrValue() const               { return m_MsrValue; }
+//                 void SetMsrItem (const isMsrItem&  MI) { m_MsrItem  = MI;   }
+//                 void SetMsrValue(const isMsrValue& MV) { m_MsrValue = MV;   }
+// };
 
 
 class CColorEyeIView : public CScrollView
@@ -71,7 +71,7 @@ private:
 //debug function
 #ifdef _DEBUG
 private:
-    void ViewTableBkColor(isMsrItem);
+//     void ViewTableBkColor(isMsrItem);
     CString strTemp;
     CString temp;
 
