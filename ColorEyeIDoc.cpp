@@ -152,7 +152,7 @@ void CColorEyeIDoc::OnFileOpen()
 {
     // TODO: Add your command handler code here
 //   OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-     OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 	SetModifiedFlag(FALSE);
 	UpdateAllViews(NULL);
 }

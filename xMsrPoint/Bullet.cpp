@@ -30,7 +30,7 @@ void Bullet::i(const ValueKind& _VK, const float& _F)
 
 void Bullet::i(const ValueKind& _VK, const CString& _S)
 {
-    ASSERT( str2flt(_S)>=0 && str2flt(_S)<=0.8 ); 
+//     ASSERT( str2flt(_S)>=0 && str2flt(_S)<=0.8 ); 
     m_vfValues[_VK] = str2flt(_S);
     m_LastModifyTime = CTime::GetCurrentTime(); 
 }

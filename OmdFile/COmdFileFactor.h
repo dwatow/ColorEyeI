@@ -65,7 +65,7 @@ public:
 
 	void Close(){ m_fTxt.Close(); };
 
-	RNA  oOmdData(){ TxtToOmd(); return m_dOmd; };
+	RNA  oOmdData()         { TxtToOmd(); return m_dOmd; };
 	void oOmdData(RNA& data){ TxtToOmd(); data = m_dOmd; };
 	void iOmdData(const RNA& data){ m_dOmd = data; OmdToTxt(); };
 // 	OmdCarData oOmdData(){ TxtToOmd(); return m_dOmd; };

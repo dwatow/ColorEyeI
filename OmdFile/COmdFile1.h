@@ -10,9 +10,12 @@
 #endif // _MSC_VER > 1000
 
 #include "COmdFileFactor.h"
+#include "../xMsrPoint/DNA.h"
+#include "../debugFile.h"
 
 class COmdFile1 : public COmdFileFactor
 {
+	debugFile m_debugLog;
 	BOOL m_isOld;
 public:
     COmdFile1(const BOOL& old = FALSE);
@@ -30,8 +33,13 @@ private:
 	void o2tW9nD1();
 	void o2tWRGB1nNits();
 
-	void t2oInfo();
+private:
+	void t2oInit();
+	void DNA_sortable(DNA& );
+	void DNA_Unsortable(DNA& );
 
+private:
+	void t2oInfo();
 	void t2oW5();
 	void t2oWRGBD();
 	void t2oW9();

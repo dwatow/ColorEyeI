@@ -211,7 +211,7 @@ DebugCode(
 
 void CPatternDlg::initLCMSize() const
 {
-    if (!atoi(m_pCA210->GetLcmSize()))
+    if (atoi(m_pCA210->GetLcmSize()) == 0)
     {
         CEnterValueDlg dlgEnterValue("µLªk§P§OLCM Size", "LCM Size");
 

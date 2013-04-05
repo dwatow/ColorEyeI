@@ -48,8 +48,8 @@ public:               void SetBkStatus( const BackGroundStatus& _BGS, const BOOL
 		     const CString GetStrBkStatus() const;
 //¸ê®Æ
 private:            Bullet m_Data;
-public:       const Bullet GetBullet() const;
-			        Bullet GetBullet();
+public:      const Bullet& GetBullet() const;
+			       Bullet& GetBullet();
                       void SetBullet(const Bullet& Pd);
 //¤å¦r´y­z
 private:           CString m_Description;

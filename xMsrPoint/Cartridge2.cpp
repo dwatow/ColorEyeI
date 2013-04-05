@@ -91,12 +91,12 @@ void Cartridge2::SetBullet(const Bullet& Pd)
     m_Data = Pd;
 }
 
-const Bullet Cartridge2::GetBullet() const
+const Bullet& Cartridge2::GetBullet() const
 {
     return m_Data;    
 }
 
-Bullet Cartridge2::GetBullet()
+Bullet& Cartridge2::GetBullet()
 {
     return m_Data;    
 }

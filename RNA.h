@@ -36,13 +36,15 @@ public:
     void CutEqualCell(const RNA& );
 //    void CutEqualCell(std::vector<Cartridge2> );
 //    void Grow(ColorType ct, PointNum pn);
-//    void freeEmptyCell();
+   void freeEmptyCell();
 //    void SetBolt(Bolt *_P){ p_Pusher = _P; };
 //    Bolt* GetBolt(){ return p_Pusher; };
     //像vector的函數，卻不是直接回傳
 public:
 //     Cartridge2& At (ColorType, PointNum, UINT );
 //     const Cartridge2& At (ColorType, PointNum, UINT )const ;
+	float   fFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
+	CString sFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
     Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);
 	Cartridge2& Find(const CString&);
 private:

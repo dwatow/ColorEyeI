@@ -102,10 +102,6 @@ SOURCE=.\BkNits.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Bolt.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\xMsrPoint\Bullet.cpp
 # End Source File
 # Begin Source File
@@ -123,10 +119,6 @@ SOURCE=.\CA210real.cpp
 # Begin Source File
 
 SOURCE=.\Ca210sim.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\xMsrPoint\Cartridge.cpp
 # End Source File
 # Begin Source File
 
@@ -190,10 +182,6 @@ SOURCE=.\OmdFile\COmdFileGm.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\DataChain.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\xMsrPoint\DNA.cpp
 # End Source File
 # Begin Source File
@@ -244,10 +232,6 @@ SOURCE=.\MsrItems\StaticText.cpp
 
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
-# End Source File
-# Begin Source File
-
-SOURCE=.\Table.cpp
 # End Source File
 # Begin Source File
 
@@ -307,10 +291,6 @@ SOURCE=.\BkNits.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Bolt.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\xMsrPoint\Bullet.h
 # End Source File
 # Begin Source File
@@ -328,10 +308,6 @@ SOURCE=.\CA210real.h
 # Begin Source File
 
 SOURCE=.\Ca210sim.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\xMsrPoint\Cartridge.h
 # End Source File
 # Begin Source File
 
@@ -387,7 +363,7 @@ SOURCE=.\OmdFile\COmdFileGm.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\DataChain.h
+SOURCE=.\debugFile.h
 # End Source File
 # Begin Source File
 
@@ -396,10 +372,6 @@ SOURCE=.\xMsrPoint\DNA.H
 # Begin Source File
 
 SOURCE=.\EnterValueDlg.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Enum.h
 # End Source File
 # Begin Source File
 
@@ -448,10 +420,6 @@ SOURCE=.\MsrItems\StaticText.h
 # Begin Source File
 
 SOURCE=.\StdAfx.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Table.h
 # End Source File
 # Begin Source File
 

@@ -192,6 +192,17 @@ const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
 //             
 //             return m_CarChain2.at(0);
 // }
+float RNA::fFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V)
+{
+	return Find(_C, _P, _M, _F).GetBullet().oFlt(_V);
+}
+
+
+CString RNA::sFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V)
+{
+	return Find(_C, _P, _M, _F).GetBullet().oStr(_V);
+}
+
 Cartridge2& RNA::Find(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
 {
 /*	
@@ -213,7 +224,10 @@ Cartridge2& RNA::Find(const CString& color, const CString& ptTotal, const CStrin
 		{	
 			//if (sample == itor->GetDescrip())
 			if ( itor->GetDescrip().Find(sample) >= 0 )
+			{
+				CString debugCharPtr = itor->GetDescrip();
 				vSub.push_back(itor - m_CarChain2.begin());
+			}
 		}
 	}
 
@@ -474,17 +488,19 @@ void RNA::CutEqualCell(const RNA& compData)
 
 }
 
-// void RNA::freeEmptyCell()
-// {
-//     //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
-//     //void COmdFile1::iForm()
-//     std::vector<Cartridge2> x;
-//     for (std::vector<Cartridge2>::iterator itor = Begin(); itor != End(); ++itor)
-//         if (itor->GetBullet().isEmpty())
-//             x.push_back(*itor);           //要剪掉的
-// 
-//     CutEqualCell(x);
-// }
+void RNA::freeEmptyCell()
+{
+    //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
+    //void COmdFile1::iForm()
+    //std::vector<Cartridge2> x;
+	RNA x;
+    for (std::vector<Cartridge2>::iterator itor = Begin(); itor != End(); ++itor)
+        if (itor->GetBullet().isEmpty())
+			x.AddCell(*itor);
+            //x.push_back(*itor);           //要剪掉的
+
+    CutEqualCell(x);
+}
 
 //////////////////////////////////////////////////////////////////////////
 

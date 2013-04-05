@@ -24,7 +24,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-
 /////////////////////////////////////////////////////////////////////////////
 // CMsrItemDlg dialog
 
@@ -221,16 +220,10 @@ void CMsrItemDlg::listBoxUpdate()
         for (std::vector<Cartridge2>::iterator itor = m_RNA.Begin(); itor != m_RNA.End(); ++itor)
         {
             m_lstMsrItems.AddString(itor->GetDescrip());
-            DebugCode(m_dTxt.push_back(itor->GetDescrip() + "\n");)
+            m_debugLog.Add(itor->GetDescrip() + "\n");
         }
 
-DebugCode(
-        CTxtFile fTxt;
-        CFileException fx;
-        fTxt.Save(m_desktopPath+"//DNA.log", fx);
-        fTxt.iTxtData(m_dTxt);
-        fTxt.Close();
-    )
+	m_debugLog.Out2File(m_desktopPath+"//DNA.log");
 }
 
 void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
@@ -296,11 +289,9 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
     if (m_chkCBP49.GetState())    sortableDNA.AddCell(Blue , Pn49);
     if (m_chkCDP49.GetState())    sortableDNA.AddCell(Dark , Pn49);
     
-//     DebugCode(
-//     m_dTxt.clear();
-//     for (std::vector<Nucleotide>::iterator Nit = sortableDNA.Begin(); Nit != sortableDNA.End(); ++Nit)
-//         m_dTxt.push_back(Nit->showMe());
-//     )
+    m_debugLog.Clear();
+    for (std::vector<Nucleotide>::iterator Nit = sortableDNA.Begin(); Nit != sortableDNA.End(); ++Nit)
+        m_debugLog.Add(Nit->showMe());
 }
 
 void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
@@ -320,11 +311,9 @@ void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
     if (m_chkCBGM.GetState())    unsortableDNA.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
     
 
-//     DebugCode(
-//     m_dTxt.clear();
-//     for (std::vector<Nucleotide>::iterator Nit = unsortableDNA.Begin(); Nit != unsortableDNA.End(); ++Nit)
-//         m_dTxt.push_back(Nit->showMe());
-//     )
+    m_debugLog.Clear();
+    for (std::vector<Nucleotide>::iterator Nit = unsortableDNA.Begin(); Nit != unsortableDNA.End(); ++Nit)
+        m_debugLog.Add(Nit->showMe());
 }
 
 void CMsrItemDlg::OnButtonAdd()
@@ -364,7 +353,7 @@ void CMsrItemDlg::OnButtonDel()
     
     //±Nbuffer§Ë¦¨RNA
     RNA temp;
-    DebugCode(m_dTxt.clear();)
+    m_debugLog.Clear();
     for (int it = 0; it < m_lstMsrItems.GetSelCount(); ++it)
         temp.AddCell(m_RNA.At(buffer[it]+1));
 

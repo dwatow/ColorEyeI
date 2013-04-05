@@ -88,7 +88,7 @@ const CString COmdFileFactor::GetCell(const int& Word, const int& Line)
 const CString COmdFileFactor::GetCell(const TCHAR& c, const int& n)
 {
     int x;
-    x = c - 'A' + 1;
+    x = c - 'A'+1;
     return GetCell(x, n);
 }
 
@@ -103,7 +103,7 @@ const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n)
     c2 = *(str.Right(1).GetBuffer(str.Left(1).GetLength()));
 	
     int x;
-    x = (c1 - 'A' + 1) + (c2 - 'A' + 1) + 25;//+25是因為這個部份是從AA開始算，所以要跳過A~Z
+    x = (c1 - 'A'+1) + (c2 - 'A'+1) + 'Z'+1;//+25是因為這個部份是從AA開始算，所以要跳過A~Z
     	
     return GetCell(x, n);
 }

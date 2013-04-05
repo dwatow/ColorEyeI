@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include "StaticText.h"
+#include "../debugFile.h"
 
 #include "../xMsrPoint/Nucleotide.h"
 #include "../xMsrPoint/DNA.h"
@@ -17,10 +18,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CMsrItemDlg dialog
 
+
 class CMsrItemDlg : public CDialog
 {
 #ifdef _DEBUG
-	std::vector<CString> m_dTxt;
+	debugFile m_debugLog;
 	CString m_desktopPath;
 #endif // _DEBUG
 

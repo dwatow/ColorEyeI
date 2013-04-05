@@ -6,11 +6,64 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD70C.tmp" with contents
+[
+shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
+.\Debug\BkMaker.obj
+.\Debug\BkNits.obj
+.\Debug\Bullet.obj
+.\Debug\ca200srvr.obj
+.\Debug\CA210.obj
+.\Debug\CA210real.obj
+.\Debug\Ca210sim.obj
+.\Debug\Cartridge2.obj
+.\Debug\CartridgeFinder.obj
+.\Debug\CaSetupDlg.obj
+.\Debug\CColorRef.obj
+.\Debug\Circle.obj
+.\Debug\CircleArc.obj
+.\Debug\ColorEyeI.obj
+.\Debug\ColorEyeIDoc.obj
+.\Debug\ColorEyeIView.obj
+.\Debug\COmdFile0.obj
+.\Debug\COmdFile1.obj
+.\Debug\COmdFileFactor.obj
+.\Debug\COmdFileGm.obj
+.\Debug\DNA.obj
+.\Debug\EnterValueDlg.obj
+.\Debug\excel.obj
+.\Debug\FileDlg.obj
+.\Debug\MainFrm.obj
+.\Debug\MsrItemDlg.obj
+.\Debug\Nucleotide.obj
+.\Debug\PatternDlg.obj
+.\Debug\ReadBarCodeDialog.obj
+.\Debug\RNA.obj
+.\Debug\SelExcelDlg.obj
+.\Debug\StaticText.obj
+.\Debug\StdAfx.obj
+.\Debug\TranScripter.obj
+.\Debug\TxtFile.obj
+.\Debug\ValuesLabel.obj
+.\Debug\xlef.obj
+.\Debug\XlsFile2.obj
+.\Debug\XlsGamma.obj
+.\Debug\XlsOQC1.obj
+.\Debug\XlsOQC2.obj
+.\Debug\XlsRA1.obj
+.\Debug\XlsSEC1.obj
+.\Debug\ColorEyeI.res
+]
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPD70C.tmp"
+<h3>Output Window</h3>
+Linking...
+LINK : fatal error LNK1168: cannot open Debug/ColorEyeI.exe for writing
+Error executing link.exe.
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 0 error(s), 0 warning(s)
+ColorEyeI.exe - 1 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
