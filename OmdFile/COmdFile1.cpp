@@ -270,23 +270,19 @@ void COmdFile1::t2oInit()
 	pCa210->SetOnline(1);
 	pCa210->SetLcmSize("14");
 	
-	DNA sortableDNA;
-	
-    DNA_sortable(sortableDNA);
-	
 	TranScripter ts;
+
+	DNA sortableDNA;
+    DNA_sortable(sortableDNA);
     ts.Trans(sortableDNA, m_dOmd);
 	
-    //±Æ§Ç
-//     m_dOmd.SortQuackMsr();
-//     m_dOmd.SortOrigMsr();
-	
-	
     DNA UnsortableDNA;
-	
-    DNA_Unsortable(UnsortableDNA);
-	
+    DNA_Unsortable(UnsortableDNA);	
     ts.Trans(UnsortableDNA, m_dOmd);
+
+	CPoint pointEmpty(0, 0);
+	for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
+		itor->SetPointPosi(pointEmpty);
 
 	delete pCa210;
 }
@@ -311,7 +307,7 @@ void COmdFile1::TxtToOmd()
 	t2oD13();
 	t2oW5();
 
- 	m_dOmd.freeEmptyCell();
+  	m_dOmd.freeEmptyCell();
 	m_dTxt.clear();
 }
 

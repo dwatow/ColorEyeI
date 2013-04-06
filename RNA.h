@@ -10,19 +10,17 @@
 #include "xMsrPoint/Cartridge2.h"
 #include "CartridgeFinder.h"
 #include "OmdFile/TxtFile.h"
-
+#include "debugFile.h"
 //typedef std::vector<Cartridge2> std::vector<Cartridge2>;
 
 class RNA
 {
-#ifdef _DEBUG
-    std::vector<CString> m_dTxt;
-#endif
+	debugFile debugLogMaker;
 
 	CartridgeFinder finder;
 private:
     std::vector<Cartridge2> m_CarChain2;
-
+	
 //«Ø¸Ñºc¤l
 public:
     RNA();

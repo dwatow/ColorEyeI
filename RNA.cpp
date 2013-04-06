@@ -405,18 +405,16 @@ void RNA::CutEqualCell(const RNA& compData)
     if (!compData.IsEmpty())//裡面這些不要修改，影響再次量測的資料擺放
     {
         CString str;
-        debugCode(
-            m_dTxt.clear();
-        )
+        debugLogMaker.Clear();
         //在這時
         //m_CarChain2是舊
         //compData是新的
         std::vector<Cartridge2>::const_iterator rnaitor = 0, compItor;
         debugCode(
             str.Format("Begin: %X, End: %X\n", Begin(), End());
-            m_dTxt.push_back(str);
+            debugLogMaker.Add(str);
 
-            m_dTxt.push_back("\nRNA原本的位址\n");
+            debugLogMaker.Add("\nRNA原本的位址\n");
 				for (rnaitor  = m_CarChain2.begin();
 					 rnaitor != m_CarChain2.end(); ++rnaitor)
 				{
@@ -425,10 +423,10 @@ void RNA::CutEqualCell(const RNA& compData)
 						rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
 						rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y,\
 						rnaitor->GetStrBkStatus()); 
-					m_dTxt.push_back(str);
+					debugLogMaker.Add(str);
 				}
 
-            m_dTxt.push_back("\ncompData的位址\n");
+            debugLogMaker.Add("\ncompData的位址\n");
 				for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
 				{
 					str.Format("%X, c(%d, %d, %d), P(%d, %d), status: %s\n",\
@@ -436,14 +434,14 @@ void RNA::CutEqualCell(const RNA& compData)
 						compItor->GetBkColor().R(), compItor->GetBkColor().G(), compItor->GetBkColor().B(),\
 						compItor->GetPointPosi().x, compItor->GetPointPosi().y,\
 						compItor->GetStrBkStatus()); 
-					m_dTxt.push_back(str);
+					debugLogMaker.Add(str);
 				}
         )
         //remove & cut 在新的裡面，比對舊的，代表重覆，重覆量測去除掉
 //         removeItor = ;
         debugCode(
             str.Format("\nremoveItor:\n");
-            m_dTxt.push_back(str);
+            debugLogMaker.Add("\nremoveItor:\n");
         )
         std::vector<Cartridge2>::iterator removeItor(End());
         for (compItor = compData.Begin(); compItor != compData.End(); ++compItor)
@@ -451,21 +449,21 @@ void RNA::CutEqualCell(const RNA& compData)
             //移動一個元素到最後，就刪掉
             debugCode(
                 str.Format("B. %X\n", removeItor);
-                m_dTxt.push_back(str);
+                debugLogMaker.Add(str);
             )
             //removeItor = std::remove(Begin(), removeItor, *compItor);//確認compData的資料是沒錯的
             removeItor = std::remove(Begin(), removeItor, *compItor);
 
             debugCode(
                 str.Format("A. %x\n", removeItor);
-                m_dTxt.push_back(str);
+                debugLogMaker.Add(str);
             )
         }
         
         m_CarChain2.erase(removeItor, End());
 
         debugCode(
-            m_dTxt.push_back("\nRNA後來的位址\n");
+            debugLogMaker.Add("\nRNA後來的位址\n");
             for (rnaitor = m_CarChain2.begin();
                  rnaitor != m_CarChain2.end(); ++rnaitor)
             {
@@ -474,18 +472,11 @@ void RNA::CutEqualCell(const RNA& compData)
                     rnaitor->GetBkColor().R(), rnaitor->GetBkColor().G(), rnaitor->GetBkColor().B(),\
                     rnaitor->GetPointPosi().x, rnaitor->GetPointPosi().y,\
 					rnaitor->GetStrBkStatus());
-                m_dTxt.push_back(str);
+                debugLogMaker.Add(str);
             }
         )
     }
-    debugCode(
-        CTxtFile fTxt;
-        CFileException fx;
-        fTxt.Save("C://Users//1004066//Desktop//RNA_address.log", fx);
-        fTxt.iTxtData(m_dTxt);
-        fTxt.Close();
-    )
-
+	debugLogMaker.Out2File("C://Users//1004066//Desktop//RNA_address.log");
 }
 
 void RNA::freeEmptyCell()

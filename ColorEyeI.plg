@@ -6,7 +6,7 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPD70C.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPA69D.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\BkMaker.obj
@@ -54,16 +54,63 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPD70C.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPA69D.tmp"
 <h3>Output Window</h3>
 Linking...
-LINK : fatal error LNK1168: cannot open Debug/ColorEyeI.exe for writing
-Error executing link.exe.
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAAC3.tmp" with contents
+[
+/nologo /o"Debug/ColorEyeI.bsc" 
+.\Debug\StdAfx.sbr
+.\Debug\BkMaker.sbr
+.\Debug\BkNits.sbr
+.\Debug\Bullet.sbr
+.\Debug\ca200srvr.sbr
+.\Debug\CA210.sbr
+.\Debug\CA210real.sbr
+.\Debug\Ca210sim.sbr
+.\Debug\Cartridge2.sbr
+.\Debug\CartridgeFinder.sbr
+.\Debug\CaSetupDlg.sbr
+.\Debug\CColorRef.sbr
+.\Debug\Circle.sbr
+.\Debug\CircleArc.sbr
+.\Debug\ColorEyeI.sbr
+.\Debug\ColorEyeIDoc.sbr
+.\Debug\ColorEyeIView.sbr
+.\Debug\COmdFile0.sbr
+.\Debug\COmdFile1.sbr
+.\Debug\COmdFileFactor.sbr
+.\Debug\COmdFileGm.sbr
+.\Debug\DNA.sbr
+.\Debug\EnterValueDlg.sbr
+.\Debug\excel.sbr
+.\Debug\FileDlg.sbr
+.\Debug\MainFrm.sbr
+.\Debug\MsrItemDlg.sbr
+.\Debug\Nucleotide.sbr
+.\Debug\PatternDlg.sbr
+.\Debug\ReadBarCodeDialog.sbr
+.\Debug\RNA.sbr
+.\Debug\SelExcelDlg.sbr
+.\Debug\StaticText.sbr
+.\Debug\TranScripter.sbr
+.\Debug\TxtFile.sbr
+.\Debug\ValuesLabel.sbr
+.\Debug\xlef.sbr
+.\Debug\XlsFile2.sbr
+.\Debug\XlsGamma.sbr
+.\Debug\XlsOQC1.sbr
+.\Debug\XlsOQC2.sbr
+.\Debug\XlsRA1.sbr
+.\Debug\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPAAC3.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-ColorEyeI.exe - 1 error(s), 0 warning(s)
+ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

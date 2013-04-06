@@ -24,10 +24,21 @@ Cartridge2::~Cartridge2()
 
 const BOOL Cartridge2::operator==(const Cartridge2& vCar2) const
 {
-    return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
-		     (GetBkColor()   == vCar2.GetBkColor()  ) &&
-		     (GetBkStatus()  == vCar2.GetBkStatus() )
-		   ) ? TRUE : FALSE;
+	BOOL B(FALSE);
+	if ( ((vCar2.GetPointPosi().x == 0) && (vCar2.GetPointPosi().x == 0)) ||
+		 ((      GetPointPosi().x == 0) && (      GetPointPosi().y == 0)) )
+	{
+		return ( (GetBkColor()   == vCar2.GetBkColor()  ) &&
+			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
+
+	}
+	else
+	{
+		return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
+			     (GetBkColor()   == vCar2.GetBkColor()  ) &&
+			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
+	}
+	return B;
 };
 
 void Cartridge2::operator= (const Cartridge2& vCar)

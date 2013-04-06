@@ -66,11 +66,12 @@ void Bullet::operator= (const Bullet& xp)
 
 const BOOL Bullet::isEmpty() const
 {
+	BOOL B(TRUE);
 	for (std::vector<float>::const_iterator vitor = m_vfValues.begin(); vitor != m_vfValues.end(); ++vitor)
-		if ( *vitor == 0.0 ) 
-			return TRUE;
+		if ( *vitor != 0.0 )
+			B = FALSE;
 
-    return FALSE ;
+    return B;
 }
 
 const CString Bullet::GetLastTime() const
