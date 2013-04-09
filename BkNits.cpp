@@ -1,3 +1,4 @@
+#include "StdAfx.h"
 #include "BkNits.h"
 
 void BkNits::n2cPos(ColorRef& Bkclr)

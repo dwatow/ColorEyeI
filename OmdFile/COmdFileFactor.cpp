@@ -2,7 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "COmdFile0.h"
 
 #ifdef _DEBUG
@@ -17,9 +17,7 @@ static char THIS_FILE[]=__FILE__;
 //iForm()  input  form
 //////////////////////////////////////////////////////////////////////////
 
-COmdFileFactor::COmdFileFactor():
-m_PnlID(""), m_MsrDvc(""), m_Prb(""), m_CHID(""), m_nitsLv("")
-{};
+COmdFileFactor::COmdFileFactor(){};
 
 COmdFileFactor::~COmdFileFactor()
 {

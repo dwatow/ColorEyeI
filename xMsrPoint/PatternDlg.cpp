@@ -1,16 +1,17 @@
 // PatternDlg.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include <cstdlib>
 #include <ctime>
 #include "xMsrPoint.h"
 #include "PatternDlg.h"
-#include "..\EnterValueDlg.h"
-#include "..\ReadBarCodeDialog.h"
-#include "..\TranScripter.h"
-#include "..\MainFrm.h"
-#include "..\ColorEyeIDoc.h"
+#include "../EnterValueDlg.h"
+#include "../ReadBarCodeDialog.h"
+#include "../TranScripter.h"
+#include "../MainFrm.h"
+#include "../ColorEyeIDoc.h"
+#include "../OmdFile/OmdHead.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -227,11 +228,12 @@ void CPatternDlg::initDocument()
     
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
-    
-    pDoc->SetCHID   ( pMainFrm->m_pCa210->GetChStrNo()    );
-    pDoc->SetPrb    ( pMainFrm->m_pCa210->GetProb()       );
-    pDoc->SetMsrDvc ( pMainFrm->m_pCa210->GetDeviceType() );
 
+	pDoc->GetFileHead().iCHID  ( pMainFrm->m_pCa210->GetChStrNo()    );
+	pDoc->GetFileHead().iPrb   ( pMainFrm->m_pCa210->GetProb()       );
+	pDoc->GetFileHead().iMsrDvc( pMainFrm->m_pCa210->GetDeviceType() );
+	pDoc->GetFileHead().iInch  ( pMainFrm->m_pCa210->GetLcmSize()    );
+	
 
     m_RNA = pDoc->GetDocRNA();
     m_itor = m_RNA.Begin();

@@ -2,8 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
-//#include "ColorEyeI.h"
+#include "StdAfx.h"
 #include "RNA.h"
 #include <algorithm>
 
@@ -482,13 +481,19 @@ void RNA::CutEqualCell(const RNA& compData)
 void RNA::freeEmptyCell()
 {
     //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
-    //void COmdFile1::iForm()
-    //std::vector<Cartridge2> x;
 	RNA x;
     for (std::vector<Cartridge2>::iterator itor = Begin(); itor != End(); ++itor)
-        if (itor->GetBullet().isEmpty())
-			x.AddCell(*itor);
-            //x.push_back(*itor);           //要剪掉的
+	{
+        if (itor->GetBullet().isEmpty() == TRUE)
+			x.AddCell(*itor);           //要剪掉的
+	}
+    //x.push_back(*itor);
+	debugFile freeEmpty;
+	for (std::vector<Cartridge2>::iterator itorX = x.Begin(); itorX != x.End(); ++itorX)
+	{
+		freeEmpty.Add(itorX->GetDescrip() + "\n");
+	}
+	freeEmpty.Out2File("C://Users//1004066//Desktop//freeEmpty.log");
 
     CutEqualCell(x);
 }

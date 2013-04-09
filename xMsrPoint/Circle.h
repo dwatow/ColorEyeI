@@ -1,9 +1,10 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
-#include <afxmt.h>
+
 #include "../CColorRef.h"
 #include "../ValuesLabel.h"
 #include <cmath>
+#include <afxmt.h>
 
 enum CirclePercent {CP_NULL, CP_X, CP_FULL};
 

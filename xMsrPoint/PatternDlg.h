@@ -3,8 +3,8 @@
 
 #include "CircleArc.h"    // Added by ClassView
 #include "CA210.h"
-#include "..\MsrItems\MsrItemDlg.h"
-#include "..\CColorRef.h"
+#include "../MsrItems/MsrItemDlg.h"
+#include "../CColorRef.h"
 
 #include <cmath>
 #include <vector>

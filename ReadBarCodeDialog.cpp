@@ -1,7 +1,7 @@
 // ReadBarCodeDialog.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ColorEyeI.h"
 #include "ReadBarCodeDialog.h"
 #include "OmdFile/TxtFile.h"
@@ -106,7 +106,7 @@ void CReadBarCodeDialog::OnOK()
 	CString pnlId;
 	m_stcBarCode.GetWindowText(pnlId);
 	pnlId.TrimRight();
-	pDoc->SetPnlID(pnlId);
+	pDoc->GetFileHead().iPnlID(pnlId);
 
 	CDialog::OnOK();
 }

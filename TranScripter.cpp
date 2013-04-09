@@ -1,3 +1,4 @@
+#include "StdAfx.h"
 #include "TranScripter.h"
 #include "MainFrm.h"
 #include <cmath>

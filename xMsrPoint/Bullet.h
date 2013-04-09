@@ -32,10 +32,14 @@ public:
 private:
       const float str2flt(CString ) const;
     const CString flt2str(const float& ) const;
+//空物件判別
+private:
+	BOOL isEmptyObj;
+public:
+	const BOOL isEmpty() const;
 //運算子
 public:
              void operator= (const Bullet&);
-       const BOOL isEmpty() const;
     const CString Bullet::show() const;
 };
 

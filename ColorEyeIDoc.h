@@ -13,28 +13,17 @@
 #include "Omdfile/COmdFile0.h"
 #include "RNA.h"
 #include "xMsrPoint/DNA.h"
+#include "Omdfile/OmdHead.h"
 
 class CColorEyeIDoc : public CDocument
 {
 //basic information in Doc
-    CString m_PnlID;
-    CString m_MsrDvc;
-    CString m_Prb;
-    CString m_CHID;
-	CString m_nitsBkClr;
+	OmdHead m_docFileHead;
+public:
+	OmdHead& GetFileHead(){ return m_docFileHead; };
+	const OmdHead GetFileHead() const{ return m_docFileHead; };
+	void SetFileHead(const OmdHead& _H){ m_docFileHead = _H; };
 
-public:    
-    CString GetPnlID () { return m_PnlID;  };
-    CString GetMsrDvc() { return m_MsrDvc; };
-    CString GetPrb   () { return m_Prb;    };
-    CString GetCHID  () { return m_CHID;   };
-	CString GetNitsLv() { return m_nitsBkClr; };
-
-    void SetPnlID  (const CString& _S) { m_PnlID  =  _S; };
-    void SetMsrDvc (const CString& _S) { m_MsrDvc =  _S; };
-    void SetPrb    (const CString& _S) { m_Prb    =  _S; };
-    void SetCHID   (const CString& _S) { m_CHID   =  _S; };
-	void SetNitsLv (const int& _I)     { m_nitsBkClr.Format("%d", _I); };
 //File Error
 	CFileException m_ErrorFx;
 //OMD File

@@ -1,3 +1,4 @@
+#include "StdAfx.h"
 #include "DNA.h"
 
 void DNA::AddCell(const Nucleotide& _N) 

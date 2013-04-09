@@ -1,7 +1,7 @@
 // MsrItemDlg.cpp : implementation file
 //
 //#include <afxres.h>
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "resource.h"
 #include "MsrItemDlg.h"
 #include "../xMsrPoint/PatternDlg.h"

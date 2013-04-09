@@ -8,22 +8,11 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#include "Table.h"
-
-// class ViewTable
-// {
-//     isMsrItem  m_MsrItem;
-//     isMsrValue m_MsrValue;
-// public:
-//     const isMsrItem  GetMsrItem()  const               { return m_MsrItem;  }
-//     const isMsrValue GetMsrValue() const               { return m_MsrValue; }
-//                 void SetMsrItem (const isMsrItem&  MI) { m_MsrItem  = MI;   }
-//                 void SetMsrValue(const isMsrValue& MV) { m_MsrValue = MV;   }
-// };
-
+// #include "Table.h"
 
 class CColorEyeIView : public CScrollView
 {
+	CSize sizeTotal;
 protected: // create from serialization only
     CColorEyeIView();
     DECLARE_DYNCREATE(CColorEyeIView)

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "Cartridge2.h"
 
 Cartridge2::Cartridge2():
@@ -102,7 +102,7 @@ void Cartridge2::SetBullet(const Bullet& Pd)
     m_Data = Pd;
 }
 
-const Bullet& Cartridge2::GetBullet() const
+const Bullet Cartridge2::GetBullet() const
 {
     return m_Data;    
 }

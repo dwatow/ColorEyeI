@@ -2,7 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "stdAfx.h"
+#include "StdAfx.h"
 #include "TxtFile.h"
 #include <shlwapi.h>
 

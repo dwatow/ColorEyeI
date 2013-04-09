@@ -1,7 +1,7 @@
 // StaticText.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "MsrItems.h"
 #include "StaticText.h"
 

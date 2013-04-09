@@ -1,7 +1,7 @@
 // SelExcelDlg.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "SelXls.h"
 #include "SelExcelDlg.h"
 
@@ -327,6 +327,11 @@ void CSelExcelDlg::HDfileToExcel(CXlsFile2* pHDfXls)
 void CSelExcelDlg::DocfileToExcel(CXlsFile2* pDocfXls)
 {
     pDocfXls->InitForm();
-    pDocfXls->iCellNO(0)->iChannel(m_pDoc->GetCHID())->iPanelID(m_pDoc->GetPnlID())->iProb(m_pDoc->GetPrb())->iNitsLv(m_pDoc->GetNitsLv());//->iData(m_pDoc->GetOmdData());
+    pDocfXls
+		->iCellNO(0)
+		->iChannel(m_pDoc->GetFileHead().oCHID())
+		->iPanelID(m_pDoc->GetFileHead().oPnlID())
+		->iProb   (m_pDoc->GetFileHead().oPrb())
+		->iNitsLv (m_pDoc->GetFileHead().oNitsLv());//->iData(m_pDoc->GetOmdData());
 }
 

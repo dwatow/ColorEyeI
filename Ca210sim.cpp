@@ -6,18 +6,11 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
+#include "StdAfx.h"
+#include "Ca210sim.h"
 #include <cstdlib>
 #include <ctime>
 
-#include "StdAfx.h"
-//#include "ColorEyeI.h"
-#include "Ca210sim.h"
-
-// #ifdef _DEBUG
-// #undef THIS_FILE
-// static char THIS_FILE[]=__FILE__;
-// #define new DEBUG_NEW
-// #endif
 
 //#define _CA210DEBUG
 

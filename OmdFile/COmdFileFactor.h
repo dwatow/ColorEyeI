@@ -10,39 +10,40 @@
 #endif // _MSC_VER > 1000
 
 #include "TxtFile.h"
-//#include "../xMsrPoint/Cartridge.h"
-//#include "../DataChain.h"
 #include "../RNA.h"
 #include <vector>
 #include <iterator>
-// #include "../xMsrPoint/Bolt.h"
-
-//typedef std::vector<Cartridge> OmdCarData;
-// typedef CDataChain OmdCarData;
+#include "OmdHead.h"
 
 class COmdFileFactor
 {
 //Diff of Txt file
 protected:
-	CString m_PnlID;
-    CString m_MsrDvc;
-    CString m_Prb;
-    CString m_CHID;
- 	CString m_nitsLv;
+	OmdHead m_omdFileHead;
+
+// 	CString m_PnlID;
+//     CString m_MsrDvc;
+//     CString m_Prb;
+//     CString m_CHID;
+//  	CString m_nitsLv;
 
 public:
-    const CString GetPnlID () const { return m_PnlID;  };
-    const CString GetMsrDvc() const { return m_MsrDvc; };
-    const CString GetPrb   () const { return m_Prb;    };
-    const CString GetCHID  () const { return m_CHID;   };
- 	const CString GetNitsLv() const { return m_nitsLv; };
-	
-	void SetPnlID  (const CString& _S) { m_PnlID  =  _S; };
-	void SetMsrDvc (const CString& _S) { m_MsrDvc =  _S; };
-    void SetPrb    (const CString& _S) { m_Prb    =  _S; };
-    void SetCHID   (const CString& _S) { m_CHID   =  _S; };
+	OmdHead& GetFileHead(){ return m_omdFileHead; };
+	const OmdHead GetFileHead() const{ return m_omdFileHead; };
+	void SetFileHead(const OmdHead& _H){ m_omdFileHead = _H; };
 
- 	void SetNitsLv (const CString& _S) { m_nitsLv =  _S; };
+//     const CString GetPnlID () const { return m_PnlID;  };
+//     const CString GetMsrDvc() const { return m_MsrDvc; };
+//     const CString GetPrb   () const { return m_Prb;    };
+//     const CString GetCHID  () const { return m_CHID;   };
+//  	const CString GetNitsLv() const { return m_nitsLv; };
+	
+// 	void SetPnlID  (const CString& _S) { m_PnlID  =  _S; };
+// 	void SetMsrDvc (const CString& _S) { m_MsrDvc =  _S; };
+//     void SetPrb    (const CString& _S) { m_Prb    =  _S; };
+//     void SetCHID   (const CString& _S) { m_CHID   =  _S; };
+// 
+//  	void SetNitsLv (const CString& _S) { m_nitsLv =  _S; };
 
 protected:
 //	virtual BOOL isOldForm(TxtStrData&) = 0;

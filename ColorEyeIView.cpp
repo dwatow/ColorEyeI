@@ -1,7 +1,7 @@
 // ColorEyeIView.cpp : implementation of the CColorEyeIView class
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ColorEyeI.h"
 
 #include "ColorEyeIDoc.h"
@@ -56,6 +56,10 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     int nDC = pDC->SaveDC();
     const UINT TextHight(16);
 
+	CFont afont;
+    afont.CreateFont(TextHight, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, FF_MODERN, "Century Gothic");
+    pDC->SelectObject(&afont);
+
     CSize szAroundSpace(2, 2);  //視窗的留白
     CPoint ptOrig(0, 0);        //視窗的原點（左上角）
     CPoint ptFix (0, 0);
@@ -71,21 +75,21 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     ptFix = GetDeviceScrollPosition();
     CPoint ptTemp = ptFix;
 
-//     CTable tbInfo(pDC, ptTemp);
-//     ptTemp = tbInfo.SetCellNum(2, 4).SetTableBoard(0).SetGridBoard(0)/*.SetFont(afont)*/.SetCellSpace(1)
-//      .Width(0, TextHight*10).Width(1, TextHight*12).Hight(0, TextHight).Hight(1, TextHight).Hight(2, TextHight)
-//              .tr().td().b().text("Panel ID").b_().td_()          .td().text(pDoc->GetPnlID()).td_().tr_()
-//              .tr().td().b().text("Measurement device").b_().td_().td().text(pDoc->GetMsrDvc()).td_().tr_()
-//              .tr().td().b().text("Probe").b_().td_()             .td().text(pDoc->GetPrb()).td_().tr_()
-//              .tr().td().b().text("Channel").b_().td_()           .td().text(pDoc->GetCHID()).td_().tr_()
-//         .table_();
+	int line(0);//18*7
+// 	pDC->TextOut(ptTemp.x, ptTemp.y, "Panel ID");            pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetPnlID()  );    line++;	ptTemp.y =  TextHight*(line);	
+// 	pDC->TextOut(ptTemp.x, ptTemp.y, "Measurement device");  pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetMsrDvc() );    line++;	ptTemp.y =  TextHight*(line);	
+// 	pDC->TextOut(ptTemp.x, ptTemp.y, "Probe");               pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetPrb()    );    line++;	ptTemp.y =  TextHight*(line);	
+// 	pDC->TextOut(ptTemp.x, ptTemp.y, "Channel");             pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetCHID()   );    line++;	ptTemp.y =  TextHight*(line);	
+// 	pDC->TextOut(ptTemp.x, ptTemp.y, "Inch");                pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetInch()   );    line++;	ptTemp.y =  TextHight*(line);	
+
+	pDC->TextOut(ptTemp.x, ptTemp.y, "Panel ID");            pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetFileHead().oPnlID()  );    line++;	ptTemp.y =  TextHight*(line);	
+	pDC->TextOut(ptTemp.x, ptTemp.y, "Measurement device");  pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetFileHead().oMsrDvc() );    line++;	ptTemp.y =  TextHight*(line);	
+	pDC->TextOut(ptTemp.x, ptTemp.y, "Probe");               pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetFileHead().oPrb()    );    line++;	ptTemp.y =  TextHight*(line);	
+	pDC->TextOut(ptTemp.x, ptTemp.y, "Channel");             pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetFileHead().oCHID()   );    line++;	ptTemp.y =  TextHight*(line);	
+	pDC->TextOut(ptTemp.x, ptTemp.y, "Inch");                pDC->TextOut(ptTemp.x+(TextHight*9), ptTemp.y, pDoc->GetFileHead().oInch()   );    line++;	ptTemp.y =  TextHight*(line);	
 
     //自訂字型
-    CFont afont;
-    afont.CreateFont(TextHight, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, FF_MODERN, "Century Gothic");
-    pDC->SelectObject(&afont);
 
-    int line(0);
     CString str;
 
     int maxXview(0), 
@@ -96,21 +100,18 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     for ( std::vector<Nucleotide>::iterator indexItor = showIndex.Begin(); indexItor != showIndex.End(); ++indexItor)
     {
         str.Format("%s", indexItor->showMe());
-        ptTemp.y =  TextHight*(line);
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
+        ptTemp.y =  TextHight*(line);
         line++;
         maxYview = ptTemp.y;
         if (maxXview < str.GetLength()*5.5)
             maxXview = (int)((float)str.GetLength()*5.5); //介於5~6之間
     }
 
-//  str.Format("%d, %d", maxXview, maxYview);
-//  if (showIndex.Size())
-//      AfxMessageBox(str);
+
     //視窗右半邊（主要資料檢視區）
     int maxX_LeftView(maxXview);
-    ptTemp.x = maxX_LeftView;
-//  ptTemp.x = 0;
+    ptTemp.x = 291;
     ptTemp.y = ptOrig.y;
     line = 0;
     RNA showData(pDoc->GetDocRNA());
@@ -126,16 +127,13 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     }
     maxXview += maxX_LeftView;
 
-//  str.Format("%d, %d", maxXview, maxYview);
-//  AfxMessageBox(str);
-    
+   
     pDC->RestoreDC( nDC );
 
     //設定高度
     CSize sizeTotal;
     // TODO: calculate the total size of this view
     sizeTotal.cx = maxXview;
-//     sizeTotal.cy = (ptTemp.y > 291) ? ptTemp.y : 291; //291是左邊的
     sizeTotal.cy = maxYview;
     SetScrollSizes(MM_TEXT, sizeTotal);
 }

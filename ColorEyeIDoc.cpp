@@ -1,11 +1,11 @@
 // ColorEyeIDoc.cpp : implementation of the CColorEyeIDoc class
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ColorEyeI.h"
 #include "ColorEyeIDoc.h"
 
-#include "SelXls\FileDlg.h"
+#include "SelXls/FileDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -107,11 +107,7 @@ void CColorEyeIDoc::OnFileNew()
     m_docDNA.Empty();
     m_docRNA.Empty();
 
-    m_PnlID.Empty();
-    m_MsrDvc.Empty();
-    m_Prb.Empty();
-    m_CHID.Empty();
-	m_nitsBkClr.Empty();
+	m_docFileHead.Empty();
     
 	SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);  //更新畫面
@@ -256,11 +252,11 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
 //         ft_Omd.oOmdData(m_dOmd);
         ft_Omd.oOmdData(m_docRNA);
 
-        m_PnlID     = ft_Omd.GetPnlID();
-        m_MsrDvc    = ft_Omd.GetMsrDvc();
-        m_Prb       = ft_Omd.GetPrb();
-        m_CHID      = ft_Omd.GetCHID();
-		m_nitsBkClr = ft_Omd.GetNitsLv();
+		m_docFileHead.iPnlID ( ft_Omd.GetPnlID()  );
+        m_docFileHead.iMsrDvc( ft_Omd.GetMsrDvc() );
+        m_docFileHead.iPrb   ( ft_Omd.GetPrb()    );
+        m_docFileHead.iCHID  ( ft_Omd.GetCHID()   );
+		m_docFileHead.iNitsLv( ft_Omd.GetNitsLv() );
 
         ft_Omd.Close();
     }
@@ -276,13 +272,13 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
         AfxMessageBox("路徑有問題!!");
     else
 	{
-		f_Omd.SetPnlID (m_PnlID);
-		f_Omd.SetMsrDvc(m_MsrDvc);
-		f_Omd.SetPrb   (m_Prb);
-		f_Omd.SetCHID  (m_CHID);
-		f_Omd.SetNitsLv(m_nitsBkClr);
-		f_Omd.iOmdData (m_docRNA);
-// 		f_Omd.iOmdData (m_dOmd);
+		f_Omd.SetPnlID ( m_docFileHead.oPnlID() );
+		f_Omd.SetMsrDvc( m_docFileHead.oMsrDvc());
+		f_Omd.SetPrb   ( m_docFileHead.oPrb()   );
+		f_Omd.SetCHID  ( m_docFileHead.oCHID()  );
+		f_Omd.SetNitsLv( m_docFileHead.oNitsLv());
+
+		f_Omd.iOmdData ( m_docRNA);
 
         f_Omd.Close();
 	}

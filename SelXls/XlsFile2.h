@@ -10,21 +10,11 @@
 #endif // _MSC_VER > 1000
 
 #include "xlef.h"
-//#include "../DataChain.h"
 #include "../RNA.h"
 
 class CXlsFile2 : public xlsFile
 {
 protected:
-// 	BOOL nMsred(const CString clr, CString pn)
-// 	{
-// 		BOOL _notmsr(TRUE);
-// 		for (int i =0; i < pn; ++i)
-// //			_notmsr = m_vCar.At(clr, pn, i).GetBullet().isEmpty(); //量過就是非空的
-// 				_notmsr &= m_vCar.At(clr, pn, i).GetBullet().isEmpty();
-// 		return !_notmsr;
-// 	}
-	//CDataChain m_vCar;
 	RNA m_vCar;
 public:
 	virtual void       InitForm() = 0;

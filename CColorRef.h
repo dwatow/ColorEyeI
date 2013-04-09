@@ -1,6 +1,5 @@
 #ifndef CCOLORREF_H
 #define CCOLORREF_H
-#include "StdAfx.h"
 
 class ColorRef
 {

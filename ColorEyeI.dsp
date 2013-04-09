@@ -395,6 +395,10 @@ SOURCE=.\xMsrPoint\Nucleotide.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\OmdFile\OmdHead.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\xMsrPoint\PatternDlg.h
 # End Source File
 # Begin Source File
@@ -432,10 +436,6 @@ SOURCE=.\OmdFile\TxtFile.h
 # Begin Source File
 
 SOURCE=.\ValuesLabel.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\VersionNo.h
 # End Source File
 # Begin Source File
 

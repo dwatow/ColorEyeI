@@ -10,11 +10,11 @@
  * ´ú¸Õ¥­¥x Microsoft Windows XP SP3                   *
  *                           2011/7/11     *
  *******************************************************************/
-#ifndef __XLEF_H__
-#define __XLEF_H__
+#ifndef XLSFILE_H
+#define XLSFILE_H
 
 #include "../excel.h"
-#include "stdafx.h"
+// #include "stdafx.h"
 #include <vector>
 
 enum Boarder_Style

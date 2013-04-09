@@ -1,7 +1,7 @@
 // CaSetupDlg.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "CaSetupDlg.h"
 
 #ifdef _DEBUG

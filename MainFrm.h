@@ -9,7 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-//#include "xMsrPoint/CA210.h"
 #include "CA210sim.h"
 #include "CA210real.h"
 

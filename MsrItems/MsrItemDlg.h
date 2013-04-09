@@ -21,10 +21,8 @@
 
 class CMsrItemDlg : public CDialog
 {
-#ifdef _DEBUG
 	debugFile m_debugLog;
 	CString m_desktopPath;
-#endif // _DEBUG
 
 	CString m_RememberChkPathName;
 	DNA m_DNA;

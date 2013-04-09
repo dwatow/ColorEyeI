@@ -6,7 +6,15 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPA69D.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP3049.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_AFXDLL" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\MsrItems\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\xMsrPoint\PatternDlg.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSP3049.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP305A.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\BkMaker.obj
@@ -54,10 +62,16 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPA69D.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSP305A.tmp"
 <h3>Output Window</h3>
+Compiling...
+ColorEyeI.cpp
+Generating Code...
+Skipping... (no relevant changes detected)
+MsrItemDlg.cpp
+PatternDlg.cpp
 Linking...
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAAC3.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSP3A88.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\StdAfx.sbr
@@ -103,7 +117,7 @@ Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPAAC3.tmp" with c
 .\Debug\XlsOQC2.sbr
 .\Debug\XlsRA1.sbr
 .\Debug\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPAAC3.tmp"
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSP3A88.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

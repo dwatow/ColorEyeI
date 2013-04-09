@@ -23,17 +23,19 @@ class COmdFile0
 	TxtStrData m_dTxt;
 
 public:
-	CString GetPnlID () const { return m_Omd->GetPnlID (); };
-    CString GetMsrDvc() const { return m_Omd->GetMsrDvc(); };
-    CString GetPrb   () const { return m_Omd->GetPrb   (); };
-    CString GetCHID  () const { return m_Omd->GetCHID  (); };
-	CString GetNitsLv() const { return m_Omd->GetNitsLv(); };
+	CString GetPnlID () const { return m_Omd->GetFileHead().oPnlID (); };
+    CString GetMsrDvc() const { return m_Omd->GetFileHead().oMsrDvc(); };
+    CString GetPrb   () const { return m_Omd->GetFileHead().oPrb   (); };
+    CString GetCHID  () const { return m_Omd->GetFileHead().oCHID  (); };
+	CString GetInch  () const { return m_Omd->GetFileHead().oInch  (); };
+	CString GetNitsLv() const { return m_Omd->GetFileHead().oNitsLv(); };
 	
-	void SetPnlID  (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPnlID(_S);  m_Omd->SetPnlID  (_S); };
-	void SetMsrDvc (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetMsrDvc(_S); m_Omd->SetMsrDvc (_S); };
-    void SetPrb    (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetPrb(_S);    m_Omd->SetPrb    (_S); };
-    void SetCHID   (CString& _S) { if (m_GmOmd != 0) m_GmOmd->SetCHID(_S);   m_Omd->SetCHID   (_S); };
-	void SetNitsLv (CString& _S) {                                           m_Omd->SetNitsLv (_S); };
+	void SetPnlID  (const CString& _S) { if (m_GmOmd != 0) m_GmOmd->GetFileHead().iPnlID(_S);  m_Omd->GetFileHead().iPnlID  (_S); };
+	void SetMsrDvc (const CString& _S) { if (m_GmOmd != 0) m_GmOmd->GetFileHead().iMsrDvc(_S); m_Omd->GetFileHead().iMsrDvc (_S); };
+    void SetPrb    (const CString& _S) { if (m_GmOmd != 0) m_GmOmd->GetFileHead().iPrb(_S);    m_Omd->GetFileHead().iPrb    (_S); };
+    void SetCHID   (const CString& _S) { if (m_GmOmd != 0) m_GmOmd->GetFileHead().iCHID(_S);   m_Omd->GetFileHead().iCHID   (_S); };
+	void SetInch   (const CString& _S) { if (m_GmOmd != 0) m_GmOmd->GetFileHead().iInch(_S);   m_Omd->GetFileHead().iInch   (_S); };
+	void SetNitsLv (const CString& _S) {                                                       m_Omd->GetFileHead().iNitsLv (_S); };
 public:
 	COmdFile0():m_Omd(0), m_GmOmd(0){};
 	virtual ~COmdFile0() { delete m_Omd; };

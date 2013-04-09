@@ -2,7 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "COmdFile1.h"
 #include "../TranScripter.h"
 #include "../MainFrm.h"
@@ -21,7 +21,13 @@ static char THIS_FILE[]=__FILE__;
 
 void COmdFile1::OmdToTxt()
 {
-    m_dTxt.push_back("Panel ID\t" + m_PnlID + "\tMeasurement device\t" + m_MsrDvc + "\tProbe\t" + m_Prb + "\tCH\t" + m_CHID + "\n");
+	CString& PanelId    = m_omdFileHead.oPnlID();
+	CString& MsrDevice  = m_omdFileHead.oMsrDvc();
+	CString& ProbeIndex = m_omdFileHead.oPrb();
+	CString& ChannelId  = m_omdFileHead.oCHID();
+	CString& LcmInch    = m_omdFileHead.oInch();
+    
+	m_dTxt.push_back("Panel ID\t" + PanelId + "\tMeasurement device\t" + MsrDevice + "\tProbe\t" + ProbeIndex + "\tCH\t" + ChannelId + "\tInch\t" + LcmInch + "\n");
 
 	o2tWRGB1nNits();
 	o2tW9nD1();
@@ -39,8 +45,9 @@ void COmdFile1::OmdToTxt()
 
 void COmdFile1::o2tWRGB1nNits()
 {
+	CString& NitsGray   = m_omdFileHead.oNitsLv();
     m_dTxt.push_back("中心點\tL\tx\ty\tu'\tv'\t5nits 9點均齊度\tL\t\t\t\t\t5nits 9點均齊度\tx\t\t\t\t\t5nits 9點均齊度\ty\t\t\t\t\t5nits 9點均齊度\tT\t\t\t\t\t5nits 9點均齊度\tduv\n");
-    m_dTxt.push_back("白色\t" + m_dOmd.sFind("白","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Dv) + "\t灰階:" + m_nitsLv + "\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Duv) + "\n");
+    m_dTxt.push_back("白色\t" + m_dOmd.sFind("白","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("白","1","1"," ",VluK_Dv) + "\t灰階:" + NitsGray + "\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","1","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","2","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","3","5-",VluK_Duv) + "\n");
     m_dTxt.push_back("紅色\t" + m_dOmd.sFind("紅","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("紅","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("紅","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("紅","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("紅","1","1"," ",VluK_Dv) + "\t\t"                     + m_dOmd.sFind("Nits","9","4","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","5","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","6","5-",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","4","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","5","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","6","5-",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","4","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","5","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","6","5-",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","4","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","5","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","6","5-",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","4","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","5","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","6","5-",VluK_Duv) + "\n");
     m_dTxt.push_back("綠色\t" + m_dOmd.sFind("綠","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("綠","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("綠","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("綠","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("綠","1","1"," ",VluK_Dv) + "\t\t"                     + m_dOmd.sFind("Nits","9","7","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","8","5-",VluK_Lv) + "\t" + m_dOmd.sFind("Nits","9","9","5-",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","7","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","8","5-",VluK_Sx) + "\t" + m_dOmd.sFind("Nits","9","9","5-",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","7","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","8","5-",VluK_Sy) + "\t" + m_dOmd.sFind("Nits","9","9","5-",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","7","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","8","5-",VluK_T) + "\t" + m_dOmd.sFind("Nits","9","9","5-",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("Nits","9","7","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","8","5-",VluK_Duv) + "\t" + m_dOmd.sFind("Nits","9","9","5-",VluK_Duv) + "\n");
     m_dTxt.push_back("藍色\t" + m_dOmd.sFind("藍","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("藍","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("藍","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("藍","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("藍","1","1"," ",VluK_Dv) + "\n");
@@ -266,7 +273,6 @@ void COmdFile1::t2oInit()
     
     pMainFrm->m_pCa210 = new Ca210sim();
 	Ca210* pCa210 = pMainFrm->m_pCa210;
-//	pCa210 = pMainFrm->m_pCa210;
 	pCa210->SetOnline(1);
 	pCa210->SetLcmSize("14");
 	
@@ -315,26 +321,25 @@ void COmdFile1::t2oInfo()
 {
 	if (!m_isOld)
     {
-		m_PnlID .Format("%s", GetCell('B', 1));           m_PnlID.TrimRight();
-		m_MsrDvc.Format("%s", GetCell('F', 1).Left(6));   m_MsrDvc.TrimRight();
-		m_Prb   .Format("%s", GetCell('F', 1).Right(8));  m_Prb.TrimRight();
-		m_CHID  .Format("%s", GetCell('G', 1).Right(2));  m_CHID.TrimRight();
-		m_nitsLv.Format("%s", GetCell('G', 3).Mid(GetCell('G', 3).Find(':')+1), GetCell('G', 3).GetLength());  m_nitsLv.TrimRight();
+		m_omdFileHead.iPnlID ( GetCell('B', 1)          );
+		m_omdFileHead.iMsrDvc( GetCell('F', 1).Left(6)  );
+		m_omdFileHead.iPrb   ( GetCell('F', 1).Right(8) );
+		m_omdFileHead.iCHID  ( GetCell('G', 1).Right(2) );
+		m_omdFileHead.iNitsLv( GetCell('G', 3).Mid(GetCell('G', 3).Find(':')+1));
     }
     else
     {
-		m_PnlID .Format("%s", GetCell('B', 1));  m_PnlID.TrimRight();
-		m_MsrDvc.Format("%s", GetCell('D', 1));  m_MsrDvc.TrimRight();
-		m_Prb   .Format("%s", GetCell('F', 1));  m_Prb.TrimRight();
-		m_CHID  .Format("%s", GetCell('H', 1));  m_CHID.TrimRight();
-		m_nitsLv.Format("%s", GetCell('G', 3).Mid(GetCell('G', 3).Find(':')+1), GetCell('G', 3).GetLength());  m_nitsLv.TrimRight();
+		m_omdFileHead.iPnlID ( GetCell('B', 1) );
+		m_omdFileHead.iMsrDvc( GetCell('D', 1) );
+		m_omdFileHead.iPrb   ( GetCell('F', 1) );
+		m_omdFileHead.iCHID  ( GetCell('H', 1) );
+		m_omdFileHead.iNitsLv( GetCell('G', 3).Mid(GetCell('G', 3).Find(':')+1));
+		m_omdFileHead.iInch  ( GetCell('J', 1) );
 	}
 }
 
 void COmdFile1::t2oWRGBD()
 {
-// 	Bullet _B= m_dOmd.Find("白","1","1"," ").GetBullet();
-// 	_B.i(VluK_Lv, GetCell('B', 3) );
  	m_dOmd.Find("白","1","1"," ").GetBullet().i(VluK_Lv, GetCell('B', 3) );
     m_dOmd.Find("白","1","1"," ").GetBullet().i(VluK_Sx, GetCell('C', 3) );
     m_dOmd.Find("白","1","1"," ").GetBullet().i(VluK_Sy, GetCell('D', 3) );
@@ -1045,35 +1050,35 @@ void COmdFile1::t2oD13()
 
 void COmdFile1::t2oW5()
 {
-	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Lv, GetCell('H', 58) );
-	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Lv, GetCell('J', 58) );
-	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Lv, GetCell('I', 59) );
-	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Lv, GetCell('H', 60) );
-	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Lv, GetCell('J', 60) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Lv, GetCell('H', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Lv, GetCell('J', 58) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Lv, GetCell('I', 59) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Lv, GetCell('H', 60) );
+	m_dOmd.Find("白","5","5","0").GetBullet().i(VluK_Lv, GetCell('J', 60) );
 	
-	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Sx, GetCell('N', 58) );
-	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sx, GetCell('P', 58) );
-	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sx, GetCell('O', 59) );
-	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sx, GetCell('N', 60) );
-	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sx, GetCell('P', 60) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sx, GetCell('N', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sx, GetCell('P', 58) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sx, GetCell('O', 59) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sx, GetCell('N', 60) );
+	m_dOmd.Find("白","5","5","0").GetBullet().i(VluK_Sx, GetCell('P', 60) );
 	
-	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Sy, GetCell('T', 58) );
-	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sy, GetCell('V', 58) );
-	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sy, GetCell('U', 59) );
-	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sy, GetCell('T', 60) );
-	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sy, GetCell('V', 60) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Sy, GetCell('T', 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Sy, GetCell('V', 58) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Sy, GetCell('U', 59) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Sy, GetCell('T', 60) );
+	m_dOmd.Find("白","5","5","0").GetBullet().i(VluK_Sy, GetCell('V', 60) );
 	
-	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_T,  GetCell('Z' , 58) );
-	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_T,  GetCell("AB", 58) );
-	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_T,  GetCell("AA", 59) );
-	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_T,  GetCell('Z' , 60) );
-	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_T,  GetCell("AB", 60) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_T,  GetCell('Z' , 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_T,  GetCell("AB", 58) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_T,  GetCell("AA", 59) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_T,  GetCell('Z' , 60) );
+	m_dOmd.Find("白","5","5","0").GetBullet().i(VluK_T,  GetCell("AB", 60) );
 	
-	m_dOmd.Find("白","5","0","0").GetBullet().i(VluK_Duv,  GetCell("AF", 58) );
-	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Duv,  GetCell("AH", 58) );
-	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Duv,  GetCell("AG", 59) );
-	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Duv,  GetCell("AF", 60) );
-	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Duv,  GetCell("AH", 60) );
+	m_dOmd.Find("白","5","1","0").GetBullet().i(VluK_Duv,  GetCell("AF", 58) );
+	m_dOmd.Find("白","5","2","0").GetBullet().i(VluK_Duv,  GetCell("AH", 58) );
+	m_dOmd.Find("白","5","3","0").GetBullet().i(VluK_Duv,  GetCell("AG", 59) );
+	m_dOmd.Find("白","5","4","0").GetBullet().i(VluK_Duv,  GetCell("AF", 60) );
+	m_dOmd.Find("白","5","5","0").GetBullet().i(VluK_Duv,  GetCell("AH", 60) );
 }
 
 void COmdFile1::DNA_sortable(DNA& sortableDNA)
@@ -1096,45 +1101,45 @@ void COmdFile1::DNA_sortable(DNA& sortableDNA)
     
     //5點
     sortableDNA.AddCell(White, Pn5, 0);
-    sortableDNA.AddCell(Red  , Pn5, 0);
-    sortableDNA.AddCell(Green, Pn5, 0);
-    sortableDNA.AddCell(Blue , Pn5, 0);
-    sortableDNA.AddCell(Dark , Pn5, 0);
+//     sortableDNA.AddCell(Red  , Pn5, 0);
+//     sortableDNA.AddCell(Green, Pn5, 0);
+//     sortableDNA.AddCell(Blue , Pn5, 0);
+//     sortableDNA.AddCell(Dark , Pn5, 0);
     
     //9點
     sortableDNA.AddCell(White, Pn9, 6);
-    sortableDNA.AddCell(Red  , Pn9, 6);
-    sortableDNA.AddCell(Green, Pn9, 6);
-    sortableDNA.AddCell(Blue , Pn9, 6);
+//     sortableDNA.AddCell(Red  , Pn9, 6);
+//     sortableDNA.AddCell(Green, Pn9, 6);
+//     sortableDNA.AddCell(Blue , Pn9, 6);
     sortableDNA.AddCell(Dark , Pn9, 6);
     
     //21點
-    sortableDNA.AddCell(White, Pn21, 0);
-    sortableDNA.AddCell(Red  , Pn21, 0);
-    sortableDNA.AddCell(Green, Pn21, 0);
-    sortableDNA.AddCell(Blue , Pn21, 0);
+//     sortableDNA.AddCell(White, Pn21, 0);
+//     sortableDNA.AddCell(Red  , Pn21, 0);
+//     sortableDNA.AddCell(Green, Pn21, 0);
+//     sortableDNA.AddCell(Blue , Pn21, 0);
     sortableDNA.AddCell(Dark , Pn21, 0);
     
     //13點
-    sortableDNA.AddCell(White, Pn13, 0);
-    sortableDNA.AddCell(Red  , Pn13, 0);
-    sortableDNA.AddCell(Green, Pn13, 0);
-    sortableDNA.AddCell(Blue , Pn13, 0);
+//    sortableDNA.AddCell(White, Pn13, 0);
+//     sortableDNA.AddCell(Red  , Pn13, 0);
+//     sortableDNA.AddCell(Green, Pn13, 0);
+//     sortableDNA.AddCell(Blue , Pn13, 0);
     sortableDNA.AddCell(Dark , Pn13, 0);
     
     //25點
-    sortableDNA.AddCell(White, Pn25, 0, 10);
-    sortableDNA.AddCell(Red  , Pn25, 0, 10);
-    sortableDNA.AddCell(Green, Pn25, 0, 10);
-    sortableDNA.AddCell(Blue , Pn25, 0, 10);
+//     sortableDNA.AddCell(White, Pn25, 0, 10);
+//     sortableDNA.AddCell(Red  , Pn25, 0, 10);
+//     sortableDNA.AddCell(Green, Pn25, 0, 10);
+//     sortableDNA.AddCell(Blue , Pn25, 0, 10);
     sortableDNA.AddCell(Dark , Pn25, 0, 10);
     
     //49點
     sortableDNA.AddCell(White, Pn49);
-    sortableDNA.AddCell(Red  , Pn49);
-    sortableDNA.AddCell(Green, Pn49);
-    sortableDNA.AddCell(Blue , Pn49);
-    sortableDNA.AddCell(Dark , Pn49);
+//     sortableDNA.AddCell(Red  , Pn49);
+//     sortableDNA.AddCell(Green, Pn49);
+//     sortableDNA.AddCell(Blue , Pn49);
+//     sortableDNA.AddCell(Dark , Pn49);
 }
 
 void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
@@ -1145,8 +1150,8 @@ void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
     unsortableDNA.AddCell(CrsTlkW, Pn4, 4);  
     
 	//Gamma
-    unsortableDNA.AddCell(White, PnGamma, 0, 255, 255);  
-    unsortableDNA.AddCell(Red  , PnGamma, 0, 255, 255);
-    unsortableDNA.AddCell(Green, PnGamma, 0, 255, 255);
-    unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
+//     unsortableDNA.AddCell(White, PnGamma, 0, 255, 255);  
+//     unsortableDNA.AddCell(Red  , PnGamma, 0, 255, 255);
+//     unsortableDNA.AddCell(Green, PnGamma, 0, 255, 255);
+//     unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
 }

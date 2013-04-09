@@ -1,6 +1,6 @@
 // Machine generated IDispatch wrapper class(es) created with ClassWizard
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ca200srvr.h"
 
 #ifdef _DEBUG

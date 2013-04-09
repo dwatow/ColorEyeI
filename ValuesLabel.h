@@ -1,7 +1,7 @@
 #ifndef VALUESLABEL_H
 #define VALUESLABEL_H
 
-#include "xMsrPoint\Bullet.h"
+#include "xMsrPoint/Bullet.h"
 #include "CColorRef.h"
 
 class ValuesLabel
