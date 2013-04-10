@@ -268,9 +268,12 @@ void COmdFile1::o2tW5()
 //m_debugLog
 void COmdFile1::t2oInit()
 {
+	Ca210* pOldCa210;
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     
+	pOldCa210 = pMainFrm->m_pCa210;
+
     pMainFrm->m_pCa210 = new Ca210sim();
 	Ca210* pCa210 = pMainFrm->m_pCa210;
 	pCa210->SetOnline(1);
@@ -291,6 +294,7 @@ void COmdFile1::t2oInit()
 		itor->SetPointPosi(pointEmpty);
 
 	delete pCa210;
+	pMainFrm->m_pCa210 = pOldCa210;
 }
 
 void COmdFile1::TxtToOmd()

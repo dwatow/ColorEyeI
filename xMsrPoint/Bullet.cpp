@@ -12,7 +12,7 @@ m_LastModifyTime(CTime::GetCurrentTime())
 {}
 
 Bullet::Bullet(const Bullet& xp):
-m_vfValues(xp.m_vfValues), isEmptyObj(TRUE), 
+m_vfValues(xp.m_vfValues), isEmptyObj(xp.isEmptyObj), 
 m_LastModifyTime(xp.m_LastModifyTime)
 {}
 
@@ -69,8 +69,9 @@ const CString Bullet::flt2str(const float& _F) const
 
 void Bullet::operator= (const Bullet& xp)
 {
-    m_vfValues = xp.m_vfValues;
+    m_vfValues       = xp.m_vfValues;
     m_LastModifyTime = xp.m_LastModifyTime;
+	isEmptyObj       = xp.isEmptyObj;
 }
 
 const BOOL Bullet::isEmpty() const
@@ -78,8 +79,10 @@ const BOOL Bullet::isEmpty() const
 #ifdef _DEBUG
 	BOOL B(TRUE);
 	for (std::vector<float>::const_iterator vitor = m_vfValues.begin(); vitor != m_vfValues.end(); ++vitor)
+	{
 		if ( *vitor != 0.0 )
 			B = FALSE;
+	}
 
     ASSERT(B == isEmptyObj);
 #endif

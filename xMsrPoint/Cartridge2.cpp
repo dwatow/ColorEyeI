@@ -25,19 +25,22 @@ Cartridge2::~Cartridge2()
 const BOOL Cartridge2::operator==(const Cartridge2& vCar2) const
 {
 	BOOL B(FALSE);
-	if ( ((vCar2.GetPointPosi().x == 0) && (vCar2.GetPointPosi().x == 0)) ||
-		 ((      GetPointPosi().x == 0) && (      GetPointPosi().y == 0)) )
-	{
-		return ( (GetBkColor()   == vCar2.GetBkColor()  ) &&
-			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
 
-	}
-	else
-	{
-		return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
-			     (GetBkColor()   == vCar2.GetBkColor()  ) &&
-			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
-	}
+	if ( GetDescrip() == vCar2.GetDescrip() )
+		B = TRUE;
+// 	if ( ((vCar2.GetPointPosi().x == 0) && (vCar2.GetPointPosi().x == 0)) ||
+// 		 ((      GetPointPosi().x == 0) && (      GetPointPosi().y == 0)) )
+// 	{
+// 		return ( (GetBkColor()   == vCar2.GetBkColor()  ) &&
+// 			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
+// 
+// 	}
+// 	else
+// 	{
+// 		return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
+// 			     (GetBkColor()   == vCar2.GetBkColor()  ) &&
+// 			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
+// 	}
 	return B;
 };
 
@@ -97,7 +100,7 @@ const AreaKind Cartridge2::GetSqncArea() const
 	return m_sequenceArea;
 }
 
-void Cartridge2::SetBullet(const Bullet& Pd)    
+void Cartridge2::SetBullet(const Bullet& Pd)
 {
     m_Data = Pd;
 }

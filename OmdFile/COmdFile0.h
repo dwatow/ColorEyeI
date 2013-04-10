@@ -21,8 +21,11 @@ class COmdFile0
 	COmdFileFactor *m_Omd;
 	COmdFileFactor *m_GmOmd;
 	TxtStrData m_dTxt;
-
 public:
+	OmdHead& GetFileHead(){ return m_Omd->GetFileHead(); };
+	const OmdHead GetFileHead() const{ return m_Omd->GetFileHead(); };
+	void SetFileHead(const OmdHead& _H){ m_Omd->SetFileHead(_H); };
+
 	CString GetPnlID () const { return m_Omd->GetFileHead().oPnlID (); };
     CString GetMsrDvc() const { return m_Omd->GetFileHead().oMsrDvc(); };
     CString GetPrb   () const { return m_Omd->GetFileHead().oPrb   (); };
@@ -41,21 +44,16 @@ public:
 	virtual ~COmdFile0() { delete m_Omd; };
     BOOL Open(LPCTSTR _S, CFileException& _Fx);
     BOOL Save(LPCTSTR _S, CFileException& _Fx, RNA& _D);
-//    BOOL Save(CString _S, CFileException& _Fx, OmdCarData _D);
     
 	void Close(){ if (m_GmOmd != 0) m_GmOmd->Close();   m_Omd->Close(); };
 
 	void iOmdData(RNA& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
 	void oOmdData(RNA& data){ m_Omd->oOmdData(data); };
-// 	void iOmdData(OmdCarData& data){ if (m_GmOmd != 0) m_GmOmd->iOmdData(data);   m_Omd->iOmdData(data); };
-// 	void oOmdData(OmdCarData& data){ m_Omd->oOmdData(data); };
-
-	//	OmdCarData oOmdData(){ return m_Omd->oOmdData(); };
+	RNA  oOmdData()         { return m_Omd->oOmdData(); };
 
 private:
 	void openWhichKindOmefile();
 	void saveWhichKindOmefile(RNA&);
-//	void saveWhichKindOmefile(OmdCarData);
 	void GetOpenSample(LPCTSTR , CFileException& );
 };
 

@@ -18,25 +18,40 @@
 class CColorEyeIDoc : public CDocument
 {
 //basic information in Doc
+private:
 	OmdHead m_docFileHead;
 public:
-	OmdHead& GetFileHead(){ return m_docFileHead; };
-	const OmdHead GetFileHead() const{ return m_docFileHead; };
-	void SetFileHead(const OmdHead& _H){ m_docFileHead = _H; };
+	OmdHead& GetFileHead();
+	const OmdHead GetFileHead() const;
+	void SetFileHead(const OmdHead& _H);
+
+private:
+    RNA m_docRNA;
+public:
+    void UpdateDocRNA(const RNA& _docRNA);
+    RNA  GetDocRNA() const { return m_docRNA; };
+	
+private:
+    RNA m_MsrRNA;
+public:
+    void UpdateMsrRNA(const RNA& m_MsrRNA);
+    RNA  GetMsrRNA() const { return m_MsrRNA; };
+	
+private:
+    DNA m_docDNA;
+public:
+    void UpdateDocDNA(const DNA& _docDNA);
+    const DNA GetDocDNA() const { return m_docDNA; };
 
 //File Error
 	CFileException m_ErrorFx;
 //OMD File
-private:
-//    OmdCarData m_dOmd;
-// 	RNA m_dOmd;
 public:
 	void OpenOmdDlg(LPCTSTR);
 	void SaveOmdDlg(LPCTSTR);
     void OpenOmdFile(LPCTSTR);
     void SaveOmdFile(LPCTSTR);
-    RNA& GetOmdData(){return m_docRNA; };
-//    OmdCarData& GetOmdData(){return m_dOmd; };
+//    RNA& GetOmdData(){return m_docRNA; };
 
 //TXT File
 private:
@@ -46,29 +61,9 @@ private:
 	void SaveTxtDlg(LPCTSTR);
     void OpenTxtFile(LPCTSTR);
     void SaveTxtFile(LPCTSTR);
-    TxtStrData& GetTextData(){return m_TextData; };
-    //TxtStrData GetTextData(){return m_TextData; }; //也可以
+//     TxtStrData& GetTextData(){return m_TextData; };
+//     TxtStrData GetTextData() const{return m_TextData; }; //也可以
 
-// public:
-// 	void AutoSave(int); //0: Txt, 1: Omd
-//MsrDataChain
-//private:
-//	CDataChain m_MsrData;
-//public:
-//	CDataChain& GetMsrDataChain(){ return m_MsrData; };//新的一條鍊 vChain2
-//    void RestructureVector();
-
-private:
-    RNA m_docRNA;
-public:
-    void UpdateDocRNA(const RNA& _docRNA);//{ m_docRNA.Empty(); m_docRNA = _docRNA; };
-    RNA GetDocRNA() const { return m_docRNA; };
-
-private:
-    DNA m_docDNA;
-public:
-    void UpdateDocDNA(const DNA& _docDNA);//{ m_docDNA.Empty(); m_docDNA = _docDNA; };
-    const DNA GetDocDNA() const { return m_docDNA; };
     
 protected: // create from serialization only
     CColorEyeIDoc();

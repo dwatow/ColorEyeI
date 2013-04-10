@@ -67,13 +67,13 @@ public:
     std::vector<Cartridge2>::iterator       End();
     std::vector<Cartridge2>::const_iterator End() const;  //using by CutEqualCell(const RNA)
 
-     const std::vector<Cartridge2>::size_type Size() const;
+    const std::vector<Cartridge2>::size_type Size() const;
 //     
 //     std::vector<Cartridge2>& operator=(const std::vector<Cartridge2>&);
 //     void AddCell( std::vector<Cartridge2>::const_iterator& _F, 
 //                   std::vector<Cartridge2>::const_iterator& _L );
-//     void AddCell(const RNA&);
-     void AddCell(const Cartridge2& _X);
+    void AddCell(const RNA&);
+    void AddCell(const Cartridge2& _X);
 
 //sorting
 public:
@@ -102,8 +102,8 @@ inline const BOOL RNA::IsEmpty() const
 //inline void RNA::AddCell(std::vector<Cartridge2>::const_iterator& _F, 
 //                         std::vector<Cartridge2>::const_iterator& _L)
 //{ m_CarChain2.insert(End(), _F, _L); };
-// inline void RNA::AddCell(const RNA& _R)
-// { m_CarChain2.insert(End(), _R.Begin(), _R.End()); }
+inline void RNA::AddCell(const RNA& _R)
+{ m_CarChain2.insert(End(), _R.Begin(), _R.End()); }
 inline void RNA::AddCell(const Cartridge2& _X)
 { m_CarChain2.push_back(_X);      };
 

@@ -100,16 +100,13 @@ void CColorEyeIDoc::OnFileNew()
 {
     // TODO: Add your command handler code here
     //開新檔案
-//	if (!GetPathName().IsEmpty())
-	CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
+    CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
-//     m_dOmd.Empty();          //清空記憶體空間m_OmdData
+    m_docFileHead.Empty();
     m_docDNA.Empty();
     m_docRNA.Empty();
-
-	m_docFileHead.Empty();
     
-	SetModifiedFlag(FALSE);
+    SetModifiedFlag(FALSE);
     UpdateAllViews(NULL);  //更新畫面
 }
 
@@ -117,11 +114,12 @@ BOOL CColorEyeIDoc::OnNewDocument()
 {
     if (!CDocument::OnNewDocument())
         return FALSE;
-	
+    
     // TODO: add reinitialization code here
     // (SDI documents will reuse this document)
     //第一次執行時會執行這個
-	CColorEyeIDoc::OnFileNew();
+
+    CColorEyeIDoc::OnFileNew();
     return TRUE;
 }
 
@@ -148,9 +146,13 @@ void CColorEyeIDoc::OnFileOpen()
 {
     // TODO: Add your command handler code here
 //   OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    m_docDNA.Empty();
+    m_docRNA.Empty();
+    m_docFileHead.Empty();
+
     OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-	SetModifiedFlag(FALSE);
-	UpdateAllViews(NULL);
+    SetModifiedFlag(FALSE);
+    UpdateAllViews(NULL);
 }
 
 void CColorEyeIDoc::OnFileSaveAs() 
@@ -158,7 +160,7 @@ void CColorEyeIDoc::OnFileSaveAs()
     // TODO: Add your command handler code here
 //   SaveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
      SaveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-	SetModifiedFlag(FALSE);
+    SetModifiedFlag(FALSE);
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::OpenTxtDlg(LPCTSTR FileFilter)
@@ -205,10 +207,10 @@ void CColorEyeIDoc::SaveTxtFile(LPCTSTR FilePathName)
     if (!f_txt.Save(FilePathName, m_ErrorFx))
         AfxMessageBox("路徑有問題!!!");
     else 
-	{
-		f_txt.iTxtData(m_TextData);
+    {
+        f_txt.iTxtData(m_TextData);
         f_txt.Close();
-	}
+    }
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::OpenOmdDlg(LPCTSTR FileFilter)
@@ -232,7 +234,7 @@ void CColorEyeIDoc::SaveOmdDlg(LPCTSTR FileFilter)
     if (nID == IDOK)
     {
         SaveOmdFile(aFileDialog.GetPathName());
-		DebugByTxt(aFileDialog.GetPathName());
+        DebugByTxt(aFileDialog.GetPathName());
 
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
@@ -249,14 +251,8 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
         AfxMessageBox("路徑有問題");
     else 
     {
-//         ft_Omd.oOmdData(m_dOmd);
-        ft_Omd.oOmdData(m_docRNA);
-
-		m_docFileHead.iPnlID ( ft_Omd.GetPnlID()  );
-        m_docFileHead.iMsrDvc( ft_Omd.GetMsrDvc() );
-        m_docFileHead.iPrb   ( ft_Omd.GetPrb()    );
-        m_docFileHead.iCHID  ( ft_Omd.GetCHID()   );
-		m_docFileHead.iNitsLv( ft_Omd.GetNitsLv() );
+        m_docRNA = ft_Omd.oOmdData();
+        m_docFileHead = ft_Omd.GetFileHead();
 
         ft_Omd.Close();
     }
@@ -267,36 +263,30 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
 {
     COmdFile0 f_Omd;
 
-//     if(!f_Omd.Save(FilePathName, m_ErrorFx, m_dOmd))
-	if(!f_Omd.Save(FilePathName, m_ErrorFx, m_docRNA))
+    if(!f_Omd.Save(FilePathName, m_ErrorFx, m_docRNA))
         AfxMessageBox("路徑有問題!!");
     else
-	{
-		f_Omd.SetPnlID ( m_docFileHead.oPnlID() );
-		f_Omd.SetMsrDvc( m_docFileHead.oMsrDvc());
-		f_Omd.SetPrb   ( m_docFileHead.oPrb()   );
-		f_Omd.SetCHID  ( m_docFileHead.oCHID()  );
-		f_Omd.SetNitsLv( m_docFileHead.oNitsLv());
-
-		f_Omd.iOmdData ( m_docRNA);
+    {
+		f_Omd.SetFileHead(m_docFileHead);
+        f_Omd.iOmdData ( m_docRNA);
 
         f_Omd.Close();
-	}
+    }
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::OnFileSave() 
 {
     // TODO: Add your command handler code here
-//	SetPathName()
+//    SetPathName()
     if (GetPathName().IsEmpty())            //若還沒有存過的檔
         OnFileSaveAs();                     //就另存新檔
     else
     {
         SetModifiedFlag(FALSE);
-//		SaveTxtFile(GetPathName());
- 		SaveOmdFile(GetPathName());
+//        SaveTxtFile(GetPathName());
+         SaveOmdFile(GetPathName());
     }
-	SetModifiedFlag(FALSE);
+    SetModifiedFlag(FALSE);
 }
 
 void CColorEyeIDoc::DebugByTxt(CString pathName)
@@ -317,7 +307,7 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 //             iter->GetMsrFlowNo(), //第幾點
 //             iter->GetStrPointNum(),//量測點數
 //             iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
-		str.Format("%s\n", iter->GetDescrip());
+        str.Format("%s\n", iter->GetDescrip());
         vStr.push_back(str);
     }
 
@@ -344,6 +334,20 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 }
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::UpdateDocRNA(const RNA& _docRNA)
-{ m_docRNA.Empty(); m_docRNA = _docRNA; }
+{
+	m_docRNA.CutEqualCell(_docRNA);
+	m_docRNA.AddCell(_docRNA);
+}
+
+void CColorEyeIDoc::UpdateMsrRNA(const RNA& _msrRNA)
+{ m_MsrRNA.Empty(); m_MsrRNA.AddCell(_msrRNA); }
+
 void CColorEyeIDoc::UpdateDocDNA(const DNA& _docDNA)
-{ m_docDNA.Empty(); m_docDNA = _docDNA; }
+{ m_docDNA.AddCell(_docDNA); }
+
+OmdHead& CColorEyeIDoc::GetFileHead()
+{ return m_docFileHead; };
+const OmdHead CColorEyeIDoc::GetFileHead() const
+{ return m_docFileHead; };
+void CColorEyeIDoc::SetFileHead(const OmdHead& _H)
+{ m_docFileHead = _H; };

@@ -28,15 +28,18 @@ private:
             CTime m_LastModifyTime;
 public:
     const CString GetLastTime() const;
-//float, String轉換
-private:
-      const float str2flt(CString ) const;
-    const CString flt2str(const float& ) const;
+
 //空物件判別
 private:
 	BOOL isEmptyObj;
 public:
 	const BOOL isEmpty() const;
+
+
+//float, String轉換
+private:
+      const float str2flt(CString ) const;
+    const CString flt2str(const float& ) const;
 //運算子
 public:
              void operator= (const Bullet&);

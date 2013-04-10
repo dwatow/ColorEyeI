@@ -235,7 +235,7 @@ void CPatternDlg::initDocument()
 	pDoc->GetFileHead().iInch  ( pMainFrm->m_pCa210->GetLcmSize()    );
 	
 
-    m_RNA = pDoc->GetDocRNA();
+    m_RNA  = pDoc->GetMsrRNA();
     m_itor = m_RNA.Begin();
 
     //SetPanelID
