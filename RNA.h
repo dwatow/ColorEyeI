@@ -7,20 +7,14 @@
 
 #include <vector>
 #include <iterator>
-#include "xMsrPoint/Cartridge2.h"
+#include "Cartridge2.h"
 #include "CartridgeFinder.h"
-#include "OmdFile/TxtFile.h"
+#include "TxtFile.h"
 #include "debugFile.h"
-//typedef std::vector<Cartridge2> std::vector<Cartridge2>;
 
 class RNA
 {
-	debugFile debugLogMaker;
-
-	CartridgeFinder finder;
-private:
     std::vector<Cartridge2> m_CarChain2;
-	
 //建解構子
 public:
     RNA();
@@ -34,7 +28,7 @@ public:
     void CutEqualCell(const RNA& );
 //    void CutEqualCell(std::vector<Cartridge2> );
 //    void Grow(ColorType ct, PointNum pn);
-   void freeEmptyCell();
+   void DeleteEmptyCell();
 //    void SetBolt(Bolt *_P){ p_Pusher = _P; };
 //    Bolt* GetBolt(){ return p_Pusher; };
     //像vector的函數，卻不是直接回傳
@@ -45,10 +39,6 @@ public:
 	CString sFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
     Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);
 	Cartridge2& Find(const CString&);
-private:
-	const int reconstrColor(CString&);
-	const int reconstrPointNum(CString&);
-	const int reconstrMsrNo(CString&);
 
 public:
 	void Empty(); 
@@ -80,8 +70,8 @@ public:
      void SortQuackMsr();
      void SortOrigMsr();
 private:
-    static bool AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
-    static bool OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
+    static bool areaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
+    static bool origPriority(const Cartridge2 &sp1, const Cartridge2 &sp2);
 //     void SortQuackMsr(std::vector<Cartridge2>& vCar) const;
 //     void SortOrigMsr (std::vector<Cartridge2>& vCar) const;
     
@@ -94,6 +84,15 @@ public:
     //debug
 // public:
 //    std::vector<CString> InsideData();
+private:
+	CartridgeFinder finder;
+private:
+	const int reconstrColor(CString&);
+	const int reconstrPointNum(CString&);
+	const int reconstrMsrNo(CString&);
+	
+private:
+	debugFile debugLogMaker;
 };
 
 inline const BOOL RNA::IsEmpty() const

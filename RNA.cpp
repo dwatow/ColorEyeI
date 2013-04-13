@@ -2,7 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "RNA.h"
 #include <algorithm>
 
@@ -22,34 +22,34 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////////
 //sort
 
-bool RNA::AreaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
+bool RNA::areaPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
 {
     return (sp1.GetSqncArea() < sp2.GetSqncArea()) ? 1 : 0;
 }
 
-bool RNA::OrigPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
+bool RNA::origPriority(const Cartridge2 &sp1, const Cartridge2 &sp2)
 {
     return (sp1.GetSqncFrm() < sp2.GetSqncFrm()) ? 1 : 0;
 }
 
 // void RNA::SortQuackMsr(std::vector<Cartridge2>& vCar) const
 // {
-//     std::stable_sort(vCar.begin(), vCar.end(), AreaPriority);
+//     std::stable_sort(vCar.begin(), vCar.end(), areaPriority);
 // }
 // 
 // void RNA::SortOrigMsr(std::vector<Cartridge2>& vCar) const
 // {
-//     std::stable_sort(vCar.begin(), vCar.end(), OrigPriority);
+//     std::stable_sort(vCar.begin(), vCar.end(), origPriority);
 // }
 
 void RNA::SortQuackMsr()
 {
-    std::stable_sort(Begin(), End(), AreaPriority);
+    std::stable_sort(Begin(), End(), areaPriority);
 }
 
 void RNA::SortOrigMsr()
 {
-    std::stable_sort(Begin(), End(), OrigPriority);
+    std::stable_sort(Begin(), End(), origPriority);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -478,13 +478,13 @@ void RNA::CutEqualCell(const RNA& compData)
 	debugLogMaker.Out2File("C://Users//1004066//Desktop//RNA_address.log");
 }
 
-void RNA::freeEmptyCell()
+void RNA::DeleteEmptyCell()
 {
     //適用於InitStd之後收集資料完，再free掉沒有資料的Cell
 	RNA x;
     for (std::vector<Cartridge2>::iterator itor = Begin(); itor != End(); ++itor)
 	{
-        if (itor->GetBullet().isEmpty() == TRUE)
+        if (itor->GetBullet().IsEmpty() == TRUE)
 			x.AddCell(*itor);           //要剪掉的
 	}
     //x.push_back(*itor);

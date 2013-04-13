@@ -1,16 +1,15 @@
 // ColorEyeI.cpp : Defines the class behaviors for the application.
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ColorEyeI.h"
 
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
 #include "SelExcelDlg.h"
-// #include "SelXls/SelExcelDlg.h"
 #include "CaSetupDlg.h"
-#include "xMsrPoint/PatternDlg.h"
+#include "PatternDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -251,17 +250,17 @@ void CColorEyeIApp::OnMsrForItem()
 	m_pdlgPattern->LoadedCartridge();
 }
 
-const CString CColorEyeIApp::GetPathName()
+const CString CColorEyeIApp::GetPathName() const
 {
     return m_strPathName;
 }
 
-const CString CColorEyeIApp::GetPath()
+const CString CColorEyeIApp::GetPath() const
 {
     return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
 }
 
-const CString CColorEyeIApp::GetDesktopPath()
+const CString CColorEyeIApp::GetDesktopPath() const
 {
 	return m_desktopPath;
 }

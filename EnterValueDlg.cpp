@@ -1,7 +1,7 @@
 // EnterValueDlg.cpp : implementation file
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ColorEyeI.h"
 #include "EnterValueDlg.h"
 

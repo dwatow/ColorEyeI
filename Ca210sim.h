@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "xMsrPoint/CA210.h"
+#include "CA210.h"
 
 class Ca210sim : public Ca210
 {    
@@ -91,17 +91,17 @@ public:
     void SetCalStandard  (const  CalStand&); const long  GetCalStandard()   const;
     
 #ifdef _CA210DEBUG
-    const CString GetSetupValue() const;
-    void DBugModeBox(const CString&) const;
+    const CString getSetupValue() const;
+    void debugMessageBox(const CString&) const;
 #endif
     
 private:  //for setup CA-SDK parameter
-    const float ChooseSynMode      (const   SynMode&) const;
-    const int   ChooseDisplayMode  (const   DisPlay&) const;
-    const int   ChooseDisplayDigits(const DisDigits&) const;
-    const int   ChooseAvgingMode   (const   AvgMode&) const;
-    const int   ChooseBrigUnit     (const  BrigUnit&) const;
-    const int   ChooseCalStandard  (const  CalStand&) const;
+    const float chooseSynMode      (const   SynMode&) const;
+    const int   chooseDisplayMode  (const   DisPlay&) const;
+    const int   chooseDisplayDigits(const DisDigits&) const;
+    const int   chooseAvgingMode   (const   AvgMode&) const;
+    const int   chooseBrigUnit     (const  BrigUnit&) const;
+    const int   chooseCalStandard  (const  CalStand&) const;
 };
 
 

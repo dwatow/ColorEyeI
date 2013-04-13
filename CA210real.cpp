@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Ca210real.h"
 #include <cstdlib>
 #include <ctime>
@@ -433,10 +433,10 @@ const CString Ca210real::GetCalMode() const
 
 void Ca210real::SetSynMode(const SynMode& SmType)
 {
-    m_pICa->SetSyncMode(ChooseSynMode(SmType));
+    m_pICa->SetSyncMode(chooseSynMode(SmType));
 }
 
-const float Ca210real::ChooseSynMode(const SynMode& SmType) const
+const float Ca210real::chooseSynMode(const SynMode& SmType) const
 {
     switch(SmType)
     {
@@ -469,10 +469,10 @@ const float Ca210real::GetSynMode() const
 //////////////////////////////////////////////////////////////////////////
 void Ca210real::SetDisplayMode(const DisPlay& DpType)
 {
-    m_pICa->SetDisplayMode(ChooseDisplayMode(DpType));
+    m_pICa->SetDisplayMode(chooseDisplayMode(DpType));
 }
 
-const int Ca210real::ChooseDisplayMode(const DisPlay& DpType) const
+const int Ca210real::chooseDisplayMode(const DisPlay& DpType) const
 {
     return (int)DpType;
 }
@@ -502,10 +502,10 @@ const long Ca210real::GetDisplayMode() const
 
 void Ca210real::SetDisplayDigits(const DisDigits& DdType)
 {
-    m_pICa->SetDisplayDigits(ChooseDisplayDigits(DdType));
+    m_pICa->SetDisplayDigits(chooseDisplayDigits(DdType));
 }
 
-const int Ca210real::ChooseDisplayDigits(const DisDigits& DdType) const
+const int Ca210real::chooseDisplayDigits(const DisDigits& DdType) const
 {
     switch(DdType)
     {
@@ -532,10 +532,10 @@ const long Ca210real::GetDisplayDigits() const
 //////////////////////////////////////////////////////////////////////////
 void Ca210real::SetAvgingMode(const AvgMode& AmType)
 {
-    m_pICa->SetAveragingMode(ChooseAvgingMode(AmType));
+    m_pICa->SetAveragingMode(chooseAvgingMode(AmType));
 }
 
-const int Ca210real::ChooseAvgingMode(const AvgMode& AmType) const
+const int Ca210real::chooseAvgingMode(const AvgMode& AmType) const
 {
     switch(AmType)
     {
@@ -564,10 +564,10 @@ const long Ca210real::GetAvgingMode() const
 //////////////////////////////////////////////////////////////////////////
 void Ca210real::SetBrigUnit(const BrigUnit& BuType)
 {
-    m_pICa->SetBrightnessUnit(ChooseBrigUnit(BuType));
+    m_pICa->SetBrightnessUnit(chooseBrigUnit(BuType));
 }
 
-const int Ca210real::ChooseBrigUnit(const BrigUnit& BuType) const
+const int Ca210real::chooseBrigUnit(const BrigUnit& BuType) const
 {
     switch(BuType)
     {
@@ -595,10 +595,10 @@ const long Ca210real::GetBrigUnit() const
 //////////////////////////////////////////////////////////////////////////
 void Ca210real::SetCalStandard(const CalStand& CsType)
 {
-    m_pICa->SetCalStandard(ChooseCalStandard(CsType));
+    m_pICa->SetCalStandard(chooseCalStandard(CsType));
 }
 
-const int Ca210real::ChooseCalStandard(const CalStand& CsType) const
+const int Ca210real::chooseCalStandard(const CalStand& CsType) const
 {
     switch(CsType)
     {
@@ -655,7 +655,7 @@ CString Ca210real::GetSetupValue() const
     return str;
 }
 
-void Ca210real::DBugModeBox(const CString& str) const
+void Ca210real::debugMessageBox(const CString& str) const
 {
     CString strTemp;
     strTemp.Format("%s\n%s模式, %s", str, m_isTrue?"真實":"模擬", m_Online?"連線":"離線");

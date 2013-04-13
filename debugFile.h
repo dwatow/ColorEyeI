@@ -1,7 +1,7 @@
 #ifndef DEBUGFILE_H
 #define DEBUGFILE_H
 
-#include "OmdFile/TxtFile.h"
+#include "TxtFile.h"
 
 #ifdef _DEBUG
 #define DebugCode( code_fragment ) { code_fragment }
@@ -12,7 +12,6 @@
 class debugFile
 {
     TxtStrData m_outData;
-
 public:
 	void Clear();
 	void Out2File(CString path);

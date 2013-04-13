@@ -2,7 +2,7 @@
 #define BKMAKER_H
 
 #include "CColorRef.h"
-#include "xMsrPoint\CA210.h"
+#include "CA210.h"
 
 enum NitsDirect{ND_NoDefine = 0, ND_Pos, ND_Neg};
 

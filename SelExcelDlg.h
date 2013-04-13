@@ -1,14 +1,14 @@
 #if !defined(AFX_SELEXCELDLG_H__8D74EAAE_F8BE_4BB0_8053_BFCCC8738358__INCLUDED_)
 #define AFX_SELEXCELDLG_H__8D74EAAE_F8BE_4BB0_8053_BFCCC8738358__INCLUDED_
 
-#include "SelXls\XlsRA1.h"
-#include "SelXls\XlsOQC1.h"
-#include "SelXls\XlsOQC2.h"
-#include "SelXls\XlsSEC1.h"
-#include "SelXls\XlsGamma.h"
+#include "XlsRA1.h"
+#include "XlsOQC1.h"
+#include "XlsOQC2.h"
+#include "XlsSEC1.h"
+#include "XlsGamma.h"
 
 #include <cderr.h>   //for   definition   of   FNERR_BUFFERTOOSMALL 
-#include "SelXls\FileDlg.h"
+#include "FileDlg.h"
 
 #if _MSC_VER > 1000
 #pragma once
@@ -23,31 +23,9 @@ enum FormType{ FM_Nothing = 0, FM_RA, FM_OQC_Test, FM_SEC, FM_Gamma, FM_OQCY2013
 
 class CSelExcelDlg : public CDialog
 {
-    FormType   m_ft;
-    int        m_openOmdLimit;
-	
-     std::vector<CString> m_omdFilesList;//   m_vOmdFilePathList;
-	
 // Construction
 public:
 	CSelExcelDlg(CWnd* pParent = NULL);   // standard constructor
-
-private:
-    void initSelXlsCbx(const CString& FileNameExt);
-	const CString reconstructSearchXlsPath(const CString&);
-	//OnSelectXlsForm
-	void setSelXlsDetail(const LPCTSTR& xlsDescrip, const int& openXlsLimit, const FormType& formTypt, const BOOL& tranXlsBtnEnble = TRUE);
-	//Select Radio
-	void setOmdComeFrom(enum WhereFileComeFrom WFCF);
-	//Other Omd flie -> find Omdfile
-	void findOtherOmdFile(std::vector<CString>& );
-	void showOtherOmdList(std::vector<CString>& );
-	//tran2Xls
-	void initXlsObj(CXlsFile2* );
-	const CString getCurSelXlsPath() const;
-	void out2xls(CXlsFile2* );
-	void otherOmd2xls(CXlsFile2* pfXls);
-	void thisOmd2xls(CXlsFile2* fXls);
 
 public:
 // Dialog Data
@@ -86,12 +64,26 @@ protected:
     afx_msg void OnRadioHdfile();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-    // Generated OLE dispatch map functions
-    //{{AFX_DISPATCH(CSelExcelDlg)
-        // NOTE - the ClassWizard will add and remove member functions here.
-    //}}AFX_DISPATCH
-//     DECLARE_DISPATCH_MAP()
-//     DECLARE_INTERFACE_MAP()
+private:
+	FormType   m_omdFromType;
+    int        m_omdOpenLimit;
+	std::vector<CString> m_omdList;//   m_vOmdFilePathList;
+private:
+    void initSelXlsCbx(const CString& FileNameExt);
+	const CString reconstructSearchXlsPath(const CString&);
+	//OnSelectXlsForm
+	void setSelXlsDetail(const LPCTSTR& xlsDescrip, const int& openXlsLimit, const FormType& formTypt, const BOOL& tranXlsBtnEnble = TRUE);
+	//Select Radio
+	void setOmdComeFrom(enum WhereFileComeFrom WFCF);
+	//Other Omd flie -> find Omdfile
+	void findOtherOmdFile(std::vector<CString>& );
+	void showOtherOmdList(std::vector<CString>& );
+	//tran2Xls
+	void initXlsObj(CXlsFile2* );
+	const CString getCurSelXlsPath() const;
+	void out2xls(CXlsFile2* );
+	void otherOmd2xls(CXlsFile2* pfXls);
+	void thisOmd2xls(CXlsFile2* fXls);
 };
 
 //{{AFX_INSERT_LOCATION}}

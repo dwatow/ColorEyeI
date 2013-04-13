@@ -6,14 +6,12 @@
 #endif // _MSC_VER > 1000
 // EnterValueDlg.h : header file
 //
-#include "resource.h"
 /////////////////////////////////////////////////////////////////////////////
 // CEnterValueDlg dialog
 
 class CEnterValueDlg : public CDialog
 {
 // Construction
-	CString m_dlgTitle;
 public:
 	CEnterValueDlg(const CString& dlgTitle, const CString& str, CWnd* pParent = NULL);   // standard constructor
 
@@ -40,6 +38,8 @@ protected:
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	CString m_dlgTitle;
 };
 
 //{{AFX_INSERT_LOCATION}}

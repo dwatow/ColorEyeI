@@ -6,7 +6,7 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Ca210sim.h"
 #include <cstdlib>
 #include <ctime>
@@ -211,7 +211,7 @@ void Ca210sim::SetSynMode(const SynMode& SmType)
 const float Ca210sim::GetSynMode() const
 { return 3.0; }//SM_UNIV
 
-const float Ca210sim::ChooseSynMode(const SynMode& SmType) const
+const float Ca210sim::chooseSynMode(const SynMode& SmType) const
 {
     switch(SmType)
     {
@@ -243,7 +243,7 @@ void Ca210sim::SetDisplayMode(const DisPlay& DpType)
 { m_displayMode = DpType; }
 const long Ca210sim::GetDisplayMode() const
 { return 0; }//xyLv
-const int Ca210sim::ChooseDisplayMode(const DisPlay& DpType) const
+const int Ca210sim::chooseDisplayMode(const DisPlay& DpType) const
 { return (int)DpType; }
 
 const CString Ca210sim::GetDisplayMode(const DisPlay& DpType) const
@@ -267,7 +267,7 @@ void Ca210sim::SetDisplayDigits(const DisDigits& DdType)
 { m_displayDigits = DdType; }
 const long Ca210sim::GetDisplayDigits() const
 { return 1; }//DD_4DisDigits
-const int Ca210sim::ChooseDisplayDigits(const DisDigits& DdType) const
+const int Ca210sim::chooseDisplayDigits(const DisDigits& DdType) const
 {
     switch(DdType)
     {
@@ -292,7 +292,7 @@ void Ca210sim::SetAvgingMode(const AvgMode& AmType)
 const long Ca210sim::GetAvgingMode() const
 { return 1; }//AM_FAST
 
-const int Ca210sim::ChooseAvgingMode(const AvgMode& AmType) const
+const int Ca210sim::chooseAvgingMode(const AvgMode& AmType) const
 {
     switch(AmType)
     {
@@ -319,7 +319,7 @@ void Ca210sim::SetBrigUnit(const BrigUnit& BuType)
 const long Ca210sim::GetBrigUnit() const
 { return 1; }//BU_cdm2
 
-const int Ca210sim::ChooseBrigUnit(const BrigUnit& BuType) const
+const int Ca210sim::chooseBrigUnit(const BrigUnit& BuType) const
 {
     switch(BuType)
     {
@@ -344,7 +344,7 @@ void Ca210sim::SetCalStandard(const CalStand& CsType)
 const long Ca210sim::GetCalStandard() const
 { return 1; }//CS_6500K
 
-const int Ca210sim::ChooseCalStandard(const CalStand& CsType) const
+const int Ca210sim::chooseCalStandard(const CalStand& CsType) const
 {
     switch(CsType)
     {
@@ -369,14 +369,14 @@ const CString Ca210sim::GetCalStandard(const CalStand& CsType) const
 
 #ifdef _CA210DEBUG
 
-const CString Ca210sim::GetSetupValue() const
+const CString Ca210sim::getSetupValue() const
 {
     CString str;
     str.Format("連線:%d, 實機:%d, ZeroCal了沒:%d", m_Online, m_isTrue, m_isZeroCal);
     return str;
 }
 
-void Ca210sim::DBugModeBox(const CString& str) const
+void Ca210sim::debugMessageBox(const CString& str) const
 {
     CString strTemp;
     strTemp.Format("%s\n%s模式, %s", str, m_isTrue?"真實":"模擬", m_Online?"連線":"離線");

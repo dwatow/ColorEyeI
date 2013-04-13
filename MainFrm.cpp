@@ -1,7 +1,7 @@
 // MainFrm.cpp : implementation of the CMainFrame class
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ColorEyeI.h"
 
 #include "MainFrm.h"

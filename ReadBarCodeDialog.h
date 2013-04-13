@@ -7,7 +7,7 @@
 // ReadBarCodeDialog.h : header file
 //
 #include <vector>
-#include "OmdFile/TxtFile.h"
+#include "TxtFile.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CReadBarCodeDialog dialog
@@ -15,9 +15,6 @@
 class CReadBarCodeDialog : public CDialog
 {
 // Construction
-	CString m_PathName;
-	TxtStrData m_Barcodelsit;
-	void InitBarCodeList();
 public:
 	CReadBarCodeDialog(CWnd* pParent = NULL);   // standard constructor
 
@@ -46,6 +43,11 @@ protected:
 	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	CString m_PathName;
+	TxtStrData m_Barcodelsit;
+private:
+	void initBarCodeList();
 };
 
 //{{AFX_INSERT_LOCATION}}

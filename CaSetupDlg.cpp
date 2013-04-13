@@ -1,7 +1,7 @@
 // CaSetupDlg.cpp : implementation file
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "CaSetupDlg.h"
 
 #ifdef _DEBUG
@@ -91,9 +91,9 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CCaSetupDlg message handlers
 
-void CCaSetupDlg::OnOK()     { ExitDlg(); }
-void CCaSetupDlg::OnCancel() { ExitDlg(); }
-void CCaSetupDlg::ExitDlg()  { ShowWindow(SW_HIDE); }
+void CCaSetupDlg::OnOK()     { dlgExit(); }
+void CCaSetupDlg::OnCancel() { dlgExit(); }
+void CCaSetupDlg::dlgExit()  { ShowWindow(SW_HIDE); }
 
 BOOL CCaSetupDlg::OnInitDialog() 
 {
@@ -116,14 +116,14 @@ BOOL CCaSetupDlg::OnInitDialog()
         m_cbxChNo.AddString(m_pCA210->GetChStrNo());
     }
 
-    UpdateAllSetup();
+    itemsUpdate();
     EndWaitCursor();
     
     return TRUE;  // return TRUE unless you set the focus to a control
                   // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CCaSetupDlg::UpdateAllSetup()
+void CCaSetupDlg::itemsUpdate()
 {
     m_strCaType        = m_pCA210->GetDeviceType();
     m_strCaVersion     = m_pCA210->GetCaVersion();
@@ -158,7 +158,7 @@ void CCaSetupDlg::OnSelchangeComboChannelId()
     long Ch = (long)m_cbxChId.GetCurSel();
     m_pCA210->SetChNo(Ch);
     m_pCA210->SetLcmSize("");
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboChannelNumber() 
@@ -167,49 +167,49 @@ void CCaSetupDlg::OnSelchangeComboChannelNumber()
     long Ch = (long)m_cbxChNo.GetCurSel();
     m_pCA210->SetChNo(Ch);
     m_pCA210->SetLcmSize("");
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboDisplayMode() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetDisplayMode((DisPlay)m_cbxDisMode.GetCurSel());
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboSyncMode() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetSynMode((SynMode)m_cbxSynMode.GetCurSel());
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboAveragingMode() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetAvgingMode((AvgMode)m_cbxAvgMode.GetCurSel());
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboBrigUnit() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetBrigUnit((BrigUnit)m_cbxBrigUnit.GetCurSel());
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboDisplayDigitsMode() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetDisplayDigits((DisDigits)m_cbxDisDigMode.GetCurSel());
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnSelchangeComboDisplayDefaultStd() 
 {
     // TODO: Add your control notification handler code here
     m_pCA210->SetCalStandard((CalStand)(m_cbxDisCalStand.GetCurSel()+1));
-    UpdateAllSetup();
+    itemsUpdate();
 }
 
 void CCaSetupDlg::OnShowWindow(BOOL bShow, UINT nStatus) 

@@ -8,11 +8,9 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// #include "Table.h"
 
 class CColorEyeIView : public CScrollView
 {
-	CSize sizeTotal;
 protected: // create from serialization only
     CColorEyeIView();
     DECLARE_DYNCREATE(CColorEyeIView)
@@ -53,20 +51,6 @@ protected:
 //    afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
-private:
-    void KeepSc();
-
-//////////////////////////////////////////////////////////////////////////
-//debug function
-#ifdef _DEBUG
-private:
-//     void ViewTableBkColor(isMsrItem);
-    CString strTemp;
-    CString temp;
-
-    void DebugView(CDC*, CColorEyeIDoc*, UINT);
-#endif
-
 };
 
 

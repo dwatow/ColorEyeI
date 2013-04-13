@@ -11,12 +11,6 @@ class CartridgeFinder
 public:
 	const BOOL Reconstr(CString&, CString&, CString&, CString&);
 	const BOOL Reconstr(CString&);
-// private:
-// 	void multi2single(CString, CString, CString, CString, CString&);
-// 	const BOOL m2sColor(CString);
-// 	const BOOL m2sPointTotal(CString);
-// 	const BOOL m2sMsrIndex(CString);
-// 	const BOOL m2sPara(CString);
 
 private:
 	const BOOL color(CString&);

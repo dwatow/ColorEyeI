@@ -1,7 +1,7 @@
 // ColorEyeIView.cpp : implementation of the CColorEyeIView class
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ColorEyeI.h"
 
 #include "ColorEyeIDoc.h"
@@ -99,7 +99,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
 
     for ( std::vector<Nucleotide>::iterator indexItor = showIndex.Begin(); indexItor != showIndex.End(); ++indexItor)
     {
-        str.Format("%s", indexItor->showMe());
+        str.Format("%s", indexItor->ShowMe());
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
         ptTemp.y =  TextHight*(line);
         line++;
@@ -117,7 +117,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     RNA showData(pDoc->GetDocRNA());
     for ( std::vector<Cartridge2>::iterator dataItor = showData.Begin(); dataItor != showData.End(); ++dataItor)
     {
-        str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().show());
+        str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().Show());
         ptTemp.y =  TextHight*(line);
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
         line++;
@@ -173,29 +173,17 @@ CColorEyeIDoc* CColorEyeIView::GetDocument() // non-debug version is inline
 /////////////////////////////////////////////////////////////////////////////
 // CColorEyeIView message handlers
 
-void CColorEyeIView::KeepSc()
-{
-    CRect* pRcClient = new CRect;
-//    GetClientRect(&rcClient);
-    pRcClient->top    = 2;
-    pRcClient->left   = 2;
-    pRcClient->right  = 340;
-    pRcClient->bottom = 285;
-    InvalidateRect(pRcClient);
-    delete pRcClient;
-}
-
 void CColorEyeIView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) 
 {
     // TODO: Add your message handler code here and/or call default
-//    KeepSc();
+//    keepSc();
     CScrollView::OnVScroll(nSBCode, nPos, pScrollBar);
 }
 
 BOOL CColorEyeIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) 
 {
     // TODO: Add your message handler code here and/or call default
-//    KeepSc();
+//    keepSc();
     return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
 

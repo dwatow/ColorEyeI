@@ -2,9 +2,9 @@
 #define CA210REAL_H
 
 
-#include "xMsrPoint/CA210.h"
-#include "xMsrPoint/ca200srvr.h"
-#include "xMsrPoint/Bullet.h"
+#include "CA210.h"
+#include "ca200srvr.h"
+#include "Bullet.h"
 
 //單獨控制CA-210模組是不是要進入 DEBUG模式
 //#define _CA210DEBUG _DEBUG
@@ -91,12 +91,12 @@ public:
     void SetCalStandard  (const  CalStand&); const long  GetCalStandard()   const;
     
 private:  //for setup CA-SDK parameter
-    const float ChooseSynMode      (const   SynMode&) const;
-    const int   ChooseDisplayMode  (const   DisPlay&) const;
-    const int   ChooseDisplayDigits(const DisDigits&) const;
-    const int   ChooseAvgingMode   (const   AvgMode&) const;
-    const int   ChooseBrigUnit     (const  BrigUnit&) const;
-    const int   ChooseCalStandard  (const  CalStand&) const;
+    const float chooseSynMode      (const   SynMode&) const;
+    const int   chooseDisplayMode  (const   DisPlay&) const;
+    const int   chooseDisplayDigits(const DisDigits&) const;
+    const int   chooseAvgingMode   (const   AvgMode&) const;
+    const int   chooseBrigUnit     (const  BrigUnit&) const;
+    const int   chooseCalStandard  (const  CalStand&) const;
 
 private:  //for real CA-210 USB connect initial
     const BOOL initCreatCa200();
@@ -106,7 +106,7 @@ private:  //for real CA-210 USB connect initial
     
 #ifdef _CA210DEBUG
     const CString GetSetupValue()             const;
-             void DBugModeBox(const CString&) const;
+             void debugMessageBox(const CString&) const;
 #endif
 };
 

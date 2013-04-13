@@ -1,13 +1,14 @@
 #if !defined(AFX_CASETUPDLG_H__BE5D64EA_9467_4284_B2C8_B1FF90213FA7__INCLUDED_)
 #define AFX_CASETUPDLG_H__BE5D64EA_9467_4284_B2C8_B1FF90213FA7__INCLUDED_
 
+#include "resource.h"
+#include "MainFrm.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
 // CaSetupDlg.h : header file
 //
-#include "MainFrm.h"
-#include "resource.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CCaSetupDlg dialog
@@ -15,9 +16,6 @@
 
 class CCaSetupDlg : public CDialog
 {
-// 	CMainFrame* m_pMainFrm;
-	Ca210* m_pCA210;
-
 // Construction
 public:
 	CCaSetupDlg(CWnd* pParent = NULL);   // standard constructor
@@ -75,8 +73,10 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	void ExitDlg();
-	void UpdateAllSetup();
+	Ca210* m_pCA210;
+private:
+	void dlgExit();
+	void itemsUpdate();
 };
 
 //{{AFX_INSERT_LOCATION}}

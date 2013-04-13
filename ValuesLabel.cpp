@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ValuesLabel.h"
 
 ValuesLabel::ValuesLabel(): m_cWidth(88), m_cHight(158),

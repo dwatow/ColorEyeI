@@ -10,61 +10,13 @@
 #endif // _MSC_VER > 1000
 #include <vector>
 #include <algorithm>
-#include "Omdfile/COmdFile0.h"
+#include "COmdFile0.h"
+#include "OmdHead.h"
 #include "RNA.h"
-#include "xMsrPoint/DNA.h"
-#include "Omdfile/OmdHead.h"
+#include "DNA.h"
 
 class CColorEyeIDoc : public CDocument
 {
-//basic information in Doc
-private:
-	OmdHead m_docFileHead;
-public:
-	OmdHead& GetFileHead();
-	const OmdHead GetFileHead() const;
-	void SetFileHead(const OmdHead& _H);
-
-private:
-    RNA m_docRNA;
-public:
-    void UpdateDocRNA(const RNA& _docRNA);
-    RNA  GetDocRNA() const { return m_docRNA; };
-	
-private:
-    RNA m_MsrRNA;
-public:
-    void UpdateMsrRNA(const RNA& m_MsrRNA);
-    RNA  GetMsrRNA() const { return m_MsrRNA; };
-	
-private:
-    DNA m_docDNA;
-public:
-    void UpdateDocDNA(const DNA& _docDNA);
-    const DNA GetDocDNA() const { return m_docDNA; };
-
-//File Error
-	CFileException m_ErrorFx;
-//OMD File
-public:
-	void OpenOmdDlg(LPCTSTR);
-	void SaveOmdDlg(LPCTSTR);
-    void OpenOmdFile(LPCTSTR);
-    void SaveOmdFile(LPCTSTR);
-//    RNA& GetOmdData(){return m_docRNA; };
-
-//TXT File
-private:
-    TxtStrData m_TextData;
-// public:
-	void OpenTxtDlg(LPCTSTR);
-	void SaveTxtDlg(LPCTSTR);
-    void OpenTxtFile(LPCTSTR);
-    void SaveTxtFile(LPCTSTR);
-//     TxtStrData& GetTextData(){return m_TextData; };
-//     TxtStrData GetTextData() const{return m_TextData; }; //也可以
-
-    
 protected: // create from serialization only
     CColorEyeIDoc();
     DECLARE_DYNCREATE(CColorEyeIDoc)
@@ -111,10 +63,54 @@ protected:
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
 private:
-//    void DebugByTxt();
-    void DebugByTxt(CString pathName);
-//    static bool isMsred(const Cartridge &sp1, const Cartridge &sp2);
-
+	//basic information in Doc
+private:
+	OmdHead m_docFileHead;
+public:
+	OmdHead& GetFileHead();
+	const OmdHead GetFileHead() const;
+	void SetFileHead(const OmdHead& _H);
+	
+private:
+    RNA m_docRNA;
+public:
+    void UpdateDocRNA(const RNA& _docRNA);
+    RNA  GetDocRNA() const { return m_docRNA; };
+	
+private:
+    RNA m_MsrRNA;
+public:
+    void UpdateMsrRNA(const RNA& m_MsrRNA);
+    RNA  GetMsrRNA() const { return m_MsrRNA; };
+	
+private:
+    DNA m_docDNA;
+public:
+    void UpdateDocDNA(const DNA& _docDNA);
+    const DNA GetDocDNA() const { return m_docDNA; };
+	
+	//File Error
+	CFileException m_ErrorFx;
+	//OMD File
+// public:
+	void openOmdDlg(LPCTSTR);
+	void saveOmdDlg(LPCTSTR);
+    void openOmdFile(LPCTSTR);
+    void saveOmdFile(LPCTSTR);
+	//    RNA& GetOmdData(){return m_docRNA; };
+	
+	//TXT File
+private:
+    TxtStrData m_TextData;
+	void openTxtDlg(LPCTSTR);
+	void saveTxtDlg(LPCTSTR);
+    void openTxtFile(LPCTSTR);
+    void saveTxtFile(LPCTSTR);
+	//     TxtStrData& GetTextData(){return m_TextData; };
+	//     TxtStrData GetTextData() const{return m_TextData; }; //也可以
+	
+	//debug
+    void debugByTxt(CString pathName);
 };
 
 /////////////////////////////////////////////////////////////////////////////

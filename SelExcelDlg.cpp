@@ -21,13 +21,11 @@ static char THIS_FILE[] = __FILE__;
 CSelExcelDlg::CSelExcelDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CSelExcelDlg::IDD, pParent)
 {
-    EnableAutomation();
+    EnableAutomation();  //為什麼要有這個呀？
     //{{AFX_DATA_INIT(CSelExcelDlg)
     m_xlsDescrip = _T("");
     //}}AFX_DATA_INIT
 }
-
-
 
 void CSelExcelDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -54,23 +52,6 @@ BEGIN_MESSAGE_MAP(CSelExcelDlg, CDialog)
     //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-// BEGIN_DISPATCH_MAP(CSelExcelDlg, CDialog)
-// //{{AFX_DISPATCH_MAP(CSelExcelDlg)
-// // NOTE - the ClassWizard will add and remove mapping macros here.
-// //}}AFX_DISPATCH_MAP
-// END_DISPATCH_MAP()
-// 
-// // Note: we add support for IID_ISelExcelDlg to support typesafe binding
-// //  from VBA.  This IID must match the GUID that is attached to the 
-// //  dispinterface in the .ODL file.
-// 
-// // {1898EEAC-B573-4CD6-90FA-92D98663C79E}
-// static const IID IID_ISelExcelDlg =
-// { 0x1898eeac, 0xb573, 0x4cd6, { 0x90, 0xfa, 0x92, 0xd9, 0x86, 0x63, 0xc7, 0x9e } };
-// 
-// BEGIN_INTERFACE_MAP(CSelExcelDlg, CDialog)
-// INTERFACE_PART(CSelExcelDlg, IID_ISelExcelDlg, Dispatch)
-// END_INTERFACE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSelExcelDlg message handlers
 
@@ -147,8 +128,8 @@ void CSelExcelDlg::setOmdComeFrom(enum WhereFileComeFrom WFCF)
 void CSelExcelDlg::setSelXlsDetail(const LPCTSTR& _S, const int& _I, const FormType& _F, const BOOL& _B)
 {
     m_xlsDescrip.Format(_S); 
-    m_openOmdLimit = _I;
-    m_ft = _F;
+    m_omdOpenLimit = _I;
+    m_omdFromType = _F;
     m_tran2Xls.EnableWindow(_B);
 }
 
@@ -174,10 +155,10 @@ void CSelExcelDlg::findOtherOmdFile(std::vector<CString>& fileList)
 {
     CString fOmdFilter("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");//檔案過濾條件
     CFileDlg aFileDialog (TRUE, NULL, NULL, \
-        ( m_openOmdLimit > 1 ) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT \
+        ( m_omdOpenLimit > 1 ) ? OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT \
         : OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, fOmdFilter);
     
-    aFileDialog.SetSelMultiFileTotal(m_openOmdLimit);  //設定可以選幾個檔案。
+    aFileDialog.SetSelMultiFileTotal(m_omdOpenLimit);  //設定可以選幾個檔案。
     
     if (aFileDialog.DoModal() == IDOK)
         aFileDialog.GetSelFileList(fileList);
@@ -193,7 +174,7 @@ void CSelExcelDlg::showOtherOmdList(std::vector<CString>& fileList)
     for (std::vector<CString>::iterator itStr = fileList.begin(); itStr != fileList.end(); ++itStr)
     {
         //顯示時會依表格適用幾筆Omd檔的數量，做限制。
-        if (itStr - fileList.begin() < m_openOmdLimit)
+        if (itStr - fileList.begin() < m_omdOpenLimit)
             m_lstSelOmdFileList.AddString(itStr->Right(itStr->GetLength() - itStr->ReverseFind('\\') - 1));
         else
         {
@@ -205,8 +186,8 @@ void CSelExcelDlg::showOtherOmdList(std::vector<CString>& fileList)
 void CSelExcelDlg::OnFindOmdFile()
 {
     // TODO: Add your control notification handler code here
-    findOtherOmdFile(m_omdFilesList);  //找omd檔案的動作
-    showOtherOmdList(m_omdFilesList);  //檔案列表裝在控制項上
+    findOtherOmdFile(m_omdList);  //找omd檔案的動作
+    showOtherOmdList(m_omdList);  //檔案列表裝在控制項上
 }
 
 void CSelExcelDlg::OnOK()
@@ -224,7 +205,7 @@ void CSelExcelDlg::OnOK()
 
 void CSelExcelDlg::initXlsObj(CXlsFile2* pfXls)
 {
-    switch(m_ft)
+    switch(m_omdFromType)
     {
     case FM_SEC:             pfXls = new CXlsSEC1 (); pfXls->New()->SetSheetName(1,"SEC Report");                   break;
     case FM_RA:              pfXls = new CXlsRA1  (); pfXls->New()->SetSheetName(1,"RA Report");                    break;    
@@ -261,14 +242,14 @@ void CSelExcelDlg::otherOmd2xls(CXlsFile2* pHDfXls)
     COmdFile0 fOmd;
     CFileException fx;
     BeginWaitCursor();
-    for (std::vector<CString>::iterator itfPaths = m_omdFilesList.begin(); itfPaths != m_omdFilesList.end(); ++itfPaths)
+    for (std::vector<CString>::iterator itfPaths = m_omdList.begin(); itfPaths != m_omdList.end(); ++itfPaths)
     {
         //在此，等同於Doc的開啟舊檔As omd
         if(!fOmd.Open(*itfPaths, fx))
             AfxMessageBox("路徑有問題");
         else
         {
-            pHDfXls->iCellNO (abs(itfPaths - m_omdFilesList.begin()));
+            pHDfXls->iCellNO (abs(itfPaths - m_omdList.begin()));
             pHDfXls->iChannel(fOmd.GetCHID());
             pHDfXls->iPanelID(fOmd.GetPnlID());
             pHDfXls->iProb   (fOmd.GetPrb());

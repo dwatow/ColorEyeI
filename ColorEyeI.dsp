@@ -102,15 +102,15 @@ SOURCE=.\BkNits.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Bullet.cpp
+SOURCE=.\Bullet.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\ca200srvr.cpp
+SOURCE=.\ca200srvr.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\CA210.cpp
+SOURCE=.\CA210.cpp
 # End Source File
 # Begin Source File
 
@@ -122,7 +122,7 @@ SOURCE=.\Ca210sim.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Cartridge2.cpp
+SOURCE=.\Cartridge2.cpp
 # End Source File
 # Begin Source File
 
@@ -138,11 +138,11 @@ SOURCE=.\CColorRef.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Circle.cpp
+SOURCE=.\Circle.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\CircleArc.cpp
+SOURCE=.\CircleArc.cpp
 # End Source File
 # Begin Source File
 
@@ -166,23 +166,23 @@ SOURCE=.\ColorEyeIView.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFile0.cpp
+SOURCE=.\COmdFile0.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFile1.cpp
+SOURCE=.\COmdFile1.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileFactor.cpp
+SOURCE=.\COmdFileFactor.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileGm.cpp
+SOURCE=.\COmdFileGm.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\DNA.cpp
+SOURCE=.\DNA.cpp
 # End Source File
 # Begin Source File
 
@@ -194,7 +194,7 @@ SOURCE=.\excel.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\FileDlg.cpp
+SOURCE=.\FileDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -202,15 +202,15 @@ SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\MsrItems\MsrItemDlg.cpp
+SOURCE=.\MsrItemDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Nucleotide.cpp
+SOURCE=.\Nucleotide.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\PatternDlg.cpp
+SOURCE=.\PatternDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -226,7 +226,7 @@ SOURCE=.\SelExcelDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\MsrItems\StaticText.cpp
+SOURCE=.\StaticText.cpp
 # End Source File
 # Begin Source File
 
@@ -239,7 +239,7 @@ SOURCE=.\TranScripter.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\TxtFile.cpp
+SOURCE=.\TxtFile.cpp
 # End Source File
 # Begin Source File
 
@@ -247,31 +247,31 @@ SOURCE=.\ValuesLabel.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\xlef.cpp
+SOURCE=.\xlef.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsFile2.cpp
+SOURCE=.\XlsFile2.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsGamma.cpp
+SOURCE=.\XlsGamma.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsOQC1.cpp
+SOURCE=.\XlsOQC1.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsOQC2.cpp
+SOURCE=.\XlsOQC2.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsRA1.cpp
+SOURCE=.\XlsRA1.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsSEC1.cpp
+SOURCE=.\XlsSEC1.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -291,15 +291,15 @@ SOURCE=.\BkNits.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Bullet.h
+SOURCE=.\Bullet.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\ca200srvr.h
+SOURCE=.\ca200srvr.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\CA210.h
+SOURCE=.\CA210.h
 # End Source File
 # Begin Source File
 
@@ -311,7 +311,7 @@ SOURCE=.\Ca210sim.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Cartridge2.h
+SOURCE=.\Cartridge2.h
 # End Source File
 # Begin Source File
 
@@ -327,11 +327,11 @@ SOURCE=.\CColorRef.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Circle.h
+SOURCE=.\Circle.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\CircleArc.h
+SOURCE=.\CircleArc.h
 # End Source File
 # Begin Source File
 
@@ -347,19 +347,19 @@ SOURCE=.\ColorEyeIView.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFile0.h
+SOURCE=.\COmdFile0.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFile1.h
+SOURCE=.\COmdFile1.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileFactor.h
+SOURCE=.\COmdFileFactor.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\COmdFileGm.h
+SOURCE=.\COmdFileGm.h
 # End Source File
 # Begin Source File
 
@@ -367,7 +367,7 @@ SOURCE=.\debugFile.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\DNA.H
+SOURCE=.\DNA.h
 # End Source File
 # Begin Source File
 
@@ -379,7 +379,7 @@ SOURCE=.\excel.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\FileDlg.h
+SOURCE=.\FileDlg.h
 # End Source File
 # Begin Source File
 
@@ -387,19 +387,19 @@ SOURCE=.\MainFrm.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\MsrItems\MsrItemDlg.h
+SOURCE=.\MsrItemDlg.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\Nucleotide.h
+SOURCE=.\Nucleotide.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\OmdHead.h
+SOURCE=.\OmdHead.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\xMsrPoint\PatternDlg.h
+SOURCE=.\PatternDlg.h
 # End Source File
 # Begin Source File
 
@@ -419,7 +419,7 @@ SOURCE=.\SelExcelDlg.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\MsrItems\StaticText.h
+SOURCE=.\StaticText.h
 # End Source File
 # Begin Source File
 
@@ -431,7 +431,7 @@ SOURCE=.\TranScripter.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\OmdFile\TxtFile.h
+SOURCE=.\TxtFile.h
 # End Source File
 # Begin Source File
 
@@ -439,31 +439,31 @@ SOURCE=.\ValuesLabel.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\xlef.h
+SOURCE=.\xlef.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsFile2.h
+SOURCE=.\XlsFile2.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsGamma.h
+SOURCE=.\XlsGamma.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsOQC1.h
+SOURCE=.\XlsOQC1.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsOQC2.h
+SOURCE=.\XlsOQC2.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsRA1.h
+SOURCE=.\XlsRA1.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\XlsSEC1.h
+SOURCE=.\XlsSEC1.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

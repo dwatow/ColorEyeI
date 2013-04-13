@@ -1,11 +1,11 @@
 // ColorEyeIDoc.cpp : implementation of the CColorEyeIDoc class
 //
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ColorEyeI.h"
 #include "ColorEyeIDoc.h"
 
-#include "SelXls/FileDlg.h"
+#include "FileDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -145,51 +145,52 @@ BOOL CColorEyeIDoc::OnOpenDocument(LPCTSTR lpszPathName)
 void CColorEyeIDoc::OnFileOpen() 
 {
     // TODO: Add your command handler code here
-//   OpenTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-    m_docDNA.Empty();
-    m_docRNA.Empty();
-    m_docFileHead.Empty();
-
-    OpenOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-    SetModifiedFlag(FALSE);
-    UpdateAllViews(NULL);
+//   openTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    openOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 }
 
 void CColorEyeIDoc::OnFileSaveAs() 
 {
     // TODO: Add your command handler code here
-//   SaveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-     SaveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
-    SetModifiedFlag(FALSE);
+//   saveTxtDlg("Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
+    saveOmdDlg("OrigMsrData Files (*.omd)|*.omd|Text File(*.txt)|*.txt|All Files (*.*)|*.* ||");
 }
 //////////////////////////////////////////////////////////////////////////
-void CColorEyeIDoc::OpenTxtDlg(LPCTSTR FileFilter)
+void CColorEyeIDoc::openTxtDlg(LPCTSTR FileFilter)
 {
     CFileDlg aFileDialog (TRUE, "txt", "*.txt", OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        OpenTxtFile(aFileDialog.GetPathName());    
+        m_docDNA.Empty();
+        m_docRNA.Empty();
+        m_docFileHead.Empty();
+        SetModifiedFlag(FALSE);
+        UpdateAllViews(NULL);
+
+        openTxtFile(aFileDialog.GetPathName());    
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
     }
 }
 
-void CColorEyeIDoc::SaveTxtDlg(LPCTSTR FileFilter)
+void CColorEyeIDoc::saveTxtDlg(LPCTSTR FileFilter)
 {
     CFileDlg aFileDialog (FALSE, "txt", "*.txt", OFN_SHAREAWARE, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        SaveTxtFile(aFileDialog.GetPathName());
+        saveTxtFile(aFileDialog.GetPathName());
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
+    
+        SetModifiedFlag(FALSE);
     }        
 }
 
-void CColorEyeIDoc::OpenTxtFile(LPCTSTR FilePathName)
+void CColorEyeIDoc::openTxtFile(LPCTSTR FilePathName)
 {
     CTxtFile f_txt;
     if(!f_txt.Open(FilePathName, m_ErrorFx))
@@ -201,7 +202,7 @@ void CColorEyeIDoc::OpenTxtFile(LPCTSTR FilePathName)
     }
 }
 
-void CColorEyeIDoc::SaveTxtFile(LPCTSTR FilePathName)
+void CColorEyeIDoc::saveTxtFile(LPCTSTR FilePathName)
 {
     CTxtFile f_txt;
     if (!f_txt.Save(FilePathName, m_ErrorFx))
@@ -213,35 +214,44 @@ void CColorEyeIDoc::SaveTxtFile(LPCTSTR FilePathName)
     }
 }
 //////////////////////////////////////////////////////////////////////////
-void CColorEyeIDoc::OpenOmdDlg(LPCTSTR FileFilter)
+void CColorEyeIDoc::openOmdDlg(LPCTSTR FileFilter)
 {
     CFileDialog aFileDialog (TRUE, NULL, NULL, OFN_SHAREAWARE | OFN_OVERWRITEPROMPT, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        OpenOmdFile(aFileDialog.GetPathName());
+        m_docDNA.Empty();
+        m_docRNA.Empty();
+        m_docFileHead.Empty();
+
+        openOmdFile(aFileDialog.GetPathName());
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
-    }
+
+        SetModifiedFlag(FALSE);
+        UpdateAllViews(NULL);
+   }
 }
 
-void CColorEyeIDoc::SaveOmdDlg(LPCTSTR FileFilter)
+void CColorEyeIDoc::saveOmdDlg(LPCTSTR FileFilter)
 {
     CFileDialog aFileDialog (FALSE, "omd", "*.omd", OFN_SHAREAWARE, FileFilter);
     
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        SaveOmdFile(aFileDialog.GetPathName());
-        DebugByTxt(aFileDialog.GetPathName());
+        saveOmdFile(aFileDialog.GetPathName());
+        debugByTxt(aFileDialog.GetPathName());
 
         SetPathName(aFileDialog.GetPathName());
         SetTitle(aFileDialog.GetFileName());
+    
+        SetModifiedFlag(FALSE);
     }
 }
 
-void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
+void CColorEyeIDoc::openOmdFile(LPCTSTR FilePathName)
 {
     BeginWaitCursor();
 
@@ -259,7 +269,7 @@ void CColorEyeIDoc::OpenOmdFile(LPCTSTR FilePathName)
     EndWaitCursor();
 }
 
-void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
+void CColorEyeIDoc::saveOmdFile(LPCTSTR FilePathName)
 {
     COmdFile0 f_Omd;
 
@@ -267,7 +277,7 @@ void CColorEyeIDoc::SaveOmdFile(LPCTSTR FilePathName)
         AfxMessageBox("路徑有問題!!");
     else
     {
-		f_Omd.SetFileHead(m_docFileHead);
+        f_Omd.SetFileHead(m_docFileHead);
         f_Omd.iOmdData ( m_docRNA);
 
         f_Omd.Close();
@@ -283,13 +293,13 @@ void CColorEyeIDoc::OnFileSave()
     else
     {
         SetModifiedFlag(FALSE);
-//        SaveTxtFile(GetPathName());
-         SaveOmdFile(GetPathName());
+//        saveTxtFile(GetPathName());
+         saveOmdFile(GetPathName());
     }
     SetModifiedFlag(FALSE);
 }
 
-void CColorEyeIDoc::DebugByTxt(CString pathName)
+void CColorEyeIDoc::debugByTxt(CString pathName)
 {
     std::vector<CString> vStr;
     CString str;
@@ -335,8 +345,8 @@ void CColorEyeIDoc::DebugByTxt(CString pathName)
 //////////////////////////////////////////////////////////////////////////
 void CColorEyeIDoc::UpdateDocRNA(const RNA& _docRNA)
 {
-	m_docRNA.CutEqualCell(_docRNA);
-	m_docRNA.AddCell(_docRNA);
+    m_docRNA.CutEqualCell(_docRNA);
+    m_docRNA.AddCell(_docRNA);
 }
 
 void CColorEyeIDoc::UpdateMsrRNA(const RNA& _msrRNA)

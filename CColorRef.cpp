@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "CColorRef.h"
 
 ColorRef::ColorRef():m_color(0, 0, 0)

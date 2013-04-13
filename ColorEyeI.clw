@@ -2,33 +2,35 @@
 
 [General Info]
 Version=1
-LastClass=CSelExcelDlg
+LastClass=CAboutDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=9
+ClassCount=11
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_EDIT_DIALOG
+Resource1=IDD_MSR_ITEM
 Class5=CAboutDlg
-Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_ABOUTBOX
-Resource4=IDD_MSR_ITEM
+Resource2=IDR_MAINFRAME
+Resource3=IDD_OMDTOEXCEL
+Resource4=IDD_PATTERN_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_OMDTOEXCEL
-Resource7=IDR_MAINFRAME
+Resource6=IDD_CASETUP_DIALOG
+Resource7=IDD_ABOUTBOX
 Class7=CCaSetupDlg
-Resource8=IDD_CASETUP_DIALOG
+Resource8=IDD_EDIT_DIALOG
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
+Class10=CMsrItemDlg
+Class11=CPatternDlg
 Resource9=IDD_DIALOG_BARCODE
 
 [CLS:CColorEyeIApp]
@@ -155,7 +157,7 @@ Control11=IDC_STATIC,button,1342177287
 
 [DLG:IDD_PATTERN_DIALOG]
 Type=1
-Class=?
+Class=CPatternDlg
 ControlCount=0
 
 [DLG:"IDD_OMDTOEXCEL"]
@@ -176,7 +178,7 @@ Control11=IDC_STATIC,button,1342177287
 
 [DLG:IDD_MSR_ITEM]
 Type=1
-Class=?
+Class=CMsrItemDlg
 ControlCount=99
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
@@ -282,7 +284,7 @@ Control99=IDC_STATIC,static,1342308352
 Type=1
 Class=CEnterValueDlg
 ControlCount=4
-Control1=IDC_EDIT_VALUE,edit,1350631552
+Control1=IDC_EDIT_VALUE,edit,1350639744
 Control2=IDOK,button,1342242817
 Control3=IDC_STATIC_SOMETHING,static,1342308352
 Control4=IDC_STATIC,static,1342308352
@@ -367,7 +369,7 @@ HeaderFile=ReadBarCodeDialog.h
 ImplementationFile=ReadBarCodeDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_COMBO_SELNO
+LastObject=CReadBarCodeDialog
 VirtualFilter=dWC
 
 [CLS:CSelExcelDlg]
@@ -378,4 +380,20 @@ BaseClass=CDialog
 Filter=D
 LastObject=CSelExcelDlg
 VirtualFilter=dWC
+
+[CLS:CMsrItemDlg]
+Type=0
+HeaderFile=MsrItemDlg.h
+ImplementationFile=MsrItemDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CMsrItemDlg
+
+[CLS:CPatternDlg]
+Type=0
+HeaderFile=PatternDlg.h
+ImplementationFile=PatternDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CPatternDlg
 
