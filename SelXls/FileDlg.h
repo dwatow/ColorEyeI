@@ -34,7 +34,8 @@ public:
 // 	int GetSelFileList(CComboBox& ComboBox);
 // 	int GetSelFileList(CListBox& ListBox);
 	const int GetSelFileList(std::vector<CString>& vstrFilePath);
-	void SetMultiFileNameBuffer(const int&);
+// 	void SetMultiFileNameBuffer(const int&);
+	void SetSelMultiFileTotal(const int&);
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -5,9 +5,7 @@ Cartridge2::Cartridge2():
 m_sequenceArea(AA_00), m_sequenceFrom(0),
 m_PointPosition(0, 0), m_pBackGorund(0),
 m_Description(""), m_bkStatus(BGS_Normal)
-{
-	SetBkStatus(m_bkStatus);
-}
+{ SetBkStatus(m_bkStatus); }
 
 Cartridge2::Cartridge2(const Cartridge2& _C):
 m_sequenceArea(_C.m_sequenceArea), m_sequenceFrom(_C.m_sequenceFrom),
@@ -23,26 +21,7 @@ Cartridge2::~Cartridge2()
 }
 
 const BOOL Cartridge2::operator==(const Cartridge2& vCar2) const
-{
-	BOOL B(FALSE);
-
-	if ( GetDescrip() == vCar2.GetDescrip() )
-		B = TRUE;
-// 	if ( ((vCar2.GetPointPosi().x == 0) && (vCar2.GetPointPosi().x == 0)) ||
-// 		 ((      GetPointPosi().x == 0) && (      GetPointPosi().y == 0)) )
-// 	{
-// 		return ( (GetBkColor()   == vCar2.GetBkColor()  ) &&
-// 			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
-// 
-// 	}
-// 	else
-// 	{
-// 		return ( (GetPointPosi() == vCar2.GetPointPosi()) && 
-// 			     (GetBkColor()   == vCar2.GetBkColor()  ) &&
-// 			     (GetBkStatus()  == vCar2.GetBkStatus() ) ) ? TRUE : FALSE;
-// 	}
-	return B;
-};
+{ return ( GetDescrip() == vCar2.GetDescrip() ) ? TRUE : FALSE; };
 
 void Cartridge2::operator= (const Cartridge2& vCar)
 {
@@ -81,39 +60,19 @@ const CString Cartridge2::showMe() const
  *******************************************/
 
 void Cartridge2::SetSqncFrm(const UINT& _F)
-{
-	m_sequenceFrom = _F;
-}
-
+{ m_sequenceFrom = _F; }
 const UINT Cartridge2::GetSqncFrm() const
-{
-	return m_sequenceFrom;
-}
-
+{ return m_sequenceFrom; }
 void Cartridge2::SetSqncArea(const AreaKind& _A)
-{
-	m_sequenceArea = _A;
-}
-
+{ m_sequenceArea = _A; }
 const AreaKind Cartridge2::GetSqncArea() const
-{
-	return m_sequenceArea;
-}
-
+{ return m_sequenceArea; }
 void Cartridge2::SetBullet(const Bullet& Pd)
-{
-    m_Data = Pd;
-}
-
+{ m_Data = Pd; }
 const Bullet Cartridge2::GetBullet() const
-{
-    return m_Data;    
-}
-
+{ return m_Data; }
 Bullet& Cartridge2::GetBullet()
-{
-    return m_Data;    
-}
+{ return m_Data; }
 
 void Cartridge2::SetPointPosi(const CPoint& _P)
 {
@@ -123,9 +82,7 @@ void Cartridge2::SetPointPosi(const CPoint& _P)
 }
 
 const CPoint Cartridge2::GetPointPosi() const
-{
-    return m_PointPosition;
-}
+{ return m_PointPosition; }
 
 void Cartridge2::SetBkColor(const ColorRef& _C)
 {
@@ -198,11 +155,6 @@ const CString Cartridge2::GetStrBkStatus() const
 }
 
 void Cartridge2::SetDescrip(const CString& str)
-{
-	m_Description = str;
-}
-
+{ m_Description = str; }
 const CString Cartridge2::GetDescrip() const
-{
-	return m_Description;
-}
+{ return m_Description; }

@@ -156,7 +156,7 @@ const int CFileDlg::GetSelFileList(std::vector<CString>& vstrFilePath)
 	return (int)vstrFilePath.size();
 }
 
-void CFileDlg::SetMultiFileNameBuffer(const int& FileMaxBuffer)
+void CFileDlg::SetSelMultiFileTotal(const int& FileMaxBuffer)
 {
 	const int BufferSize = (FileMaxBuffer * (MAX_PATH + 1)) + 1;
 	m_ofn.nMaxFile = BufferSize;

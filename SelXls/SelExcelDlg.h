@@ -20,8 +20,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // CSelExcelDlg dialog
 
-enum WhereFileComeFrom { FromNowFile = 0, FromHDFile};
-enum FormType{ FORM_Nothing = 0, FORM_RA, FORM_OQC_TRIAL_PRODUCTION, FORM_SEC, FORM_Gamma, FORM_OQCY2013_MASS_PRODUCTION};
+enum WhereFileComeFrom { ThisFile = 0, OtherFile};
+enum FormType{ FM_Nothing = 0, FM_RA, FM_OQC_Test, FM_SEC, FM_Gamma, FM_OQCY2013_Volume};
 
 class CSelExcelDlg : public CDialog
 {
@@ -29,16 +29,29 @@ class CSelExcelDlg : public CDialog
     int        m_fileNumLimit;
     CString    m_strXlsFilePath;  //XlsFilepath
 
-    RNA m_vOmdtoXls;
-//    CDataChain m_vOmdtoXls;
-    std::vector<CString>   m_vOmdFilePathList;
+    RNA m_omd2xls;
+    std::vector<CString> m_omdFilesList;//   m_vOmdFilePathList;
 
     CMainFrame*    m_pMainFrm;
     CColorEyeIDoc* m_pDoc;
+
 // Construction
 public:
     CSelExcelDlg(CWnd* pParent = NULL);   // standard constructor
 
+private:
+	const CString getCurSelXlsPath() const;
+	void out2xls(CXlsFile2* );
+//     void NewVector();
+    void initSelXlsCbx(CString FileNameExt);
+	void otherOmd2xls(CXlsFile2* pfXls);
+	void thisOmd2xls(CXlsFile2* fXls);
+	
+    void setFileComeFrom(enum WhereFileComeFrom WFCF);
+
+	void findOtherOmdFile(std::vector<CString>& );
+	void showFileList(std::vector<CString>& );
+public:
 // Dialog Data
     //{{AFX_DATA(CSelExcelDlg)
     enum { IDD = IDD_OMDTOEXCEL };
@@ -57,15 +70,12 @@ public:
 // Overrides
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CSelExcelDlg)
-	public:
-//    virtual void OnFinalRelease();
 	protected:
     virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
 
 // Implementation
 protected:
-    //afx_msg void OnSelchangeComboExcelseler();OnSelectXlsForm
 
     // Generated message map functions
     //{{AFX_MSG(CSelExcelDlg)
@@ -83,15 +93,6 @@ protected:
     //}}AFX_DISPATCH
     DECLARE_DISPATCH_MAP()
     DECLARE_INTERFACE_MAP()
-private:
-	const CString GetXlsFilePath() const;
-	void OutToExcel(CXlsFile2* );
-    void NewVector();
-    void InitXlsFileList(CComboBox& ComboBox, CString FileNameExt);
-	void HDfileToExcel(CXlsFile2* pfXls);
-	void DocfileToExcel(CXlsFile2* fXls);
-
-    void SetFileComeFrom(enum WhereFileComeFrom WFCF);
 };
 
 //{{AFX_INSERT_LOCATION}}

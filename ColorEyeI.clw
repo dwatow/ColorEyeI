@@ -2,32 +2,33 @@
 
 [General Info]
 Version=1
-LastClass=CMainFrame
+LastClass=CSelExcelDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=8
+ClassCount=9
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_EDIT_DIALOG
 Class5=CAboutDlg
-Resource2=IDD_MSR_ITEM
-Resource3=IDR_MAINFRAME
-Resource4=IDD_OMDTOEXCEL
+Resource2=IDD_PATTERN_DIALOG
+Resource3=IDD_ABOUTBOX
+Resource4=IDD_MSR_ITEM
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_EDIT_DIALOG
-Resource7=IDD_PATTERN_DIALOG
+Resource6=IDD_OMDTOEXCEL
+Resource7=IDR_MAINFRAME
 Class7=CCaSetupDlg
 Resource8=IDD_CASETUP_DIALOG
 Class8=CReadBarCodeDialog
+Class9=CSelExcelDlg
 Resource9=IDD_DIALOG_BARCODE
 
 [CLS:CColorEyeIApp]
@@ -63,7 +64,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=ID_MSR_CONNECTCA210
+LastObject=CMainFrame
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -138,7 +139,7 @@ CommandCount=8
 
 [DLG:IDD_OMDTOEXCEL]
 Type=1
-Class=?
+Class=CSelExcelDlg
 ControlCount=11
 Control1=IDC_COMBO_EXCELSELER,combobox,1344339971
 Control2=IDC_RADIO_NOWFILE,button,1342308361
@@ -146,7 +147,7 @@ Control3=IDC_RADIO_HDFILE,button,1342308361
 Control4=IDC_BUTTON_FINDFILE,button,1476460544
 Control5=IDOK,button,1476460545
 Control6=IDCANCEL,button,1342242816
-Control7=IDC_STATIC_ITEMLIST,static,1342308352
+Control7=IDC_STATIC_XLSDESCRIP,static,1342308352
 Control8=IDC_STATIC,button,1342177287
 Control9=IDC_LIST_SELFILELIST,listbox,1488011521
 Control10=IDC_STATIC_HDFILELIST,button,1342177543
@@ -367,5 +368,14 @@ ImplementationFile=ReadBarCodeDialog.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=IDC_COMBO_SELNO
+VirtualFilter=dWC
+
+[CLS:CSelExcelDlg]
+Type=0
+HeaderFile=SelExcelDlg.h
+ImplementationFile=SelExcelDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CSelExcelDlg
 VirtualFilter=dWC
 

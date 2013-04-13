@@ -28,8 +28,8 @@ class CColorEyeIApp : public CWinApp
 private:
 	CString m_strPathName;
 public:
-	const CString GetPath();
-	const CString GetPathName();
+	const CString GetPath();      //執行檔所在目錄
+	const CString GetPathName();  //執行檔所在目錄及檔名
 
 //桌面路徑
 private:

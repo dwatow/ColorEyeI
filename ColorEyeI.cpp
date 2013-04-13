@@ -7,7 +7,8 @@
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
-#include "SelXls/SelExcelDlg.h"
+#include "SelExcelDlg.h"
+// #include "SelXls/SelExcelDlg.h"
 #include "CaSetupDlg.h"
 #include "xMsrPoint/PatternDlg.h"
 

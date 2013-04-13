@@ -35,6 +35,7 @@
 #define IDC_STATIC_ITEMLIST             1005
 #define IDC_CHECK_CDP5                  1005
 #define IDC_CHECK4                      1005
+#define IDC_STATIC_XLSDESCRIP           1005
 #define IDC_CHECK_CDP13                 1006
 #define IDC_CHECK5                      1006
 #define IDC_RADIO_NOWFILE               1007
@@ -180,7 +181,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_RESOURCE_VALUE        140
 #define _APS_NEXT_COMMAND_VALUE         32782
 #define _APS_NEXT_CONTROL_VALUE         1070
 #define _APS_NEXT_SYMED_VALUE           101

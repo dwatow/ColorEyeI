@@ -222,7 +222,7 @@ SOURCE=.\RNA.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\SelExcelDlg.cpp
+SOURCE=.\SelExcelDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -415,7 +415,7 @@ SOURCE=.\RNA.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SelXls\SelExcelDlg.h
+SOURCE=.\SelExcelDlg.h
 # End Source File
 # Begin Source File
 
