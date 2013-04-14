@@ -15,6 +15,9 @@ VOptional((long)DISP_E_PARAMNOTFOUND,VT_ERROR), VFALSE((short)FALSE), VTRUE((sho
 		str.Format("Excel CreateDispatch() failed w/err 0x%08lx", e.m_sc);
 		AfxMessageBox(str, MB_SETFOREGROUND);
 	}
+#ifdef _DEBUG
+	SetVisible(true);
+#endif
 };
 
 xlsFile::~xlsFile()

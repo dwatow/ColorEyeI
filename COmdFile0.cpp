@@ -16,6 +16,14 @@ static char THIS_FILE[]=__FILE__;
 //oForm()  output form
 //iForm()  input  form
 //////////////////////////////////////////////////////////////////////////
+BOOL COmdFile0::Open(LPCTSTR _S)
+{
+	CFileException _Fx;
+	getOpenSample(_S, _Fx);
+	openWhichKindOmefile();
+	return  m_Omd->Open(_S, _Fx); 
+};
+
 
 BOOL COmdFile0::Open(LPCTSTR _S, CFileException& _Fx)
 { 

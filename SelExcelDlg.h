@@ -21,6 +21,8 @@
 enum WhereFileComeFrom { ThisFile = 0, OtherFile};
 enum FormType{ FM_Nothing = 0, FM_RA, FM_OQC_Test, FM_SEC, FM_Gamma, FM_OQCY2013_Volume};
 
+typedef CXlsFile2* XLSPTR;
+
 class CSelExcelDlg : public CDialog
 {
 // Construction
@@ -79,11 +81,11 @@ private:
 	void findOtherOmdFile(std::vector<CString>& );
 	void showOtherOmdList(std::vector<CString>& );
 	//tran2Xls
-	void initXlsObj(CXlsFile2* );
+	void initXlsObj(XLSPTR&);
+	void out2xls(XLSPTR&);
 	const CString getCurSelXlsPath() const;
-	void out2xls(CXlsFile2* );
-	void otherOmd2xls(CXlsFile2* pfXls);
-	void thisOmd2xls(CXlsFile2* fXls);
+	void otherOmd2xls(XLSPTR&);
+	void thisOmd2xls(XLSPTR&);
 };
 
 //{{AFX_INSERT_LOCATION}}

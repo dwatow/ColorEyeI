@@ -42,6 +42,7 @@ public:
 public:
 	COmdFile0():m_Omd(0), m_GmOmd(0){};
 	virtual ~COmdFile0() { delete m_Omd; };
+    BOOL Open(LPCTSTR _S);
     BOOL Open(LPCTSTR _S, CFileException& _Fx);
     BOOL Save(LPCTSTR _S, CFileException& _Fx, RNA& _D);
     

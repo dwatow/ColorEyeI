@@ -69,17 +69,17 @@ BOOL CSelExcelDlg::OnInitDialog()
 
 const CString CSelExcelDlg::reconstructSearchXlsPath(const CString& XlsNameExt)
 {
-	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
-	ASSERT_VALID(pApp);
+    CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+    ASSERT_VALID(pApp);
 
     //抓取程式目錄下的.xls表格
-	return pApp->GetPath() + "\\" + XlsNameExt;  //目前執行檔所在路徑/*.xls
+    return pApp->GetPath() + "\\" + XlsNameExt;  //目前執行檔所在路徑/*.xls
 }
 
 void CSelExcelDlg::initSelXlsCbx(const CString& XlsNameExt)
 {
     //找第一個檔案
-	WIN32_FIND_DATA FindFileData;  //一個結構，找到的檔案
+    WIN32_FIND_DATA FindFileData;  //一個結構，找到的檔案
     HANDLE hListFile;
 
     hListFile = FindFirstFile(reconstructSearchXlsPath(XlsNameExt), &FindFileData);
@@ -193,25 +193,28 @@ void CSelExcelDlg::OnFindOmdFile()
 void CSelExcelDlg::OnOK()
 {
     BeginWaitCursor();
-        CXlsFile2* pfXls = 0;
-        initXlsObj(pfXls);
 
-        if (pfXls != 0)
-            delete pfXls;
+	XLSPTR pXls;
+        pXls = 0;
+        initXlsObj(pXls);
+        out2xls(pXls);
+
+        if (pXls != 0)
+            delete pXls;
 
     EndWaitCursor();
     CDialog::OnOK();
 }
 
-void CSelExcelDlg::initXlsObj(CXlsFile2* pfXls)
+void CSelExcelDlg::initXlsObj(XLSPTR& pXls)
 {
     switch(m_omdFromType)
     {
-    case FM_SEC:             pfXls = new CXlsSEC1 (); pfXls->New()->SetSheetName(1,"SEC Report");                   break;
-    case FM_RA:              pfXls = new CXlsRA1  (); pfXls->New()->SetSheetName(1,"RA Report");                    break;    
-    case FM_OQC_Test:        pfXls = new CXlsOQC2 (); pfXls->Open(getCurSelXlsPath())->SetSheetName(1, "OQC SPEC");   break;
-    case FM_OQCY2013_Volume: pfXls = new CXlsOQC1 (); pfXls->Open(getCurSelXlsPath())->SetSheetName(1, "光學");        break;
-    case FM_Gamma:           pfXls = new CXlsGamma(); pfXls->Open(getCurSelXlsPath())->SetSheetName(1, "Color Data"); break;
+    case FM_SEC:             pXls = new CXlsSEC1 (); pXls->New()->SetSheetName(1,"SEC Report");                     break;
+    case FM_RA:              pXls = new CXlsRA1  (); pXls->New()->SetSheetName(1,"RA Report");                      break;    
+    case FM_OQC_Test:        pXls = new CXlsOQC2 (); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "OQC SPEC");   break;
+    case FM_OQCY2013_Volume: pXls = new CXlsOQC1 (); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "光學");        break;
+    case FM_Gamma:           pXls = new CXlsGamma(); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "Color Data"); break;
     case FM_Nothing:
     default:                AfxMessageBox("怎麼會選這一個輸出？");
     }
@@ -219,62 +222,60 @@ void CSelExcelDlg::initXlsObj(CXlsFile2* pfXls)
 
 const CString CSelExcelDlg::getCurSelXlsPath() const
 {
-	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
-	ASSERT_VALID(pApp);
+    CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+    ASSERT_VALID(pApp);
 
     CString xlsSelNamePath;
     m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), xlsSelNamePath);   //ComboBox -> file name
     return pApp->GetPath() + "\\" + xlsSelNamePath;
 }
 
-void CSelExcelDlg::out2xls(CXlsFile2* pTofXls)
+void CSelExcelDlg::out2xls(XLSPTR& pXls)
 {
     if ( m_rdoChooseHDFile.GetCheck() == OtherFile )
-        otherOmd2xls(pTofXls);
+        otherOmd2xls(pXls);
     else
-        thisOmd2xls(pTofXls);
+        thisOmd2xls(pXls);
 }
 
-void CSelExcelDlg::otherOmd2xls(CXlsFile2* pHDfXls)
+void CSelExcelDlg::otherOmd2xls(XLSPTR& hdXls)
 {
-    pHDfXls->InitForm();
+    hdXls->InitForm();
 
     COmdFile0 fOmd;
-    CFileException fx;
-    BeginWaitCursor();
     for (std::vector<CString>::iterator itfPaths = m_omdList.begin(); itfPaths != m_omdList.end(); ++itfPaths)
     {
         //在此，等同於Doc的開啟舊檔As omd
-        if(!fOmd.Open(*itfPaths, fx))
+        if(!fOmd.Open(*itfPaths))
             AfxMessageBox("路徑有問題");
         else
         {
-            pHDfXls->iCellNO (abs(itfPaths - m_omdList.begin()));
-            pHDfXls->iChannel(fOmd.GetCHID());
-            pHDfXls->iPanelID(fOmd.GetPnlID());
-            pHDfXls->iProb   (fOmd.GetPrb());
-            pHDfXls->iNitsLv (fOmd.GetNitsLv());
-            pHDfXls->iData   (fOmd.oOmdData());
+            hdXls->iCellNO (abs(itfPaths - m_omdList.begin()));
+            hdXls->iChannel(fOmd.GetCHID());
+            hdXls->iPanelID(fOmd.GetPnlID());
+            hdXls->iProb   (fOmd.GetPrb());
+            hdXls->iNitsLv (fOmd.GetNitsLv());
+            hdXls->iData   (fOmd.oOmdData());
 
             fOmd.Close();
         }
     }
-    EndWaitCursor();
 }
 
-void CSelExcelDlg::thisOmd2xls(CXlsFile2* pDocfXls)
+void CSelExcelDlg::thisOmd2xls(XLSPTR& docXls)
 {
+    docXls->InitForm();
+
     CMainFrame*    m_pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     CColorEyeIDoc* m_pDoc     = dynamic_cast<CColorEyeIDoc*>(m_pMainFrm->GetActiveDocument());
 
     ASSERT_VALID(m_pMainFrm);
     ASSERT_VALID(m_pDoc);
 
-    pDocfXls->InitForm();
-    pDocfXls->iCellNO (0)
-            ->iChannel(m_pDoc->GetFileHead().oCHID())
-            ->iPanelID(m_pDoc->GetFileHead().oPnlID())
-            ->iProb   (m_pDoc->GetFileHead().oPrb())
-            ->iNitsLv (m_pDoc->GetFileHead().oNitsLv())
-			->iData   (m_pDoc->GetDocRNA());
+    docXls->iCellNO (0);
+    docXls->iChannel(m_pDoc->GetFileHead().oCHID());
+    docXls->iPanelID(m_pDoc->GetFileHead().oPnlID());
+    docXls->iProb   (m_pDoc->GetFileHead().oPrb());
+    docXls->iNitsLv (m_pDoc->GetFileHead().oNitsLv());
+    docXls->iData   (m_pDoc->GetDocRNA());
 }

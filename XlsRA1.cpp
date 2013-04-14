@@ -125,44 +125,45 @@ CXlsFile2* CXlsRA1::iData(RNA& vCar)
 
 void CXlsRA1::idW9()
 {
-//     SelectSheet(1);
-// 
-//     SelectCell('F'+0,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 0).GetSx());
-//     SelectCell('F'+1,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 0).GetSy());
-//     SelectCell('F'+2,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 0).GetLv());
-//     
-//     SelectCell('F'+3,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 1).GetSx());
-//     SelectCell('F'+4,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 1).GetSy());
-//     SelectCell('F'+5,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 1).GetLv());
-//     
-//     SelectCell('F'+6,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 2).GetSx());
-//     SelectCell('F'+7,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 2).GetSy());
-//     SelectCell('F'+8,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 2).GetLv());
-//     
-//     SelectCell('F'+9,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 3).GetSx());
-//     SelectCell('F'+10, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 3).GetSy());
-//     SelectCell('F'+11, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 3).GetLv());
-//     
-//     SelectCell('F'+12, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 4).GetSx());
-//     SelectCell('F'+13, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 4).GetSy());
-//     SelectCell('F'+14, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 4).GetLv());
-//     
-//     SelectCell('F'+15, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 5).GetSx());
-//     SelectCell('F'+16, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 5).GetSy());
-//     SelectCell('F'+17, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 5).GetLv());
-//     
-//     SelectCell('F'+18, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 6).GetSx());
-//     SelectCell('F'+19, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 6).GetSy());
-//     SelectCell('F'+20, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 6).GetLv());
-//     
-//     // A-Z, AA的中間界線-----------------------------------------------------
-//     SelectCell('A', 'A'+0, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 7).GetSx());
-//     SelectCell('A', 'A'+1, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 7).GetSy());
-//     SelectCell('A', 'A'+2, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 7).GetLv());
-//     
-//     SelectCell('A', 'A'+3, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetSx());
-//     SelectCell('A', 'A'+4, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetSy());
-//     SelectCell('A', 'A'+5, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.At(White, Pn9, 8).GetLv());
+    SelectSheet(1);
+
+    SelectCell('F'+0,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "1", "1/6", VluK_Sx) );
+    SelectCell('F'+1,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "1", "1/6", VluK_Sy) );
+    SelectCell('F'+2,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "1", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+3,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "2", "1/6", VluK_Sx) );
+    SelectCell('F'+4,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "2", "1/6", VluK_Sy) );
+    SelectCell('F'+5,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "2", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+6,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "3", "1/6", VluK_Sx) );
+    SelectCell('F'+7,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "3", "1/6", VluK_Sy) );
+    SelectCell('F'+8,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "3", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+9,  5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "4", "1/6", VluK_Sx) );
+    SelectCell('F'+10, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "4", "1/6", VluK_Sy) );
+    SelectCell('F'+11, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "4", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+12, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "5", "1/6", VluK_Sx) );
+    SelectCell('F'+13, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "5", "1/6", VluK_Sy) );
+    SelectCell('F'+14, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "5", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+15, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "6", "1/6", VluK_Sx) );
+    SelectCell('F'+16, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "6", "1/6", VluK_Sy) );
+    SelectCell('F'+17, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "6", "1/6", VluK_Lv) );
+    
+    SelectCell('F'+18, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "7", "1/6", VluK_Sx) );
+    SelectCell('F'+19, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "7", "1/6", VluK_Sy) );
+    SelectCell('F'+20, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "7", "1/6", VluK_Lv) );
+    
+    // A-Z, AA的中間界線-----------------------------------------------------
+    SelectCell('A', 'A'+0, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "8", "1/6", VluK_Sx) );
+    SelectCell('A', 'A'+1, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "8", "1/6", VluK_Sy) );
+    SelectCell('A', 'A'+2, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell( m_vCar.sFind("白色", "9", "8", "1/6", VluK_Lv) );
+    
+    SelectCell('A', 'A'+3, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.sFind("白色", "9", "9", "1/6", VluK_Sx) );
+    SelectCell('A', 'A'+4, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.sFind("白色", "9", "9", "1/6", VluK_Sy) );
+    SelectCell('A', 'A'+5, 5+m_CellNO)->SetCellBorder(1, 3)->SetCell(m_vCar.sFind("白色", "9", "9", "1/6", VluK_Lv) );
+
 }
 
 void CXlsRA1::idAvg()
