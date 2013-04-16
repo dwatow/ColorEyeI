@@ -9,6 +9,7 @@ enum reParaType{ rPM_NoMatch, rPM_NoPara, rPM_Over, rPM_Length, rPM_Nits, rPM_We
 class CartridgeFinder
 {
 public:
+	const BOOL ReconstrKeyWord(CString&, CString&, CString&, CString&);
 	const BOOL Reconstr(CString&, CString&, CString&, CString&);
 	const BOOL Reconstr(CString&);
 

@@ -202,6 +202,28 @@ CString RNA::sFind(const CString& _C, const CString& _P, const CString& _M, cons
 	return Find(_C, _P, _M, _F).GetBullet().oStr(_V);
 }
 
+std::vector<int>::size_type RNA::HaveSeveral(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
+{
+	CString clr(color);
+	CString ptTtl(ptTotal);
+	CString mrIdx(mrIndex);
+	CString fePr(fePara);
+	
+	std::vector<int> vSub;
+
+	if ( finder.ReconstrKeyWord(clr, ptTtl, mrIdx, fePr) )
+	{
+		for (std::vector<Cartridge2>::iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
+		{
+			if ( (itor->GetDescrip().Find(color) >= 0) && (itor->GetDescrip().Find(ptTtl) >= 0) && 
+				 (itor->GetDescrip().Find(mrIdx) >= 0) && (itor->GetDescrip().Find(fePr)  >= 0)  )
+				vSub.push_back(itor - m_CarChain2.begin());
+		}
+	}
+
+	return vSub.size();
+}
+
 Cartridge2& RNA::Find(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
 {
 /*	
@@ -219,9 +241,8 @@ Cartridge2& RNA::Find(const CString& color, const CString& ptTotal, const CStrin
 	if (finder.Reconstr(clr, ptTtl, mrIdx, fePr))
 	{
 		sample.Format("%s%s%s%s", clr, ptTtl, mrIdx, fePr);
-		for (std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
+		for ( std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
 		{	
-			//if (sample == itor->GetDescrip())
 			if ( itor->GetDescrip().Find(sample) >= 0 )
 			{
 				CString debugCharPtr = itor->GetDescrip();

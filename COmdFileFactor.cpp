@@ -50,7 +50,7 @@ BOOL COmdFileFactor::Save(LPCTSTR path, CFileException& fx)
 	}
 }
 
-const CString COmdFileFactor::GetLine(const int& LineNum)//OK
+const CString COmdFileFactor::GetLine(const int& LineNum) const//OK
 {
     if (LineNum <= 0)
         return "出現錯誤: 參數 < 1";
@@ -60,7 +60,7 @@ const CString COmdFileFactor::GetLine(const int& LineNum)//OK
         return m_dTxt.at((std::vector<CString>::size_type)LineNum - 1);
 }
 
-const CString COmdFileFactor::GetCell(const int& Word, const int& Line)
+const CString COmdFileFactor::GetCell(const int& Word, const int& Line) const
 {
     CString strBuf1;
     CString strBuf2;
@@ -83,14 +83,14 @@ const CString COmdFileFactor::GetCell(const int& Word, const int& Line)
     return strBuf2;
 }
 
-const CString COmdFileFactor::GetCell(const TCHAR& c, const int& n)
+const CString COmdFileFactor::GetCell(const TCHAR& c, const int& n) const
 {
     int x;
     x = c - 'A'+1;
     return GetCell(x, n);
 }
 
-const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n)
+const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n) const
 {
     CString str;
     str.Format("%s", c);
@@ -106,7 +106,7 @@ const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n)
     return GetCell(x, n);
 }
 
-void COmdFileFactor::ErrorMsg(CFileException& fx)
+void COmdFileFactor::ErrorMsg(CFileException& fx) const
 {
 	//例外處理
 	TCHAR buf[255];

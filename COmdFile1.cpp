@@ -54,7 +54,7 @@ void COmdFile1::o2tWRGB1nNits()
 }
 void COmdFile1::o2tW9nD1()
 {
-    m_dTxt.push_back("Dark \t" + m_dOmd.sFind("黑","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Dv) + "\t" + "9點均齊度\tL\t\t\t\t\t9點均齊度\tx\t\t\t\t\t9點均齊度\ty\t\t\t\t\t9點均齊度\tT\t\t\t\t\t9點均齊度\tduv\n");
+    m_dTxt.push_back("黑色 \t" + m_dOmd.sFind("黑","1","1"," ",VluK_Lv) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Sx) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Sy) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Du) + "\t" + m_dOmd.sFind("黑","1","1"," ",VluK_Dv) + "\t" + "9點均齊度\tL\t\t\t\t\t9點均齊度\tx\t\t\t\t\t9點均齊度\ty\t\t\t\t\t9點均齊度\tT\t\t\t\t\t9點均齊度\tduv\n");
     m_dTxt.push_back("\t\t\t\t\t\t離邊6分之1\t" + m_dOmd.sFind("白","9","1","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","2","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","3","1/6",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("白","9","1","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","2","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","3","1/6",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("白","9","1","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","2","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","3","1/6",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("白","9","1","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","2","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","3","1/6",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("白","9","1","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","2","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","3","1/6",VluK_Duv) + "\n");
     m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.sFind("白","9","4","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","5","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","6","1/6",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("白","9","4","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","5","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","6","1/6",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("白","9","4","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","5","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","6","1/6",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("白","9","4","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","5","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","6","1/6",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("白","9","4","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","5","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","6","1/6",VluK_Duv) + "\n");
     m_dTxt.push_back("\t\t\t\t\t\t\t"          + m_dOmd.sFind("白","9","7","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","8","1/6",VluK_Lv) + "\t" + m_dOmd.sFind("白","9","9","1/6",VluK_Lv) + "\t\t\t\t" + m_dOmd.sFind("白","9","7","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","8","1/6",VluK_Sx) + "\t" + m_dOmd.sFind("白","9","9","1/6",VluK_Sx) + "\t\t\t\t" + m_dOmd.sFind("白","9","7","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","8","1/6",VluK_Sy) + "\t" + m_dOmd.sFind("白","9","9","1/6",VluK_Sy) + "\t\t\t\t" + m_dOmd.sFind("白","9","7","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","8","1/6",VluK_T) + "\t" + m_dOmd.sFind("白","9","9","1/6",VluK_T) + "\t\t\t\t" + m_dOmd.sFind("白","9","7","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","8","1/6",VluK_Duv) + "\t" + m_dOmd.sFind("白","9","9","1/6",VluK_Duv) + "\n");
@@ -266,6 +266,14 @@ void COmdFile1::o2tW5()
     m_dTxt.push_back("\n");
 }
 //m_debugLog
+const CString COmdFile1::getInch() const
+{
+	if ( atoi(m_omdFileHead.oInch()) > 1 )
+		return m_omdFileHead.oInch();
+	else
+		return "14";
+}
+
 void COmdFile1::t2oInit()
 {
 	Ca210* pOldCa210;
@@ -277,7 +285,7 @@ void COmdFile1::t2oInit()
     pMainFrm->m_pCa210 = new Ca210sim();
 	Ca210* pCa210 = pMainFrm->m_pCa210;
 	pCa210->SetOnline(1);
-	pCa210->SetLcmSize("14");
+	pCa210->SetLcmSize(getInch());
 	
 	TranScripter ts;
 
@@ -289,6 +297,9 @@ void COmdFile1::t2oInit()
     DNA_Unsortable(UnsortableDNA);	
     ts.Trans(UnsortableDNA, m_dOmd);
 
+	sortableDNA.AddCell(UnsortableDNA);
+	m_omdFileHead.iDNA(sortableDNA);
+	
 	CPoint pointEmpty(0, 0);
 	for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
 		itor->SetPointPosi(pointEmpty);
@@ -301,7 +312,7 @@ void COmdFile1::txt2omd()
 {
 	m_fTxt.oTxtData(m_dTxt);
 //檔頭
-	t2oInfo();
+	t2oHead();
 //初始化裝資料的這些容器
 	t2oInit();
 
@@ -321,7 +332,7 @@ void COmdFile1::txt2omd()
 	m_dTxt.clear();
 }
 
-void COmdFile1::t2oInfo()
+void COmdFile1::t2oHead()
 {
 	if (!m_isOld)
     {

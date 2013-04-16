@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "XlsGamma.h"
+#include "Nucleotide.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -44,19 +45,21 @@ CXlsFile2* CXlsGamma::iPanelID(CString strPanelID)
 CXlsFile2* CXlsGamma::iData(RNA& vCar)
 {
 // 	m_vCar = vCar;
-    idGamma();	
+    if (vCar.HaveSeveral("フ","gamma"))  idWGamma();	
 	SetVisible(true);
     return this;
 }
 
-void CXlsGamma::idGamma()
+void CXlsGamma::idWGamma()
 {
 	SelectSheet(1);
-// 	int i(0);
-//     for(i = 0; i < PnGamma; ++i)
-// 	{
-// 		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.At(White, PnGamma, i).GetLv());
-// 		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSx());
-//         SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.At(White, PnGamma, i).GetSy());
-// 	}
+	int i(0);
+	CString msrItemIndex;
+    for(i = 0; i < PnGamma; ++i)
+	{
+		msrItemIndex.Format("%d", i+1);
+		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Lv));
+		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Sx));
+        SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Sy));
+	}
 }

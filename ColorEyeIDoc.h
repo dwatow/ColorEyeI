@@ -70,6 +70,9 @@ public:
 	OmdHead& GetFileHead();
 	const OmdHead GetFileHead() const;
 	void SetFileHead(const OmdHead& _H);
+public:
+    void UpdateDocDNA(const DNA& _docDNA);
+    const DNA GetDocDNA() const { return m_docFileHead.oDNA(); };
 	
 private:
     RNA m_docRNA;
@@ -82,13 +85,7 @@ private:
 public:
     void UpdateMsrRNA(const RNA& m_MsrRNA);
     RNA  GetMsrRNA() const { return m_MsrRNA; };
-	
-private:
-    DNA m_docDNA;
-public:
-    void UpdateDocDNA(const DNA& _docDNA);
-    const DNA GetDocDNA() const { return m_docDNA; };
-	
+
 	//File Error
 	CFileException m_ErrorFx;
 	//OMD File

@@ -39,15 +39,13 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_nGM1 = 0;
     m_nGM2 = 255;
     m_f21FE = 0.0f;
-    m_f21Havg = 7.0f;
-    m_f21Vavg = 5.0f;
     m_f25FE = 0.0f;
     m_f5FE = 0.0f;
     m_f9FE = 6.0f;
     m_f13FE = 0.0f;
+    m_fCrsTlkRectFE = 4.0f;
     m_fGammaSetp = 255.0f;
     m_n25RectSide = 10;
-    m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
     m_JndGray = 0;
 	//}}AFX_DATA_INIT
@@ -117,25 +115,21 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT_GM2, m_nGM2);
     DDV_MinMaxUInt(pDX, m_nGM2, 0, 255);
     DDX_Text(pDX, IDC_EDIT_P21FE, m_f21FE);
-    DDV_MinMaxFloat(pDX, m_f21FE, 0.f, 100.f);
-    DDX_Text(pDX, IDC_EDIT_P21HAVG, m_f21Havg);
-    DDV_MinMaxFloat(pDX, m_f21Havg, 1.f, 100.f);
-    DDX_Text(pDX, IDC_EDIT_P21VAVG, m_f21Vavg);
-    DDV_MinMaxFloat(pDX, m_f21Vavg, 1.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_f21FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P25FE, m_f25FE);
-    DDV_MinMaxFloat(pDX, m_f25FE, 0.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_f25FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P5FE, m_f5FE);
-    DDV_MinMaxFloat(pDX, m_f5FE, 0.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_f5FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P9FE, m_f9FE);
-    DDV_MinMaxFloat(pDX, m_f9FE, 0.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_f9FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
-    DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_GM3, m_fGammaSetp);
     DDV_MinMaxFloat(pDX, m_fGammaSetp, 1.f, 255.f);
     DDX_Text(pDX, IDC_EDIT_P25RECTSIDE, m_n25RectSide);
     DDV_MinMaxUInt(pDX, m_n25RectSide, 0, 100);
     DDX_Text(pDX, IDC_EDIT_CROSSTALK1, m_fCrsTlkRectFE);
-    DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 1.f, 100.f);
+	DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
     DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_JndGray);
@@ -213,6 +207,7 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
     //非称DNA
     //恶把计
     //JND
+	UpdateData(TRUE);
     if (m_chkJND.GetState())
     {
         sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
@@ -278,6 +273,7 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
 
 void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
 {
+	UpdateData(TRUE);
     //Cross Talk srot by AreaCode
     if (m_chkCrossTalk.GetState())
     {
@@ -298,34 +294,46 @@ void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
         m_debugLog.Add(Nit->ShowMe());
 }
 
+BOOL CMsrItemDlg::checkMsrItemPara()
+{
+	if ( (m_f21FE == 1) || (m_f25FE == 1) || (m_f5FE == 1) || (m_f9FE == 1) || (m_f13FE == 1) || (m_fCrsTlkRectFE == 1) )
+		return FALSE;
+	else
+		return TRUE;
+}
 void CMsrItemDlg::OnButtonAdd()
 {
     //磅︽硈硂
     //1. CA-210硈絬
     //2. CA-210
-    DNA sortableDNA;
-
-    selMsrItem2DNA_sortable(sortableDNA);
-
-    TranScripter Ts;
-    if (sortableDNA.Size()) Ts.Trans(sortableDNA, m_RNA);
-    m_DNA.AddCell(sortableDNA);
-//    sortableDNA.Empty();
-
-    //逼
-    if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
-    else                                 m_RNA.SortOrigMsr();
-
-
-    DNA UnsortableDNA;
-
-    selMsrItem2DNA_Unsortable(UnsortableDNA);
-
-    if (UnsortableDNA.Size()) Ts.Trans(UnsortableDNA, m_RNA);
-    m_DNA.AddCell(UnsortableDNA);
-//    UnsortableDNA.Empty();
-
-    listBoxUpdate();
+	if (checkMsrItemPara())
+	{
+		DNA sortableDNA;
+		
+		selMsrItem2DNA_sortable(sortableDNA);
+		
+		TranScripter Ts;
+		if (sortableDNA.Size()) Ts.Trans(sortableDNA, m_RNA);
+		m_DNA.AddCell(sortableDNA);
+		//    sortableDNA.Empty();
+		
+		//逼
+		if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
+		else                                 m_RNA.SortOrigMsr();
+		
+		
+		DNA UnsortableDNA;
+		
+		selMsrItem2DNA_Unsortable(UnsortableDNA);
+		
+		if (UnsortableDNA.Size()) Ts.Trans(UnsortableDNA, m_RNA);
+		m_DNA.AddCell(UnsortableDNA);
+		//    UnsortableDNA.Empty();
+		
+		listBoxUpdate();
+	}
+	else
+		AfxMessageBox("把计ぃ 1, 禟娩把计 0");
 }
 
 void CMsrItemDlg::OnButtonDel() 
@@ -391,6 +399,28 @@ void CMsrItemDlg::OnOK()
 	//硂临琌单PatternDialog秖Ч穝糤ㄓ
 
     rememberSelMsrItems();
+}
+
+void CMsrItemDlg::OnCancel() 
+{
+    // TODO: Add extra cleanup here
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+
+// 	m_DNA.Empty();
+	m_RNA.Empty();
+
+//     pDoc->UpdateDocDNA(m_DNA);
+    pDoc->UpdateMsrRNA(m_RNA);  
+	//Dialog琌PatternDialog玡㊣┮临琌璶盢DNA&RNAメDialog
+	//硂临琌单PatternDialog秖Ч穝糤ㄓ
+	
+    rememberSelMsrItems();
+    
+    CDialog::OnCancel();
 }
 
 void CMsrItemDlg::rememberSelMsrItems()
@@ -493,8 +523,6 @@ void CMsrItemDlg::Serialize(CArchive& ar)
                                            ar << m_nGM1;
                                            ar << m_nGM2;
                                            ar << m_f21FE;
-                                           ar << m_f21Havg;
-                                           ar << m_f21Vavg;
                                            ar << m_f5FE;
                                            ar << m_f9FE;
                                            ar << m_fGammaSetp;
@@ -561,8 +589,6 @@ void CMsrItemDlg::Serialize(CArchive& ar)
         ar >> m_nGM1;
         ar >> m_nGM2;
         ar >> m_f21FE;
-        ar >> m_f21Havg;
-        ar >> m_f21Vavg;
         ar >> m_f5FE;
         ar >> m_f9FE;
         ar >> m_fGammaSetp;
@@ -685,10 +711,3 @@ void CMsrItemDlg::OnButtonSelno()
     if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(FALSE);
 }
 
-void CMsrItemDlg::OnCancel() 
-{
-    // TODO: Add extra cleanup here
-
-    
-    CDialog::OnCancel();
-}

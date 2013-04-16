@@ -36,6 +36,7 @@ private:
 	void o2tWRGB1nNits();
 
 private:
+	const CString getInch() const;
 	void t2oInit();
 	void DNA_sortable(DNA& );
 	void DNA_Unsortable(DNA& );
@@ -43,7 +44,7 @@ private:
 private:
 	void txt2omd();
 
-	void t2oInfo();
+	void t2oHead();
 	void t2oW5();
 	void t2oWRGBD();
 	void t2oW9();

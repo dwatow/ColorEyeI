@@ -103,7 +103,7 @@ void CColorEyeIDoc::OnFileNew()
     CDocument::OnNewDocument();    //開新檔後的存檔，判斷它是不是空字串，決定要不要SaveAs
     SetTitle("新的Omd檔");
     m_docFileHead.Empty();
-    m_docDNA.Empty();
+//    m_docDNA.Empty();
     m_docRNA.Empty();
     
     SetModifiedFlag(FALSE);
@@ -163,7 +163,7 @@ void CColorEyeIDoc::openTxtDlg(LPCTSTR FileFilter)
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        m_docDNA.Empty();
+//         m_docDNA.Empty();
         m_docRNA.Empty();
         m_docFileHead.Empty();
         SetModifiedFlag(FALSE);
@@ -221,7 +221,7 @@ void CColorEyeIDoc::openOmdDlg(LPCTSTR FileFilter)
     int nID = aFileDialog.DoModal();
     if (nID == IDOK)
     {
-        m_docDNA.Empty();
+//         m_docDNA.Empty();
         m_docRNA.Empty();
         m_docFileHead.Empty();
 
@@ -353,7 +353,7 @@ void CColorEyeIDoc::UpdateMsrRNA(const RNA& _msrRNA)
 { m_MsrRNA.Empty(); m_MsrRNA.AddCell(_msrRNA); }
 
 void CColorEyeIDoc::UpdateDocDNA(const DNA& _docDNA)
-{ m_docDNA.AddCell(_docDNA); }
+{ m_docFileHead.iDNA(_docDNA); }
 
 OmdHead& CColorEyeIDoc::GetFileHead()
 { return m_docFileHead; };

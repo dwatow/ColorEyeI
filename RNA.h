@@ -35,6 +35,8 @@ public:
 public:
 //     Cartridge2& At (ColorType, PointNum, UINT );
 //     const Cartridge2& At (ColorType, PointNum, UINT )const ;
+	std::vector<int>::size_type HaveSeveral
+		(const CString& color = "", const CString& ptTotal = "", const CString& mrIndex = "", const CString& fePara = "");
 	float   fFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
 	CString sFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
     Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);

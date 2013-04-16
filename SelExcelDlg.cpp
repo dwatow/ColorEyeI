@@ -6,7 +6,6 @@
 #include "SelExcelDlg.h"
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
-#include "ColorEyeI.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -73,7 +72,7 @@ const CString CSelExcelDlg::reconstructSearchXlsPath(const CString& XlsNameExt)
     ASSERT_VALID(pApp);
 
     //抓取程式目錄下的.xls表格
-    return pApp->GetPath() + "\\" + XlsNameExt;  //目前執行檔所在路徑/*.xls
+    return pApp->GetPath() + "\\*." + XlsNameExt;  //目前執行檔所在路徑/*.xls
 }
 
 void CSelExcelDlg::initSelXlsCbx(const CString& XlsNameExt)
@@ -210,11 +209,11 @@ void CSelExcelDlg::initXlsObj(XLSPTR& pXls)
 {
     switch(m_omdFromType)
     {
-    case FM_SEC:             pXls = new CXlsSEC1 (); pXls->New()->SetSheetName(1,"SEC Report");                     break;
-    case FM_RA:              pXls = new CXlsRA1  (); pXls->New()->SetSheetName(1,"RA Report");                      break;    
-    case FM_OQC_Test:        pXls = new CXlsOQC2 (); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "OQC SPEC");   break;
-    case FM_OQCY2013_Volume: pXls = new CXlsOQC1 (); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "光學");        break;
-    case FM_Gamma:           pXls = new CXlsGamma(); pXls->Open(getCurSelXlsPath())->SetSheetName(1, "Color Data"); break;
+    case FM_SEC:             pXls = new CXlsSEC1   (); pXls->New()->SetSheetName(1,"SEC Report");                     break;
+    case FM_RA:              pXls = new CXlsRA1    (); pXls->New()->SetSheetName(1,"RA Report");                      break;    
+    case FM_OQC_Test:        pXls = new CXlsOQCtest(); pXls->Open(getCurSelXlsPath())/*->SetSheetName(1, "光學")*/;   break;
+    case FM_OQCY2013_Volume: pXls = new CXlsOQCmass(); pXls->Open(getCurSelXlsPath())/*->SetSheetName(1, "光學")*/;        break;
+    case FM_Gamma:           pXls = new CXlsGamma  (); pXls->Open(getCurSelXlsPath())/*->SetSheetName(1, "Color Data")*/; break;
     case FM_Nothing:
     default:                AfxMessageBox("怎麼會選這一個輸出？");
     }

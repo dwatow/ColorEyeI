@@ -303,42 +303,26 @@ CXlsFile2* CXlsSEC1::iData(RNA& vCar)
     m_vCar = vCar;
 
 	//不重疊
-// 	if (nMsred(Red  , Pn1 )) idR1();
-// 	if (nMsred(Green, Pn1 )) idG1();
-//     if (nMsred(Blue , Pn1 )) idB1();
-// 	if (nMsred(Nits , "9" )) idNits();
-
-	//重疊
-//     if (nMsred("白", "49")) idW49();
-// 	if (nMsred("白", "9"))  idW9();
-// 	if (nMsred("白", Pn1 )) idW1();
-// 
-//     if (nMsred("黑" , "9"))  idD9();
-// 	if (nMsred("黑" , Pn1))  idD1();
-// 
-//     if ((nMsred("cross" , "4")) ||
-// 		(nMsred("crossW", "4")) ||
-// 		(nMsred("crossD", "4")) )  idCrosTalk();
-// 
-// 	if (nMsred(Red  , Pn1 )) idR1();
-// 	if (nMsred(Green, Pn1 )) idG1();
-//     if (nMsred(Blue , Pn1 )) idB1();
-// 	if (nMsred(Nits , "9" )) idNits();
+    if (vCar.HaveSeveral("紅","1"))           idR1();
+    if (vCar.HaveSeveral("綠","1"))           idG1();
+    if (vCar.HaveSeveral("藍","1"))           idB1();
+    if (vCar.HaveSeveral("Nits","","","5-"))  idNits();
 	
-	//不重疊
-	idR1();
-	idG1();
-	idB1();
-	idNits();
 	//重疊
-    idW49();
-	idW9();
-	idW1();
+    if (vCar.HaveSeveral("白","49"))           idW49();
+    if (vCar.HaveSeveral("白","9","","1/6"))  idW9();
+    if (vCar.HaveSeveral("白","1"))           idW1();
 	
-	idD9();
-	idD1();
-
-	idCrosTalk();
+    if (vCar.HaveSeveral("黑","9"))          idD9();
+    if (vCar.HaveSeveral("黑","1"))           idD1();
+	
+    if (vCar.HaveSeveral("cross")  ||
+		vCar.HaveSeveral("crossW") ||
+		vCar.HaveSeveral("crossD")  )         idCrosTalk();
+	
+    if (vCar.HaveSeveral("紅","1"))           idR1();
+    if (vCar.HaveSeveral("綠","1"))           idG1();
+    if (vCar.HaveSeveral("藍","1"))           idB1();
 
 	SetVisible(true);
 

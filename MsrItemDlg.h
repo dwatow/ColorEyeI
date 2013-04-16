@@ -85,8 +85,6 @@ public:
     UINT    m_nGM1;
     UINT    m_nGM2;
     float    m_f21FE;
-    float    m_f21Havg;
-    float    m_f21Vavg;
     float    m_f25FE;
     float    m_f5FE;
     float    m_f9FE;
@@ -136,6 +134,7 @@ private:
     void selMsrItem2DNA_sortable(DNA&);
     void selMsrItem2DNA_Unsortable(DNA&);
 	void rememberSelMsrItems();
+	BOOL checkMsrItemPara();
 };
 
 //{{AFX_INSERT_LOCATION}}

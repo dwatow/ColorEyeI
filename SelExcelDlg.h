@@ -2,8 +2,8 @@
 #define AFX_SELEXCELDLG_H__8D74EAAE_F8BE_4BB0_8053_BFCCC8738358__INCLUDED_
 
 #include "XlsRA1.h"
-#include "XlsOQC1.h"
-#include "XlsOQC2.h"
+#include "XlsOQCmass.h"
+#include "XlsOQCtest.h"
 #include "XlsSEC1.h"
 #include "XlsGamma.h"
 

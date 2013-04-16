@@ -259,11 +259,11 @@ SOURCE=.\XlsGamma.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\XlsOQC1.cpp
+SOURCE=.\XlsOQCmass.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\XlsOQC2.cpp
+SOURCE=.\XlsOQCtest.cpp
 # End Source File
 # Begin Source File
 
@@ -451,11 +451,11 @@ SOURCE=.\XlsGamma.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\XlsOQC1.h
+SOURCE=.\XlsOQCmass.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\XlsOQC2.h
+SOURCE=.\XlsOQCtest.h
 # End Source File
 # Begin Source File
 

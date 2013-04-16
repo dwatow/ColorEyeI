@@ -1,11 +1,9 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "CartridgeFinder.h"
 
 //////////////////////////////////////////////////////////////////////////
 const BOOL CartridgeFinder::Reconstr(CString& bkColor, CString& PointTotal, CString& MsrPointIndex, CString& Parameter)
 {
-//     CString sample;
-//     multi2single(bkColor, PointTotal, MsrPointIndex, Parameter, sample);
 
     if (color(bkColor) & pointTotal(PointTotal) & msrIndex(MsrPointIndex) & para(Parameter))
         return TRUE;
@@ -13,22 +11,14 @@ const BOOL CartridgeFinder::Reconstr(CString& bkColor, CString& PointTotal, CStr
         return FALSE;
 }
 
-// void CartridgeFinder::multi2single(CString bkColorIn, CString pointTotalIn, CString msrPointIndexIn, CString parameterIn, CString& sampleOut)
-// {
-//     color(bkColorIn);
-//     pointTotal(pointTotalIn);
-//     msrIndex(msrPointIndexIn);
-//     para(parameterIn);
-// }
-
-// const BOOL CartridgeFinder::m2sColor(CString bkColor)
-// { return color(bkColor); }
-// const BOOL CartridgeFinder::m2sPointTotal(CString pointTotalIn)
-// { return pointTotal(pointTotalIn); }
-// const BOOL CartridgeFinder::m2sMsrIndex(CString msrPointIndexIn)
-// { return reMsrIndex(msrPointIndexIn); }
-// const BOOL CartridgeFinder::m2sPara(CString parameterIn)
-// { return rePara(parameterIn); }
+const BOOL CartridgeFinder::ReconstrKeyWord(CString& bkColor, CString& PointTotal, CString& MsrPointIndex, CString& Parameter)
+{
+	
+    if (color(bkColor) | pointTotal(PointTotal) | msrIndex(MsrPointIndex) | para(Parameter))
+        return TRUE;
+    else
+        return FALSE;
+}
 
 //////////////////////////////////////////////////////////////////////////
 const BOOL CartridgeFinder::Reconstr(CString& sample)
