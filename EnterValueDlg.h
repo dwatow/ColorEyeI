@@ -6,19 +6,14 @@
 #endif // _MSC_VER > 1000
 // EnterValueDlg.h : header file
 //
-#include "resource.h"
 /////////////////////////////////////////////////////////////////////////////
 // CEnterValueDlg dialog
 
 class CEnterValueDlg : public CDialog
 {
 // Construction
-	CString m_dlgTitle;
 public:
-//	void SetDlgTitle(CString str){ SetWindowText(str.GetBuffer(0)); };
-	void SetValueKind(const CString str){	m_strName = str;	};
-	CEnterValueDlg(const CString dlgTitle, CWnd* pParent = NULL);   // standard constructor
-//	float GetLcmSize(){ return (float)(atof(m_strValue)); };
+	CEnterValueDlg(const CString& dlgTitle, const CString& str, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CEnterValueDlg)
@@ -43,6 +38,8 @@ protected:
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	CString m_dlgTitle;
 };
 
 //{{AFX_INSERT_LOCATION}}

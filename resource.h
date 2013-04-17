@@ -35,6 +35,7 @@
 #define IDC_STATIC_ITEMLIST             1005
 #define IDC_CHECK_CDP5                  1005
 #define IDC_CHECK4                      1005
+#define IDC_STATIC_XLSDESCRIP           1005
 #define IDC_CHECK_CDP13                 1006
 #define IDC_CHECK5                      1006
 #define IDC_RADIO_NOWFILE               1007
@@ -161,6 +162,10 @@
 #define IDC_COMBO_SELNO                 1068
 #define IDC_EDIT_P13FE                  1068
 #define IDC_STATIC_BARCODE              1069
+#define IDC_SW_P9FE                     1073
+#define IDC_STATIC_P9FE1OVER            1075
+#define IDC_STATIC_P9                   1076
+#define IDC_STATIC_P9FECM               1077
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771
 #define ID_MSR_CONNECTCA210             32772
@@ -180,9 +185,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_RESOURCE_VALUE        140
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         1070
+#define _APS_NEXT_CONTROL_VALUE         1078
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

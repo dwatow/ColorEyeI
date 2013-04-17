@@ -9,17 +9,11 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-//#include "xMsrPoint/CA210.h"
 #include "CA210sim.h"
 #include "CA210real.h"
 
 class CMainFrame : public CFrameWnd
 {
-    BOOL m_iConnectCa210;
-    BOOL m_iOnlineCa210;
-public:
-    Ca210* m_pCa210;
-
 protected: // create from serialization only
     CMainFrame();
     DECLARE_DYNCREATE(CMainFrame)
@@ -62,6 +56,11 @@ protected:
 	afx_msg void OnUpdateSetupCa210(CCmdUI* pCmdUI);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
+private:
+	BOOL m_iConnectCa210;
+    BOOL m_iOnlineCa210;
+public:
+    Ca210* m_pCa210;
 };
 
 /////////////////////////////////////////////////////////////////////////////

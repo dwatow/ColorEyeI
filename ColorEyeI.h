@@ -19,19 +19,12 @@
 // CColorEyeIApp:
 // See ColorEyeI.cpp for the implementation of this class
 //
-
 class CPatternDlg;
 class CCaSetupDlg;
 
 class CColorEyeIApp : public CWinApp
 {
-	CString m_strPathName;
-    CPatternDlg *m_pdlgPattern;
-	CCaSetupDlg *m_pdlgCaSetup;
 public:
-	void DelMsrItemDlgSetupFile();
-	CString GetPath();
-	CString GetPathName();
     CColorEyeIApp();
     ~CColorEyeIApp();
 // Overrides
@@ -51,6 +44,21 @@ public:
 	afx_msg void OnSetupCa210();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
+
+	//執行檔所在目錄及檔名
+private:	    CString m_strPathName;
+public:	  const CString GetPath() const;      //執行檔所在目錄
+		  const CString GetPathName() const;  //執行檔所在目錄及檔名
+	
+	//桌面路徑
+private:	  CString m_desktopPath;
+public:	const CString GetDesktopPath() const;
+	
+	//對話框指標（在此生成及銷毀）
+private:	CPatternDlg *m_pdlgPattern;
+			CCaSetupDlg *m_pdlgCaSetup;
+public:	           void DelMsrItemDlgSetupFile();
+
 };
 
 

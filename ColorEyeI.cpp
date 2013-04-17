@@ -7,9 +7,9 @@
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 #include "ColorEyeIView.h"
-#include "SelXls/SelExcelDlg.h"
+#include "SelExcelDlg.h"
 #include "CaSetupDlg.h"
-#include "xMsrPoint/PatternDlg.h"
+#include "PatternDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -156,7 +156,9 @@ BOOL CColorEyeIApp::InitInstance()
 //     SHGetSpecialFolderPath(NULL, szPath, CSIDL_DESKTOP, 0);//取得桌面路徑
 //    BCFandODFPath.Format("%s",szPath);
 
-
+	SHGetSpecialFolderPath(0, m_desktopPath.GetBuffer(MAX_PATH+1), CSIDL_DESKTOPDIRECTORY,0);
+	m_desktopPath.ReleaseBuffer();
+	
 
     return TRUE;
 }
@@ -245,25 +247,22 @@ void CColorEyeIApp::OnMsrForItem()
     if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   
         AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
     
-	m_pdlgPattern->Magazine();
-
-//    if (m_pdlgPattern->Magazine())  //按下OK就顯示
-//     {
-//         m_pdlgPattern->ShowWindow(SW_MAXIMIZE);
-//         m_pdlgPattern->SetFocus();
-//     }
-//     else
-//         m_pdlgPattern->ShowWindow(SW_HIDE);
+	m_pdlgPattern->LoadedCartridge();
 }
 
-CString CColorEyeIApp::GetPathName()
+const CString CColorEyeIApp::GetPathName() const
 {
     return m_strPathName;
 }
 
-CString CColorEyeIApp::GetPath()
+const CString CColorEyeIApp::GetPath() const
 {
     return m_strPathName.Left(m_strPathName.ReverseFind('\\'));
+}
+
+const CString CColorEyeIApp::GetDesktopPath() const
+{
+	return m_desktopPath;
 }
 
 void CColorEyeIApp::DelMsrItemDlgSetupFile()

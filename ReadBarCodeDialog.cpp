@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "ColorEyeI.h"
 #include "ReadBarCodeDialog.h"
-#include "OmdFile/TxtFile.h"
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 
@@ -47,7 +46,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CReadBarCodeDialog message handlers
 
-void CReadBarCodeDialog::InitBarCodeList()
+void CReadBarCodeDialog::initBarCodeList()
 {
 	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
 	ASSERT_VALID(pApp);
@@ -86,7 +85,7 @@ BOOL CReadBarCodeDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	InitBarCodeList();
+	initBarCodeList();
 	m_cbxNo.SetCurSel(m_cbxNo.GetCount()-1);
 	OnSelchangeComboSelno();
 
@@ -106,7 +105,7 @@ void CReadBarCodeDialog::OnOK()
 	CString pnlId;
 	m_stcBarCode.GetWindowText(pnlId);
 	pnlId.TrimRight();
-	pDoc->SetPnlID(pnlId);
+	pDoc->GetFileHead().iPnlID(pnlId);
 
 	CDialog::OnOK();
 }

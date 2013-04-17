@@ -119,10 +119,10 @@ void CMainFrame::OnMsrConnectca210()
     if (!m_iConnectCa210)
     {
 		BeginWaitCursor();
-#ifndef _DEBUG
-        m_pCa210 = new Ca210real();
-#else
+#ifdef _DEBUG
         m_pCa210 = new Ca210sim();
+#else
+        m_pCa210 = new Ca210real();
 #endif
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
@@ -147,6 +147,7 @@ void CMainFrame::OnUpdateMsrConnectca210(CCmdUI* pCmdUI)
 {
     // TODO: Add your command update UI handler code here
     pCmdUI->SetCheck( (!m_iConnectCa210) ? FALSE : m_iConnectCa210);
+	pCmdUI->Enable(!m_iConnectCa210);
 }
 
 void CMainFrame::OnUpdateMsrItem(CCmdUI* pCmdUI) 

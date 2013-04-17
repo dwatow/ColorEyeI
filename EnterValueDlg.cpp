@@ -15,8 +15,8 @@ static char THIS_FILE[] = __FILE__;
 // CEnterValueDlg dialog
 
 
-CEnterValueDlg::CEnterValueDlg(const CString dlgTitle, CWnd* pParent /*=NULL*/)
-	: CDialog(CEnterValueDlg::IDD, pParent)
+CEnterValueDlg::CEnterValueDlg(const CString& dlgTitle, const CString& label, CWnd* pParent /*=NULL*/)
+	: CDialog(CEnterValueDlg::IDD, pParent), m_strName(label)
 {
 	m_dlgTitle.Format("%s", dlgTitle);
 	//{{AFX_DATA_INIT(CEnterValueDlg)
