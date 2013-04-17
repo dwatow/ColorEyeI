@@ -28,6 +28,9 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMsrItemDlg)
 	enum { IDD = IDD_MSR_ITEM };
+	CSpinButtonCtrl	m_spinP9Para;
+	CStatic	m_p9_Ncm;
+	CStatic	m_p9_1overN;
 	CComboBox	m_cbxSelNitsKind;
 	CButton	m_chkJND;
 	CButton	m_btnOK;
@@ -120,9 +123,11 @@ protected:
 	afx_msg void OnButtonSelall();
 	afx_msg void OnButtonSelno();
 	virtual void OnCancel();
+	afx_msg void OnDeltaposSwP9fe(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	FEtype m_W9FEtype;
 	debugFile m_debugLog;
 	CString m_desktopPath;
 	

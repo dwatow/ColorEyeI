@@ -16,22 +16,22 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_OMDTOEXCEL
+Resource1=IDD_ABOUTBOX
 Class5=CAboutDlg
-Resource2=IDD_EDIT_DIALOG
-Resource3=IDR_MAINFRAME
-Resource4=IDD_ABOUTBOX
+Resource2=IDR_MAINFRAME
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_OMDTOEXCEL
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_DIALOG_BARCODE
+Resource6=IDD_MSR_ITEM
 Resource7=IDD_CASETUP_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_PATTERN_DIALOG
+Resource8=IDD_EDIT_DIALOG
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_MSR_ITEM
+Resource9=IDD_DIALOG_BARCODE
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -179,7 +179,7 @@ Control11=IDC_STATIC,button,1342177287
 [DLG:IDD_MSR_ITEM]
 Type=1
 Class=CMsrItemDlg
-ControlCount=94
+ControlCount=98
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -274,6 +274,10 @@ Control91=IDC_BUTTON_SELNO,button,1342242816
 Control92=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
 Control93=IDC_EDIT_P13FE,edit,1350631552
 Control94=IDC_STATIC,static,1342308352
+Control95=IDC_SW_P9FE,msctls_updown32,1342177441
+Control96=IDC_STATIC_P9FECM,static,1476526080
+Control97=IDC_STATIC_P9FE1OVER,static,1342308352
+Control98=IDC_STATIC_P9,button,1342177287
 
 [DLG:IDD_EDIT_DIALOG]
 Type=1

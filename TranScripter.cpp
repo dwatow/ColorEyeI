@@ -67,11 +67,31 @@ const CPoint TranScripter::getCenterPoint() const
 const CPoint TranScripter::getFE9Point(const UINT& few) const
 {
 //運算第幾個（以九點為計）
-    const double dFE = (double)m_tranPointer->GetPara(PA_FEover);
+	double dFE;
+	int edgeR, edgeL;
+	if (m_tranPointer->GetPara(PA_FEover) != -1)
+	{
+		dFE = (double)m_tranPointer->GetPara(PA_FEover);
+		edgeL = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
+		edgeR = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
+	}
+	else if (m_tranPointer->GetPara(PA_FElength) != -1)
+	{
+		dFE = (double)m_tranPointer->GetPara(PA_FElength);
+		edgeL = Cm2pixel(dFE);
+		edgeR = Cm2pixel(dFE);
+	}
+	else 
+	{
+		AfxMessageBox("轉錄9點，參數出問題");
+		ASSERT(0);
+	}
+
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
-    const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));
+
+    const int LeftEdge(edgeL);
+    const int TopEdge(edgeR);
     const int RightEdge(m_nScrmH - LeftEdge);
     const int BottomEdge(m_nScrmV - TopEdge);
     const int hCenter(m_nScrmH/2);

@@ -23,11 +23,12 @@ static char THIS_FILE[] = __FILE__;
 #define DebugCode( code_fragment )
 #endif
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CMsrItemDlg dialog
 
 CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CMsrItemDlg::IDD, pParent)
+: CDialog(CMsrItemDlg::IDD, pParent), m_W9FEtype(FT_1overN)
 {
 	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
 	ASSERT_VALID(pApp);
@@ -43,9 +44,9 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_f5FE = 0.0f;
     m_f9FE = 6.0f;
     m_f13FE = 0.0f;
-    m_fCrsTlkRectFE = 4.0f;
     m_fGammaSetp = 255.0f;
     m_n25RectSide = 10;
+    m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
     m_JndGray = 0;
 	//}}AFX_DATA_INIT
@@ -56,6 +57,9 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CMsrItemDlg)
+	DDX_Control(pDX, IDC_SW_P9FE, m_spinP9Para);
+	DDX_Control(pDX, IDC_STATIC_P9FECM, m_p9_Ncm);
+	DDX_Control(pDX, IDC_STATIC_P9FE1OVER, m_p9_1overN);
     DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
     DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
@@ -146,6 +150,7 @@ BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
     ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
     ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
     ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SW_P9FE, OnDeltaposSwP9fe)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -232,11 +237,11 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
     if (m_chkCDP5.GetState())    sortableDNA.AddCell(Dark , Pn5, m_f5FE);
     
     //9點
-    if (m_chkCWP9.GetState())    sortableDNA.AddCell(White, Pn9, (int)m_f9FE);
-    if (m_chkCRP9.GetState())    sortableDNA.AddCell(Red  , Pn9, (int)m_f9FE);
-    if (m_chkCGP9.GetState())    sortableDNA.AddCell(Green, Pn9, (int)m_f9FE);
-    if (m_chkCBP9.GetState())    sortableDNA.AddCell(Blue , Pn9, (int)m_f9FE);
-    if (m_chkCDP9.GetState())    sortableDNA.AddCell(Dark , Pn9, (int)m_f9FE);
+    if (m_chkCWP9.GetState())    sortableDNA.AddCell(White, Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCRP9.GetState())    sortableDNA.AddCell(Red  , Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCGP9.GetState())    sortableDNA.AddCell(Green, Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCBP9.GetState())    sortableDNA.AddCell(Blue , Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCDP9.GetState())    sortableDNA.AddCell(Dark , Pn9, (int)m_f9FE, m_W9FEtype);
     
     //21點
     if (m_chkCWP21.GetState())    sortableDNA.AddCell(White, Pn21, m_f21FE);
@@ -363,6 +368,11 @@ BOOL CMsrItemDlg::OnInitDialog()
     m_cbxSelNitsKind.AddString("+");
     m_cbxSelNitsKind.AddString("--");
     m_cbxSelNitsKind.SetCurSel(0);
+
+	m_spinP9Para.SetRange(0, 1);
+	m_spinP9Para.SetPos(1);
+	m_spinP9Para.SetBase(10);
+
 
     //記憶 選項 file >> Dialog
     CFile LoadSet;
@@ -711,3 +721,23 @@ void CMsrItemDlg::OnButtonSelno()
     if (m_chkCDP1.IsWindowEnabled())        m_chkCDP1.SetCheck(FALSE);
 }
 
+
+void CMsrItemDlg::OnDeltaposSwP9fe(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
+	// TODO: Add your control notification handler code here
+	switch ((FEtype)pNMUpDown->iPos)
+	{
+	case FT_1overN:
+		m_p9_1overN.EnableWindow(TRUE);
+		m_p9_Ncm.EnableWindow(FALSE);
+		m_W9FEtype = FT_1overN;
+		break;
+	case FT_Ncm:
+		m_p9_1overN.EnableWindow(FALSE);
+		m_p9_Ncm.EnableWindow(TRUE);
+		m_W9FEtype = FT_Ncm;
+	}
+
+	*pResult = 0;
+}

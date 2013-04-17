@@ -26,20 +26,37 @@ m_Parameters(PA_Max, -1)
             break;
     case Pn5:
     case Pn9:
-        if (_C == Nits)
+        if (_C == Nits)  //Nits
         {
             SetPara(PA_NitsNum, _N1);
             SetPara(PA_NitsDir, _N2); 
             m_paraStr.Format("_灰階: %d%s", _N1, (_N2)?"↓":"↑");
             break;
         }
-        if (_C == Dark)
+        if (_C == Dark)  //黑色9點
         {
-            SetPara(PA_FEover, 0);
+            SetPara(PA_FEover, _N1);
             m_paraStr.Format("_貼邊");
             break;
         }
+		if (_C == White)  //白色9點
+		{
+			if ( (_N2 == FT_1overN) || (_N1 == 0) )
+			{
+				SetPara(PA_FEover, _N1);
+				if (_N1 == 0)
+					m_paraStr.Format("_貼邊");
+				else
+					m_paraStr.Format("_離邊: 1/%d", _N1);
+			}
+			else if (_N2 == FT_Ncm)
+			{
+				SetPara(PA_FElength, _N1);
+				m_paraStr.Format("_離邊: %dcm", _N1);
+			}
 
+			break;
+		}
     case Pn13:
     case Pn21:
     case Pn25:
