@@ -99,7 +99,7 @@ const CString Bullet::GetLastTime() const
     return str;
 }
 
-const CString Bullet::Show() const
+const CString Bullet::ShowDataReport() const
 {
     return " Lv =" + flt2str(m_vfValues[VluK_Lv]) + "\n" 
 		+ "  x =" + flt2str(m_vfValues[VluK_Sx]) + "\n" 
@@ -111,4 +111,16 @@ const CString Bullet::Show() const
 		+ "  X =" + flt2str(m_vfValues[VluK_X]) + "\n"
 		+ "  Y =" + flt2str(m_vfValues[VluK_Y]) + "\n"
 		+ "  Z =" + flt2str(m_vfValues[VluK_Z]);
+}
+
+const CString Bullet::ShowData() const
+{
+	CString accumulation, everyTemp;
+	for (std::vector<float>::const_iterator itor = m_vfValues.begin(); itor != m_vfValues.end(); ++itor)
+	{
+		everyTemp.Format("%f\t", *itor);
+		accumulation += everyTemp;
+	}
+	accumulation.TrimRight();
+    return accumulation;
 }

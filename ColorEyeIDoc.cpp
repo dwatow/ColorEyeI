@@ -306,18 +306,12 @@ void CColorEyeIDoc::debugByTxt(CString pathName)
 
     str.IsEmpty();
     vStr.clear();
-//     str.Format("記憶體位址\t原始順序\t區域碼\t背景色碼\t第幾點\t量測點數\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\n");
+    str.Format("點位描述\tLv\tx\ty\tdu\tdv\tT\tDuv\tX\tY\tZ\t量測時間\n");
     vStr.push_back(str);
-//     for (std::vector<Cartridge2>::iterator iter = m_dOmd.Begin(); iter != m_dOmd.End(); ++iter)
+
     for (std::vector<Cartridge2>::iterator iter = m_docRNA.Begin(); iter != m_docRNA.End(); ++iter)
     {                  
-//         str.Format("%x\t%d\t%d\t%s\t%d\t%s\t%f\t%f\t%f\t%f\t%f\t%d\t%f\t%f\t%f\t%f\n",\
-//             iter, iter->GetOrigSeqc(), iter->GetArea(), 
-//             iter->GetStrColorType(), //背景色碼
-//             iter->GetMsrFlowNo(), //第幾點
-//             iter->GetStrPointNum(),//量測點數
-//             iter->GetLv(), iter->GetSx(), iter->GetSy(), iter->GetDu(), iter->GetDv(), iter->GetT(), iter->GetDuv(), iter->GetX(), iter->GetY(), iter->GetZ());
-        str.Format("%s\n", iter->GetDescrip());
+        str.Format("%s\t%s\t%s\t\n", iter->GetDescrip(), iter->GetBullet().ShowData(), iter->GetBullet().GetLastTime());
         vStr.push_back(str);
     }
 

@@ -432,45 +432,36 @@ void CXlsOQCmass::idD25()
 void CXlsOQCmass::idCrsTlk()
 {
     SelectSheet("CrossTalk");
-    SelectCell('M', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "1", "1/4", VluK_Lv) );
-    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "2", "1/4", VluK_Lv) );
-    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "3", "1/4", VluK_Lv) );
-    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "4", "1/4", VluK_Lv) );
+
+	const CString Up    = "1";
+	const CString Left  = "2";
+	const CString Right = "3";
+	const CString Down  = "4";
+
+    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Down , "1/4", VluK_Lv) );
+    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Left , "1/4", VluK_Lv) );
+    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Right, "1/4", VluK_Lv) );
     
-    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "1", "1/4", VluK_Lv) );
-    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "2", "1/4", VluK_Lv) );
-    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "3", "1/4", VluK_Lv) );
-    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "4", "1/4", VluK_Lv) );
+    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Down , "1/4", VluK_Lv) );
+    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Left , "1/4", VluK_Lv) );
+    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Right, "1/4", VluK_Lv) );
     
-    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "1", "1/4", VluK_Lv) );
-    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "2", "1/4", VluK_Lv) );
-    SelectCell('Y', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "3", "1/4", VluK_Lv) );
-    SelectCell('Z', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "4", "1/4", VluK_Lv) );
+    SelectCell('M', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Down , "1/4", VluK_Lv) );
+    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Left , "1/4", VluK_Lv) );
+    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Right, "1/4", VluK_Lv) );
     
-    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", (SelectCell('R', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", (SelectCell('S', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", (SelectCell('T', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", (SelectCell('U', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('Q', 9+m_ModuleNO)->SetCell("%f", (SelectCell('I', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", (SelectCell('J', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", (SelectCell('K', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", (SelectCell('L', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double() );
     
-    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double() );
-    
-    SelectCell('M', 9+m_ModuleNO)->ClearCell();
-    SelectCell('N', 9+m_ModuleNO)->ClearCell();
-    SelectCell('O', 9+m_ModuleNO)->ClearCell();
-    SelectCell('P', 9+m_ModuleNO)->ClearCell();
-    
-    SelectCell('R', 9+m_ModuleNO)->ClearCell();
-    SelectCell('S', 9+m_ModuleNO)->ClearCell();
-    SelectCell('T', 9+m_ModuleNO)->ClearCell();
-    SelectCell('U', 9+m_ModuleNO)->ClearCell();
-    
-    SelectCell('W', 9+m_ModuleNO)->ClearCell();
-    SelectCell('X', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Y', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Z', 9+m_ModuleNO)->ClearCell();
+    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('V', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double() );
 }
 
 void CXlsOQCmass::iColorTemperature()

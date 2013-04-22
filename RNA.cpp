@@ -215,7 +215,7 @@ std::vector<int>::size_type RNA::HaveSeveral(const CString& color, const CString
 	{
 		for (std::vector<Cartridge2>::iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
 		{
-			if ( (itor->GetDescrip().Find(color) >= 0) && (itor->GetDescrip().Find(ptTtl) >= 0) && 
+			if ( (itor->GetDescrip().Find(clr)   >= 0) && (itor->GetDescrip().Find(ptTtl) >= 0) && 
 				 (itor->GetDescrip().Find(mrIdx) >= 0) && (itor->GetDescrip().Find(fePr)  >= 0)  )
 				vSub.push_back(itor - m_CarChain2.begin());
 		}

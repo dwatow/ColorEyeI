@@ -209,15 +209,18 @@ void CMsrItemDlg::listBoxUpdate()
 
 void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
 {
+	//修改的話，要同步修改
+	//void COmdFile1::DNA_sortable(DNA& sortableDNA)
+
     //準備DNA
     //填入參數
     //JND
 	UpdateData(TRUE);
-    if (m_chkJND.GetState())
-    {
-        sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
-        sortableDNA.AddCell(JND , Pn1, m_JndGray);
-    }
+//     if (m_chkJND.GetState())
+//     {
+//         sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
+//         sortableDNA.AddCell(JND , Pn1, m_JndGray);
+//     }
     
     //中心點
     if (m_chkCWP1.GetState())  sortableDNA.AddCell(White, Pn1);

@@ -14,9 +14,9 @@ const CString Ca210::OutData()
     try
     {
 		if(isOnline())
-			return m_blt.Show();
+			return m_blt.ShowDataReport();
 		else
-			return m_blt.Show() + "\n차퐑ㄴ...";
+			return m_blt.ShowDataReport() + "\n차퐑ㄴ...";
     }
     catch (CException* e)
     {

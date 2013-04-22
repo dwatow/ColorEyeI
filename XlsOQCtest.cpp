@@ -32,10 +32,10 @@ CXlsFile2* CXlsOQCtest::iData   (RNA&               , std::vector<Cartridge2>::s
 CXlsFile2* CXlsOQCtest::iNitsLv(CString strNitsLv   ) { SelectSheet("光學")->SelectCell("BE", 5+m_ModuleNO)->SetCell(strNitsLv); /*AfxMessageBox(strNitsLv);*/    return this;}
 CXlsFile2* CXlsOQCtest::iPanelID(CString strPanelID)
 {
-	//貼公式
+    //貼公式
     CString BarCode;
     BarCode.Format("=\'光學\'!B%d", 5+m_ModuleNO);
-	//直接貼字串
+    //直接貼字串
 //     SelectSheet("光學")              ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);
 //     SelectSheet("黑色25點")          ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);  //黑色25點
 //     SelectSheet("黑色21點")          ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);  //黑色21點
@@ -50,14 +50,15 @@ CXlsFile2* CXlsOQCtest::iData(RNA& vCar)
 {
     m_vCar = vCar;
 
-	//無重疊
+    //無重疊
     if (vCar.HaveSeveral("紅","1"))           idR1();
     if (vCar.HaveSeveral("綠","1"))           idG1();
     if (vCar.HaveSeveral("藍","1"))           idB1();
     if (vCar.HaveSeveral("Nits","","","5-"))  idNits();
-    if (vCar.HaveSeveral("cross")  ||
-		vCar.HaveSeveral("crossW") ||
-		vCar.HaveSeveral("crossD")  )         idCrsTlk();
+
+    if ( vCar.HaveSeveral("cross") ||
+         vCar.HaveSeveral("crossW") ||
+         vCar.HaveSeveral("crossD") )         idCrsTlk();
     
     //重疊
     if (vCar.HaveSeveral("黑","25"))          idD25();
@@ -66,13 +67,13 @@ CXlsFile2* CXlsOQCtest::iData(RNA& vCar)
     
     if (vCar.HaveSeveral("白","9","","1/6"))  idW9_1over6();
     if (vCar.HaveSeveral("白","9","","0"))    idW9_corner();
-	if (vCar.HaveSeveral("白","5","","0"))    idW5_corner();
+    if (vCar.HaveSeveral("白","5","","0"))    idW5_corner();
     if (vCar.HaveSeveral("白","1"))           idW1();
     
     //其它
     if (vCar.HaveSeveral("紅","1") && 
-		vCar.HaveSeveral("綠","1") && 
-		vCar.HaveSeveral("藍","1"))           iColorGamu();
+        vCar.HaveSeveral("綠","1") && 
+        vCar.HaveSeveral("藍","1"))           iColorGamu();
     if (vCar.HaveSeveral("白","1"))           iColorTemperature();
 
     SetVisible(true);
@@ -94,30 +95,30 @@ void CXlsOQCtest::idW9_1over6()
         SelectCell((char)('C'+i*3+2), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "9", msrItemIndex, "1/6", VluK_Lv) );
     }
 
-	CString WcenterLv, WcenterSx, WcenterSy;
+    CString WcenterLv, WcenterSx, WcenterSy;
     WcenterSx.Format("%1.4f", m_vCar.fFind("白", "9", "6", "1/6", VluK_Sx) );
     WcenterSy.Format("%1.4f", m_vCar.fFind("白", "9", "6", "1/6", VluK_Sy) );
     WcenterLv.Format("%3.2f", m_vCar.fFind("白", "9", "6", "1/6", VluK_Lv) );
 
-	//W9_1/6
+    //W9_1/6
     SelectCell("AA", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "9", "9", "1/6", VluK_Sx) );
     SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "9", "9", "1/6", VluK_Sy) );
     SelectCell("AC", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "9", "9", "1/6", VluK_Lv) );
     
     //等效白色中心
-	SelectCell("AD", 5+m_ModuleNO)->SetCell(WcenterSx);
+    SelectCell("AD", 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell("AE", 5+m_ModuleNO)->SetCell(WcenterSy);
 
     //等效貼邊白色九點
     SelectSheet("白色9點");
-	SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
+    SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell('P', 5+m_ModuleNO)->SetCell(WcenterSy);
     SelectCell('Q', 5+m_ModuleNO)->SetCell(WcenterLv);
 }
 
 void CXlsOQCtest::idW1()
 {
-	CString WcenterLv, WcenterSx, WcenterSy;
+    CString WcenterLv, WcenterSx, WcenterSy;
     WcenterSx.Format("%1.4f", m_vCar.fFind("白", "1", "1", " ", VluK_Sx) );
     WcenterSy.Format("%1.4f", m_vCar.fFind("白", "1", "1", " ", VluK_Sy) );
     WcenterLv.Format("%3.2f", m_vCar.fFind("白", "1", "1", " ", VluK_Lv) );
@@ -138,7 +139,7 @@ void CXlsOQCtest::idW1()
 
     //等效貼邊白色九點
     SelectSheet("白色9點");
-	SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
+    SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell('P', 5+m_ModuleNO)->SetCell(WcenterSy);
     SelectCell('Q', 5+m_ModuleNO)->SetCell(WcenterLv);
 }
@@ -149,7 +150,7 @@ void CXlsOQCtest::idR1()
     RcenterLv.Format("%3.2f", m_vCar.fFind("紅", "1", "1", " ", VluK_Lv) );
     RcenterSx.Format("%1.4f", m_vCar.fFind("紅", "1", "1", " ", VluK_Sx) );
     RcenterSy.Format("%1.4f", m_vCar.fFind("紅", "1", "1", " ", VluK_Sy) );
-	
+    
     SelectSheet("光學");
     SelectCell("AF", 5+m_ModuleNO)->SetCell(RcenterLv);
     SelectCell("AG", 5+m_ModuleNO)->SetCell(RcenterSx);
@@ -186,7 +187,7 @@ void CXlsOQCtest::idR1()
 
 void CXlsOQCtest::idG1()
 {
-	CString GcenterLv, GcenterSx, GcenterSy;
+    CString GcenterLv, GcenterSx, GcenterSy;
     GcenterLv.Format("%3.2f", m_vCar.fFind("綠", "1", "1", " ", VluK_Lv) );
     GcenterSx.Format("%1.4f", m_vCar.fFind("綠", "1", "1", " ", VluK_Sx) );
     GcenterSy.Format("%1.4f", m_vCar.fFind("綠", "1", "1", " ", VluK_Sy) );
@@ -227,7 +228,7 @@ void CXlsOQCtest::idG1()
 
 void CXlsOQCtest::idB1()
 {
-	CString BcenterLv, BcenterSx, BcenterSy;
+    CString BcenterLv, BcenterSx, BcenterSy;
     BcenterLv.Format("%3.2f", m_vCar.fFind("藍", "1", "1", " ", VluK_Lv) );
     BcenterSx.Format("%1.4f", m_vCar.fFind("藍", "1", "1", " ", VluK_Sx) );
     BcenterSy.Format("%1.4f", m_vCar.fFind("藍", "1", "1", " ", VluK_Sy) );
@@ -284,7 +285,7 @@ void CXlsOQCtest::idD1()
     SelectCell('C', 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell('D', 5+m_ModuleNO)->SetCell(DcenterSx);
     SelectCell('E', 5+m_ModuleNO)->SetCell(DcenterSy);
-	
+    
     //等效D25
     SelectSheet("黑色25點");
     SelectCell('R', 5+m_ModuleNO)->SetCell(DcenterLv);
@@ -330,7 +331,7 @@ void CXlsOQCtest::idD25()
     DcenterSx.Format("%1.4f", m_vCar.fFind("黑", "25", "13", "0", VluK_Sx) );
     DcenterSy.Format("%1.4f", m_vCar.fFind("黑", "25", "13", "0", VluK_Sy) );
 
-	//D25 center
+    //D25 center
     SelectCell('C', 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell('D', 5+m_ModuleNO)->SetCell(DcenterSx);
     SelectCell('E', 5+m_ModuleNO)->SetCell(DcenterSy);
@@ -338,18 +339,18 @@ void CXlsOQCtest::idD25()
     //等效D1
     CString str;
     SelectSheet("光學");
-	SelectCell("AO", 5+m_ModuleNO)->SetCell(DcenterLv);
+    SelectCell("AO", 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell("AP", 5+m_ModuleNO)->SetCell(DcenterSx);
     SelectCell("AQ", 5+m_ModuleNO)->SetCell(DcenterSy);
 
-	//等效D21
+    //等效D21
     SelectSheet("黑色21點");
     SelectCell('Z', 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell('C', 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell('D', 5+m_ModuleNO)->SetCell(DcenterSx);
     SelectCell('E', 5+m_ModuleNO)->SetCell(DcenterSy);
-	//四角
-	SelectCell('J', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "25",  "1", "0", VluK_Lv) );
+    //四角
+    SelectCell('J', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "25",  "1", "0", VluK_Lv) );
     SelectCell('P', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "25",  "7", "0", VluK_Lv) );
     SelectCell('F', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "25", "15", "0", VluK_Lv) );
     SelectCell('T', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "25", "21", "0", VluK_Lv) );
@@ -358,7 +359,7 @@ void CXlsOQCtest::idD25()
 void CXlsOQCtest::idW9_corner()
 {
     SelectSheet("白色9點");  //貼在"貼邊白色九點"，因為很少在用，所以沒有cover別的項目。
-	int i(0);
+    int i(0);
     CString msrItemIndex;
     //W9(Lv)(1~8)
     for(i = 0; i < 8; ++i)
@@ -368,12 +369,12 @@ void CXlsOQCtest::idW9_corner()
         SelectCell((char)('C'+i*3+1), 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "9", msrItemIndex, "0", VluK_Sy) );
         SelectCell((char)('C'+i*3+2), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "9", msrItemIndex, "0", VluK_Lv) );
     }
-	
+    
     SelectCell("AA", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "9", "9", "0", VluK_Sx) );
     SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "9", "9", "0", VluK_Sy) );
     SelectCell("AC", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "9", "9", "0", VluK_Lv) );
     
-	CString WcenterLv, WcenterSx, WcenterSy;
+    CString WcenterLv, WcenterSx, WcenterSy;
     WcenterLv.Format("%3.2f", m_vCar.fFind("白", "9", "6", "0", VluK_Lv) );
     WcenterSx.Format("%1.4f", m_vCar.fFind("白", "9", "6", "0", VluK_Sx) );
     WcenterSy.Format("%1.4f", m_vCar.fFind("白", "9", "6", "0", VluK_Sy) );
@@ -381,10 +382,10 @@ void CXlsOQCtest::idW9_corner()
     //等效白色中心
     CString str;
     SelectSheet("光學");
-	SelectCell("AD", 5+m_ModuleNO)->SetCell(WcenterSx);
-	SelectCell("AE", 5+m_ModuleNO)->SetCell(WcenterSy);
+    SelectCell("AD", 5+m_ModuleNO)->SetCell(WcenterSx);
+    SelectCell("AE", 5+m_ModuleNO)->SetCell(WcenterSy);
 
-	//等效白色1/6
+    //等效白色1/6
     SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell('P', 5+m_ModuleNO)->SetCell(WcenterSy);
     SelectCell('Q', 5+m_ModuleNO)->SetCell(WcenterLv);
@@ -392,7 +393,7 @@ void CXlsOQCtest::idW9_corner()
 
 void CXlsOQCtest::idW5_corner()
 {
-	SelectSheet("白色9點");  //貼在"貼邊白色九點"，因為很少在用，所以沒有cover別的項目。
+    SelectSheet("白色9點");  //貼在"貼邊白色九點"，因為很少在用，所以沒有cover別的項目。
     //W5(Lv,x,y)
     SelectCell('C',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "5", "1", "0", VluK_Lv) );
     SelectCell('D',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "5", "1", "0", VluK_Sx) );
@@ -409,12 +410,12 @@ void CXlsOQCtest::idW5_corner()
     SelectCell('U',  5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "5", "4", "0", VluK_Lv) );
     SelectCell('V',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "5", "4", "0", VluK_Sx) );
     SelectCell('W',  5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "5", "4", "0", VluK_Sy) );
-	
+    
     SelectCell("AA", 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("白", "5", "5", "0", VluK_Lv) );
     SelectCell("AB", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "5", "5", "0", VluK_Sx) );
     SelectCell("AC", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("白", "5", "5", "0", VluK_Sy) );
 
-	CString WcenterLv, WcenterSx, WcenterSy;
+    CString WcenterLv, WcenterSx, WcenterSy;
     WcenterLv.Format("%3.2f", m_vCar.fFind("白", "5", "3", "0", VluK_Lv) );
     WcenterSx.Format("%1.4f", m_vCar.fFind("白", "5", "3", "0", VluK_Sx) );
     WcenterSy.Format("%1.4f", m_vCar.fFind("白", "5", "3", "0", VluK_Sy) );
@@ -423,7 +424,7 @@ void CXlsOQCtest::idW5_corner()
     SelectSheet("光學");
     SelectCell("AD", 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell("AE", 5+m_ModuleNO)->SetCell(WcenterSy);
-	
+    
     //等效離邊白色9點
     SelectCell('O', 5+m_ModuleNO)->SetCell(WcenterSx);
     SelectCell('P', 5+m_ModuleNO)->SetCell(WcenterSy);
@@ -446,16 +447,16 @@ void CXlsOQCtest::idD21()
         SelectCell((char)('F'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("黑", "21", msrItemIndex, "0", VluK_Lv) );
     }
 
-	CString DcenterLv, DcenterSx, DcenterSy;
+    CString DcenterLv, DcenterSx, DcenterSy;
     DcenterLv.Format("%3.2f", m_vCar.fFind("黑", "21", "21", "0", VluK_Lv) );
     DcenterSx.Format("%1.4f", m_vCar.fFind("黑", "21", "21", "0", VluK_Sx) );
     DcenterSy.Format("%1.4f", m_vCar.fFind("黑", "21", "21", "0", VluK_Sy) );
 
-	//Set D21 center
+    //Set D21 center
     SelectCell('C', 5+m_ModuleNO)->SetCell(DcenterLv);
     SelectCell('D', 5+m_ModuleNO)->SetCell(DcenterSx);
     SelectCell('E', 5+m_ModuleNO)->SetCell(DcenterSy);
-	
+    
     //等效D1
     SelectSheet("光學");
     SelectCell("AO", 5+m_ModuleNO)->SetCell(DcenterLv);
@@ -478,53 +479,44 @@ void CXlsOQCtest::idD21()
 void CXlsOQCtest::idCrsTlk()
 {
     SelectSheet("CrossTalk");
-    SelectCell('M', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "1", "1/4", VluK_Lv) );
-    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "2", "1/4", VluK_Lv) );
-    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "3", "1/4", VluK_Lv) );
-    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", "4", "1/4", VluK_Lv) );
 
-    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "1", "1/4", VluK_Lv) );
-    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "2", "1/4", VluK_Lv) );
-    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "3", "1/4", VluK_Lv) );
-    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", "4", "1/4", VluK_Lv) );
+	const CString Up    = "1";
+	const CString Left  = "2";
+	const CString Right = "3";
+	const CString Down  = "4";
 
-    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "1", "1/4", VluK_Lv) );
-    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "2", "1/4", VluK_Lv) );
-    SelectCell('Y', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "3", "1/4", VluK_Lv) );
-    SelectCell('Z', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", "4", "1/4", VluK_Lv) );
-
-    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", (SelectCell('R', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", (SelectCell('S', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", (SelectCell('T', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", (SelectCell('U', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double() );
-
-    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('W', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('W', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('X', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('X', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Y', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Y', 9+m_ModuleNO)->GetCell2Double() );
-    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('Z', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('Z', 9+m_ModuleNO)->GetCell2Double() );
-
-    SelectCell('M', 9+m_ModuleNO)->ClearCell();
-    SelectCell('N', 9+m_ModuleNO)->ClearCell();
-    SelectCell('O', 9+m_ModuleNO)->ClearCell();
-    SelectCell('P', 9+m_ModuleNO)->ClearCell();
+    SelectCell('E', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('F', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Down , "1/4", VluK_Lv) );
+    SelectCell('G', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Left , "1/4", VluK_Lv) );
+    SelectCell('H', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("cross" , "4", Right, "1/4", VluK_Lv) );
     
-    SelectCell('R', 9+m_ModuleNO)->ClearCell();
-    SelectCell('S', 9+m_ModuleNO)->ClearCell();
-    SelectCell('T', 9+m_ModuleNO)->ClearCell();
-    SelectCell('U', 9+m_ModuleNO)->ClearCell();
+    SelectCell('I', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('J', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Down , "1/4", VluK_Lv) );
+    SelectCell('K', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Left , "1/4", VluK_Lv) );
+    SelectCell('L', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossD", "4", Right, "1/4", VluK_Lv) );
     
-    SelectCell('W', 9+m_ModuleNO)->ClearCell();
-    SelectCell('X', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Y', 9+m_ModuleNO)->ClearCell();
-    SelectCell('Z', 9+m_ModuleNO)->ClearCell();
+    SelectCell('M', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Up   , "1/4", VluK_Lv) );
+    SelectCell('N', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Down , "1/4", VluK_Lv) );
+    SelectCell('O', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Left , "1/4", VluK_Lv) );
+    SelectCell('P', 9+m_ModuleNO)->SetCell("%f", m_vCar.fFind("crossW", "4", Right, "1/4", VluK_Lv) );
+    
+    SelectCell('Q', 9+m_ModuleNO)->SetCell("%f", (SelectCell('I', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('R', 9+m_ModuleNO)->SetCell("%f", (SelectCell('J', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('S', 9+m_ModuleNO)->SetCell("%f", (SelectCell('K', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('T', 9+m_ModuleNO)->SetCell("%f", (SelectCell('L', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double() );
+    
+    SelectCell('U', 9+m_ModuleNO)->SetCell("%f", (SelectCell('M', 9+m_ModuleNO)->GetCell2Double() - SelectCell('E', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('E', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('V', 9+m_ModuleNO)->SetCell("%f", (SelectCell('N', 9+m_ModuleNO)->GetCell2Double() - SelectCell('F', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('F', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('W', 9+m_ModuleNO)->SetCell("%f", (SelectCell('O', 9+m_ModuleNO)->GetCell2Double() - SelectCell('G', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('G', 9+m_ModuleNO)->GetCell2Double() );
+    SelectCell('X', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double() );
 }
 
 void CXlsOQCtest::iColorTemperature()
 {
     //從白色中心點運算出來的色溫貼到
     SelectSheet("CrossTalk")
-		->SelectCell('C', 9+m_ModuleNO)->SetCell("%f", SelectSheet("Color Temperature")
-		->SelectCell('F', 5+m_ModuleNO)->GetCell2Double());
+        ->SelectCell('C', 9+m_ModuleNO)->SetCell("%f", SelectSheet("Color Temperature")
+        ->SelectCell('F', 5+m_ModuleNO)->GetCell2Double());
 }
 
 void CXlsOQCtest::iColorGamu()

@@ -150,10 +150,6 @@ SOURCE=.\ColorEyeI.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ColorEyeI.odl
-# End Source File
-# Begin Source File
-
 SOURCE=.\ColorEyeI.rc
 # End Source File
 # Begin Source File
@@ -231,7 +227,6 @@ SOURCE=.\StaticText.cpp
 # Begin Source File
 
 SOURCE=.\StdAfx.cpp
-# ADD CPP /Yc"stdafx.h"
 # End Source File
 # Begin Source File
 

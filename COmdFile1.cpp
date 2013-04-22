@@ -1098,6 +1098,8 @@ void COmdFile1::t2oW5()
 
 void COmdFile1::DNA_sortable(DNA& sortableDNA)
 {
+	//修改的話，要同步修改
+	//void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
     //準備DNA
     //填入參數
     //JND
@@ -1122,11 +1124,11 @@ void COmdFile1::DNA_sortable(DNA& sortableDNA)
 //     sortableDNA.AddCell(Dark , Pn5, 0);
     
     //9點
-    sortableDNA.AddCell(White, Pn9, 6);
+    sortableDNA.AddCell(White, Pn9, 6, FT_1overN);
 //     sortableDNA.AddCell(Red  , Pn9, 6);
 //     sortableDNA.AddCell(Green, Pn9, 6);
 //     sortableDNA.AddCell(Blue , Pn9, 6);
-    sortableDNA.AddCell(Dark , Pn9, 6);
+    sortableDNA.AddCell(Dark , Pn9, 6, FT_1overN);
     
     //21點
 //     sortableDNA.AddCell(White, Pn21, 0);

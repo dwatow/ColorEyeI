@@ -117,7 +117,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     RNA showData(pDoc->GetDocRNA());
     for ( std::vector<Cartridge2>::iterator dataItor = showData.Begin(); dataItor != showData.End(); ++dataItor)
     {
-        str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().Show());
+        str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().ShowDataReport());
         ptTemp.y =  TextHight*(line);
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
         line++;

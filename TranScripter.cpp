@@ -83,8 +83,9 @@ const CPoint TranScripter::getFE9Point(const UINT& few) const
 	}
 	else 
 	{
-		AfxMessageBox("轉錄9點，參數出問題");
-		ASSERT(0);
+		//沒有9點的值或參數
+// 		AfxMessageBox("轉錄9點，參數出問題");
+// 		ASSERT(0);
 	}
 
     //ScrmV 螢幕垂直pixel數

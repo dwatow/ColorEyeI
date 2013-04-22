@@ -43,7 +43,8 @@ private:
 //¹Bºâ¤l
 public:
              void operator= (const Bullet&);
-    const CString Bullet::Show() const;
+    const CString ShowDataReport() const;
+	const CString ShowData() const;
 };
 
 #endif
