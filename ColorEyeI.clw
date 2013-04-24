@@ -16,34 +16,34 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_CASETUP_DIALOG
+Resource1=IDD_DIALOG_BARCODE
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDR_MAINFRAME
-Resource3=IDD_OMDTOEXCEL
-Resource4=IDD_ABOUTBOX
+Resource2=IDD_PATTERN_DIALOG
+Resource3=IDD_MSR_ITEM
+Resource4=IDD_OMDTOEXCEL
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_PATTERN_DIALOG
-Resource7=IDD_EDIT_DIALOG
+Resource6=IDD_EDIT_DIALOG
+Resource7=IDR_MAINFRAME
 Class7=CCaSetupDlg
-Resource8=IDD_MSR_ITEM
+Resource8=IDD_CASETUP_DIALOG
 =======
-Resource2=IDR_MAINFRAME
-Resource3=IDD_OMDTOEXCEL
-Resource4=IDD_ABOUTBOX
+Resource2=IDD_PATTERN_DIALOG
+Resource3=IDD_MSR_ITEM
+Resource4=IDD_OMDTOEXCEL
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_PATTERN_DIALOG
-Resource7=IDD_EDIT_DIALOG
+Resource6=IDD_EDIT_DIALOG
+Resource7=IDR_MAINFRAME
 Class7=CCaSetupDlg
-Resource8=IDD_MSR_ITEM
+Resource8=IDD_CASETUP_DIALOG
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_DIALOG_BARCODE
+Resource9=IDD_ABOUTBOX
 
 [CLS:CColorEyeIApp]
 Type=0
