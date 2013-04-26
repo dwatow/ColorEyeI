@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAboutDlg
+LastClass=CColorEyeIDoc
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -19,25 +19,25 @@ ResourceCount=9
 Resource1=IDD_DIALOG_BARCODE
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_MSR_ITEM
-Resource4=IDD_OMDTOEXCEL
+Resource2=IDD_MSR_ITEM
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDD_PATTERN_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_EDIT_DIALOG
-Resource7=IDR_MAINFRAME
+Resource6=IDD_CASETUP_DIALOG
+Resource7=IDD_OMDTOEXCEL
 Class7=CCaSetupDlg
-Resource8=IDD_CASETUP_DIALOG
+Resource8=IDR_MAINFRAME
 =======
-Resource2=IDD_PATTERN_DIALOG
-Resource3=IDD_MSR_ITEM
-Resource4=IDD_OMDTOEXCEL
+Resource2=IDD_MSR_ITEM
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDD_PATTERN_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_EDIT_DIALOG
-Resource7=IDR_MAINFRAME
+Resource6=IDD_CASETUP_DIALOG
+Resource7=IDD_OMDTOEXCEL
 Class7=CCaSetupDlg
-Resource8=IDD_CASETUP_DIALOG
+Resource8=IDR_MAINFRAME
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
@@ -112,7 +112,7 @@ Command5=ID_FILE_OMDTOXLS
 Command6=ID_FILE_MRU_FILE1
 Command7=ID_APP_EXIT
 Command8=ID_MSR_CONNECTCA210
-Command9=ID_MSR_FORM
+Command9=ID_MSR_TABLE
 Command10=ID_MSR_ITEM
 Command11=ID_MSR_POINT
 Command12=ID_VIEW_TOOLBAR

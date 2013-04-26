@@ -191,15 +191,15 @@ public:
     //-----------------------------------------------------
     //xlsFile* 選了格子之後可以繼續下「讀」「寫」的成員函數
     //選一格
-    xlsFile* SelectCell(const char* );    
+    xlsFile* SelectCell(const char* );
     xlsFile* SelectCell(const char* , int );
-    xlsFile* SelectCell(char,int);    
-    xlsFile* SelectCell(char,char,int);    
+    xlsFile* SelectCell(char,int);
+    xlsFile* SelectCell(char,char,int);
     //選一個範圍
-    xlsFile* SelectCell(const char* , const char* );    
+    xlsFile* SelectCell(const char* , const char* );
     xlsFile* SelectCell(const char* , int ,const char* , int );
-    xlsFile* SelectCell(char,int,char,int);    
-    xlsFile* SelectCell(char,char,int,char,char,int);    
+    xlsFile* SelectCell(char,int,char,int);
+    xlsFile* SelectCell(char,char,int,char,char,int);
     //--------------------------------------------
     void ClearCell();                //清除儲存格
     xlsFile* SetMergeCells(short vMerge = TRUE, 

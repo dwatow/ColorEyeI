@@ -186,8 +186,8 @@ void CXlsOQCmass::idR1()
     SelectCell('O', 5+m_ModuleNO)->SetCell(RcenterSx);
     SelectCell('P', 5+m_ModuleNO)->SetCell(RcenterSy);
 
-    //单Color Gamu
-    SelectSheet("Color Gamu");
+    //单Color Gamut
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0: SelectCell("F3")->SetCell(RcenterSx);
@@ -228,8 +228,8 @@ void CXlsOQCmass::idG1()
     SelectCell('R', 5+m_ModuleNO)->SetCell(GcenterSx);
     SelectCell('S', 5+m_ModuleNO)->SetCell(GcenterSy);
 
-    //单Color Gamu
-    SelectSheet("Color Gamu");
+    //单Color Gamut
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F4")->SetCell(GcenterSx);
@@ -271,8 +271,8 @@ void CXlsOQCmass::idB1()
     SelectCell('U', 5+m_ModuleNO)->SetCell(BcenterSx);
     SelectCell('V', 5+m_ModuleNO)->SetCell(BcenterSy);
 
-    //单Color Gamu
-    SelectSheet("Color Gamu");
+    //单Color Gamut
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F5")->SetCell(BcenterSx);
@@ -474,7 +474,7 @@ void CXlsOQCmass::iColorTemperature()
 
 void CXlsOQCmass::iColorGamu()
 {
-    SelectSheet("Color Gamu");
+    SelectSheet("Color Gamut");
     double CGvalue = 0.0;
     switch (m_ModuleNO)
     {

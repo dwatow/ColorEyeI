@@ -6,8 +6,14 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPA0A9.tmp" with contents
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE136.tmp" with contents
+[
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\XlsOQCmass.cpp"
+"D:\GitHub\ColorEyeI\XlsOQCtest.cpp"
+]
+Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPE136.tmp" 
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPE137.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
 .\Release\BkMaker.obj
@@ -55,10 +61,62 @@ shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.p
 .\Release\XlsSEC1.obj
 .\Release\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPA0A9.tmp"
+Creating command line "link.exe @C:\Users\1004066\AppData\Local\Temp\RSPE137.tmp"
 <h3>Output Window</h3>
-Compiling resources...
+Compiling...
+XlsOQCmass.cpp
+XlsOQCtest.cpp
+Generating Code...
 Linking...
+Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPF18D.tmp" with contents
+[
+/nologo /o"Release/ColorEyeI.bsc" 
+.\Release\BkMaker.sbr
+.\Release\BkNits.sbr
+.\Release\Bullet.sbr
+.\Release\ca200srvr.sbr
+.\Release\CA210.sbr
+.\Release\CA210real.sbr
+.\Release\Ca210sim.sbr
+.\Release\Cartridge2.sbr
+.\Release\CartridgeFinder.sbr
+.\Release\CaSetupDlg.sbr
+.\Release\CColorRef.sbr
+.\Release\Circle.sbr
+.\Release\CircleArc.sbr
+.\Release\ColorEyeI.sbr
+.\Release\ColorEyeIDoc.sbr
+.\Release\ColorEyeIView.sbr
+.\Release\COmdFile0.sbr
+.\Release\COmdFile1.sbr
+.\Release\COmdFileFactor.sbr
+.\Release\COmdFileGm.sbr
+.\Release\DNA.sbr
+.\Release\EnterValueDlg.sbr
+.\Release\excel.sbr
+.\Release\FileDlg.sbr
+.\Release\MainFrm.sbr
+.\Release\MsrItemDlg.sbr
+.\Release\Nucleotide.sbr
+.\Release\PatternDlg.sbr
+.\Release\ReadBarCodeDialog.sbr
+.\Release\RNA.sbr
+.\Release\SelExcelDlg.sbr
+.\Release\StaticText.sbr
+.\Release\StdAfx.sbr
+.\Release\TranScripter.sbr
+.\Release\TxtFile.sbr
+.\Release\ValuesLabel.sbr
+.\Release\xlef.sbr
+.\Release\XlsFile2.sbr
+.\Release\XlsGamma.sbr
+.\Release\XlsOQCmass.sbr
+.\Release\XlsOQCtest.sbr
+.\Release\XlsRA1.sbr
+.\Release\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\Users\1004066\AppData\Local\Temp\RSPF18D.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 

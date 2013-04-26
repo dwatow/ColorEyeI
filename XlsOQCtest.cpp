@@ -156,7 +156,7 @@ void CXlsOQCtest::idR1()
     SelectCell("AG", 5+m_ModuleNO)->SetCell(RcenterSx);
     SelectCell("AH", 5+m_ModuleNO)->SetCell(RcenterSy);
 
-    SelectSheet("Color Gamu");
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F3")->SetCell(RcenterSx);
@@ -197,7 +197,7 @@ void CXlsOQCtest::idG1()
     SelectCell("AJ", 5+m_ModuleNO)->SetCell(GcenterSx);
     SelectCell("AK", 5+m_ModuleNO)->SetCell(GcenterSy);
  
-    SelectSheet("Color Gamu");
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F4")->SetCell(GcenterSx);
@@ -238,7 +238,7 @@ void CXlsOQCtest::idB1()
     SelectCell("AM", 5+m_ModuleNO)->SetCell(BcenterSx);
     SelectCell("AN", 5+m_ModuleNO)->SetCell(BcenterSy);
 
-    SelectSheet("Color Gamu");
+    SelectSheet("Color Gamut");
     switch (m_ModuleNO)
     {
     case 0:     SelectCell("F5")->SetCell(BcenterSx);
@@ -521,7 +521,7 @@ void CXlsOQCtest::iColorTemperature()
 
 void CXlsOQCtest::iColorGamu()
 {
-    SelectSheet("Color Gamu");
+    SelectSheet("Color Gamut");
     double CGvalue = 0.0;
     switch (m_ModuleNO)
     {

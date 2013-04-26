@@ -177,6 +177,7 @@
 #define ID_SETUP_SPEC                   32778
 #define ID_SETUP_CA210                  32779
 #define ID_SETUP_CAL                    32780
+#define ID_MSR_TABLE                    32782
 #define ID_INDICATOR_USB                59142
 #define ID_INDICATOR_RES                59143
 
@@ -186,7 +187,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        140
-#define _APS_NEXT_COMMAND_VALUE         32782
+#define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         1078
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -106,14 +106,32 @@ long xlsFile::SheetTotal()
 //由SheetNumber 指定SheetName
 void xlsFile::SetSheetName(short SheetNumber, const char* SheetName)
 {
-	objSheet = objSheets.GetItem(COleVariant(SheetNumber));
-    objSheet.SetName(SheetName);//設定sheet名稱
+	try
+	{
+		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+		objSheet.SetName(SheetName);//設定sheet名稱
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("設定第%d個Sheet的名字為%s出錯了！", SheetNumber, SheetName);
+		AfxMessageBox(str);
+	}
 }
 //-------------------------
 //由SheetNumber 取得SheetName
 CString xlsFile::GetSheetName(short SheetNumber)
 {
-	objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+	try
+	{
+		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("取得第%d個Sheet名字出錯了！", SheetNumber);
+		AfxMessageBox(str);
+	}
 	return objSheet.GetName();//edisonx
 }
 //-------------------------
@@ -121,15 +139,33 @@ CString xlsFile::GetSheetName(short SheetNumber)
 //由SheetName
 xlsFile* xlsFile::SelectSheet(const char* SheetName)
 {
-	objSheet = objSheets.GetItem(_variant_t(SheetName));
-	objSheet.Activate();//edisonx
+	try
+	{
+		objSheet = objSheets.GetItem(_variant_t(SheetName));
+		objSheet.Activate();//edisonx
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇Sheet: %s出錯了！", SheetName);
+ 		AfxMessageBox(str);
+	}
 	return this;
 }
 //由SheetNumber 
 xlsFile* xlsFile::SelectSheet(short SheetNumber)
 {
-	objSheet = objSheets.GetItem(COleVariant(SheetNumber));
-	objSheet.Activate();//edisonx
+	try
+	{
+		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+		objSheet.Activate();//edisonx
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇第%d個Sheet出錯了！", SheetNumber);
+		AfxMessageBox(str);
+	}
 	return this;
 }
 //-------------------------
@@ -199,38 +235,74 @@ long xlsFile::GetVrticlTotalCell()
 //選一格
 xlsFile* xlsFile::SelectCell(const char* x)
 {
-	range=objSheet.GetRange(COleVariant(x),COleVariant(x));
-	ASSERT(range);
+	try
+	{
+		range=objSheet.GetRange(COleVariant(x),COleVariant(x));
+		ASSERT(range);
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇儲存格%s出錯了！", x);
+		AfxMessageBox(str);
+	}
 	return this;
 }
 
 xlsFile* xlsFile::SelectCell(const char* x, int y)
 {
-	ZeroMemory(buf,sizeof(buf));
-	sprintf(buf,"%s%d",x,y);
-	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	ASSERT(range);
+	try
+	{
+		ZeroMemory(buf,sizeof(buf));
+		sprintf(buf,"%s%d",x,y);
+		range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+		ASSERT(range);
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇儲存格%s%d出錯了！", x, y);
+		AfxMessageBox(str);
+	}
 	return this;
 }
 //小於Z
 xlsFile* xlsFile::SelectCell(char x, int y)
 {
-	ASSERT(x >= 'A' && x <= 'Z');
-	ZeroMemory(buf,sizeof(buf));
-	sprintf(buf,"%c%d",x,y);
-	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	ASSERT(range);
+	if (x >= 'A' && x <= 'Z')
+	{
+		ZeroMemory(buf,sizeof(buf));
+		sprintf(buf,"%c%d",x,y);
+		range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+		ASSERT(range);
+	}
+	else
+	{
+		CString str;
+		str.Format("選擇儲存格%c%d出錯了！", x, y);
+		AfxMessageBox(str);
+		ASSERT(x >= 'A' && x <= 'Z');
+	}
 	return this;
 }
 //大於Z，開始選AA
 xlsFile* xlsFile::SelectCell(char x1, char x2, int y)
 {
-	ASSERT(x1 >= 'A' && x1 <= 'Z');
-	ASSERT(x2 >= 'A' && x2 <= 'Z');
-	ZeroMemory(buf,sizeof(buf));
-	sprintf(buf,"%c%c%d",x1,x2,y);
-	range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
-	ASSERT(range);
+	if ( (x1 >= 'A' && x1 <= 'Z') && (x2 >= 'A' && x2 <= 'Z'))
+	{
+		ZeroMemory(buf,sizeof(buf));
+		sprintf(buf,"%c%c%d",x1,x2,y);
+		range=objSheet.GetRange(COleVariant(buf),COleVariant(buf));
+		ASSERT(range);
+	}
+	else
+	{
+		CString str;
+		str.Format("選擇儲存格%c%c%d出錯了！", x1, x2, y);
+		AfxMessageBox(str);
+		ASSERT(x1 >= 'A' && x1 <= 'Z');
+		ASSERT(x2 >= 'A' && x2 <= 'Z');
+	}
 	return this;
 }
 //-------------------------
@@ -238,43 +310,82 @@ xlsFile* xlsFile::SelectCell(char x1, char x2, int y)
 //選範圍
 xlsFile* xlsFile::SelectCell(const char* x1, const char* x2)
 {
-	range=objSheet.GetRange(COleVariant(x1),COleVariant(x2));
-	ASSERT(range);
+	try
+	{
+		range=objSheet.GetRange(COleVariant(x1),COleVariant(x2));
+		ASSERT(range);
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇範圍，從%s到%s出錯了！", x1, x2);
+		AfxMessageBox(str);
+	}
 	return this;
 }
+
 xlsFile* xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
 {
-	ZeroMemory(buf1,sizeof(buf1));
-	ZeroMemory(buf2,sizeof(buf2));
-	sprintf(buf1,"%s%d",x1,y1);
-	sprintf(buf2,"%s%d",x2,y2);
-	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
-	ASSERT(range);
+	try
+	{
+		ZeroMemory(buf1,sizeof(buf1));
+		ZeroMemory(buf2,sizeof(buf2));
+		sprintf(buf1,"%s%d",x1,y1);
+		sprintf(buf2,"%s%d",x2,y2);
+		range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+		ASSERT(range);
+	}
+	catch (...)
+	{
+		CString str;
+		str.Format("選擇範圍，從%s%d到%s%d的地方出錯了！", x1, y1, x2, y2);
+		AfxMessageBox(str);
+	}
 	return this;
 }
 //小於Z
 xlsFile* xlsFile::SelectCell(char x1, int y1, char x2, int y2)
 {
-	ASSERT(x1 >= 'A' && x1 <= 'Z');
-	ZeroMemory(buf1,sizeof(buf1));
-	ZeroMemory(buf2,sizeof(buf2));
-	sprintf(buf1,"%c%d",x1,y1);
-	sprintf(buf2,"%c%d",x2,y2);
-	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+	if (x1 >= 'A' && x1 <= 'Z')
+	{
+		ZeroMemory(buf1,sizeof(buf1));
+		ZeroMemory(buf2,sizeof(buf2));
+		sprintf(buf1,"%c%d",x1,y1);
+		sprintf(buf2,"%c%d",x2,y2);
+		range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+		ASSERT(range);
+	}
+	else
+	{
+		CString str;
+		str.Format("選擇範圍，從%c%d到%c%d出錯了！", x1, y1, x2, y2);
+		AfxMessageBox(str);
+		ASSERT(x1 >= 'A' && x1 <= 'Z');
+	}
 	return this;
 }
 //大於Z，開始選AA
 xlsFile* xlsFile::SelectCell(char xA1, char xB1, int y1, char xA2, char xB2, int y2)
 {
-	ASSERT(xA1 >= 'A' && xA2 <= 'Z');
-	ASSERT(xB1 >= 'A' && xB2 <= 'Z');
-	ZeroMemory(buf1,sizeof(buf1));
-	ZeroMemory(buf2,sizeof(buf2));
-	sprintf(buf1,"%c%c%d",xA1,xB1,y1);
-	sprintf(buf2,"%c%c%d",xA2,xB2,y2);
+	if ( (xA1 >= 'A' && xA2 <= 'Z') && (xB1 >= 'A' && xB2 <= 'Z') )
+	{
+		ZeroMemory(buf1,sizeof(buf1));
+		ZeroMemory(buf2,sizeof(buf2));
+		sprintf(buf1,"%c%c%d",xA1,xB1,y1);
+		sprintf(buf2,"%c%c%d",xA2,xB2,y2);
+		
+		range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
+		ASSERT(range);
+	}
+	else
+	{
+		CString str;
+		str.Format("選擇範圍，從%c%c%d到%c%c%d出錯了！", xA1, xB1, y1, xA2, xB2, y2);
+		AfxMessageBox(str);
+		ASSERT(xA1 >= 'A' && xA2 <= 'Z');
+		ASSERT(xB1 >= 'A' && xB2 <= 'Z');
+	}
 
-	range=objSheet.GetRange(COleVariant(buf1),COleVariant(buf2));
-	ASSERT(range);
 	return this;
 }
 //-------------------------
