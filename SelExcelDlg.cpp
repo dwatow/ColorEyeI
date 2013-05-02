@@ -113,7 +113,7 @@ void CSelExcelDlg::OnRadioHdfile()
     setOmdComeFrom(OtherFile);
 }
 
-void CSelExcelDlg::setOmdComeFrom(enum WhereFileComeFrom WFCF)
+void CSelExcelDlg::setOmdComeFrom(WhereFileComeFrom WFCF)
 {
     //用Radio選擇誰要enable，誰不要
     m_rdoChooseNowFile.SetCheck(!WFCF);

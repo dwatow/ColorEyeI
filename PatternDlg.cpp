@@ -147,29 +147,29 @@ void CPatternDlg::OnPaint()
 DebugCode(
           dc.SetTextColor(m_BkColor.Shift());
 
-        int lineNum(0);
+        int lineIndex(0);
         //Pattern運作參數
         //Goal訊息
         temp.Format("  Goal%s", m_Goal.showMe());
-        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineIndex++, temp, temp.GetLength());
         
         //鍵盤訊息
 //         KeyMessage.Format("nChar = %d, nRepCnt = %d, nFlags = %d", key1, key2, key3);
-//         TextOut(dc, 0, wordHight*lineNum++, KeyMessage, 40);
+//         TextOut(dc, 0, wordHight*lineIndex++, KeyMessage, 40);
 
         //iterator的訊息
         CString IsEndstr ( m_itor == m_RNA.Begin()? "Begin" : m_itor == m_RNA.End() ? "End" : "Other" );
 
         temp.Format("迭代器資訊: itor.begin = 0x%x, itor.end = 0x%x, itor(位址 / 位置) = 0x%x / %s", \
 			m_RNA.Begin(), m_RNA.End(), m_itor, IsEndstr);
-        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineIndex++, temp, temp.GetLength());
 
         temp.Format("PatternDlg旗標: IsShowGoal: %d, IsShowStateBar: %d, 第一點 = %d, 最後一點 = %d, 最後一點量完 = %d, 自動量測模式 = %d, 連結CA-210 = %d", \
                      m_Goal.isVisible(), c_bStatusBar, c_bMsrBegin, c_bMsrEnd, c_bMsrEndnMsred, !c_bRunMsrAI, c_bUnCntCA210);
-        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineIndex++, temp, temp.GetLength());
 
         temp.Format("這一點的資訊: %s", m_itor->ShowMe());
-        TextOut(dc, 0, wordHight*lineNum++, temp, temp.GetLength());
+        TextOut(dc, 0, wordHight*lineIndex++, temp, temp.GetLength());
 )
 
     //狀態列

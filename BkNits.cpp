@@ -5,7 +5,7 @@ void BkNits::n2cPos(ColorRef& Bkclr)
 {
 	int _gl= 60;//     int Graylevel = 55;
     int fLv = 100*100;
-    while(fLv > m_Nits)  //若亮度還沒有到5以下，就減少
+    while(fLv > m_NitsLv)  //若亮度還沒有到5以下，就減少
     {
         _gl -= 2;
 		Bkclr.iGray(_gl);
@@ -17,7 +17,7 @@ void BkNits::n2cPos(ColorRef& Bkclr)
         fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
 	
-    while(fLv < m_Nits)   //若亮度還在5以下，就...變亮
+    while(fLv < m_NitsLv)   //若亮度還在5以下，就...變亮
     {
         ++_gl;
 		Bkclr.iGray(_gl);
@@ -36,7 +36,7 @@ void BkNits::n2cNeg(ColorRef& Bkclr)
     int fLv = 0;
 	int _gl = 55;
 	
-    while(fLv < m_Nits)  //若亮度還沒有到5以下，就減少
+    while(fLv < m_NitsLv)  //若亮度還沒有到5以下，就減少
     {
         _gl += 2;
 		Bkclr.iGray(_gl);
@@ -49,7 +49,7 @@ void BkNits::n2cNeg(ColorRef& Bkclr)
         fLv = (int)((m_pCa210->GetMsrData().oFlt(VluK_Lv))*100);  //m_IProbe.GetLv();
     }
     
-    while(fLv > m_Nits)   //若亮度還在5以下，就...變亮
+    while(fLv > m_NitsLv)   //若亮度還在5以下，就...變亮
     {
         --_gl;
 		Bkclr.iGray(_gl);

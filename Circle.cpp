@@ -2,7 +2,7 @@
 #include "Circle.h"
 
 Circle::Circle(CWnd* cWnd, int r):
-m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd), m_isShowPercentNum(FALSE), m_isShowLabel(FALSE), m_Visible(TRUE)
+m_Percent(r), m_nPenWidth(5), m_pdlgcWnd(cWnd), m_isShowPercentCount(FALSE), m_isShowLabel(FALSE), m_Visible(TRUE)
 {
     m_Info1.pCircle = this;
 }
@@ -38,8 +38,8 @@ void Circle::Draw(CPaintDC &dc)
 	if (m_Visible)
 	{
 		drawCircle(dc);
-		if (m_isShowPercentNum)
-			drawPercentNum(dc);
+		if (m_isShowPercentCount)
+			drawPercentCount(dc);
 		if (m_isShowLabel)
 			m_Label.Draw(dc);
 	}
@@ -96,7 +96,7 @@ void Circle::drawPercent(CPaintDC& dc)
     dc.Arc(m_DrawCircleRect, StartPoint, EndPoint);
 }
 
-void Circle::drawPercentNum(CPaintDC &dc)
+void Circle::drawPercentCount(CPaintDC &dc)
 {
  	dc.SetTextColor(m_percentColor.oRGB());
 	CString percent;

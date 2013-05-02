@@ -8,7 +8,7 @@ class DNA
 	std::vector<Nucleotide> nChain;
 public:
 	void AddCell(const Nucleotide& _N);
-	void AddCell(ColorType _C = NoColor, PointNum _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
+	void AddCell(ColorType _C = NoColor, PointTotal _P = NoPn, int _N1 = -1, int _N2 = -1, int _N3 = -1);
 	void AddCell(const DNA&);
 
     void DelCell(std::vector<Nucleotide>::size_type index);

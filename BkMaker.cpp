@@ -5,7 +5,7 @@ BkMaker::BkMaker():
 ptr_i(0), cnt(0), 
 m_BkColor(0), 
 m_centerRect(0, 0, 0, 0), m_rectColor(0), 
-m_pdlgcWnd(0), m_pCa210(0), m_Nits(0), m_NitsDirect(ND_NoDefine)
+m_pdlgcWnd(0), m_pCa210(0), m_NitsLv(0), m_NitsDirect(ND_NoDefine)
 {
 	cnt = new int(0);
 	(*cnt)++;
@@ -15,7 +15,7 @@ BkMaker::BkMaker(const BkMaker& bkN):
 ptr_i(bkN.ptr_i), cnt(bkN.cnt), 
 m_BkColor(bkN.m_BkColor), 
 m_centerRect(bkN.m_centerRect), m_rectColor(bkN.m_rectColor), 
-m_pdlgcWnd(bkN.m_pdlgcWnd), m_pCa210(bkN.m_pCa210), m_Nits(bkN.m_Nits), m_NitsDirect(bkN.m_NitsDirect)
+m_pdlgcWnd(bkN.m_pdlgcWnd), m_pCa210(bkN.m_pCa210), m_NitsLv(bkN.m_NitsLv), m_NitsDirect(bkN.m_NitsDirect)
 {
 	(*cnt)++;
 }
@@ -55,7 +55,7 @@ BkMaker& BkMaker::operator=(const BkMaker& sp)
 		m_rectColor = sp.m_rectColor;
 		m_pdlgcWnd = sp.m_pdlgcWnd;
 		m_pCa210 = sp.m_pCa210;
-		m_Nits = sp.m_Nits;
+		m_NitsLv = sp.m_NitsLv;
 		m_NitsDirect = sp.m_NitsDirect;
 	}
 	return *this;

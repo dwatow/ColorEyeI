@@ -75,9 +75,9 @@ private:
 //Label
 private:
 	ValuesLabel m_Label;
-	BOOL m_isShowPercentNum;
+	BOOL m_isShowPercentCount;
 	BOOL m_isShowLabel;
-	void drawPercentNum(CPaintDC &dc);
+	void drawPercentCount(CPaintDC &dc);
 public:	
 	void SetData(const Bullet&);
 	void ShowLabel(const BOOL&);
@@ -108,14 +108,14 @@ inline void Circle::Animation()
 		
 		BOOL t_isShowLabel(m_isShowLabel);
 		m_isShowLabel = FALSE;
-		m_isShowPercentNum = FALSE;
+		m_isShowPercentCount = FALSE;
 		
 		CSingleLock csl(&m_cs);
 		csl.Lock();
 		elasticAnimation((LPVOID)&m_Info1);
 		csl.Unlock();
 		
-		m_isShowPercentNum = TRUE;
+		m_isShowPercentCount = TRUE;
 		m_isShowLabel = t_isShowLabel;
 	}
 	else

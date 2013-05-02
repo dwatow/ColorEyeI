@@ -44,10 +44,10 @@ public:
 
 protected:
     NitsDirect m_NitsDirect;
-    int m_Nits;
+    int m_NitsLv;
 public:
-    virtual    void NT_SetNitsNum(const int&){  };
-    virtual    const int  NT_GetNitsNum() const{  return m_Nits; };
+    virtual    void NT_SetNitsLv(const int&){  };
+    virtual    const int  NT_GetNitsLv() const{  return m_NitsLv; };
     virtual    void NT_colorReviseByNits(ColorRef&){  };
 
 //¦@¥Î¤¶­±

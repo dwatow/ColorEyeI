@@ -7,8 +7,8 @@
  *******************************************/
 
 Nucleotide::Nucleotide
-(const ColorType& _C, const PointNum& _P, const int& _N1, const int& _N2, const int& _N3):
-m_BkColor(_C), m_MsrFlowNum(_P),
+(const ColorType& _C, const PointTotal& _P, const int& _N1, const int& _N2, const int& _N3):
+m_BkColor(_C), m_MsrPointTotal(_P),
 m_Parameters(PA_Max, -1)
 {
     //參數填入機制
@@ -28,7 +28,7 @@ m_Parameters(PA_Max, -1)
     case Pn9:
         if (_C == Nits)  //Nits
         {
-            SetPara(PA_NitsNum, _N1);
+            SetPara(PA_NitsLv, _N1);
             SetPara(PA_NitsDir, _N2); 
             m_paraStr.Format("_灰階: %d%s", _N1, (_N2)?"↓":"↑");
             break;
@@ -91,49 +91,48 @@ Nucleotide::~Nucleotide()
 const ColorType Nucleotide::GetBackColor() const        { return m_BkColor;     }
 void      Nucleotide::SetBackColor(const ColorType& clr) { m_BkColor = clr;      }
 
-const PointNum Nucleotide::GetMsrFlowNum() const        { return m_MsrFlowNum;  }
-void Nucleotide::SetMsrFlowNum(const PointNum& mfNum)    { m_MsrFlowNum = mfNum; }
-
-const CString Nucleotide::GetStrPointNum() const
+const PointTotal Nucleotide::GetMsrPointTotal() const        { return m_MsrPointTotal;  }
+void Nucleotide::SetMsrPointTotal(const PointTotal& msrPtTotal)    { m_MsrPointTotal = msrPtTotal; }
+const CString Nucleotide::GetStrMsrPointTotal() const
 {
-    CString Num;
-    switch(m_MsrFlowNum)
+    CString total;
+    switch(m_MsrPointTotal)
     {
-    case Pn1:  Num.Format("中心點");   break;
-    case Pn4:  Num.Format("  4點");   break;
-    case Pn5:  Num.Format("  5點");   break;
-    case Pn9:  Num.Format("  9點");   break;
-    case Pn13: Num.Format(" 13點");   break;
-    case Pn21: Num.Format(" 21點");   break;
-    case Pn25: Num.Format(" 25點");   break;
-    case Pn49: Num.Format(" 49點");   break;
-    case PnGamma: Num.Format("Gamma");   break;
+    case Pn1:     total.Format("中心點");   break;
+    case Pn4:     total.Format("  4點");   break;
+    case Pn5:     total.Format("  5點");   break;
+    case Pn9:     total.Format("  9點");   break;
+    case Pn13:    total.Format(" 13點");   break;
+    case Pn21:    total.Format(" 21點");   break;
+    case Pn25:    total.Format(" 25點");   break;
+    case Pn49:    total.Format(" 49點");   break;
+    case PnGamma: total.Format("Gamma");   break;
     case NoPn:
-    default:   Num.Format("未定義點位");
+    default:      total.Format("未定義點位");
     }
-    return Num;
+    return total;
 }
 
-const CString Nucleotide::GetStrColorType() const
+const CString Nucleotide::GetStrBackColor() const
 {
-    CString Color;
+    CString bkColor;
     switch(m_BkColor)
     {
-    case White:  Color.Format("白色");   break;
-    case Red:    Color.Format("紅色");   break;
-    case Green:  Color.Format("綠色");   break;
-    case Blue:   Color.Format("藍色");   break;
-    case Dark:   Color.Format("黑色");   break;
-    case Nits:   Color.Format("Nits");  break;
-    case CrsTlkW:Color.Format("CrossTalk白矩形"); break;
-    case CrsTlkD:Color.Format("CrossTalk黑矩形"); break;
-    case CrsTlk: Color.Format("CrossTalk無矩形"); break;
-    case JNDX:     Color.Format("JND十字"); break;
-    case JND:    Color.Format("JND空白"); break;
+    case White:  bkColor.Format("白色");   break;
+    case Red:    bkColor.Format("紅色");   break;
+    case Green:  bkColor.Format("綠色");   break;
+    case Blue:   bkColor.Format("藍色");   break;
+    case Dark:   bkColor.Format("黑色");   break;
+    case Nits:   bkColor.Format("Nits");  break;
+    case CrsTlkW:bkColor.Format("CrossTalk白矩形"); break;
+    case CrsTlkD:bkColor.Format("CrossTalk黑矩形"); break;
+    case CrsTlk: bkColor.Format("CrossTalk無矩形"); break;
+//     case JNDX:     bkColor.Format("JND十字"); break;
+//     case JND:    bkColor.Format("JND空白"); break;
     case NoColor:
-    default:     Color.Format("未定義色彩");
+    default:     bkColor.Format("未定義色彩");
     }
-    return Color;
+    return bkColor;
 }
 
 const CString Nucleotide::GetStrPara() const
@@ -145,7 +144,7 @@ const BOOL Nucleotide::operator==(const Nucleotide& vCar) const
 {
     BOOL b(FALSE);
     std::vector<int>::const_iterator vCitor = vCar.m_Parameters.begin();
-    if ((GetMsrFlowNum() == vCar.GetMsrFlowNum()) && (GetBackColor()  == vCar.GetBackColor() ))
+    if ((GetMsrPointTotal() == vCar.GetMsrPointTotal()) && (GetBackColor()  == vCar.GetBackColor() ))
         for ( std::vector<int>::const_iterator initor = m_Parameters.begin(); 
               initor != m_Parameters.end(), vCitor != vCar.m_Parameters.end(); 
               ++initor, ++vCitor)
@@ -158,7 +157,7 @@ const BOOL Nucleotide::operator==(const Nucleotide& vCar) const
 
 void Nucleotide::operator= (const Nucleotide& vCar)
 {
-    SetMsrFlowNum(vCar.GetMsrFlowNum());
+    SetMsrPointTotal(vCar.GetMsrPointTotal());
     SetBackColor(vCar.GetBackColor());
     m_Parameters.clear();
     m_Parameters = vCar.m_Parameters;
@@ -180,51 +179,8 @@ const CString Nucleotide::ShowMe() const
     //ex: 黑色25點, 6, 10...
     
     str.Format("%s%s%s %d, %d, %d, %d, %d, %d\n",\
-        GetStrColorType(), GetStrPointNum(), GetStrPara(),\
+        GetStrBackColor(), GetStrMsrPointTotal(), GetStrPara(),\
         m_Parameters[0], m_Parameters[1], m_Parameters[2], m_Parameters[3], m_Parameters[4], m_Parameters[5], m_Parameters[6], m_Parameters[7], m_Parameters[8], m_Parameters[0]);
     return str;
     //type: 直接用type看
 }
-//////////////////////////////////////////////////////////////////////////
-//debug function
-
-// #ifdef _DEBUG
-// 
-// CString Nucleotide::GetSetupValue() const
-// {
-//     CString str;
-//     CString color;
-// //    enum ColorType    { White = 1, Red, Green, Blue, Dark, Nits, CrsTlk, CrsTlkW, CrsTlkD};
-// 
-//     switch(m_BkColor)
-//     {
-//     case White: color.Format("White"); break;
-//     case Red: color.Format("Red");   break;
-//     case Green: color.Format("Green"); break;
-//     case Blue: color.Format("Blue");  break;
-//     case Dark: color.Format("Dark");  break;
-//     case Nits: color.Format("Nits");  break;
-//     case CrsTlk: color.Format("CrsTlk"); break;
-//     case CrsTlkW: color.Format("CrsTlkW"); break;
-//     case CrsTlkD: color.Format("CrsTlkD"); break;
-//     case JND:     color.Format("JND"); break;
-//     case JNDX:     color.Format("JNDX"); break;
-//     default: color.Format("UnDefine"); break;
-//     }
-// 
-//     str.Format("顏色項目=%s, 點位/所有: %d/%d, 區域碼=%d",\
-//         color, m_MsrFlowNo, m_MsrFlowNum, m_AreaCode);
-// 
-//     return str;
-// }
-// 
-// CString Nucleotide::MsgBoxStr() const
-// {
-//     CString str;
-//     str.Format("AreaCode   = %d\nBackColor  = %d\nMsrFlowNo  = %d\nMsrFlowNum = %d\n%s"\
-//         , m_AreaCode, m_BkColor, m_MsrFlowNo, m_MsrFlowNum);
-//     
-//     return str;
-// }
-// 
-// #endif

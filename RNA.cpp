@@ -67,85 +67,6 @@ RNA::~RNA()
     m_CarChain2.clear();
 }
 
-// std::vector<Cartridge2>::size_type RNA::StdInit()
-// {
-//    Empty();    
-//      Grow(JND, Pn1);
-//      Grow(White, Pn1);       Grow(Red  , Pn1);       Grow(Green, Pn1);       Grow(Blue , Pn1);       Grow(Dark , Pn1);
-//      Grow(Nits, Pn9);
-//      Grow(White, Pn5);       Grow(Red  , Pn5);       Grow(Green, Pn5);       Grow(Blue , Pn5);       Grow(Dark , Pn5);    
-//      Grow(White, Pn9);       Grow(Red  , Pn9);       Grow(Green, Pn9);       Grow(Blue , Pn9);       Grow(Dark , Pn9);    
-//      Grow(White, Pn13);      Grow(Red  , Pn13);      Grow(Green, Pn13);      Grow(Blue , Pn13);      Grow(Dark , Pn13);
-//      Grow(White, Pn21);      Grow(Red  , Pn21);      Grow(Green, Pn21);      Grow(Blue , Pn21);      Grow(Dark , Pn21);
-//      Grow(White, Pn25);      Grow(Red  , Pn25);      Grow(Green, Pn25);      Grow(Blue , Pn25);      Grow(Dark , Pn25);
-//      Grow(White, Pn49);      Grow(Red  , Pn49);      Grow(Green, Pn49);      Grow(Blue , Pn49);      Grow(Dark , Pn49);
-//      Grow(CrsTlk , Pn4);
-    
-    //freeBuffer();
-//     return m_CarChain2.size();
-// }
-
-// void RNA::Grow(ColorType ct, PointNum pn)
-// {
-//     BOOL delBolt = FALSE;
-//     if (p_Pusher == 0)
-//     {
-//         p_Pusher = new Bolt();
-//         delBolt = TRUE;
-//     }
-// //////////////////////////////////////////////////////////////////////////
-//     if (ct == CrsTlk)
-//     {
-//         std::vector<Cartridge2> vCrossTalk;
-//         
-//         Cartridge2 CrsTlk1(CrsTlk , pn);    p_Pusher->Grow(vCrossTalk, CrsTlk1);
-//         Cartridge2 CrsTlk2(CrsTlkW, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk2);
-//         Cartridge2 CrsTlk3(CrsTlkD, pn);    p_Pusher->Grow(vCrossTalk, CrsTlk3);
-//         
-//         SortQuackMsr(vCrossTalk);
-//         m_CarChain2.insert(m_CarChain2.end(), vCrossTalk.begin(), vCrossTalk.end());
-//     }
-//     else if (ct == JND)
-//     {
-//         std::vector<Cartridge2> vJND;
-//         
-//         Cartridge2 JndX(JNDX, pn);
-//         Cartridge2 Jnd(JND, pn);
-//         
-//         p_Pusher->Grow(vJND, JndX);
-//         p_Pusher->Grow(vJND, Jnd);
-//         
-//         SortQuackMsr(vJND);
-//         m_CarChain2.insert(m_CarChain2.end(), vJND.begin(), vJND.end());
-//     }
-//     else
-//     {
-//         Cartridge2 MsrItem(ct, pn);
-//         p_Pusher->Grow(m_CarChain2, MsrItem);
-//     }
-// //////////////////////////////////////////////////////////////////////////
-//     if (delBolt == TRUE)
-//     {
-//         delete p_Pusher;
-//         p_Pusher = 0;
-//     }
-// }
-
-// std::vector<Cartridge2>::size_type RNA::GammaInit()
-// {
-//     Grow(White, PnGamma);   Grow(Red  , PnGamma);   Grow(Green, PnGamma);   Grow(Blue , PnGamma);   Grow(Dark , PnGamma);
-//     return m_CarChain2.size();
-// }
-
-// Cartridge2& RNA::At(Cartridge2 _C2) 
-// {
-//     for (std::vector<Cartridge2>::iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
-//         if (_C2 == *itor)
-//             return m_CarChain2.at(abs(itor - m_CarChain2.begin()));
-//     
-//     return m_CarChain2.at(0);
-// }
-
 const Cartridge2& RNA::At(const Cartridge2& _C2) const
 {
     for (std::vector<Cartridge2>::const_iterator citor = m_CarChain2.begin(); citor != m_CarChain2.end(); ++citor)
@@ -158,39 +79,6 @@ const Cartridge2& RNA::At(const Cartridge2& _C2) const
 const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
 { return m_CarChain2.at(_P);   };
 
-// Cartridge2& RNA::At(ColorType clr, PointNum Large, UINT Little) 
-// {
-//     if(Little > (UINT)Large)
-//     {
-//         AfxMessageBox("RNA::At() ERROR!!!");
-//         return m_CarChain2.at(0);
-//     }
-//     else
-//         for (std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
-//             if (itor->GetBackColor()  == clr   && 
-//                 itor->GetMsrFlowNum() == Large && 
-//                 itor->GetMsrFlowNo()  == Little)
-//                 return m_CarChain2.at(abs(itor - m_CarChain2.begin()));
-//         
-//     return m_CarChain2.at(0);
-// }
-// 
-// const Cartridge2& RNA::At(ColorType clr, PointNum Large, UINT Little) const
-// {
-//     if(Little > (UINT)Large)
-//     {
-//         AfxMessageBox("RNA::At() ERROR!!!");
-//         return m_CarChain2.at(0);
-//     }
-//     else
-//         for (std::vector<Cartridge2>::const_iterator itor = m_CarChain2.begin(); itor != m_CarChain2.end(); ++itor)
-//             if (itor->GetBackColor()  == clr   && 
-//                 itor->GetMsrFlowNum() == Large && 
-//                 itor->GetMsrFlowNo()  == Little)
-//                 return m_CarChain2.at(abs(itor - m_CarChain2.begin()));
-//             
-//             return m_CarChain2.at(0);
-// }
 float RNA::fFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V)
 {
 	return Find(_C, _P, _M, _F).GetBullet().oFlt(_V);

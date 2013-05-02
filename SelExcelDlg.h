@@ -76,7 +76,7 @@ private:
 	//OnSelectXlsForm
 	void setSelXlsDetail(const LPCTSTR& xlsDescrip, const int& openXlsLimit, const FormType& formTypt, const BOOL& tranXlsBtnEnble = TRUE);
 	//Select Radio
-	void setOmdComeFrom(enum WhereFileComeFrom WFCF);
+	void setOmdComeFrom(WhereFileComeFrom WFCF);
 	//Other Omd flie -> find Omdfile
 	void findOtherOmdFile(std::vector<CString>& );
 	void showOtherOmdList(std::vector<CString>& );

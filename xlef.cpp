@@ -103,33 +103,33 @@ long xlsFile::SheetTotal()
 	return objSheets.GetCount();//edisonx
 }
 //-------------------------
-//由SheetNumber 指定SheetName
-void xlsFile::SetSheetName(short SheetNumber, const char* SheetName)
+//由SheetIndex 指定SheetName
+void xlsFile::SetSheetName(short SheetIndex, const char* SheetName)
 {
 	try
 	{
-		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+		objSheet = objSheets.GetItem(COleVariant(SheetIndex));
 		objSheet.SetName(SheetName);//設定sheet名稱
 	}
 	catch (...)
 	{
 		CString str;
-		str.Format("設定第%d個Sheet的名字為%s出錯了！", SheetNumber, SheetName);
+		str.Format("設定第%d個Sheet的名字為%s出錯了！", SheetIndex, SheetName);
 		AfxMessageBox(str);
 	}
 }
 //-------------------------
-//由SheetNumber 取得SheetName
-CString xlsFile::GetSheetName(short SheetNumber)
+//由SheetIndex 取得SheetName
+CString xlsFile::GetSheetName(short SheetIndex)
 {
 	try
 	{
-		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+		objSheet = objSheets.GetItem(COleVariant(SheetIndex));
 	}
 	catch (...)
 	{
 		CString str;
-		str.Format("取得第%d個Sheet名字出錯了！", SheetNumber);
+		str.Format("取得第%d個Sheet名字出錯了！", SheetIndex);
 		AfxMessageBox(str);
 	}
 	return objSheet.GetName();//edisonx
@@ -152,18 +152,18 @@ xlsFile* xlsFile::SelectSheet(const char* SheetName)
 	}
 	return this;
 }
-//由SheetNumber 
-xlsFile* xlsFile::SelectSheet(short SheetNumber)
+//由SheetIndex 
+xlsFile* xlsFile::SelectSheet(short SheetIndex)
 {
 	try
 	{
-		objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+		objSheet = objSheets.GetItem(COleVariant(SheetIndex));
 		objSheet.Activate();//edisonx
 	}
 	catch (...)
 	{
 		CString str;
-		str.Format("選擇第%d個Sheet出錯了！", SheetNumber);
+		str.Format("選擇第%d個Sheet出錯了！", SheetIndex);
 		AfxMessageBox(str);
 	}
 	return this;
@@ -175,10 +175,10 @@ void xlsFile::CopySheet(const char* SheetName)
 	objSheet.AttachDispatch(objSheets.GetItem(_variant_t(SheetName)),true);
 	objSheet.Copy(vtMissing,_variant_t(objSheet));
 }
-//複製SheetNumber 指定插入Sheet的位置，並指定名稱
-void xlsFile::CopySheet(short SheetNumber)
+//複製SheetIndex 指定插入Sheet的位置，並指定名稱
+void xlsFile::CopySheet(short SheetIndex)
 {
-	objSheet.AttachDispatch(objSheets.GetItem(COleVariant(SheetNumber)));
+	objSheet.AttachDispatch(objSheets.GetItem(COleVariant(SheetIndex)));
 	objSheet.Copy(vtMissing,_variant_t(objSheet));
 }
 //-------------------------
@@ -189,10 +189,10 @@ void xlsFile::DelSheet(const char* SheetName)
 	objSheet = objSheets.GetItem(_variant_t(SheetName));
 	objSheet.Delete();//edisonx
 }
-//選SheetNumber
-void xlsFile::DelSheet(short SheetNumber)
+//選SheetIndex
+void xlsFile::DelSheet(short SheetIndex)
 {
-	objSheet = objSheets.GetItem(COleVariant(SheetNumber));
+	objSheet = objSheets.GetItem(COleVariant(SheetIndex));
 	objSheet.Delete();//edisonx
 }
 ///////////////////////////////////////////////////////////////////////////////////////////

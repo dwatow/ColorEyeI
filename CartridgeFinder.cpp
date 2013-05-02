@@ -356,8 +356,7 @@ void CartridgeFinder::reParaOver(CString& strResult)
 void CartridgeFinder::reParaLength(CString& strResult)
 {
     strResult = strResult.Right(strResult.GetLength() - strResult.Find("Â÷Ãä") -6);
-    int FENumber(atoi(strResult));
-    strResult.Format("_Â÷Ãä: %dmm", FENumber);
+    strResult.Format("_Â÷Ãä: %dmm", atoi(strResult));
 }
 
 void CartridgeFinder::reParaNits(CString& strResult)

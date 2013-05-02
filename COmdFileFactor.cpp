@@ -50,22 +50,22 @@ BOOL COmdFileFactor::Save(LPCTSTR path, CFileException& fx)
 	}
 }
 
-const CString COmdFileFactor::GetLine(const int& LineNum) const//OK
+const CString COmdFileFactor::GetLine(const int& lineIndex) const//OK
 {
-    if (LineNum <= 0)
+    if (lineIndex <= 0)
         return "出現錯誤: 參數 < 1";
-    else if (LineNum > m_dTxt.size())
+    else if (lineIndex > m_dTxt.size())
         return "超出範圍";
     else
-        return m_dTxt.at((std::vector<CString>::size_type)LineNum - 1);
+        return m_dTxt.at((std::vector<CString>::size_type)lineIndex - 1);
 }
 
-const CString COmdFileFactor::GetCell(const int& Word, const int& Line) const
+const CString COmdFileFactor::GetCell(const int& Word, const int& line) const
 {
     CString strBuf1;
     CString strBuf2;
     
-    strBuf1 = GetLine(Line) + '\t';   
+    strBuf1 = GetLine(line) + '\t';   
     
     if (!strBuf1.IsEmpty())
     {

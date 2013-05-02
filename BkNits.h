@@ -18,8 +18,8 @@ public:
 
 	void NT_colorReviseByNits(ColorRef&);
 
-	void NT_SetNitsNum(const int&);
-	const int  NT_GetNitsNum()const;
+	void NT_SetNitsLv(const int&);
+	const int  NT_GetNitsLv()const;
 
 };
 
@@ -36,10 +36,10 @@ inline BkNits::BkNits(const BkNits& bkN)
 	_SetBkColor(bkN._GetBkColor());
 };
 
-inline void BkNits::NT_SetNitsNum(const int& _N)
-{ m_Nits = _N*100; };
-inline const int BkNits::NT_GetNitsNum() const
-{ return m_Nits/100; };
+inline void BkNits::NT_SetNitsLv(const int& _N)
+{ m_NitsLv = _N*100; };
+inline const int BkNits::NT_GetNitsLv() const
+{ return m_NitsLv/100; };
 
 inline void BkNits::NT_colorReviseByNits(ColorRef& Bkclr)
 {
