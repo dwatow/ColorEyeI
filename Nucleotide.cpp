@@ -89,11 +89,11 @@ Nucleotide::~Nucleotide()
     m_Parameters.clear();
 }
 
-const ColorType Nucleotide::GetBackColor() const        { return m_BkColor;     }
+const ColorType Nucleotide::GetBackColor() const         { return m_BkColor;     }
 void      Nucleotide::SetBackColor(const ColorType& clr) { m_BkColor = clr;      }
 
-const PointTotal Nucleotide::GetMsrPointTotal() const        { return m_MsrPointTotal;  }
-void Nucleotide::SetMsrPointTotal(const PointTotal& msrPtTotal)    { m_MsrPointTotal = msrPtTotal; }
+const PointTotal Nucleotide::GetMsrPointTotal() const           { return m_MsrPointTotal;  }
+void Nucleotide::SetMsrPointTotal(const PointTotal& msrPtTotal) { m_MsrPointTotal = msrPtTotal; }
 const CString Nucleotide::GetStrMsrPointTotal() const
 {
     CString total;
@@ -144,7 +144,7 @@ const CString Nucleotide::GetStrPara() const
 const BOOL Nucleotide::operator==(const Nucleotide& vCar) const
 {
     return ( equalParameter(vCar) && equalMsrPtTotal(vCar) && equalBackColor(vCar) )? TRUE: FALSE;
-};
+}
 
 void Nucleotide::operator= (const Nucleotide& vCar)
 {
@@ -152,6 +152,7 @@ void Nucleotide::operator= (const Nucleotide& vCar)
     SetBackColor(vCar.GetBackColor());
     m_Parameters.clear();
     m_Parameters = vCar.m_Parameters;
+	m_paraStr = vCar.m_paraStr;
 }
 
 void Nucleotide::SetPara(const ParaOfPara& Parameter, const int& FromEdge)

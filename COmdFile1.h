@@ -57,7 +57,7 @@ private:
 	void t2oD13();
 	void t2oNits();
 
-	void t2oDelEmptyDNA();
+	void t2oDelDNAinEmptyRNA();
 };
 
 inline COmdFile1::COmdFile1(const BOOL& isOld){ m_isOld = isOld; };

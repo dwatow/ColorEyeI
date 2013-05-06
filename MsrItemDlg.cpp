@@ -282,14 +282,15 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
 void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
 {
     UpdateData(TRUE);
-    //Cross Talk srot by AreaCode
+    //Cross Talk
     if (m_chkCrossTalk.GetState())
     {
-        unsortableDNA.AddCell(CrsTlk, Pn4, m_fCrsTlkRectFE);  
+        unsortableDNA.AddCell(CrsTlk , Pn4, m_fCrsTlkRectFE);  
         unsortableDNA.AddCell(CrsTlkD, Pn4, m_fCrsTlkRectFE);  
         unsortableDNA.AddCell(CrsTlkW, Pn4, m_fCrsTlkRectFE);  
     }
     
+	//Gamma
     if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
         unsortableDNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
     if (m_chkCRGM.GetState())    unsortableDNA.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);

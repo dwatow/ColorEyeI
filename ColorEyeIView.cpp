@@ -95,24 +95,32 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     int maxXview(0), 
         maxYview(0);
 
-    DNA showIndex(pDoc->GetDocDNA());
-
-    for ( std::vector<Nucleotide>::iterator indexItor = showIndex.Begin(); indexItor != showIndex.End(); ++indexItor)
-    {
-        str.Format("%s", indexItor->ShowMe());
+    DNA showDNA(pDoc->GetDocDNA());
+	if (!showDNA.Size())
+	{
+        str.Format("（空的DNA）");
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
+	}
+	else
+	{
+		for ( std::vector<Nucleotide>::iterator indexItor = showDNA.Begin(); indexItor != showDNA.End(); ++indexItor)
+		{
+			str.Format("%s", indexItor->ShowMe());
+			pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
 
-		//set position point
-		line++;
-		ptTemp.y = TextHight*(line);
+			//set position point
+			line++;
+			ptTemp.y = TextHight*(line);
 
-		//set max X veiw
-        if (maxXview < str.GetLength()*5.5)
-            maxXview = (int)((float)str.GetLength()*5.5); //介於5~6之間
+			//set max X veiw
+			if (maxXview < str.GetLength()*5.5)
+				maxXview = (int)((float)str.GetLength()*5.5); //介於5~6之間
 
-		//set max Y view
-        maxYview = ptTemp.y;
-    }
+			//set max Y view
+			maxYview = ptTemp.y;
+		}
+	}
+
 
 
     //視窗右半邊（主要資料檢視區）
@@ -120,17 +128,26 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     ptTemp.x = 291;
     ptTemp.y = ptOrig.y;
     line = 0;
-    RNA showData(pDoc->GetDocRNA());
-    for ( std::vector<Cartridge2>::iterator dataItor = showData.Begin(); dataItor != showData.End(); ++dataItor)
-    {
-        str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().ShowDataReport());
-        ptTemp.y =  TextHight*(line);
-        pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
-        line++;
-        maxYview = ptTemp.y;
-        if (maxXview < str.GetLength()*5.5)
-            maxXview = (int)((float)str.GetLength()*5.5); //介於5~6之間
-    }
+    RNA showRNA(pDoc->GetDocRNA());
+	if (showRNA.IsEmpty())
+	{
+		str.Format("（空的RNA）");
+		pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
+	}
+	else
+	{
+		for ( std::vector<Cartridge2>::iterator dataItor = showRNA.Begin(); dataItor != showRNA.End(); ++dataItor)
+		{
+			str.Format("%s %s", dataItor->GetDescrip(), dataItor->GetBullet().ShowDataReport());
+			pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
+			maxYview = ptTemp.y;
+			if (maxXview < str.GetLength()*5.5)
+				maxXview = (int)((float)str.GetLength()*5.5); //介於5~6之間
+
+			ptTemp.y =  TextHight*(line);
+			line++;
+		}
+	}
     maxXview += maxX_LeftView;
 
    

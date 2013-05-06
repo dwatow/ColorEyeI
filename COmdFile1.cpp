@@ -7,6 +7,7 @@
 #include "TranScripter.h"
 #include "MainFrm.h"
 #include "CartridgeFinder.h"
+#include "debugFile.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -296,7 +297,7 @@ void COmdFile1::txt2omd()
 	t2oW5();
 
   	m_dOmd.DeleteEmptyCell();
-	t2oDelEmptyDNA();
+ 	t2oDelDNAinEmptyRNA();
  	m_omdFileHead.iDNA(m_omdDNA);
 
 	m_dTxt.clear();
@@ -1179,17 +1180,13 @@ void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
 //     unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
 }
 //t2oSaveDNAinRNA()
-void COmdFile1::t2oDelEmptyDNA()
+void COmdFile1::t2oDelDNAinEmptyRNA()
 {
-	debugFile fileLog;
-
-	fileLog.Add("\nDNA\n");
-	for (std::vector<Nucleotide>::const_iterator itorDNA = m_omdDNA.Begin(); itorDNA != m_omdDNA.End(); ++itorDNA)
-		fileLog.Add(itorDNA->ShowMe());
-
-	fileLog.Add("\nRNA\n");
-	for (std::vector<Cartridge2>::const_iterator itorRNA = m_dOmd.Begin(); itorRNA != m_dOmd.End(); ++itorRNA)
-		fileLog.Add(itorRNA->GetDescrip() + "\n");
+	debugFile df;
+	df.Add("一開始\n");
+	std::vector<Nucleotide>::iterator logItor;
+	for (logItor = m_omdDNA.Begin(); logItor != m_omdDNA.End(); ++logItor)
+		df.Add(logItor->ShowMe());
 
 	DNA inverEmptyDNA = m_omdDNA;
 	DNA emptyDNA;
@@ -1201,7 +1198,7 @@ void COmdFile1::t2oDelEmptyDNA()
 		const CString sample(itor->GetDescrip());
 		for (std::vector<Nucleotide>::const_iterator itorDNA = m_omdDNA.Begin(); itorDNA != m_omdDNA.End(); ++itorDNA)
 		{
-			colorMatch = ptTotalMatch = paraMatch = 1;
+// 			colorMatch = ptTotalMatch = paraMatch = 1;
 
 			colorMatch   = ( sample.Find( itorDNA->GetStrBackColor()     ) != -1)? TRUE: FALSE;
 			ptTotalMatch = ( sample.Find( itorDNA->GetStrMsrPointTotal() ) != -1)? TRUE: FALSE;
@@ -1210,34 +1207,14 @@ void COmdFile1::t2oDelEmptyDNA()
 			if (colorMatch && ptTotalMatch && paraMatch)
 				emptyDNA.AddCell(*itorDNA);
 		}
-
-//		sample.Find()
-
-//         if (itor->GetBullet().IsEmpty() == TRUE)
-// 			emptyRNAs.AddCell(*itor);           //要剪掉的
 	}
-	fileLog.Add("\nemptyDNA\n");
-	for (std::vector<Nucleotide>::const_iterator itorEDNA = emptyDNA.Begin(); itorEDNA != emptyDNA.End(); ++itorEDNA)
-		fileLog.Add(itorEDNA->ShowMe());
 	
 	inverEmptyDNA.CutEqualCell(emptyDNA);
 	m_omdDNA.CutEqualCell(inverEmptyDNA);
-// 	CartridgeFinder emptyFinder;
-	//emptyFinder
-// 
-// 	1. 找出空的RNA
-//     2. 找在空的RNA中抽出字串，這些是DNA裡有的（看看RNA和DNA的字串是怎麼生出來的）
-// 	3. 字串比對
-// 	4. 刪掉DNA
-// 
 
-// 
-// 
-	
+	df.Add("\n最後\n");
+	for (logItor = m_omdDNA.Begin(); logItor != m_omdDNA.End(); ++logItor)
+		df.Add(logItor->ShowMe());
 
-		
-	fileLog.Out2File("c:\\DNAnRNAofOMD.log");
-	
-// 	在這裡做字串比對，找出RNA沒有值的，去刪掉DNA
-
+	df.Out2File("c:\\t2oDelDNAinEmptyRNA.log");
 }
