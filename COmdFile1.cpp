@@ -6,6 +6,7 @@
 #include "COmdFile1.h"
 #include "TranScripter.h"
 #include "MainFrm.h"
+#include "CartridgeFinder.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -274,47 +275,13 @@ const CString COmdFile1::getInch() const
 		return "14";
 }
 
-void COmdFile1::t2oInit()
-{
-	Ca210* pOldCa210;
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
-    ASSERT_VALID(pMainFrm);
-    
-	pOldCa210 = pMainFrm->m_pCa210;
-
-    pMainFrm->m_pCa210 = new Ca210sim();
-	Ca210* pCa210 = pMainFrm->m_pCa210;
-	pCa210->SetOnline(1);
-	pCa210->SetLcmSize(getInch());
-	
-	TranScripter ts;
-
-	DNA sortableDNA;
-    DNA_sortable(sortableDNA);
-    ts.Trans(sortableDNA, m_dOmd);
-	
-    DNA UnsortableDNA;
-    DNA_Unsortable(UnsortableDNA);	
-    ts.Trans(UnsortableDNA, m_dOmd);
-
-	sortableDNA.AddCell(UnsortableDNA);
-	m_omdFileHead.iDNA(sortableDNA);
-	
-	CPoint pointEmpty(0, 0);
-	for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
-		itor->SetPointPosi(pointEmpty);
-
-	delete pCa210;
-	pMainFrm->m_pCa210 = pOldCa210;
-}
-
 void COmdFile1::txt2omd()
 {
 	m_fTxt.oTxtData(m_dTxt);
 //檔頭
 	t2oHead();
 //初始化裝資料的這些容器
-	t2oInit();
+	t2oDNAnRNA();
 
 //檔案資料      
 	t2oWRGBD();
@@ -329,6 +296,9 @@ void COmdFile1::txt2omd()
 	t2oW5();
 
   	m_dOmd.DeleteEmptyCell();
+	t2oDelEmptyDNA();
+ 	m_omdFileHead.iDNA(m_omdDNA);
+
 	m_dTxt.clear();
 }
 
@@ -351,6 +321,42 @@ void COmdFile1::t2oHead()
 		m_omdFileHead.iNitsLv( GetCell('G', 3).Mid(GetCell('G', 3).Find(':')+1));
 		m_omdFileHead.iInch  ( GetCell('J', 1) );
 	}
+}
+
+void COmdFile1::t2oDNAnRNA()
+{
+	Ca210* pOldCa210;
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+	pOldCa210 = pMainFrm->m_pCa210;
+	
+    pMainFrm->m_pCa210 = new Ca210sim();
+	Ca210* pCa210 = pMainFrm->m_pCa210;
+	pCa210->SetOnline(1);
+	pCa210->SetLcmSize(getInch());
+	
+	TranScripter ts;
+	
+	DNA sortableDNA;
+    DNA_sortable(sortableDNA);
+    ts.Trans(sortableDNA, m_dOmd);
+	
+    DNA UnsortableDNA;
+    DNA_Unsortable(UnsortableDNA);	
+    ts.Trans(UnsortableDNA, m_dOmd);
+
+	sortableDNA.AddCell(UnsortableDNA);
+
+	m_omdDNA = sortableDNA;
+// 	m_omdFileHead.iDNA(sortableDNA);
+	
+	CPoint pointEmpty(0, 0);
+	for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
+		itor->SetPointPosi(pointEmpty);
+	
+	delete pCa210;
+	pMainFrm->m_pCa210 = pOldCa210;
 }
 
 void COmdFile1::t2oWRGBD()
@@ -1171,4 +1177,67 @@ void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
 //     unsortableDNA.AddCell(Red  , PnGamma, 0, 255, 255);
 //     unsortableDNA.AddCell(Green, PnGamma, 0, 255, 255);
 //     unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
+}
+//t2oSaveDNAinRNA()
+void COmdFile1::t2oDelEmptyDNA()
+{
+	debugFile fileLog;
+
+	fileLog.Add("\nDNA\n");
+	for (std::vector<Nucleotide>::const_iterator itorDNA = m_omdDNA.Begin(); itorDNA != m_omdDNA.End(); ++itorDNA)
+		fileLog.Add(itorDNA->ShowMe());
+
+	fileLog.Add("\nRNA\n");
+	for (std::vector<Cartridge2>::const_iterator itorRNA = m_dOmd.Begin(); itorRNA != m_dOmd.End(); ++itorRNA)
+		fileLog.Add(itorRNA->GetDescrip() + "\n");
+
+	DNA inverEmptyDNA = m_omdDNA;
+	DNA emptyDNA;
+    for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
+	{
+		BOOL colorMatch;
+		BOOL ptTotalMatch;
+		BOOL paraMatch;
+		const CString sample(itor->GetDescrip());
+		for (std::vector<Nucleotide>::const_iterator itorDNA = m_omdDNA.Begin(); itorDNA != m_omdDNA.End(); ++itorDNA)
+		{
+			colorMatch = ptTotalMatch = paraMatch = 1;
+
+			colorMatch   = ( sample.Find( itorDNA->GetStrBackColor()     ) != -1)? TRUE: FALSE;
+			ptTotalMatch = ( sample.Find( itorDNA->GetStrMsrPointTotal() ) != -1)? TRUE: FALSE;
+			paraMatch    = ( sample.Find( itorDNA->GetStrPara()          ) != -1)? TRUE: FALSE;
+
+			if (colorMatch && ptTotalMatch && paraMatch)
+				emptyDNA.AddCell(*itorDNA);
+		}
+
+//		sample.Find()
+
+//         if (itor->GetBullet().IsEmpty() == TRUE)
+// 			emptyRNAs.AddCell(*itor);           //要剪掉的
+	}
+	fileLog.Add("\nemptyDNA\n");
+	for (std::vector<Nucleotide>::const_iterator itorEDNA = emptyDNA.Begin(); itorEDNA != emptyDNA.End(); ++itorEDNA)
+		fileLog.Add(itorEDNA->ShowMe());
+	
+	inverEmptyDNA.CutEqualCell(emptyDNA);
+	m_omdDNA.CutEqualCell(inverEmptyDNA);
+// 	CartridgeFinder emptyFinder;
+	//emptyFinder
+// 
+// 	1. 找出空的RNA
+//     2. 找在空的RNA中抽出字串，這些是DNA裡有的（看看RNA和DNA的字串是怎麼生出來的）
+// 	3. 字串比對
+// 	4. 刪掉DNA
+// 
+
+// 
+// 
+	
+
+		
+	fileLog.Out2File("c:\\DNAnRNAofOMD.log");
+	
+// 	在這裡做字串比對，找出RNA沒有值的，去刪掉DNA
+
 }

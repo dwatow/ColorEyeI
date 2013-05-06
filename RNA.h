@@ -79,7 +79,7 @@ private:
     
 //operator
 public:
-     void operator+(const Cartridge2&  _X);
+    void operator+(const Cartridge2&  _X);
     void operator+(const RNA& _R);
 //     void operator+(      RNA& _X) { AddCell(m_CarChain2.end(), _X.Begin(), _X.End()); };
     ////

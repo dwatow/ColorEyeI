@@ -101,11 +101,17 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     {
         str.Format("%s", indexItor->ShowMe());
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
-        ptTemp.y =  TextHight*(line);
-        line++;
-        maxYview = ptTemp.y;
+
+		//set position point
+		line++;
+		ptTemp.y = TextHight*(line);
+
+		//set max X veiw
         if (maxXview < str.GetLength()*5.5)
             maxXview = (int)((float)str.GetLength()*5.5); //¤¶©ó5~6¤§¶¡
+
+		//set max Y view
+        maxYview = ptTemp.y;
     }
 
 

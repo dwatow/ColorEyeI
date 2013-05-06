@@ -278,7 +278,7 @@ void CColorEyeIDoc::saveOmdFile(LPCTSTR FilePathName)
     else
     {
         f_Omd.SetFileHead(m_docFileHead);
-        f_Omd.iOmdData ( m_docRNA);
+        f_Omd.iOmdData (m_docRNA);
 
         f_Omd.Close();
     }

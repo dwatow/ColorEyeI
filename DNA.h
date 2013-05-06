@@ -24,6 +24,8 @@ public:
 	void Empty(){ nChain.clear(); };
 //	BOOL IsEmpty(){ nChain.empty(); };
 
+    void CutEqualCell(const DNA& );
+
 	void operator+(const Nucleotide&  _X);
 	void operator+(const DNA& _R);
 };

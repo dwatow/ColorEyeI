@@ -69,15 +69,15 @@ const CPoint TranScripter::getFE9Point(const int& few) const
 //運算第幾個（以九點為計）
 	double dFE;
 	int edgeR, edgeL;
-	if (m_curDnaCell->GetPara(PA_FEover) != -1)
+	if (m_curDnaCellItor->GetPara(PA_FEover) != -1)
 	{
-		dFE = (double)m_curDnaCell->GetPara(PA_FEover);
+		dFE = (double)m_curDnaCellItor->GetPara(PA_FEover);
 		edgeL = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
 		edgeR = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
 	}
-	else if (m_curDnaCell->GetPara(PA_FElength) != -1)
+	else if (m_curDnaCellItor->GetPara(PA_FElength) != -1)
 	{
-		dFE = (double)m_curDnaCell->GetPara(PA_FElength);
+		dFE = (double)m_curDnaCellItor->GetPara(PA_FElength);
 		edgeL = Cm2pixel(dFE);
 		edgeR = Cm2pixel(dFE);
 	}
@@ -153,7 +153,7 @@ const CPoint TranScripter::getFE5Point(const int& few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const double dFE = (double)m_curDnaCell->GetPara(PA_FEover);
+    const double dFE = (double)m_curDnaCellItor->GetPara(PA_FEover);
     const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
     const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
     const int RightEdge  = m_nScrmH - LeftEdge;
@@ -267,7 +267,7 @@ const CPoint TranScripter::getD13Point(const int& few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const double dFE = (double)m_curDnaCell->GetPara(PA_FEover);
+    const double dFE = (double)m_curDnaCellItor->GetPara(PA_FEover);
 
     const int LeftEdge  ((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));//左邊緣
     const int TopEdge   ((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));//上邊緣
@@ -352,7 +352,7 @@ const CPoint TranScripter::getD21Point(const int& few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const double dFE = (double)m_curDnaCell->GetPara(PA_FEover);
+    const double dFE = (double)m_curDnaCellItor->GetPara(PA_FEover);
     const int LeftEdge((dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3));
     const int TopEdge((dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3));
     const int RightEdge(m_nScrmH - LeftEdge);
@@ -444,8 +444,8 @@ const CPoint TranScripter::getD25Point(const int& few) const
 {
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const double dFE = (double)m_curDnaCell->GetPara(PA_FEover);
-    const int fRectSide = m_curDnaCell->GetPara(PA_D25RectSide);
+    const double dFE = (double)m_curDnaCellItor->GetPara(PA_FEover);
+    const int fRectSide = m_curDnaCellItor->GetPara(PA_D25RectSide);
 
     const int LeftEdge   = (dFE) ? static_cast<int>(m_nScrmH / dFE) : Cm2pixel(2.3);
     const int TopEdge    = (dFE) ? static_cast<int>(m_nScrmV / dFE) : Cm2pixel(2.3);
@@ -750,7 +750,7 @@ const CPoint TranScripter::getCrossTalk(const int& few) const
 
     //ScrmV 螢幕垂直pixel數
     //ScrmH 螢幕水平pixel數
-    const double dFE = (double)m_curDnaCell->GetPara(PA_FEover)* 2;
+    const double dFE = (double)m_curDnaCellItor->GetPara(PA_FEover)* 2;
 
     const int LeftEdge   = static_cast<int>(m_nScrmH / dFE);    //上
     const int TopEdge    = static_cast<int>(m_nScrmV / dFE);    //下
@@ -835,44 +835,38 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
 {
     ASSERT(_vD.Size());
 
-	RNA unitRNA;
-	DNA emptyDNA;
-
-    for (m_curDnaCell = _vD.Begin(); m_curDnaCell != _vD.End(); ++m_curDnaCell)
+    for (m_curDnaCellItor = _vD.Begin(); m_curDnaCellItor != _vD.End(); ++m_curDnaCellItor)
     {
-		unitRNA.Empty();
-
-        const unsigned int msrItemTotal = m_curDnaCell->GetMsrPointTotal();
+        const unsigned int msrItemTotal = m_curDnaCellItor->GetMsrPointTotal();
         for (unsigned int msrItemIndex = 0; msrItemIndex < msrItemTotal; ++msrItemIndex)
         {
-            Cartridge2 curRnaCell;
-			curRnaCell.SetBkStatus(tranBkStatus(msrItemIndex));
-            curRnaCell.SetBkColor(tranColor(msrItemIndex));
-            curRnaCell.SetPointPosi(tranPoint(msrItemIndex));
+            Cartridge2 m_curDnaCellItor;
+			m_curDnaCellItor.SetBkStatus(tranBkStatus(msrItemIndex));
+            m_curDnaCellItor.SetBkColor(tranColor(msrItemIndex));
+            m_curDnaCellItor.SetPointPosi(tranPoint(msrItemIndex));
             
-            setSquence(curRnaCell, _vR.Size(), msrItemIndex);
+            setSquence(m_curDnaCellItor, _vR.Size(), msrItemIndex);
             
-            curRnaCell.SetDescrip(tranDescrip(msrItemIndex));
+            m_curDnaCellItor.SetDescrip(tranDescrip(msrItemIndex));
 
-			forCrsTlk(curRnaCell);
-			forNits(curRnaCell);
+			forCrsTlk(m_curDnaCellItor);
+			forNits(m_curDnaCellItor);
 
-			//unitRNA.AddCell(curRnaCell);
-			_vR + curRnaCell;
+			_vR + m_curDnaCellItor;
+
         }
-		//_vR.AddCell(unitRNA);
     }
 }
 
 const BackGroundStatus TranScripter::tranBkStatus(const int& msrItemIndex) const
 {
 	BackGroundStatus status;
-	ColorType ct = m_curDnaCell->GetBackColor();
-	if ( (ct == Nits)/* && (msrItemIndex == m_curDnaCell->GetMsrPointTotal()/2)*/ )
+	ColorType ct = m_curDnaCellItor->GetBackColor();
+	if ( (ct == Nits)/* && (msrItemIndex == m_curDnaCellItor->GetMsrPointTotal()/2)*/ )
 	{
-		if (m_curDnaCell->GetPara(PA_NitsDir) == 1) //Neg
+		if (m_curDnaCellItor->GetPara(PA_NitsDir) == 1) //Neg
 			status = BGS_NitsNeg;
-		else if (m_curDnaCell->GetPara(PA_NitsDir) == 0) //Pos
+		else if (m_curDnaCellItor->GetPara(PA_NitsDir) == 0) //Pos
 			status = BGS_NitsPos;
 	}
 	else if (ct == CrsTlkD)
@@ -888,11 +882,11 @@ void TranScripter::forNits(Cartridge2& crtg)
 {
 	static BkMaker* NitsClr = 0;
 
-	if (m_curDnaCell->GetBackColor() == Nits)
+	if (m_curDnaCellItor->GetBackColor() == Nits)
 	{
 		if (NitsClr == 0)
 		{
-			crtg.m_pBackGorund->NT_SetNitsLv(m_curDnaCell->GetPara(PA_NitsLv));
+			crtg.m_pBackGorund->NT_SetNitsLv(m_curDnaCellItor->GetPara(PA_NitsLv));
 			NitsClr = crtg.m_pBackGorund;
  			NitsClr->_SetBkColor(RGB(123, 123, 123));
 		}
@@ -909,7 +903,7 @@ void TranScripter::forNits(Cartridge2& crtg)
 
 void TranScripter::forCrsTlk(Cartridge2& crtg)
 {
-    ColorType ct = m_curDnaCell->GetBackColor();
+    ColorType ct = m_curDnaCellItor->GetBackColor();
 	if (ct == CrsTlkD || ct == CrsTlkW)
 	{
 		ColorRef _clr;
@@ -918,7 +912,7 @@ void TranScripter::forCrsTlk(Cartridge2& crtg)
 		else if (ct == CrsTlkW)
 			_clr.iRGB(255, 255, 255);
 		
-		int m_fCrsTlkRectFE = m_curDnaCell->GetPara(PA_FEover);
+		int m_fCrsTlkRectFE = m_curDnaCellItor->GetPara(PA_FEover);
 		ASSERT(m_fCrsTlkRectFE > 0);
 		
 		CRect _rect = 
@@ -934,8 +928,8 @@ void TranScripter::forCrsTlk(Cartridge2& crtg)
 const ColorRef TranScripter::tranColor(const int& msrIndex) const
 {
 	ColorRef clr;
-    if (m_curDnaCell->GetMsrPointTotal() == PnGamma)
-        switch(m_curDnaCell->GetBackColor())
+    if (m_curDnaCellItor->GetMsrPointTotal() == PnGamma)
+        switch(m_curDnaCellItor->GetBackColor())
         {
             case Red:      clr.iRGB( msrIndex,      0,      0); break;
             case Green:    clr.iRGB(      0, msrIndex,      0); break;
@@ -945,7 +939,7 @@ const ColorRef TranScripter::tranColor(const int& msrIndex) const
             default:       clr.iRGB(msrIndex, msrIndex, msrIndex);
         }
     else
-        switch(m_curDnaCell->GetBackColor())
+        switch(m_curDnaCellItor->GetBackColor())
         {
             case White:    clr.iRGB( 255, 255, 255); break;
             case Dark:     clr.iRGB(   0,   0,   0); break;
@@ -953,10 +947,10 @@ const ColorRef TranScripter::tranColor(const int& msrIndex) const
             case Green:    clr.iRGB(   0, 255,   0); break;
             case Blue:     clr.iRGB(   0,   0, 255); break;
             case Nits:     clr.iRGB( 192, 212,  49);
-				return m_curDnaCell->GetPara(PA_NitsLv);
+				return m_curDnaCellItor->GetPara(PA_NitsLv);
 //             case JNDX:
 //             case JND:      
-// 				return m_curDnaCell->GetPara(PA_JndGrayLv);
+// 				return m_curDnaCellItor->GetPara(PA_JndGrayLv);
             case CrsTlk: 
             case CrsTlkW:
             case CrsTlkD:  clr.iRGB( 128, 128, 128); break;
@@ -967,12 +961,12 @@ const ColorRef TranScripter::tranColor(const int& msrIndex) const
 
 const CPoint TranScripter::tranPoint(const int& msrIndex) const
 {
-    switch(m_curDnaCell->GetMsrPointTotal())
+    switch(m_curDnaCellItor->GetMsrPointTotal())
     {
     case Pn1:        return getCenterPoint();        //中心點定義不分
     case Pn4:        return getCrossTalk(msrIndex);
     case Pn5:        return getFE5Point(msrIndex);
-    case Pn9:    if (m_curDnaCell->GetBackColor() == Nits)   //九點週邊定義各有不同
+    case Pn9:    if (m_curDnaCellItor->GetBackColor() == Nits)   //九點週邊定義各有不同
                      return get5nits9Point(msrIndex);           //分白、黑、5Nits
                  else
                      return getFE9Point(msrIndex);
@@ -989,9 +983,9 @@ const CString TranScripter::tranDescrip(const int& msrIndex) const
 {
     CString color, ptTotal, ptIndex, para;
 
-    color   = m_curDnaCell->GetStrBackColor();
-    ptTotal = m_curDnaCell->GetStrMsrPointTotal();
-    para    = m_curDnaCell->GetStrPara();
+    color   = m_curDnaCellItor->GetStrBackColor();
+    ptTotal = m_curDnaCellItor->GetStrMsrPointTotal();
+    para    = m_curDnaCellItor->GetStrPara();
     
     ptIndex.Format(", 第%d點", msrIndex+1 );
     
@@ -1027,17 +1021,17 @@ void TranScripter::setSquence(Cartridge2& _Car, const std::vector<Nucleotide>::s
     }
 
     //依area code判斷順序的選擇
-	if (m_curDnaCell->GetMsrPointTotal() == Pn21)
+	if (m_curDnaCellItor->GetMsrPointTotal() == Pn21)
 	{
-		if (msrItemIndex+1 == m_curDnaCell->GetMsrPointTotal()) 
+		if (msrItemIndex+1 == m_curDnaCellItor->GetMsrPointTotal()) 
 			_Car.SetSqncFrm(1);
 		else
 			_Car.SetSqncFrm(size + 2);
 	}
 	else
 	{
-		if (msrItemIndex <  m_curDnaCell->GetMsrPointTotal()/2) _Car.SetSqncFrm(size + 2); 
-		if (msrItemIndex == m_curDnaCell->GetMsrPointTotal()/2) _Car.SetSqncFrm(1);
-		if (msrItemIndex >  m_curDnaCell->GetMsrPointTotal()/2) _Car.SetSqncFrm(size + 1);
+		if (msrItemIndex <  m_curDnaCellItor->GetMsrPointTotal()/2) _Car.SetSqncFrm(size + 2); 
+		if (msrItemIndex == m_curDnaCellItor->GetMsrPointTotal()/2) _Car.SetSqncFrm(1);
+		if (msrItemIndex >  m_curDnaCellItor->GetMsrPointTotal()/2) _Car.SetSqncFrm(size + 1);
 	}
 }

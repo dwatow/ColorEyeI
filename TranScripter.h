@@ -17,7 +17,7 @@ class TranScripter
 #endif // _DEBUG
 
 	const int m_nScrmH, m_nScrmV;
-	std::vector<Nucleotide>::iterator m_curDnaCell;
+	std::vector<Nucleotide>::iterator m_curDnaCellItor;
 
 public:
 	TranScripter();

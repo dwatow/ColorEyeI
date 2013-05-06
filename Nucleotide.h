@@ -43,8 +43,43 @@ public:
 //¹Bºâ¤l
     const BOOL operator==(const Nucleotide& vNucl) const;
           void operator= (const Nucleotide& vNucl);
+    const BOOL equalMsrPtTotal(const Nucleotide& vCar) const;
+	const BOOL equalBackColor(const Nucleotide& vCar) const;
+	const BOOL equalParameter(const Nucleotide& vCar) const;
 
     const CString ShowMe() const;
 };
+
+inline const BOOL Nucleotide::equalMsrPtTotal(const Nucleotide& vCar) const
+{
+	return (GetMsrPointTotal() == vCar.GetMsrPointTotal())? TRUE : FALSE;
+}
+
+inline const BOOL Nucleotide::equalBackColor(const Nucleotide& vCar) const
+{
+	return (GetBackColor()  == vCar.GetBackColor() )? TRUE : FALSE;
+}
+
+inline const BOOL Nucleotide::equalParameter(const Nucleotide& vCar) const
+{
+	BOOL b(TRUE);
+	if (vCar.m_Parameters.size() == m_Parameters.size())
+	{
+		for ( int i = 0; i < PA_Max; ++i)
+		{
+			int a, b, c;			
+			a = vCar.m_Parameters[i];
+			b = m_Parameters[i];
+			c = i;
+			if (vCar.m_Parameters[i] != m_Parameters[i])
+				b = FALSE;
+		}
+	}
+	else
+		ASSERT(0);
+
+	return b;
+}
+
 
 #endif

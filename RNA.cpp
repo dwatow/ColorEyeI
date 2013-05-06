@@ -397,12 +397,12 @@ void RNA::DeleteEmptyCell()
 			x.AddCell(*itor);           //­n°Å±¼ªº
 	}
     //x.push_back(*itor);
-	debugFile freeEmpty;
-	for (std::vector<Cartridge2>::iterator itorX = x.Begin(); itorX != x.End(); ++itorX)
-	{
-		freeEmpty.Add(itorX->GetDescrip() + "\n");
-	}
-	freeEmpty.Out2File("C://Users//1004066//Desktop//freeEmpty.log");
+// 	debugFile freeEmpty;
+// 	for (std::vector<Cartridge2>::iterator itorX = x.Begin(); itorX != x.End(); ++itorX)
+// 	{
+// 		freeEmpty.Add(itorX->GetDescrip() + "\n");
+// 	}
+// 	freeEmpty.Out2File("C:\\Users\\1004066\\Desktop\\freeEmpty.log");
 
     CutEqualCell(x);
 }

@@ -139,7 +139,7 @@ private:
     void selMsrItem2DNA_sortable(DNA&);
     void selMsrItem2DNA_Unsortable(DNA&);
 	void rememberSelMsrItems();
-	BOOL checkMsrItemPara();
+	BOOL checkMsrParaOK();
 };
 
 //{{AFX_INSERT_LOCATION}}

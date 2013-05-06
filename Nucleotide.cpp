@@ -70,13 +70,14 @@ m_Parameters(PA_Max, -1)
     //無離邊
     //沒有特別定義，就成為空字串
 
+//    case Pn1:
+//         if (_C == JND || _C == JNDX)
+//         {
+//             SetPara(PA_JndGrayLv, _N1); 
+//             m_paraStr.Format("_灰階: %d", _N1);
+//             break;
+//         }
     case Pn1:
-        if (_C == JND || _C == JNDX)
-        {
-            SetPara(PA_JndGrayLv, _N1); 
-            m_paraStr.Format("_灰階: %d", _N1);
-            break;
-        }
     case Pn49:
     default:
         m_paraStr.Format("_");
@@ -142,17 +143,7 @@ const CString Nucleotide::GetStrPara() const
 
 const BOOL Nucleotide::operator==(const Nucleotide& vCar) const
 {
-    BOOL b(FALSE);
-    std::vector<int>::const_iterator vCitor = vCar.m_Parameters.begin();
-    if ((GetMsrPointTotal() == vCar.GetMsrPointTotal()) && (GetBackColor()  == vCar.GetBackColor() ))
-        for ( std::vector<int>::const_iterator initor = m_Parameters.begin(); 
-              initor != m_Parameters.end(), vCitor != vCar.m_Parameters.end(); 
-              ++initor, ++vCitor)
-                  if (initor == vCitor)
-                      b = TRUE;
-                  else
-                      b = FALSE;
-    return b;
+    return ( equalParameter(vCar) && equalMsrPtTotal(vCar) && equalBackColor(vCar) )? TRUE: FALSE;
 };
 
 void Nucleotide::operator= (const Nucleotide& vCar)

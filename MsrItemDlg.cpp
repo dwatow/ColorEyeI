@@ -30,13 +30,13 @@ static char THIS_FILE[] = __FILE__;
 CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CMsrItemDlg::IDD, pParent), m_W9FEtype(FT_1overN)
 {
-	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
-	ASSERT_VALID(pApp);
+    CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+    ASSERT_VALID(pApp);
 
-	m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
-	DebugCode( m_desktopPath.Format("%s", pApp->GetDesktopPath()); )
+    m_RememberChkPathName.Format("%s\\~MsrItemDlg.temp", pApp->GetPath());
+    DebugCode( m_desktopPath.Format("%s", pApp->GetDesktopPath()); )
 
-	//{{AFX_DATA_INIT(CMsrItemDlg)
+    //{{AFX_DATA_INIT(CMsrItemDlg)
     m_nGM1 = 0;
     m_nGM2 = 255;
     m_f21FE = 0.0f;
@@ -49,17 +49,17 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
     m_JndGray = 0;
-	//}}AFX_DATA_INIT
+    //}}AFX_DATA_INIT
 }
 
 
 void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CMsrItemDlg)
-	DDX_Control(pDX, IDC_SW_P9FE, m_spinP9Para);
-	DDX_Control(pDX, IDC_STATIC_P9FECM, m_p9_Ncm);
-	DDX_Control(pDX, IDC_STATIC_P9FE1OVER, m_p9_1overN);
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CMsrItemDlg)
+    DDX_Control(pDX, IDC_SW_P9FE, m_spinP9Para);
+    DDX_Control(pDX, IDC_STATIC_P9FECM, m_p9_Ncm);
+    DDX_Control(pDX, IDC_STATIC_P9FE1OVER, m_p9_1overN);
     DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
     DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
@@ -119,39 +119,39 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT_GM2, m_nGM2);
     DDV_MinMaxUInt(pDX, m_nGM2, 0, 255);
     DDX_Text(pDX, IDC_EDIT_P21FE, m_f21FE);
-	DDV_MinMaxFloat(pDX, m_f21FE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_f21FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P25FE, m_f25FE);
-	DDV_MinMaxFloat(pDX, m_f25FE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_f25FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P5FE, m_f5FE);
-	DDV_MinMaxFloat(pDX, m_f5FE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_f5FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P9FE, m_f9FE);
-	DDV_MinMaxFloat(pDX, m_f9FE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_f9FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_P13FE, m_f13FE);
-	DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_f13FE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_GM3, m_fGammaSetp);
     DDV_MinMaxFloat(pDX, m_fGammaSetp, 1.f, 255.f);
     DDX_Text(pDX, IDC_EDIT_P25RECTSIDE, m_n25RectSide);
     DDV_MinMaxUInt(pDX, m_n25RectSide, 0, 100);
     DDX_Text(pDX, IDC_EDIT_CROSSTALK1, m_fCrsTlkRectFE);
-	DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
+    DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
     DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_JndGray);
     DDV_MinMaxUInt(pDX, m_JndGray, 0, 255);
-	//}}AFX_DATA_MAP
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
-	//{{AFX_MSG_MAP(CMsrItemDlg)
+    //{{AFX_MSG_MAP(CMsrItemDlg)
     ON_WM_CTLCOLOR()
     ON_WM_PAINT()
     ON_BN_CLICKED(IDC_BUTTON_ADD, OnButtonAdd)
     ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
     ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
     ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
-	ON_NOTIFY(UDN_DELTAPOS, IDC_SW_P9FE, OnDeltaposSwP9fe)
-	//}}AFX_MSG_MAP
+    ON_NOTIFY(UDN_DELTAPOS, IDC_SW_P9FE, OnDeltaposSwP9fe)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -204,18 +204,18 @@ void CMsrItemDlg::listBoxUpdate()
             m_debugLog.Add(itor->GetDescrip() + "\n");
         }
 
-	m_debugLog.Out2File(m_desktopPath+"//DNA.log");
+    m_debugLog.Out2File(m_desktopPath+"//DNA.log");
 }
 
 void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
 {
-	//修改的話，要同步修改
-	//void COmdFile1::DNA_sortable(DNA& sortableDNA)
+    //修改的話，要同步修改
+    //void COmdFile1::DNA_sortable(DNA& sortableDNA)
 
     //準備DNA
     //填入參數
     //JND
-	UpdateData(TRUE);
+    UpdateData(TRUE);
 //     if (m_chkJND.GetState())
 //     {
 //         sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
@@ -281,7 +281,7 @@ void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
 
 void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
 {
-	UpdateData(TRUE);
+    UpdateData(TRUE);
     //Cross Talk srot by AreaCode
     if (m_chkCrossTalk.GetState())
     {
@@ -302,46 +302,46 @@ void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
         m_debugLog.Add(Nit->ShowMe());
 }
 
-BOOL CMsrItemDlg::checkMsrItemPara()
+BOOL CMsrItemDlg::checkMsrParaOK()
 {
-	if ( (m_f21FE == 1) || (m_f25FE == 1) || (m_f5FE == 1) || (m_f9FE == 1) || (m_f13FE == 1) || (m_fCrsTlkRectFE == 1) )
-		return FALSE;
-	else
-		return TRUE;
+    if ( (m_f21FE == 1) || (m_f25FE == 1) || (m_f5FE == 1) || (m_f9FE == 1) || (m_f13FE == 1) || (m_fCrsTlkRectFE == 1) )
+        return FALSE;
+    else
+        return TRUE;
 }
 void CMsrItemDlg::OnButtonAdd()
 {
     //執行連到了這
     //1. CA-210已連線
     //2. CA-210已宣告
-	if (checkMsrItemPara())
-	{
-		DNA sortableDNA;
-		
-		selMsrItem2DNA_sortable(sortableDNA);
-		
-		TranScripter Ts;
-		if (sortableDNA.Size()) Ts.Trans(sortableDNA, m_RNA);
-		m_DNA.AddCell(sortableDNA);
-		//    sortableDNA.Empty();
-		
-		//排序
-		if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
-		else                                 m_RNA.SortOrigMsr();
-		
-		
-		DNA UnsortableDNA;
-		
-		selMsrItem2DNA_Unsortable(UnsortableDNA);
-		
-		if (UnsortableDNA.Size()) Ts.Trans(UnsortableDNA, m_RNA);
-		m_DNA.AddCell(UnsortableDNA);
-		//    UnsortableDNA.Empty();
-		
-		listBoxUpdate();
-	}
-	else
-		AfxMessageBox("參數不可以為 1, 貼邊參數為 0");
+    if (checkMsrParaOK())
+    {
+        DNA sortableDNA;
+        
+        selMsrItem2DNA_sortable(sortableDNA);
+        
+        TranScripter Ts;
+        if (sortableDNA.Size()) Ts.Trans(sortableDNA, m_RNA);
+        m_DNA.AddCell(sortableDNA);
+        //    sortableDNA.Empty();
+
+        //排序
+        if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
+        else                                 m_RNA.SortOrigMsr();
+        
+        
+        DNA UnsortableDNA;
+        
+        selMsrItem2DNA_Unsortable(UnsortableDNA);
+        
+        if (UnsortableDNA.Size()) Ts.Trans(UnsortableDNA, m_RNA);
+        m_DNA.AddCell(UnsortableDNA);
+        //    UnsortableDNA.Empty();
+        
+        listBoxUpdate();
+    }
+    else
+        AfxMessageBox("參數不可以為 1, 貼邊參數為 0");
 }
 
 void CMsrItemDlg::OnButtonDel() 
@@ -372,9 +372,9 @@ BOOL CMsrItemDlg::OnInitDialog()
     m_cbxSelNitsKind.AddString("--");
     m_cbxSelNitsKind.SetCurSel(0);
 
-	m_spinP9Para.SetRange(0, 1);
-	m_spinP9Para.SetPos(1);
-	m_spinP9Para.SetBase(10);
+    m_spinP9Para.SetRange(0, 1);
+    m_spinP9Para.SetPos(1);
+    m_spinP9Para.SetBase(10);
 
 
     //記憶 選項 file >> Dialog
@@ -408,8 +408,8 @@ void CMsrItemDlg::OnOK()
 
     pDoc->UpdateDocDNA(m_DNA);
     pDoc->UpdateMsrRNA(m_RNA);  
-	//此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
-	//這個，還是等到PatternDialog量完再新增上來吧！
+    //此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
+    //這個，還是等到PatternDialog量完再新增上來吧！
 
     rememberSelMsrItems();
 }
@@ -417,20 +417,20 @@ void CMsrItemDlg::OnOK()
 void CMsrItemDlg::OnCancel() 
 {
     // TODO: Add extra cleanup here
-	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
     
     CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
     ASSERT_VALID(pDoc);
 
-// 	m_DNA.Empty();
-	m_RNA.Empty();
+//     m_DNA.Empty();
+    m_RNA.Empty();
 
 //     pDoc->UpdateDocDNA(m_DNA);
     pDoc->UpdateMsrRNA(m_RNA);  
-	//此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
-	//這個，還是等到PatternDialog量完再新增上來吧！
-	
+    //此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
+    //這個，還是等到PatternDialog量完再新增上來吧！
+    
     rememberSelMsrItems();
     
     CDialog::OnCancel();
@@ -727,20 +727,20 @@ void CMsrItemDlg::OnButtonSelno()
 
 void CMsrItemDlg::OnDeltaposSwP9fe(NMHDR* pNMHDR, LRESULT* pResult) 
 {
-	NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
-	// TODO: Add your control notification handler code here
-	switch ((FEtype)pNMUpDown->iPos)
-	{
-	case FT_1overN:
-		m_p9_1overN.EnableWindow(TRUE);
-		m_p9_Ncm.EnableWindow(FALSE);
-		m_W9FEtype = FT_1overN;
-		break;
-	case FT_Ncm:
-		m_p9_1overN.EnableWindow(FALSE);
-		m_p9_Ncm.EnableWindow(TRUE);
-		m_W9FEtype = FT_Ncm;
-	}
+    NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
+    // TODO: Add your control notification handler code here
+    switch ((FEtype)pNMUpDown->iPos)
+    {
+    case FT_1overN:
+        m_p9_1overN.EnableWindow(TRUE);
+        m_p9_Ncm.EnableWindow(FALSE);
+        m_W9FEtype = FT_1overN;
+        break;
+    case FT_Ncm:
+        m_p9_1overN.EnableWindow(FALSE);
+        m_p9_Ncm.EnableWindow(TRUE);
+        m_W9FEtype = FT_Ncm;
+    }
 
-	*pResult = 0;
+    *pResult = 0;
 }
