@@ -9,7 +9,7 @@
 #include <cmath>
 #include <vector>
 
-enum initType{  MsrForItem = 0, MsrForPoint, MsrForForm  };
+enum initType{  MsrForItem = 0, MsrForPoint, MsrForTable  };
 
 #if _MSC_VER > 1000
 #pragma once

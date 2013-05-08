@@ -42,6 +42,7 @@ public:
 	afx_msg void OnFileOmdtoxls();
 	afx_msg void OnMsrForItem();
 	afx_msg void OnSetupCa210();
+	afx_msg void OnMsrTable();
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 

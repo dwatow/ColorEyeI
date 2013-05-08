@@ -14,6 +14,7 @@
 #include "MainFrm.h"
 #include "ColorEyeIDoc.h"
 #include "OmdHead.h"
+#include "MsrTableDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -56,14 +57,20 @@ void CPatternDlg::initCa210()
 
 void CPatternDlg::initDataDlgType() const
 {
-    CDialog *DataDlg = new CMsrItemDlg();
-    CMsrItemDlg dlgMsrItem;        //為Pattern Dialog初始化，做準備
+    CDialog *dlgData = 0;
+
     switch(InitDataType)
     {
-    case MsrForItem:
-        dlgMsrItem.DoModal();  //之後判斷子彈是不是空的。
-        break;
+    case MsrForItem:  dlgData = new CMsrItemDlg();   break;
+	case MsrForTable: dlgData = new CMsrTableDlg();  break;
+	default:
+		CString str("Pattern Dialog初始化量測資料出問題");
+		AfxMessageBox(str);
     }
+
+	ASSERT(dlgData);
+	dlgData->DoModal();
+	delete dlgData;
 }
 
 void CPatternDlg::DoDataExchange(CDataExchange* pDX)

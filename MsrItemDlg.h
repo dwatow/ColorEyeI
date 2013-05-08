@@ -115,7 +115,6 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CMsrItemDlg)
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-    afx_msg void OnPaint();
 	afx_msg void OnButtonAdd();
 	afx_msg void OnButtonDel();
 	virtual BOOL OnInitDialog();

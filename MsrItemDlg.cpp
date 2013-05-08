@@ -145,13 +145,12 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
     //{{AFX_MSG_MAP(CMsrItemDlg)
     ON_WM_CTLCOLOR()
-    ON_WM_PAINT()
     ON_BN_CLICKED(IDC_BUTTON_ADD, OnButtonAdd)
     ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonDel)
     ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
     ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SW_P9FE, OnDeltaposSwP9fe)
-    //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -175,20 +174,6 @@ HBRUSH CMsrItemDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
     // TODO: Return a different brush if the default is not desired
     return hbr;
-}
-
-void CMsrItemDlg::OnPaint() 
-{
-    CPaintDC dc(this); // device context for painting
-    
-    // TODO: Add your message handler code here
-    m_stcWhite.SetFontFace("新細明體");
-    m_stcRed.  SetFontFace("新細明體");
-    m_stcGreen.SetFontFace("新細明體");
-    m_stcBlue. SetFontFace("新細明體");
-    m_stcDark. SetFontFace("新細明體");
-
-    // Do not call CDialog::OnPaint() for painting messages
 }
 
 void CMsrItemDlg::listBoxUpdate()
@@ -369,6 +354,12 @@ BOOL CMsrItemDlg::OnInitDialog()
     CDialog::OnInitDialog();
     
     // TODO: Add extra initialization here
+	m_stcWhite.SetFontFace("新細明體");
+    m_stcRed.  SetFontFace("新細明體");
+    m_stcGreen.SetFontFace("新細明體");
+    m_stcBlue. SetFontFace("新細明體");
+    m_stcDark. SetFontFace("新細明體");
+
     m_cbxSelNitsKind.AddString("+");
     m_cbxSelNitsKind.AddString("--");
     m_cbxSelNitsKind.SetCurSel(0);

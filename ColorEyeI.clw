@@ -2,20 +2,20 @@
 
 [General Info]
 Version=1
-LastClass=CColorEyeIDoc
+LastClass=CMsrItemDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=11
+ClassCount=12
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
-ResourceCount=9
+ResourceCount=10
 Resource1=IDD_DIALOG_BARCODE
 Class5=CAboutDlg
 <<<<<<< HEAD
@@ -44,6 +44,8 @@ Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
 Resource9=IDD_ABOUTBOX
+Class12=CMsrTableDlg
+Resource10=IDD_MSR_TABLE
 
 [CLS:CColorEyeIApp]
 Type=0
@@ -78,7 +80,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=CMainFrame
+LastObject=ID_MSR_TABLE
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -130,7 +132,7 @@ Type=1
 Class=CMainFrame
 Command1=ID_MSR_CONNECTCA210
 Command2=ID_MSR_ITEM
-Command3=ID_MSR_FORM
+Command3=ID_MSR_TABLE
 Command4=ID_FILE_NEW
 Command5=ID_FILE_OPEN
 Command6=ID_MSR_POINT
@@ -408,4 +410,27 @@ ImplementationFile=PatternDlg.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CPatternDlg
+
+[DLG:IDD_MSR_TABLE]
+Type=1
+Class=CMsrTableDlg
+ControlCount=9
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_BUTTON2,button,1342242816
+Control4=IDC_BUTTON3,button,1342242816
+Control5=IDC_BUTTON4,button,1342242816
+Control6=IDC_STATIC,button,1342177287
+Control7=IDC_STATIC,button,1342177287
+Control8=IDC_STATIC_TABLE_VIEW,static,1342177294
+Control9=IDC_STATIC,button,1342177287
+
+[CLS:CMsrTableDlg]
+Type=0
+HeaderFile=msrtabledlg.h
+ImplementationFile=msrtabledlg.cpp
+BaseClass=CDialog
+LastObject=CMsrTableDlg
+Filter=D
+VirtualFilter=dWC
 

@@ -75,6 +75,9 @@ IDR_CLRETYPE            ICON    DISCARDABLE     "res\\ColorEyeIDoc.ico"
 //
 
 IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_BMP_SEC_FROM        BITMAP  DISCARDABLE     "res\\SEC.bmp"
+IDB_BMP_RA_FROM         BITMAP  DISCARDABLE     "res\\RAFrom.bmp"
+IDB_BMP_OQC_MASS        BITMAP  DISCARDABLE     "res\\oqcFrom.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -154,7 +157,7 @@ IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE
 BEGIN
     "C",            ID_MSR_CONNECTCA210,    VIRTKEY, CONTROL, NOINVERT
     "I",            ID_MSR_ITEM,            VIRTKEY, CONTROL, NOINVERT
-    "M",            ID_MSR_FORM,            VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_MSR_TABLE,           VIRTKEY, CONTROL, NOINVERT
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
     "P",            ID_MSR_POINT,           VIRTKEY, CONTROL, NOINVERT
@@ -503,6 +506,23 @@ BEGIN
     LTEXT           "Static",IDC_STATIC_BARCODE,60,9,177,8
 END
 
+IDD_MSR_TABLE DIALOG DISCARDABLE  0, 0, 449, 243
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "選擇量測表格"
+FONT 9, "Calibri"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,322,222,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,377,222,50,14
+    PUSHBUTTON      "Button2",IDC_BUTTON2,12,17,45,40
+    PUSHBUTTON      "Button3",IDC_BUTTON3,12,62,45,40
+    PUSHBUTTON      "Button4",IDC_BUTTON4,72,17,45,40
+    GROUPBOX        "Static",IDC_STATIC,7,7,55,205
+    GROUPBOX        "Static",IDC_STATIC,67,7,55,205
+    CONTROL         144,IDC_STATIC_TABLE_VIEW,"Static",SS_BITMAP,137,17,300,
+                    190
+    GROUPBOX        "Static",IDC_STATIC,132,7,310,205
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -556,6 +576,14 @@ BEGIN
         RIGHTMARGIN, 239
         TOPMARGIN, 7
         BOTTOMMARGIN, 40
+    END
+
+    IDD_MSR_TABLE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 442
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 236
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -676,6 +704,12 @@ STRINGTABLE DISCARDABLE
 BEGIN
     AFX_IDS_SCRESTORE       "還原視窗至原來大小"
     AFX_IDS_SCTASKLIST      "叫出「工作列」"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MSR_ITEM             "選擇量測項目"
+    ID_MSR_TABLE            "選擇量測表格"
 END
 
 #endif    // Chinese (Taiwan) resources

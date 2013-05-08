@@ -10,6 +10,7 @@
 #include "SelExcelDlg.h"
 #include "CaSetupDlg.h"
 #include "PatternDlg.h"
+#include "MsrTableDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -26,7 +27,8 @@ BEGIN_MESSAGE_MAP(CColorEyeIApp, CWinApp)
     ON_COMMAND(ID_FILE_OMDTOXLS, OnFileOmdtoxls)
     ON_COMMAND(ID_MSR_ITEM, OnMsrForItem)
     ON_COMMAND(ID_SETUP_CA210, OnSetupCa210)
-    //}}AFX_MSG_MAP
+	ON_COMMAND(ID_MSR_TABLE, OnMsrTable)
+	//}}AFX_MSG_MAP
     // Standard file based document commands
     ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
     ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
@@ -65,6 +67,9 @@ static const CLSID clsid =
 
 BOOL CColorEyeIApp::InitInstance()
 {
+	CMsrTableDlg dlgtemp;
+	dlgtemp.DoModal();
+
     // Initialize OLE libraries
     if (!AfxOleInit())
     {
@@ -284,3 +289,16 @@ void CColorEyeIApp::OnSetupCa210()
 }
 
 
+
+void CColorEyeIApp::OnMsrTable() 
+{
+    if (m_pdlgPattern != 0)
+        delete m_pdlgPattern;
+        
+    m_pdlgPattern = new CPatternDlg(MsrForTable);  //初始化Pattern Dialog，可以呼叫MsrForItem等對話框出來初始化vChain
+	
+    if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   
+        AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
+    
+	m_pdlgPattern->LoadedCartridge();
+}

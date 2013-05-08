@@ -202,6 +202,10 @@ SOURCE=.\MsrItemDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\MsrTableDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Nucleotide.cpp
 # End Source File
 # Begin Source File
@@ -386,6 +390,10 @@ SOURCE=.\MsrItemDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\MsrTableDlg.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Nucleotide.h
 # End Source File
 # Begin Source File
@@ -479,6 +487,18 @@ SOURCE=.\res\ColorEyeI.rc2
 # Begin Source File
 
 SOURCE=.\res\ColorEyeIDoc.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\oqcFrom.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\RAFrom.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\SEC.bmp
 # End Source File
 # Begin Source File
 
