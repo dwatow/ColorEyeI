@@ -2,49 +2,50 @@
 
 [General Info]
 Version=1
-LastClass=CMsrItemDlg
-LastTemplate=CDialog
+LastClass=CBtm
+LastTemplate=CButton
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=12
+ClassCount=13
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=10
-Resource1=IDD_DIALOG_BARCODE
+Resource1=IDD_ABOUTBOX
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_MSR_ITEM
-Resource3=IDD_EDIT_DIALOG
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_CASETUP_DIALOG
+Resource3=IDD_DIALOG_BARCODE
+Resource4=IDD_EDIT_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_CASETUP_DIALOG
-Resource7=IDD_OMDTOEXCEL
+Resource6=IDR_MAINFRAME
+Resource7=IDD_MSR_ITEM
 Class7=CCaSetupDlg
-Resource8=IDR_MAINFRAME
+Resource8=IDD_OMDTOEXCEL
 =======
-Resource2=IDD_MSR_ITEM
-Resource3=IDD_EDIT_DIALOG
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_CASETUP_DIALOG
+Resource3=IDD_DIALOG_BARCODE
+Resource4=IDD_EDIT_DIALOG
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_CASETUP_DIALOG
-Resource7=IDD_OMDTOEXCEL
+Resource6=IDR_MAINFRAME
+Resource7=IDD_MSR_ITEM
 Class7=CCaSetupDlg
-Resource8=IDR_MAINFRAME
+Resource8=IDD_OMDTOEXCEL
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_ABOUTBOX
+Resource9=IDD_PATTERN_DIALOG
 Class12=CMsrTableDlg
+Class13=CBtm
 Resource10=IDD_MSR_TABLE
 
 [CLS:CColorEyeIApp]
@@ -414,7 +415,7 @@ LastObject=CPatternDlg
 [DLG:IDD_MSR_TABLE]
 Type=1
 Class=CMsrTableDlg
-ControlCount=9
+ControlCount=8
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BUTTON2,button,1342242816
@@ -422,8 +423,7 @@ Control4=IDC_BUTTON3,button,1342242816
 Control5=IDC_BUTTON4,button,1342242816
 Control6=IDC_STATIC,button,1342177287
 Control7=IDC_STATIC,button,1342177287
-Control8=IDC_STATIC_TABLE_VIEW,static,1342177294
-Control9=IDC_STATIC,button,1342177287
+Control8=IDC_STATIC,button,1342177287
 
 [CLS:CMsrTableDlg]
 Type=0
@@ -433,4 +433,13 @@ BaseClass=CDialog
 LastObject=CMsrTableDlg
 Filter=D
 VirtualFilter=dWC
+
+[CLS:CBtm]
+Type=0
+HeaderFile=Btm.h
+ImplementationFile=Btm.cpp
+BaseClass=CButton
+Filter=W
+VirtualFilter=BWC
+LastObject=CBtm
 

@@ -102,6 +102,10 @@ SOURCE=.\BkNits.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Btm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Bullet.cpp
 # End Source File
 # Begin Source File
@@ -287,6 +291,10 @@ SOURCE=.\BkMaker.h
 # Begin Source File
 
 SOURCE=.\BkNits.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Btm.h
 # End Source File
 # Begin Source File
 

@@ -6,6 +6,9 @@
 #endif // _MSC_VER > 1000
 // MsrTableDlg.h : header file
 //
+#include "Btm.h"
+
+enum tableIndex{ TI_SEC, TI_OQCMASS, TI_OQCTEST, TI_RA};
 
 /////////////////////////////////////////////////////////////////////////////
 // CMsrTableDlg dialog
@@ -14,12 +17,17 @@ class CMsrTableDlg : public CDialog
 {
 // Construction
 public:
+	void SetTableImage(tableIndex);
+	UINT tableID();
 	CMsrTableDlg(CWnd* pParent = NULL);   // standard constructor
+	tableIndex m_TableIndex;
 
 // Dialog Data
 	//{{AFX_DATA(CMsrTableDlg)
 	enum { IDD = IDD_MSR_TABLE };
-	CStatic	m_tableView;
+	CBtm	m_msrRAtable;
+	CBtm	m_msrSECtable;
+	CBtm	m_msrOQCMASStable;
 	//}}AFX_DATA
 
 
@@ -36,6 +44,8 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CMsrTableDlg)
 	virtual BOOL OnInitDialog();
+	afx_msg void OnPaint();
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

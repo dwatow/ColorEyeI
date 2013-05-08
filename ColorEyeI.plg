@@ -6,20 +6,123 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\1004066\AppData\Local\Temp\RSPCFC5.tmp" with contents
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C5.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_AFXDLL" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\GitHub\ColorEyeI\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\Btm.cpp"
 ]
-Creating command line "cl.exe @C:\Users\1004066\AppData\Local\Temp\RSPCFC5.tmp" 
+Creating command line "cl.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C5.tmp" 
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C6.tmp" with contents
+[
+shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
+.\Debug\BkMaker.obj
+.\Debug\BkNits.obj
+.\Debug\Bullet.obj
+.\Debug\ca200srvr.obj
+.\Debug\CA210.obj
+.\Debug\CA210real.obj
+.\Debug\Ca210sim.obj
+.\Debug\Cartridge2.obj
+.\Debug\CartridgeFinder.obj
+.\Debug\CaSetupDlg.obj
+.\Debug\CColorRef.obj
+.\Debug\Circle.obj
+.\Debug\CircleArc.obj
+.\Debug\ColorEyeI.obj
+.\Debug\ColorEyeIDoc.obj
+.\Debug\ColorEyeIView.obj
+.\Debug\COmdFile0.obj
+.\Debug\COmdFile1.obj
+.\Debug\COmdFileFactor.obj
+.\Debug\COmdFileGm.obj
+.\Debug\DNA.obj
+.\Debug\EnterValueDlg.obj
+.\Debug\excel.obj
+.\Debug\FileDlg.obj
+.\Debug\MainFrm.obj
+.\Debug\MsrItemDlg.obj
+.\Debug\MsrTableDlg.obj
+.\Debug\Nucleotide.obj
+.\Debug\PatternDlg.obj
+.\Debug\ReadBarCodeDialog.obj
+.\Debug\RNA.obj
+.\Debug\SelExcelDlg.obj
+.\Debug\StaticText.obj
+.\Debug\StdAfx.obj
+.\Debug\TranScripter.obj
+.\Debug\TxtFile.obj
+.\Debug\ValuesLabel.obj
+.\Debug\xlef.obj
+.\Debug\XlsFile2.obj
+.\Debug\XlsGamma.obj
+.\Debug\XlsOQCmass.obj
+.\Debug\XlsOQCtest.obj
+.\Debug\XlsRA1.obj
+.\Debug\XlsSEC1.obj
+.\Debug\ColorEyeI.res
+.\Debug\Btm.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C6.tmp"
 <h3>Output Window</h3>
 Compiling...
-MsrItemDlg.cpp
+Btm.cpp
+Linking...
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C7.tmp" with contents
+[
+/nologo /o"Debug/ColorEyeI.bsc" 
+.\Debug\BkMaker.sbr
+.\Debug\BkNits.sbr
+.\Debug\Bullet.sbr
+.\Debug\ca200srvr.sbr
+.\Debug\CA210.sbr
+.\Debug\CA210real.sbr
+.\Debug\Ca210sim.sbr
+.\Debug\Cartridge2.sbr
+.\Debug\CartridgeFinder.sbr
+.\Debug\CaSetupDlg.sbr
+.\Debug\CColorRef.sbr
+.\Debug\Circle.sbr
+.\Debug\CircleArc.sbr
+.\Debug\ColorEyeI.sbr
+.\Debug\ColorEyeIDoc.sbr
+.\Debug\ColorEyeIView.sbr
+.\Debug\COmdFile0.sbr
+.\Debug\COmdFile1.sbr
+.\Debug\COmdFileFactor.sbr
+.\Debug\COmdFileGm.sbr
+.\Debug\DNA.sbr
+.\Debug\EnterValueDlg.sbr
+.\Debug\excel.sbr
+.\Debug\FileDlg.sbr
+.\Debug\MainFrm.sbr
+.\Debug\MsrItemDlg.sbr
+.\Debug\MsrTableDlg.sbr
+.\Debug\Nucleotide.sbr
+.\Debug\PatternDlg.sbr
+.\Debug\ReadBarCodeDialog.sbr
+.\Debug\RNA.sbr
+.\Debug\SelExcelDlg.sbr
+.\Debug\StaticText.sbr
+.\Debug\StdAfx.sbr
+.\Debug\TranScripter.sbr
+.\Debug\TxtFile.sbr
+.\Debug\ValuesLabel.sbr
+.\Debug\xlef.sbr
+.\Debug\XlsFile2.sbr
+.\Debug\XlsGamma.sbr
+.\Debug\XlsOQCmass.sbr
+.\Debug\XlsOQCtest.sbr
+.\Debug\XlsRA1.sbr
+.\Debug\XlsSEC1.sbr
+.\Debug\Btm.sbr]
+Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP30C7.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-MsrItemDlg.obj - 0 error(s), 0 warning(s)
+ColorEyeI.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
