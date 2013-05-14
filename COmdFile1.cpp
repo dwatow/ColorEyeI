@@ -337,21 +337,26 @@ void COmdFile1::t2oDNAnRNA()
 	pCa210->SetOnline(1);
 	pCa210->SetLcmSize(getInch());
 	
-	TranScripter ts;
-	
-	DNA sortableDNA;
-    DNA_sortable(sortableDNA);
-    ts.Trans(sortableDNA, m_dOmd);
-	
-    DNA UnsortableDNA;
-    DNA_Unsortable(UnsortableDNA);	
-    ts.Trans(UnsortableDNA, m_dOmd);
+// 	TranScripter ts;
+// 	
+// 	DNA sortableDNA;
+//     DNA_sortable(sortableDNA);
+//     ts.Trans(sortableDNA, m_dOmd);
+// 	
+//     DNA UnsortableDNA;
+//     DNA_Unsortable(UnsortableDNA);	
+//     ts.Trans(UnsortableDNA, m_dOmd);
 
-	sortableDNA.AddCell(UnsortableDNA);
-
-	m_omdDNA = sortableDNA;
+// 	sortableDNA.AddCell(UnsortableDNA);
+// 
+// 	m_omdDNA = sortableDNA;
 // 	m_omdFileHead.iDNA(sortableDNA);
 	
+	DnaFactory DnaInit;
+	DnaInit.Add_OmdFileDNA();
+
+	DnaInit.CreatDNA(m_omdDNA, m_dOmd);
+
 	CPoint pointEmpty(0, 0);
 	for (std::vector<Cartridge2>::iterator itor = m_dOmd.Begin(); itor != m_dOmd.End(); ++itor)
 		itor->SetPointPosi(pointEmpty);
@@ -1103,83 +1108,83 @@ void COmdFile1::t2oW5()
 	m_dOmd.Find("フ","5","5","0").GetBullet().i(VluK_Duv,  GetCell("AH", 60) );
 }
 
-void COmdFile1::DNA_sortable(DNA& sortableDNA)
-{
-	//э杠璶˙э
-	//void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
-    //非称DNA
-    //恶把计
-    //JND
-//     sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
-//     sortableDNA.AddCell(JND , Pn1, m_JndGray);
-    
-    //いみ翴
-    sortableDNA.AddCell(White, Pn1);
-    sortableDNA.AddCell(Red  , Pn1);
-    sortableDNA.AddCell(Green, Pn1);
-    sortableDNA.AddCell(Blue , Pn1);
-    sortableDNA.AddCell(Dark , Pn1);
-    
-    //Nits
-    sortableDNA.AddCell(Nits, Pn9, 5, 1);
-    
-    //5翴
-    sortableDNA.AddCell(White, Pn5, 0);
-//     sortableDNA.AddCell(Red  , Pn5, 0);
-//     sortableDNA.AddCell(Green, Pn5, 0);
-//     sortableDNA.AddCell(Blue , Pn5, 0);
-//     sortableDNA.AddCell(Dark , Pn5, 0);
-    
-    //9翴
-    sortableDNA.AddCell(White, Pn9, 6, FT_1overN);
-//     sortableDNA.AddCell(Red  , Pn9, 6);
-//     sortableDNA.AddCell(Green, Pn9, 6);
-//     sortableDNA.AddCell(Blue , Pn9, 6);
-    sortableDNA.AddCell(Dark , Pn9, 6, FT_1overN);
-    
-    //21翴
-//     sortableDNA.AddCell(White, Pn21, 0);
-//     sortableDNA.AddCell(Red  , Pn21, 0);
-//     sortableDNA.AddCell(Green, Pn21, 0);
-//     sortableDNA.AddCell(Blue , Pn21, 0);
-    sortableDNA.AddCell(Dark , Pn21, 0);
-    
-    //13翴
-//    sortableDNA.AddCell(White, Pn13, 0);
-//     sortableDNA.AddCell(Red  , Pn13, 0);
-//     sortableDNA.AddCell(Green, Pn13, 0);
-//     sortableDNA.AddCell(Blue , Pn13, 0);
-    sortableDNA.AddCell(Dark , Pn13, 0);
-    
-    //25翴
-//     sortableDNA.AddCell(White, Pn25, 0, 10);
-//     sortableDNA.AddCell(Red  , Pn25, 0, 10);
-//     sortableDNA.AddCell(Green, Pn25, 0, 10);
-//     sortableDNA.AddCell(Blue , Pn25, 0, 10);
-    sortableDNA.AddCell(Dark , Pn25, 0, 10);
-    
-    //49翴
-    sortableDNA.AddCell(White, Pn49);
-//     sortableDNA.AddCell(Red  , Pn49);
-//     sortableDNA.AddCell(Green, Pn49);
-//     sortableDNA.AddCell(Blue , Pn49);
-//     sortableDNA.AddCell(Dark , Pn49);
-}
-
-void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
-{
-    //Cross Talk srot by AreaCode
-    unsortableDNA.AddCell(CrsTlk , Pn4, 4);  
-    unsortableDNA.AddCell(CrsTlkD, Pn4, 4);  
-    unsortableDNA.AddCell(CrsTlkW, Pn4, 4);  
-    
-	//Gamma
-//     unsortableDNA.AddCell(White, PnGamma, 0, 255, 255);  
-//     unsortableDNA.AddCell(Red  , PnGamma, 0, 255, 255);
-//     unsortableDNA.AddCell(Green, PnGamma, 0, 255, 255);
-//     unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
-}
-//t2oSaveDNAinRNA()
+// void COmdFile1::DNA_sortable(DNA& sortableDNA)
+// {
+// 	//э杠璶˙э
+// 	//void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
+//     //非称DNA
+//     //恶把计
+//     //JND
+// //     sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
+// //     sortableDNA.AddCell(JND , Pn1, m_JndGray);
+//     
+//     //いみ翴
+//     sortableDNA.AddCell(White, Pn1);
+//     sortableDNA.AddCell(Red  , Pn1);
+//     sortableDNA.AddCell(Green, Pn1);
+//     sortableDNA.AddCell(Blue , Pn1);
+//     sortableDNA.AddCell(Dark , Pn1);
+//     
+//     //Nits
+//     sortableDNA.AddCell(Nits, Pn9, 5, 1);
+//     
+//     //5翴
+//     sortableDNA.AddCell(White, Pn5, 0);
+// //     sortableDNA.AddCell(Red  , Pn5, 0);
+// //     sortableDNA.AddCell(Green, Pn5, 0);
+// //     sortableDNA.AddCell(Blue , Pn5, 0);
+// //     sortableDNA.AddCell(Dark , Pn5, 0);
+//     
+//     //9翴
+//     sortableDNA.AddCell(White, Pn9, 6, FT_1overN);
+// //     sortableDNA.AddCell(Red  , Pn9, 6);
+// //     sortableDNA.AddCell(Green, Pn9, 6);
+// //     sortableDNA.AddCell(Blue , Pn9, 6);
+//     sortableDNA.AddCell(Dark , Pn9, 6, FT_1overN);
+//     
+//     //21翴
+// //     sortableDNA.AddCell(White, Pn21, 0);
+// //     sortableDNA.AddCell(Red  , Pn21, 0);
+// //     sortableDNA.AddCell(Green, Pn21, 0);
+// //     sortableDNA.AddCell(Blue , Pn21, 0);
+//     sortableDNA.AddCell(Dark , Pn21, 0);
+//     
+//     //13翴
+// //    sortableDNA.AddCell(White, Pn13, 0);
+// //     sortableDNA.AddCell(Red  , Pn13, 0);
+// //     sortableDNA.AddCell(Green, Pn13, 0);
+// //     sortableDNA.AddCell(Blue , Pn13, 0);
+//     sortableDNA.AddCell(Dark , Pn13, 0);
+//     
+//     //25翴
+// //     sortableDNA.AddCell(White, Pn25, 0, 10);
+// //     sortableDNA.AddCell(Red  , Pn25, 0, 10);
+// //     sortableDNA.AddCell(Green, Pn25, 0, 10);
+// //     sortableDNA.AddCell(Blue , Pn25, 0, 10);
+//     sortableDNA.AddCell(Dark , Pn25, 0, 10);
+//     
+//     //49翴
+//     sortableDNA.AddCell(White, Pn49);
+// //     sortableDNA.AddCell(Red  , Pn49);
+// //     sortableDNA.AddCell(Green, Pn49);
+// //     sortableDNA.AddCell(Blue , Pn49);
+// //     sortableDNA.AddCell(Dark , Pn49);
+// }
+// 
+// void COmdFile1::DNA_Unsortable(DNA& unsortableDNA)
+// {
+//     //Cross Talk srot by AreaCode
+//     unsortableDNA.AddCell(CrsTlk , Pn4, 4);  
+//     unsortableDNA.AddCell(CrsTlkD, Pn4, 4);  
+//     unsortableDNA.AddCell(CrsTlkW, Pn4, 4);  
+//     
+// 	//Gamma
+// //     unsortableDNA.AddCell(White, PnGamma, 0, 255, 255);  
+// //     unsortableDNA.AddCell(Red  , PnGamma, 0, 255, 255);
+// //     unsortableDNA.AddCell(Green, PnGamma, 0, 255, 255);
+// //     unsortableDNA.AddCell(Blue , PnGamma, 0, 255, 255);
+// }
+// //t2oSaveDNAinRNA()
 void COmdFile1::t2oDelDNAinEmptyRNA()
 {
 	debugFile df;

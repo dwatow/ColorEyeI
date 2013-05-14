@@ -7,27 +7,44 @@
 // MsrTableDlg.h : header file
 //
 #include "Btm.h"
-
-enum tableIndex{ TI_SEC, TI_OQCMASS, TI_OQCTEST, TI_RA};
+#include "DNA.h"
+#include "RNA.h"
+#include "DNAfactory.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CMsrTableDlg dialog
 
 class CMsrTableDlg : public CDialog
 {
+	DnaFactory m_DnaInit;
+	DNA m_DNA;
+	RNA m_RNA;
+	tableIndex m_TableIndex;
+	const CString descripTableRA;
+	const CString descripTableSEC;
+	const CString descripTableQOCmass;
+	const CString descripTableQOCtest;
+	void showTableImage(CPaintDC* pDc);
+	void showMsrItem(CPaintDC* pDc);
+	const UINT tableID() const;
+	const CString tableDescrip() const;
+
 // Construction
 public:
-	void SetTableImage(tableIndex);
-	UINT tableID();
+	void Exit();
+	void SetTableImage(const tableIndex&);
 	CMsrTableDlg(CWnd* pParent = NULL);   // standard constructor
-	tableIndex m_TableIndex;
+
 
 // Dialog Data
 	//{{AFX_DATA(CMsrTableDlg)
 	enum { IDD = IDD_MSR_TABLE };
-	CBtm	m_msrRAtable;
-	CBtm	m_msrSECtable;
-	CBtm	m_msrOQCMASStable;
+	CBtm	m_tableSECF;
+	CBtm	m_tableRA;
+	CBtm	m_tableOQCTPV;
+	CBtm	m_tableOQCtest;
+	CBtm	m_tableOQCSEC;
+	CStatic	m_tableDescrip;
 	//}}AFX_DATA
 
 
@@ -45,7 +62,9 @@ protected:
 	//{{AFX_MSG(CMsrTableDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
-	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnButtonRA();
+	afx_msg void OnButtonSEC();
+	afx_msg void OnButtonOQCMASS();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

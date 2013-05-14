@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CBtm
+LastClass=CMainFrame
 LastTemplate=CButton
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -16,28 +16,28 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=10
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_EDIT_DIALOG
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_CASETUP_DIALOG
+Resource2=IDD_OMDTOEXCEL
 Resource3=IDD_DIALOG_BARCODE
-Resource4=IDD_EDIT_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
 Resource6=IDR_MAINFRAME
 Resource7=IDD_MSR_ITEM
 Class7=CCaSetupDlg
-Resource8=IDD_OMDTOEXCEL
+Resource8=IDD_CASETUP_DIALOG
 =======
-Resource2=IDD_CASETUP_DIALOG
+Resource2=IDD_OMDTOEXCEL
 Resource3=IDD_DIALOG_BARCODE
-Resource4=IDD_EDIT_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
 Resource6=IDR_MAINFRAME
 Resource7=IDD_MSR_ITEM
 Class7=CCaSetupDlg
-Resource8=IDD_OMDTOEXCEL
+Resource8=IDD_CASETUP_DIALOG
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
@@ -53,7 +53,7 @@ Type=0
 HeaderFile=ColorEyeI.h
 ImplementationFile=ColorEyeI.cpp
 Filter=N
-LastObject=CColorEyeIApp
+LastObject=ID_MSR_ITEM
 BaseClass=CWinApp
 VirtualFilter=AC
 
@@ -194,7 +194,7 @@ Control11=IDC_STATIC,button,1342177287
 [DLG:IDD_MSR_ITEM]
 Type=1
 Class=CMsrItemDlg
-ControlCount=98
+ControlCount=95
 Control1=IDC_CHECK_CWP1,button,1342242819
 Control2=IDC_CHECK_CRP1,button,1342242819
 Control3=IDC_CHECK_CGP1,button,1342242819
@@ -279,20 +279,17 @@ Control81=IDC_STATIC,static,1342308352
 Control82=IDC_STATIC,static,1342308352
 Control83=IDC_STATIC,static,1342308352
 Control84=IDC_STATIC,static,1342308352
-Control85=IDC_CHECK_JND,button,1073807363
-Control86=IDC_EDIT_JND_GRAYVALUE,edit,1082196096
-Control87=IDC_STATIC,static,1073872896
-Control88=IDC_STATIC,button,1342177287
-Control89=IDC_STATIC,button,1342177287
-Control90=IDC_BUTTON_SELALL,button,1342242816
-Control91=IDC_BUTTON_SELNO,button,1342242816
-Control92=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
-Control93=IDC_EDIT_P13FE,edit,1350631552
-Control94=IDC_STATIC,static,1342308352
-Control95=IDC_SW_P9FE,msctls_updown32,1342177441
-Control96=IDC_STATIC_P9FECM,static,1476526080
-Control97=IDC_STATIC_P9FE1OVER,static,1342308352
-Control98=IDC_STATIC_P9,button,1342177287
+Control85=IDC_STATIC,button,1342177287
+Control86=IDC_STATIC,button,1342177287
+Control87=IDC_BUTTON_SELALL,button,1342242816
+Control88=IDC_BUTTON_SELNO,button,1342242816
+Control89=IDC_COMBO_SEL_NITS_KIND,combobox,1342242819
+Control90=IDC_EDIT_P13FE,edit,1350631552
+Control91=IDC_STATIC,static,1342308352
+Control92=IDC_SW_P9FE,msctls_updown32,1342177441
+Control93=IDC_STATIC_P9FECM,static,1476526080
+Control94=IDC_STATIC_P9FE1OVER,static,1342308352
+Control95=IDC_STATIC_P9,button,1342177287
 
 [DLG:IDD_EDIT_DIALOG]
 Type=1
@@ -415,22 +412,27 @@ LastObject=CPatternDlg
 [DLG:IDD_MSR_TABLE]
 Type=1
 Class=CMsrTableDlg
-ControlCount=8
+ControlCount=13
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
-Control3=IDC_BUTTON2,button,1342242816
-Control4=IDC_BUTTON3,button,1342242816
-Control5=IDC_BUTTON4,button,1342242816
+Control3=IDC_BTN_SECF,button,1342242816
+Control4=IDC_BTN_OQC_TPV,button,1342251008
+Control5=IDC_BTN_RA,button,1342242816
 Control6=IDC_STATIC,button,1342177287
 Control7=IDC_STATIC,button,1342177287
 Control8=IDC_STATIC,button,1342177287
+Control9=IDC_STATIC,button,1342177287
+Control10=IDC_TABLE_DESCRIP,static,1342308352
+Control11=IDC_BTN_OQC_SEC,button,1342251008
+Control12=IDC_STATIC,button,1342177287
+Control13=IDC_BTN_OQC_TEST,button,1342251008
 
 [CLS:CMsrTableDlg]
 Type=0
 HeaderFile=msrtabledlg.h
 ImplementationFile=msrtabledlg.cpp
 BaseClass=CDialog
-LastObject=CMsrTableDlg
+LastObject=IDC_BTN_OQC_TEST
 Filter=D
 VirtualFilter=dWC
 

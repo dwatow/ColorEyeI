@@ -67,9 +67,6 @@ static const CLSID clsid =
 
 BOOL CColorEyeIApp::InitInstance()
 {
-	CMsrTableDlg dlgtemp;
-	dlgtemp.DoModal();
-	
     // Initialize OLE libraries
     if (!AfxOleInit())
     {

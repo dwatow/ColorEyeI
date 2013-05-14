@@ -11,6 +11,7 @@
 
 #include "COmdFileFactor.h"
 #include "DNA.h"
+#include "DNAfactory.h"
 #include "debugFile.h"
 
 class COmdFile1 : public COmdFileFactor

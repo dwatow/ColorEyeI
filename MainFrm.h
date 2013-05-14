@@ -54,6 +54,7 @@ protected:
 	afx_msg void OnCntUSBUI(CCmdUI  *pCmdUI);
 	afx_msg void OnResolutionUI(CCmdUI  *pCmdUI);
 	afx_msg void OnUpdateSetupCa210(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateMsrTable(CCmdUI* pCmdUI);
 	//}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 private:

@@ -6,23 +6,18 @@
 #endif // _MSC_VER > 1000
 // Btm.h : header file
 //
+enum tableIndex{ TI_SEC, TI_OQCMASS, TI_OQCTEST, TI_RA};
 
 /////////////////////////////////////////////////////////////////////////////
 // CBtm window
 
 class CBtm : public CButton
 {
-	CPoint m_position;
-	CSize  m_size;
+
 // Construction
 public:
 	CBtm();
-	int GetX();
-	int GetY();
-	CPoint GetPosition();
-	CRect GetRect();
-	CSize GetSize;
-
+	BOOL checkKeyBtnText(const CString&);
 
 // Attributes
 public:

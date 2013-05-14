@@ -48,7 +48,6 @@ CMsrItemDlg::CMsrItemDlg(CWnd* pParent /*=NULL*/)
     m_n25RectSide = 10;
     m_fCrsTlkRectFE = 4.0f;
     m_fNits = 5.0f;
-    m_JndGray = 0;
     //}}AFX_DATA_INIT
 }
 
@@ -61,7 +60,6 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_STATIC_P9FECM, m_p9_Ncm);
     DDX_Control(pDX, IDC_STATIC_P9FE1OVER, m_p9_1overN);
     DDX_Control(pDX, IDC_COMBO_SEL_NITS_KIND, m_cbxSelNitsKind);
-    DDX_Control(pDX, IDC_CHECK_JND, m_chkJND);
     DDX_Control(pDX, IDOK, m_btnOK);
     DDX_Control(pDX, IDC_BUTTON_DEL, m_btnDelItems);
     DDX_Control(pDX, IDC_BUTTON_ADD, m_btnAddItems);
@@ -136,8 +134,6 @@ void CMsrItemDlg::DoDataExchange(CDataExchange* pDX)
     DDV_MinMaxFloat(pDX, m_fCrsTlkRectFE, 0.f, 100.f);
     DDX_Text(pDX, IDC_EDIT_NITS, m_fNits);
     DDV_MinMaxFloat(pDX, m_fNits, 1.f, 600.f);
-    DDX_Text(pDX, IDC_EDIT_JND_GRAYVALUE, m_JndGray);
-    DDV_MinMaxUInt(pDX, m_JndGray, 0, 255);
     //}}AFX_DATA_MAP
 }
 
@@ -150,7 +146,7 @@ BEGIN_MESSAGE_MAP(CMsrItemDlg, CDialog)
     ON_BN_CLICKED(IDC_BUTTON_SELALL, OnButtonSelall)
     ON_BN_CLICKED(IDC_BUTTON_SELNO, OnButtonSelno)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SW_P9FE, OnDeltaposSwP9fe)
-	//}}AFX_MSG_MAP
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -192,102 +188,73 @@ void CMsrItemDlg::listBoxUpdate()
     m_debugLog.Out2File(m_desktopPath+"//DNA.log");
 }
 
-void CMsrItemDlg::selMsrItem2DNA_sortable(DNA& sortableDNA)
+void CMsrItemDlg::SetupDnaInit()
 {
-    //修改的話，要同步修改
-    //void COmdFile1::DNA_sortable(DNA& sortableDNA)
-
-    //準備DNA
-    //填入參數
-    //JND
     UpdateData(TRUE);
-//     if (m_chkJND.GetState())
-//     {
-//         sortableDNA.AddCell(JNDX , Pn1, m_JndGray);
-//         sortableDNA.AddCell(JND , Pn1, m_JndGray);
-//     }
-    
     //中心點
-    if (m_chkCWP1.GetState())  sortableDNA.AddCell(White, Pn1);
-    if (m_chkCRP1.GetState())  sortableDNA.AddCell(Red  , Pn1);
-    if (m_chkCGP1.GetState())  sortableDNA.AddCell(Green, Pn1);
-    if (m_chkCBP1.GetState())  sortableDNA.AddCell(Blue , Pn1);
-    if (m_chkCDP1.GetState())  sortableDNA.AddCell(Dark , Pn1);
+    if (m_chkCWP1.GetState())  m_DnaInit.Add_W_center();
+    if (m_chkCRP1.GetState())  m_DnaInit.Add_R_center();
+    if (m_chkCGP1.GetState())  m_DnaInit.Add_G_center();
+    if (m_chkCBP1.GetState())  m_DnaInit.Add_B_center();
+    if (m_chkCDP1.GetState())  m_DnaInit.Add_D_center();
     
     //Nits
-    if (m_chkNits.GetState())  sortableDNA.AddCell(Nits, Pn9, m_fNits, m_cbxSelNitsKind.GetCurSel());
+    if (m_chkNits.GetState())  m_DnaInit.Add_Nits(m_fNits, m_cbxSelNitsKind.GetCurSel());
     
     //5點
-    if (m_chkCWP5.GetState())    sortableDNA.AddCell(White, Pn5, m_f5FE);
-    if (m_chkCRP5.GetState())    sortableDNA.AddCell(Red  , Pn5, m_f5FE);
-    if (m_chkCGP5.GetState())    sortableDNA.AddCell(Green, Pn5, m_f5FE);
-    if (m_chkCBP5.GetState())    sortableDNA.AddCell(Blue , Pn5, m_f5FE);
-    if (m_chkCDP5.GetState())    sortableDNA.AddCell(Dark , Pn5, m_f5FE);
+    if (m_chkCWP5.GetState())  m_DnaInit.Add_W_5(m_f5FE);
+    //     if (m_chkCRP5.GetState())    sortableDNA.AddCell(Red  , Pn5, m_f5FE);
+    //     if (m_chkCGP5.GetState())    sortableDNA.AddCell(Green, Pn5, m_f5FE);
+    //     if (m_chkCBP5.GetState())    sortableDNA.AddCell(Blue , Pn5, m_f5FE);
+    //     if (m_chkCDP5.GetState())    sortableDNA.AddCell(Dark , Pn5, m_f5FE);
     
     //9點
-    if (m_chkCWP9.GetState())    sortableDNA.AddCell(White, Pn9, (int)m_f9FE, m_W9FEtype);
-    if (m_chkCRP9.GetState())    sortableDNA.AddCell(Red  , Pn9, (int)m_f9FE, m_W9FEtype);
-    if (m_chkCGP9.GetState())    sortableDNA.AddCell(Green, Pn9, (int)m_f9FE, m_W9FEtype);
-    if (m_chkCBP9.GetState())    sortableDNA.AddCell(Blue , Pn9, (int)m_f9FE, m_W9FEtype);
-    if (m_chkCDP9.GetState())    sortableDNA.AddCell(Dark , Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCWP9.GetState())    m_DnaInit.Add_W_9((int)m_f9FE, m_W9FEtype);
+    //     if (m_chkCRP9.GetState())    sortableDNA.AddCell(Red  , Pn9, (int)m_f9FE, m_W9FEtype);
+    //     if (m_chkCGP9.GetState())    sortableDNA.AddCell(Green, Pn9, (int)m_f9FE, m_W9FEtype);
+    //     if (m_chkCBP9.GetState())    sortableDNA.AddCell(Blue , Pn9, (int)m_f9FE, m_W9FEtype);
+    if (m_chkCDP9.GetState())    m_DnaInit.Add_D_9((int)m_f9FE, m_W9FEtype);
     
     //21點
-    if (m_chkCWP21.GetState())    sortableDNA.AddCell(White, Pn21, m_f21FE);
-    if (m_chkCRP21.GetState())    sortableDNA.AddCell(Red  , Pn21, m_f21FE);
-    if (m_chkCGP21.GetState())    sortableDNA.AddCell(Green, Pn21, m_f21FE);
-    if (m_chkCBP21.GetState())    sortableDNA.AddCell(Blue , Pn21, m_f21FE);
-    if (m_chkCDP21.GetState())    sortableDNA.AddCell(Dark , Pn21, m_f21FE);
+    //     if (m_chkCWP21.GetState())    sortableDNA.AddCell(White, Pn21, m_f21FE);
+    //     if (m_chkCRP21.GetState())    sortableDNA.AddCell(Red  , Pn21, m_f21FE);
+    //     if (m_chkCGP21.GetState())    sortableDNA.AddCell(Green, Pn21, m_f21FE);
+    //     if (m_chkCBP21.GetState())    sortableDNA.AddCell(Blue , Pn21, m_f21FE);
+    if (m_chkCDP21.GetState())    m_DnaInit.Add_D_21(m_f21FE);
     
     //13點
-    if (m_chkCWP13.GetState())    sortableDNA.AddCell(White, Pn13, m_f13FE);
-    if (m_chkCRP13.GetState())    sortableDNA.AddCell(Red  , Pn13, m_f13FE);
-    if (m_chkCGP13.GetState())    sortableDNA.AddCell(Green, Pn13, m_f13FE);
-    if (m_chkCBP13.GetState())    sortableDNA.AddCell(Blue , Pn13, m_f13FE);
-    if (m_chkCDP13.GetState())    sortableDNA.AddCell(Dark , Pn13, m_f13FE);
+    //     if (m_chkCWP13.GetState())    sortableDNA.AddCell(White, Pn13, m_f13FE);
+    //     if (m_chkCRP13.GetState())    sortableDNA.AddCell(Red  , Pn13, m_f13FE);
+    //     if (m_chkCGP13.GetState())    sortableDNA.AddCell(Green, Pn13, m_f13FE);
+    //     if (m_chkCBP13.GetState())    sortableDNA.AddCell(Blue , Pn13, m_f13FE);
+    if (m_chkCDP13.GetState())    m_DnaInit.Add_D_13(m_f13FE);
     
     //25點
-    if (m_chkCWP25.GetState())    sortableDNA.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCRP25.GetState())    sortableDNA.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCGP25.GetState())    sortableDNA.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCBP25.GetState())    sortableDNA.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCDP25.GetState())    sortableDNA.AddCell(Dark , Pn25, m_f25FE, m_n25RectSide);
+    //     if (m_chkCWP25.GetState())    sortableDNA.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
+    //     if (m_chkCRP25.GetState())    sortableDNA.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
+    //     if (m_chkCGP25.GetState())    sortableDNA.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
+    //     if (m_chkCBP25.GetState())    sortableDNA.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
+    if (m_chkCDP25.GetState())    m_DnaInit.Add_D_25(m_f25FE, m_n25RectSide);
     
     //49點
-    if (m_chkCWP49.GetState())    sortableDNA.AddCell(White, Pn49);
-    if (m_chkCRP49.GetState())    sortableDNA.AddCell(Red  , Pn49);
-    if (m_chkCGP49.GetState())    sortableDNA.AddCell(Green, Pn49);
-    if (m_chkCBP49.GetState())    sortableDNA.AddCell(Blue , Pn49);
-    if (m_chkCDP49.GetState())    sortableDNA.AddCell(Dark , Pn49);
+    if (m_chkCWP49.GetState())    m_DnaInit.Add_W_49();
+    //     if (m_chkCRP49.GetState())    sortableDNA.AddCell(Red  , Pn49);
+    //     if (m_chkCGP49.GetState())    sortableDNA.AddCell(Green, Pn49);
+    //     if (m_chkCBP49.GetState())    sortableDNA.AddCell(Blue , Pn49);
+    //     if (m_chkCDP49.GetState())    sortableDNA.AddCell(Dark , Pn49);
     
-    m_debugLog.Clear();
-    for (std::vector<Nucleotide>::iterator Nit = sortableDNA.Begin(); Nit != sortableDNA.End(); ++Nit)
-        m_debugLog.Add(Nit->ShowMe());
-}
-
-void CMsrItemDlg::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
-{
-    UpdateData(TRUE);
-    //Cross Talk
     if (m_chkCrossTalk.GetState())
-    {
-        unsortableDNA.AddCell(CrsTlk , Pn4, m_fCrsTlkRectFE);  
-        unsortableDNA.AddCell(CrsTlkD, Pn4, m_fCrsTlkRectFE);  
-        unsortableDNA.AddCell(CrsTlkW, Pn4, m_fCrsTlkRectFE);  
-    }
+                                 m_DnaInit.Add_CrossTalk(m_fCrsTlkRectFE);
     
-	//Gamma
-    if (m_chkCWGM.GetState() || m_chkCDGM.GetState())        
-        unsortableDNA.AddCell(White, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);  
-    if (m_chkCRGM.GetState())    unsortableDNA.AddCell(Red  , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Red  , PnGamma);
-    if (m_chkCGGM.GetState())    unsortableDNA.AddCell(Green, PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Green, PnGamma);
-    if (m_chkCBGM.GetState())    unsortableDNA.AddCell(Blue , PnGamma, m_nGM1, m_nGM2, m_fGammaSetp);//pDoc->GetMsrDataChain().Grow(Blue , PnGamma);
-    
+    //Gamma
+    if (m_chkCWGM.GetState() || m_chkCDGM.GetState())
+                                 m_DnaInit.Add_W_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCRGM.GetState())    m_DnaInit.Add_R_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCGGM.GetState())    m_DnaInit.Add_G_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCBGM.GetState())    m_DnaInit.Add_B_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
 
-    m_debugLog.Clear();
-    for (std::vector<Nucleotide>::iterator Nit = unsortableDNA.Begin(); Nit != unsortableDNA.End(); ++Nit)
-        m_debugLog.Add(Nit->ShowMe());
+
 }
-
 BOOL CMsrItemDlg::checkMsrParaOK()
 {
     if ( (m_f21FE == 1) || (m_f25FE == 1) || (m_f5FE == 1) || (m_f9FE == 1) || (m_f13FE == 1) || (m_fCrsTlkRectFE == 1) )
@@ -302,28 +269,13 @@ void CMsrItemDlg::OnButtonAdd()
     //2. CA-210已宣告
     if (checkMsrParaOK())
     {
-        DNA sortableDNA;
-        
-        selMsrItem2DNA_sortable(sortableDNA);
-        
-        TranScripter Ts;
-        if (sortableDNA.Size()) Ts.Trans(sortableDNA, m_RNA);
-        m_DNA.AddCell(sortableDNA);
-        //    sortableDNA.Empty();
+        SetupDnaInit();
+        m_DnaInit.CreatDNA(m_DNA, m_RNA);
 
-        //排序
-        if (m_chkQuickMsr.GetCheck())        m_RNA.SortQuackMsr();
-        else                                 m_RNA.SortOrigMsr();
-        
-        
-        DNA UnsortableDNA;
-        
-        selMsrItem2DNA_Unsortable(UnsortableDNA);
-        
-        if (UnsortableDNA.Size()) Ts.Trans(UnsortableDNA, m_RNA);
-        m_DNA.AddCell(UnsortableDNA);
-        //    UnsortableDNA.Empty();
-        
+        m_debugLog.Clear();
+        for (std::vector<Nucleotide>::iterator Nit = m_DNA.Begin(); Nit != m_DNA.End(); ++Nit)
+            m_debugLog.Add(Nit->ShowMe());
+
         listBoxUpdate();
     }
     else
@@ -354,7 +306,7 @@ BOOL CMsrItemDlg::OnInitDialog()
     CDialog::OnInitDialog();
     
     // TODO: Add extra initialization here
-	m_stcWhite.SetFontFace("新細明體");
+    m_stcWhite.SetFontFace("新細明體");
     m_stcRed.  SetFontFace("新細明體");
     m_stcGreen.SetFontFace("新細明體");
     m_stcBlue. SetFontFace("新細明體");
@@ -422,7 +374,7 @@ void CMsrItemDlg::OnCancel()
     pDoc->UpdateMsrRNA(m_RNA);  
     //此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
     //這個，還是等到PatternDialog量完再新增上來吧！
-    
+
     rememberSelMsrItems();
     
     CDialog::OnCancel();
@@ -458,7 +410,6 @@ void CMsrItemDlg::Serialize(CArchive& ar)
 
     BOOL chkCrossTalk;
     BOOL chkNits;
-    BOOL chkJND;
 
     BOOL chkCWP1 , chkCRP1 , chkCGP1 , chkCBP1 , chkCDP1 ;
     BOOL chkCWP5 , chkCRP5 , chkCGP5 , chkCBP5 , chkCDP5 ;
@@ -475,7 +426,6 @@ void CMsrItemDlg::Serialize(CArchive& ar)
 
         chkCrossTalk = m_chkCrossTalk.GetCheck();  ar << chkCrossTalk;
         chkNits = m_chkNits.GetCheck();            ar << chkNits;
-        chkJND  = m_chkJND.GetCheck();             ar << chkJND;
         
         chkCWP21 = m_chkCWP21.GetCheck();    ar << chkCWP21;
         chkCRP21 = m_chkCRP21.GetCheck();    ar << chkCRP21;
@@ -541,7 +491,6 @@ void CMsrItemDlg::Serialize(CArchive& ar)
         
         ar >> chkCrossTalk;  m_chkCrossTalk.SetCheck(chkCrossTalk);
         ar >> chkNits;       m_chkNits.SetCheck(chkNits);
-        ar >> chkJND;        m_chkJND.SetCheck(chkJND);
         
         ar >> chkCWP21;   m_chkCWP21.SetCheck(chkCWP21);
         ar >> chkCRP21;   m_chkCRP21.SetCheck(chkCRP21);

@@ -15,6 +15,7 @@
 class RNA
 {
     std::vector<Cartridge2> m_CarChain2;
+	CString m_desktopPath;
 //«Ø¸Ñºc¤l
 public:
     RNA();

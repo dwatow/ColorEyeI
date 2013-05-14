@@ -11,6 +11,8 @@
 #include "RNA.h"
 #include "TxtFile.h"
 
+#include "DNAfactory.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -32,7 +34,6 @@ public:
 	CStatic	m_p9_Ncm;
 	CStatic	m_p9_1overN;
 	CComboBox	m_cbxSelNitsKind;
-	CButton	m_chkJND;
 	CButton	m_btnOK;
 	CButton	m_btnDelItems;
 	CButton	m_btnAddItems;
@@ -96,7 +97,6 @@ public:
     UINT     m_n25RectSide;
     float    m_fCrsTlkRectFE;
     float    m_fNits;
-	UINT	m_JndGray;
 	//}}AFX_DATA
 
 
@@ -131,12 +131,14 @@ private:
 	CString m_desktopPath;
 	
 	CString m_RememberChkPathName;
+	DnaFactory m_DnaInit;
 	DNA m_DNA;
 	RNA m_RNA;
 private:
 	void listBoxUpdate();
-    void selMsrItem2DNA_sortable(DNA&);
-    void selMsrItem2DNA_Unsortable(DNA&);
+//     void selMsrItem2DNA_sortable(DNA&);
+//     void selMsrItem2DNA_Unsortable(DNA&);
+	void SetupDnaInit();
 	void rememberSelMsrItems();
 	BOOL checkMsrParaOK();
 };

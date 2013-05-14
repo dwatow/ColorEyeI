@@ -17,12 +17,6 @@ static char THIS_FILE[] = __FILE__;
 
 CBtm::CBtm()
 {
-// 	CRect rect;
-// 	GetWindowRect(&rect);
-	
-// 	CString str;
-// 	str.Format("Buttom:%d, %d, %d, %d", rect.left, rect.top, rect.right, rect.bottom);
-// 	AfxMessageBox(str);
 }
 
 CBtm::~CBtm()
@@ -31,9 +25,9 @@ CBtm::~CBtm()
 
 
 BEGIN_MESSAGE_MAP(CBtm, CButton)
-	//{{AFX_MSG_MAP(CBtm)
-	ON_WM_MOUSEMOVE()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CBtm)
+    ON_WM_MOUSEMOVE()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -42,23 +36,25 @@ END_MESSAGE_MAP()
 
 void CBtm::OnMouseMove(UINT nFlags, CPoint point) 
 {
-	// TODO: Add your message handler code here and/or call default
-	CMsrTableDlg* pDlg = dynamic_cast<CMsrTableDlg*>(GetOwner());
-	CString str;
-	// 	str.Format("%d, %d, %d, %d", rect.left, rect.top, rect.right, rect.bottom);
-	// 	//str.Format("%d, %d", pt.x, pt.y);
-	GetWindowText(str);
-	if (str.Find("SEC") != -1)
-		pDlg->SetTableImage(TI_SEC);
-	else if (str.Find("RA") != -1)
-		pDlg->SetTableImage(TI_RA);
-	else if (str.Find("mass") != -1)
-		pDlg->SetTableImage(TI_OQCMASS);
-// 	else
-// 		AfxMessageBox("問題");
+    // TODO: Add your message handler code here and/or call default
+	
+	CMsrTableDlg* pDlgMsrTable = dynamic_cast<CMsrTableDlg*>(GetOwner());
 
-// 	str.Format("0x%p", GetOwner());
-//  	AfxMessageBox(str);
+         if ( checkKeyBtnText("SEC From" ) )    pDlgMsrTable->SetTableImage(TI_SEC);
+    else if ( checkKeyBtnText("RA"  ) )         pDlgMsrTable->SetTableImage(TI_RA);
+    else if ( checkKeyBtnText("量產") )          pDlgMsrTable->SetTableImage(TI_OQCMASS);
+	else if ( checkKeyBtnText("試產") )          pDlgMsrTable->SetTableImage(TI_OQCTEST);
 
-	CButton::OnMouseMove(nFlags, point);
+    CButton::OnMouseMove(nFlags, point);
+}
+
+BOOL CBtm::checkKeyBtnText(const CString& keyText)
+{
+	CString btnText;
+    GetWindowText(btnText);
+
+    if (btnText.Find(keyText) != -1)
+        return TRUE;
+    else
+        return FALSE;
 }

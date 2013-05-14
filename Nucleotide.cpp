@@ -70,13 +70,6 @@ m_Parameters(PA_Max, -1)
     //無離邊
     //沒有特別定義，就成為空字串
 
-//    case Pn1:
-//         if (_C == JND || _C == JNDX)
-//         {
-//             SetPara(PA_JndGrayLv, _N1); 
-//             m_paraStr.Format("_灰階: %d", _N1);
-//             break;
-//         }
     case Pn1:
     case Pn49:
     default:

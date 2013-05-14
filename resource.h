@@ -22,6 +22,7 @@
 #define IDB_BMP_SEC_FROM                141
 #define IDB_BMP_RA_FROM                 142
 #define IDB_BMP_OQC_MASS                144
+#define IDB_BMP_OQC_TEST                148
 #define IDC_BUTTON1                     1000
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_BUTTON_SELALL               1000
@@ -171,9 +172,15 @@
 #define IDC_STATIC_P9                   1076
 #define IDC_STATIC_P9FECM               1077
 #define IDC_BUTTON2                     1078
+#define IDC_BTN_SECF                    1078
 #define IDC_BUTTON3                     1079
+#define IDC_BTN_OQC_TPV                 1079
 #define IDC_BUTTON4                     1080
+#define IDC_BTN_RA                      1080
 #define IDC_STATIC_TABLE_VIEW           1081
+#define IDC_BTN_OQC_SEC                 1081
+#define IDC_BTN_OQC_TEST                1082
+#define IDC_TABLE_DESCRIP               1084
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771
 #define ID_MSR_CONNECTCA210             32772
@@ -193,9 +200,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        146
+#define _APS_NEXT_RESOURCE_VALUE        149
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1083
+#define _APS_NEXT_CONTROL_VALUE         1085
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

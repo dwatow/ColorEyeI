@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#include "ColorEyeI.h"
 #include "RNA.h"
 #include <algorithm>
 
@@ -384,7 +385,12 @@ void RNA::CutEqualCell(const RNA& compData)
             }
         )
     }
-	debugLogMaker.Out2File("C://Users//1004066//Desktop//RNA_address.log");
+
+	CColorEyeIApp* pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+    ASSERT_VALID(pApp);
+
+    DebugCode( m_desktopPath.Format("%s", pApp->GetDesktopPath()); )
+	debugLogMaker.Out2File(m_desktopPath+"//RNA_address.log");
 }
 
 void RNA::DeleteEmptyCell()

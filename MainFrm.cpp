@@ -27,6 +27,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_USB, OnCntUSBUI)
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_RES, OnResolutionUI)
 	ON_UPDATE_COMMAND_UI(ID_SETUP_CA210, OnUpdateSetupCa210)
+	ON_UPDATE_COMMAND_UI(ID_MSR_TABLE, OnUpdateMsrTable)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -167,4 +168,10 @@ void CMainFrame::OnDestroy()
     CFrameWnd::OnDestroy();
     // TODO: Add your message handler code here
     delete    m_pCa210;
+}
+
+void CMainFrame::OnUpdateMsrTable(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+    pCmdUI->Enable(m_iConnectCa210);
 }

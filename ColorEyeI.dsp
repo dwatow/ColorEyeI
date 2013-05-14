@@ -186,6 +186,10 @@ SOURCE=.\DNA.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DNAfactory.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\EnterValueDlg.cpp
 # End Source File
 # Begin Source File
@@ -378,6 +382,10 @@ SOURCE=.\DNA.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\DNAfactory.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\EnterValueDlg.h
 # End Source File
 # Begin Source File
@@ -499,6 +507,10 @@ SOURCE=.\res\ColorEyeIDoc.ico
 # Begin Source File
 
 SOURCE=.\res\oqcFrom.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\OQCtest.bmp
 # End Source File
 # Begin Source File
 
