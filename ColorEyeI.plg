@@ -6,13 +6,7 @@
 --------------------Configuration: ColorEyeI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP918.tmp" with contents
-[
-/nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_AFXDLL" /Fr"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\GitHub\ColorEyeI\DNAfactory.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP918.tmp" 
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP919.tmp" with contents
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP243C.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pdb" /debug /machine:I386 /out:"Debug/ColorEyeI.exe" /pdbtype:sept 
 .\Debug\BkMaker.obj
@@ -37,6 +31,7 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\COmdFileFactor.obj
 .\Debug\COmdFileGm.obj
 .\Debug\DNA.obj
+.\Debug\DNAfactory.obj
 .\Debug\EnterValueDlg.obj
 .\Debug\excel.obj
 .\Debug\FileDlg.obj
@@ -61,14 +56,11 @@ shlwapi.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ColorEyeI.pd
 .\Debug\XlsRA1.obj
 .\Debug\XlsSEC1.obj
 .\Debug\ColorEyeI.res
-.\Debug\DNAfactory.obj
 ]
-Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP919.tmp"
+Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP243C.tmp"
 <h3>Output Window</h3>
-Compiling...
-DNAfactory.cpp
 Linking...
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP91A.tmp" with contents
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP2442.tmp" with contents
 [
 /nologo /o"Debug/ColorEyeI.bsc" 
 .\Debug\BkMaker.sbr
@@ -93,6 +85,7 @@ Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP91A.tmp" with cont
 .\Debug\COmdFileFactor.sbr
 .\Debug\COmdFileGm.sbr
 .\Debug\DNA.sbr
+.\Debug\DNAfactory.sbr
 .\Debug\EnterValueDlg.sbr
 .\Debug\excel.sbr
 .\Debug\FileDlg.sbr
@@ -115,9 +108,8 @@ Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP91A.tmp" with cont
 .\Debug\XlsOQCmass.sbr
 .\Debug\XlsOQCtest.sbr
 .\Debug\XlsRA1.sbr
-.\Debug\XlsSEC1.sbr
-.\Debug\DNAfactory.sbr]
-Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP91A.tmp"
+.\Debug\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP2442.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 

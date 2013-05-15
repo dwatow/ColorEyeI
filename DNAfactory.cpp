@@ -252,6 +252,7 @@ void DnaFactory::Add_Table_OQC_MASS_TPV()
 	Add_W_9();
 	Add_W_9(3, PA_FElength);
 	Add_D_25();
+	Add_W_Gamma();
 }
 
 void DnaFactory::Add_Table_OQC_MASS_SEC()
