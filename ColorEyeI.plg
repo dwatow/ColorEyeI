@@ -3,9 +3,65 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: ColorEyeI - Win32 Debug--------------------
+--------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP48.tmp" with contents
+[
+shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
+.\Release\BkMaker.obj
+.\Release\BkNits.obj
+.\Release\Btm.obj
+.\Release\Bullet.obj
+.\Release\ca200srvr.obj
+.\Release\CA210.obj
+.\Release\CA210real.obj
+.\Release\Ca210sim.obj
+.\Release\Cartridge2.obj
+.\Release\CartridgeFinder.obj
+.\Release\CaSetupDlg.obj
+.\Release\CColorRef.obj
+.\Release\Circle.obj
+.\Release\CircleArc.obj
+.\Release\ColorEyeI.obj
+.\Release\ColorEyeIDoc.obj
+.\Release\ColorEyeIView.obj
+.\Release\COmdFile0.obj
+.\Release\COmdFile1.obj
+.\Release\COmdFileFactor.obj
+.\Release\COmdFileGm.obj
+.\Release\DNA.obj
+.\Release\DNAfactory.obj
+.\Release\EnterValueDlg.obj
+.\Release\excel.obj
+.\Release\FileDlg.obj
+.\Release\MainFrm.obj
+.\Release\MsrItemDlg.obj
+.\Release\MsrTableDlg.obj
+.\Release\Nucleotide.obj
+.\Release\PatternDlg.obj
+.\Release\ReadBarCodeDialog.obj
+.\Release\RNA.obj
+.\Release\SelExcelDlg.obj
+.\Release\StaticText.obj
+.\Release\StdAfx.obj
+.\Release\TranScripter.obj
+.\Release\TxtFile.obj
+.\Release\ValuesLabel.obj
+.\Release\xlef.obj
+.\Release\XlsFile2.obj
+.\Release\XlsGamma.obj
+.\Release\XlsOQCmass.obj
+.\Release\XlsOQCtest.obj
+.\Release\XlsRA1.obj
+.\Release\XlsSEC1.obj
+.\Release\ColorEyeI.res
+]
+Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP48.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Linking...
 
 
 
