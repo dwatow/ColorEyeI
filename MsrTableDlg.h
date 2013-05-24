@@ -65,6 +65,7 @@ protected:
 	afx_msg void OnButtonRA();
 	afx_msg void OnButtonSEC();
 	afx_msg void OnButtonOQCMASS();
+	afx_msg void OnBtnOqcNibo();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

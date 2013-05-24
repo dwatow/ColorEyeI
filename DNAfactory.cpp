@@ -3,6 +3,7 @@
 #include "TranScripter.h"
 
 DnaFactory::DnaFactory():
+//   W            R            G            B            D   
 m_chkWP1(0), m_chkRP1(0), m_chkGP1(0), m_chkBP1(0), m_chkDP1(0),   //中心點
 m_chkWP5(0),                                                       //5點
 m_chkWP9(0),                                        m_chkDP9(0),   //9點
@@ -253,10 +254,19 @@ void DnaFactory::Add_Table_OQC_MASS_TPV()
 	Add_W_9(3, PA_FElength);
 	Add_D_25();
 	Add_W_Gamma();
+	//check with OQC
 }
 
 void DnaFactory::Add_Table_OQC_MASS_SEC()
-{}
+{
+	Add_WRGBD_center();
+	Add_Nits();
+	Add_W_9();
+	Add_W_5();
+	Add_D_25();
+	Add_W_Gamma();
+	//check with OQC
+}
 
 void DnaFactory::Add_Table_RA()
 {
@@ -266,8 +276,17 @@ void DnaFactory::Add_Table_RA()
 void DnaFactory::Add_Table_SEC()
 {
 	Add_WRGBD_center();
-//	Add_W_9();
+//	Add_W_9();  49 cover
 	Add_W_49();
 	Add_D_9();
 	Add_Nits();
+}
+
+void DnaFactory::Add_Table_OQC_MASS_NIBO()
+{
+	Add_WRGBD_center();
+	Add_W_9();
+	Add_D_25();
+	Add_CrossTalk();
+	//check with OQC
 }

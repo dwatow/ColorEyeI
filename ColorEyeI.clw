@@ -16,34 +16,34 @@ Class3=CColorEyeIView
 Class4=CMainFrame
 
 ResourceCount=10
-Resource1=IDD_EDIT_DIALOG
+Resource1=IDD_PATTERN_DIALOG
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_OMDTOEXCEL
-Resource3=IDD_DIALOG_BARCODE
-Resource4=IDD_ABOUTBOX
+Resource2=IDR_MAINFRAME
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDD_DIALOG_BARCODE
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDR_MAINFRAME
-Resource7=IDD_MSR_ITEM
+Resource6=IDD_CASETUP_DIALOG
+Resource7=IDD_OMDTOEXCEL
 Class7=CCaSetupDlg
-Resource8=IDD_CASETUP_DIALOG
+Resource8=IDD_MSR_ITEM
 =======
-Resource2=IDD_OMDTOEXCEL
-Resource3=IDD_DIALOG_BARCODE
-Resource4=IDD_ABOUTBOX
+Resource2=IDR_MAINFRAME
+Resource3=IDD_EDIT_DIALOG
+Resource4=IDD_DIALOG_BARCODE
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDR_MAINFRAME
-Resource7=IDD_MSR_ITEM
+Resource6=IDD_CASETUP_DIALOG
+Resource7=IDD_OMDTOEXCEL
 Class7=CCaSetupDlg
-Resource8=IDD_CASETUP_DIALOG
+Resource8=IDD_MSR_ITEM
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_PATTERN_DIALOG
+Resource9=IDD_ABOUTBOX
 Class12=CMsrTableDlg
 Class13=CBtm
 Resource10=IDD_MSR_TABLE
@@ -412,7 +412,7 @@ LastObject=CPatternDlg
 [DLG:IDD_MSR_TABLE]
 Type=1
 Class=CMsrTableDlg
-ControlCount=13
+ControlCount=15
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BTN_SECF,button,1342242816
@@ -426,6 +426,8 @@ Control10=IDC_TABLE_DESCRIP,static,1342308352
 Control11=IDC_BTN_OQC_SEC,button,1342251008
 Control12=IDC_STATIC,button,1342177287
 Control13=IDC_BTN_OQC_TEST,button,1342251008
+Control14=IDC_STATIC,button,1342177287
+Control15=IDC_BTN_OQC_NIBO,button,1342251008
 
 [CLS:CMsrTableDlg]
 Type=0

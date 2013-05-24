@@ -180,6 +180,7 @@
 #define IDC_STATIC_TABLE_VIEW           1081
 #define IDC_BTN_OQC_SEC                 1081
 #define IDC_BTN_OQC_TEST                1082
+#define IDC_BTN_OQC_NIBO                1083
 #define IDC_TABLE_DESCRIP               1084
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771

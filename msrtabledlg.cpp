@@ -49,6 +49,7 @@ BEGIN_MESSAGE_MAP(CMsrTableDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButtonRA)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButtonSEC)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButtonOQCMASS)
+	ON_BN_CLICKED(IDC_BTN_OQC_NIBO, OnBtnOqcNibo)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -143,7 +144,6 @@ void CMsrTableDlg::OnButtonSEC()
 {
 	// TODO: Add your control notification handler code here
 	m_DnaInit.Add_Table_SEC();
-
 	Exit();
 }
 
@@ -168,4 +168,10 @@ void CMsrTableDlg::Exit()
     pDoc->UpdateMsrRNA(m_RNA);  
 
 	CDialog::OnOK();
+}
+
+void CMsrTableDlg::OnBtnOqcNibo() 
+{
+	// TODO: Add your control notification handler code here
+	m_DnaInit.Add_Table_OQC_MASS_NIBO();
 }

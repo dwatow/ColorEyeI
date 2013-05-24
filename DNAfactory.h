@@ -89,6 +89,7 @@ public:
 	void Add_Table_OQC_MASS_SEC();
 	void Add_Table_RA();
 	void Add_Table_SEC();
+	void Add_Table_OQC_MASS_NIBO();
 
 	void CreatDNA(DNA&, RNA&);
 private:
