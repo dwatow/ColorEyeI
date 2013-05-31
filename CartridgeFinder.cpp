@@ -20,7 +20,6 @@ const BOOL CartridgeFinder::ReconstrKeyWord(CString& bkColor, CString& PointTota
         return FALSE;
 }
 
-//////////////////////////////////////////////////////////////////////////
 const BOOL CartridgeFinder::Reconstr(CString& sample)
 {
     CString clr = sample;
@@ -36,6 +35,7 @@ const BOOL CartridgeFinder::Reconstr(CString& sample)
         return FALSE;
 }
 
+//////////////////////////////////////////////////////////////////////////
 const int CartridgeFinder::color(CString& strResult)
 {
     int colorName(0);

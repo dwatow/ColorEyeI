@@ -67,10 +67,11 @@ inline const BOOL Nucleotide::equalParameter(const Nucleotide& vCar) const
 	{
 		for ( int i = 0; i < PA_Max; ++i)
 		{
-			int a, b, c;			
-			a = vCar.m_Parameters[i];
-			b = m_Parameters[i];
-			c = i;
+//			int b;
+// 			int a, b, c;			
+// 			a = vCar.m_Parameters[i];
+// 			b = m_Parameters[i];
+// 			c = i;
 			if (vCar.m_Parameters[i] != m_Parameters[i])
 				b = FALSE;
 		}

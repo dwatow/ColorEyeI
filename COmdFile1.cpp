@@ -352,7 +352,7 @@ void COmdFile1::t2oDNAnRNA()
 // 	m_omdDNA = sortableDNA;
 // 	m_omdFileHead.iDNA(sortableDNA);
 	
-	DnaFactory DnaInit;
+	DnaConfig DnaInit;
 	DnaInit.Add_OmdFileDNA();
 
 	DnaInit.CreatDNA(m_omdDNA, m_dOmd);
@@ -1214,8 +1214,8 @@ void COmdFile1::t2oDelDNAinEmptyRNA()
 		}
 	}
 	
-	inverEmptyDNA.CutEqualCell(emptyDNA);
-	m_omdDNA.CutEqualCell(inverEmptyDNA);
+	inverEmptyDNA.DelCell(emptyDNA);
+	m_omdDNA.DelCell(inverEmptyDNA);
 
 	df.Add("\n³Ì«á\n");
 	for (logItor = m_omdDNA.Begin(); logItor != m_omdDNA.End(); ++logItor)

@@ -186,7 +186,7 @@ SOURCE=.\DNA.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\DNAfactory.cpp
+SOURCE=.\DNAconfig.cpp
 # End Source File
 # Begin Source File
 
@@ -255,10 +255,6 @@ SOURCE=.\ValuesLabel.cpp
 # Begin Source File
 
 SOURCE=.\xlef.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\XlsFile2.cpp
 # End Source File
 # Begin Source File
 
@@ -382,7 +378,7 @@ SOURCE=.\DNA.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\DNAfactory.h
+SOURCE=.\DNAconfig.h
 # End Source File
 # Begin Source File
 

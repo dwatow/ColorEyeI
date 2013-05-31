@@ -27,6 +27,13 @@ public:
 
 	//這些介面剩下 void CSelExcelDlg::otherOmd2xls(CXlsFile2* pHDfXls) 在使用
 	CString GetPnlID () const { return m_Omd->GetFileHead().oPnlID (); };
+//    CString GetPnlID  () const 
+// 	{
+// 		CString str;
+// 		str.Format("%s", m_Omd->GetFileHead().oPnlID ());
+// 		AfxMessageBox(str);
+// 		return str; 
+// 	};
     CString GetMsrDvc() const { return m_Omd->GetFileHead().oMsrDvc(); };
     CString GetPrb   () const { return m_Omd->GetFileHead().oPrb   (); };
     CString GetCHID  () const { return m_Omd->GetFileHead().oCHID  (); };

@@ -12,6 +12,7 @@ public:
 	void AddCell(const DNA&);
 
     void DelCell(std::vector<Nucleotide>::size_type index);
+    void DelCell(const DNA& );
 
 public:
 	std::vector<Nucleotide>::iterator            Begin()       { return nChain.begin(); };
@@ -24,7 +25,6 @@ public:
 	void Empty(){ nChain.clear(); };
 //	BOOL IsEmpty(){ nChain.empty(); };
 
-    void CutEqualCell(const DNA& );
 
 	void operator+(const Nucleotide&  _X);
 	void operator+(const DNA& _R);

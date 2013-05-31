@@ -6,7 +6,14 @@
 #endif // _MSC_VER > 1000
 // Btm.h : header file
 //
-enum tableIndex{ TI_SEC, TI_OQCMASS, TI_OQCTEST, TI_RA};
+enum tableIndex{ 
+	TI_SEC_From, 
+	TI_OQC_MASS_SEC, 
+	TI_OQC_MASS_TPV, 
+	TI_QOC_MASS_NIBO,
+	TI_OQC_TEST,
+	TI_RA
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // CBtm window

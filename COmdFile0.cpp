@@ -82,7 +82,6 @@ void COmdFile0::openWhichKindOmefile()
 	}
 }
 
-//void COmdFile0::saveWhichKindOmefile(OmdCarData _D)
 void COmdFile0::saveWhichKindOmefile(RNA& _R)
 {
 //	KindOfOmd omdKind = OMD_AtYPE;

@@ -18,19 +18,19 @@ static char THIS_FILE[]=__FILE__;
 
 BOOL CTxtFile::Open(LPCTSTR path, CFileException& fx)
 {
-	if (PathFileExists(path))
-	{
-		if (ftxt_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
-			return TRUE;  //成功入侵取得資料
-		else
-		{ 
-			errorMsg(fx);
-			ftxt_Std.Close();
-			return FALSE;  //失敗
-		}
-	}
-	else
-		return FALSE;
+    if (PathFileExists(path))
+    {
+        if (ftxt_Std.Open(path, CFile::modeRead | CFile::typeText, &fx))
+            return TRUE;  //成功入侵取得資料
+        else
+        { 
+            errorMsg(fx);
+            ftxt_Std.Close();
+            return FALSE;  //失敗
+        }
+    }
+    else
+        return FALSE;
 }
 
 void CTxtFile::file2mem()
@@ -51,7 +51,7 @@ BOOL CTxtFile::Save(LPCTSTR path, CFileException& fx)
     else
     {
         errorMsg(fx);
-		ftxt_Std.Close();
+        ftxt_Std.Close();
         return FALSE;
     }
 }
@@ -61,8 +61,8 @@ void CTxtFile::mem2file()
     if (!dtxt_Txt.empty())
     {
         for (TxtStrData::iterator it = dtxt_Txt.begin(); it != dtxt_Txt.end(); ++it)
-			//AfxMessageBox(*it);
-				ftxt_Std.WriteString(*it);
+            //AfxMessageBox(*it);
+                ftxt_Std.WriteString(*it);
     }
 }
 

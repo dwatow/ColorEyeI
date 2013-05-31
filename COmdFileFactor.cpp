@@ -22,32 +22,32 @@ COmdFileFactor::COmdFileFactor(){};
 COmdFileFactor::~COmdFileFactor()
 {
     m_dOmd.Empty(); 
-	m_dTxt.clear();
+    m_dTxt.clear();
 };
 
 BOOL COmdFileFactor::Open(LPCTSTR path, CFileException& fx)
 {
-	if (m_fTxt.Open(path, fx))
-		return TRUE;
-	else
-	{
-		ErrorMsg(fx);
-		return FALSE;
-	}
+    if (m_fTxt.Open(path, fx))
+        return TRUE;
+    else
+    {
+        ErrorMsg(fx);
+        return FALSE;
+    }
 }
 
 BOOL COmdFileFactor::Save(LPCTSTR path, CFileException& fx)
 {
-	if (m_fTxt.Save(path, fx))
-	{
-		return TRUE;
-	}
-	else
-	{
-		ErrorMsg(fx);
-		m_fTxt.Close();
-		return FALSE;
-	}
+    if (m_fTxt.Save(path, fx))
+    {
+        return TRUE;
+    }
+    else
+    {
+        ErrorMsg(fx);
+        m_fTxt.Close();
+        return FALSE;
+    }
 }
 
 const CString COmdFileFactor::GetLine(const int& lineIndex) const//OK
@@ -70,7 +70,7 @@ const CString COmdFileFactor::GetCell(const int& Word, const int& line) const
     if (!strBuf1.IsEmpty())
     {
         int wBegin = 0, wLength = 0;
-		
+        
         for (int i = 0; i < Word; ++i)
         {
             wLength = strBuf1.Right(strBuf1.GetLength() - wBegin).Find('\t');
@@ -94,24 +94,24 @@ const CString COmdFileFactor::GetCell(const PTCHAR& c, const int& n) const
 {
     CString str;
     str.Format("%s", c);
-	
+    
     TCHAR c1;
     TCHAR c2;
     c1 = *(str.Left(1).GetBuffer(str.Left(1).GetLength()));
     c2 = *(str.Right(1).GetBuffer(str.Left(1).GetLength()));
-	
+    
     int x;
     x = (c1 - 'A'+1) + (c2 - 'A'+1) + 'Z'+1;//+25是因為這個部份是從AA開始算，所以要跳過A~Z
-    	
+        
     return GetCell(x, n);
 }
 
 void COmdFileFactor::ErrorMsg(CFileException& fx) const
 {
-	//例外處理
-	TCHAR buf[255];
-	fx.GetErrorMessage(buf, 255);
-	CString strPrompt;
-	strPrompt.Format("COmdFileFactor::LoadData()\n%s", buf);
-	AfxMessageBox(strPrompt);
+    //例外處理
+    TCHAR buf[255];
+    fx.GetErrorMessage(buf, 255);
+    CString strPrompt;
+    strPrompt.Format("COmdFileFactor::LoadData()\n%s", buf);
+    AfxMessageBox(strPrompt);
 }

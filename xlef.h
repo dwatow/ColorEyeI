@@ -163,7 +163,7 @@ public:
     ~xlsFile();
     //xlsFile* //開了檔案之後可以繼續選擇Sheet和命名
     xlsFile* New();
-    xlsFile* Open();
+//     xlsFile* Open();
     xlsFile* Open(const char*);
     void SaveAs(const char*);
     void Save();

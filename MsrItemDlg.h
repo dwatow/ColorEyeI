@@ -11,7 +11,7 @@
 #include "RNA.h"
 #include "TxtFile.h"
 
-#include "DNAfactory.h"
+#include "DnaConfig.h"
 
 #if _MSC_VER > 1000
 #pragma once
@@ -131,7 +131,7 @@ private:
 	CString m_desktopPath;
 	
 	CString m_RememberChkPathName;
-	DnaFactory m_DnaInit;
+	DnaConfig m_DnaInit;
 	DNA m_DNA;
 	RNA m_RNA;
 private:

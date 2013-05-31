@@ -1,5 +1,5 @@
-#ifndef DNAFACTORY_H
-#define DNAFACTORY_H
+#ifndef DNACONFIG_H
+#define DNACONFIG_H
 
 #include "DNA.h"
 #include "RNA.h"
@@ -25,7 +25,7 @@
 #define GammaAvg 255
 
 
-class DnaFactory
+class DnaConfig
 {
 //          W       R       G       B       D
 	BOOL m_chkWP1, m_chkRP1, m_chkGP1, m_chkBP1, m_chkDP1;   //¤¤¤ßÂI
@@ -58,7 +58,7 @@ class DnaFactory
 	int m_GGammaBegin, m_GGamma_End, m_GGamma_Avg;
 	int m_BGammaBegin, m_BGamma_End, m_BGamma_Avg;
 public:
-	DnaFactory();
+	DnaConfig();
 	void Add_WRGBD_center();
 	void Add_W_center();
 	void Add_R_center();
@@ -90,6 +90,7 @@ public:
 	void Add_Table_RA();
 	void Add_Table_SEC();
 	void Add_Table_OQC_MASS_NIBO();
+	void Add_Table_OQC_TEST();
 
 	void CreatDNA(DNA&, RNA&);
 private:

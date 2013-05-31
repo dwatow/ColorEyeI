@@ -33,9 +33,10 @@ CXlsFile2* CXlsOQCtest::iNitsLv(CString strNitsLv   ) { SelectSheet("光學")->Sel
 CXlsFile2* CXlsOQCtest::iPanelID(CString strPanelID)
 {
     //貼公式
-    CString BarCode;
-    BarCode.Format("=\'光學\'!B%d", 5+m_ModuleNO);
+//     CString BarCode;
+//     BarCode.Format("=\'光學\'!B%d", 5+m_ModuleNO);
     //直接貼字串
+	SelectSheet("光學")->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);
 //     SelectSheet("光學")              ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);
 //     SelectSheet("黑色25點")          ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);  //黑色25點
 //     SelectSheet("黑色21點")          ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);  //黑色21點

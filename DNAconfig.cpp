@@ -1,8 +1,8 @@
 #include "StdAfx.h"
-#include "DNAfactory.h"
+#include "DnaConfig.h"
 #include "TranScripter.h"
 
-DnaFactory::DnaFactory():
+DnaConfig::DnaConfig():
 //   W            R            G            B            D   
 m_chkWP1(0), m_chkRP1(0), m_chkGP1(0), m_chkBP1(0), m_chkDP1(0),   //中心點
 m_chkWP5(0),                                                       //5點
@@ -35,7 +35,7 @@ m_GGammaBegin(0), m_GGamma_End(0), m_GGamma_Avg(0),
 m_BGammaBegin(0), m_BGamma_End(0), m_BGamma_Avg(0)
 {}
 
-void DnaFactory::CreatDNA(DNA& _D, RNA& _R)
+void DnaConfig::CreatDNA(DNA& _D, RNA& _R)
 {
 	DNA sortableDNA;
 	
@@ -58,7 +58,7 @@ void DnaFactory::CreatDNA(DNA& _D, RNA& _R)
         _D + UnsortableDNA;
 }
 
-void DnaFactory::Add_WRGBD_center()
+void DnaConfig::Add_WRGBD_center()
 {
 	Add_W_center();
 	Add_R_center();
@@ -66,48 +66,48 @@ void DnaFactory::Add_WRGBD_center()
 	Add_B_center();
 	Add_D_center();	
 }
-void DnaFactory::Add_W_center(){m_chkWP1 = TRUE;}
-void DnaFactory::Add_R_center(){m_chkRP1 = TRUE;}
-void DnaFactory::Add_G_center(){m_chkGP1 = TRUE;}
-void DnaFactory::Add_B_center(){m_chkBP1 = TRUE;}
-void DnaFactory::Add_D_center(){m_chkDP1 = TRUE;}
+void DnaConfig::Add_W_center(){m_chkWP1 = TRUE;}
+void DnaConfig::Add_R_center(){m_chkRP1 = TRUE;}
+void DnaConfig::Add_G_center(){m_chkGP1 = TRUE;}
+void DnaConfig::Add_B_center(){m_chkBP1 = TRUE;}
+void DnaConfig::Add_D_center(){m_chkDP1 = TRUE;}
 
 //W
-void DnaFactory::Add_W_5(const int& fromEdgeNum, const int& fromEdgeType)
+void DnaConfig::Add_W_5(const int& fromEdgeNum, const int& fromEdgeType)
 {
 	m_W5FE = fromEdgeNum;
 	m_chkWP5 = TRUE;
 }
 
-void DnaFactory::Add_W_9(const int& fromEdgeNum, const int& fromEdgeType)
+void DnaConfig::Add_W_9(const int& fromEdgeNum, const int& fromEdgeType)
 {
 	m_W9FE = fromEdgeNum;
 	m_W9EdgeType = fromEdgeType;
 	m_chkWP9 = TRUE;
 }
 
-void DnaFactory::Add_W_49(){m_chkWP49 = TRUE;}
+void DnaConfig::Add_W_49(){m_chkWP49 = TRUE;}
 
 //Dark
-void DnaFactory::Add_D_9(const int& fromEdgeNum, const int& fromEdgeType)
+void DnaConfig::Add_D_9(const int& fromEdgeNum, const int& fromEdgeType)
 {
 	m_D9FE = fromEdgeNum;
 	m_chkDP9 = TRUE;
 }
 
-void DnaFactory::Add_D_13(const int& fromEdgeNum, const int& fromEdgeType)
+void DnaConfig::Add_D_13(const int& fromEdgeNum, const int& fromEdgeType)
 {
 	m_D13FE = fromEdgeNum;
 	m_chkDP13 = TRUE;
 }
 
-void DnaFactory::Add_D_21(const int& fromEdgeNum, const int& fromEdgeType)
+void DnaConfig::Add_D_21(const int& fromEdgeNum, const int& fromEdgeType)
 {
 	m_D21FE = fromEdgeNum;
 	m_chkDP21 = TRUE;
 }
 
-void DnaFactory::Add_D_25(const int& fromEdgeNum, const int& rectSide)
+void DnaConfig::Add_D_25(const int& fromEdgeNum, const int& rectSide)
 {
 	m_D25FE = fromEdgeNum;
 	m_D25RectSide = rectSide;
@@ -115,13 +115,13 @@ void DnaFactory::Add_D_25(const int& fromEdgeNum, const int& rectSide)
 }
 
 //Other
-void DnaFactory::Add_CrossTalk(const int& fromEdgeNum)
+void DnaConfig::Add_CrossTalk(const int& fromEdgeNum)
 {
 	m_CTFE = fromEdgeNum;
 	m_chkCrossTalk = TRUE;
 }
 
-void DnaFactory::Add_Nits(const int& Lv, const int& direct)
+void DnaConfig::Add_Nits(const int& Lv, const int& direct)
 {
 	m_NitsLv = Lv;
 	m_NitsDirect = direct;
@@ -129,7 +129,7 @@ void DnaFactory::Add_Nits(const int& Lv, const int& direct)
 }
 
 //WRGB
-void DnaFactory::Add_W_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
+void DnaConfig::Add_W_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
 {
 	m_WGammaBegin = lvBegin;
 	m_WGamma_End = lvEnd;
@@ -137,7 +137,7 @@ void DnaFactory::Add_W_Gamma(const int& lvBegin,  const int& lvEnd, const int& l
 	m_chkWGamma = TRUE;
 }
 
-void DnaFactory::Add_R_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
+void DnaConfig::Add_R_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
 {
 	m_RGammaBegin = lvBegin;
 	m_RGamma_End = lvEnd;
@@ -145,7 +145,7 @@ void DnaFactory::Add_R_Gamma(const int& lvBegin,  const int& lvEnd, const int& l
 	m_chkRGamma = TRUE;
 }
 
-void DnaFactory::Add_G_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
+void DnaConfig::Add_G_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
 {
 	m_GGammaBegin = lvBegin;
 	m_GGamma_End = lvEnd;
@@ -153,7 +153,7 @@ void DnaFactory::Add_G_Gamma(const int& lvBegin,  const int& lvEnd, const int& l
 	m_chkGGamma = TRUE;
 }
 
-void DnaFactory::Add_B_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
+void DnaConfig::Add_B_Gamma(const int& lvBegin,  const int& lvEnd, const int& lfAvgStep)
 {
 	m_BGammaBegin = lvBegin;
 	m_BGamma_End = lvEnd;
@@ -161,7 +161,7 @@ void DnaFactory::Add_B_Gamma(const int& lvBegin,  const int& lvEnd, const int& l
 	m_chkBGamma = TRUE;
 }
 
-void DnaFactory::selMsrItem2DNA_sortable(DNA& sortableDNA)
+void DnaConfig::selMsrItem2DNA_sortable(DNA& sortableDNA)
 {
     //修改的話，要同步修改
     //中心點
@@ -216,7 +216,7 @@ void DnaFactory::selMsrItem2DNA_sortable(DNA& sortableDNA)
 //     if (m_chkBP49)    sortableDNA.AddCell(Blue , Pn49);
 //     if (m_chkDP49)    sortableDNA.AddCell(Dark , Pn49);
 }
-void DnaFactory::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
+void DnaConfig::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
 {
     //Cross Talk
     if (m_chkCrossTalk)
@@ -233,7 +233,7 @@ void DnaFactory::selMsrItem2DNA_Unsortable(DNA& unsortableDNA)
     if (m_chkBGamma)    unsortableDNA.AddCell(Blue , PnGamma, m_BGammaBegin, m_BGamma_End, m_BGamma_Avg );
 }
 
-void DnaFactory::Add_OmdFileDNA()
+void DnaConfig::Add_OmdFileDNA()
 {
 	Add_WRGBD_center();
 	Add_Nits();
@@ -247,17 +247,17 @@ void DnaFactory::Add_OmdFileDNA()
 	Add_CrossTalk();
 }
 
-void DnaFactory::Add_Table_OQC_MASS_TPV()
+void DnaConfig::Add_Table_OQC_MASS_TPV()
 {
 	Add_WRGBD_center();
 	Add_W_9();
 	Add_W_9(3, PA_FElength);
-	Add_D_25();
+	Add_D_21();
 	Add_W_Gamma();
 	//check with OQC
 }
 
-void DnaFactory::Add_Table_OQC_MASS_SEC()
+void DnaConfig::Add_Table_OQC_MASS_SEC()
 {
 	Add_WRGBD_center();
 	Add_Nits();
@@ -268,12 +268,12 @@ void DnaFactory::Add_Table_OQC_MASS_SEC()
 	//check with OQC
 }
 
-void DnaFactory::Add_Table_RA()
+void DnaConfig::Add_Table_RA()
 {
 	Add_W_9();
 }
 
-void DnaFactory::Add_Table_SEC()
+void DnaConfig::Add_Table_SEC()
 {
 	Add_WRGBD_center();
 //	Add_W_9();  49 cover
@@ -282,11 +282,22 @@ void DnaFactory::Add_Table_SEC()
 	Add_Nits();
 }
 
-void DnaFactory::Add_Table_OQC_MASS_NIBO()
+void DnaConfig::Add_Table_OQC_MASS_NIBO()
 {
 	Add_WRGBD_center();
 	Add_W_9();
 	Add_D_25();
 	Add_CrossTalk();
 	//check with OQC
+}
+
+void DnaConfig::Add_Table_OQC_TEST()
+{
+	Add_WRGBD_center();
+	Add_W_9();
+	Add_W_9(0);
+	Add_D_25();
+	Add_D_21();
+	Add_Nits();
+	Add_CrossTalk();
 }

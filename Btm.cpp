@@ -40,10 +40,13 @@ void CBtm::OnMouseMove(UINT nFlags, CPoint point)
 	
 	CMsrTableDlg* pDlgMsrTable = dynamic_cast<CMsrTableDlg*>(GetOwner());
 
-         if ( checkKeyBtnText("SEC From" ) )    pDlgMsrTable->SetTableImage(TI_SEC);
-    else if ( checkKeyBtnText("RA"  ) )         pDlgMsrTable->SetTableImage(TI_RA);
-    else if ( checkKeyBtnText("量產") )          pDlgMsrTable->SetTableImage(TI_OQCMASS);
-	else if ( checkKeyBtnText("試產") )          pDlgMsrTable->SetTableImage(TI_OQCTEST);
+	     if ( checkKeyBtnText("TPV OQC" ) )  pDlgMsrTable->SetTableImage(TI_OQC_MASS_TPV);
+	else if ( checkKeyBtnText("SEC OQC" ) )  pDlgMsrTable->SetTableImage(TI_OQC_MASS_SEC);
+	else if ( checkKeyBtnText("仁寶 OQC" ) )  pDlgMsrTable->SetTableImage(TI_QOC_MASS_NIBO);
+    else if ( checkKeyBtnText("SEC From") )  pDlgMsrTable->SetTableImage(TI_SEC_From);
+	else if ( checkKeyBtnText("試產"     ) )  pDlgMsrTable->SetTableImage(TI_OQC_TEST);
+	else if ( checkKeyBtnText("RA"      ) )  pDlgMsrTable->SetTableImage(TI_RA);
+	else
 
     CButton::OnMouseMove(nFlags, point);
 }

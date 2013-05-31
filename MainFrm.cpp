@@ -125,6 +125,7 @@ void CMainFrame::OnMsrConnectca210()
 #else
         m_pCa210 = new Ca210real();
 #endif
+		m_pCa210 = new Ca210sim();
         m_iConnectCa210 = TRUE;
         m_iOnlineCa210 = FALSE;
 		m_pCa210->SetOnline(m_iOnlineCa210);

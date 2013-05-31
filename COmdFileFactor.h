@@ -23,7 +23,7 @@ protected:
 
 public:
     OmdHead& GetFileHead(){ return m_omdFileHead; };
-    const OmdHead GetFileHead() const{ return m_omdFileHead; };
+    const OmdHead& GetFileHead() const{ return m_omdFileHead; };
     void SetFileHead(const OmdHead& _H){ m_omdFileHead = _H; };
 
 protected:

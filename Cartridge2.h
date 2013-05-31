@@ -44,11 +44,11 @@ public:           BkMaker* m_pBackGorund;
 private:  BackGroundStatus m_bkStatus;
 public:               void SetBkStatus( const BackGroundStatus& _BGS, const BOOL& creatBGS = TRUE);
           BackGroundStatus GetBkStatus() const;
-		     const CString GetStrBkStatus() const;
+             const CString GetStrBkStatus() const;
 //¸ê®Æ
 private:            Bullet m_Data;
 public:       const Bullet GetBullet() const;
-			       Bullet& GetBullet();
+                   Bullet& GetBullet();
                       void SetBullet(const Bullet& Pd);
 //¤å¦r´y­z
 private:           CString m_Description;

@@ -174,8 +174,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,3,13,23
- PRODUCTVERSION 3,10,15,0
+ FILEVERSION 2,3,14,25
+ PRODUCTVERSION 3,11,16,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -193,14 +193,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 光學量測程式\0"
-            VALUE "FileVersion", "2, 3, 13, 23\0"
-            VALUE "InternalName", "ColorEye 測試版 v3.10\0"
+            VALUE "FileVersion", "2, 3, 14, 25\0"
+            VALUE "InternalName", "ColorEye 測式版 v3.11\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Color Eye App\0"
-            VALUE "ProductVersion", "3, 10, 15, 0\0"
+            VALUE "ProductVersion", "3, 11, 16, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -225,7 +225,7 @@ FONT 9, "Calibri"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,165,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,19,20,20
-    LTEXT           "ColorEye Version Beta 3.11.15",IDC_STATIC,40,10,110,8,
+    LTEXT           "ColorEye Version Beta 3.11.16",IDC_STATIC,40,10,110,8,
                     SS_NOPREFIX
     LTEXT           "Copyright (C) 2012\n奇菱光電股份有限公司\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,125,25
@@ -502,13 +502,13 @@ BEGIN
     LTEXT           "Static",IDC_STATIC_BARCODE,60,9,177,8
 END
 
-IDD_MSR_TABLE DIALOG DISCARDABLE  0, 0, 454, 263
+IDD_MSR_TABLE DIALOG DISCARDABLE  0, 0, 455, 237
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "選擇量測表格"
 FONT 9, "微軟正黑體"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,291,242,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,346,242,50,14
+    DEFPUSHBUTTON   "OK",IDOK,398,188,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Cancel",IDCANCEL,398,204,50,14,NOT WS_VISIBLE
     PUSHBUTTON      "SEC From",IDC_BTN_SECF,336,65,45,39
     PUSHBUTTON      "TPV OQC\n量產",IDC_BTN_OQC_TPV,336,125,45,39,
                     BS_MULTILINE
@@ -516,14 +516,14 @@ BEGIN
     GROUPBOX        "TPV",IDC_STATIC,331,112,55,58
     GROUPBOX        "SEC",IDC_STATIC,331,7,55,103
     GROUPBOX        "Excel表格預覽",IDC_STATIC,7,7,319,183
-    GROUPBOX        "Static",IDC_STATIC,7,195,318,35
+    GROUPBOX        "待會欲量項目預覽",IDC_STATIC,7,195,318,35
     LTEXT           "Descrip",IDC_TABLE_DESCRIP,10,205,310,20
     PUSHBUTTON      "SEC OQC\n量產",IDC_BTN_OQC_SEC,336,20,45,39,
                     BS_MULTILINE
     GROUPBOX        "CLO",IDC_STATIC,391,7,55,103
     PUSHBUTTON      "OQC\n試產",IDC_BTN_OQC_TEST,396,65,45,39,BS_MULTILINE
-    GROUPBOX        "仁寶",IDC_STATIC,391,112,54,58
-    PUSHBUTTON      "仁寶 OQC\n量產",IDC_BTN_OQC_NIBO,396,125,45,39,
+    GROUPBOX        "仁寶",IDC_STATIC,331,171,54,58
+    PUSHBUTTON      "仁寶 OQC\n量產",IDC_BTN_OQC_NIBO,336,184,45,39,
                     BS_MULTILINE
 END
 
@@ -585,9 +585,9 @@ BEGIN
     IDD_MSR_TABLE, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 447
+        RIGHTMARGIN, 448
         TOPMARGIN, 7
-        BOTTOMMARGIN, 256
+        BOTTOMMARGIN, 230
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -65,7 +65,6 @@ CXlsFile2* CXlsOQCmass::iData(RNA& vCar)
 		vCar.HaveSeveral("бе","1"))           iColorGamu();
     if (vCar.HaveSeveral("╔у","1"))           iColorTemperature();
 
-
     SetVisible(true);
     return this;
 }

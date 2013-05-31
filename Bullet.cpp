@@ -25,23 +25,23 @@ void Bullet::i(const ValueKind& _VK, const float& _F)
 {
 //    ASSERT( _F>=0 && _F<=0.8 ); 
 //不是只會輸入色度，所以不需要檢查定義域
-	if (_F != 0.0 )
-	{
-		m_vfValues[_VK] = _F;
-		m_LastModifyTime = CTime::GetCurrentTime(); 
-		isEmptyObj = FALSE;
-	}
+    if (_F != 0.0 )
+    {
+        m_vfValues[_VK] = _F;
+        m_LastModifyTime = CTime::GetCurrentTime(); 
+        isEmptyObj = FALSE;
+    }
 }
 
 void Bullet::i(const ValueKind& _VK, const CString& _S)
 {
 //     ASSERT( str2flt(_S)>=0 && str2flt(_S)<=0.8 );
-	if ( str2flt(_S) != 0.0 )
-	{
-		m_vfValues[_VK] = str2flt(_S);
-		m_LastModifyTime = CTime::GetCurrentTime(); 
-		isEmptyObj = FALSE;
-	}
+    if ( str2flt(_S) != 0.0 )
+    {
+        m_vfValues[_VK] = str2flt(_S);
+        m_LastModifyTime = CTime::GetCurrentTime(); 
+        isEmptyObj = FALSE;
+    }
 }
 
 const float Bullet::oFlt(const ValueKind& _VK) const
@@ -71,22 +71,22 @@ void Bullet::operator= (const Bullet& xp)
 {
     m_vfValues       = xp.m_vfValues;
     m_LastModifyTime = xp.m_LastModifyTime;
-	isEmptyObj       = xp.isEmptyObj;
+    isEmptyObj       = xp.isEmptyObj;
 }
 
 const BOOL Bullet::IsEmpty() const
 {
 #ifdef _DEBUG
-	BOOL B(TRUE);
-	for (std::vector<float>::const_iterator vitor = m_vfValues.begin(); vitor != m_vfValues.end(); ++vitor)
-	{
-		if ( *vitor != 0.0 )
-			B = FALSE;
-	}
+    BOOL B(TRUE);
+    for (std::vector<float>::const_iterator vitor = m_vfValues.begin(); vitor != m_vfValues.end(); ++vitor)
+    {
+        if ( *vitor != 0.0 )
+            B = FALSE;
+    }
 
     ASSERT(B == isEmptyObj);
 #endif
-	return isEmptyObj;
+    return isEmptyObj;
 }
 
 const CString Bullet::GetLastTime() const
@@ -102,25 +102,25 @@ const CString Bullet::GetLastTime() const
 const CString Bullet::ShowDataReport() const
 {
     return " Lv =" + flt2str(m_vfValues[VluK_Lv]) + "\n" 
-		+ "  x =" + flt2str(m_vfValues[VluK_Sx]) + "\n" 
-		+ "  y =" + flt2str(m_vfValues[VluK_Sy]) + "\n" 
-		+ "  T =" + flt2str(m_vfValues[VluK_T])  + "\n" 
-		+ "Δuv=" + flt2str(m_vfValues[VluK_Duv]) + "\n" 
-		+ " u' =" + flt2str(m_vfValues[VluK_Du]) + "\n"
-		+ " v' =" + flt2str(m_vfValues[VluK_Dv]) + "\n"
-		+ "  X =" + flt2str(m_vfValues[VluK_X]) + "\n"
-		+ "  Y =" + flt2str(m_vfValues[VluK_Y]) + "\n"
-		+ "  Z =" + flt2str(m_vfValues[VluK_Z]);
+        + "  x =" + flt2str(m_vfValues[VluK_Sx]) + "\n" 
+        + "  y =" + flt2str(m_vfValues[VluK_Sy]) + "\n" 
+        + "  T =" + flt2str(m_vfValues[VluK_T])  + "\n" 
+        + "Δuv=" + flt2str(m_vfValues[VluK_Duv]) + "\n" 
+        + " u' =" + flt2str(m_vfValues[VluK_Du]) + "\n"
+        + " v' =" + flt2str(m_vfValues[VluK_Dv]) + "\n"
+        + "  X =" + flt2str(m_vfValues[VluK_X]) + "\n"
+        + "  Y =" + flt2str(m_vfValues[VluK_Y]) + "\n"
+        + "  Z =" + flt2str(m_vfValues[VluK_Z]);
 }
 
 const CString Bullet::ShowData() const
 {
-	CString accumulation, everyTemp;
-	for (std::vector<float>::const_iterator itor = m_vfValues.begin(); itor != m_vfValues.end(); ++itor)
-	{
-		everyTemp.Format("%f\t", *itor);
-		accumulation += everyTemp;
-	}
-	accumulation.TrimRight();
+    CString accumulation, everyTemp;
+    for (std::vector<float>::const_iterator itor = m_vfValues.begin(); itor != m_vfValues.end(); ++itor)
+    {
+        everyTemp.Format("%f\t", *itor);
+        accumulation += everyTemp;
+    }
+    accumulation.TrimRight();
     return accumulation;
 }

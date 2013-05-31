@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CMainFrame
+LastClass=CMsrTableDlg
 LastTemplate=CButton
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
@@ -19,31 +19,31 @@ ResourceCount=10
 Resource1=IDR_MAINFRAME
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_EDIT_DIALOG
-Resource3=IDD_OMDTOEXCEL
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_MSR_ITEM
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_MSR_ITEM
-Resource7=IDD_DIALOG_BARCODE
+Resource6=IDD_OMDTOEXCEL
+Resource7=IDD_CASETUP_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_ABOUTBOX
+Resource8=IDD_DIALOG_BARCODE
 =======
-Resource2=IDD_EDIT_DIALOG
-Resource3=IDD_OMDTOEXCEL
-Resource4=IDD_PATTERN_DIALOG
+Resource2=IDD_MSR_ITEM
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_ABOUTBOX
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_MSR_ITEM
-Resource7=IDD_DIALOG_BARCODE
+Resource6=IDD_OMDTOEXCEL
+Resource7=IDD_CASETUP_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_ABOUTBOX
+Resource8=IDD_DIALOG_BARCODE
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_CASETUP_DIALOG
+Resource9=IDD_EDIT_DIALOG
 Class12=CMsrTableDlg
 Class13=CBtm
 Resource10=IDD_MSR_TABLE
@@ -81,7 +81,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=ID_MSR_TABLE
+LastObject=CMainFrame
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -413,8 +413,8 @@ LastObject=CPatternDlg
 Type=1
 Class=CMsrTableDlg
 ControlCount=15
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
+Control1=IDOK,button,1073807361
+Control2=IDCANCEL,button,1073807360
 Control3=IDC_BTN_SECF,button,1342242816
 Control4=IDC_BTN_OQC_TPV,button,1342251008
 Control5=IDC_BTN_RA,button,1342242816

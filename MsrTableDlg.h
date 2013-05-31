@@ -9,20 +9,22 @@
 #include "Btm.h"
 #include "DNA.h"
 #include "RNA.h"
-#include "DNAfactory.h"
+#include "DnaConfig.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CMsrTableDlg dialog
 
 class CMsrTableDlg : public CDialog
 {
-	DnaFactory m_DnaInit;
+	DnaConfig m_DnaInit;
 	DNA m_DNA;
 	RNA m_RNA;
 	tableIndex m_TableIndex;
 	const CString descripTableRA;
-	const CString descripTableSEC;
-	const CString descripTableQOCmass;
+	const CString descripTableSECfrom;
+	const CString descripTableQOCmassSEC;
+	const CString descripTableQOCmassTPV;
+	const CString descripTableQOCmassNibo;
 	const CString descripTableQOCtest;
 	void showTableImage(CPaintDC* pDc);
 	void showMsrItem(CPaintDC* pDc);
@@ -39,6 +41,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMsrTableDlg)
 	enum { IDD = IDD_MSR_TABLE };
+	CBtm	m_tableOQCNibo;
 	CBtm	m_tableSECF;
 	CBtm	m_tableRA;
 	CBtm	m_tableOQCTPV;
@@ -62,10 +65,12 @@ protected:
 	//{{AFX_MSG(CMsrTableDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
-	afx_msg void OnButtonRA();
-	afx_msg void OnButtonSEC();
-	afx_msg void OnButtonOQCMASS();
 	afx_msg void OnBtnOqcNibo();
+	afx_msg void OnBtnOqcSec();
+	afx_msg void OnBtnRa();
+	afx_msg void OnBtnSecfrom();
+	afx_msg void OnBtnOqcTest();
+	afx_msg void OnBtnOqcTpv();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
