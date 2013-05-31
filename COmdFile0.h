@@ -21,19 +21,12 @@ class COmdFile0
 	COmdFileFactor *m_GmOmd;
 	TxtStrData m_dTxt;
 public:
-	OmdHead& GetFileHead(){ return m_Omd->GetFileHead(); };
-	const OmdHead GetFileHead() const{ return m_Omd->GetFileHead(); };
+	OmdHead GetFileHead(){ return m_Omd->GetFileHead(); };
+	const OmdHead& GetFileHead() const{ return m_Omd->GetFileHead(); };
 	void SetFileHead(const OmdHead& _H){ m_Omd->SetFileHead(_H); };
 
 	//這些介面剩下 void CSelExcelDlg::otherOmd2xls(CXlsFile2* pHDfXls) 在使用
 	CString GetPnlID () const { return m_Omd->GetFileHead().oPnlID (); };
-//    CString GetPnlID  () const 
-// 	{
-// 		CString str;
-// 		str.Format("%s", m_Omd->GetFileHead().oPnlID ());
-// 		AfxMessageBox(str);
-// 		return str; 
-// 	};
     CString GetMsrDvc() const { return m_Omd->GetFileHead().oMsrDvc(); };
     CString GetPrb   () const { return m_Omd->GetFileHead().oPrb   (); };
     CString GetCHID  () const { return m_Omd->GetFileHead().oCHID  (); };

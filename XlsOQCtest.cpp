@@ -33,8 +33,8 @@ CXlsFile2* CXlsOQCtest::iNitsLv(CString strNitsLv   ) { SelectSheet("光學")->Sel
 CXlsFile2* CXlsOQCtest::iPanelID(CString strPanelID)
 {
     //貼公式
-//     CString BarCode;
-//     BarCode.Format("=\'光學\'!B%d", 5+m_ModuleNO);
+     CString BarCode;
+     BarCode.Format("=\'光學\'!B%d", 5+m_ModuleNO);
     //直接貼字串
 	SelectSheet("光學")->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);
 //     SelectSheet("光學")              ->SelectCell('B', 5+m_ModuleNO)->SetCell(strPanelID);
@@ -52,9 +52,12 @@ CXlsFile2* CXlsOQCtest::iData(RNA& vCar)
     m_vCar = vCar;
 
     //無重疊
-    if (vCar.HaveSeveral("紅","1"))           idR1();
-    if (vCar.HaveSeveral("綠","1"))           idG1();
-    if (vCar.HaveSeveral("藍","1"))           idB1();
+    if (vCar.HaveSeveral("紅","1"))           
+		idR1();
+    if (vCar.HaveSeveral("綠","1"))           
+		idG1();
+    if (vCar.HaveSeveral("藍","1"))           
+		idB1();
     if (vCar.HaveSeveral("Nits","","","5-"))  idNits();
 
     if ( vCar.HaveSeveral("cross") ||

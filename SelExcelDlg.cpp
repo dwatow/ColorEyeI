@@ -141,8 +141,8 @@ void CSelExcelDlg::OnSelectXlsForm()
     m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), str);
 
          if (str.Find("RA") != -1)     setSelXlsDetail("9點亮度\n9點色度\n\nCA210-CH\nCA210-Probe\n", 100, FM_RA); 
+	else if (str.Find("Y2013") != -1)  setSelXlsDetail("2013年量產表格\n9點亮度\n25點暗態\n中心點亮色度\n5Nits\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker", 10, FM_OQCY2013_Volume); 
     else if (str.Find("OQC") != -1)       setSelXlsDetail("2013年試產表格\n9點亮色度、中心點亮色度、5Nits\n25點暗態\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker", 10, FM_OQC_Test); 
-    else if (str.Find("Y2013") != -1)  setSelXlsDetail("2013年量產表格\n9點亮度\n25點暗態\n中心點亮色度\n5Nits\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker", 10, FM_OQCY2013_Volume); 
     else if (str.Find("Gamma") != -1)  setSelXlsDetail("Gamma curve", 5, FM_Gamma); 
     else if (str.Find("SEC") != -1)       setSelXlsDetail("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER\nCross Talk", 1, FM_SEC); 
     else                               setSelXlsDetail("(無法識別)", 1, FM_Nothing, FALSE); 
@@ -249,12 +249,17 @@ void CSelExcelDlg::otherOmd2xls(XLSPTR& hdXls)
             AfxMessageBox("路徑有問題");
         else
         {
+// 			CString str;
+// 			str.Format("%s, %s, %s, %s", fOmd.GetFileHead().oCHID(), fOmd.GetFileHead().oPnlID(), fOmd.GetFileHead().oPrb(), fOmd.GetFileHead().oNitsLv());
+// 			AfxMessageBox(str);
+
             hdXls->iCellNO (abs(itfPaths - m_omdList.begin()));
-            hdXls->iChannel(fOmd.GetCHID());
-            hdXls->iPanelID(fOmd.GetPnlID());
-            hdXls->iProb   (fOmd.GetPrb());
-            hdXls->iNitsLv (fOmd.GetNitsLv());
-            hdXls->iData   (fOmd.oOmdData());
+            hdXls->iData   (fOmd.oOmdData()); //先給這個，才可以給head（doc 的open也是一樣）
+            hdXls->iChannel(fOmd.GetFileHead().oCHID());
+            hdXls->iPanelID(fOmd.GetFileHead().oPnlID());
+            hdXls->iProb   (fOmd.GetFileHead().oPrb());
+            hdXls->iNitsLv (fOmd.GetFileHead().oNitsLv());
+
 
             fOmd.Close();
         }

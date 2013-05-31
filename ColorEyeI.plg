@@ -6,40 +6,13 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9F5.tmp" with contents
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC12.tmp" with contents
 [
 /nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\GitHub\ColorEyeI\Btm.cpp"
-"D:\GitHub\ColorEyeI\Bullet.cpp"
-"D:\GitHub\ColorEyeI\Cartridge2.cpp"
-"D:\GitHub\ColorEyeI\CartridgeFinder.cpp"
-"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
-"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
-"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
-"D:\GitHub\ColorEyeI\COmdFile0.cpp"
-"D:\GitHub\ColorEyeI\COmdFile1.cpp"
-"D:\GitHub\ColorEyeI\COmdFileFactor.cpp"
-"D:\GitHub\ColorEyeI\COmdFileGm.cpp"
-"D:\GitHub\ColorEyeI\DNA.cpp"
-"D:\GitHub\ColorEyeI\DNAconfig.cpp"
-"D:\GitHub\ColorEyeI\MsrItemDlg.cpp"
-"D:\GitHub\ColorEyeI\MsrTableDlg.cpp"
-"D:\GitHub\ColorEyeI\Nucleotide.cpp"
-"D:\GitHub\ColorEyeI\PatternDlg.cpp"
-"D:\GitHub\ColorEyeI\ReadBarCodeDialog.cpp"
-"D:\GitHub\ColorEyeI\RNA.cpp"
 "D:\GitHub\ColorEyeI\SelExcelDlg.cpp"
-"D:\GitHub\ColorEyeI\TranScripter.cpp"
-"D:\GitHub\ColorEyeI\xlef.cpp"
-"D:\GitHub\ColorEyeI\XlsGamma.cpp"
-"D:\GitHub\ColorEyeI\XlsOQCmass.cpp"
-"D:\GitHub\ColorEyeI\XlsOQCtest.cpp"
-"D:\GitHub\ColorEyeI\XlsRA1.cpp"
-"D:\GitHub\ColorEyeI\XlsSEC1.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9F5.tmp" 
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9F6.tmp" with contents
+Creating command line "cl.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC12.tmp" 
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC13.tmp" with contents
 [
 shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
 .\Release\BkMaker.obj
@@ -89,42 +62,12 @@ shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.p
 .\Release\XlsSEC1.obj
 .\Release\ColorEyeI.res
 ]
-Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9F6.tmp"
+Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC13.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Compiling...
-Btm.cpp
-Bullet.cpp
-Cartridge2.cpp
-CartridgeFinder.cpp
-ColorEyeI.cpp
-ColorEyeIDoc.cpp
-ColorEyeIView.cpp
-COmdFile0.cpp
-COmdFile1.cpp
-COmdFileFactor.cpp
-COmdFileGm.cpp
-DNA.cpp
-DNAconfig.cpp
-MsrItemDlg.cpp
-MsrTableDlg.cpp
-Nucleotide.cpp
-PatternDlg.cpp
-ReadBarCodeDialog.cpp
-RNA.cpp
 SelExcelDlg.cpp
-Generating Code...
-Compiling...
-TranScripter.cpp
-xlef.cpp
-XlsGamma.cpp
-XlsOQCmass.cpp
-XlsOQCtest.cpp
-XlsRA1.cpp
-XlsSEC1.cpp
-Generating Code...
 Linking...
-Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9FB.tmp" with contents
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC15.tmp" with contents
 [
 /nologo /o"Release/ColorEyeI.bsc" 
 .\Release\BkMaker.sbr
@@ -172,7 +115,7 @@ Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9FB.tmp" with cont
 .\Release\XlsOQCtest.sbr
 .\Release\XlsRA1.sbr
 .\Release\XlsSEC1.sbr]
-Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP9FB.tmp"
+Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSPC15.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
