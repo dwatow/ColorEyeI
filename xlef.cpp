@@ -116,6 +116,7 @@ void xlsFile::SetSheetName(short SheetIndex, const char* SheetName)
         CString str;
         str.Format("設定第%d個Sheet的名字為%s出錯了！", SheetIndex, SheetName);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
 }
 //-------------------------
@@ -131,6 +132,7 @@ CString xlsFile::GetSheetName(short SheetIndex)
         CString str;
         str.Format("取得第%d個Sheet名字出錯了！", SheetIndex);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return objSheet.GetName();//edisonx
 }
@@ -148,7 +150,8 @@ xlsFile* xlsFile::SelectSheet(const char* SheetName)
     {
         CString str;
         str.Format("選擇Sheet: %s出錯了！", SheetName);
-         AfxMessageBox(str);
+        AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return this;
 }
@@ -165,6 +168,7 @@ xlsFile* xlsFile::SelectSheet(short SheetIndex)
         CString str;
         str.Format("選擇第%d個Sheet出錯了！", SheetIndex);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return this;
 }
@@ -245,7 +249,8 @@ xlsFile* xlsFile::SelectCell(const char* x)
         CString str;
         str.Format("選擇儲存格%s出錯了！", x);
         AfxMessageBox(str);
-    }
+		SetVisible(TRUE);
+	}
     return this;
 }
 
@@ -263,6 +268,7 @@ xlsFile* xlsFile::SelectCell(const char* x, int y)
         CString str;
         str.Format("選擇儲存格%s%d出錯了！", x, y);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return this;
 }
@@ -320,6 +326,7 @@ xlsFile* xlsFile::SelectCell(const char* x1, const char* x2)
         CString str;
         str.Format("選擇範圍，從%s到%s出錯了！", x1, x2);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return this;
 }
@@ -340,6 +347,7 @@ xlsFile* xlsFile::SelectCell(const char* x1, int y1, const char* x2, int y2)
         CString str;
         str.Format("選擇範圍，從%s%d到%s%d的地方出錯了！", x1, y1, x2, y2);
         AfxMessageBox(str);
+		SetVisible(TRUE);
     }
     return this;
 }

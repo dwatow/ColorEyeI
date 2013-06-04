@@ -65,7 +65,7 @@ CXlsFile2* CXlsOQCmass::iData(RNA& vCar)
 		vCar.HaveSeveral("бе","1"))           iColorGamu();
     if (vCar.HaveSeveral("╔у","1"))           iColorTemperature();
 
-    SetVisible(true);
+    SetVisible(TRUE);
     return this;
 }
 
@@ -334,10 +334,11 @@ void CXlsOQCmass::idNits()
     SelectCell('Z', 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("Nits", "9", "1", "5-", VluK_Lv) );
     
     CString msrItemIndex;
-    for(int i=1;i<9;++i)
+    for(int i=0;i<8;++i)
     {
-        msrItemIndex.Format("%d", i+1);
-        SelectCell('A',(char)('A'+i), 5+m_ModuleNO)->SetCell("%3.2f", m_vCar.fFind("Nits", "9", msrItemIndex, "5-", VluK_Lv) );
+        msrItemIndex.Format("%d", i+2);
+        SelectCell('A',(char)('A'+i), 5+m_ModuleNO)
+			->SetCell("%3.2f", m_vCar.fFind("Nits", "9", msrItemIndex, "5-", VluK_Lv) );
     }
     SelectCell("AJ", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", 4, "5-", VluK_Sx) );
     SelectCell("AK", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", 4, "5-", VluK_Sy) );
