@@ -80,16 +80,18 @@ const Cartridge2& RNA::At(const Cartridge2& _C2) const
 const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
 { return m_CarChain2.at(_P);   };
 
-float RNA::fFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V)
-{
-	return Find(_C, _P, _M, _F).GetBullet().oFlt(_V);
-}
+float RNA::fFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V){	return Find(_C, _P, _M, _F).GetBullet().oFlt(_V);}
+CString RNA::sFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V){	return Find(_C, _P, _M, _F).GetBullet().oStr(_V);}
 
+#ifdef _DEBUG
+float RNA::fFind(const CString& _C, const int&     _P, const CString& _M, const CString& _F, const ValueKind& _V){	paraError();	return 0.0000;}
+float RNA::fFind(const CString& _C, const CString& _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return 0.0000;}
+float RNA::fFind(const CString& _C, const int&     _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return 0.0000;}
 
-CString RNA::sFind(const CString& _C, const CString& _P, const CString& _M, const CString& _F, const ValueKind& _V)
-{
-	return Find(_C, _P, _M, _F).GetBullet().oStr(_V);
-}
+CString RNA::sFind(const CString& _C, const int&     _P, const CString& _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
+CString RNA::sFind(const CString& _C, const CString& _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
+CString RNA::sFind(const CString& _C, const int&     _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
+#endif
 
 std::vector<int>::size_type RNA::HaveSeveral(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
 {

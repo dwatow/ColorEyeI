@@ -29,8 +29,8 @@ public:
 protected:
 //    virtual BOOL isOldForm(TxtStrData&) = 0;
     const CString GetLine(const int& ) const;    
-    const CString GetCell(const int&, const int& ) const;
-    const CString GetCell(const TCHAR& , const int& ) const;   // 0< c<=24
+    const CString GetCell(const int&    , const int& ) const;
+    const CString GetCell(const TCHAR&  , const int& ) const;  // 0< c<=24
     const CString GetCell(const PTCHAR& , const int& ) const;  //25<=c¡A±qAA¶}©lºâ
 
 protected:

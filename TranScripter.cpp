@@ -852,7 +852,7 @@ void TranScripter::Trans(DNA& _vD, RNA& _vR)
 			forCrsTlk(m_curDnaCellItor);
 			forNits(m_curDnaCellItor);
 
-			_vR + m_curDnaCellItor;
+			_vR += m_curDnaCellItor;
 
         }
     }
@@ -1004,18 +1004,18 @@ void TranScripter::setSquence(Cartridge2& _Car, const std::vector<Nucleotide>::s
     if (carPoint.y < aP.y)
     {
         if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_02); 
-        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_03);
+        else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_05);
         else                                                     _Car.SetSqncArea(AA_07);
     }
     else if ((carPoint.y >= aP.y) && (carPoint.y <= dP.y))
     {
-        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_04); 
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_03); 
         else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_01);
         else                                                     _Car.SetSqncArea(AA_08);
     }
     else
     {
-        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_05); 
+        if ( (carPoint.x >= 0) && (carPoint.x < aP.x)) _Car.SetSqncArea(AA_04); 
         else if ( (carPoint.x >= aP.x) && (carPoint.x <= dP.x) ) _Car.SetSqncArea(AA_06);
         else                                                     _Car.SetSqncArea(AA_09);
     }
@@ -1027,6 +1027,10 @@ void TranScripter::setSquence(Cartridge2& _Car, const std::vector<Nucleotide>::s
 			_Car.SetSqncFrm(1);
 		else
 			_Car.SetSqncFrm(size + 2);
+	}
+	else if (m_curDnaCellItor->GetMsrPointTotal() == Pn4)
+	{
+		_Car.SetSqncFrm(size);
 	}
 	else
 	{

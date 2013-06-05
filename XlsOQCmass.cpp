@@ -62,8 +62,8 @@ CXlsFile2* CXlsOQCmass::iData(RNA& vCar)
     //其它
     if (vCar.HaveSeveral("紅","1") && 
 		vCar.HaveSeveral("綠","1") && 
-		vCar.HaveSeveral("藍","1"))           iColorGamu();
-    if (vCar.HaveSeveral("白","1"))           iColorTemperature();
+		vCar.HaveSeveral("藍","1"))           idColorGamu();
+    if (vCar.HaveSeveral("白","1"))           idColorTemperature();
 
     SetVisible(TRUE);
     return this;
@@ -340,8 +340,8 @@ void CXlsOQCmass::idNits()
         SelectCell('A',(char)('A'+i), 5+m_ModuleNO)
 			->SetCell("%3.2f", m_vCar.fFind("Nits", "9", msrItemIndex, "5-", VluK_Lv) );
     }
-    SelectCell("AJ", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", 4, "5-", VluK_Sx) );
-    SelectCell("AK", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", 4, "5-", VluK_Sy) );
+    SelectCell("AJ", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", "4", "5-", VluK_Sx) );
+    SelectCell("AK", 5+m_ModuleNO)->SetCell("%1.4f", m_vCar.fFind("Nits", "9", "4", "5-", VluK_Sy) );
 }
 
 void CXlsOQCmass::idD21()
@@ -464,7 +464,7 @@ void CXlsOQCmass::idCrsTlk()
     SelectCell('X', 9+m_ModuleNO)->SetCell("%f", (SelectCell('P', 9+m_ModuleNO)->GetCell2Double() - SelectCell('H', 9+m_ModuleNO)->GetCell2Double()) / SelectCell('H', 9+m_ModuleNO)->GetCell2Double() );
 }
 
-void CXlsOQCmass::iColorTemperature()
+void CXlsOQCmass::idColorTemperature()
 {
     //從白色中心點運算出來的色溫貼到
     SelectSheet("CrossTalk")
@@ -472,7 +472,7 @@ void CXlsOQCmass::iColorTemperature()
 		->SetCell("%f", SelectSheet("Color Temperature")->SelectCell('F', 5+m_ModuleNO)->GetCell2Double());
 }
 
-void CXlsOQCmass::iColorGamu()
+void CXlsOQCmass::idColorGamu()
 {
     SelectSheet("Color Gamut");
     double CGvalue = 0.0;

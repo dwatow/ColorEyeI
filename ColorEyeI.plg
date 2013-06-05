@@ -6,6 +6,213 @@
 --------------------Configuration: ColorEyeI - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x404 /fo"Release/ColorEyeI.res" /d "NDEBUG" "D:\GitHub\ColorEyeI\ColorEyeI.rc"" 
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3DE.tmp" with contents
+[
+/nologo /MT /W3 /GR /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\GitHub\ColorEyeI\BkMaker.cpp"
+"D:\GitHub\ColorEyeI\BkNits.cpp"
+"D:\GitHub\ColorEyeI\Btm.cpp"
+"D:\GitHub\ColorEyeI\Bullet.cpp"
+"D:\GitHub\ColorEyeI\ca200srvr.cpp"
+"D:\GitHub\ColorEyeI\CA210.cpp"
+"D:\GitHub\ColorEyeI\CA210real.cpp"
+"D:\GitHub\ColorEyeI\Ca210sim.cpp"
+"D:\GitHub\ColorEyeI\Cartridge2.cpp"
+"D:\GitHub\ColorEyeI\CartridgeFinder.cpp"
+"D:\GitHub\ColorEyeI\CaSetupDlg.cpp"
+"D:\GitHub\ColorEyeI\CColorRef.cpp"
+"D:\GitHub\ColorEyeI\Circle.cpp"
+"D:\GitHub\ColorEyeI\CircleArc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeI.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIDoc.cpp"
+"D:\GitHub\ColorEyeI\ColorEyeIView.cpp"
+"D:\GitHub\ColorEyeI\COmdFile0.cpp"
+"D:\GitHub\ColorEyeI\COmdFile1.cpp"
+"D:\GitHub\ColorEyeI\COmdFileFactor.cpp"
+"D:\GitHub\ColorEyeI\COmdFileGm.cpp"
+"D:\GitHub\ColorEyeI\DNA.cpp"
+"D:\GitHub\ColorEyeI\DNAconfig.cpp"
+"D:\GitHub\ColorEyeI\EnterValueDlg.cpp"
+"D:\GitHub\ColorEyeI\excel.cpp"
+"D:\GitHub\ColorEyeI\FileDlg.cpp"
+"D:\GitHub\ColorEyeI\MainFrm.cpp"
+"D:\GitHub\ColorEyeI\MsrItemDlg.cpp"
+"D:\GitHub\ColorEyeI\MsrTableDlg.cpp"
+"D:\GitHub\ColorEyeI\Nucleotide.cpp"
+"D:\GitHub\ColorEyeI\PatternDlg.cpp"
+"D:\GitHub\ColorEyeI\ReadBarCodeDialog.cpp"
+"D:\GitHub\ColorEyeI\RNA.cpp"
+"D:\GitHub\ColorEyeI\SelExcelDlg.cpp"
+"D:\GitHub\ColorEyeI\StaticText.cpp"
+"D:\GitHub\ColorEyeI\StdAfx.cpp"
+"D:\GitHub\ColorEyeI\TranScripter.cpp"
+"D:\GitHub\ColorEyeI\TxtFile.cpp"
+"D:\GitHub\ColorEyeI\ValuesLabel.cpp"
+"D:\GitHub\ColorEyeI\xlef.cpp"
+"D:\GitHub\ColorEyeI\XlsGamma.cpp"
+"D:\GitHub\ColorEyeI\XlsOQCmass.cpp"
+"D:\GitHub\ColorEyeI\XlsOQCtest.cpp"
+"D:\GitHub\ColorEyeI\XlsRA1.cpp"
+"D:\GitHub\ColorEyeI\XlsSEC1.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3DE.tmp" 
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3DF.tmp" with contents
+[
+shlwapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/ColorEyeI.pdb" /machine:I386 /out:"Release/ColorEyeI.exe" 
+.\Release\BkMaker.obj
+.\Release\BkNits.obj
+.\Release\Btm.obj
+.\Release\Bullet.obj
+.\Release\ca200srvr.obj
+.\Release\CA210.obj
+.\Release\CA210real.obj
+.\Release\Ca210sim.obj
+.\Release\Cartridge2.obj
+.\Release\CartridgeFinder.obj
+.\Release\CaSetupDlg.obj
+.\Release\CColorRef.obj
+.\Release\Circle.obj
+.\Release\CircleArc.obj
+.\Release\ColorEyeI.obj
+.\Release\ColorEyeIDoc.obj
+.\Release\ColorEyeIView.obj
+.\Release\COmdFile0.obj
+.\Release\COmdFile1.obj
+.\Release\COmdFileFactor.obj
+.\Release\COmdFileGm.obj
+.\Release\DNA.obj
+.\Release\DNAconfig.obj
+.\Release\EnterValueDlg.obj
+.\Release\excel.obj
+.\Release\FileDlg.obj
+.\Release\MainFrm.obj
+.\Release\MsrItemDlg.obj
+.\Release\MsrTableDlg.obj
+.\Release\Nucleotide.obj
+.\Release\PatternDlg.obj
+.\Release\ReadBarCodeDialog.obj
+.\Release\RNA.obj
+.\Release\SelExcelDlg.obj
+.\Release\StaticText.obj
+.\Release\StdAfx.obj
+.\Release\TranScripter.obj
+.\Release\TxtFile.obj
+.\Release\ValuesLabel.obj
+.\Release\xlef.obj
+.\Release\XlsGamma.obj
+.\Release\XlsOQCmass.obj
+.\Release\XlsOQCtest.obj
+.\Release\XlsRA1.obj
+.\Release\XlsSEC1.obj
+.\Release\ColorEyeI.res
+]
+Creating command line "link.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3DF.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+BkMaker.cpp
+BkNits.cpp
+Btm.cpp
+Bullet.cpp
+ca200srvr.cpp
+CA210.cpp
+CA210real.cpp
+Ca210sim.cpp
+Cartridge2.cpp
+CartridgeFinder.cpp
+CaSetupDlg.cpp
+CColorRef.cpp
+Circle.cpp
+CircleArc.cpp
+ColorEyeI.cpp
+ColorEyeIDoc.cpp
+ColorEyeIView.cpp
+COmdFile0.cpp
+COmdFile1.cpp
+COmdFileFactor.cpp
+Generating Code...
+Compiling...
+COmdFileGm.cpp
+DNA.cpp
+DNAconfig.cpp
+EnterValueDlg.cpp
+excel.cpp
+FileDlg.cpp
+MainFrm.cpp
+MsrItemDlg.cpp
+MsrTableDlg.cpp
+Nucleotide.cpp
+PatternDlg.cpp
+ReadBarCodeDialog.cpp
+RNA.cpp
+SelExcelDlg.cpp
+StaticText.cpp
+StdAfx.cpp
+TranScripter.cpp
+TxtFile.cpp
+ValuesLabel.cpp
+xlef.cpp
+Generating Code...
+Compiling...
+XlsGamma.cpp
+XlsOQCmass.cpp
+XlsOQCtest.cpp
+XlsRA1.cpp
+XlsSEC1.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3E3.tmp" with contents
+[
+/nologo /o"Release/ColorEyeI.bsc" 
+.\Release\BkMaker.sbr
+.\Release\BkNits.sbr
+.\Release\Btm.sbr
+.\Release\Bullet.sbr
+.\Release\ca200srvr.sbr
+.\Release\CA210.sbr
+.\Release\CA210real.sbr
+.\Release\Ca210sim.sbr
+.\Release\Cartridge2.sbr
+.\Release\CartridgeFinder.sbr
+.\Release\CaSetupDlg.sbr
+.\Release\CColorRef.sbr
+.\Release\Circle.sbr
+.\Release\CircleArc.sbr
+.\Release\ColorEyeI.sbr
+.\Release\ColorEyeIDoc.sbr
+.\Release\ColorEyeIView.sbr
+.\Release\COmdFile0.sbr
+.\Release\COmdFile1.sbr
+.\Release\COmdFileFactor.sbr
+.\Release\COmdFileGm.sbr
+.\Release\DNA.sbr
+.\Release\DNAconfig.sbr
+.\Release\EnterValueDlg.sbr
+.\Release\excel.sbr
+.\Release\FileDlg.sbr
+.\Release\MainFrm.sbr
+.\Release\MsrItemDlg.sbr
+.\Release\MsrTableDlg.sbr
+.\Release\Nucleotide.sbr
+.\Release\PatternDlg.sbr
+.\Release\ReadBarCodeDialog.sbr
+.\Release\RNA.sbr
+.\Release\SelExcelDlg.sbr
+.\Release\StaticText.sbr
+.\Release\StdAfx.sbr
+.\Release\TranScripter.sbr
+.\Release\TxtFile.sbr
+.\Release\ValuesLabel.sbr
+.\Release\xlef.sbr
+.\Release\XlsGamma.sbr
+.\Release\XlsOQCmass.sbr
+.\Release\XlsOQCtest.sbr
+.\Release\XlsRA1.sbr
+.\Release\XlsSEC1.sbr]
+Creating command line "bscmake.exe @C:\DOCUME~1\1004066\LOCALS~1\Temp\RSP3E3.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 

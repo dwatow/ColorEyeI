@@ -223,8 +223,10 @@ void CPatternDlg::initLCMSize() const
     {
         CEnterValueDlg dlgEnterValue("無法判別LCM Size", "LCM Size");
 
-        if (dlgEnterValue.DoModal() == IDOK)
+        do{
+			dlgEnterValue.DoModal();
             m_pCA210->SetLcmSize(dlgEnterValue.m_strValue);
+		}while (dlgEnterValue.m_strValue.IsEmpty()); //反覆查是不是空字串
     }
 }
 

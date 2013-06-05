@@ -4,6 +4,9 @@
 #include "DNA.h"
 #include "RNA.h"
 #include "BkMaker.h"  //ND_Neg, ND_Pos
+#include "TranScripter.h"
+#include "debugFile.h"
+#include "ColorEyeI.h"
 
 //enum ParaOfPara  { PA_FEover = 0, PA_FElength, PA_D25RectSide, PA_NitsLv, PA_NitsDir, PA_JndGrayLv, PA_GmaBegin, PA_GmaEnd, PA_GmaAvg, PA_Max};
 //NitsDirect
@@ -42,7 +45,7 @@ class DnaConfig
 	BOOL m_chkNits;
 
 	//control
-	BOOL msrQuick;
+	BOOL m_msrQuick;
 
 	//para
 	int m_W5FE, m_W5EdgeType;
@@ -57,8 +60,11 @@ class DnaConfig
 	int m_RGammaBegin, m_RGamma_End, m_RGamma_Avg;
 	int m_GGammaBegin, m_GGamma_End, m_GGamma_Avg;
 	int m_BGammaBegin, m_BGamma_End, m_BGamma_Avg;
+
+	TranScripter *Ts;
 public:
 	DnaConfig();
+	void SetQuickSort(const BOOL& _B);
 	void Add_WRGBD_center();
 	void Add_W_center();
 	void Add_R_center();
@@ -94,7 +100,27 @@ public:
 
 	void CreatDNA(DNA&, RNA&);
 private:
-	void selMsrItem2DNA_sortable(DNA&);
-	void selMsrItem2DNA_Unsortable(DNA&);
+	RNA selMsrItem2DNA_sortable();
+	RNA selMsrItem2DNA_CrossTalk();
+	RNA selMsrItem2DNA_Gamma();
+	void showRNA(RNA& ) ;
 };
+
+inline void DnaConfig::showRNA(RNA& _R) 
+{
+	debugFile df;
+	for (std::vector<Cartridge2>::iterator itor = _R.Begin(); itor != _R.End(); ++itor)
+		df.Add( itor->ShowMe() );
+
+	CString pathDesktop;
+	CColorEyeIApp *pApp = dynamic_cast<CColorEyeIApp*>(AfxGetApp());
+	pathDesktop.Format("%s\\DNAconfig.log", pApp->GetDesktopPath());
+	df.Out2File(pathDesktop);
+}
+
+inline 	void DnaConfig::SetQuickSort(const BOOL& _B)
+{
+	m_msrQuick = _B;
+}
+
 #endif

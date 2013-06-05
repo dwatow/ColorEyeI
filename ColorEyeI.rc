@@ -174,8 +174,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,3,14,26
- PRODUCTVERSION 3,11,17,0
+ FILEVERSION 2,3,14,27
+ PRODUCTVERSION 3,11,18,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -193,14 +193,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 光學量測程式\0"
-            VALUE "FileVersion", "2, 3, 14, 26\0"
+            VALUE "FileVersion", "2, 3, 14, 27\0"
             VALUE "InternalName", "ColorEye 測式版 v3.11\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Color Eye App\0"
-            VALUE "ProductVersion", "3, 11, 17, 0\0"
+            VALUE "ProductVersion", "3, 11, 18, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -225,7 +225,7 @@ FONT 9, "Calibri"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,165,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,19,20,20
-    LTEXT           "ColorEye Version Beta 3.11.17",IDC_STATIC,40,10,110,8,
+    LTEXT           "ColorEye Version Beta 3.11.18",IDC_STATIC,40,10,110,8,
                     SS_NOPREFIX
     LTEXT           "Copyright (C) 2012\n奇菱光電股份有限公司\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,125,25
@@ -261,153 +261,153 @@ FONT 9, "Calibri"
 BEGIN
 END
 
-IDD_MSR_ITEM DIALOG DISCARDABLE  0, 0, 462, 257
+IDD_MSR_ITEM DIALOG DISCARDABLE  0, 0, 462, 278
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "選擇量測項目"
 FONT 9, "Calibri"
 BEGIN
     CONTROL         "",IDC_CHECK_CWP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    53,57,8,8
+                    67,57,8,8
     CONTROL         "",IDC_CHECK_CRP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    63,57,8,8
+                    77,57,8,8
     CONTROL         "",IDC_CHECK_CGP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    73,57,8,8
+                    87,57,8,8
     CONTROL         "",IDC_CHECK_CBP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    83,57,8,8
+                    97,57,8,8
     CONTROL         "",IDC_CHECK_CDP1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,57,8,8
+                    107,57,8,8
     CONTROL         "",IDC_CHECK_CWP5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    53,69,8,8
+                    67,69,8,8
     CONTROL         "",IDC_CHECK_CRP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,63,69,8,8
+                    WS_TABSTOP,77,69,8,8
     CONTROL         "",IDC_CHECK_CGP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,73,69,8,8
+                    WS_TABSTOP,87,69,8,8
     CONTROL         "",IDC_CHECK_CBP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,83,69,8,8
+                    WS_TABSTOP,97,69,8,8
     CONTROL         "",IDC_CHECK_CDP5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,93,69,8,8
-    EDITTEXT        IDC_EDIT_P5FE,145,67,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,107,69,8,8
+    EDITTEXT        IDC_EDIT_P5FE,159,67,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    53,84,8,8
+                    67,84,8,8
     CONTROL         "",IDC_CHECK_CRP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,63,84,8,8
+                    WS_TABSTOP,77,84,8,8
     CONTROL         "",IDC_CHECK_CGP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,73,84,8,8
+                    WS_TABSTOP,87,84,8,8
     CONTROL         "",IDC_CHECK_CBP9,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,83,84,8,8
+                    WS_TABSTOP,97,84,8,8
     CONTROL         "",IDC_CHECK_CDP9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,84,8,8
-    EDITTEXT        IDC_EDIT_P9FE,145,82,20,12,ES_AUTOHSCROLL
+                    107,84,8,8
+    EDITTEXT        IDC_EDIT_P9FE,159,82,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,53,99,8,8
+                    WS_DISABLED | WS_TABSTOP,67,99,8,8
     CONTROL         "",IDC_CHECK_CRP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,63,99,8,8
+                    WS_DISABLED | WS_TABSTOP,77,99,8,8
     CONTROL         "",IDC_CHECK_CGP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,73,99,8,8
+                    WS_DISABLED | WS_TABSTOP,87,99,8,8
     CONTROL         "",IDC_CHECK_CBP13,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,83,99,8,8
+                    WS_DISABLED | WS_TABSTOP,97,99,8,8
     CONTROL         "",IDC_CHECK_CDP13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,99,8,8
+                    107,99,8,8
     CONTROL         "",IDC_CHECK_CWP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,53,112,8,8
+                    WS_DISABLED | WS_TABSTOP,67,112,8,8
     CONTROL         "",IDC_CHECK_CRP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,63,112,8,8
+                    WS_DISABLED | WS_TABSTOP,77,112,8,8
     CONTROL         "",IDC_CHECK_CGP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,73,112,8,8
+                    WS_DISABLED | WS_TABSTOP,87,112,8,8
     CONTROL         "",IDC_CHECK_CBP21,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,83,112,8,8
+                    WS_DISABLED | WS_TABSTOP,97,112,8,8
     CONTROL         "",IDC_CHECK_CDP21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,112,8,8
-    EDITTEXT        IDC_EDIT_P21FE,145,110,20,12,ES_AUTOHSCROLL
+                    107,112,8,8
+    EDITTEXT        IDC_EDIT_P21FE,159,110,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,53,125,8,8
+                    WS_DISABLED | WS_TABSTOP,67,125,8,8
     CONTROL         "",IDC_CHECK_CRP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,63,125,8,8
+                    WS_DISABLED | WS_TABSTOP,77,125,8,8
     CONTROL         "",IDC_CHECK_CGP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,73,125,8,8
+                    WS_DISABLED | WS_TABSTOP,87,125,8,8
     CONTROL         "",IDC_CHECK_CBP25,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,83,125,8,8
+                    WS_DISABLED | WS_TABSTOP,97,125,8,8
     CONTROL         "",IDC_CHECK_CDP25,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    93,125,8,8
-    EDITTEXT        IDC_EDIT_P25RECTSIDE,162,136,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_P25FE,145,123,20,12,ES_AUTOHSCROLL
+                    107,125,8,8
+    EDITTEXT        IDC_EDIT_P25RECTSIDE,176,136,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_P25FE,159,123,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_CWP49,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    53,151,8,8
+                    67,151,8,8
     CONTROL         "",IDC_CHECK_CRP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,63,151,8,8
+                    WS_DISABLED | WS_TABSTOP,77,151,8,8
     CONTROL         "",IDC_CHECK_CGP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,73,151,8,8
+                    WS_DISABLED | WS_TABSTOP,87,151,8,8
     CONTROL         "",IDC_CHECK_CBP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,83,151,8,8
+                    WS_DISABLED | WS_TABSTOP,97,151,8,8
     CONTROL         "",IDC_CHECK_CDP49,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,93,151,8,8
+                    WS_DISABLED | WS_TABSTOP,107,151,8,8
     CONTROL         "",IDC_CHECK_CWGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    53,163,8,8
+                    67,163,8,8
     CONTROL         "",IDC_CHECK_CRGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    63,163,8,8
+                    77,163,8,8
     CONTROL         "",IDC_CHECK_CGGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    73,163,8,8
+                    87,163,8,8
     CONTROL         "",IDC_CHECK_CBGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    83,163,8,8
+                    97,163,8,8
     CONTROL         "",IDC_CHECK_CDGM,"Button",BS_AUTOCHECKBOX | WS_DISABLED | 
-                    WS_TABSTOP,93,163,8,8
-    EDITTEXT        IDC_EDIT_GM1,105,161,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_GM2,137,161,20,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_GM3,197,161,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,107,163,8,8
+    EDITTEXT        IDC_EDIT_GM1,119,161,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_GM2,151,161,20,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_GM3,211,161,20,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_CHECK_NITS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    23,191,8,8
-    EDITTEXT        IDC_EDIT_NITS,33,189,15,12,ES_AUTOHSCROLL
+                    23,207,8,8
+    EDITTEXT        IDC_EDIT_NITS,33,205,15,12,ES_AUTOHSCROLL
     CONTROL         "CrossTalk",IDC_CHECK_CROSSTALK,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,23,205,48,8
-    EDITTEXT        IDC_EDIT_CROSSTALK1,141,204,20,12,ES_AUTOHSCROLL
+                    WS_TABSTOP,23,221,48,8
+    EDITTEXT        IDC_EDIT_CROSSTALK1,141,220,20,12,ES_AUTOHSCROLL
     PUSHBUTTON      ">>",IDC_BUTTON_ADD,265,123,25,15
     PUSHBUTTON      "<<",IDC_BUTTON_DEL,265,143,25,15,WS_DISABLED
-    LISTBOX         IDC_LIST_MSRITEMS,300,23,150,197,LBS_USETABSTOPS | 
+    LISTBOX         IDC_LIST_MSRITEMS,302,23,147,215,LBS_USETABSTOPS | 
                     LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | 
                     WS_HSCROLL | WS_TABSTOP
-    CONTROL         "最佳化量測效率",IDC_CHECK_QUICKMSR,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,15,22,70,8
-    DEFPUSHBUTTON   "量測",IDOK,135,235,50,14,WS_DISABLED
-    PUSHBUTTON      "Cancel",IDCANCEL,189,235,50,14
-    LTEXT           "13點",IDC_STATIC,33,99,17,8
-    LTEXT           "25點",IDC_STATIC,33,125,17,8
-    LTEXT           "9點",IDC_STATIC,37,84,13,8
-    LTEXT           "5點",IDC_STATIC,37,69,13,8
-    LTEXT           "中心點",IDC_STATIC,26,57,24,8
-    LTEXT           "離邊 :  ",IDC_STATIC,111,84,21,8
-    LTEXT           "四週矩形邊長:",IDC_STATIC,111,137,52,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,111,69,32,8
-    LTEXT           "cm",IDC_STATIC,187,137,11,8
-    LTEXT           "49點",IDC_STATIC,33,151,17,8
-    LTEXT           "Gamma",IDC_STATIC,21,163,29,8
-    LTEXT           "~",IDC_STATIC,127,163,8,8
-    LTEXT           "平均分配",IDC_STATIC,162,163,32,8
-    LTEXT           "等分",IDC_STATIC,217,163,17,8
-    LTEXT           "Nits",IDC_STATIC,53,191,14,8
-    LTEXT           "█",IDC_STATIC_W,53,45,8,8
-    LTEXT           "█",IDC_STATIC_R,63,45,8,8
-    LTEXT           "█",IDC_STATIC_G,73,45,8,8
-    LTEXT           "█",IDC_STATIC_B,83,45,8,8
-    LTEXT           "█",IDC_STATIC_D,93,45,8,8
-    GROUPBOX        "亮度、色度、暗態",IDC_STATIC,13,35,237,141
-    GROUPBOX        "特別項目",IDC_STATIC,13,179,237,41
-    LTEXT           "中心方塊離邊 : 1/",IDC_STATIC,76,205,64,8
-    LTEXT           "21點",IDC_STATIC,33,112,17,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,111,112,32,8
-    LTEXT           "離邊 :  1/",IDC_STATIC,111,125,32,8
-    GROUPBOX        "量測項目",IDC_STATIC,7,9,250,216
-    GROUPBOX        "量測點位列表",IDC_STATIC,295,10,160,215
-    PUSHBUTTON      "全選",IDC_BUTTON_SELALL,185,20,29,15
-    PUSHBUTTON      "全不選",IDC_BUTTON_SELNO,220,20,29,15
-    COMBOBOX        IDC_COMBO_SEL_NITS_KIND,73,189,27,45,CBS_DROPDOWNLIST | 
+    CONTROL         "最佳化量測",IDC_CHECK_QUICKMSR,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,24,177,50,8
+    DEFPUSHBUTTON   "量測",IDOK,135,255,50,14,WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,189,255,50,14
+    LTEXT           "13點",IDC_STATIC,47,99,17,8
+    LTEXT           "25點",IDC_STATIC,47,125,17,8
+    LTEXT           "9點",IDC_STATIC,51,84,13,8
+    LTEXT           "5點",IDC_STATIC,51,69,13,8
+    LTEXT           "中心點",IDC_STATIC,40,57,24,8
+    LTEXT           "離邊 :  ",IDC_STATIC,125,84,21,8
+    LTEXT           "四週矩形邊長:",IDC_STATIC,125,137,52,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,125,69,32,8
+    LTEXT           "cm",IDC_STATIC,201,137,11,8
+    LTEXT           "49點",IDC_STATIC,47,151,17,8
+    LTEXT           "Gamma",IDC_STATIC,35,163,29,8
+    LTEXT           "~",IDC_STATIC,141,163,8,8
+    LTEXT           "平均分配",IDC_STATIC,176,163,32,8
+    LTEXT           "等分",IDC_STATIC,231,163,17,8
+    LTEXT           "Nits",IDC_STATIC,53,207,14,8
+    LTEXT           "█",IDC_STATIC_W,67,45,8,8
+    LTEXT           "█",IDC_STATIC_R,77,45,8,8
+    LTEXT           "█",IDC_STATIC_G,87,45,8,8
+    LTEXT           "█",IDC_STATIC_B,97,45,8,8
+    LTEXT           "█",IDC_STATIC_D,107,45,8,8
+    GROUPBOX        "亮度、色度、暗態",IDC_STATIC,13,35,237,156
+    GROUPBOX        "特別項目",IDC_STATIC,13,195,237,41
+    LTEXT           "中心方塊離邊 : 1/",IDC_STATIC,77,221,64,8
+    LTEXT           "21點",IDC_STATIC,47,112,17,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,125,112,32,8
+    LTEXT           "離邊 :  1/",IDC_STATIC,125,125,32,8
+    GROUPBOX        "量測項目",IDC_STATIC,7,9,250,236
+    GROUPBOX        "量測點位列表",IDC_STATIC,295,10,160,235
+    PUSHBUTTON      "全選",IDC_BUTTON_SELALL,145,20,49,15
+    PUSHBUTTON      "全不選",IDC_BUTTON_SELNO,200,20,49,15
+    COMBOBOX        IDC_COMBO_SEL_NITS_KIND,73,206,27,45,CBS_DROPDOWNLIST | 
                     WS_TABSTOP
-    EDITTEXT        IDC_EDIT_P13FE,145,97,20,12,ES_AUTOHSCROLL
-    LTEXT           "離邊 :  1/",IDC_STATIC,111,99,32,8
+    EDITTEXT        IDC_EDIT_P13FE,159,97,20,12,ES_AUTOHSCROLL
+    LTEXT           "離邊 :  1/",IDC_STATIC,125,99,32,8
     CONTROL         "Spin1",IDC_SW_P9FE,"msctls_updown32",UDS_WRAP | 
-                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,186,83,11,9
-    LTEXT           "cm",IDC_STATIC_P9FECM,167,84,14,8,WS_DISABLED
-    LTEXT           "1/",IDC_STATIC_P9FE1OVER,131,84,8,8
-    GROUPBOX        "",IDC_STATIC_P9,20,76,182,20
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,200,83,11,9
+    LTEXT           "cm",IDC_STATIC_P9FECM,181,84,14,8,WS_DISABLED
+    LTEXT           "1/",IDC_STATIC_P9FE1OVER,145,84,8,8
+    GROUPBOX        "",IDC_STATIC_P9,34,76,182,20
 END
 
 IDD_EDIT_DIALOG DIALOG DISCARDABLE  0, 0, 112, 56
@@ -563,7 +563,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 455
         TOPMARGIN, 7
-        BOTTOMMARGIN, 250
+        BOTTOMMARGIN, 271
     END
 
     IDD_CASETUP_DIALOG, DIALOG

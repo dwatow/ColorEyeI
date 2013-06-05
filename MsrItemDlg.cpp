@@ -188,7 +188,7 @@ void CMsrItemDlg::listBoxUpdate()
     m_debugLog.Out2File(m_desktopPath+"//DNA.log");
 }
 
-void CMsrItemDlg::SetupDnaInit()
+void CMsrItemDlg::SetupDnaConfig()
 {
     UpdateData(TRUE);
     //中心點
@@ -269,7 +269,8 @@ void CMsrItemDlg::OnButtonAdd()
     //2. CA-210已宣告
     if (checkMsrParaOK())
     {
-        SetupDnaInit();
+        SetupDnaConfig();
+		m_DnaInit.SetQuickSort(m_chkQuickMsr.GetCheck());
         m_DnaInit.CreatDNA(m_DNA, m_RNA);
 
         m_debugLog.Clear();

@@ -29,19 +29,31 @@ public:
     void CutEqualCell(const RNA& );
 //    void CutEqualCell(std::vector<Cartridge2> );
 //    void Grow(ColorType ct, PointNum pn);
-   void DeleteEmptyCell();
+    void DeleteEmptyCell();
 //    void SetBolt(Bolt *_P){ p_Pusher = _P; };
 //    Bolt* GetBolt(){ return p_Pusher; };
     //像vector的函數，卻不是直接回傳
 public:
 //     Cartridge2& At (ColorType, PointNum, UINT );
 //     const Cartridge2& At (ColorType, PointNum, UINT )const ;
-	std::vector<int>::size_type HaveSeveral
-		(const CString& color = "", const CString& ptTotal = "", const CString& mrIndex = "", const CString& fePara = "");
+	std::vector<int>::size_type HaveSeveral(const CString& color   = "", const CString& ptTotal = "", 
+		                                    const CString& mrIndex = "", const CString& fePara  = "");
 	float   fFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
 	CString sFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
+
+#ifdef _DEBUG
+	float   fFind(const CString&, const int&    , const CString&, const CString&, const ValueKind&);
+	CString sFind(const CString&, const int&    , const CString&, const CString&, const ValueKind&);
+	float   fFind(const CString&, const CString&, const int&    , const CString&, const ValueKind&);
+	CString sFind(const CString&, const CString&, const int&    , const CString&, const ValueKind&);
+	float   fFind(const CString&, const int&    , const int&    , const CString&, const ValueKind&);
+	CString sFind(const CString&, const int&    , const int&    , const CString&, const ValueKind&);
+#endif
+
     Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);
 	Cartridge2& Find(const CString&);
+private:
+	void paraError();
 
 public:
 	void Empty(); 
@@ -80,9 +92,9 @@ private:
     
 //operator
 public:
-    void operator+(const Cartridge2&  _X);
-    void operator+(const RNA& _R);
-//     void operator+(      RNA& _X) { AddCell(m_CarChain2.end(), _X.Begin(), _X.End()); };
+    void operator+=(const RNA& _R);
+    void operator+=(const Cartridge2&  _X);
+//     void operator+=(      RNA& _X) { AddCell(m_CarChain2.end(), _X.Begin(), _X.End()); };
     ////
     //debug
 // public:
@@ -123,10 +135,15 @@ inline std::vector<Cartridge2>::const_iterator RNA::End() const
 inline const std::vector<Cartridge2>::size_type RNA::Size () const
 { return m_CarChain2.size()-1; };
 
-// inline void RNA::operator+(const RNA& _R)
-// { AddCell(_R); };
-inline void RNA::operator+(const Cartridge2&  _X)
+inline void RNA::operator+=(const RNA& _R)
+{ AddCell(_R); };
+inline void RNA::operator+=(const Cartridge2&  _X)
 { AddCell(_X); };
 
+inline void RNA::paraError()
+{
+	AfxMessageBox("檢查一下參數有沒有加\"\"");
+	ASSERT(0);
+}
 
 #endif // !defined(AFX_std::vector<Cartridge2>_H__0108A325_5755_4826_B203_49A50707E9EF__INCLUDED_)

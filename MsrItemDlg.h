@@ -138,7 +138,7 @@ private:
 	void listBoxUpdate();
 //     void selMsrItem2DNA_sortable(DNA&);
 //     void selMsrItem2DNA_Unsortable(DNA&);
-	void SetupDnaInit();
+	void SetupDnaConfig();
 	void rememberSelMsrItems();
 	BOOL checkMsrParaOK();
 };
