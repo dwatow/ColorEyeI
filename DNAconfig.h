@@ -90,7 +90,8 @@ public:
 	void Add_B_Gamma(const int& lvBegin = GammaBeginLv,  const int& lvEnd = GammaEndLv, const int& lfStep = GammaAvg);
 
 //for Omd file
-	void Add_OmdFileDNA();
+	void Add_Omd();
+	void Add_Omd_Gamma();
 	void Add_Table_OQC_MASS_TPV();
 	void Add_Table_OQC_MASS_SEC();
 	void Add_Table_RA();
@@ -98,11 +99,11 @@ public:
 	void Add_Table_OQC_MASS_NIBO();
 	void Add_Table_OQC_TEST();
 
-	void CreatDNA(DNA&, RNA&);
+	void CreatRNA(DNA&, RNA&);
 private:
-	RNA selMsrItem2DNA_sortable();
-	RNA selMsrItem2DNA_CrossTalk();
-	RNA selMsrItem2DNA_Gamma();
+	RNA add_DNA_WRGBD(DNA&);
+	RNA add_DNA_CrossTalk(DNA&);
+	RNA add_DNA_Gamma(DNA&);
 	void showRNA(RNA& ) ;
 };
 

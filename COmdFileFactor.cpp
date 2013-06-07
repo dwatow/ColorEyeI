@@ -21,7 +21,7 @@ COmdFileFactor::COmdFileFactor(){};
 
 COmdFileFactor::~COmdFileFactor()
 {
-    m_dOmd.Empty(); 
+    m_omdRNA.Empty(); 
     m_dTxt.clear();
 };
 

@@ -271,7 +271,7 @@ void CMsrItemDlg::OnButtonAdd()
     {
         SetupDnaConfig();
 		m_DnaInit.SetQuickSort(m_chkQuickMsr.GetCheck());
-        m_DnaInit.CreatDNA(m_DNA, m_RNA);
+        m_DnaInit.CreatRNA(m_DNA, m_RNA);
 
         m_debugLog.Clear();
         for (std::vector<Nucleotide>::iterator Nit = m_DNA.Begin(); Nit != m_DNA.End(); ++Nit)

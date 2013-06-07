@@ -26,13 +26,13 @@ public:
 //	BOOL IsEmpty(){ nChain.empty(); };
 
 
-	void operator+(const Nucleotide&  _X);
-	void operator+(const DNA& _R);
+	void operator+=(const Nucleotide&  _X);
+	void operator+=(const DNA& _R);
 };
 
-inline void DNA::operator+(const Nucleotide&  _N)
+inline void DNA::operator+=(const Nucleotide&  _N)
 { AddCell(_N); };
-inline void DNA::operator+(const DNA& _D)
+inline void DNA::operator+=(const DNA& _D)
 { AddCell(_D); };
 
 #endif

@@ -68,15 +68,15 @@ RNA::~RNA()
     m_CarChain2.clear();
 }
 
-const Cartridge2& RNA::At(const Cartridge2& _C2) const
-{
-    for (std::vector<Cartridge2>::const_iterator citor = m_CarChain2.begin(); citor != m_CarChain2.end(); ++citor)
-        if (_C2 == *citor)
-            return m_CarChain2.at(abs(citor - m_CarChain2.begin()));
-
-        return m_CarChain2.at(0);
-}
-
+// const Cartridge2& RNA::At(const Cartridge2& _C2) const
+// {
+//     for (std::vector<Cartridge2>::const_iterator citor = m_CarChain2.begin(); citor != m_CarChain2.end(); ++citor)
+//         if (_C2 == *citor)
+//             return m_CarChain2.at(abs(citor - m_CarChain2.begin()));
+// 
+//         return m_CarChain2.at(0);
+// }
+// 
 const Cartridge2& RNA::At(const std::vector<Cartridge2>::size_type& _P) const
 { return m_CarChain2.at(_P);   };
 
@@ -91,6 +91,11 @@ float RNA::fFind(const CString& _C, const int&     _P, const int&     _M, const 
 CString RNA::sFind(const CString& _C, const int&     _P, const CString& _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
 CString RNA::sFind(const CString& _C, const CString& _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
 CString RNA::sFind(const CString& _C, const int&     _P, const int&     _M, const CString& _F, const ValueKind& _V){	paraError();	return "0.0000";}
+void RNA::paraError()
+{
+	AfxMessageBox("檢查一下參數有沒有加\"\"");
+	ASSERT(0);
+}
 #endif
 
 std::vector<int>::size_type RNA::HaveSeveral(const CString& color, const CString& ptTotal, const CString& mrIndex, const CString& fePara)
@@ -173,121 +178,121 @@ Cartridge2& RNA::Find(const CString& sample)
 		return m_CarChain2.at(0);
 }
 
-const int RNA::reconstrColor(CString& strResult)
-{
-	int colorName(0);
-
-	//Crosstalk+矩形
-	colorName = strResult.Find("Cross");
-	if (colorName >= 0)
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 13));
-		return colorName;
-	}
-
-	//Nits
-	colorName = strResult.Find("Nits");
-	if (colorName >= 0)
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 4));
-		return colorName;
-	}
-	
-	//x色
-	colorName = strResult.Find("色") - 2;
-
-	if (colorName >= 0)
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 2));
-		return colorName;
-	}
-
-	return colorName;
-}
-
-const int RNA::reconstrPointNum(CString& strResult)
-{ 
-	int colorName(0);
-
-	//Gamma
-	colorName = strResult.Find("Gamma");
-	if (colorName >= 0)
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 5));
-		return colorName;
-	}	
-
-	//中心點
-	colorName = strResult.Find("中心點");
-	if (colorName >= 0)
-	{
-		strResult.Format("中心點");
-		return colorName;
-	}
-	
-	colorName = strResult.Find("1點");
-	if (colorName >= 0)
-	{
-		strResult.Format("中心點");
-		return colorName;
-	}	
-
-	//數字 點
-	const int shift = 2;
-	colorName = strResult.Find("點") - (3+shift);
-	if (colorName >= 0-(3+shift) && atoi(strResult))
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 3));
-		return colorName;
-	}	
-
-	colorName = strResult.Find("點") - (2+shift);
-	if (colorName >= 0-(2+shift) && atoi(strResult))
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 2));
-		return colorName;
-	}	
-
-	colorName = strResult.Find("點") - (1+shift);
-	if (colorName >= 0-(1+shift) && atoi(strResult))
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 1));
-		return colorName;
-	}
-
+// const int RNA::reconstrColor(CString& strResult)
+// {
+// 	int colorName(0);
+// 
+// 	//Crosstalk+矩形
+// 	colorName = strResult.Find("Cross");
 // 	if (colorName >= 0)
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 13));
+// 		return colorName;
+// 	}
+// 
+// 	//Nits
+// 	colorName = strResult.Find("Nits");
+// 	if (colorName >= 0)
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 4));
+// 		return colorName;
+// 	}
+// 	
+// 	//x色
+// 	colorName = strResult.Find("色") - 2;
+// 
+// 	if (colorName >= 0)
+// 	{
 // 		strResult.Format("%s", strResult.Mid(colorName, 2));
-	
-	return colorName;
-}
-const int RNA::reconstrMsrNo(CString& strResult)
-{
-	const int shift = 2;
-	int colorName(0);
-
-	colorName = strResult.Find("第") + shift;
-	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 3)))
-	{
-		strResult.Format("第%s點", strResult.Mid(colorName, 3));
-		return colorName;
-	}
-
-	colorName = strResult.Find("第") + shift;
-	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 2)))
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 2));
-		return colorName;
-	}
-
-	colorName = strResult.Find("第") + shift;
-	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 1)))
-	{
-		strResult.Format("%s", strResult.Mid(colorName, 1));
-		return colorName;
-	}
-
-	return colorName;
-}
+// 		return colorName;
+// 	}
+// 
+// 	return colorName;
+// }
+// 
+// const int RNA::reconstrPointNum(CString& strResult)
+// { 
+// 	int colorName(0);
+// 
+// 	//Gamma
+// 	colorName = strResult.Find("Gamma");
+// 	if (colorName >= 0)
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 5));
+// 		return colorName;
+// 	}	
+// 
+// 	//中心點
+// 	colorName = strResult.Find("中心點");
+// 	if (colorName >= 0)
+// 	{
+// 		strResult.Format("中心點");
+// 		return colorName;
+// 	}
+// 	
+// 	colorName = strResult.Find("1點");
+// 	if (colorName >= 0)
+// 	{
+// 		strResult.Format("中心點");
+// 		return colorName;
+// 	}	
+// 
+// 	//數字 點
+// 	const int shift = 2;
+// 	colorName = strResult.Find("點") - (3+shift);
+// 	if (colorName >= 0-(3+shift) && atoi(strResult))
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 3));
+// 		return colorName;
+// 	}	
+// 
+// 	colorName = strResult.Find("點") - (2+shift);
+// 	if (colorName >= 0-(2+shift) && atoi(strResult))
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 2));
+// 		return colorName;
+// 	}	
+// 
+// 	colorName = strResult.Find("點") - (1+shift);
+// 	if (colorName >= 0-(1+shift) && atoi(strResult))
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 1));
+// 		return colorName;
+// 	}
+// 
+// // 	if (colorName >= 0)
+// // 		strResult.Format("%s", strResult.Mid(colorName, 2));
+// 	
+// 	return colorName;
+// }
+// const int RNA::reconstrMsrNo(CString& strResult)
+// {
+// 	const int shift = 2;
+// 	int colorName(0);
+// 
+// 	colorName = strResult.Find("第") + shift;
+// 	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 3)))
+// 	{
+// 		strResult.Format("第%s點", strResult.Mid(colorName, 3));
+// 		return colorName;
+// 	}
+// 
+// 	colorName = strResult.Find("第") + shift;
+// 	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 2)))
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 2));
+// 		return colorName;
+// 	}
+// 
+// 	colorName = strResult.Find("第") + shift;
+// 	if (colorName >= 0+shift && atoi(strResult.Mid(colorName, 1)))
+// 	{
+// 		strResult.Format("%s", strResult.Mid(colorName, 1));
+// 		return colorName;
+// 	}
+// 
+// 	return colorName;
+// }
 
 
 void RNA::Empty()

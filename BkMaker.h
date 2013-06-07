@@ -44,10 +44,10 @@ public:
 
 protected:
     NitsDirect m_NitsDirect;
-    int m_NitsLv;
+    int m_NitsLv;  //參數
 public:
+//void TranScripter::forNits(Cartridge2& crtg)
     virtual    void NT_SetNitsLv(const int&){  };
-    virtual    const int  NT_GetNitsLv() const{  return m_NitsLv; };
     virtual    void NT_colorReviseByNits(ColorRef&){  };
 
 //共用介面

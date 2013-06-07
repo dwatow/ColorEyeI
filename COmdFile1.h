@@ -37,9 +37,8 @@ private:
 	void o2tWRGB1nNits();
 
 private:
-	DNA m_omdDNA;
-	const CString getInch() const;
-	void t2oDNAnRNA();
+// 	const CString getInch() const;
+	void CreatDNA(DnaConfig&);
 	void DNA_sortable(DNA& );
 	void DNA_Unsortable(DNA& );
 
@@ -58,7 +57,7 @@ private:
 	void t2oD13();
 	void t2oNits();
 
-	void t2oDelDNAinEmptyRNA();
+// 	void t2oDelDNAinEmptyRNA();
 };
 
 inline COmdFile1::COmdFile1(const BOOL& isOld){ m_isOld = isOld; };

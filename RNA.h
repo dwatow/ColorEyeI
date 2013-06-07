@@ -42,18 +42,20 @@ public:
 	CString sFind(const CString&, const CString&, const CString&, const CString&, const ValueKind&);
 
 #ifdef _DEBUG
+public:
 	float   fFind(const CString&, const int&    , const CString&, const CString&, const ValueKind&);
 	CString sFind(const CString&, const int&    , const CString&, const CString&, const ValueKind&);
 	float   fFind(const CString&, const CString&, const int&    , const CString&, const ValueKind&);
 	CString sFind(const CString&, const CString&, const int&    , const CString&, const ValueKind&);
 	float   fFind(const CString&, const int&    , const int&    , const CString&, const ValueKind&);
 	CString sFind(const CString&, const int&    , const int&    , const CString&, const ValueKind&);
-#endif
-
-    Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);
-	Cartridge2& Find(const CString&);
 private:
 	void paraError();
+#endif
+
+public:
+    Cartridge2& Find(const CString&, const CString&, const CString&, const CString&);
+	Cartridge2& Find(const CString&);
 
 public:
 	void Empty(); 
@@ -62,7 +64,7 @@ public:
     //不管名字像不像直接由vector 回傳
 public:
 //    Cartridge2& At(Cartridge2);
-    const Cartridge2& At(const Cartridge2&) const;
+//     const Cartridge2& At(const Cartridge2&) const;
 //     Cartridge2& At(std::vector<Cartridge2>::size_type _P)    { return m_CarChain2.at(_P);   };
     const Cartridge2& At(const std::vector<Cartridge2>::size_type& _P) const;
 
@@ -102,9 +104,9 @@ public:
 private:
 	CartridgeFinder finder;
 private:
-	const int reconstrColor(CString&);
-	const int reconstrPointNum(CString&);
-	const int reconstrMsrNo(CString&);
+// 	const int reconstrColor(CString&);
+// 	const int reconstrPointNum(CString&);
+// 	const int reconstrMsrNo(CString&);
 	
 private:
 	debugFile debugLogMaker;
@@ -139,11 +141,5 @@ inline void RNA::operator+=(const RNA& _R)
 { AddCell(_R); };
 inline void RNA::operator+=(const Cartridge2&  _X)
 { AddCell(_X); };
-
-inline void RNA::paraError()
-{
-	AfxMessageBox("檢查一下參數有沒有加\"\"");
-	ASSERT(0);
-}
 
 #endif // !defined(AFX_std::vector<Cartridge2>_H__0108A325_5755_4826_B203_49A50707E9EF__INCLUDED_)

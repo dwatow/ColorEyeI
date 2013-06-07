@@ -280,7 +280,6 @@ void CPatternDlg::trigger()
     m_itor->m_pBackGorund->NT_SetWnd(GetActiveWindow());
     m_itor->m_pBackGorund->NT_SetCa(m_pCA210);
 
-    //目前這一點是不是5nits的中心點？2=是
     setBkColor(m_itor->GetBkColor());
 
     m_Goal.SetData(m_itor->GetBullet());
@@ -460,7 +459,10 @@ UINT CPatternDlg::eventCatchMsrValue()
     //不然就是下一點
     m_Goal.ShowLabel(FALSE);
     if (m_itor->GetBkStatus() == BGS_NitsNeg || m_itor->GetBkStatus() == BGS_NitsPos)
+	{
         m_itor->m_pBackGorund->NT_colorReviseByNits(m_BkColor);
+		m_NitsLv.Format("%d", m_BkColor.R());
+	}
     /*
     recoil() 
     0 沒連線
@@ -538,6 +540,7 @@ void CPatternDlg::eventExitDialog()
     ASSERT_VALID(pDoc);
     
 	pDoc->UpdateDocRNA(m_RNA);
+	pDoc->GetFileHead().iNitsLv(m_NitsLv);
     pDoc->UpdateAllViews(NULL);
 }
 

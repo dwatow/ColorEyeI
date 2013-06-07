@@ -16,7 +16,7 @@
 
 class CMsrTableDlg : public CDialog
 {
-	DnaConfig m_DnaInit;
+	DnaConfig m_dnaConfig;
 	DNA m_DNA;
 	RNA m_RNA;
 	tableIndex m_TableIndex;

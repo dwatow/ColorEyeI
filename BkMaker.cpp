@@ -55,7 +55,7 @@ BkMaker& BkMaker::operator=(const BkMaker& sp)
 		m_rectColor = sp.m_rectColor;
 		m_pdlgcWnd = sp.m_pdlgcWnd;
 		m_pCa210 = sp.m_pCa210;
-		m_NitsLv = sp.m_NitsLv;
+// 		m_NitsLv = sp.m_NitsLv;
 		m_NitsDirect = sp.m_NitsDirect;
 	}
 	return *this;

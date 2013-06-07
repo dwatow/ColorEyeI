@@ -31,7 +31,7 @@ CXlsFile2* CXlsGamma::iPanelID(CString strPanelID , std::vector<Cartridge2>::siz
 
 CXlsFile2* CXlsGamma::iData(RNA&, std::vector<Cartridge2>::size_type ModuleNO)
 {
-// 	iCellNO(ModuleNO)->iData(m_vCar);
+ 	iCellNO(ModuleNO)->iData(m_vCar);
 	return this;
 }
 
@@ -44,7 +44,7 @@ CXlsFile2* CXlsGamma::iPanelID(CString strPanelID)
 
 CXlsFile2* CXlsGamma::iData(RNA& vCar)
 {
-// 	m_vCar = vCar;
+	m_vCar = vCar;
     if (vCar.HaveSeveral("フ","gamma"))  idWGamma();	
 	SetVisible(true);
     return this;
@@ -52,14 +52,15 @@ CXlsFile2* CXlsGamma::iData(RNA& vCar)
 
 void CXlsGamma::idWGamma()
 {
-	SelectSheet(1);
-	int i(0);
-	CString msrItemIndex;
-    for(i = 0; i < PnGamma; ++i)
+	SelectSheet("Color Data");
+	int index(0);
+	CString gammaIndex;
+    for(index = 0; index < PnGamma; ++index)
 	{
-		msrItemIndex.Format("%d", i+1);
-		SelectCell((char)('E'+13*m_ModuleNO), 53+i)->SetCell("%3.2f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Lv));
-		SelectCell((char)('F'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Sx));
-        SelectCell((char)('G'+13*m_ModuleNO), 53+i)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", msrItemIndex," ",VluK_Sy));
+		gammaIndex.Format("%d", index+1);
+		SelectCell((char)('E'+13*m_ModuleNO), 53+index)->SetCell("%3.2f", m_vCar.fFind("フ","Gamma", gammaIndex,"0 255 255",VluK_Lv));
+		SelectCell((char)('F'+13*m_ModuleNO), 53+index)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", gammaIndex,"0 255 255",VluK_Sx));
+        SelectCell((char)('G'+13*m_ModuleNO), 53+index)->SetCell("%1.4f", m_vCar.fFind("フ","Gamma", gammaIndex,"0 255 255",VluK_Sy));
+		gammaIndex.Format("%d", m_vCar.Size());
 	}
 }

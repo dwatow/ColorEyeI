@@ -18,7 +18,11 @@ public:
 	virtual ~COmdFileGm(){};
  
 private:
+	void CreatDNA(DnaConfig&);
 	void txt2omd();
+	void t2oHead();
+	void t2oGamma();
+
 	void omd2txt();
 };
 

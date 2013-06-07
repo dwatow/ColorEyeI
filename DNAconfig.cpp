@@ -35,12 +35,12 @@ m_BGammaBegin(0), m_BGamma_End(0), m_BGamma_Avg(0),
 Ts(0)
 {}
 
-void DnaConfig::CreatDNA(DNA& _D, RNA& _R)
+void DnaConfig::CreatRNA(DNA& _D, RNA& _R)
 {
 	Ts = new TranScripter();
-	_R += selMsrItem2DNA_sortable();		
-	_R += selMsrItem2DNA_CrossTalk();
-	_R += selMsrItem2DNA_Gamma();
+	_R += add_DNA_WRGBD(_D);
+	_R += add_DNA_CrossTalk(_D);
+	_R += add_DNA_Gamma(_D);
 	delete Ts;
 }
 
@@ -147,9 +147,9 @@ void DnaConfig::Add_B_Gamma(const int& lvBegin,  const int& lvEnd, const int& lf
 	m_chkBGamma = TRUE;
 }
 
-RNA DnaConfig::selMsrItem2DNA_sortable()
+RNA DnaConfig::add_DNA_WRGBD(DNA& dnaTotal)
 {
-	DNA dnaSortStable;
+ 	DNA dnaSortStable;
 	RNA rnaSortStable;
 
     //修改的話，要同步修改
@@ -215,11 +215,11 @@ RNA DnaConfig::selMsrItem2DNA_sortable()
 	}
 
 	showRNA(rnaSortStable);
-
+	dnaTotal += dnaSortStable;
 	return rnaSortStable;
 }
 
-RNA DnaConfig::selMsrItem2DNA_CrossTalk()
+RNA DnaConfig::add_DNA_CrossTalk(DNA& dnaTotal)
 {
 	DNA dnaCrossTalk;
 	RNA rnaCrossTalk;
@@ -239,12 +239,13 @@ RNA DnaConfig::selMsrItem2DNA_CrossTalk()
 	}
 
 	showRNA(rnaCrossTalk);
+	dnaTotal += dnaCrossTalk;
 
 	return rnaCrossTalk;
 	
 }
 
-RNA DnaConfig::selMsrItem2DNA_Gamma()
+RNA DnaConfig::add_DNA_Gamma(DNA& dnaTotal)
 {
 	DNA dnaGamma;
 	RNA rnaGamma;
@@ -260,11 +261,12 @@ RNA DnaConfig::selMsrItem2DNA_Gamma()
 		Ts->Trans(dnaGamma, rnaGamma);
 		rnaGamma.SortOrigMsr();
 	}
+	dnaTotal += dnaGamma;
 
 	return rnaGamma;
 }
 
-void DnaConfig::Add_OmdFileDNA()
+void DnaConfig::Add_Omd()
 {
 	Add_WRGBD_center();
 	Add_Nits();
@@ -276,6 +278,14 @@ void DnaConfig::Add_OmdFileDNA()
 	Add_D_25();
 	Add_W_49();
 	Add_CrossTalk();
+}
+
+void DnaConfig::Add_Omd_Gamma()
+{
+	Add_W_Gamma();
+	Add_R_Gamma();
+	Add_G_Gamma();
+	Add_B_Gamma();
 }
 
 void DnaConfig::Add_Table_OQC_MASS_TPV()

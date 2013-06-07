@@ -1028,7 +1028,7 @@ void TranScripter::setSquence(Cartridge2& _Car, const std::vector<Nucleotide>::s
 		else
 			_Car.SetSqncFrm(size + 2);
 	}
-	else if (m_curDnaCellItor->GetMsrPointTotal() == Pn4)
+	else if ( (m_curDnaCellItor->GetMsrPointTotal() == Pn4) || (m_curDnaCellItor->GetMsrPointTotal() == PnGamma) )
 	{
 		_Car.SetSqncFrm(size);
 	}

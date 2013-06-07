@@ -141,7 +141,7 @@ void CMsrTableDlg::SetTableImage(const tableIndex& index)
 
 void CMsrTableDlg::Exit()
 {
-    m_DnaInit.CreatDNA(m_DNA, m_RNA);
+    m_dnaConfig.CreatRNA(m_DNA, m_RNA);
 
     CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
     ASSERT_VALID(pMainFrm);
@@ -157,36 +157,36 @@ void CMsrTableDlg::Exit()
 
 void CMsrTableDlg::OnBtnOqcNibo() 
 {
-    m_DnaInit.Add_Table_OQC_MASS_NIBO();
+    m_dnaConfig.Add_Table_OQC_MASS_NIBO();
     Exit();
 }
 
 void CMsrTableDlg::OnBtnOqcSec() 
 {
-    m_DnaInit.Add_Table_OQC_MASS_SEC();
+    m_dnaConfig.Add_Table_OQC_MASS_SEC();
     Exit();
 }
 
 void CMsrTableDlg::OnBtnRa() 
 {
-    m_DnaInit.Add_Table_RA();
+    m_dnaConfig.Add_Table_RA();
     Exit();
 }
 
 void CMsrTableDlg::OnBtnSecfrom() 
 {
-    m_DnaInit.Add_Table_SEC();    
+    m_dnaConfig.Add_Table_SEC();    
     Exit();
 }
 
 void CMsrTableDlg::OnBtnOqcTest() 
 {
-    m_DnaInit.Add_Table_OQC_TEST();    
+    m_dnaConfig.Add_Table_OQC_TEST();    
     Exit();
 }
 
 void CMsrTableDlg::OnBtnOqcTpv() 
 {
-    m_DnaInit.Add_Table_OQC_MASS_TPV();
+    m_dnaConfig.Add_Table_OQC_MASS_TPV();
     Exit();
 }

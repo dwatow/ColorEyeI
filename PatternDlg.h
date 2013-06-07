@@ -73,6 +73,7 @@ private:
 	
     CBrush   m_BkBrush;
     ColorRef m_BkColor;   //­I´º¦â
+	CString m_NitsLv;
 	
     Circle m_Goal;        //¥Ø¼Ð°é°é
     Ca210* m_pCA210;
