@@ -19,12 +19,13 @@ static char THIS_FILE[] = __FILE__;
 
 CMsrTableDlg::CMsrTableDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CMsrTableDlg::IDD, pParent), m_TableIndex(TI_OQC_MASS_TPV), 
-    descripTableRA          ("白色9點"), 
-    descripTableSECfrom     ("WRGBD中心點 | 白色9點(1/6) | 白色49點 | 黑色9點 | 5Nits9點"), 
-    descripTableQOCmassSEC  ("WRGBD中心點 | 白色9點(1/6) | 白色5點(貼邊) | 黑色25點 | 5Nits9點(5-) | 灰階Gamma"), 
+    descripTableRA          ("白色9點(1/6)"), 
+    descripTableSECfrom     ("WRGBD中心點 | 白色9點(1/6) | 白色49點 | 黑色9點 | Nits9點(5-)"), 
+    descripTableQOCtest     ("WRGBD中心點 | 白色9點(1/6) | 白色9點(貼邊) | 黑色25點 | 黑色21點 | Nits9點(5-) | CrossTalk"), 
+	
+    descripTableQOCmassSEC  ("WRGBD中心點 | 白色9點(1/6) | 白色5點(貼邊) | 黑色25點 | Nits9點(5-) | 灰階Gamma"), 
     descripTableQOCmassTPV  ("WRGBD中心點 | 白色9點(1/6) | 白色9點(3cm) | 黑色21點 | 灰階Gamma"), 
-    descripTableQOCmassNibo ("WRGBD中心點 | 白色9點(1/6) | 黑色25點 | Cross Talk"), 
-    descripTableQOCtest     ("RGBWD中心點 | 白色9點(1/6) | 白色9點(貼邊) | 黑色25點 | 黑色21點 | 5Nits | CrossTalk")
+    descripTableQOCmassNibo ("WRGBD中心點 | 白色9點(1/6) | 黑色21點 | Cross Talk")
 {
     //{{AFX_DATA_INIT(CMsrTableDlg)
     //}}AFX_DATA_INIT

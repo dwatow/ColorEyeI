@@ -140,12 +140,32 @@ void CSelExcelDlg::OnSelectXlsForm()
     m_lstSelOmdFileList.ResetContent();
     m_cbxExcelSelor.GetLBText(m_cbxExcelSelor.GetCurSel(), str);
 
-         if (str.Find("RA") != -1)     setSelXlsDetail("9點亮度\n9點色度\n\nCA210-CH\nCA210-Probe\n", 100, FM_RA); 
-	else if (str.Find("Y2013") != -1)  setSelXlsDetail("2013年量產表格\n9點亮度\n25點暗態\n中心點亮色度\n5Nits\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker", 10, FM_OQCY2013_Volume); 
-    else if (str.Find("OQC") != -1)       setSelXlsDetail("2013年試產表格\n9點亮色度、中心點亮色度、5Nits\n25點暗態\n21點暗態\nCrossTalk\nCrossTalk\nColor Gamu\n\n灰階階數\nCA210-CH\nFlicker", 10, FM_OQC_Test); 
-    else if (str.Find("Gamma") != -1)  setSelXlsDetail("Gamma curve", 5, FM_Gamma); 
-    else if (str.Find("SEC") != -1)       setSelXlsDetail("9點亮度\n9點暗態\n中心點色度\n5Nits\n\n灰階階數\nCA210-CH\nFLICKER\nCross Talk", 1, FM_SEC); 
-    else                               setSelXlsDetail("(無法識別)", 1, FM_Nothing, FALSE); 
+	const CString W9_1over6("白色9點_離邊1/6\n");
+	const CString D9_0("黑色9點\n");
+	const CString WRGBD("WRGBD中心點\n");
+	const CString Nits5sub("Nits5↓\n");
+	const CString NitsLvValue("灰階階數\n");
+	const CString FlickerValue("Flicker\n");
+	const CString CaChannelIndex("Channel Number\n");
+	const CString CaProbeSerNo("Probe Number\n");
+	const CString D25side10_0("黑色25點\n");
+	const CString D21_0("黑色21點\n");
+	const CString CrossTalk_1over4("CrossTalk\n");
+	const CString ColorGamut("Color Gamut\n");
+	const CString WRGB_Gamma("WRGB Gamma Curve");
+
+	const CString dscrptRA(W9_1over6 + CaChannelIndex + CaProbeSerNo);
+	const CString dscrptOQCmass("2013年量產表格\n" + W9_1over6 + WRGBD + Nits5sub + FlickerValue + NitsLvValue + CaChannelIndex + D25side10_0 + D21_0 + CrossTalk_1over4 + ColorGamut);
+	const CString dscrptOQCtest("2013年試產表格\n" + W9_1over6 + WRGBD + Nits5sub + FlickerValue + NitsLvValue + CaChannelIndex + D25side10_0 + D21_0 + CrossTalk_1over4 + ColorGamut);
+	const CString dscrptGamma(WRGB_Gamma);
+	const CString dscrptSEC(W9_1over6 + D9_0 + WRGBD + Nits5sub + NitsLvValue + CaChannelIndex + FlickerValue + CrossTalk_1over4);
+
+         if (str.Find("RA")    != -1)  setSelXlsDetail(dscrptRA     , 100, FM_RA             ); 
+	else if (str.Find("Y2013") != -1)  setSelXlsDetail(dscrptOQCmass, 10 , FM_OQCY2013_Volume); 
+    else if (str.Find("OQC")   != -1)  setSelXlsDetail(dscrptOQCtest, 10 , FM_OQC_Test       ); 
+    else if (str.Find("Gamma") != -1)  setSelXlsDetail(dscrptGamma  , 5  , FM_Gamma          ); 
+    else if (str.Find("SEC")   != -1)  setSelXlsDetail(dscrptSEC    , 1  , FM_SEC            ); 
+    else                               setSelXlsDetail("(無法識別)"  , 1  , FM_Nothing, FALSE ); 
 
     UpdateData(FALSE);
 }
