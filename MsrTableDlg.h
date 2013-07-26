@@ -71,6 +71,7 @@ protected:
 	afx_msg void OnBtnSecfrom();
 	afx_msg void OnBtnOqcTest();
 	afx_msg void OnBtnOqcTpv();
+	virtual void OnCancel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

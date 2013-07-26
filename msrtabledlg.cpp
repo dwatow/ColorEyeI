@@ -49,14 +49,13 @@ void CMsrTableDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMsrTableDlg, CDialog)
     //{{AFX_MSG_MAP(CMsrTableDlg)
     ON_WM_PAINT()
-//     ON_BN_CLICKED(IDC_BUTTON3, OnButtonOQCMASS)
     ON_BN_CLICKED(IDC_BTN_OQC_NIBO, OnBtnOqcNibo)
     ON_BN_CLICKED(IDC_BTN_OQC_SEC, OnBtnOqcSec)
     ON_BN_CLICKED(IDC_BTN_RA, OnBtnRa)
     ON_BN_CLICKED(IDC_BTN_SECF, OnBtnSecfrom)
     ON_BN_CLICKED(IDC_BTN_OQC_TEST, OnBtnOqcTest)
     ON_BN_CLICKED(IDC_BTN_OQC_TPV, OnBtnOqcTpv)
-    //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -190,4 +189,26 @@ void CMsrTableDlg::OnBtnOqcTpv()
 {
     m_dnaConfig.Add_Table_OQC_MASS_TPV();
     Exit();
+}
+
+void CMsrTableDlg::OnCancel() 
+{
+	// TODO: Add extra cleanup here
+	// TODO: Add extra cleanup here
+    CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetMainWnd());
+    ASSERT_VALID(pMainFrm);
+    
+    CColorEyeIDoc* pDoc = dynamic_cast<CColorEyeIDoc*>(pMainFrm->GetActiveDocument());
+    ASSERT_VALID(pDoc);
+	
+	//m_DNA.Empty();
+    m_RNA.Empty();
+	
+	//     pDoc->UpdateDocDNA(m_DNA);
+    pDoc->UpdateMsrRNA(m_RNA);  
+    //此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
+    //這個，還是等到PatternDialog量完再新增上來吧！
+	
+    
+	CDialog::OnCancel();
 }

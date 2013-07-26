@@ -98,7 +98,7 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     DNA showDNA(pDoc->GetDocDNA());
 	if (!showDNA.Size())
 	{
-        str.Format("（空的DNA）");
+        str.Format("（無量測紀錄）");
         pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
 	}
 	else
@@ -127,11 +127,11 @@ void CColorEyeIView::OnDraw(CDC* pDC)
     int maxX_LeftView(maxXview);
     ptTemp.x = 291;
     ptTemp.y = ptOrig.y;
-    line = 0;
+    line = 1;
     RNA showRNA(pDoc->GetDocRNA());
 	if (showRNA.IsEmpty())
 	{
-		str.Format("（空的RNA）");
+		str.Format("（無量測資料）");
 		pDC->TextOut(ptTemp.x, ptTemp.y, str.GetBuffer(0));
 	}
 	else

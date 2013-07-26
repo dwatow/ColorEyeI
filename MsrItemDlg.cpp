@@ -188,70 +188,70 @@ void CMsrItemDlg::listBoxUpdate()
     m_debugLog.Out2File(m_desktopPath+"//DNA.log");
 }
 
-void CMsrItemDlg::SetupDnaConfig()
+void CMsrItemDlg::SetupDnaConfig(DnaConfig& dnaInitConfig)
 {
-    UpdateData(TRUE);
+//    UpdateData(TRUE);
     //ㄴㅯ헕
-    if (m_chkCWP1.GetState())  m_DnaInit.Add_W_center();
-    if (m_chkCRP1.GetState())  m_DnaInit.Add_R_center();
-    if (m_chkCGP1.GetState())  m_DnaInit.Add_G_center();
-    if (m_chkCBP1.GetState())  m_DnaInit.Add_B_center();
-    if (m_chkCDP1.GetState())  m_DnaInit.Add_D_center();
+    if (m_chkCWP1.GetState())  dnaInitConfig.Add_W_center();
+    if (m_chkCRP1.GetState())  dnaInitConfig.Add_R_center();
+    if (m_chkCGP1.GetState())  dnaInitConfig.Add_G_center();
+    if (m_chkCBP1.GetState())  dnaInitConfig.Add_B_center();
+    if (m_chkCDP1.GetState())  dnaInitConfig.Add_D_center();
     
     //Nits
-    if (m_chkNits.GetState())  m_DnaInit.Add_Nits(m_fNits, m_cbxSelNitsKind.GetCurSel());
+    if (m_chkNits.GetState())  dnaInitConfig.Add_Nits(m_fNits, m_cbxSelNitsKind.GetCurSel());
     
     //5헕
-    if (m_chkCWP5.GetState())  m_DnaInit.Add_W_5(m_f5FE);
+    if (m_chkCWP5.GetState())  dnaInitConfig.Add_W_5(m_f5FE);
     //     if (m_chkCRP5.GetState())    sortableDNA.AddCell(Red  , Pn5, m_f5FE);
     //     if (m_chkCGP5.GetState())    sortableDNA.AddCell(Green, Pn5, m_f5FE);
     //     if (m_chkCBP5.GetState())    sortableDNA.AddCell(Blue , Pn5, m_f5FE);
     //     if (m_chkCDP5.GetState())    sortableDNA.AddCell(Dark , Pn5, m_f5FE);
     
     //9헕
-    if (m_chkCWP9.GetState())    m_DnaInit.Add_W_9((int)m_f9FE, m_W9FEtype);
+    if (m_chkCWP9.GetState())    dnaInitConfig.Add_W_9((int)m_f9FE, m_W9FEtype);
     //     if (m_chkCRP9.GetState())    sortableDNA.AddCell(Red  , Pn9, (int)m_f9FE, m_W9FEtype);
     //     if (m_chkCGP9.GetState())    sortableDNA.AddCell(Green, Pn9, (int)m_f9FE, m_W9FEtype);
     //     if (m_chkCBP9.GetState())    sortableDNA.AddCell(Blue , Pn9, (int)m_f9FE, m_W9FEtype);
-    if (m_chkCDP9.GetState())    m_DnaInit.Add_D_9((int)m_f9FE, m_W9FEtype);
+    if (m_chkCDP9.GetState())    dnaInitConfig.Add_D_9((int)m_f9FE, m_W9FEtype);
     
     //21헕
     //     if (m_chkCWP21.GetState())    sortableDNA.AddCell(White, Pn21, m_f21FE);
     //     if (m_chkCRP21.GetState())    sortableDNA.AddCell(Red  , Pn21, m_f21FE);
     //     if (m_chkCGP21.GetState())    sortableDNA.AddCell(Green, Pn21, m_f21FE);
     //     if (m_chkCBP21.GetState())    sortableDNA.AddCell(Blue , Pn21, m_f21FE);
-    if (m_chkCDP21.GetState())    m_DnaInit.Add_D_21(m_f21FE);
+    if (m_chkCDP21.GetState())    dnaInitConfig.Add_D_21(m_f21FE);
     
     //13헕
     //     if (m_chkCWP13.GetState())    sortableDNA.AddCell(White, Pn13, m_f13FE);
     //     if (m_chkCRP13.GetState())    sortableDNA.AddCell(Red  , Pn13, m_f13FE);
     //     if (m_chkCGP13.GetState())    sortableDNA.AddCell(Green, Pn13, m_f13FE);
     //     if (m_chkCBP13.GetState())    sortableDNA.AddCell(Blue , Pn13, m_f13FE);
-    if (m_chkCDP13.GetState())    m_DnaInit.Add_D_13(m_f13FE);
+    if (m_chkCDP13.GetState())    dnaInitConfig.Add_D_13(m_f13FE);
     
     //25헕
     //     if (m_chkCWP25.GetState())    sortableDNA.AddCell(White, Pn25, m_f25FE, m_n25RectSide);
     //     if (m_chkCRP25.GetState())    sortableDNA.AddCell(Red  , Pn25, m_f25FE, m_n25RectSide);
     //     if (m_chkCGP25.GetState())    sortableDNA.AddCell(Green, Pn25, m_f25FE, m_n25RectSide);
     //     if (m_chkCBP25.GetState())    sortableDNA.AddCell(Blue , Pn25, m_f25FE, m_n25RectSide);
-    if (m_chkCDP25.GetState())    m_DnaInit.Add_D_25(m_f25FE, m_n25RectSide);
+    if (m_chkCDP25.GetState())    dnaInitConfig.Add_D_25(m_f25FE, m_n25RectSide);
     
     //49헕
-    if (m_chkCWP49.GetState())    m_DnaInit.Add_W_49();
+    if (m_chkCWP49.GetState())    dnaInitConfig.Add_W_49();
     //     if (m_chkCRP49.GetState())    sortableDNA.AddCell(Red  , Pn49);
     //     if (m_chkCGP49.GetState())    sortableDNA.AddCell(Green, Pn49);
     //     if (m_chkCBP49.GetState())    sortableDNA.AddCell(Blue , Pn49);
     //     if (m_chkCDP49.GetState())    sortableDNA.AddCell(Dark , Pn49);
     
     if (m_chkCrossTalk.GetState())
-                                 m_DnaInit.Add_CrossTalk(m_fCrsTlkRectFE);
+                                 dnaInitConfig.Add_CrossTalk(m_fCrsTlkRectFE);
     
     //Gamma
     if (m_chkCWGM.GetState() || m_chkCDGM.GetState())
-                                 m_DnaInit.Add_W_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
-    if (m_chkCRGM.GetState())    m_DnaInit.Add_R_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
-    if (m_chkCGGM.GetState())    m_DnaInit.Add_G_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
-    if (m_chkCBGM.GetState())    m_DnaInit.Add_B_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+                                 dnaInitConfig.Add_W_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCRGM.GetState())    dnaInitConfig.Add_R_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCGGM.GetState())    dnaInitConfig.Add_G_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
+    if (m_chkCBGM.GetState())    dnaInitConfig.Add_B_Gamma(m_nGM1, m_nGM2, m_fGammaSetp);
 
 
 }
@@ -269,9 +269,10 @@ void CMsrItemDlg::OnButtonAdd()
     //2. CA-210쨢ヅ쬲
     if (checkMsrParaOK())
     {
-        SetupDnaConfig();
-		m_DnaInit.SetQuickSort(m_chkQuickMsr.GetCheck());
-        m_DnaInit.CreatRNA(m_DNA, m_RNA);
+		DnaConfig dnaInitConfig;
+        SetupDnaConfig(dnaInitConfig);
+		dnaInitConfig.SetQuickSort(m_chkQuickMsr.GetCheck());
+        dnaInitConfig.CreatRNA(m_DNA, m_RNA);
 
         m_debugLog.Clear();
         for (std::vector<Nucleotide>::iterator Nit = m_DNA.Begin(); Nit != m_DNA.End(); ++Nit)
@@ -559,8 +560,7 @@ void CMsrItemDlg::OnButtonSelall()
     // TODO: Add your control notification handler code here
     if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(TRUE);
     if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(TRUE);
-//     if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(TRUE);
-    
+
     if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(TRUE);
     if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(TRUE);
     if (m_chkCGP21.IsWindowEnabled())        m_chkCGP21.SetCheck(TRUE);
@@ -615,7 +615,6 @@ void CMsrItemDlg::OnButtonSelno()
     // TODO: Add your control notification handler code here
     if (m_chkCrossTalk.IsWindowEnabled())   m_chkCrossTalk.SetCheck(FALSE);
     if (m_chkNits.IsWindowEnabled())        m_chkNits.SetCheck(FALSE);
-//     if (m_chkJND.IsWindowEnabled())         m_chkJND.SetCheck(FALSE);
     
     if (m_chkCWP21.IsWindowEnabled())        m_chkCWP21.SetCheck(FALSE);
     if (m_chkCRP21.IsWindowEnabled())        m_chkCRP21.SetCheck(FALSE);

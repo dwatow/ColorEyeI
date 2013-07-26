@@ -174,8 +174,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,4,14,28
- PRODUCTVERSION 4,11,19,0
+ FILEVERSION 2,3,14,31
+ PRODUCTVERSION 3,11,22,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -193,14 +193,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "奇菱光電股份有限公司\0"
             VALUE "FileDescription", "CA-210 彩色分析儀 光學量測程式\0"
-            VALUE "FileVersion", "2, 4, 14, 28\0"
+            VALUE "FileVersion", "2, 3, 14, 31\0"
             VALUE "InternalName", "ColorEye 正式版 v4.11\0"
             VALUE "LegalCopyright", "奇菱光電股份有限公司Copyright (C) 2012\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ColorEye.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Color Eye App\0"
-            VALUE "ProductVersion", "4, 11, 19, 0\0"
+            VALUE "ProductVersion", "3, 11, 22, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -225,7 +225,7 @@ FONT 9, "Calibri"
 BEGIN
     DEFPUSHBUTTON   "確定",IDOK,165,13,50,14,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,11,19,20,20
-    LTEXT           "ColorEye Version Beta 4.11.19",IDC_STATIC,40,10,110,8,
+    LTEXT           "ColorEye Version Beta 3.11.22",IDC_STATIC,40,10,110,8,
                     SS_NOPREFIX
     LTEXT           "Copyright (C) 2012\n奇菱光電股份有限公司\n光電技術研發處 電子開發一課",
                     IDC_STATIC,40,22,125,25

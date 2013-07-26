@@ -131,14 +131,14 @@ private:
 	CString m_desktopPath;
 	
 	CString m_RememberChkPathName;
-	DnaConfig m_DnaInit;
+// 	DnaConfig m_DnaInit;
 	DNA m_DNA;
 	RNA m_RNA;
 private:
 	void listBoxUpdate();
 //     void selMsrItem2DNA_sortable(DNA&);
 //     void selMsrItem2DNA_Unsortable(DNA&);
-	void SetupDnaConfig();
+	void SetupDnaConfig(DnaConfig&);
 	void rememberSelMsrItems();
 	BOOL checkMsrParaOK();
 };
