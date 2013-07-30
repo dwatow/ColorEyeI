@@ -205,7 +205,7 @@ void CMsrTableDlg::OnCancel()
     m_RNA.Empty();
 	
 	//     pDoc->UpdateDocDNA(m_DNA);
-    pDoc->UpdateMsrRNA(m_RNA);  
+    pDoc->UpdateMsrRNA(m_RNA);
     //此Dialog是在PatternDialog前呼叫，所以還是要將DNA&RNA丟回Dialog
     //這個，還是等到PatternDialog量完再新增上來吧！
 	

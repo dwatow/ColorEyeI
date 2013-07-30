@@ -190,7 +190,7 @@ void CMsrItemDlg::listBoxUpdate()
 
 void CMsrItemDlg::SetupDnaConfig(DnaConfig& dnaInitConfig)
 {
-//    UpdateData(TRUE);
+    UpdateData(TRUE);// for parameter
     //¤¤¤ßÂI
     if (m_chkCWP1.GetState())  dnaInitConfig.Add_W_center();
     if (m_chkCRP1.GetState())  dnaInitConfig.Add_R_center();
