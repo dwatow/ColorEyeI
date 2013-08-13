@@ -32,7 +32,7 @@ public:
 public:
 // Dialog Data
 	//{{AFX_DATA(CSelExcelDlg)
-	enum { IDD = IDD_OMDTOEXCEL };
+	enum { IDD = IDD_OMD2EXCEL };
 	CButton	m_tran2Xls;
 	CButton	m_btnOK2Xls;
     CListBox   m_lstSelOmdFileList;

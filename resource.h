@@ -6,23 +6,21 @@
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDS_ABOUTBOX                    101
-#define IDD_SELXLS_DIALOG               102
-#define IDD_MSRITEMS_DIALOG             112
 #define IDR_MAINFRAME                   128
 #define IDR_CLRETYPE                    129
-#define IDD_PATTERN_DIALOG              130
+#define IDD_PATTERN                     130
 #define IDD_MSR_ITEM                    131
-#define IDD_OMDTOEXCEL                  132
-#define IDD_EDIT_DIALOG                 133
-#define IDD_SETUP_DIALOG                134
-#define IDD_CASETUP_DIALOG              134
+#define IDD_OMD2EXCEL                   132
+#define IDD_ENTER_VALUE                 133
+#define IDD_SETUP_CA                    134
 #define IDI_COLOREYE_MAINICON           136
-#define IDD_DIALOG_BARCODE              138
+#define IDD_BARCODE                     138
 #define IDD_MSR_TABLE                   140
 #define IDB_BMP_SEC_FROM                141
 #define IDB_BMP_RA_FROM                 142
 #define IDB_BMP_OQC_MASS                144
 #define IDB_BMP_OQC_TEST                148
+#define IDD_SETUP_MSR                   149
 #define IDC_BUTTON1                     1000
 #define ID_MSR_ITEM_GO                  1000
 #define IDC_BUTTON_SELALL               1000
@@ -182,6 +180,7 @@
 #define IDC_BTN_OQC_TEST                1082
 #define IDC_BTN_OQC_NIBO                1083
 #define IDC_TABLE_DESCRIP               1084
+#define IDC_SLIDER1                     1088
 #define ID_MENUITEM32771                32771
 #define ID_FILE_OMDTOXLS                32771
 #define ID_MSR_CONNECTCA210             32772
@@ -201,9 +200,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        149
+#define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1085
+#define _APS_NEXT_CONTROL_VALUE         1089
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

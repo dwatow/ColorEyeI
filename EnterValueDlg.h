@@ -17,7 +17,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CEnterValueDlg)
-	enum { IDD = IDD_EDIT_DIALOG };
+	enum { IDD = IDD_ENTER_VALUE };
 	CString	m_strName;
 	CString	m_strValue;
 	//}}AFX_DATA

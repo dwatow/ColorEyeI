@@ -27,7 +27,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CPatternDlg)
-	enum { IDD = IDD_PATTERN_DIALOG };
+	enum { IDD = IDD_PATTERN };
 		// NOTE: the ClassWizard will add data members here
 	//}}AFX_DATA
 

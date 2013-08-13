@@ -246,7 +246,7 @@ void CColorEyeIApp::OnMsrForItem()
     
     m_pdlgPattern = new CPatternDlg(MsrForItem);  //初始化Pattern Dialog，可以呼叫MsrForItem等對話框出來初始化vChain
 
-    if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   
+    if (!m_pdlgPattern->Create(IDD_PATTERN))   
         AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
     
 	m_pdlgPattern->LoadedCartridge();
@@ -280,7 +280,7 @@ void CColorEyeIApp::OnSetupCa210()
     if (m_pdlgCaSetup == 0)
     {
         m_pdlgCaSetup = new CCaSetupDlg();
-        m_pdlgCaSetup->Create(IDD_CASETUP_DIALOG);
+        m_pdlgCaSetup->Create(IDD_SETUP_CA);
     }
     m_pdlgCaSetup->ShowWindow(SW_NORMAL);
 }
@@ -294,7 +294,7 @@ void CColorEyeIApp::OnMsrTable()
         
     m_pdlgPattern = new CPatternDlg(MsrForTable);  //初始化Pattern Dialog，可以呼叫MsrForItem等對話框出來初始化vChain
 	
-    if (!m_pdlgPattern->Create(IDD_PATTERN_DIALOG))   
+    if (!m_pdlgPattern->Create(IDD_PATTERN))   
         AfxMessageBox("CColorEyeIView::PatternDialog.Create() 出錯啦！\n剪下圖片，並通知程式設計師");
     
 	m_pdlgPattern->LoadedCartridge();

@@ -20,7 +20,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CReadBarCodeDialog)
-	enum { IDD = IDD_DIALOG_BARCODE };
+	enum { IDD = IDD_BARCODE };
 	CStatic	m_stcBarCode;
 	CComboBox	m_cbxNo;
 	//}}AFX_DATA

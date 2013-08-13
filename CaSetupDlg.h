@@ -22,7 +22,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCaSetupDlg)
-	enum { IDD = IDD_CASETUP_DIALOG };
+	enum { IDD = IDD_SETUP_CA };
 	CComboBox	m_cbxBrigUnit;
 	CComboBox	m_cbxSynMode;
 	CComboBox	m_cbxDisMode;
