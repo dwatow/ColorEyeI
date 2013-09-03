@@ -2,14 +2,14 @@
 
 [General Info]
 Version=1
-LastClass=CMsrItemDlg
-LastTemplate=CButton
+LastClass=CSendMailDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ColorEyeI.h"
 ODLFile=ColorEyeI.odl
 LastPage=0
 
-ClassCount=13
+ClassCount=14
 Class1=CColorEyeIApp
 Class2=CColorEyeIDoc
 Class3=CColorEyeIView
@@ -19,33 +19,34 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Class5=CAboutDlg
 <<<<<<< HEAD
-Resource2=IDD_DIALOG_BARCODE
-Resource3=IDR_MAINFRAME
-Resource4=IDD_CASETUP_DIALOG
+Resource2=IDD_OMDTOEXCEL
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_DIALOG_BARCODE
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_EDIT_DIALOG
-Resource7=IDD_OMDTOEXCEL
+Resource6=IDR_MAINFRAME
+Resource7=IDD_CASETUP_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_MSR_ITEM
+Resource8=IDD_EDIT_DIALOG
 =======
-Resource2=IDD_DIALOG_BARCODE
-Resource3=IDR_MAINFRAME
-Resource4=IDD_CASETUP_DIALOG
+Resource2=IDD_OMDTOEXCEL
+Resource3=IDD_PATTERN_DIALOG
+Resource4=IDD_DIALOG_BARCODE
 Resource5="IDD_OMDTOEXCEL"
 Class6=CEnterValueDlg
-Resource6=IDD_EDIT_DIALOG
-Resource7=IDD_OMDTOEXCEL
+Resource6=IDR_MAINFRAME
+Resource7=IDD_CASETUP_DIALOG
 Class7=CCaSetupDlg
-Resource8=IDD_MSR_ITEM
+Resource8=IDD_EDIT_DIALOG
 >>>>>>> DNA
 Class8=CReadBarCodeDialog
 Class9=CSelExcelDlg
 Class10=CMsrItemDlg
 Class11=CPatternDlg
-Resource9=IDD_PATTERN_DIALOG
+Resource9=IDD_MSR_ITEM
 Class12=CMsrTableDlg
 Class13=CBtm
+Class14=CSendMailDialog
 Resource10=IDD_MSR_TABLE
 
 [CLS:CColorEyeIApp]
@@ -126,7 +127,8 @@ Command16=ID_SETUP_SPEC
 Command17=ID_SETUP_CA210
 Command18=ID_SETUP_CAL
 Command19=ID_APP_ABOUT
-CommandCount=19
+Command20=ID_MAIL_TO_ME
+CommandCount=20
 
 [ACL:IDR_MAINFRAME]
 Type=1
@@ -446,4 +448,12 @@ BaseClass=CButton
 Filter=W
 VirtualFilter=BWC
 LastObject=CBtm
+
+[CLS:CSendMailDialog]
+Type=0
+HeaderFile=SendMailDialog.h
+ImplementationFile=SendMailDialog.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
 

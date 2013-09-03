@@ -5,6 +5,7 @@
 #include "ColorEyeI.h"
 
 #include "MainFrm.h"
+#include "Oft.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -28,6 +29,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_RES, OnResolutionUI)
 	ON_UPDATE_COMMAND_UI(ID_SETUP_CA210, OnUpdateSetupCa210)
 	ON_UPDATE_COMMAND_UI(ID_MSR_TABLE, OnUpdateMsrTable)
+	ON_COMMAND(ID_MAIL_TO_ME, OnMailToMe)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -175,4 +177,15 @@ void CMainFrame::OnUpdateMsrTable(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code here
     pCmdUI->Enable(m_iConnectCa210);
+}
+
+
+
+void CMainFrame::OnMailToMe() 
+{
+	olkFile appOutlook;
+	
+ 	CString mailBody("test");
+	appOutlook.AddMail("kx_wang@chilinopto.com.tw", "[ColorEye] (輸入主旨)");
+	appOutlook.SendMail("kx_wang@chilinopto.com.tw", "[ColorEye] 誰在用？", mailBody);
 }

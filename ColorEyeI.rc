@@ -145,6 +145,7 @@ BEGIN
     POPUP "說明(&H)"
     BEGIN
         MENUITEM "關於 ColorEyeI(&A)...",       ID_APP_ABOUT
+        MENUITEM "聯絡作者",                    ID_MAIL_TO_ME
     END
 END
 

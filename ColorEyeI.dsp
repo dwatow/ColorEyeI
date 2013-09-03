@@ -206,6 +206,10 @@ SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\msoutl.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MsrItemDlg.cpp
 # End Source File
 # Begin Source File
@@ -394,7 +398,15 @@ SOURCE=.\FileDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\HyperLink.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\msoutl.h
 # End Source File
 # Begin Source File
 
@@ -407,6 +419,10 @@ SOURCE=.\MsrTableDlg.h
 # Begin Source File
 
 SOURCE=.\Nucleotide.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Oft.h
 # End Source File
 # Begin Source File
 
@@ -535,3 +551,12 @@ SOURCE=.\VerCtrl.dsm
 # End Source File
 # End Target
 # End Project
+# Section ColorEyeI : {20C62CAB-15DA-101B-B9A8-444553540000}
+# 	2:21:DefaultSinkHeaderFile:mapimessages.h
+# 	2:16:DefaultSinkClass:CMapiMessages
+# End Section
+# Section ColorEyeI : {F49AC0B2-DF74-11CF-8E74-00A0C90F26F8}
+# 	2:5:Class:CMapiMessages
+# 	2:10:HeaderFile:mapimessages.h
+# 	2:8:ImplFile:mapimessages.cpp
+# End Section

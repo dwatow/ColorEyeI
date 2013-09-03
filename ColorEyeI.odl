@@ -37,6 +37,34 @@ library ColorEyeI
 		[default] dispinterface IColorEyeI;
 	};
 
+
+	//  Primary dispatch interface for CSendMailDialog
+	
+	[ uuid(FC3BC041-634C-429D-9519-06D3CB199B9A) ]
+	dispinterface ISendMailDialog
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CSendMailDialog)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CSendMailDialog)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CSendMailDialog
+
+	[ uuid(9901649E-028F-4476-AC76-5D579F1EFD1A) ]
+	coclass SendMailDialog
+	{
+		[default] dispinterface ISendMailDialog;
+	};
+
 	//{{AFX_APPEND_ODL}}
 	//}}AFX_APPEND_ODL}}
 };
